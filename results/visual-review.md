@@ -76,3 +76,5 @@ Host 31 项单测、UI 60 项单测与 4 个 Visualizer 浏览器回放在本地
 自动定位器仍有限制：可能点到柱图轴标签、被可见标签覆盖的 radio、或已关闭弹窗中的控件。`browser-checks.json` 保留原始判断；额外 `review/` 记录实际用户入口的动作、截图和消息，评审备注据此区分检查器错误与产品错误，没有把原检查强行改成 pass。
 
 你无需再逐份打完。可以在 [评审页](../model-review.html) 抽查示例、不同意的分数和失败；原 [人工页](../label.html?stage=compare-visualizer-heldout-20260917) 仍可独立保存人工判断。若要以质量分作为发布门槛，下一步需要独立人工校准；当前最直接的剩余验证是实际 Cordis 预设路由。
+
+最终远端核验：Host `2d79a739ab` 与 Web `d6b55d03f1` 的技术检查通过。Web 的 [API-e2e 首次 PTC 取消测试失败，第二次通过](https://github.com/deepseek-harness/deepseek-harness/actions/runs/35259889589)；该测试与 master 相同，本轮未修改它，首次失败记录保留。Host 仍待审，Web 已批准，weighted approval 门槛单列；两个 PR 均未合并。
