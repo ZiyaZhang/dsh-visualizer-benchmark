@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 2,
+  "trialId": "E01-B-2",
+  "caseId": "E01",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 39,
+  "resultSeq": 40,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:15.110Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "fail",
+      "reason": "Browser reported an initial runtime/resource error.",
+      "evidence": {
+        "errors": [
+          {
+            "type": "error",
+            "channel": "98476910dfea6b094444cec4036fb467",
+            "payload": {
+              "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
+            },
+            "at": 97.70000004768372
+          }
+        ]
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "not_applicable",
+      "reason": "No literal label oracle specified.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "客户端\nCLOSED\n服务端\nLISTEN\n尚未建立连接\n客户端\nCLOSED\n服务端\nLISTEN\nSYN seq = x\nSYN seq = y, ack = x + 1\nACK ack = y + 1\n每一方都要收到对方的初始序列号，并让对方确认自己已被收到\n实线箭头 = 实际发送的报文段（示意，未按比例）\n00\n初始状态\n01\nSYN →\n02\n← SYN + ACK\n03\nACK →\n初始状态\n握手尚未开始\n\n双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n方向\t报文\tseq\tack\n客户端 → 服务端\tSYN\tx\t—\n服务端 → 客户端\tSYN + ACK\ty\tx + 1\n客户端 → 服务端\tACK\tx + 1\ty + 1\n\n阅读提示：SYN 表示“我的初始序列号是……”，ACK 表示“你上一条我收到了”。\n客户端 CLOSED 服务端 LISTEN SYN  seq = x SYN  seq = y,  ack = x + 1 ACK  ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 实线箭头 = 实际发送的报文段（示意，未按比例）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 680,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "98476910dfea6b094444cec4036fb467",
+          "payload": {},
+          "at": 57.5
+        },
+        {
+          "type": "error",
+          "channel": "98476910dfea6b094444cec4036fb467",
+          "payload": {
+            "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
+          },
+          "at": 97.70000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "98476910dfea6b094444cec4036fb467",
+          "payload": {
+            "height": 680
+          },
+          "at": 110.90000009536743
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 客户端 CLOSED 服务端 LISTEN 尚未建立连接\n- img \"TCP 三次握手时序图 客户端与服务端之间依次交换 SYN、SYN+ACK、ACK 三条报文，双方状态从 CLOSED 和 LISTEN 逐步变为 ESTABLISHED。\": 客户端 CLOSED 服务端 LISTEN SYN seq = x SYN seq = y, ack = x + 1 ACK ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 实线箭头 = 实际发送的报文段（示意，未按比例）\n- group \"握手步骤\":\n  - button \"00 初始状态\"\n  - button \"01 SYN →\"\n  - button \"02 ← SYN + ACK\"\n  - button \"03 ACK →\"\n- heading \"初始状态\" [level=4]\n- text: 握手尚未开始\n- paragraph\n- table \"双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\":\n  - caption: 双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n  - rowgroup:\n    - row \"方向 报文 seq ack\":\n      - columnheader \"方向\"\n      - columnheader \"报文\"\n      - columnheader \"seq\"\n      - columnheader \"ack\"\n  - rowgroup:\n    - row \"客户端 → 服务端 SYN x —\":\n      - cell \"客户端 → 服务端\"\n      - cell \"SYN\"\n      - cell \"x\":\n        - code: x\n      - cell \"—\"\n    - row \"服务端 → 客户端 SYN + ACK y x + 1\":\n      - cell \"服务端 → 客户端\"\n      - cell \"SYN + ACK\"\n      - cell \"y\":\n        - code: \"y\"\n      - cell \"x + 1\":\n        - code: x + 1\n    - row \"客户端 → 服务端 ACK x + 1 y + 1\":\n      - cell \"客户端 → 服务端\"\n      - cell \"ACK\"\n      - cell \"x + 1\":\n        - code: x + 1\n      - cell \"y + 1\":\n        - code: y + 1\n- paragraph:\n  - text: 阅读提示：\n  - code: SYN\n  - text: 表示“我的初始序列号是……”，\n  - code: ACK\n  - text: 表示“你上一条我收到了”。"
+    },
+    {
+      "text": "客户端\nCLOSED\n服务端\nLISTEN\n尚未建立连接\n客户端\nCLOSED\n服务端\nLISTEN\nSYN seq = x\nSYN seq = y, ack = x + 1\nACK ack = y + 1\n每一方都要收到对方的初始序列号，并让对方确认自己已被收到\n实线箭头 = 实际发送的报文段（示意，未按比例）\n00\n初始状态\n01\nSYN →\n02\n← SYN + ACK\n03\nACK →\n初始状态\n握手尚未开始\n\n双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n方向\t报文\tseq\tack\n客户端 → 服务端\tSYN\tx\t—\n服务端 → 客户端\tSYN + ACK\ty\tx + 1\n客户端 → 服务端\tACK\tx + 1\ty + 1\n\n阅读提示：SYN 表示“我的初始序列号是……”，ACK 表示“你上一条我收到了”。\n客户端 CLOSED 服务端 LISTEN SYN  seq = x SYN  seq = y,  ack = x + 1 ACK  ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 实线箭头 = 实际发送的报文段（示意，未按比例）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 643,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "ddf5f466035d5a433025767132ca823c",
+          "payload": {},
+          "at": 193.20000004768372
+        },
+        {
+          "type": "error",
+          "channel": "ddf5f466035d5a433025767132ca823c",
+          "payload": {
+            "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
+          },
+          "at": 196
+        },
+        {
+          "type": "resize",
+          "channel": "ddf5f466035d5a433025767132ca823c",
+          "payload": {
+            "height": 643
+          },
+          "at": 197.20000004768372
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 客户端 CLOSED 服务端 LISTEN 尚未建立连接\n- img \"TCP 三次握手时序图 客户端与服务端之间依次交换 SYN、SYN+ACK、ACK 三条报文，双方状态从 CLOSED 和 LISTEN 逐步变为 ESTABLISHED。\": 客户端 CLOSED 服务端 LISTEN SYN seq = x SYN seq = y, ack = x + 1 ACK ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 实线箭头 = 实际发送的报文段（示意，未按比例）\n- group \"握手步骤\":\n  - button \"00 初始状态\"\n  - button \"01 SYN →\"\n  - button \"02 ← SYN + ACK\"\n  - button \"03 ACK →\"\n- heading \"初始状态\" [level=4]\n- text: 握手尚未开始\n- paragraph\n- table \"双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\":\n  - caption: 双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n  - rowgroup:\n    - row \"方向 报文 seq ack\":\n      - columnheader \"方向\"\n      - columnheader \"报文\"\n      - columnheader \"seq\"\n      - columnheader \"ack\"\n  - rowgroup:\n    - row \"客户端 → 服务端 SYN x —\":\n      - cell \"客户端 → 服务端\"\n      - cell \"SYN\"\n      - cell \"x\":\n        - code: x\n      - cell \"—\"\n    - row \"服务端 → 客户端 SYN + ACK y x + 1\":\n      - cell \"服务端 → 客户端\"\n      - cell \"SYN + ACK\"\n      - cell \"y\":\n        - code: \"y\"\n      - cell \"x + 1\":\n        - code: x + 1\n    - row \"客户端 → 服务端 ACK x + 1 y + 1\":\n      - cell \"客户端 → 服务端\"\n      - cell \"ACK\"\n      - cell \"x + 1\":\n        - code: x + 1\n      - cell \"y + 1\":\n        - code: y + 1\n- paragraph:\n  - text: 阅读提示：\n  - code: SYN\n  - text: 表示“我的初始序列号是……”，\n  - code: ACK\n  - text: 表示“你上一条我收到了”。"
+    },
+    {
+      "text": "客户端\nCLOSED\n服务端\nLISTEN\n尚未建立连接\n客户端\nCLOSED\n服务端\nLISTEN\nSYN seq = x\nSYN seq = y, ack = x + 1\nACK ack = y + 1\n每一方都要收到对方的初始序列号，并让对方确认自己已被收到\n实线箭头 = 实际发送的报文段（示意，未按比例）\n00\n初始状态\n01\nSYN →\n02\n← SYN + ACK\n03\nACK →\n初始状态\n握手尚未开始\n\n双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n方向\t报文\tseq\tack\n客户端 → 服务端\tSYN\tx\t—\n服务端 → 客户端\tSYN + ACK\ty\tx + 1\n客户端 → 服务端\tACK\tx + 1\ty + 1\n\n阅读提示：SYN 表示“我的初始序列号是……”，ACK 表示“你上一条我收到了”。\n客户端 CLOSED 服务端 LISTEN SYN  seq = x SYN  seq = y,  ack = x + 1 ACK  ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 实线箭头 = 实际发送的报文段（示意，未按比例）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 680,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "7bf636035fde84633bbcd63a1836a3e4",
+          "payload": {},
+          "at": 258.7000000476837
+        },
+        {
+          "type": "error",
+          "channel": "7bf636035fde84633bbcd63a1836a3e4",
+          "payload": {
+            "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
+          },
+          "at": 260.60000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "7bf636035fde84633bbcd63a1836a3e4",
+          "payload": {
+            "height": 680
+          },
+          "at": 262.40000009536743
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 客户端 CLOSED 服务端 LISTEN 尚未建立连接\n- img \"TCP 三次握手时序图 客户端与服务端之间依次交换 SYN、SYN+ACK、ACK 三条报文，双方状态从 CLOSED 和 LISTEN 逐步变为 ESTABLISHED。\": 客户端 CLOSED 服务端 LISTEN SYN seq = x SYN seq = y, ack = x + 1 ACK ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 实线箭头 = 实际发送的报文段（示意，未按比例）\n- group \"握手步骤\":\n  - button \"00 初始状态\"\n  - button \"01 SYN →\"\n  - button \"02 ← SYN + ACK\"\n  - button \"03 ACK →\"\n- heading \"初始状态\" [level=4]\n- text: 握手尚未开始\n- paragraph\n- table \"双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\":\n  - caption: 双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n  - rowgroup:\n    - row \"方向 报文 seq ack\":\n      - columnheader \"方向\"\n      - columnheader \"报文\"\n      - columnheader \"seq\"\n      - columnheader \"ack\"\n  - rowgroup:\n    - row \"客户端 → 服务端 SYN x —\":\n      - cell \"客户端 → 服务端\"\n      - cell \"SYN\"\n      - cell \"x\":\n        - code: x\n      - cell \"—\"\n    - row \"服务端 → 客户端 SYN + ACK y x + 1\":\n      - cell \"服务端 → 客户端\"\n      - cell \"SYN + ACK\"\n      - cell \"y\":\n        - code: \"y\"\n      - cell \"x + 1\":\n        - code: x + 1\n    - row \"客户端 → 服务端 ACK x + 1 y + 1\":\n      - cell \"客户端 → 服务端\"\n      - cell \"ACK\"\n      - cell \"x + 1\":\n        - code: x + 1\n      - cell \"y + 1\":\n        - code: y + 1\n- paragraph:\n  - text: 阅读提示：\n  - code: SYN\n  - text: 表示“我的初始序列号是……”，\n  - code: ACK\n  - text: 表示“你上一条我收到了”。"
+    },
+    {
+      "text": "客户端\nCLOSED\n服务端\nLISTEN\n尚未建立连接\n客户端\nCLOSED\n服务端\nLISTEN\nSYN seq = x\nSYN seq = y, ack = x + 1\nACK ack = y + 1\n每一方都要收到对方的初始序列号，并让对方确认自己已被收到\n实线箭头 = 实际发送的报文段（示意，未按比例）\n00\n初始状态\n01\nSYN →\n02\n← SYN + ACK\n03\nACK →\n初始状态\n握手尚未开始\n\n双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n方向\t报文\tseq\tack\n客户端 → 服务端\tSYN\tx\t—\n服务端 → 客户端\tSYN + ACK\ty\tx + 1\n客户端 → 服务端\tACK\tx + 1\ty + 1\n\n阅读提示：SYN 表示“我的初始序列号是……”，ACK 表示“你上一条我收到了”。\n客户端 CLOSED 服务端 LISTEN SYN  seq = x SYN  seq = y,  ack = x + 1 ACK  ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 实线箭头 = 实际发送的报文段（示意，未按比例）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 643,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "a4a611d2e97fdb430974ad833a078ec8",
+          "payload": {},
+          "at": 323
+        },
+        {
+          "type": "error",
+          "channel": "a4a611d2e97fdb430974ad833a078ec8",
+          "payload": {
+            "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
+          },
+          "at": 325
+        },
+        {
+          "type": "resize",
+          "channel": "a4a611d2e97fdb430974ad833a078ec8",
+          "payload": {
+            "height": 643
+          },
+          "at": 328
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 客户端 CLOSED 服务端 LISTEN 尚未建立连接\n- img \"TCP 三次握手时序图 客户端与服务端之间依次交换 SYN、SYN+ACK、ACK 三条报文，双方状态从 CLOSED 和 LISTEN 逐步变为 ESTABLISHED。\": 客户端 CLOSED 服务端 LISTEN SYN seq = x SYN seq = y, ack = x + 1 ACK ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 实线箭头 = 实际发送的报文段（示意，未按比例）\n- group \"握手步骤\":\n  - button \"00 初始状态\"\n  - button \"01 SYN →\"\n  - button \"02 ← SYN + ACK\"\n  - button \"03 ACK →\"\n- heading \"初始状态\" [level=4]\n- text: 握手尚未开始\n- paragraph\n- table \"双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\":\n  - caption: 双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n  - rowgroup:\n    - row \"方向 报文 seq ack\":\n      - columnheader \"方向\"\n      - columnheader \"报文\"\n      - columnheader \"seq\"\n      - columnheader \"ack\"\n  - rowgroup:\n    - row \"客户端 → 服务端 SYN x —\":\n      - cell \"客户端 → 服务端\"\n      - cell \"SYN\"\n      - cell \"x\":\n        - code: x\n      - cell \"—\"\n    - row \"服务端 → 客户端 SYN + ACK y x + 1\":\n      - cell \"服务端 → 客户端\"\n      - cell \"SYN + ACK\"\n      - cell \"y\":\n        - code: \"y\"\n      - cell \"x + 1\":\n        - code: x + 1\n    - row \"客户端 → 服务端 ACK x + 1 y + 1\":\n      - cell \"客户端 → 服务端\"\n      - cell \"ACK\"\n      - cell \"x + 1\":\n        - code: x + 1\n      - cell \"y + 1\":\n        - code: y + 1\n- paragraph:\n  - text: 阅读提示：\n  - code: SYN\n  - text: 表示“我的初始序列号是……”，\n  - code: ACK\n  - text: 表示“你上一条我收到了”。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "98476910dfea6b094444cec4036fb467",
+      "payload": {},
+      "at": 57.5
+    },
+    {
+      "type": "error",
+      "channel": "98476910dfea6b094444cec4036fb467",
+      "payload": {
+        "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
+      },
+      "at": 97.70000004768372
+    },
+    {
+      "type": "resize",
+      "channel": "98476910dfea6b094444cec4036fb467",
+      "payload": {
+        "height": 680
+      },
+      "at": 110.90000009536743
+    }
+  ],
+  "console": [],
+  "pageErrors": [
+    "Cannot read properties of null (reading 'addEventListener')",
+    "Cannot read properties of null (reading 'addEventListener')",
+    "Cannot read properties of null (reading 'addEventListener')",
+    "Cannot read properties of null (reading 'addEventListener')"
+  ],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "e69a76f258040157721446aa36bb28edb9c8acad2c2bc8f76db865db00f7cd84",
+  "previewSha256": "44cfdaedec09d2a45535777308c291bc6f28341794071d5d06a65d75735d04ed",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

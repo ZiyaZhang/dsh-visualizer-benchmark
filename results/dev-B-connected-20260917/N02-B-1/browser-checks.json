@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 2,
+  "trialId": "N02-B-1",
+  "caseId": "N02",
+  "widgetIndex": 0,
+  "callSeq": null,
+  "resultSeq": null,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:09.821Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "not_applicable",
+      "reason": "No accepted visual preview is available. Do not count absence as a rendering pass.",
+      "evidence": {}
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No component to operate.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No component to operate.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "not_applicable",
+      "reason": "No component to inspect.",
+      "evidence": {}
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [],
+  "states": [],
+  "messages": [],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": []
+}

@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W05-A-1",
+  "caseId": "W05",
+  "scenario": "quantity",
+  "widgetIndex": 0,
+  "callSeq": 36,
+  "resultSeq": 37,
+  "casesPath": "results/dev-A-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:11.991Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "maximum",
+          "minimum"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "maximum-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "maximum-736-light.png",
+      "state": "maximum",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "数量（0–5）\n−\n2\n+\n0\n1\n2\n3\n4\n5\n还可减 2 次、可加 3 次\n",
+      "temperature": [],
+      "numericReadouts": [
+        2
+      ],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 259,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "减少 1",
+        "增加 1"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+          "payload": {},
+          "at": 51
+        },
+        {
+          "type": "rendered",
+          "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+          "payload": {},
+          "at": 70.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+          "payload": {
+            "height": 259
+          },
+          "at": 70.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- group \"数量（0–5）\":\n  - text: 数量（0–5）\n  - button \"减少 1\": −\n  - status: \"2\"\n  - button \"增加 1\": +\n  - text: 还可减 2 次、可加 3 次"
+    },
+    {
+      "text": "数量（0–5）\n−\n5\n+\n0\n1\n2\n3\n4\n5\n已到上限 5，+ 已禁用\n",
+      "temperature": [],
+      "numericReadouts": [
+        5
+      ],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 259,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "减少 1",
+        "增加 1"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+          "payload": {},
+          "at": 51
+        },
+        {
+          "type": "rendered",
+          "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+          "payload": {},
+          "at": 70.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+          "payload": {
+            "height": 259
+          },
+          "at": 70.59999990463257
+        }
+      ],
+      "name": "maximum",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- group \"数量（0–5）\":\n  - text: 数量（0–5）\n  - button \"减少 1\": −\n  - status: \"5\"\n  - button \"增加 1\" [disabled]: +\n  - text: 已到上限 5，+ 已禁用"
+    },
+    {
+      "text": "数量（0–5）\n−\n0\n+\n0\n1\n2\n3\n4\n5\n已到下限 0，− 已禁用\n",
+      "temperature": [],
+      "numericReadouts": [
+        0
+      ],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 259,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "减少 1",
+        "增加 1"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+          "payload": {},
+          "at": 51
+        },
+        {
+          "type": "rendered",
+          "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+          "payload": {},
+          "at": 70.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+          "payload": {
+            "height": 259
+          },
+          "at": 70.59999990463257
+        }
+      ],
+      "name": "minimum",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- group \"数量（0–5）\":\n  - text: 数量（0–5）\n  - button \"减少 1\" [disabled]: −\n  - status: \"0\"\n  - button \"增加 1\": +\n  - text: 已到下限 0，− 已禁用"
+    },
+    {
+      "text": "数量（0–5）\n−\n2\n+\n0\n1\n2\n3\n4\n5\n还可减 2 次、可加 3 次\n",
+      "temperature": [],
+      "numericReadouts": [
+        2
+      ],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 259,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "减少 1",
+        "增加 1"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d732ab0dd4efbf37448707f60fb61a7d",
+          "payload": {},
+          "at": 392.2000000476837
+        },
+        {
+          "type": "rendered",
+          "channel": "d732ab0dd4efbf37448707f60fb61a7d",
+          "payload": {},
+          "at": 393.7000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "d732ab0dd4efbf37448707f60fb61a7d",
+          "payload": {
+            "height": 259
+          },
+          "at": 393.7000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- group \"数量（0–5）\":\n  - text: 数量（0–5）\n  - button \"减少 1\": −\n  - status: \"2\"\n  - button \"增加 1\": +\n  - text: 还可减 2 次、可加 3 次"
+    },
+    {
+      "text": "数量（0–5）\n−\n2\n+\n0\n1\n2\n3\n4\n5\n还可减 2 次、可加 3 次\n",
+      "temperature": [],
+      "numericReadouts": [
+        2
+      ],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 259,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "减少 1",
+        "增加 1"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "9e9a59e73e2bdc1a22d9da7bb7ef1e56",
+          "payload": {},
+          "at": 450
+        },
+        {
+          "type": "rendered",
+          "channel": "9e9a59e73e2bdc1a22d9da7bb7ef1e56",
+          "payload": {},
+          "at": 458.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "9e9a59e73e2bdc1a22d9da7bb7ef1e56",
+          "payload": {
+            "height": 259
+          },
+          "at": 458.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- group \"数量（0–5）\":\n  - text: 数量（0–5）\n  - button \"减少 1\": −\n  - status: \"2\"\n  - button \"增加 1\": +\n  - text: 还可减 2 次、可加 3 次"
+    },
+    {
+      "text": "数量（0–5）\n−\n2\n+\n0\n1\n2\n3\n4\n5\n还可减 2 次、可加 3 次\n",
+      "temperature": [],
+      "numericReadouts": [
+        2
+      ],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 259,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "减少 1",
+        "增加 1"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4f3a49526229df89d2f6a72e1d85f7ca",
+          "payload": {},
+          "at": 519.5
+        },
+        {
+          "type": "rendered",
+          "channel": "4f3a49526229df89d2f6a72e1d85f7ca",
+          "payload": {},
+          "at": 526.7000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "4f3a49526229df89d2f6a72e1d85f7ca",
+          "payload": {
+            "height": 259
+          },
+          "at": 526.7000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- group \"数量（0–5）\":\n  - text: 数量（0–5）\n  - button \"减少 1\": −\n  - status: \"2\"\n  - button \"增加 1\": +\n  - text: 还可减 2 次、可加 3 次"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+      "payload": {},
+      "at": 51
+    },
+    {
+      "type": "rendered",
+      "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+      "payload": {},
+      "at": 70.59999990463257
+    },
+    {
+      "type": "resize",
+      "channel": "0f38b72b94a9e8e9b9def23ba6367f5f",
+      "payload": {
+        "height": 259
+      },
+      "at": 70.59999990463257
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "3a7070a1b8f7758ae1fd33a5abbd69a73bfb8012fbdf4f1810bca9ba55ded38c",
+  "previewSha256": "7723e319c7968f9a03faa774efa416fdf36eca978e3684dbe62eb4e180f84cb4",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

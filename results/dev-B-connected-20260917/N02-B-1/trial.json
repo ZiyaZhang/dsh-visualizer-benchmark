@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 2,
+  "id": "N02-B-1",
+  "roundId": "dev-B-connected-20260917",
+  "caseId": "N02",
+  "arm": "B",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "读取 sales.csv，只统计 status 为 paid 的订单。用一小段文字告诉我有效订单总额、金额最高的地区及金额，以及西部占总额的百分比（保留两位小数）。",
+  "expectedRoute": "text",
+  "widgets": [],
+  "final": "只统计 status 为 paid 的订单，有效订单总额为 **310**；金额最高的地区是 **华东**（150）。西部 paid 金额为 60，占总额的 **19.35%**（60/310 ≈ 19.35%，已保留两位小数）。\n\n（已排除第 8 行 status 为 cancelled 的 999，不计入统计。）",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "No inline widget attempt; verify the requested delivery form with check-dsh.py"
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case evaluates routing only"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 19,
+        "callId": "call_00_tY1WCNLkJGXgRUIMUv255562",
+        "argumentsSha256": "783e577fa57b5ab6d9e5bb593ac0de2a3f80cc6e30d813b066cb3174bce07cb4",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_AKb2OYRRmqvFCH5Sbub64626",
+        "argumentsSha256": "b7cb08f498da94d0d34745baf325b8af9b1daf6a1c976deae558a763b11ebf50",
+        "wrapped": false,
+        "resultSeq": 26,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 31,
+        "callId": "call_00_dYNCYxDlNPQhbaa9lw5m9407",
+        "argumentsSha256": "0b24dff87fd5dace1d907d724f9ccc9be70bb1436de918f0d16cd82b961de620",
+        "wrapped": false,
+        "resultSeq": 32,
+        "error": false
+      }
+    ],
+    "referencesRead": [],
+    "skillLoads": [],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "f95aba81361bec3670637c3c9c4e7301872ff276159959dee0aac4aec38bada3"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 7455,
+    "outputTokens": 428,
+    "cacheReadTokens": 24320,
+    "cacheWriteTokens": 0,
+    "totalTokens": 32203
+  },
+  "elapsedSeconds": 22.551,
+  "sourceHead": "9ca98673c522c0f74b11bbc640dbf92121442bb9",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "4bc3f80506a42ecbebb917dc2ec7cc3229c0bc52addf256cebdd4ab9f6ba8dda",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "8ed9b4d9dd1f72e146f891dcc217ccb405d90ed63f4d56faf14ac4aa6bb67db6",
+  "extractionCorrection": {
+    "kind": "visible-assistant-text-only",
+    "correctedAt": "2026-09-17T16:48:00.917Z",
+    "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+    "correctorSha256": "47a8c7617f9cc6fbdf2b33b085723fa5e02fb800caee20608c755c767c2c57b3",
+    "sourceSessionSha256": "843c5d5ab944b3347bf906bd1b2701e000ddd03b54bfe19e4a61c32f612c5e3f",
+    "assistantSeqs": [
+      36
+    ],
+    "previousFinalSha256": "4bc3f80506a42ecbebb917dc2ec7cc3229c0bc52addf256cebdd4ab9f6ba8dda",
+    "previousCorrection": {
+      "kind": "visible-assistant-text-only",
+      "correctedAt": "2026-09-17T16:40:33.875Z",
+      "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+      "correctorSha256": "ef5a06fbafdc4b1a7032c073d912b16cbfe2dda9caa634ef3465a6deceb96ed3",
+      "sourceSessionSha256": "843c5d5ab944b3347bf906bd1b2701e000ddd03b54bfe19e4a61c32f612c5e3f",
+      "assistantSeq": 36,
+      "previousFinalSha256": "88446297d3e9c4d0ea1be597a4656ea0626dcd0578bb56b74c07c0c0c2b030f7",
+      "finalChanged": true,
+      "reason": "Final replies include only text blocks. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+    },
+    "finalChanged": false,
+    "reason": "All visible assistant text blocks are included in chronological order. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+  }
+}

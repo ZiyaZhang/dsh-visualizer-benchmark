@@ -1,0 +1,396 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W06-B-1",
+  "caseId": "W06",
+  "scenario": "sales",
+  "widgetIndex": 0,
+  "callSeq": 39,
+  "resultSeq": 40,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:08.169Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "selected-west",
+          "explain-sent"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "pass",
+      "reason": "Preview checks the emitted payload only; Host admission and model continuation remain separate.",
+      "evidence": {
+        "count": 1,
+        "payloads": [
+          "请解释所选地区：西部，销售额 50 万元。请结合已给出的三地区数据（华东 120 万元、华南 80 万元、西部 50 万元）说明该地区在整体销售结构中的位置、与最高/最低地区的差距，以及可能的原因与建议。"
+        ],
+        "amountsInTenThousandYuan": [
+          50,
+          120,
+          80,
+          50
+        ]
+      }
+    },
+    "hostFollowup": {
+      "status": "pending",
+      "reason": "Run this action in the real DSH conversation to verify Remote admission and the model response.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "selected-west-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "selected-west-736-light.png",
+      "state": "selected-west",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "地区销售对比\n单位：万元\n华东\n120\n华南\n80\n西部\n50\n当前所选\n—\n点击柱条选择地区（仅本地选中）\n解释所选地区\n华东 120 华南 80 西部 50",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 357,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "地区销售额，点击选择地区（单位：万元）"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "820bf764e5c653fdc6649aded93f4f34",
+          "payload": {},
+          "at": 50.5
+        },
+        {
+          "type": "rendered",
+          "channel": "820bf764e5c653fdc6649aded93f4f34",
+          "payload": {},
+          "at": 66.90000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "820bf764e5c653fdc6649aded93f4f34",
+          "payload": {
+            "height": 357
+          },
+          "at": 66.90000009536743
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 地区销售对比 单位：万元\n- listbox \"地区销售额，点击选择地区（单位：万元）\":\n  - option \"华东：120万元\": 华东 120\n  - option \"华南：80万元\": 华南 80\n  - option \"西部：50万元\": 西部 50\n- text: 当前所选 — 点击柱条选择地区（仅本地选中）\n- button \"解释所选地区\" [disabled]"
+    },
+    {
+      "text": "地区销售对比\n单位：万元\n华东\n120\n华南\n80\n西部\n50\n当前所选\n西部 · 50 万元（本地选中）\n点击下方按钮可向模型追问解释\n解释所选地区\n华东 120 华南 80 西部 50",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 357,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "地区销售额，点击选择地区（单位：万元）"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "820bf764e5c653fdc6649aded93f4f34",
+          "payload": {},
+          "at": 50.5
+        },
+        {
+          "type": "rendered",
+          "channel": "820bf764e5c653fdc6649aded93f4f34",
+          "payload": {},
+          "at": 66.90000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "820bf764e5c653fdc6649aded93f4f34",
+          "payload": {
+            "height": 357
+          },
+          "at": 66.90000009536743
+        }
+      ],
+      "name": "selected-west",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 地区销售对比 单位：万元\n- listbox \"地区销售额，点击选择地区（单位：万元）\":\n  - option \"华东：120万元\": 华东 120\n  - option \"华南：80万元\": 华南 80\n  - option \"西部：50万元\" [selected]: 西部 50\n- text: 当前所选 西部 · 50 万元（本地选中） 点击下方按钮可向模型追问解释\n- button \"解释所选地区\""
+    },
+    {
+      "text": "地区销售对比\n单位：万元\n华东\n120\n华南\n80\n西部\n50\n当前所选\n西部 · 50 万元（本地选中）\n点击下方按钮可向模型追问解释\n解释所选地区\n华东 120 华南 80 西部 50",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 357,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "地区销售额，点击选择地区（单位：万元）"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "820bf764e5c653fdc6649aded93f4f34",
+          "payload": {},
+          "at": 50.5
+        },
+        {
+          "type": "rendered",
+          "channel": "820bf764e5c653fdc6649aded93f4f34",
+          "payload": {},
+          "at": 66.90000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "820bf764e5c653fdc6649aded93f4f34",
+          "payload": {
+            "height": 357
+          },
+          "at": 66.90000009536743
+        },
+        {
+          "type": "send_prompt",
+          "channel": "820bf764e5c653fdc6649aded93f4f34",
+          "payload": {
+            "text": "请解释所选地区：西部，销售额 50 万元。请结合已给出的三地区数据（华东 120 万元、华南 80 万元、西部 50 万元）说明该地区在整体销售结构中的位置、与最高/最低地区的差距，以及可能的原因与建议。"
+          },
+          "at": 227.70000004768372
+        }
+      ],
+      "name": "explain-sent",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 地区销售对比 单位：万元\n- listbox \"地区销售额，点击选择地区（单位：万元）\":\n  - option \"华东：120万元\": 华东 120\n  - option \"华南：80万元\": 华南 80\n  - option \"西部：50万元\" [selected]: 西部 50\n- text: 当前所选 西部 · 50 万元（本地选中） 点击下方按钮可向模型追问解释\n- button \"解释所选地区\""
+    },
+    {
+      "text": "地区销售对比\n单位：万元\n华东\n华南\n西部\n当前所选\n—\n点击柱条选择地区（仅本地选中）\n解释所选地区\n华东 华南 西部",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 281,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "地区销售额，点击选择地区（单位：万元）"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "acb551f529498e79738118fd051d13df",
+          "payload": {},
+          "at": 250.40000009536743
+        },
+        {
+          "type": "rendered",
+          "channel": "acb551f529498e79738118fd051d13df",
+          "payload": {},
+          "at": 252.40000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "acb551f529498e79738118fd051d13df",
+          "payload": {
+            "height": 281
+          },
+          "at": 252.40000009536743
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 地区销售对比 单位：万元\n- listbox \"地区销售额，点击选择地区（单位：万元）\":\n  - option \"华东：120万元\": 华东\n  - option \"华南：80万元\": 华南\n  - option \"西部：50万元\": 西部\n- text: 当前所选 — 点击柱条选择地区（仅本地选中）\n- button \"解释所选地区\" [disabled]"
+    },
+    {
+      "text": "地区销售对比\n单位：万元\n华东\n120\n华南\n80\n西部\n50\n当前所选\n—\n点击柱条选择地区（仅本地选中）\n解释所选地区\n华东 120 华南 80 西部 50",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 357,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "地区销售额，点击选择地区（单位：万元）"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "93719b02ff422128d30194325fa23be2",
+          "payload": {},
+          "at": 310.59999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "93719b02ff422128d30194325fa23be2",
+          "payload": {},
+          "at": 310.7999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "93719b02ff422128d30194325fa23be2",
+          "payload": {
+            "height": 357
+          },
+          "at": 310.7999999523163
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 地区销售对比 单位：万元\n- listbox \"地区销售额，点击选择地区（单位：万元）\":\n  - option \"华东：120万元\": 华东 120\n  - option \"华南：80万元\": 华南 80\n  - option \"西部：50万元\": 西部 50\n- text: 当前所选 — 点击柱条选择地区（仅本地选中）\n- button \"解释所选地区\" [disabled]"
+    },
+    {
+      "text": "地区销售对比\n单位：万元\n华东\n华南\n西部\n当前所选\n—\n点击柱条选择地区（仅本地选中）\n解释所选地区\n华东 华南 西部",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 281,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "地区销售额，点击选择地区（单位：万元）"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "7b808cd4a4954394078cba6a7c6fbcce",
+          "payload": {},
+          "at": 361.59999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "7b808cd4a4954394078cba6a7c6fbcce",
+          "payload": {},
+          "at": 368.2999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "7b808cd4a4954394078cba6a7c6fbcce",
+          "payload": {
+            "height": 281
+          },
+          "at": 368.2999999523163
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 地区销售对比 单位：万元\n- listbox \"地区销售额，点击选择地区（单位：万元）\":\n  - option \"华东：120万元\": 华东\n  - option \"华南：80万元\": 华南\n  - option \"西部：50万元\": 西部\n- text: 当前所选 — 点击柱条选择地区（仅本地选中）\n- button \"解释所选地区\" [disabled]"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "820bf764e5c653fdc6649aded93f4f34",
+      "payload": {},
+      "at": 50.5
+    },
+    {
+      "type": "rendered",
+      "channel": "820bf764e5c653fdc6649aded93f4f34",
+      "payload": {},
+      "at": 66.90000009536743
+    },
+    {
+      "type": "resize",
+      "channel": "820bf764e5c653fdc6649aded93f4f34",
+      "payload": {
+        "height": 357
+      },
+      "at": 66.90000009536743
+    },
+    {
+      "type": "send_prompt",
+      "channel": "820bf764e5c653fdc6649aded93f4f34",
+      "payload": {
+        "text": "请解释所选地区：西部，销售额 50 万元。请结合已给出的三地区数据（华东 120 万元、华南 80 万元、西部 50 万元）说明该地区在整体销售结构中的位置、与最高/最低地区的差距，以及可能的原因与建议。"
+      },
+      "at": 227.70000004768372
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "5cc81c371b162ea86378e872c1ce3b5aec292d9ca10dfc895ca20fed669521bd",
+  "previewSha256": "cae7fd226b2519e76b7806ab7f6ceb4fa2c9819f9c549044dbf30fea9545feb1",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

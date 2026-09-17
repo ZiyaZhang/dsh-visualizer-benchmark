@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W01-B-2",
+  "caseId": "W01",
+  "scenario": "binary",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:09.913Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1",
+          "step-2",
+          "reset"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "step-2-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "step-2-736-light.png",
+      "state": "step-2",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "二分查找 · 在有序数组中找 23\nmid（本轮比较）\n本轮排除\n已排除\n命中\nlow\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\nlow = 0\nmid = —\nhigh = 7\n候选区间 = [0..7]\n剩余元素 = 8 个\n初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。\n下一步\n重置\n第 0 / 2 步\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 324,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，尚未计算 mid。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {},
+          "at": 53.5
+        },
+        {
+          "type": "rendered",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {},
+          "at": 78.5
+        },
+        {
+          "type": "resize",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {
+            "height": 324
+          },
+          "at": 78.5
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 mid（本轮比较） 本轮排除 已排除 命中\n- img \"数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，尚未计算 mid。\": low 2 0 5 1 8 2 12 3 16 4 23 5 38 6 high 56 7\n- text: low = 0 mid = — high = 7 候选区间 = [0..7] 剩余元素 = 8 个 初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。\n- button \"下一步\"\n- button \"重置\"\n- text: 第 0 / 2 步"
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\nmid（本轮比较）\n本轮排除\n已排除\n命中\nlow\n2\n0\n5\n1\n8\n2\nmid\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\nlow = 0\nmid = 3\nhigh = 7\n候选区间 = [0..7]\n剩余元素 = 8 个\n第 1 轮：mid = ⌊(0+7)/2⌋ = 3，比较 a[3] = 12 与目标 23。12 < 23，说明目标只可能在右半边 → 排除下标 0～3（含 mid 本身），low 更新为 4。\n下一步\n重置\n第 1 / 2 步\n第 1 轮：mid = 3，a[3] = 12 < 23 → 排除 [0..3]，low = 4\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 379,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，mid 为下标 3，值 12。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {},
+          "at": 53.5
+        },
+        {
+          "type": "rendered",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {},
+          "at": 78.5
+        },
+        {
+          "type": "resize",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {
+            "height": 324
+          },
+          "at": 78.5
+        },
+        {
+          "type": "resize",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {
+            "height": 379
+          },
+          "at": 211.40000009536743
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 mid（本轮比较） 本轮排除 已排除 命中\n- img \"数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，mid 为下标 3，值 12。\": low 2 0 5 1 8 2 mid 12 3 16 4 23 5 38 6 high 56 7\n- text: low = 0 mid = 3 high = 7 候选区间 = [0..7] 剩余元素 = 8 个 第 1 轮：mid = ⌊(0+7)/2⌋ = 3，比较 a[3] = 12 与目标 23。12 < 23，说明目标只可能在右半边 → 排除下标 0～3（含 mid 本身），low 更新为 4。\n- button \"下一步\"\n- button \"重置\"\n- text: 第 1 / 2 步\n- list:\n  - listitem: 第 1 轮：mid = 3，a[3] = 12 < 23 → 排除 [0..3]，low = 4"
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\nmid（本轮比较）\n本轮排除\n已排除\n命中\n2\n0\n5\n1\n8\n2\n12\n3\nlow\n16\n4\nmid\n23\n5\n38\n6\nhigh\n56\n7\nlow = 4\nmid = 5\nhigh = 7\n候选区间 = [4..7]\n剩余元素 = 4 个\n第 2 轮：mid = ⌊(4+7)/2⌋ = 5，比较 a[5] = 23 与目标 23，相等 → 命中！返回下标 5。全程只用 2 次比较。\n已找到 23 ✓\n重置\n第 2 / 2 步\n第 1 轮：mid = 3，a[3] = 12 < 23 → 排除 [0..3]，low = 4\n第 2 轮：mid = 5，a[5] = 23 = 23 → 命中，返回下标 5\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 378,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 4 到 7，mid 为下标 5，值 23。已命中目标。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {},
+          "at": 53.5
+        },
+        {
+          "type": "rendered",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {},
+          "at": 78.5
+        },
+        {
+          "type": "resize",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {
+            "height": 324
+          },
+          "at": 78.5
+        },
+        {
+          "type": "resize",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {
+            "height": 379
+          },
+          "at": 211.40000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {
+            "height": 378
+          },
+          "at": 258.80000019073486
+        }
+      ],
+      "name": "step-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 mid（本轮比较） 本轮排除 已排除 命中\n- img \"数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 4 到 7，mid 为下标 5，值 23。已命中目标。\": 2 0 5 1 8 2 12 3 low 16 4 mid 23 5 38 6 high 56 7\n- text: low = 4 mid = 5 high = 7 候选区间 = [4..7] 剩余元素 = 4 个 第 2 轮：mid = ⌊(4+7)/2⌋ = 5，比较 a[5] = 23 与目标 23，相等 → 命中！返回下标 5。全程只用 2 次比较。\n- button \"已找到 23 ✓\" [disabled]\n- button \"重置\"\n- text: 第 2 / 2 步\n- list:\n  - listitem: 第 1 轮：mid = 3，a[3] = 12 < 23 → 排除 [0..3]，low = 4\n  - listitem: 第 2 轮：mid = 5，a[5] = 23 = 23 → 命中，返回下标 5"
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\nmid（本轮比较）\n本轮排除\n已排除\n命中\nlow\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\nlow = 0\nmid = —\nhigh = 7\n候选区间 = [0..7]\n剩余元素 = 8 个\n初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。\n下一步\n重置\n第 0 / 2 步\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 324,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，尚未计算 mid。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {},
+          "at": 53.5
+        },
+        {
+          "type": "rendered",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {},
+          "at": 78.5
+        },
+        {
+          "type": "resize",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {
+            "height": 324
+          },
+          "at": 78.5
+        },
+        {
+          "type": "resize",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {
+            "height": 379
+          },
+          "at": 211.40000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "7176c33d305dbda00bf8b4a819b219ac",
+          "payload": {
+            "height": 378
+          },
+          "at": 258.80000019073486
+        }
+      ],
+      "name": "reset",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 mid（本轮比较） 本轮排除 已排除 命中\n- img \"数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，尚未计算 mid。\": low 2 0 5 1 8 2 12 3 16 4 23 5 38 6 high 56 7\n- text: low = 0 mid = — high = 7 候选区间 = [0..7] 剩余元素 = 8 个 初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。\n- button \"下一步\"\n- button \"重置\"\n- text: 第 0 / 2 步"
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\nmid（本轮比较）\n本轮排除\n已排除\n命中\nlow\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\nlow = 0\nmid = —\nhigh = 7\n候选区间 = [0..7]\n剩余元素 = 8 个\n初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。\n下一步\n重置\n第 0 / 2 步\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 438,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，尚未计算 mid。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "ba88d64654189946247b9ef6e9cc91fb",
+          "payload": {},
+          "at": 335.10000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "ba88d64654189946247b9ef6e9cc91fb",
+          "payload": {},
+          "at": 340.5
+        },
+        {
+          "type": "resize",
+          "channel": "ba88d64654189946247b9ef6e9cc91fb",
+          "payload": {
+            "height": 438
+          },
+          "at": 340.5
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 mid（本轮比较） 本轮排除 已排除 命中\n- img \"数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，尚未计算 mid。\": low 2 0 5 1 8 2 12 3 16 4 23 5 38 6 high 56 7\n- text: low = 0 mid = — high = 7 候选区间 = [0..7] 剩余元素 = 8 个 初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。\n- button \"下一步\"\n- button \"重置\"\n- text: 第 0 / 2 步"
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\nmid（本轮比较）\n本轮排除\n已排除\n命中\nlow\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\nlow = 0\nmid = —\nhigh = 7\n候选区间 = [0..7]\n剩余元素 = 8 个\n初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。\n下一步\n重置\n第 0 / 2 步\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 324,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，尚未计算 mid。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "e21f3a819a926d2763253a7723940159",
+          "payload": {},
+          "at": 409.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "e21f3a819a926d2763253a7723940159",
+          "payload": {},
+          "at": 417.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "e21f3a819a926d2763253a7723940159",
+          "payload": {
+            "height": 324
+          },
+          "at": 417.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 mid（本轮比较） 本轮排除 已排除 命中\n- img \"数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，尚未计算 mid。\": low 2 0 5 1 8 2 12 3 16 4 23 5 38 6 high 56 7\n- text: low = 0 mid = — high = 7 候选区间 = [0..7] 剩余元素 = 8 个 初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。\n- button \"下一步\"\n- button \"重置\"\n- text: 第 0 / 2 步"
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\nmid（本轮比较）\n本轮排除\n已排除\n命中\nlow\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\nlow = 0\nmid = —\nhigh = 7\n候选区间 = [0..7]\n剩余元素 = 8 个\n初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。\n下一步\n重置\n第 0 / 2 步\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 438,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，尚未计算 mid。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "2d2ae2d7af6c2b4563f524ce7eeafa73",
+          "payload": {},
+          "at": 478.10000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "2d2ae2d7af6c2b4563f524ce7eeafa73",
+          "payload": {},
+          "at": 482.30000019073486
+        },
+        {
+          "type": "resize",
+          "channel": "2d2ae2d7af6c2b4563f524ce7eeafa73",
+          "payload": {
+            "height": 438
+          },
+          "at": 482.30000019073486
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 mid（本轮比较） 本轮排除 已排除 命中\n- img \"数组 2、5、8、12、16、23、38、56，目标 23。当前候选区间为下标 0 到 7，尚未计算 mid。\": low 2 0 5 1 8 2 12 3 16 4 23 5 38 6 high 56 7\n- text: low = 0 mid = — high = 7 候选区间 = [0..7] 剩余元素 = 8 个 初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。\n- button \"下一步\"\n- button \"重置\"\n- text: 第 0 / 2 步"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "7176c33d305dbda00bf8b4a819b219ac",
+      "payload": {},
+      "at": 53.5
+    },
+    {
+      "type": "rendered",
+      "channel": "7176c33d305dbda00bf8b4a819b219ac",
+      "payload": {},
+      "at": 78.5
+    },
+    {
+      "type": "resize",
+      "channel": "7176c33d305dbda00bf8b4a819b219ac",
+      "payload": {
+        "height": 324
+      },
+      "at": 78.5
+    },
+    {
+      "type": "resize",
+      "channel": "7176c33d305dbda00bf8b4a819b219ac",
+      "payload": {
+        "height": 379
+      },
+      "at": 211.40000009536743
+    },
+    {
+      "type": "resize",
+      "channel": "7176c33d305dbda00bf8b4a819b219ac",
+      "payload": {
+        "height": 378
+      },
+      "at": 258.80000019073486
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "aedfe4f62e6a39b31164ba0fbca9209ed75e0b0d3d40bbbb0edd5dc02a6cbbf2",
+  "previewSha256": "cf12bd27e86f8386303cf49441ab5adda9aa3c1fe7756abe0b2e2e5ed54d4d50",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

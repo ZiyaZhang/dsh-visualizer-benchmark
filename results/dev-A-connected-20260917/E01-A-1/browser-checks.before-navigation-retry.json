@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 2,
+  "trialId": "E01-A-1",
+  "caseId": "E01",
+  "casesPath": "results/dev-A-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:27:08.893Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "error",
+      "reason": "Checker/environment failure: frame.evaluate: Execution context was destroyed, most likely because of a navigation.",
+      "evidence": {}
+    },
+    "interaction": {
+      "status": "pending",
+      "reason": "Scenario has not run.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "pending",
+      "reason": "Local actions have not run.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Screenshots and overflow flags support human review, not an automatic design score.",
+      "evidence": {}
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [],
+  "states": [],
+  "messages": [],
+  "console": [
+    {
+      "type": "error",
+      "text": "Blocked script execution in 'data:text/html;charset=utf-8,%3C!doctype%20html%3E%3Chtml%3E%3Chead%3E%3Cmeta%20charset%3D%22utf-8%22%3E%3Cmeta%20http-equiv%3D%22Content-Security-Policy%22%20content%3D%22default-src%20'none'%3B%20style-src%20'unsafe-inline'%3B%20script-src%20'none'%3B%20img-src%20data%3A%3B%20base-uri%20'none'%3B%20form-action%20'none'%3B%22%3E%3Cstyle%3E%3Aroot%7B--dsw-alias-bg-base%3A%23ffffff%3B--dsw-alias-bg-layer-1%3A%23ffffff%3B--dsw-alias-bg-layer-2%3A%23f4f5f7%3B--dsw-alias-border-l1%3A%23e5e7eb%3B--dsw-alias-bor...0x%3D%22565%22%20y%3D%22447%22%20font-size%3D%2212.5%22%20font-weight%3D%22600%22%20fill%3D%22var(--dsw-alias-label-primary%2C%20%23111827)%22%3E%E7%AC%AC%E4%B8%89%E6%AC%A1%20ACK%20%E8%AE%A9%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%85%88%E7%A1%AE%E8%AE%A4%E5%86%8D%E6%8A%95%E5%85%A5%E8%B5%84%E6%BA%90%E3%80%82%3C%2Ftext%3E%0A%0A%20%20%3C!--%20bottom%20takeaway%20--%3E%0A%20%20%3Crect%20x%3D%2240%22%20y%3D%22612%22%20width%3D%22845%22%20height%3D%220%22%20fill%3D%22none%22%2F%3E%0A%3C%2Fsvg%3E%3C%2Fbody%3E%3C%2Fhtml%3E' because the document's frame is sandboxed and the 'allow-scripts' permission is not set."
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "0aea5c883b7b972ffc217647ab4fcd3d2bebb4f452274225f2e290f6198c5973",
+  "previewSha256": "e0e27a9d23f54efd5c887ed9561d027b8f61849269e9dd2a14c65118ae5e0efd",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original light preview; dark SVG is rebuilt from unchanged source using checkerRuntimeRendererSha256.",
+  "checkerSha256": "6f313bab30ffbef2ee4cba89e4fe19e36ced92db6c9bebd079e77fa07dd3030c",
+  "kind": "svg",
+  "sandbox": "",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

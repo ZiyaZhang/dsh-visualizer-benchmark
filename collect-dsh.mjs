@@ -21,6 +21,12 @@ function textParts(value){
   if(typeof value!=='object')return [];
   return [...(typeof value.text==='string'?[value.text]:[]),...textParts(value.content)];
 }
+export function visibleAssistantText(content){
+  return (Array.isArray(content)?content:[]).filter(part=>part?.type==='text'&&typeof part.text==='string').map(part=>part.text).join('\n');
+}
+export function visibleAssistantReply(messages){
+  return messages.map(message=>visibleAssistantText(message.data.message?.content)).filter(Boolean).join('\n\n');
+}
 function failed(value){return Boolean(value&&typeof value==='object'&&(value.isError===true||Object.values(value).some(x=>Array.isArray(x)?x.some(failed):x&&typeof x==='object'&&failed(x))));}
 function readRows(file){
   const rows=[],errors=[];
@@ -160,8 +166,8 @@ async function collect(roundId,privateRoot){
     }
     const assistants=rows.filter(r=>r.type==='assistant/message');
     for(const message of assistants)for(const[k,v]of Object.entries(message.data.usage??{}))if(typeof v==='number')trial.usage[k]=(trial.usage[k]??0)+v;
-    trial.final=redact(textParts(assistants.at(-1)?.data.message?.content).join('\n'),privateRoot,repo);
-    trial.finalSha256=sha(textParts(assistants.at(-1)?.data.message?.content).join('\n'));
+    trial.final=redact(visibleAssistantReply(assistants),privateRoot,repo);
+    trial.finalSha256=sha(visibleAssistantReply(assistants));
     const header=rows.find(e=>e.type==='request/header')?.data.header;
     trial.requestModel=header?.config?.model??null;
     trial.reasoningEffort=header?.config?.reasoningEffort??null;
@@ -196,7 +202,68 @@ async function collect(roundId,privateRoot){
   console.log(JSON.stringify({round:roundId,collected,planned:manifest.trials.length,statuses:manifest.trials.reduce((a,t)=>(a[t.status]=(a[t.status]??0)+1,a),{})}));
 }
 
-const options={};
-for(let i=2;i<process.argv.length;i+=2){const name=process.argv[i];if(!['--round','--private-root'].includes(name)||!process.argv[i+1])throw Error('Usage: node collect-dsh.mjs --round ID [--private-root DIR]');options[name]=process.argv[i+1];}
-if(!options['--round']||!/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(options['--round']))throw Error('A safe --round ID is required');
-await collect(options['--round'],path.resolve(options['--private-root']??DEFAULT_PRIVATE));
+// Explicit correction of an export bug, not a rerun of a frozen experiment.
+// Keep the frozen collector hash and private original export as provenance.
+function correctFinalExports(roundId,privateRoot){
+  const publicDir=path.join(ROOT,'results',roundId),privateDir=path.join(privateRoot,roundId);
+  const manifest=json(path.join(publicDir,'manifest.json'));
+  if(manifest.trials.some(t=>['planned','running'].includes(t.status)))throw Error('Wait until generation has finished; the running collector would overwrite this correction');
+  const config=json(path.join(privateDir,'round.json')),correctorSha=sha(fs.readFileSync(fileURLToPath(import.meta.url)));
+  const prepared=[];
+  for(const item of manifest.trials){
+    if(item.status!=='completed')continue;
+    const slot=path.join(privateDir,'trials',item.id),file=path.join(publicDir,item.id,'trial.json');
+    const original=fs.readFileSync(file,'utf8'),trial=JSON.parse(original);
+    const stream=readRows(path.join(slot,'events.jsonl'));
+    const sessionId=stream.rows.find(e=>e.type==='session')?.sessionId;
+    const logs=walk(path.join(slot,'home/sessions')).filter(p=>p.endsWith('/session.v3.jsonl'));
+    const log=logs.find(p=>sessionId&&path.basename(path.dirname(p))===sessionId)??(logs.length===1?logs[0]:null);
+    if(!log)throw Error('No unambiguous private Session: '+item.id);
+    const durable=readRows(log),assistants=durable.rows.filter(r=>r.type==='assistant/message'),last=assistants.at(-1);
+    if(stream.errors.length||durable.errors.length||!last)throw Error('Invalid source log: '+item.id);
+    const content=last.data.message?.content,visible=visibleAssistantReply(assistants);
+    const oldSha=sha(textParts(content).join('\n')),newSha=sha(visible);
+    const priorCorrection=trial.extractionCorrection;
+    if(trial.extractionCorrection){
+      if(trial.finalSha256===newSha&&trial.final===redact(visible,privateRoot,config.repo)&&trial.extractionCorrection.assistantSeqs)continue;
+      if(trial.finalSha256!==sha(visibleAssistantText(content))||trial.final!==redact(visibleAssistantText(content),privateRoot,config.repo))throw Error('Previously corrected export differs from source: '+item.id);
+    }else{
+      if(trial.finalSha256!==oldSha)throw Error('Original final digest differs from the frozen extraction: '+item.id);
+      if(trial.final!==redact(textParts(content).join('\n'),privateRoot,config.repo))throw Error('Original final content was edited: '+item.id);
+    }
+    const sourceHeader=durable.rows.find(r=>r.type==='request/header');
+    const recorded=trial.trace?.requestHeaders?.find(h=>h.seq===sourceHeader?.seq);
+    if(!sourceHeader||recorded?.sha256!==sha(JSON.stringify(sourceHeader.data.header)))throw Error('Session identity mismatch: '+item.id);
+    const previousFinalSha256=trial.finalSha256;
+    trial.final=redact(visible,privateRoot,config.repo);
+    trial.finalSha256=newSha;
+    trial.artifactSetSha256=sha(JSON.stringify({final:newSha,widgets:trial.widgets.map(w=>({sha256:w.sha256,callSeq:w.callSeq,resultSeq:w.resultSeq}))}));
+    trial.extractionCorrection={kind:'visible-assistant-text-only',correctedAt:new Date().toISOString(),
+      frozenCollectorSha256:manifest.collectorSha256,correctorSha256:correctorSha,
+      sourceSessionSha256:sha(fs.readFileSync(log)),assistantSeqs:assistants.filter(r=>visibleAssistantText(r.data.message?.content)).map(r=>r.seq),previousFinalSha256,
+      ...(priorCorrection?{previousCorrection:priorCorrection}:{}),finalChanged:previousFinalSha256!==newSha,
+      reason:'All visible assistant text blocks are included in chronological order. Non-display blocks remain in the private Session; generation and widget sources are unchanged.'};
+    prepared.push({file,trial,original,backup:path.join(privateDir,'exports-before-visible-text-all',item.id+'.json')});
+  }
+  // Validate every source before changing any export; backups never enter the public repo.
+  for(const entry of prepared){
+    fs.mkdirSync(path.dirname(entry.backup),{recursive:true,mode:0o700});
+    fs.writeFileSync(entry.backup,entry.original,{flag:'wx',mode:0o600});
+    writeJson(entry.file,entry.trial);
+  }
+  console.log(JSON.stringify({round:roundId,correctedExports:prepared.length,changedFinals:prepared.filter(p=>p.trial.extractionCorrection.finalChanged).length,modelRequests:0}));
+}
+
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+  const options={};
+  for(let i=2;i<process.argv.length;i++){
+    const name=process.argv[i];
+    if(name==='--correct-final-exports'){options[name]=true;continue;}
+    if(!['--round','--private-root'].includes(name)||!process.argv[i+1])throw Error('Usage: node collect-dsh.mjs --round ID [--private-root DIR] [--correct-final-exports]');
+    options[name]=process.argv[++i];
+  }
+  if(!options['--round']||!/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(options['--round']))throw Error('A safe --round ID is required');
+  const privateRoot=path.resolve(options['--private-root']??DEFAULT_PRIVATE);
+  if(options['--correct-final-exports'])correctFinalExports(options['--round'],privateRoot);
+  else await collect(options['--round'],privateRoot);
+}

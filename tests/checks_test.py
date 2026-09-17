@@ -16,6 +16,23 @@ checks = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(checks)
 
 
+class CollectorChecks(unittest.TestCase):
+    def test_final_exports_only_visible_text_blocks(self):
+        script = "import assert from 'node:assert/strict';import {visibleAssistantText,visibleAssistantReply} from " + json.dumps(str(ROOT / 'collect-dsh.mjs')) + ";" + """
+        assert.equal(visibleAssistantText([{type:'reasoning',text:'private fixture'},
+          {type:'text',text:'Visible one'},{type:'tool_use',text:'not a reply'},
+          {type:'text',text:'Visible two'}]), 'Visible one\\nVisible two');
+        assert.equal(visibleAssistantText([{type:'reasoning',text:'private fixture'}]), '');
+        assert.equal(visibleAssistantText(undefined), '');
+        assert.equal(visibleAssistantReply([
+          {data:{message:{content:[{type:'text',text:'Before widget'}]}}},
+          {data:{message:{content:[{type:'reasoning',text:'private fixture'}]}}},
+          {data:{message:{content:[{type:'text',text:'After widget'}]}}}
+        ]), 'Before widget\\n\\nAfter widget');
+        """
+        subprocess.run([NODE, '--input-type=module', '-e', script], check=True, capture_output=True, timeout=15)
+
+
 class RouteChecks(unittest.TestCase):
     def test_absence_and_unfinished_are_not_success(self):
         self.assertEqual(checks.check_trial({'tools': [], 'final': ''}, {'route': 'text'})['route']['status'], 'pending')
@@ -39,6 +56,9 @@ class RouteChecks(unittest.TestCase):
 
 
 FIXTURES = {
+    'quantity': '''<button id="minus" aria-label="减少 1">−</button><output role="status" id="quantity">2</output><button id="plus" aria-label="增加 1">+</button><div>0</div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><script>let q=2;function render(){document.getElementById('quantity').textContent=q;document.getElementById('minus').disabled=q===0;document.getElementById('plus').disabled=q===(BAD?6:5)}document.getElementById('minus').onclick=()=>{q--;render()};document.getElementById('plus').onclick=()=>{q++;render()};render()</script>''',
+    'heat': '''<h2>节点温度（°C）</h2><div role="img" id="rod"></div><button id="next">单步</button><button id="reset">重置</button><script>let n=0;function render(){const v=[[100,0,0,0,0],[100,25,0,0,0],[100,37.5,BAD?7.25:6.25,0,0]][n];const rod=document.getElementById('rod');rod.innerHTML=v.map((t,i)=>'<div>节点'+(i+1)+' · x='+i+'<div>'+t.toFixed(2)+'</div></div>').join('');rod.setAttribute('aria-label',v.map((t,i)=>'T'+(i+1)+' '+t.toFixed(1)+' 摄氏度').join('，'))}document.getElementById('next').onclick=()=>{n=Math.min(n+1,2);render()};document.getElementById('reset').onclick=()=>{n=0;render()};render()</script>''',
+    'binary': '''<div>low<div id="low">0</div></div><div>mid 刚比较<div id="mid">—</div></div><div>high<div>7</div></div><div id="found"></div><button id="next">下一步</button><button id="reset">重置</button><script>let n=0;function render(){document.getElementById('low').textContent=n?4:0;document.getElementById('mid').textContent=n===0?'—':n===1?(BAD?4:3):5;document.getElementById('found').textContent=n===2?'命中下标5':'';document.getElementById('next').disabled=n===2}document.getElementById('next').onclick=()=>{n++;render()};document.getElementById('reset').onclick=()=>{n=0;render()};render()</script>''',
     'cache': '''<label>命中率<input id="s" type="range" min="0" max="100" step="50" value="0"></label><p>总成本 <output id="cost"></output></p><p>命中 <output id="hit"></output></p><p>未命中 <output id="miss"></output></p><script>const s=document.getElementById('s');function render(){const p=+s.value;document.getElementById('hit').textContent=p*10;document.getElementById('miss').textContent=1000-p*10;document.getElementById('cost').textContent=(1-.9*p/100)+(BAD?.02:0)}s.addEventListener('input',render);render()</script>''',
     'backoff': '''<p>累计等待 <output id="sum">0</output></p><p>下一次等待 <output id="wait">0</output></p><div id="history"></div><button id="next">下一步</button><button id="reset">重置</button><script>let n=0;const next=document.getElementById('next');function render(){document.getElementById('sum').textContent=[0,0,1,3][n];document.getElementById('wait').textContent=[0,1,BAD?9:2,0][n];document.getElementById('history').textContent=['第1次失败','第2次失败','第3次成功'].slice(0,n).join('；');next.disabled=n===3}next.onclick=()=>{n++;render()};document.getElementById('reset').onclick=()=>{n=0;render()};render()</script>''',
     'filter': '''<label><input type="radio" name="state" value="进行中" checked>进行中</label><label><input type="radio" name="state" value="已完成">已完成</label><label>负责人<input id="owner"></label><button id="apply" disabled>应用</button><div id="summary"></div><script>const owner=document.getElementById('owner'),apply=document.getElementById('apply');owner.oninput=()=>apply.disabled=!owner.value;apply.onclick=()=>document.getElementById('summary').textContent='已应用：'+(BAD?'进行中':document.querySelector('input[name=state]:checked').value)+' '+owner.value</script>''',

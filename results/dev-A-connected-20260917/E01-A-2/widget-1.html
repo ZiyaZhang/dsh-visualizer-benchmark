@@ -1,0 +1,274 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><div class="hs" id="hs-root">
+<style>
+.hs{--c1:#4a7cfa;--c2:#12a594;--ink:var(--dsw-alias-label-primary,#1f2328);--ink2:var(--dsw-alias-label-secondary,#5b6570);--ink3:var(--dsw-alias-label-tertiary,#8b949e);--line:var(--dsw-alias-border-l1,#e3e7ec);--bg1:var(--dsw-alias-bg-layer-1,#fff);--bg2:var(--dsw-alias-bg-layer-2,#f6f8fa);--hover:var(--dsw-alias-interactive-bg-hover,rgba(127,127,127,.12));color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;line-height:1.5}
+.hs *{box-sizing:border-box}
+.hs-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.hs-seg{display:flex;flex-wrap:wrap;gap:4px}
+.hs-seg button{font:inherit;font-size:12.5px;padding:6px 10px;border:1px solid var(--line);background:var(--bg2);color:var(--ink2);border-radius:8px;cursor:pointer}
+.hs-seg button:hover{background:var(--hover)}
+.hs-seg button.on{background:var(--c1);border-color:var(--c1);color:#fff;font-weight:600}
+.hs-play{font:inherit;font-size:12.5px;padding:6px 12px;border:1px solid var(--line);background:var(--bg1);color:var(--ink);border-radius:8px;cursor:pointer}
+.hs-play:hover{background:var(--hover)}
+.hs-stage{border:1px solid var(--line);border-radius:12px;background:var(--bg1);padding:4px 8px}
+.hs-stage svg{width:100%;height:auto;display:block}
+.life{stroke:var(--line);stroke-width:2}
+.node{fill:var(--bg2);stroke:var(--line)}
+.nlabel{fill:var(--ink);font-size:13.5px;font-weight:600}
+.lbl{font-size:13px;font-weight:600}
+.sub{font-size:11.5px;fill:var(--ink3)}
+.statetxt{font-size:11.5px;fill:var(--ink2);font-weight:600}
+.arrow{opacity:0;transition:opacity .32s ease}
+.arrow.on{opacity:1}
+.arrow.active line{animation:hsW 1.1s ease-in-out infinite}
+@keyframes hsW{50%{stroke-width:4.5}}
+.hs-note{margin-top:12px;padding:10px 12px;background:var(--bg2);border-left:3px solid var(--c1);border-radius:8px;font-size:13px;min-height:62px}
+.hs-know{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.hs-know section{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg1);min-width:0}
+.hs-know h4{margin:0 0 8px;font-size:12.5px;color:var(--ink2);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.chip{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.sc1{background:rgba(74,124,250,.14);color:var(--c1)}
+.sc2{background:rgba(18,165,148,.16);color:var(--c2)}
+.hs-know ul{list-style:none;margin:0;padding:0}
+.hs-know li{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--ink2);margin-bottom:7px;transition:opacity .3s}
+.hs-know li:last-child{margin-bottom:0}
+.hs-know li::before{content:"";flex:none;width:8px;height:8px;margin-top:5px;border-radius:50%;border:1.5px solid var(--ink3)}
+.hs-know li.pending{opacity:.42}
+.hs-know li.now{color:var(--ink)}
+.hs-know li.now::before{background:var(--c1);border-color:var(--c1)}
+.hs-know li.done::before{background:var(--c2);border-color:var(--c2)}
+.hs-cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.hs-cmp section{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg1);min-width:0}
+.hs-cmp h5{margin:0 0 6px;font-size:13px}
+.hs-cmp .bad h5{color:#d9534f}
+.hs-cmp .good h5{color:var(--c2)}
+.hs-cmp p{margin:0;font-size:12.5px;color:var(--ink2)}
+.hs-foot{margin-top:10px;font-size:12px;color:var(--ink3)}
+</style>
+
+<div class="hs-bar">
+  <div class="hs-seg" role="group" aria-label="握手步骤">
+    <button type="button" data-step="0" aria-pressed="true" class="on">起点</button>
+    <button type="button" data-step="1" aria-pressed="false">① SYN</button>
+    <button type="button" data-step="2" aria-pressed="false">② SYN+ACK</button>
+    <button type="button" data-step="3" aria-pressed="false">③ ACK</button>
+  </div>
+  <button type="button" class="hs-play" id="hs-play">▶ 播放</button>
+</div>
+
+<div class="hs-stage">
+<svg viewBox="0 0 760 400" role="img" aria-labelledby="hs-t hs-d">
+  <title id="hs-t">TCP 三次握手时序图</title>
+  <desc id="hs-d">客户端与服务端依次交换 SYN、SYN+ACK、ACK 三条报文，用于确认双向收发能力并同步双方初始序号。</desc>
+  <defs>
+    <marker id="hs-m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--c1)"/></marker>
+    <marker id="hs-m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--c2)"/></marker>
+  </defs>
+  <line class="life" x1="180" y1="54" x2="180" y2="356"/>
+  <line class="life" x1="580" y1="54" x2="580" y2="356"/>
+  <rect class="node" x="105" y="14" width="150" height="40" rx="10"/>
+  <text class="nlabel" x="180" y="39" text-anchor="middle">客户端 Client</text>
+  <rect class="node" x="505" y="14" width="150" height="40" rx="10"/>
+  <text class="nlabel" x="580" y="39" text-anchor="middle">服务端 Server</text>
+
+  <g class="arrow" id="hs-a1">
+    <line x1="180" y1="118" x2="576" y2="118" stroke="var(--c1)" stroke-width="2.5" marker-end="url(#hs-m1)"/>
+    <text class="lbl" x="380" y="110" text-anchor="middle" fill="var(--c1)">SYN · seq=x</text>
+    <text class="sub" x="380" y="136" text-anchor="middle">① 请求建立连接，声明我的初始序号 x</text>
+  </g>
+  <g class="arrow" id="hs-a2">
+    <line x1="580" y1="208" x2="184" y2="208" stroke="var(--c2)" stroke-width="2.5" marker-end="url(#hs-m2)"/>
+    <text class="lbl" x="380" y="200" text-anchor="middle" fill="var(--c2)">SYN+ACK · seq=y, ack=x+1</text>
+    <text class="sub" x="380" y="226" text-anchor="middle">② 同意并反向声明：收到 x，我的初始序号是 y</text>
+  </g>
+  <g class="arrow" id="hs-a3">
+    <line x1="180" y1="298" x2="576" y2="298" stroke="var(--c1)" stroke-width="2.5" marker-end="url(#hs-m1)"/>
+    <text class="lbl" x="380" y="290" text-anchor="middle" fill="var(--c1)">ACK · ack=y+1</text>
+    <text class="sub" x="380" y="316" text-anchor="middle">③ 确认 y：我收到了你的序号，双向都通了</text>
+  </g>
+  <text class="statetxt" x="180" y="378" text-anchor="middle" id="hs-st-c">CLOSED</text>
+  <text class="statetxt" x="580" y="378" text-anchor="middle" id="hs-st-s">LISTEN</text>
+</svg>
+</div>
+
+<div class="hs-note" id="hs-note" aria-live="polite"></div>
+
+<div class="hs-know">
+  <section>
+    <h4>客户端视角 <span class="chip sc1" id="hs-st-c-chip">CLOSED</span></h4>
+    <ul id="hs-kc">
+      <li data-min="1">已发出 SYN（seq=x）：只是"发出去了"，还不知道是否送达</li>
+      <li data-min="2">收到 SYN+ACK（ack=x+1）：确认我能发、服务端能收；服务端能发、我能收</li>
+      <li data-min="3">发出 ACK（ack=y+1），进入 ESTABLISHED</li>
+    </ul>
+  </section>
+  <section>
+    <h4>服务端视角 <span class="chip sc2" id="hs-st-s-chip">LISTEN</span></h4>
+    <ul id="hs-ks">
+      <li data-min="1">收到 SYN（seq=x）：确认对方能发、我能收；但还不知道我的回复能否送达</li>
+      <li data-min="2">发出 SYN+ACK（seq=y）：这条报文送出后，等待对方确认</li>
+      <li data-min="3">收到 ACK（ack=y+1）：确认我能发、对方能收，进入 ESTABLISHED</li>
+    </ul>
+  </section>
+</div>
+
+<div class="hs-cmp">
+  <section class="bad">
+    <h5>为什么两次不够 ✗</h5>
+    <p>若服务端发出 SYN+ACK 后就认为连接建立：万一这个 SYN 是网络里滞留的过期副本，客户端会直接忽略后面的 SYN+ACK、不回 ACK，服务端却已分配资源 → 半开连接（half-open），白白占用连接与内存；同时服务端的初始序号 y 从未被确认，它无从知道自己的报文能否送达。</p>
+  </section>
+  <section class="good">
+    <h5>为什么三次刚好 ✓</h5>
+    <p>第三个 ACK 是服务端唯一能确认"我的 SYN 被收到、对方此刻在线且这次请求是新鲜的"的方式，同时两个方向的初始序号都被显式确认。三次是"双向收发能力 + 双向序号同步"同时成立所需的最小往返次数。</p>
+  </section>
+</div>
+
+<div class="hs-foot">为什么不是四次？三次之后两端的信息已经完备，再来一轮不增加任何确认。四次挥手出现在关闭连接时，因为关闭是半双工的，两个方向需要各自确认。</div>
+
+<script>
+(function(){
+  var root=document.getElementById('hs-root');
+  if(!root) return;
+  var notes=[
+    '点击上面的步骤按钮（或「播放」）逐步走一遍：每一轮往返都在补齐一块信息。',
+    '① 客户端 → 服务端：SYN（seq=x）。客户端声明自己的初始序号并请求连接。此刻服务端只确认了"你能发、我能收"，还不知道自己能否发得出去。',
+    '② 服务端 → 客户端：SYN+ACK（seq=y, ack=x+1）。客户端收到后，双向收发能力已经验证；但服务端仍不知道自己的 SYN+ACK 有没有送达——所以还不能认为连接建立。',
+    '③ 客户端 → 服务端：ACK（ack=y+1）。服务端收到后，才确认"我能发、你能收"，并且这次请求是当下有效的。双方进入 ESTABLISHED，握手完成。'
+  ];
+  var cs=['CLOSED','SYN_SENT','双向确认 ✓','ESTABLISHED'];
+  var ss=['LISTEN','SYN_RCVD','SYN_RCVD（等 ACK）','ESTABLISHED'];
+  var cur=0,timer=null;
+  var btns=Array.prototype.slice.call(root.querySelectorAll('.hs-seg button'));
+  var play=document.getElementById('hs-play');
+  var note=document.getElementById('hs-note');
+  var stC=document.getElementById('hs-st-c'), stS=document.getElementById('hs-st-s');
+  var stCc=document.getElementById('hs-st-c-chip'), stSc=document.getElementById('hs-st-s-chip');
+  var kc=root.querySelectorAll('#hs-kc li'), ks=root.querySelectorAll('#hs-ks li');
+
+  function mark(list,n){
+    Array.prototype.forEach.call(list,function(li){
+      var m=+li.getAttribute('data-min');
+      li.classList.toggle('pending', n<m);
+      li.classList.toggle('now', n===m);
+      li.classList.toggle('done', n>m);
+    });
+  }
+  function render(n){
+    cur=n;
+    for(var i=1;i<=3;i++){
+      var a=document.getElementById('hs-a'+i);
+      a.classList.toggle('on', n>=i);
+      a.classList.toggle('active', n===i);
+    }
+    mark(kc,n); mark(ks,n);
+    stC.textContent=cs[n]; stS.textContent=ss[n];
+    stCc.textContent=cs[n]; stSc.textContent=ss[n];
+    note.textContent=notes[n];
+    btns.forEach(function(b){
+      var on=(+b.getAttribute('data-step')===n);
+      b.classList.toggle('on',on);
+      b.setAttribute('aria-pressed',on?'true':'false');
+    });
+  }
+  function stop(){ if(timer){clearInterval(timer);timer=null;play.textContent='▶ 播放';} }
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){ stop(); render(+b.getAttribute('data-step')); });
+  });
+  play.addEventListener('click',function(){
+    if(timer){ stop(); return; }
+    if(cur>=3) render(0);
+    play.textContent='❚❚ 暂停';
+    timer=setInterval(function(){
+      if(cur>=3){ stop(); return; }
+      render(cur+1);
+    },1300);
+  });
+  render(0);
+})();
+</script>
+</div></body></html>

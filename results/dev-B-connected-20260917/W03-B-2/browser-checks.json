@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W03-B-2",
+  "caseId": "W03",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:11.763Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [
+          "1月",
+          "2月",
+          "3月",
+          "4月",
+          "5月",
+          "120",
+          "-30",
+          "80"
+        ],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "pass",
+      "reason": "All requested literal labels are present in visible text or accessible names.",
+      "evidence": {
+        "expectedText": [
+          "1月",
+          "2月",
+          "3月",
+          "4月",
+          "5月",
+          "120",
+          "-30",
+          "80"
+        ],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "每月净新增用户（人）\n120\n80\n40\n0\n-40\n—\n120\n-30\n80\n0\n1月\n2月\n3月\n4月\n5月\n数据缺失\n净增（正）\n真实为零\n数据缺失\n净减（负）\n每月净新增用户（人） 120 80 40 0 -40 — 120 -30 80 0 1月 2月 3月 4月 5月 数据缺失 净增（正） 真实为零 数据缺失 净减（负）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 393,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- img \"每月净新增用户柱状图 1月120人，2月0人，3月数据缺失，4月-30人，5月80人。正值柱在零线之上，负值柱在零线之下，真实为零用空心圆标出，数据缺失用斜纹空列表示。\": 每月净新增用户（人） 120 80 40 0 -40 — 120 -30 80 0 1月 2月 3月 4月 5月 数据缺失 净增（正） 真实为零 数据缺失 净减（负）"
+    },
+    {
+      "text": "每月净新增用户（人）\n120\n80\n40\n0\n-40\n—\n120\n-30\n80\n0\n1月\n2月\n3月\n4月\n5月\n数据缺失\n净增（正）\n真实为零\n数据缺失\n净减（负）\n每月净新增用户（人） 120 80 40 0 -40 — 120 -30 80 0 1月 2月 3月 4月 5月 数据缺失 净增（正） 真实为零 数据缺失 净减（负）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 192,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- img \"每月净新增用户柱状图 1月120人，2月0人，3月数据缺失，4月-30人，5月80人。正值柱在零线之上，负值柱在零线之下，真实为零用空心圆标出，数据缺失用斜纹空列表示。\": 每月净新增用户（人） 120 80 40 0 -40 — 120 -30 80 0 1月 2月 3月 4月 5月 数据缺失 净增（正） 真实为零 数据缺失 净减（负）"
+    },
+    {
+      "text": "每月净新增用户（人）\n120\n80\n40\n0\n-40\n—\n120\n-30\n80\n0\n1月\n2月\n3月\n4月\n5月\n数据缺失\n净增（正）\n真实为零\n数据缺失\n净减（负）\n每月净新增用户（人） 120 80 40 0 -40 — 120 -30 80 0 1月 2月 3月 4月 5月 数据缺失 净增（正） 真实为零 数据缺失 净减（负）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 393,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- img \"每月净新增用户柱状图 1月120人，2月0人，3月数据缺失，4月-30人，5月80人。正值柱在零线之上，负值柱在零线之下，真实为零用空心圆标出，数据缺失用斜纹空列表示。\": 每月净新增用户（人） 120 80 40 0 -40 — 120 -30 80 0 1月 2月 3月 4月 5月 数据缺失 净增（正） 真实为零 数据缺失 净减（负）"
+    },
+    {
+      "text": "每月净新增用户（人）\n120\n80\n40\n0\n-40\n—\n120\n-30\n80\n0\n1月\n2月\n3月\n4月\n5月\n数据缺失\n净增（正）\n真实为零\n数据缺失\n净减（负）\n每月净新增用户（人） 120 80 40 0 -40 — 120 -30 80 0 1月 2月 3月 4月 5月 数据缺失 净增（正） 真实为零 数据缺失 净减（负）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 192,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- img \"每月净新增用户柱状图 1月120人，2月0人，3月数据缺失，4月-30人，5月80人。正值柱在零线之上，负值柱在零线之下，真实为零用空心圆标出，数据缺失用斜纹空列表示。\": 每月净新增用户（人） 120 80 40 0 -40 — 120 -30 80 0 1月 2月 3月 4月 5月 数据缺失 净增（正） 真实为零 数据缺失 净减（负）"
+    }
+  ],
+  "messages": [],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "856b1e547dcdaf33944e79c14fa1b1f3c6eb19b18765a3982a6bbbc25c59fe25",
+  "previewSha256": "f0bda1a5c6799ef68324ba69bb38c5ab4ab3dbe741cf6906f5884719cfba5437",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original light preview; dark SVG is rebuilt from unchanged source using checkerRuntimeRendererSha256.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "svg",
+  "sandbox": "",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

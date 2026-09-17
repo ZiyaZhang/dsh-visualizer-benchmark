@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W03-A-2",
+  "caseId": "W03",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-A-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:09.904Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [
+          "1月",
+          "2月",
+          "3月",
+          "4月",
+          "5月",
+          "120",
+          "-30",
+          "80"
+        ],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "pass",
+      "reason": "All requested literal labels are present in visible text or accessible names.",
+      "evidence": {
+        "expectedText": [
+          "1月",
+          "2月",
+          "3月",
+          "4月",
+          "5月",
+          "120",
+          "-30",
+          "80"
+        ],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "每月净新增用户\n\n单位：人 · 2026 年 1–5 月\n净新增（正）\n净减少（负）\n0（有数据，无变化）\n数据缺失（无数据，≠0）\n120\n80\n40\n0\n-40\n—\n数据缺失\n0\n+120\n+80\n-30\n1月\n2月\n3月\n4月\n5月\n净增\n持平（0）\n无数据\n净减\n净增\n\n0＝有数据且没有变化（2月）；数据缺失＝没采到数据，不能当作 0（3月）；负数＝当月净流失（4月 −30）。\n120 80 40 0 -40 — 数据缺失 0 +120 +80 -30 1月 2月 3月 4月 5月 净增 持平（0） 无数据 净减 净增",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 479,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "柱状图：1月净新增120人，2月0人（持平），3月数据缺失，4月净减少30人，5月净新增80人。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "e461202524dd9bf34bda0c180132d37b",
+          "payload": {},
+          "at": 54.200000047683716
+        },
+        {
+          "type": "rendered",
+          "channel": "e461202524dd9bf34bda0c180132d37b",
+          "payload": {},
+          "at": 76.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "e461202524dd9bf34bda0c180132d37b",
+          "payload": {
+            "height": 479
+          },
+          "at": 76.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- paragraph: 每月净新增用户\n- text: 单位：人 · 2026 年 1–5 月 净新增（正） 净减少（负） 0（有数据，无变化） 数据缺失（无数据，≠0）\n- img \"柱状图：1月净新增120人，2月0人（持平），3月数据缺失，4月净减少30人，5月净新增80人。\": 120 80 40 0 -40 — 数据缺失 0 +120 +80 -30 1月 2月 3月 4月 5月 净增 持平（0） 无数据 净减 净增\n- paragraph: 0＝有数据且没有变化（2月）；数据缺失＝没采到数据，不能当作 0（3月）；负数＝当月净流失（4月 −30）。"
+    },
+    {
+      "text": "每月净新增用户\n\n单位：人 · 2026 年 1–5 月\n净新增（正）\n净减少（负）\n0（有数据，无变化）\n数据缺失（无数据，≠0）\n120\n80\n40\n0\n-40\n—\n数据缺失\n0\n+120\n+80\n-30\n1月\n2月\n3月\n4月\n5月\n净增\n持平（0）\n无数据\n净减\n净增\n\n0＝有数据且没有变化（2月）；数据缺失＝没采到数据，不能当作 0（3月）；负数＝当月净流失（4月 −30）。\n120 80 40 0 -40 — 数据缺失 0 +120 +80 -30 1月 2月 3月 4月 5月 净增 持平（0） 无数据 净减 净增",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 322,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "柱状图：1月净新增120人，2月0人（持平），3月数据缺失，4月净减少30人，5月净新增80人。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "775844fb6bf4a1fcfdc5ac1b564e2de6",
+          "payload": {},
+          "at": 152.20000004768372
+        },
+        {
+          "type": "rendered",
+          "channel": "775844fb6bf4a1fcfdc5ac1b564e2de6",
+          "payload": {},
+          "at": 159.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "775844fb6bf4a1fcfdc5ac1b564e2de6",
+          "payload": {
+            "height": 322
+          },
+          "at": 159.20000004768372
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- paragraph: 每月净新增用户\n- text: 单位：人 · 2026 年 1–5 月 净新增（正） 净减少（负） 0（有数据，无变化） 数据缺失（无数据，≠0）\n- img \"柱状图：1月净新增120人，2月0人（持平），3月数据缺失，4月净减少30人，5月净新增80人。\": 120 80 40 0 -40 — 数据缺失 0 +120 +80 -30 1月 2月 3月 4月 5月 净增 持平（0） 无数据 净减 净增\n- paragraph: 0＝有数据且没有变化（2月）；数据缺失＝没采到数据，不能当作 0（3月）；负数＝当月净流失（4月 −30）。"
+    },
+    {
+      "text": "每月净新增用户\n\n单位：人 · 2026 年 1–5 月\n净新增（正）\n净减少（负）\n0（有数据，无变化）\n数据缺失（无数据，≠0）\n120\n80\n40\n0\n-40\n—\n数据缺失\n0\n+120\n+80\n-30\n1月\n2月\n3月\n4月\n5月\n净增\n持平（0）\n无数据\n净减\n净增\n\n0＝有数据且没有变化（2月）；数据缺失＝没采到数据，不能当作 0（3月）；负数＝当月净流失（4月 −30）。\n120 80 40 0 -40 — 数据缺失 0 +120 +80 -30 1月 2月 3月 4月 5月 净增 持平（0） 无数据 净减 净增",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 479,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "柱状图：1月净新增120人，2月0人（持平），3月数据缺失，4月净减少30人，5月净新增80人。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4d7c1cd14ab2a6925e53c3845a59f062",
+          "payload": {},
+          "at": 220.79999995231628
+        },
+        {
+          "type": "rendered",
+          "channel": "4d7c1cd14ab2a6925e53c3845a59f062",
+          "payload": {},
+          "at": 224.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "4d7c1cd14ab2a6925e53c3845a59f062",
+          "payload": {
+            "height": 479
+          },
+          "at": 224.20000004768372
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- paragraph: 每月净新增用户\n- text: 单位：人 · 2026 年 1–5 月 净新增（正） 净减少（负） 0（有数据，无变化） 数据缺失（无数据，≠0）\n- img \"柱状图：1月净新增120人，2月0人（持平），3月数据缺失，4月净减少30人，5月净新增80人。\": 120 80 40 0 -40 — 数据缺失 0 +120 +80 -30 1月 2月 3月 4月 5月 净增 持平（0） 无数据 净减 净增\n- paragraph: 0＝有数据且没有变化（2月）；数据缺失＝没采到数据，不能当作 0（3月）；负数＝当月净流失（4月 −30）。"
+    },
+    {
+      "text": "每月净新增用户\n\n单位：人 · 2026 年 1–5 月\n净新增（正）\n净减少（负）\n0（有数据，无变化）\n数据缺失（无数据，≠0）\n120\n80\n40\n0\n-40\n—\n数据缺失\n0\n+120\n+80\n-30\n1月\n2月\n3月\n4月\n5月\n净增\n持平（0）\n无数据\n净减\n净增\n\n0＝有数据且没有变化（2月）；数据缺失＝没采到数据，不能当作 0（3月）；负数＝当月净流失（4月 −30）。\n120 80 40 0 -40 — 数据缺失 0 +120 +80 -30 1月 2月 3月 4月 5月 净增 持平（0） 无数据 净减 净增",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 322,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "柱状图：1月净新增120人，2月0人（持平），3月数据缺失，4月净减少30人，5月净新增80人。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "cb89d08d0adf7e4aac383a6e0f10fb68",
+          "payload": {},
+          "at": 283.2000000476837
+        },
+        {
+          "type": "rendered",
+          "channel": "cb89d08d0adf7e4aac383a6e0f10fb68",
+          "payload": {},
+          "at": 285.09999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "cb89d08d0adf7e4aac383a6e0f10fb68",
+          "payload": {
+            "height": 322
+          },
+          "at": 285.09999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- paragraph: 每月净新增用户\n- text: 单位：人 · 2026 年 1–5 月 净新增（正） 净减少（负） 0（有数据，无变化） 数据缺失（无数据，≠0）\n- img \"柱状图：1月净新增120人，2月0人（持平），3月数据缺失，4月净减少30人，5月净新增80人。\": 120 80 40 0 -40 — 数据缺失 0 +120 +80 -30 1月 2月 3月 4月 5月 净增 持平（0） 无数据 净减 净增\n- paragraph: 0＝有数据且没有变化（2月）；数据缺失＝没采到数据，不能当作 0（3月）；负数＝当月净流失（4月 −30）。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "e461202524dd9bf34bda0c180132d37b",
+      "payload": {},
+      "at": 54.200000047683716
+    },
+    {
+      "type": "rendered",
+      "channel": "e461202524dd9bf34bda0c180132d37b",
+      "payload": {},
+      "at": 76.59999990463257
+    },
+    {
+      "type": "resize",
+      "channel": "e461202524dd9bf34bda0c180132d37b",
+      "payload": {
+        "height": 479
+      },
+      "at": 76.59999990463257
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "f8ee62386c2099d5b270556c4b3af91899f31b542185787a98f6b3697cf67122",
+  "previewSha256": "72b13a51536884c3e4f115c66ff1a14fe8e3b60da2b1a13eb1c8df6f9f374069",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W03-B-1",
+  "caseId": "W03",
+  "scenario": "static",
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:30:00.839Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "error",
+      "reason": "Checker/environment failure: frame.evaluate: Execution context was destroyed, most likely because of a navigation.",
+      "evidence": {}
+    },
+    "interaction": {
+      "status": "pending",
+      "reason": "Scenario has not run.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "pending",
+      "reason": "Local actions have not run.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Screenshots and overflow flags support human review, not an automatic design score.",
+      "evidence": {}
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [],
+  "states": [],
+  "messages": [],
+  "console": [
+    {
+      "type": "error",
+      "text": "Blocked script execution in 'data:text/html;charset=utf-8,%3C!doctype%20html%3E%3Chtml%3E%3Chead%3E%3Cmeta%20charset%3D%22utf-8%22%3E%3Cmeta%20http-equiv%3D%22Content-Security-Policy%22%20content%3D%22default-src%20'none'%3B%20style-src%20'unsafe-inline'%3B%20script-src%20'none'%3B%20img-src%20data%3A%3B%20base-uri%20'none'%3B%20form-action%20'none'%3B%22%3E%3Cstyle%3E%3Aroot%7B--dsw-alias-bg-base%3A%23ffffff%3B--dsw-alias-bg-layer-1%3A%23ffffff%3B--dsw-alias-bg-layer-2%3A%23f4f5f7%3B--dsw-alias-border-l1%3A%23e5e7eb%3B--dsw-alias-bor...F%3E%0A%20%20%3Ctext%20x%3D%22445%22%20y%3D%22430%22%20class%3D%22lg%22%3E%E8%99%9A%E7%BA%BF%E6%A1%86%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BC%BA%E5%A4%B1%EF%BC%8C%E6%97%A0%E6%95%B0%E5%80%BC%3C%2Ftext%3E%0A%20%20%3Crect%20x%3D%22635%22%20y%3D%22418%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%223%22%20class%3D%22neg%22%2F%3E%0A%20%20%3Ctext%20x%3D%22655%22%20y%3D%22430%22%20class%3D%22lg%22%3E%E8%B4%9F%E6%95%B0%EF%BC%88%E5%87%80%E6%B5%81%E5%A4%B1%EF%BC%89%3C%2Ftext%3E%0A%3C%2Fsvg%3E%3C%2Fbody%3E%3C%2Fhtml%3E' because the document's frame is sandboxed and the 'allow-scripts' permission is not set."
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "cb7d51acf3b5473e788e0fb0de7cfa2c5b9c767e3f0e517065ec538b1587d66e",
+  "previewSha256": "2b341932edfeaf49f2c8f3a1b5e9eb3845244aead2cecf1a18555e3e130453ab",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original light preview; dark SVG is rebuilt from unchanged source using checkerRuntimeRendererSha256.",
+  "checkerSha256": "6f313bab30ffbef2ee4cba89e4fe19e36ced92db6c9bebd079e77fa07dd3030c",
+  "kind": "svg",
+  "sandbox": "",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "privateArchive": {
+    "id": "B-checker-history-20260917T165226Z",
+    "published": false,
+    "originalRecordSha256": "cf91af45d647c3bc78fde237795d81954562a276f50801cb9124b2097961faf0",
+    "recordId": "W03-B-1/browser-checks/6f313bab30ff/browser-checks.json",
+    "note": "The complete original record and screenshots are retained in the private run archive. Archived screenshot names below are identifiers, not public file links. Public screenshots contains only retained explanatory evidence.",
+    "screenshots": []
+  },
+  "retentionReason": {
+    "kind": "checker-result-changed",
+    "checks": {
+      "render": {
+        "previous": "error",
+        "current": "pass"
+      },
+      "interaction": {
+        "previous": "pending",
+        "current": "not_applicable"
+      },
+      "localMessages": {
+        "previous": "pending",
+        "current": "not_applicable"
+      }
+    },
+    "finalRecord": "../../browser-checks.json"
+  }
+}

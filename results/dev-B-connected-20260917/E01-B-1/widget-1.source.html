@@ -1,0 +1,243 @@
+<style>
+.tcpw{font-family:inherit;display:flex;flex-direction:column;gap:12px;color:var(--dsw-alias-label-primary,#0f172a)}
+.tcpw svg{display:block;width:100%;height:auto;font-family:inherit}
+.tcpw-svgwrap{background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,#e2e8f0);border-radius:12px;padding:6px 4px}
+.tcpw .node-box{fill:var(--dsw-alias-bg-layer-2,#eef2f7);stroke:var(--dsw-alias-border-l1,#dbe3ec)}
+.tcpw .lifeline{stroke:var(--dsw-alias-border-l2,#cbd5e1);stroke-dasharray:4 5;stroke-width:1.5}
+.tcpw .node-label{fill:var(--dsw-alias-label-primary,#0f172a);font-size:14px;font-weight:600}
+.tcpw .state-box{fill:var(--dsw-alias-bg-layer-2,#eef2f7);stroke:var(--dsw-alias-border-l1,#dbe3ec)}
+.tcpw .state-k{fill:var(--dsw-alias-label-tertiary,#94a3b8);font-size:11px}
+.tcpw .state-v{fill:var(--dsw-alias-label-primary,#0f172a);font-size:13px;font-weight:600;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.tcpw .msg{opacity:0;transition:opacity .28s ease}
+.tcpw .msg.show{opacity:1}
+.tcpw .arrow{stroke:var(--dsw-alias-brand-primary,#3b82f6);stroke-width:2.2;fill:none}
+.tcpw .arrow.warn{stroke:var(--dsw-alias-state-error-primary,#ef4444)}
+.tcpw .arrow.stale{stroke-dasharray:7 5}
+.tcpw .msg-label{fill:var(--dsw-alias-label-primary,#0f172a);font-size:12.5px;font-weight:600}
+.tcpw #tcpw-ah path{fill:var(--dsw-alias-brand-primary,#3b82f6)}
+.tcpw #tcpw-ahw path{fill:var(--dsw-alias-state-error-primary,#ef4444)}
+.tcpw-panels{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:12px}
+@media (max-width:560px){.tcpw-panels{grid-template-columns:1fr}}
+.tcpw-panel{background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,#e2e8f0);border-radius:12px;padding:12px 14px;min-width:0}
+.tcpw-panel h4{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--dsw-alias-label-secondary,#64748b);display:flex;justify-content:space-between;gap:8px}
+.tcpw-panel p{margin:0;font-size:13.5px;line-height:1.65;color:var(--dsw-alias-label-primary,#0f172a)}
+.tcpw-checks{list-style:none;margin:0;padding:0}
+.tcpw-checks li{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;color:var(--dsw-alias-label-tertiary,#94a3b8)}
+.tcpw-checks li .mark{width:16px;text-align:center}
+.tcpw-checks li.on{color:var(--dsw-alias-label-primary,#0f172a)}
+.tcpw-checks li.on .mark{color:var(--dsw-alias-brand-primary,#3b82f6);font-weight:700}
+.tcpw-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.tcpw-seg{display:inline-flex;gap:2px;background:var(--dsw-alias-bg-layer-2,#eef2f7);border-radius:10px;padding:3px}
+.tcpw-seg label{position:relative;display:inline-flex}
+.tcpw-seg input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.tcpw-seg span{display:block;padding:6px 12px;border-radius:8px;font-size:13px;color:var(--dsw-alias-label-secondary,#64748b);cursor:pointer;white-space:nowrap}
+.tcpw-seg input:checked+span{background:var(--dsw-alias-bg-layer-1,#fff);color:var(--dsw-alias-label-primary,#0f172a);box-shadow:0 1px 2px rgba(15,23,42,.1)}
+.tcpw-seg input:focus-visible+span{outline:2px solid var(--dsw-alias-brand-primary,#3b82f6);outline-offset:1px}
+.tcpw-steps{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tcpw button{padding:6px 12px;border-radius:8px;border:1px solid var(--dsw-alias-border-l1,#e2e8f0);background:var(--dsw-alias-bg-layer-1,#fff);color:var(--dsw-alias-label-primary,#0f172a);font-size:13px;font-family:inherit;cursor:pointer}
+.tcpw button:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover,rgba(15,23,42,.06))}
+.tcpw button:disabled{opacity:.4;cursor:default}
+.tcpw #tcpw-next{background:var(--dsw-alias-button-primary-fill,var(--dsw-alias-brand-primary,#3b82f6));color:var(--dsw-alias-label-primary-inverted,#fff);border-color:transparent}
+.tcpw #tcpw-reset{background:transparent}
+.tcpw-count{font-size:13px;color:var(--dsw-alias-label-secondary,#64748b);font-variant-numeric:tabular-nums;min-width:82px;text-align:center}
+</style>
+
+<div class="tcpw" id="tcpw-root">
+  <div class="tcpw-svgwrap">
+    <svg viewBox="0 0 660 380" role="img" aria-label="TCP 三次握手时序图：客户端与服务器之间的 SYN、SYN+ACK、ACK 三条报文">
+      <defs>
+        <marker id="tcpw-ah" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z"/></marker>
+        <marker id="tcpw-ahw" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z"/></marker>
+      </defs>
+
+      <rect class="node-box" x="40" y="10" width="160" height="36" rx="10"/>
+      <text class="node-label" x="120" y="33" text-anchor="middle">客户端</text>
+      <rect class="node-box" x="440" y="10" width="160" height="36" rx="10"/>
+      <text class="node-label" x="520" y="33" text-anchor="middle">服务器</text>
+
+      <line class="lifeline" x1="120" y1="52" x2="120" y2="300"/>
+      <line class="lifeline" x1="520" y1="52" x2="520" y2="300"/>
+
+      <g id="tcpw-gA">
+        <g id="tcpw-a1" class="msg">
+          <line class="arrow" x1="126" y1="104" x2="508" y2="104" marker-end="url(#tcpw-ah)"/>
+          <text class="msg-label" x="317" y="92" text-anchor="middle">SYN · seq = x</text>
+        </g>
+        <g id="tcpw-a2" class="msg">
+          <line class="arrow" x1="514" y1="178" x2="132" y2="178" marker-end="url(#tcpw-ah)"/>
+          <text class="msg-label" x="317" y="166" text-anchor="middle">SYN + ACK · seq = y · ack = x + 1</text>
+        </g>
+        <g id="tcpw-a3" class="msg">
+          <line class="arrow" x1="126" y1="252" x2="508" y2="252" marker-end="url(#tcpw-ah)"/>
+          <text class="msg-label" x="317" y="240" text-anchor="middle">ACK · ack = y + 1</text>
+        </g>
+      </g>
+
+      <g id="tcpw-gB" style="display:none">
+        <g id="tcpw-b1" class="msg">
+          <line class="arrow warn stale" x1="126" y1="104" x2="508" y2="104" marker-end="url(#tcpw-ahw)"/>
+          <text class="msg-label" x="317" y="92" text-anchor="middle">迟到的旧 SYN（客户端毫不知情）</text>
+        </g>
+        <g id="tcpw-b2" class="msg">
+          <line class="arrow warn" x1="514" y1="178" x2="132" y2="178" marker-end="url(#tcpw-ahw)"/>
+          <text class="msg-label" x="317" y="166" text-anchor="middle">SYN + ACK · 服务器立刻 ESTABLISHED</text>
+        </g>
+        <g id="tcpw-b3" class="msg">
+          <line class="arrow warn stale" x1="126" y1="252" x2="508" y2="252" marker-end="url(#tcpw-ahw)"/>
+          <text class="msg-label" x="317" y="240" text-anchor="middle">客户端：没有这次连接 → RST / 丢弃</text>
+        </g>
+      </g>
+
+      <g>
+        <rect class="state-box" x="20" y="306" width="200" height="58" rx="10"/>
+        <text class="state-k" x="36" y="328">状态</text>
+        <text class="state-v" id="tcpw-client-state" x="36" y="350">CLOSED</text>
+      </g>
+      <g>
+        <rect class="state-box" x="420" y="306" width="200" height="58" rx="10"/>
+        <text class="state-k" x="436" y="328">状态</text>
+        <text class="state-v" id="tcpw-server-state" x="436" y="350">LISTEN</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="tcpw-controls">
+    <div class="tcpw-seg" role="radiogroup" aria-label="选择场景">
+      <label><input type="radio" name="tcpw-scn" value="three" checked><span>三次握手</span></label>
+      <label><input type="radio" name="tcpw-scn" value="two"><span>假如只有两次</span></label>
+    </div>
+    <div class="tcpw-steps">
+      <button type="button" id="tcpw-prev">上一步</button>
+      <span class="tcpw-count" id="tcpw-count">步骤 0 / 3</span>
+      <button type="button" id="tcpw-next">下一步</button>
+      <button type="button" id="tcpw-reset">重置</button>
+    </div>
+  </div>
+
+  <div class="tcpw-panels">
+    <div class="tcpw-panel">
+      <h4><span>两个方向、四种能力</span><span id="tcpw-verify">0 / 4</span></h4>
+      <ul class="tcpw-checks" id="tcpw-checks">
+        <li><span class="mark">○</span>服务器确认：客户端能发</li>
+        <li><span class="mark">○</span>客户端确认：服务器能收</li>
+        <li><span class="mark">○</span>客户端确认：服务器能发</li>
+        <li><span class="mark">○</span>服务器确认：客户端能收</li>
+      </ul>
+    </div>
+    <div class="tcpw-panel">
+      <h4 id="tcpw-ex-title">初始状态</h4>
+      <p id="tcpw-ex-text" aria-live="polite">点「下一步」逐条查看报文。</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var data = {
+    three: {
+      arrows: ['tcpw-a1', 'tcpw-a2', 'tcpw-a3'],
+      steps: [
+        { arrows: [], client: 'CLOSED', server: 'LISTEN', verified: 0,
+          title: '初始状态',
+          text: '客户端还没发起连接，服务器在 LISTEN 等待。点「下一步」逐条查看报文。' },
+        { arrows: ['tcpw-a1'], client: 'SYN_SENT', server: 'LISTEN', verified: 1,
+          title: '第 1 次 · 客户端 → 服务器：SYN',
+          text: '客户端发出 SYN，带上自己的初始序列号 x，意思是“我的字节流从 x 开始编号”。服务器收到后确认了一件事：客户端能发。此时它还不知道客户端能否收到自己的消息。' },
+        { arrows: ['tcpw-a1', 'tcpw-a2'], client: 'SYN_SENT', server: 'SYN_RCVD', verified: 3,
+          title: '第 2 次 · 服务器 → 客户端：SYN + ACK',
+          text: '服务器把一个报文当两件事用：ACK（ack = x + 1，表示“你的 x 我收到了”）和 SYN（seq = y，表示“我的序号从 y 开始，请你确认”）。客户端收到后确认了服务器既能收、也能发。' },
+        { arrows: ['tcpw-a1', 'tcpw-a2', 'tcpw-a3'], client: 'ESTABLISHED', server: 'ESTABLISHED', verified: 4,
+          title: '第 3 次 · 客户端 → 服务器：ACK',
+          text: '客户端回 ACK（ack = y + 1）。服务器由此确认：客户端确实收到了我的 SYN，并认可了我的序列号 y。两个方向的可发、可收共四种能力至此全部验证，双方进入 ESTABLISHED，序列号同步完成。' }
+      ]
+    },
+    two: {
+      arrows: ['tcpw-b1', 'tcpw-b2', 'tcpw-b3'],
+      steps: [
+        { arrows: [], client: 'CLOSED', server: 'LISTEN', verified: 0,
+          title: '初始状态（假设只做两次握手）',
+          text: '同样的两个端点，但假设握手只做两次：服务器发出 SYN + ACK 后就立即认为连接建立。' },
+        { arrows: ['tcpw-b1'], client: 'CLOSED', server: 'LISTEN', verified: 1,
+          title: '意外 · 一个过期的 SYN 迟到了',
+          text: '旧连接早已关闭，但它在网络中滞留的 SYN 此时才到达。客户端这次根本没有发起握手，服务器却无法区分它是新请求还是历史遗留，照常回应。' },
+        { arrows: ['tcpw-b1', 'tcpw-b2'], client: 'CLOSED', server: 'ESTABLISHED', verified: 1,
+          title: '两次握手的致命一步',
+          text: '若只有两次握手，服务器在发出 SYN + ACK 的瞬间就进入 ESTABLISHED，分配连接资源并开始等待数据——它等的是一个并不存在的客户端请求。' },
+        { arrows: ['tcpw-b1', 'tcpw-b2', 'tcpw-b3'], client: 'CLOSED', server: '半开连接', verified: 1,
+          title: '第三次握手才让服务器“落地”',
+          text: '客户端发现没有对应的连接，回以 RST 或直接丢弃。第三次 ACK 的价值正在这里：让服务器在真正占用资源之前，等到“对方确实收到并接受了我的序列号”这个证据。少了它，服务器只能凭一个可能过期的 SYN 单方面建连，既浪费资源，也给了 SYN 洪泛可乘之机。' }
+      ]
+    }
+  };
+
+  var root = document.getElementById('tcpw-root');
+  if (!root) { return; }
+  var scn = 'three';
+  var step = 0;
+
+  var elGA = document.getElementById('tcpw-gA');
+  var elGB = document.getElementById('tcpw-gB');
+  var elClient = document.getElementById('tcpw-client-state');
+  var elServer = document.getElementById('tcpw-server-state');
+  var elCount = document.getElementById('tcpw-count');
+  var elTitle = document.getElementById('tcpw-ex-title');
+  var elText = document.getElementById('tcpw-ex-text');
+  var elVerify = document.getElementById('tcpw-verify');
+  var elPrev = document.getElementById('tcpw-prev');
+  var elNext = document.getElementById('tcpw-next');
+  var elReset = document.getElementById('tcpw-reset');
+  var checkItems = document.getElementById('tcpw-checks').children;
+
+  function render() {
+    var d = data[scn];
+    var st = d.steps[step];
+    var max = d.steps.length - 1;
+
+    elGA.style.display = scn === 'three' ? '' : 'none';
+    elGB.style.display = scn === 'two' ? '' : 'none';
+
+    d.arrows.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) { el.classList.toggle('show', st.arrows.indexOf(id) > -1); }
+    });
+
+    elClient.textContent = st.client;
+    elServer.textContent = st.server;
+    elCount.textContent = '步骤 ' + step + ' / ' + max;
+    elTitle.textContent = st.title;
+    elText.textContent = st.text;
+    elVerify.textContent = st.verified + ' / 4';
+
+    for (var i = 0; i < checkItems.length; i++) {
+      var on = i < st.verified;
+      checkItems[i].classList.toggle('on', on);
+      checkItems[i].firstElementChild.textContent = on ? '✓' : '○';
+    }
+
+    elPrev.disabled = step === 0;
+    elNext.disabled = step === max;
+  }
+
+  elNext.addEventListener('click', function () {
+    var max = data[scn].steps.length - 1;
+    if (step < max) { step++; render(); }
+  });
+  elPrev.addEventListener('click', function () {
+    if (step > 0) { step--; render(); }
+  });
+  elReset.addEventListener('click', function () {
+    step = 0; render();
+  });
+
+  var radios = root.querySelectorAll('input[name="tcpw-scn"]');
+  for (var r = 0; r < radios.length; r++) {
+    radios[r].addEventListener('change', function () {
+      scn = this.value;
+      step = 0;
+      render();
+    });
+  }
+
+  render();
+})();
+</script>

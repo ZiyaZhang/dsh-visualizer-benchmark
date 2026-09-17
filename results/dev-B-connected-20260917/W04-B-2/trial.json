@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 2,
+  "id": "W04-B-2",
+  "roundId": "dev-B-connected-20260917",
+  "caseId": "W04",
+  "arm": "B",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "在回复里用一张静态横向条形图对比四个功能的使用次数：长文档的跨章节证据追溯120次、多轮对话中的上下文恢复80次、插件热更新后继续当前任务45次、直接生成一个简短答案300次。完整显示名称，手机上也要能读懂。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "四类功能使用次数对比",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/dev-B-connected-20260917/W04-B-2/widget-1.source.html",
+      "preview": "results/dev-B-connected-20260917/W04-B-2/widget-1.html",
+      "sha256": "471e85c39cffeb603a85ea59696cddc8d6d38a8f2d4ff563c0cbf64bebe255b0",
+      "bytes": 2862
+    }
+  ],
+  "final": "上图的横向条形图对比了四类功能的使用次数，已按次数从多到少排列：\n\n- **直接生成一个简短答案**：300 次\n- **长文档的跨章节证据追溯**：120 次\n- **多轮对话中的上下文恢复**：80 次\n- **插件热更新后继续当前任务**：45 次\n\n设计上做了三点处理，方便手机阅读：功能名称用完整中文写在每根柱子上方（窄屏会自动换行，不截断、不缩写），数值与单位「次」放在名称同一行右侧，条长统一以 0 为起点、300 次为满格基准，因此 120、80、45 分别对应 40%、约 27%、15% 的长度。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_xkZNS5tDAciGXAf9r7qr6681",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_vURr8cOnKWI53vmp2i3g9306",
+        "argumentsSha256": "65e09ad1c2476e68f2a0160c84516456f89b132ae1b0a61365a4c29e086a591a",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_Y6e40NSHovshACBNUiEk3631",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_2HTsxffashOmEBMxSbxA5648",
+        "argumentsSha256": "e888d05bf1308c647877b31ec523dec45b715778191b03cfbd199e5675aaf9cc",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/charts.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "0778ef689dea193a21f6f319a3d915e268d184bdd377128fa6a272a4ff8a1d80",
+        "resultSha256": "6c62edf990ca26f8ff6ec2bb0ae6a1e265be63a972ea3b5bd7950c4e90b49262"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "e7ad7d9e0e5165491b26735ab7fadfad99c7ddc17bd67d56b57e51fb162c5a29"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "8b930586312c73fc4e5633389b7c6d3107d86ef594ae1028f8dfcfabb1676b95"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "91faceadcffc949590f846662b76d3a13a1ebc19503d844f3338e83b5d6ac086"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8189,
+    "outputTokens": 2961,
+    "cacheReadTokens": 28160,
+    "cacheWriteTokens": 0,
+    "totalTokens": 39310
+  },
+  "elapsedSeconds": 25.572,
+  "sourceHead": "9ca98673c522c0f74b11bbc640dbf92121442bb9",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "5c2fa47a36ab98e92f39d22ab43444e447e3c7d73845c5320c8cc197a120e415",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "8a8e3c1046739706b7461f2220b42010bab1a17c088c5b1204157c48119af4d0",
+  "extractionCorrection": {
+    "kind": "visible-assistant-text-only",
+    "correctedAt": "2026-09-17T16:48:00.930Z",
+    "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+    "correctorSha256": "47a8c7617f9cc6fbdf2b33b085723fa5e02fb800caee20608c755c767c2c57b3",
+    "sourceSessionSha256": "1438bbb44ef08eb18aca27b624b97ad7f0dde2d4728d55bfb89143383e8d3c02",
+    "assistantSeqs": [
+      38
+    ],
+    "previousFinalSha256": "5c2fa47a36ab98e92f39d22ab43444e447e3c7d73845c5320c8cc197a120e415",
+    "previousCorrection": {
+      "kind": "visible-assistant-text-only",
+      "correctedAt": "2026-09-17T16:40:33.888Z",
+      "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+      "correctorSha256": "ef5a06fbafdc4b1a7032c073d912b16cbfe2dda9caa634ef3465a6deceb96ed3",
+      "sourceSessionSha256": "1438bbb44ef08eb18aca27b624b97ad7f0dde2d4728d55bfb89143383e8d3c02",
+      "assistantSeq": 38,
+      "previousFinalSha256": "81e9c7e0ad539280c43db649a525639015ae0ce60a59422bdab526fb79fc4007",
+      "finalChanged": true,
+      "reason": "Final replies include only text blocks. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+    },
+    "finalChanged": false,
+    "reason": "All visible assistant text blocks are included in chronological order. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+  }
+}

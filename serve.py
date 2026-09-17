@@ -175,9 +175,22 @@ def catalog():
             if manifest.get('origin') == 'historical-calibration':
                 stages[0]['trialIds'] = [round_id + '/' + key for key in CALIBRATION if round_id + '/' + key in ids]
             else:
-                stages.append({'id': round_id, 'title': '实验：' + round_id, 'trialIds': ids, 'description': '来自冻结 manifest；尚未产出的计划项仍然显示。'})
+                stages.append({'id': round_id, 'title': '实验：' + round_id, 'trialIds': ids, 'description': '来自冻结 manifest；尚未产出的计划项仍然显示。', 'comparisonId': manifest.get('comparisonId'), 'arm': manifest.get('arm')})
         except (ValueError, KeyError, TypeError, OSError) as error:
             errors.append(f'{manifest_path.parent.name}: {error}')
+    # A shared review queue hides candidate labels in the ordinary scoring flow.
+    # Full source records remain inspectable; this is not a claim of sealed blinding.
+    comparisons = {s.get('comparisonId') for s in stages if s.get('comparisonId')}
+    for comparison in sorted(comparisons):
+        arms = [s for s in stages if s.get('comparisonId') == comparison and s.get('arm') in ('A', 'B')]
+        if {s['arm'] for s in arms} != {'A', 'B'}:
+            continue
+        rounds = {s['id'] for s in arms}
+        members = [t for t in trials if t['roundId'] in rounds and t['qualityExpected']]
+        members.sort(key=lambda t: (t['caseId'], t.get('repeat', 1), hashlib.sha256((comparison + t['id']).encode()).hexdigest()))
+        stages.insert(1, {'id': 'compare-' + comparison, 'title': '同题混排：' + comparison,
+                          'trialIds': [t['id'] for t in members],
+                          'description': '同题同次序号的两个候选按固定顺序混排，逐份评价；版本信息在评分后查看。路由对照另列，未生成项仍保留。'})
     return {
         'schemaVersion': 2, 'trials': trials, 'stages': stages, 'defaultStage': 'calibration', 'catalogErrors': errors,
         'dimensions': list(DIMENSIONS), 'evidence': '已有检查来自脚本或代理核查，不是人工评分；未评不计为 0。',

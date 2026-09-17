@@ -1,0 +1,185 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+  .mv-wrap{--pos:var(--dsw-alias-brand-primary,#2f6feb);--neg:var(--dsw-alias-state-error-primary,#d64545);--ink:var(--dsw-alias-label-primary,#1f2328);--ink2:var(--dsw-alias-label-secondary,#5b6470);--line:var(--dsw-alias-border-l1,#e3e6ea);--bg:var(--dsw-alias-bg-base,#fff);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;color:var(--ink);max-width:720px}
+  .mv-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin:0 0 4px}
+  .mv-title{font-size:15px;font-weight:650;margin:0}
+  .mv-unit{font-size:12px;color:var(--ink2)}
+  .mv-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:6px 0 2px;font-size:12px;color:var(--ink2)}
+  .mv-legend span{display:inline-flex;align-items:center;gap:6px;min-width:0}
+  .mv-sw{width:14px;height:14px;border-radius:3px;flex:0 0 auto}
+  .mv-swatch-pos{background:var(--pos)}
+  .mv-swatch-neg{background:var(--neg)}
+  .mv-swatch-zero{background:linear-gradient(to bottom,transparent 0 45%,var(--ink2) 45% 62%,transparent 62% 100%);border:1px solid var(--line)}
+  .mv-swatch-miss{background:repeating-linear-gradient(45deg,#9aa4b2 0 2px,transparent 2px 7px);border:1px dashed #9aa4b2}
+  .mv-svg{display:block;width:100%;height:auto}
+  .mv-note{font-size:12px;line-height:1.55;color:var(--ink2);margin:6px 0 0}
+  .mv-note b{color:var(--ink);font-weight:600}
+</style>
+<div class="mv-wrap">
+  <div class="mv-head">
+    <p class="mv-title">每月净新增用户</p>
+    <span class="mv-unit">单位：人 · 2026 年 1–5 月</span>
+  </div>
+  <div class="mv-legend">
+    <span><i class="mv-sw mv-swatch-pos"></i>净新增（正）</span>
+    <span><i class="mv-sw mv-swatch-neg"></i>净减少（负）</span>
+    <span><i class="mv-sw mv-swatch-zero"></i>0（有数据，无变化）</span>
+    <span><i class="mv-sw mv-swatch-miss"></i>数据缺失（无数据，≠0）</span>
+  </div>
+  <svg class="mv-svg" viewBox="0 0 720 382" role="img" aria-label="柱状图：1月净新增120人，2月0人（持平），3月数据缺失，4月净减少30人，5月净新增80人。">
+    <title>每月净新增用户</title>
+    <desc>1月120人，2月0人，3月数据缺失，4月-30人，5月80人。</desc>
+    <defs>
+      <pattern id="mvHatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#9aa4b2" stroke-width="2.2" opacity="0.5"/>
+      </pattern>
+    </defs>
+
+    <!-- gridlines -->
+    <g stroke="var(--dsw-alias-border-l1,#e3e6ea)" stroke-width="1">
+      <line x1="64" y1="80"  x2="696" y2="80"/>
+      <line x1="64" y1="140" x2="696" y2="140"/>
+      <line x1="64" y1="200" x2="696" y2="200"/>
+      <line x1="64" y1="320" x2="696" y2="320"/>
+    </g>
+    <!-- zero baseline -->
+    <line x1="64" y1="260" x2="696" y2="260" stroke="var(--dsw-alias-border-l2,#c3c9d2)" stroke-width="1.5"/>
+
+    <!-- y ticks -->
+    <g fill="var(--dsw-alias-label-secondary,#5b6470)" font-size="12" text-anchor="end" dominant-baseline="central">
+      <text x="54" y="80">120</text>
+      <text x="54" y="140">80</text>
+      <text x="54" y="200">40</text>
+      <text x="54" y="260">0</text>
+      <text x="54" y="320">-40</text>
+    </g>
+
+    <!-- March: missing value -->
+    <rect x="348" y="72" width="64" height="258" rx="8" fill="url(#mvHatch)" stroke="#9aa4b2" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="380" y="182" text-anchor="middle" font-size="26" fill="var(--dsw-alias-label-secondary,#5b6470)">—</text>
+    <text x="380" y="210" text-anchor="middle" font-size="13" font-weight="600" fill="var(--dsw-alias-label-secondary,#5b6470)"
+          stroke="var(--dsw-alias-bg-base,#fff)" stroke-width="5" paint-order="stroke">数据缺失</text>
+
+    <!-- February: real zero -->
+    <line x1="217.6" y1="260" x2="289.6" y2="260" stroke="var(--dsw-alias-label-secondary,#5b6470)" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="253.6" cy="260" r="5.5" fill="var(--dsw-alias-bg-base,#fff)" stroke="var(--dsw-alias-label-secondary,#5b6470)" stroke-width="2.5"/>
+    <text x="253.6" y="248" text-anchor="middle" font-size="14" font-weight="600" fill="var(--dsw-alias-label-secondary,#5b6470)">0</text>
+
+    <!-- January +120 -->
+    <path d="M91.2 260 L91.2 87 Q91.2 80 98.2 80 L156.2 80 Q163.2 80 163.2 87 L163.2 260 Z" fill="var(--dsw-alias-brand-primary,#2f6feb)"/>
+    <text x="127.2" y="68" text-anchor="middle" font-size="14" font-weight="650" fill="var(--dsw-alias-label-primary,#1f2328)">+120</text>
+
+    <!-- May +80 -->
+    <path d="M596.8 260 L596.8 147 Q596.8 140 603.8 140 L661.8 140 Q668.8 140 668.8 147 L668.8 260 Z" fill="var(--dsw-alias-brand-primary,#2f6feb)"/>
+    <text x="632.8" y="128" text-anchor="middle" font-size="14" font-weight="650" fill="var(--dsw-alias-label-primary,#1f2328)">+80</text>
+
+    <!-- April -30 -->
+    <path d="M470.4 260 L470.4 298 Q470.4 305 477.4 305 L535.4 305 Q542.4 305 542.4 298 L542.4 260 Z" fill="var(--dsw-alias-state-error-primary,#d64545)"/>
+    <text x="506.4" y="323" text-anchor="middle" font-size="14" font-weight="650" fill="var(--dsw-alias-state-error-primary,#d64545)">-30</text>
+
+    <!-- month labels + status captions -->
+    <g text-anchor="middle">
+      <g fill="var(--dsw-alias-label-primary,#1f2328)" font-size="14">
+        <text x="127.2" y="344">1月</text>
+        <text x="253.6" y="344">2月</text>
+        <text x="380"   y="344">3月</text>
+        <text x="506.4" y="344">4月</text>
+        <text x="632.8" y="344">5月</text>
+      </g>
+      <g fill="var(--dsw-alias-label-secondary,#5b6470)" font-size="11.5">
+        <text x="127.2" y="364">净增</text>
+        <text x="253.6" y="364">持平（0）</text>
+        <text x="380"   y="364">无数据</text>
+        <text x="506.4" y="364">净减</text>
+        <text x="632.8" y="364">净增</text>
+      </g>
+    </g>
+  </svg>
+  <p class="mv-note"><b>0</b>＝有数据且没有变化（2月）；<b>数据缺失</b>＝没采到数据，不能当作 0（3月）；<b>负数</b>＝当月净流失（4月 −30）。</p>
+</div></body></html>

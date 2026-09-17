@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 2,
+  "trialId": "E01-B-2",
+  "caseId": "E01",
+  "scenario": "static",
+  "widgetIndex": 1,
+  "callSeq": 51,
+  "resultSeq": 52,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:16.017Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "not_applicable",
+      "reason": "No literal label oracle specified.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "客户端\nCLOSED\n服务端\nLISTEN\n←\n→\n尚未建立连接\n客户端\nCLOSED\n服务端\nLISTEN\nSYN seq = x\nSYN seq = y, ack = x + 1\nACK ack = y + 1\n每一方都要收到对方的初始序列号，并让对方确认自己已被收到\n箭头表示实际发送的报文段（示意，未按比例）\n00\n初始状态\n01\nSYN →\n02\n← SYN + ACK\n03\nACK →\n初始状态\n握手尚未开始\n\n客户端处于 CLOSED，服务端在某个端口上 LISTEN，等待连接请求。此时双方都还不知道对方的初始序列号（ISN）。\n\n双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n方向\t报文\tseq\tack\n客户端 → 服务端\tSYN\tx\t—\n服务端 → 客户端\tSYN + ACK\ty\tx + 1\n客户端 → 服务端\tACK\tx + 1\ty + 1\n\n阅读提示：SYN 表示“我的初始序列号是……”，ACK 表示“你上一条我收到了”。\n客户端 CLOSED 服务端 LISTEN SYN  seq = x SYN  seq = y,  ack = x + 1 ACK  ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 箭头表示实际发送的报文段（示意，未按比例）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 731,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "上一步",
+        "下一步",
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+          "payload": {},
+          "at": 51
+        },
+        {
+          "type": "rendered",
+          "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+          "payload": {},
+          "at": 91.70000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+          "payload": {
+            "height": 731
+          },
+          "at": 92.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 客户端 CLOSED 服务端 LISTEN\n- button \"上一步\": ←\n- button \"下一步\": →\n- text: 尚未建立连接\n- img \"TCP 三次握手时序图 客户端与服务端之间依次交换 SYN、SYN+ACK、ACK 三条报文，双方状态从 CLOSED 和 LISTEN 逐步变为 ESTABLISHED。\": 客户端 CLOSED 服务端 LISTEN SYN seq = x SYN seq = y, ack = x + 1 ACK ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 箭头表示实际发送的报文段（示意，未按比例）\n- group \"握手步骤\":\n  - button \"00 初始状态\"\n  - button \"01 SYN →\"\n  - button \"02 ← SYN + ACK\"\n  - button \"03 ACK →\"\n- heading \"初始状态\" [level=4]\n- text: 握手尚未开始\n- paragraph: 客户端处于 CLOSED，服务端在某个端口上 LISTEN，等待连接请求。此时双方都还不知道对方的初始序列号（ISN）。\n- table \"双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\":\n  - caption: 双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n  - rowgroup:\n    - row \"方向 报文 seq ack\":\n      - columnheader \"方向\"\n      - columnheader \"报文\"\n      - columnheader \"seq\"\n      - columnheader \"ack\"\n  - rowgroup:\n    - row \"客户端 → 服务端 SYN x —\":\n      - cell \"客户端 → 服务端\"\n      - cell \"SYN\"\n      - cell \"x\":\n        - code: x\n      - cell \"—\"\n    - row \"服务端 → 客户端 SYN + ACK y x + 1\":\n      - cell \"服务端 → 客户端\"\n      - cell \"SYN + ACK\"\n      - cell \"y\":\n        - code: \"y\"\n      - cell \"x + 1\":\n        - code: x + 1\n    - row \"客户端 → 服务端 ACK x + 1 y + 1\":\n      - cell \"客户端 → 服务端\"\n      - cell \"ACK\"\n      - cell \"x + 1\":\n        - code: x + 1\n      - cell \"y + 1\":\n        - code: y + 1\n- paragraph:\n  - text: 阅读提示：\n  - code: SYN\n  - text: 表示“我的初始序列号是……”，\n  - code: ACK\n  - text: 表示“你上一条我收到了”。"
+    },
+    {
+      "text": "客户端\nCLOSED\n服务端\nLISTEN\n←\n→\n尚未建立连接\n客户端\nCLOSED\n服务端\nLISTEN\nSYN seq = x\nSYN seq = y, ack = x + 1\nACK ack = y + 1\n每一方都要收到对方的初始序列号，并让对方确认自己已被收到\n箭头表示实际发送的报文段（示意，未按比例）\n00\n初始状态\n01\nSYN →\n02\n← SYN + ACK\n03\nACK →\n初始状态\n握手尚未开始\n\n客户端处于 CLOSED，服务端在某个端口上 LISTEN，等待连接请求。此时双方都还不知道对方的初始序列号（ISN）。\n\n双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n方向\t报文\tseq\tack\n客户端 → 服务端\tSYN\tx\t—\n服务端 → 客户端\tSYN + ACK\ty\tx + 1\n客户端 → 服务端\tACK\tx + 1\ty + 1\n\n阅读提示：SYN 表示“我的初始序列号是……”，ACK 表示“你上一条我收到了”。\n客户端 CLOSED 服务端 LISTEN SYN  seq = x SYN  seq = y,  ack = x + 1 ACK  ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 箭头表示实际发送的报文段（示意，未按比例）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 724,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "上一步",
+        "下一步",
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "e329e8267207cf93e20a689f2c4f0b5a",
+          "payload": {},
+          "at": 177.59999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "e329e8267207cf93e20a689f2c4f0b5a",
+          "payload": {},
+          "at": 181.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "e329e8267207cf93e20a689f2c4f0b5a",
+          "payload": {
+            "height": 724
+          },
+          "at": 181.89999985694885
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 客户端 CLOSED 服务端 LISTEN\n- button \"上一步\": ←\n- button \"下一步\": →\n- text: 尚未建立连接\n- img \"TCP 三次握手时序图 客户端与服务端之间依次交换 SYN、SYN+ACK、ACK 三条报文，双方状态从 CLOSED 和 LISTEN 逐步变为 ESTABLISHED。\": 客户端 CLOSED 服务端 LISTEN SYN seq = x SYN seq = y, ack = x + 1 ACK ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 箭头表示实际发送的报文段（示意，未按比例）\n- group \"握手步骤\":\n  - button \"00 初始状态\"\n  - button \"01 SYN →\"\n  - button \"02 ← SYN + ACK\"\n  - button \"03 ACK →\"\n- heading \"初始状态\" [level=4]\n- text: 握手尚未开始\n- paragraph: 客户端处于 CLOSED，服务端在某个端口上 LISTEN，等待连接请求。此时双方都还不知道对方的初始序列号（ISN）。\n- table \"双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\":\n  - caption: 双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n  - rowgroup:\n    - row \"方向 报文 seq ack\":\n      - columnheader \"方向\"\n      - columnheader \"报文\"\n      - columnheader \"seq\"\n      - columnheader \"ack\"\n  - rowgroup:\n    - row \"客户端 → 服务端 SYN x —\":\n      - cell \"客户端 → 服务端\"\n      - cell \"SYN\"\n      - cell \"x\":\n        - code: x\n      - cell \"—\"\n    - row \"服务端 → 客户端 SYN + ACK y x + 1\":\n      - cell \"服务端 → 客户端\"\n      - cell \"SYN + ACK\"\n      - cell \"y\":\n        - code: \"y\"\n      - cell \"x + 1\":\n        - code: x + 1\n    - row \"客户端 → 服务端 ACK x + 1 y + 1\":\n      - cell \"客户端 → 服务端\"\n      - cell \"ACK\"\n      - cell \"x + 1\":\n        - code: x + 1\n      - cell \"y + 1\":\n        - code: y + 1\n- paragraph:\n  - text: 阅读提示：\n  - code: SYN\n  - text: 表示“我的初始序列号是……”，\n  - code: ACK\n  - text: 表示“你上一条我收到了”。"
+    },
+    {
+      "text": "客户端\nCLOSED\n服务端\nLISTEN\n←\n→\n尚未建立连接\n客户端\nCLOSED\n服务端\nLISTEN\nSYN seq = x\nSYN seq = y, ack = x + 1\nACK ack = y + 1\n每一方都要收到对方的初始序列号，并让对方确认自己已被收到\n箭头表示实际发送的报文段（示意，未按比例）\n00\n初始状态\n01\nSYN →\n02\n← SYN + ACK\n03\nACK →\n初始状态\n握手尚未开始\n\n客户端处于 CLOSED，服务端在某个端口上 LISTEN，等待连接请求。此时双方都还不知道对方的初始序列号（ISN）。\n\n双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n方向\t报文\tseq\tack\n客户端 → 服务端\tSYN\tx\t—\n服务端 → 客户端\tSYN + ACK\ty\tx + 1\n客户端 → 服务端\tACK\tx + 1\ty + 1\n\n阅读提示：SYN 表示“我的初始序列号是……”，ACK 表示“你上一条我收到了”。\n客户端 CLOSED 服务端 LISTEN SYN  seq = x SYN  seq = y,  ack = x + 1 ACK  ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 箭头表示实际发送的报文段（示意，未按比例）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 731,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "上一步",
+        "下一步",
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4109f18944f10d6cf0754c8cda30b1d8",
+          "payload": {},
+          "at": 253.39999985694885
+        },
+        {
+          "type": "rendered",
+          "channel": "4109f18944f10d6cf0754c8cda30b1d8",
+          "payload": {},
+          "at": 256.89999985694885
+        },
+        {
+          "type": "resize",
+          "channel": "4109f18944f10d6cf0754c8cda30b1d8",
+          "payload": {
+            "height": 731
+          },
+          "at": 256.89999985694885
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 客户端 CLOSED 服务端 LISTEN\n- button \"上一步\": ←\n- button \"下一步\": →\n- text: 尚未建立连接\n- img \"TCP 三次握手时序图 客户端与服务端之间依次交换 SYN、SYN+ACK、ACK 三条报文，双方状态从 CLOSED 和 LISTEN 逐步变为 ESTABLISHED。\": 客户端 CLOSED 服务端 LISTEN SYN seq = x SYN seq = y, ack = x + 1 ACK ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 箭头表示实际发送的报文段（示意，未按比例）\n- group \"握手步骤\":\n  - button \"00 初始状态\"\n  - button \"01 SYN →\"\n  - button \"02 ← SYN + ACK\"\n  - button \"03 ACK →\"\n- heading \"初始状态\" [level=4]\n- text: 握手尚未开始\n- paragraph: 客户端处于 CLOSED，服务端在某个端口上 LISTEN，等待连接请求。此时双方都还不知道对方的初始序列号（ISN）。\n- table \"双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\":\n  - caption: 双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n  - rowgroup:\n    - row \"方向 报文 seq ack\":\n      - columnheader \"方向\"\n      - columnheader \"报文\"\n      - columnheader \"seq\"\n      - columnheader \"ack\"\n  - rowgroup:\n    - row \"客户端 → 服务端 SYN x —\":\n      - cell \"客户端 → 服务端\"\n      - cell \"SYN\"\n      - cell \"x\":\n        - code: x\n      - cell \"—\"\n    - row \"服务端 → 客户端 SYN + ACK y x + 1\":\n      - cell \"服务端 → 客户端\"\n      - cell \"SYN + ACK\"\n      - cell \"y\":\n        - code: \"y\"\n      - cell \"x + 1\":\n        - code: x + 1\n    - row \"客户端 → 服务端 ACK x + 1 y + 1\":\n      - cell \"客户端 → 服务端\"\n      - cell \"ACK\"\n      - cell \"x + 1\":\n        - code: x + 1\n      - cell \"y + 1\":\n        - code: y + 1\n- paragraph:\n  - text: 阅读提示：\n  - code: SYN\n  - text: 表示“我的初始序列号是……”，\n  - code: ACK\n  - text: 表示“你上一条我收到了”。"
+    },
+    {
+      "text": "客户端\nCLOSED\n服务端\nLISTEN\n←\n→\n尚未建立连接\n客户端\nCLOSED\n服务端\nLISTEN\nSYN seq = x\nSYN seq = y, ack = x + 1\nACK ack = y + 1\n每一方都要收到对方的初始序列号，并让对方确认自己已被收到\n箭头表示实际发送的报文段（示意，未按比例）\n00\n初始状态\n01\nSYN →\n02\n← SYN + ACK\n03\nACK →\n初始状态\n握手尚未开始\n\n客户端处于 CLOSED，服务端在某个端口上 LISTEN，等待连接请求。此时双方都还不知道对方的初始序列号（ISN）。\n\n双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n方向\t报文\tseq\tack\n客户端 → 服务端\tSYN\tx\t—\n服务端 → 客户端\tSYN + ACK\ty\tx + 1\n客户端 → 服务端\tACK\tx + 1\ty + 1\n\n阅读提示：SYN 表示“我的初始序列号是……”，ACK 表示“你上一条我收到了”。\n客户端 CLOSED 服务端 LISTEN SYN  seq = x SYN  seq = y,  ack = x + 1 ACK  ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 箭头表示实际发送的报文段（示意，未按比例）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 724,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "上一步",
+        "下一步",
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "235680fe8c9b40ee4df3378a020539d5",
+          "payload": {},
+          "at": 316
+        },
+        {
+          "type": "rendered",
+          "channel": "235680fe8c9b40ee4df3378a020539d5",
+          "payload": {},
+          "at": 320.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "235680fe8c9b40ee4df3378a020539d5",
+          "payload": {
+            "height": 724
+          },
+          "at": 320.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 客户端 CLOSED 服务端 LISTEN\n- button \"上一步\": ←\n- button \"下一步\": →\n- text: 尚未建立连接\n- img \"TCP 三次握手时序图 客户端与服务端之间依次交换 SYN、SYN+ACK、ACK 三条报文，双方状态从 CLOSED 和 LISTEN 逐步变为 ESTABLISHED。\": 客户端 CLOSED 服务端 LISTEN SYN seq = x SYN seq = y, ack = x + 1 ACK ack = y + 1 每一方都要收到对方的初始序列号，并让对方确认自己已被收到 箭头表示实际发送的报文段（示意，未按比例）\n- group \"握手步骤\":\n  - button \"00 初始状态\"\n  - button \"01 SYN →\"\n  - button \"02 ← SYN + ACK\"\n  - button \"03 ACK →\"\n- heading \"初始状态\" [level=4]\n- text: 握手尚未开始\n- paragraph: 客户端处于 CLOSED，服务端在某个端口上 LISTEN，等待连接请求。此时双方都还不知道对方的初始序列号（ISN）。\n- table \"双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\":\n  - caption: 双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）\n  - rowgroup:\n    - row \"方向 报文 seq ack\":\n      - columnheader \"方向\"\n      - columnheader \"报文\"\n      - columnheader \"seq\"\n      - columnheader \"ack\"\n  - rowgroup:\n    - row \"客户端 → 服务端 SYN x —\":\n      - cell \"客户端 → 服务端\"\n      - cell \"SYN\"\n      - cell \"x\":\n        - code: x\n      - cell \"—\"\n    - row \"服务端 → 客户端 SYN + ACK y x + 1\":\n      - cell \"服务端 → 客户端\"\n      - cell \"SYN + ACK\"\n      - cell \"y\":\n        - code: \"y\"\n      - cell \"x + 1\":\n        - code: x + 1\n    - row \"客户端 → 服务端 ACK x + 1 y + 1\":\n      - cell \"客户端 → 服务端\"\n      - cell \"ACK\"\n      - cell \"x + 1\":\n        - code: x + 1\n      - cell \"y + 1\":\n        - code: y + 1\n- paragraph:\n  - text: 阅读提示：\n  - code: SYN\n  - text: 表示“我的初始序列号是……”，\n  - code: ACK\n  - text: 表示“你上一条我收到了”。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+      "payload": {},
+      "at": 51
+    },
+    {
+      "type": "rendered",
+      "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+      "payload": {},
+      "at": 91.70000004768372
+    },
+    {
+      "type": "resize",
+      "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+      "payload": {
+        "height": 731
+      },
+      "at": 92.59999990463257
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "9039139f5db82513e563bf1fcbb5464a5dd9bb976794f85558c481cbcb7c5a67",
+  "previewSha256": "a7da95d5d103518c44dbccd76d9ebbfa5aae1d99c895a9a81902f0b1551ecf3a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

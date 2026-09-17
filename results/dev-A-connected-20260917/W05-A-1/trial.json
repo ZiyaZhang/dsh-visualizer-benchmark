@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 2,
+  "id": "W05-A-1",
+  "roundId": "dev-A-connected-20260917",
+  "caseId": "W05",
+  "arm": "A",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "先在回复里让我试试一个数量选择器的手感：初始为2，每次增加或减少1，范围0到5，到达边界时禁用对应按钮。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "数量选择器（0–5）",
+      "kind": "html",
+      "callSeq": 36,
+      "resultSeq": 37,
+      "replace": null,
+      "source": "results/dev-A-connected-20260917/W05-A-1/widget-1.source.html",
+      "preview": "results/dev-A-connected-20260917/W05-A-1/widget-1.html",
+      "sha256": "3a7070a1b8f7758ae1fd33a5abbd69a73bfb8012fbdf4f1810bca9ba55ded38c",
+      "bytes": 4400
+    }
+  ],
+  "final": "上面这个数量选择器可以直接点着试试手感：\n\n- **初始值 2**，中间的「−」/「+」每次增减 1。\n- **范围 0–5**：到达 0 时「−」自动禁用，到 5 时「+」自动禁用，按钮变灰且不可点击（同时也阻止了越界点击）。\n- 进度条按当前值填充，下方刻度标出 0–5；状态行会提示还剩几次可加/可减。\n- 用键盘 Tab 聚焦按钮、Enter/空格触发同样有效，并带 `aria-live` 读数播报。\n\n需要的话我可以再加上长按连续增减、直接输入数值，或者把范围/步长做成可调参数。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 22,
+        "callId": "call_00_7sdaOggXWcHXWTWq3KAP4781",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 23,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 28,
+        "callId": "call_00_tHyHGQLIFUYj7VAYAFhi5083",
+        "argumentsSha256": "7088902a91f03cb1993ee2b302ad21bbed2907f9cc8b6017d346740aea4f10ae",
+        "wrapped": false,
+        "resultSeq": 30,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 29,
+        "callId": "call_01_UBXzokkzDVdrClWHL60R2330",
+        "argumentsSha256": "ac4ca12955dc6a9c398135a34c7e4f5b531d70439709e4fb42156d455d85c34f",
+        "wrapped": false,
+        "resultSeq": 31,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 36,
+        "callId": "call_00_x9z2bwbENwXrG0ksvZ5P1712",
+        "argumentsSha256": "b4b7989560f5b8bc17691bd91f6ca815141226613352cdf8dc5467c89cdc7916",
+        "wrapped": false,
+        "resultSeq": 37,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 28,
+        "resultSeq": 30,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "3f77906dce8b753270fa92cdd57889393264a64f1e0386ddc73f9d64d6345cbd"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 29,
+        "resultSeq": 31,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "af50ef24191dbfa13a3f796598ed442f8e04861ea61a1d2aaa0ae9c8b3a3ff26"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 22,
+        "resultSeq": 23,
+        "success": true,
+        "resultSha256": "02a40fc3db940e276cf74e535845cfed6c319f13b574a9f02b8f2646d385f9e4"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "4633468eac00e66aeb31b48b1646f1bdbb4cb673a810c756f953e76e8816d81b"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8325,
+    "outputTokens": 1964,
+    "cacheReadTokens": 27136,
+    "cacheWriteTokens": 0,
+    "totalTokens": 37425
+  },
+  "elapsedSeconds": 34.216,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "f9e0f4448c90b4cd21bc0d7fd28e5ba4d2741167c1379ad78ce8c12c01dc54c0",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "2f9432e4887181c3100d84a5f87d689b7f8ded06c3135b071e0a9450b386648b",
+  "extractionCorrection": {
+    "kind": "visible-assistant-text-only",
+    "correctedAt": "2026-09-17T16:48:00.747Z",
+    "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+    "correctorSha256": "47a8c7617f9cc6fbdf2b33b085723fa5e02fb800caee20608c755c767c2c57b3",
+    "sourceSessionSha256": "9dff31821811d4387be5b58cc0223ccf569836eac884b422c8cf804aeece0bf5",
+    "assistantSeqs": [
+      41
+    ],
+    "previousFinalSha256": "f9e0f4448c90b4cd21bc0d7fd28e5ba4d2741167c1379ad78ce8c12c01dc54c0",
+    "previousCorrection": {
+      "kind": "visible-assistant-text-only",
+      "correctedAt": "2026-09-17T16:40:33.713Z",
+      "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+      "correctorSha256": "ef5a06fbafdc4b1a7032c073d912b16cbfe2dda9caa634ef3465a6deceb96ed3",
+      "sourceSessionSha256": "9dff31821811d4387be5b58cc0223ccf569836eac884b422c8cf804aeece0bf5",
+      "assistantSeq": 41,
+      "previousFinalSha256": "56d185b0d9f3c7b2339ffbe59a8d1fea7c021917bf2641f56feabec5d1e3606c",
+      "finalChanged": true,
+      "reason": "Final replies include only text blocks. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+    },
+    "finalChanged": false,
+    "reason": "All visible assistant text blocks are included in chronological order. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+  }
+}

@@ -1,0 +1,342 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><div class="bsw" id="bsw">
+  <style>
+    .bsw{
+      --bsw-bg-base: var(--dsw-alias-bg-base, #ffffff);
+      --bsw-bg1: var(--dsw-alias-bg-layer-1, #f7f8fa);
+      --bsw-bg2: var(--dsw-alias-bg-layer-2, #eef0f3);
+      --bsw-bd1: var(--dsw-alias-border-l1, #e5e6eb);
+      --bsw-bd2: var(--dsw-alias-border-l2, #c9cdd4);
+      --bsw-brand: var(--dsw-alias-brand-primary, #3370ff);
+      --bsw-inv: var(--dsw-alias-label-primary-inverted, #ffffff);
+      --bsw-label: var(--dsw-alias-label-primary, #1f2329);
+      --bsw-sec: var(--dsw-alias-label-secondary, #4e5969);
+      --bsw-ter: var(--dsw-alias-label-tertiary, #86909c);
+      box-sizing: border-box;
+      max-width: 640px;
+      padding: 16px;
+      border: 1px solid var(--bsw-bd1);
+      border-radius: 14px;
+      background: var(--bsw-bg-base);
+      color: var(--bsw-label);
+      font: 400 14px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    .bsw *, .bsw *::before, .bsw *::after{ box-sizing: border-box; }
+    .bsw-head{ display:flex; flex-wrap:wrap; gap:6px 12px; align-items:baseline; justify-content:space-between; }
+    .bsw-title{ font-size:15px; font-weight:600; }
+    .bsw-title b{ color:var(--bsw-brand); font-variant-numeric: tabular-nums; }
+    .bsw-round{ font-size:12.5px; color:var(--bsw-sec); font-variant-numeric: tabular-nums; }
+
+    .bsw-stage{ margin-top:14px; }
+    .bsw-track{ display:grid; grid-template-columns:repeat(8, minmax(0,1fr)); gap:6px; }
+    .bsw-slot{ display:flex; justify-content:center; align-items:center; min-width:0; height:20px; }
+    .bsw-track.bsw-cells{ margin:3px 0; }
+
+    .bsw-cell{
+      position:relative; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:1px; padding:8px 2px 5px; border:1px solid var(--bsw-bd1); border-radius:10px; background:var(--bsw-bg1);
+      transition: background-color .18s ease, border-color .18s ease, opacity .18s ease, box-shadow .18s ease;
+    }
+    .bsw-cell .bsw-v{ font-size:clamp(14px, 4.2vw, 18px); font-weight:600; font-variant-numeric: tabular-nums; }
+    .bsw-cell .bsw-ix{ font-size:10.5px; color:var(--bsw-ter); font-variant-numeric: tabular-nums; }
+    .bsw-cell.is-win{ background:var(--bsw-bg2); border-color:var(--bsw-bd2); }
+    .bsw-cell.is-out{
+      opacity:.55;
+      background-image:repeating-linear-gradient(45deg, transparent 0 5px, rgba(128,128,128,.22) 5px 6px);
+    }
+    .bsw-cell.is-out .bsw-v{ color:var(--bsw-sec); text-decoration:line-through; text-decoration-thickness:1px; }
+    .bsw-cell.is-mid{ border-color:var(--bsw-brand); box-shadow:inset 0 0 0 1px var(--bsw-brand); opacity:1; }
+    .bsw-cell.is-hit{ background:var(--bsw-brand); border-color:var(--bsw-brand); box-shadow:none; }
+    .bsw-cell.is-hit .bsw-v{ color:var(--bsw-inv); text-decoration:none; }
+    .bsw-cell.is-hit .bsw-ix{ color:var(--bsw-inv); opacity:.85; }
+
+    .bsw-flag{
+      position:absolute; top:-1px; right:-1px; font-size:10px; line-height:1; padding:2px 4px;
+      border-radius:0 9px 0 8px; background:var(--bsw-brand); color:var(--bsw-inv);
+    }
+    .bsw-flag:empty{ display:none; }
+    .bsw-cell.is-out .bsw-flag{ background:var(--bsw-ter); }
+
+    .bsw-chip{
+      display:inline-block; font-size:10.5px; font-weight:600; line-height:1; padding:3px 7px;
+      border:1px solid currentColor; border-radius:999px; white-space:nowrap; font-variant-numeric: tabular-nums;
+    }
+    .bsw-chip.lo{ color:var(--bsw-brand); }
+    .bsw-chip.hi{ color:var(--bsw-label); }
+    .bsw-chip.mid{ color:var(--bsw-inv); background:var(--bsw-brand); border-color:var(--bsw-brand); }
+    .bsw-chip.mid.is-out{ color:var(--bsw-ter); background:transparent; border-color:var(--bsw-ter); }
+    .bsw-chip[hidden]{ display:none; }
+
+    .bsw-stats{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:8px; margin-top:14px; }
+    .bsw-stat{ min-width:0; padding:7px 10px; border:1px solid var(--bsw-bd1); border-radius:10px; background:var(--bsw-bg1); }
+    .bsw-stat .k{ font-size:11.5px; color:var(--bsw-sec); }
+    .bsw-stat .v{ font-size:17px; font-weight:600; font-variant-numeric: tabular-nums; overflow-wrap:anywhere; }
+
+    .bsw-note{ margin-top:12px; padding:2px 0 2px 10px; border-left:3px solid var(--bsw-brand); font-size:13.5px; }
+    .bsw-note b{ font-variant-numeric: tabular-nums; }
+
+    .bsw-ctrl{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:14px; }
+    .bsw-ctrl button{ min-height:32px; padding:0 14px; font:inherit; font-size:13.5px; border-radius:8px; cursor:pointer; }
+    .bsw-next{ border:1px solid var(--bsw-brand); background:var(--dsw-alias-button-primary-fill, var(--bsw-brand)); color:var(--bsw-inv); }
+    .bsw-reset{ border:1px solid var(--bsw-bd2); background:transparent; color:var(--bsw-label); }
+    .bsw-ctrl button:disabled{ opacity:.45; cursor:default; }
+
+    .bsw-legend{ display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:12px; font-size:11.5px; color:var(--bsw-sec); }
+    .bsw-legend span{ display:inline-flex; align-items:center; gap:5px; }
+    .bsw-sw{ width:14px; height:14px; border-radius:4px; border:1px solid var(--bsw-bd1); background:var(--bsw-bg2); }
+    .bsw-sw.mid{ background:transparent; border:2px solid var(--bsw-brand); }
+    .bsw-sw.out{ background:var(--bsw-bg1); background-image:repeating-linear-gradient(45deg, transparent 0 4px, rgba(128,128,128,.3) 4px 5px); opacity:.7; }
+    .bsw-sw.hit{ background:var(--bsw-brand); border-color:var(--bsw-brand); }
+
+    @media (prefers-reduced-motion: reduce){ .bsw *{ transition:none !important; } }
+    @media (max-width: 420px){
+      .bsw{ padding:12px; }
+      .bsw-stats{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+      .bsw-track{ gap:4px; }
+    }
+  </style>
+
+  <div class="bsw-head">
+    <div class="bsw-title">二分查找 · 在有序数组中找 <b>23</b></div>
+    <div class="bsw-round" id="bsw-round">起始状态</div>
+  </div>
+
+  <div class="bsw-stage" role="group" aria-label="数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找">
+    <div class="bsw-track" id="bsw-track-mid" aria-hidden="true"></div>
+    <div class="bsw-track bsw-cells" id="bsw-track-cells"></div>
+    <div class="bsw-track" id="bsw-track-ptr" aria-hidden="true"></div>
+  </div>
+
+  <div class="bsw-stats">
+    <div class="bsw-stat"><div class="k">low</div><div class="v" id="bsw-v-lo">0</div></div>
+    <div class="bsw-stat"><div class="k">mid</div><div class="v" id="bsw-v-mid">—</div></div>
+    <div class="bsw-stat"><div class="k">high</div><div class="v" id="bsw-v-hi">7</div></div>
+    <div class="bsw-stat"><div class="k">已排除</div><div class="v" id="bsw-v-ex">—</div></div>
+  </div>
+
+  <div class="bsw-note" id="bsw-note" role="status" aria-live="polite"></div>
+
+  <div class="bsw-ctrl">
+    <button type="button" class="bsw-next" id="bsw-next">下一步 →</button>
+    <button type="button" class="bsw-reset" id="bsw-reset">重置</button>
+  </div>
+
+  <div class="bsw-legend" aria-hidden="true">
+    <span><i class="bsw-sw"></i>当前区间</span>
+    <span><i class="bsw-sw mid"></i>本轮 mid</span>
+    <span><i class="bsw-sw out"></i>已排除</span>
+    <span><i class="bsw-sw hit"></i>命中</span>
+  </div>
+
+  <script>
+  (function () {
+    var A = [2, 5, 8, 12, 16, 23, 38, 56];
+    var TARGET = 23;
+    var steps = [
+      {
+        round: 0, low: 0, high: 7, mid: null, hit: null, excluded: [],
+        note: '初始状态：<b>low = 0</b>，<b>high = 7</b>，搜索区间 <b>[0, 7]</b> 覆盖整个数组。目标值是 <b>23</b>。二分查找每一轮都把区间从中间劈开。'
+      },
+      {
+        round: 1, low: 4, high: 7, mid: 3, hit: null, excluded: [[0, 3]],
+        note: '第 1 轮：<b>mid = ⌊(0+7)/2⌋ = 3</b>，a[3] = <b>12</b>。因为 <b>12 &lt; 23</b>，目标只可能在右半段，于是把 <b>[0, 3]</b> 整段排除（mid 自己也在里面，已排除）。新区间 <b>low = 4，high = 7</b>。'
+      },
+      {
+        round: 2, low: 4, high: 7, mid: 5, hit: 5, excluded: [[0, 3]],
+        note: '第 2 轮：<b>mid = ⌊(4+7)/2⌋ = 5</b>，a[5] = <b>23</b>。因为 <b>23 = 23</b>，命中！返回索引 <b>5</b>。8 个元素只比较了 2 次。'
+      }
+    ];
+
+    var trackMid = document.getElementById('bsw-track-mid');
+    var trackCells = document.getElementById('bsw-track-cells');
+    var trackPtr = document.getElementById('bsw-track-ptr');
+    var roundEl = document.getElementById('bsw-round');
+    var noteEl = document.getElementById('bsw-note');
+    var vLo = document.getElementById('bsw-v-lo');
+    var vMid = document.getElementById('bsw-v-mid');
+    var vHi = document.getElementById('bsw-v-hi');
+    var vEx = document.getElementById('bsw-v-ex');
+    var btnNext = document.getElementById('bsw-next');
+    var btnReset = document.getElementById('bsw-reset');
+
+    var idx = 0;
+    var cells = [], midSlot, midChip, loChip, hiChip;
+
+    A.forEach(function (value, i) {
+      var c = document.createElement('div');
+      c.className = 'bsw-cell';
+      var flag = document.createElement('span');
+      flag.className = 'bsw-flag';
+      var v = document.createElement('span');
+      v.className = 'bsw-v';
+      v.textContent = value;
+      var ix = document.createElement('span');
+      ix.className = 'bsw-ix';
+      ix.textContent = i;
+      c.appendChild(flag); c.appendChild(v); c.appendChild(ix);
+      trackCells.appendChild(c);
+      cells.push(c);
+
+      var sMid = document.createElement('span');
+      sMid.className = 'bsw-slot';
+      trackMid.appendChild(sMid);
+      var sPtr = document.createElement('span');
+      sPtr.className = 'bsw-slot';
+      trackPtr.appendChild(sPtr);
+      if (i === 0) {
+        midChip = document.createElement('span');
+        midChip.className = 'bsw-chip mid';
+        midChip.textContent = 'mid';
+        sMid.appendChild(midChip);
+        midSlot = sMid;
+        loChip = document.createElement('span');
+        loChip.className = 'bsw-chip lo';
+        loChip.textContent = 'low';
+        hiChip = document.createElement('span');
+        hiChip.className = 'bsw-chip hi';
+        hiChip.textContent = 'high';
+      }
+    });
+
+    function isOut(i, s) {
+      return !(i >= s.low && i <= s.high);
+    }
+
+    function render() {
+      var s = steps[idx];
+
+      roundEl.textContent = s.round === 0 ? '起始状态' : '第 ' + s.round + ' / ' + (steps.length - 1) + ' 轮';
+
+      cells.forEach(function (c, i) {
+        var out = isOut(i, s);
+        var cls = 'bsw-cell';
+        if (out) cls += ' is-out'; else cls += ' is-win';
+        if (i === s.mid) cls += ' is-mid';
+        if (i === s.hit) cls += ' is-hit';
+        c.className = cls;
+        c.setAttribute('aria-label', '索引 ' + i + '，值 ' + A[i] + (out ? '，已排除' : '，在当前区间内'));
+        c.firstChild.textContent = s.hit === i ? '✓' : (i === s.mid ? '×' : '');
+      });
+
+      if (s.mid === null) {
+        midChip.hidden = true;
+      } else {
+        midChip.hidden = false;
+        midSlot.appendChild(midChip);
+        midChip.className = 'bsw-chip mid' + (isOut(s.mid, s) ? ' is-out' : '');
+        midChip.textContent = 'mid';
+      }
+
+      loChip.textContent = 'low';
+      hiChip.textContent = 'high';
+      trackPtr.children[s.low].appendChild(loChip);
+      trackPtr.children[s.high].appendChild(hiChip);
+
+      vLo.textContent = s.low;
+      vMid.textContent = s.mid === null ? '—' : s.mid;
+      vHi.textContent = s.high;
+      vEx.textContent = s.excluded.length ? s.excluded.map(function (r) {
+        return '[' + r[0] + ', ' + r[1] + ']';
+      }).join(' ') : '—';
+
+      noteEl.innerHTML = s.note;
+
+      var last = idx >= steps.length - 1;
+      btnNext.disabled = last;
+      btnNext.textContent = last ? '查找完成' : '下一步 →';
+    }
+
+    btnNext.addEventListener('click', function () {
+      if (idx < steps.length - 1) { idx += 1; render(); }
+    });
+    btnReset.addEventListener('click', function () { idx = 0; render(); });
+
+    render();
+  })();
+  </script>
+</div></body></html>

@@ -1,0 +1,226 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+  .hc-wrap{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--dsw-alias-label-primary,#1f2328);background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.12));border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:12px;max-width:760px;box-sizing:border-box}
+  .hc-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
+  .hc-title{font-size:15px;font-weight:650}
+  .hc-sub{font-size:12px;color:var(--dsw-alias-label-secondary,#5b6470)}
+  .hc-formula{font-size:12.5px;color:var(--dsw-alias-label-secondary,#5b6470);font-variant-numeric:tabular-nums;background:var(--dsw-alias-bg-layer-2,rgba(0,0,0,.035));border-radius:8px;padding:7px 10px;line-height:1.5}
+  .hc-formula b{color:var(--dsw-alias-label-primary,#1f2328);font-weight:600}
+  .hc-chart{width:100%;height:auto;display:block}
+  .hc-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  .hc-card{border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.12));border-radius:9px;padding:6px 4px;text-align:center;min-width:0;background:var(--dsw-alias-bg-base,#fff)}
+  .hc-card .nm{font-size:10.5px;color:var(--dsw-alias-label-secondary,#5b6470);line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hc-card .vv{font-size:15px;font-weight:650;font-variant-numeric:tabular-nums;margin-top:2px}
+  .hc-card.fix{border-style:dashed}
+  .hc-stencil{font-size:12px;font-variant-numeric:tabular-nums;color:var(--dsw-alias-label-secondary,#5b6470);line-height:1.7;overflow-wrap:anywhere}
+  .hc-stencil b{color:var(--dsw-alias-label-primary,#1f2328);font-weight:600}
+  .hc-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;border-top:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.1));padding-top:11px}
+  .hc-steps{font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--dsw-alias-label-secondary,#5b6470)}
+  .hc-steps b{color:var(--dsw-alias-label-primary,#1f2328);font-size:15px}
+  .hc-btns{display:flex;flex-wrap:wrap;gap:8px}
+  .hc-btn{font:inherit;font-size:13px;padding:6px 14px;border-radius:8px;border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.15));background:var(--dsw-alias-bg-layer-1,#fff);color:var(--dsw-alias-label-primary,#1f2328);cursor:pointer}
+  .hc-btn:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.05))}
+  .hc-btn:disabled{opacity:.4;cursor:not-allowed}
+  .hc-btn.pri{background:var(--dsw-alias-button-primary-fill,#2f6feb);border-color:transparent;color:var(--dsw-alias-label-primary-inverted,#fff);font-weight:600}
+  .hc-note{font-size:11.5px;line-height:1.6;color:var(--dsw-alias-label-tertiary,#6b7280)}
+</style>
+<div class="hc-wrap">
+  <div class="hc-head">
+    <div class="hc-title">一维热传导 · 离散有限差演示</div>
+    <div class="hc-sub">5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C</div>
+  </div>
+
+  <div class="hc-formula">
+    <b>T′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)</b>，扩散系数 λ = 0.25；每步只用<b>上一时刻</b>的温度同步更新（不就地覆盖）。
+  </div>
+
+  <svg class="hc-chart" viewBox="0 0 560 300" role="img" aria-label="杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度">
+    <line x1="60" x2="530" y1="270" y2="270" stroke="currentColor" stroke-opacity=".35"/>
+    <line x1="60" x2="530" y1="158" y2="158" stroke="currentColor" stroke-opacity=".12" stroke-dasharray="3 4"/>
+    <line x1="60" x2="530" y1="46" y2="46" stroke="currentColor" stroke-opacity=".12" stroke-dasharray="3 4"/>
+    <text x="52" y="274" text-anchor="end" font-size="11" fill="currentColor" fill-opacity=".6">0°C</text>
+    <text x="52" y="162" text-anchor="end" font-size="11" fill="currentColor" fill-opacity=".6">50</text>
+    <text x="52" y="50" text-anchor="end" font-size="11" fill="currentColor" fill-opacity=".6">100</text>
+    <polyline id="hcCurve" fill="none" stroke="var(--dsw-alias-brand-primary,#2f6feb)" stroke-width="2" stroke-linejoin="round" points=""/>
+    <rect id="hcB0" x="77" y="270" width="56" height="0" rx="3" fill="#c43f2c"></rect>
+    <rect id="hcB1" x="167" y="270" width="56" height="0" rx="3" fill="#c43f2c"></rect>
+    <rect id="hcB2" x="257" y="270" width="56" height="0" rx="3" fill="#c43f2c"></rect>
+    <rect id="hcB3" x="347" y="270" width="56" height="0" rx="3" fill="#c43f2c"></rect>
+    <rect id="hcB4" x="437" y="270" width="56" height="0" rx="3" fill="#c43f2c"></rect>
+    <text x="105" y="289" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity=".7">节点 0</text>
+    <text x="195" y="289" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity=".7">节点 1</text>
+    <text x="285" y="289" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity=".7">节点 2</text>
+    <text x="375" y="289" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity=".7">节点 3</text>
+    <text x="465" y="289" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity=".7">节点 4</text>
+  </svg>
+
+  <div class="hc-cards">
+    <div class="hc-card fix"><div class="nm">节点 0 · 左端固定</div><div class="vv" id="hcV0">—</div></div>
+    <div class="hc-card"><div class="nm">节点 1</div><div class="vv" id="hcV1">—</div></div>
+    <div class="hc-card"><div class="nm">节点 2</div><div class="vv" id="hcV2">—</div></div>
+    <div class="hc-card"><div class="nm">节点 3</div><div class="vv" id="hcV3">—</div></div>
+    <div class="hc-card fix"><div class="nm">节点 4 · 右端固定</div><div class="vv" id="hcV4">—</div></div>
+  </div>
+
+  <div class="hc-stencil" id="hcStencil"></div>
+
+  <div class="hc-bar">
+    <div class="hc-steps">步数 <b id="hcStep">0</b> <span id="hcStepNote">（初始状态）</span></div>
+    <div class="hc-btns">
+      <button class="hc-btn pri" id="hcStepBtn" type="button">单步 ▸</button>
+      <button class="hc-btn" id="hcBackBtn" type="button">◂ 上一步</button>
+      <button class="hc-btn" id="hcResetBtn" type="button">重置</button>
+    </div>
+  </div>
+
+  <div class="hc-note">这是<b>离散示意</b>：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。</div>
+</div>
+<script>
+(function(){
+  var LAM = 0.25, TOP = 46, BASE = 270, SLOT = 90, X0 = 105;
+  var hist = [[100,0,0,0,0]];
+  var cur = 0;
+  var barIds = ['hcB0','hcB1','hcB2','hcB3','hcB4'];
+  var valIds = ['hcV0','hcV1','hcV2','hcV3','hcV4'];
+  var els = {
+    step: document.getElementById('hcStep'),
+    stepNote: document.getElementById('hcStepNote'),
+    stencil: document.getElementById('hcStencil'),
+    curve: document.getElementById('hcCurve'),
+    stepBtn: document.getElementById('hcStepBtn'),
+    backBtn: document.getElementById('hcBackBtn'),
+    resetBtn: document.getElementById('hcResetBtn'),
+    bars: barIds.map(function(id){ return document.getElementById(id); }),
+    vals: valIds.map(function(id){ return document.getElementById(id); })
+  };
+  function fmt(v){ return v.toFixed(2); }
+  function yOf(t){ return BASE - (BASE - TOP) * Math.max(0, Math.min(100, t)) / 100; }
+  function colorOf(t){
+    var u = Math.max(0, Math.min(1, t / 100));
+    var a = [58, 118, 214], b = [196, 63, 44];
+    return 'rgb(' + Math.round(a[0]+(b[0]-a[0])*u) + ',' + Math.round(a[1]+(b[1]-a[1])*u) + ',' + Math.round(a[2]+(b[2]-a[2])*u) + ')';
+  }
+  function render(){
+    var t = hist[cur];
+    for (var i = 0; i < 5; i++){
+      var y = yOf(t[i]), h = Math.max(0, BASE - y);
+      els.bars[i].setAttribute('y', y);
+      els.bars[i].setAttribute('height', h);
+      els.bars[i].setAttribute('fill', colorOf(t[i]));
+      els.vals[i].textContent = fmt(t[i]) + ' °C';
+    }
+    var pts = t.map(function(v, i){ return (X0 + i * SLOT) + ',' + yOf(v); }).join(' ');
+    els.curve.setAttribute('points', pts);
+    els.step.textContent = cur;
+    els.stepNote.textContent = cur === 0 ? '（初始状态）' : '（已更新 ' + cur + ' 次）';
+    if (cur === 0){
+      els.stencil.innerHTML = '<b>初始条件：</b>T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。';
+    } else {
+      var p = hist[cur - 1];
+      var rows = [1,2,3].map(function(i){
+        return 'T′' + i + ' = ' + fmt(p[i]) + ' + 0.25×(' + fmt(p[i-1]) + ' − 2×' + fmt(p[i]) + ' + ' + fmt(p[i+1]) + ') = <b>' + fmt(t[i]) + '</b> °C';
+      });
+      els.stencil.innerHTML = '第 ' + cur + ' 步（由第 ' + (cur-1) + ' 步同步算得）：<br>' + rows.join('<br>');
+    }
+    els.stepBtn.disabled = (cur >= 120);
+    els.backBtn.disabled = (cur === 0);
+  }
+  function step(){
+    if (cur >= 120){ return; }
+    var t = hist[cur], n = t.slice();
+    for (var i = 1; i <= 3; i++){ n[i] = t[i] + LAM * (t[i-1] - 2*t[i] + t[i+1]); }
+    hist.push(n);
+    cur++;
+    render();
+  }
+  els.stepBtn.addEventListener('click', step);
+  els.backBtn.addEventListener('click', function(){ if (cur > 0){ cur--; render(); } });
+  els.resetBtn.addEventListener('click', function(){ hist = [[100,0,0,0,0]]; cur = 0; render(); });
+  render();
+})();
+</script></body></html>

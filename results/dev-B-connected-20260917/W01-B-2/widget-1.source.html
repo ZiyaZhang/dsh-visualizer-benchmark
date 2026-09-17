@@ -1,0 +1,160 @@
+<style>
+  .bs-wrap{font-family:inherit;color:var(--dsw-alias-label-primary,#111827);background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,#e5e7eb);border-radius:12px;padding:14px;display:grid;gap:12px}
+  .bs-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between}
+  .bs-title{font-weight:650;font-size:15px}
+  .bs-title b{color:var(--dsw-alias-brand-primary,#2563eb)}
+  .bs-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--dsw-alias-label-secondary,#6b7280)}
+  .bs-legend span{display:inline-flex;align-items:center;gap:5px}
+  .bs-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;border:1.5px solid transparent}
+  .sw-mid{background:var(--dsw-alias-brand-primary,#2563eb)}
+  .sw-rul{background:transparent;border:1.5px dashed var(--dsw-alias-state-error-primary,#dc2626)}
+  .sw-ex{background:transparent;border:1.5px dashed var(--dsw-alias-border-l2,#9ca3af);opacity:.5}
+  .sw-find{background:#16a34a}
+  .bs-array{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+  .bs-cell{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+  .bs-tags{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;align-items:center;min-height:19px}
+  .bs-tag{font-size:10px;font-weight:700;line-height:16px;padding:0 5px;border-radius:999px;white-space:nowrap}
+  .bs-tag-low,.bs-tag-high{background:var(--dsw-alias-bg-layer-2,#f3f4f6);color:var(--dsw-alias-label-secondary,#374151);border:1px solid var(--dsw-alias-border-l2,#d1d5db)}
+  .bs-tag-mid{background:var(--dsw-alias-brand-primary,#2563eb);color:var(--dsw-alias-label-primary-inverted,#fff)}
+  .bs-val{width:100%;padding:11px 2px;text-align:center;border-radius:10px;border:1.5px solid var(--dsw-alias-border-l2,#d1d5db);background:var(--dsw-alias-bg-layer-2,#f9fafb);font-weight:650;font-size:clamp(14px,3.6vw,20px);font-variant-numeric:tabular-nums;transition:background .18s,border-color .18s,opacity .18s}
+  .bs-cell.in-range .bs-val{border-color:var(--dsw-alias-brand-primary,#2563eb);background:var(--dsw-alias-interactive-bg-hover,#eff4ff)}
+  .bs-cell.is-ruled .bs-val{border-style:dashed;border-color:var(--dsw-alias-state-error-primary,#dc2626);opacity:.7;text-decoration:line-through}
+  .bs-cell.is-excluded .bs-val{opacity:.34;border-style:dashed;text-decoration:line-through}
+  .bs-cell.is-mid .bs-val{background:var(--dsw-alias-brand-primary,#2563eb);border-color:transparent;color:var(--dsw-alias-label-primary-inverted,#fff)}
+  .bs-cell.is-found .bs-val{background:#16a34a;border-color:transparent;color:#fff;box-shadow:0 0 0 3px rgba(22,163,74,.25)}
+  .bs-idx{font-size:11px;color:var(--dsw-alias-label-tertiary,#9ca3af);font-variant-numeric:tabular-nums}
+  .bs-readout{display:grid;gap:8px;background:var(--dsw-alias-bg-layer-2,#f9fafb);border-radius:10px;padding:10px 12px}
+  .bs-vars{display:flex;gap:8px 18px;flex-wrap:wrap;font-size:13px;font-variant-numeric:tabular-nums}
+  .bs-vars b{font-weight:700;font-size:14px}
+  .bs-note{font-size:13px;line-height:1.65;color:var(--dsw-alias-label-secondary,#374151)}
+  .bs-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .bs-controls button{padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+  .bs-progress{margin-left:auto;font-size:12px;color:var(--dsw-alias-label-secondary,#6b7280);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .bs-log{margin:0;padding-left:18px;font-size:12px;line-height:1.75;color:var(--dsw-alias-label-secondary,#4b5563);font-variant-numeric:tabular-nums}
+  .bs-log:empty{display:none}
+  @media (max-width:520px){.bs-array{gap:4px}.bs-val{padding:9px 1px}.bs-tag{font-size:9px;padding:0 3px}}
+</style>
+
+<div class="bs-wrap">
+  <div class="bs-head">
+    <div class="bs-title">二分查找 · 在有序数组中找 <b>23</b></div>
+    <div class="bs-legend">
+      <span><i class="sw-mid"></i>mid（本轮比较）</span>
+      <span><i class="sw-rul"></i>本轮排除</span>
+      <span><i class="sw-ex"></i>已排除</span>
+      <span><i class="sw-find"></i>命中</span>
+    </div>
+  </div>
+
+  <div class="bs-array" id="bsArray" role="img"></div>
+
+  <div class="bs-readout">
+    <div class="bs-vars">
+      <span>low = <b id="bsLow">0</b></span>
+      <span>mid = <b id="bsMid">—</b></span>
+      <span>high = <b id="bsHigh">7</b></span>
+      <span>候选区间 = <b id="bsRange">[0..7]</b></span>
+      <span>剩余元素 = <b id="bsSize">8</b> 个</span>
+    </div>
+    <div class="bs-note" id="bsNote" aria-live="polite"></div>
+  </div>
+
+  <div class="bs-controls">
+    <button type="button" id="bsNext">下一步</button>
+    <button type="button" id="bsReset">重置</button>
+    <span class="bs-progress" id="bsProgress">第 0 / 2 步</span>
+  </div>
+
+  <ol class="bs-log" id="bsLog"></ol>
+</div>
+
+<script>
+(function(){
+  var ARR = [2,5,8,12,16,23,38,56];
+  var TARGET = 23;
+  var STATES = [
+    { low:0, high:7, mid:null, excluded:[], ruled:[], found:false,
+      note:"初始状态：整个数组都是候选区间，low = 0，high = 7，尚未计算 mid。数组已排好序，这是二分查找的前提。",
+      log:"" },
+    { low:0, high:7, mid:3, excluded:[], ruled:[0,1,2,3], found:false,
+      note:"第 1 轮：mid = ⌊(0+7)/2⌋ = 3，比较 a[3] = 12 与目标 23。12 < 23，说明目标只可能在右半边 → 排除下标 0～3（含 mid 本身），low 更新为 4。",
+      log:"第 1 轮：mid = 3，a[3] = 12 < 23 → 排除 [0..3]，low = 4" },
+    { low:4, high:7, mid:5, excluded:[0,1,2,3], ruled:[], found:true,
+      note:"第 2 轮：mid = ⌊(4+7)/2⌋ = 5，比较 a[5] = 23 与目标 23，相等 → 命中！返回下标 5。全程只用 2 次比较。",
+      log:"第 2 轮：mid = 5，a[5] = 23 = 23 → 命中，返回下标 5" }
+  ];
+
+  var arrayEl = document.getElementById('bsArray');
+  var lowEl = document.getElementById('bsLow');
+  var midEl = document.getElementById('bsMid');
+  var highEl = document.getElementById('bsHigh');
+  var rangeEl = document.getElementById('bsRange');
+  var sizeEl = document.getElementById('bsSize');
+  var noteEl = document.getElementById('bsNote');
+  var logEl = document.getElementById('bsLog');
+  var nextBtn = document.getElementById('bsNext');
+  var resetBtn = document.getElementById('bsReset');
+  var progressEl = document.getElementById('bsProgress');
+  var step = 0;
+
+  ARR.forEach(function(v, i){
+    var cell = document.createElement('div');
+    cell.className = 'bs-cell';
+    cell.dataset.i = String(i);
+    cell.innerHTML = '<div class="bs-tags"></div><div class="bs-val">' + v + '</div><div class="bs-idx">' + i + '</div>';
+    arrayEl.appendChild(cell);
+  });
+
+  function render(){
+    var s = STATES[step];
+    var cells = arrayEl.querySelectorAll('.bs-cell');
+    for (var k = 0; k < cells.length; k++){
+      var cell = cells[k];
+      var i = Number(cell.dataset.i);
+      cell.className = 'bs-cell';
+      var tags = '';
+      if (s.low === i) tags += '<span class="bs-tag bs-tag-low">low</span>';
+      if (s.mid === i) tags += '<span class="bs-tag bs-tag-mid">mid</span>';
+      if (s.high === i) tags += '<span class="bs-tag bs-tag-high">high</span>';
+      cell.querySelector('.bs-tags').innerHTML = tags;
+      if (i >= s.low && i <= s.high) cell.classList.add('in-range');
+      if (s.excluded.indexOf(i) !== -1) cell.classList.add('is-excluded');
+      if (s.ruled.indexOf(i) !== -1) cell.classList.add('is-ruled');
+      if (s.mid === i) cell.classList.add('is-mid');
+      if (s.found && s.mid === i) cell.classList.add('is-found');
+    }
+
+    lowEl.textContent = s.low;
+    highEl.textContent = s.high;
+    midEl.textContent = (s.mid === null) ? '—' : s.mid;
+    rangeEl.textContent = '[' + s.low + '..' + s.high + ']';
+    sizeEl.textContent = s.high - s.low + 1;
+    noteEl.textContent = s.note;
+    progressEl.textContent = '第 ' + step + ' / ' + (STATES.length - 1) + ' 步';
+
+    var items = '';
+    for (var j = 1; j <= step; j++){
+      items += '<li>' + STATES[j].log + '</li>';
+    }
+    logEl.innerHTML = items;
+
+    arrayEl.setAttribute('aria-label',
+      '数组 ' + ARR.join('、') + '，目标 ' + TARGET + '。当前候选区间为下标 ' + s.low + ' 到 ' + s.high +
+      (s.mid === null ? '，尚未计算 mid。' : '，mid 为下标 ' + s.mid + '，值 ' + ARR[s.mid] + '。') +
+      (s.found ? '已命中目标。' : ''));
+
+    var last = (step === STATES.length - 1);
+    nextBtn.disabled = last;
+    nextBtn.textContent = last ? '已找到 ' + TARGET + ' ✓' : '下一步';
+  }
+
+  nextBtn.addEventListener('click', function(){
+    if (step < STATES.length - 1){ step += 1; render(); }
+  });
+  resetBtn.addEventListener('click', function(){
+    step = 0; render();
+  });
+
+  render();
+})();
+</script>

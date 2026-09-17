@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W03-B-1",
+  "caseId": "W03",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 41,
+  "resultSeq": 42,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:05.776Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [
+          "1月",
+          "2月",
+          "3月",
+          "4月",
+          "5月",
+          "120",
+          "-30",
+          "80"
+        ],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "pass",
+      "reason": "All requested literal labels are present in visible text or accessible names.",
+      "evidence": {
+        "expectedText": [
+          "1月",
+          "2月",
+          "3月",
+          "4月",
+          "5月",
+          "120",
+          "-30",
+          "80"
+        ],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "净新增人数（人）\n↑ 正值（净增）\n120\n60\n-30\n0\n+120\n0\n有数据，为零\n?\n—\n数据缺失\n−30\n1月\n2月\n3月\n4月\n5月\n有数据\n有数据\n+80\n5月\n正值（净增）\n0：有数据但无变化\n虚线框：数据缺失，无数值\n负数（净流失）\n净新增人数（人） ↑ 正值（净增） 120 60 -30 0 +120 0 有数据，为零 ? — 数据缺失 −30 1月 2月 3月 4月 5月 有数据 有数据 +80 5月 正值（净增） 0：有数据但无变化 虚线框：数据缺失，无数值 负数（净流失）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 416,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- img \"每月净新增用户：1月120人，2月0人，3月数据缺失，4月-30人，5月80人 柱状图对比五个月的净新增人数。1月120人为正值，柱子在零线以上；2月为0人，只显示零线上的圆点；3月数据缺失，用虚线斜纹框表示没有任何数值；4月-30人为负值，柱子在零线以下；5月80人为正值。网格尺度从-30到120人，零线为基准。\": 净新增人数（人） ↑ 正值（净增） 120 60 -30 0 +120 0 有数据，为零 ? — 数据缺失 −30 1月 2月 3月 4月 5月 有数据 有数据 +80 5月 正值（净增） 0：有数据但无变化 虚线框：数据缺失，无数值 负数（净流失）"
+    },
+    {
+      "text": "净新增人数（人）\n↑ 正值（净增）\n120\n60\n-30\n0\n+120\n0\n有数据，为零\n?\n—\n数据缺失\n−30\n1月\n2月\n3月\n4月\n5月\n有数据\n有数据\n+80\n5月\n正值（净增）\n0：有数据但无变化\n虚线框：数据缺失，无数值\n负数（净流失）\n净新增人数（人） ↑ 正值（净增） 120 60 -30 0 +120 0 有数据，为零 ? — 数据缺失 −30 1月 2月 3月 4月 5月 有数据 有数据 +80 5月 正值（净增） 0：有数据但无变化 虚线框：数据缺失，无数值 负数（净流失）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 204,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- img \"每月净新增用户：1月120人，2月0人，3月数据缺失，4月-30人，5月80人 柱状图对比五个月的净新增人数。1月120人为正值，柱子在零线以上；2月为0人，只显示零线上的圆点；3月数据缺失，用虚线斜纹框表示没有任何数值；4月-30人为负值，柱子在零线以下；5月80人为正值。网格尺度从-30到120人，零线为基准。\": 净新增人数（人） ↑ 正值（净增） 120 60 -30 0 +120 0 有数据，为零 ? — 数据缺失 −30 1月 2月 3月 4月 5月 有数据 有数据 +80 5月 正值（净增） 0：有数据但无变化 虚线框：数据缺失，无数值 负数（净流失）"
+    },
+    {
+      "text": "净新增人数（人）\n↑ 正值（净增）\n120\n60\n-30\n0\n+120\n0\n有数据，为零\n?\n—\n数据缺失\n−30\n1月\n2月\n3月\n4月\n5月\n有数据\n有数据\n+80\n5月\n正值（净增）\n0：有数据但无变化\n虚线框：数据缺失，无数值\n负数（净流失）\n净新增人数（人） ↑ 正值（净增） 120 60 -30 0 +120 0 有数据，为零 ? — 数据缺失 −30 1月 2月 3月 4月 5月 有数据 有数据 +80 5月 正值（净增） 0：有数据但无变化 虚线框：数据缺失，无数值 负数（净流失）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 416,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- img \"每月净新增用户：1月120人，2月0人，3月数据缺失，4月-30人，5月80人 柱状图对比五个月的净新增人数。1月120人为正值，柱子在零线以上；2月为0人，只显示零线上的圆点；3月数据缺失，用虚线斜纹框表示没有任何数值；4月-30人为负值，柱子在零线以下；5月80人为正值。网格尺度从-30到120人，零线为基准。\": 净新增人数（人） ↑ 正值（净增） 120 60 -30 0 +120 0 有数据，为零 ? — 数据缺失 −30 1月 2月 3月 4月 5月 有数据 有数据 +80 5月 正值（净增） 0：有数据但无变化 虚线框：数据缺失，无数值 负数（净流失）"
+    },
+    {
+      "text": "净新增人数（人）\n↑ 正值（净增）\n120\n60\n-30\n0\n+120\n0\n有数据，为零\n?\n—\n数据缺失\n−30\n1月\n2月\n3月\n4月\n5月\n有数据\n有数据\n+80\n5月\n正值（净增）\n0：有数据但无变化\n虚线框：数据缺失，无数值\n负数（净流失）\n净新增人数（人） ↑ 正值（净增） 120 60 -30 0 +120 0 有数据，为零 ? — 数据缺失 −30 1月 2月 3月 4月 5月 有数据 有数据 +80 5月 正值（净增） 0：有数据但无变化 虚线框：数据缺失，无数值 负数（净流失）",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 204,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- img \"每月净新增用户：1月120人，2月0人，3月数据缺失，4月-30人，5月80人 柱状图对比五个月的净新增人数。1月120人为正值，柱子在零线以上；2月为0人，只显示零线上的圆点；3月数据缺失，用虚线斜纹框表示没有任何数值；4月-30人为负值，柱子在零线以下；5月80人为正值。网格尺度从-30到120人，零线为基准。\": 净新增人数（人） ↑ 正值（净增） 120 60 -30 0 +120 0 有数据，为零 ? — 数据缺失 −30 1月 2月 3月 4月 5月 有数据 有数据 +80 5月 正值（净增） 0：有数据但无变化 虚线框：数据缺失，无数值 负数（净流失）"
+    }
+  ],
+  "messages": [],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "cb7d51acf3b5473e788e0fb0de7cfa2c5b9c767e3f0e517065ec538b1587d66e",
+  "previewSha256": "2b341932edfeaf49f2c8f3a1b5e9eb3845244aead2cecf1a18555e3e130453ab",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original light preview; dark SVG is rebuilt from unchanged source using checkerRuntimeRendererSha256.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "svg",
+  "sandbox": "",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

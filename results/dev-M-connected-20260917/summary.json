@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-17T16:48:31.905496+00:00",
+  "stage": "dev-M-connected-20260917",
+  "description": "来自冻结 manifest；尚未产出的计划项仍然显示。",
+  "planned": 6,
+  "trialStatuses": {
+    "completed": 6
+  },
+  "gates": {
+    "route": {
+      "pass": 6
+    },
+    "acceptance": {
+      "not_applicable": 6
+    },
+    "content": {
+      "not_applicable": 6
+    }
+  },
+  "human": {
+    "eligible": 0,
+    "completed": 0,
+    "needsReview": 0,
+    "unreviewed": 0,
+    "stale": [],
+    "dimensions": {
+      "understanding": {},
+      "layout": {},
+      "operability": {},
+      "focus": {}
+    }
+  },
+  "trials": [
+    {
+      "trialId": "dev-M-connected-20260917/N01-M-1",
+      "caseId": "N01",
+      "arm": "M",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-M-connected-20260917/N02-M-1",
+      "caseId": "N02",
+      "arm": "M",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-M-connected-20260917/N03-M-1",
+      "caseId": "N03",
+      "arm": "M",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-M-connected-20260917/N01-M-2",
+      "caseId": "N01",
+      "arm": "M",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-M-connected-20260917/N02-M-2",
+      "caseId": "N02",
+      "arm": "M",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-M-connected-20260917/N03-M-2",
+      "caseId": "N03",
+      "arm": "M",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable"
+      }
+    }
+  ],
+  "limitations": [
+    "No weighted overall score.",
+    "Pending, error and not_applicable are not passes.",
+    "Historical calibration is not a fresh prompt comparison.",
+    "Preview messages do not verify real Web follow-up or repair."
+  ]
+}

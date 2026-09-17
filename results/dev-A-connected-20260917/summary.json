@@ -1,0 +1,439 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-17T16:48:30.577014+00:00",
+  "stage": "dev-A-connected-20260917",
+  "description": "来自冻结 manifest；尚未产出的计划项仍然显示。",
+  "planned": 20,
+  "trialStatuses": {
+    "completed": 20
+  },
+  "gates": {
+    "route": {
+      "pass": 20
+    },
+    "acceptance": {
+      "pass": 14,
+      "not_applicable": 6
+    },
+    "content": {
+      "fail": 2,
+      "pending": 12,
+      "not_applicable": 6
+    },
+    "render": {
+      "pass": 14,
+      "not_applicable": 6
+    },
+    "interaction": {
+      "pass": 8,
+      "not_applicable": 12
+    },
+    "localMessages": {
+      "pass": 8,
+      "not_applicable": 12
+    },
+    "followupPayload": {
+      "not_applicable": 18,
+      "pass": 2
+    },
+    "hostFollowup": {
+      "not_applicable": 18,
+      "pending": 2
+    },
+    "layout": {
+      "pending": 14,
+      "not_applicable": 6
+    },
+    "visibleLabels": {
+      "pass": 4,
+      "not_applicable": 2
+    }
+  },
+  "human": {
+    "eligible": 14,
+    "completed": 0,
+    "needsReview": 0,
+    "unreviewed": 14,
+    "stale": [],
+    "dimensions": {
+      "understanding": {},
+      "layout": {},
+      "operability": {},
+      "focus": {}
+    }
+  },
+  "trials": [
+    {
+      "trialId": "dev-A-connected-20260917/W01-A-1",
+      "caseId": "W01",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "fail",
+        "render": "pass",
+        "interaction": "pass",
+        "localMessages": "pass",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W02-A-1",
+      "caseId": "W02",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "pass",
+        "localMessages": "pass",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W03-A-1",
+      "caseId": "W03",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending",
+        "visibleLabels": "pass"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W04-A-1",
+      "caseId": "W04",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending",
+        "visibleLabels": "pass"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W05-A-1",
+      "caseId": "W05",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "pass",
+        "localMessages": "pass",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W06-A-1",
+      "caseId": "W06",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "pass",
+        "localMessages": "pass",
+        "followupPayload": "pass",
+        "hostFollowup": "pending",
+        "layout": "pending"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/E01-A-1",
+      "caseId": "E01",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending",
+        "visibleLabels": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/N01-A-1",
+      "caseId": "N01",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable",
+        "render": "not_applicable",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/N02-A-1",
+      "caseId": "N02",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable",
+        "render": "not_applicable",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/N03-A-1",
+      "caseId": "N03",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable",
+        "render": "not_applicable",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W01-A-2",
+      "caseId": "W01",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "fail",
+        "render": "pass",
+        "interaction": "pass",
+        "localMessages": "pass",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W02-A-2",
+      "caseId": "W02",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "pass",
+        "localMessages": "pass",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W03-A-2",
+      "caseId": "W03",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending",
+        "visibleLabels": "pass"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W04-A-2",
+      "caseId": "W04",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending",
+        "visibleLabels": "pass"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W05-A-2",
+      "caseId": "W05",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "pass",
+        "localMessages": "pass",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/W06-A-2",
+      "caseId": "W06",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "pass",
+        "localMessages": "pass",
+        "followupPayload": "pass",
+        "hostFollowup": "pending",
+        "layout": "pending"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/E01-A-2",
+      "caseId": "E01",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "unreviewed",
+      "checks": {
+        "route": "pass",
+        "acceptance": "pass",
+        "content": "pending",
+        "render": "pass",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "pending",
+        "visibleLabels": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/N01-A-2",
+      "caseId": "N01",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable",
+        "render": "not_applicable",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/N02-A-2",
+      "caseId": "N02",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable",
+        "render": "not_applicable",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-A-connected-20260917/N03-A-2",
+      "caseId": "N03",
+      "arm": "A",
+      "status": "completed",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pass",
+        "acceptance": "not_applicable",
+        "content": "not_applicable",
+        "render": "not_applicable",
+        "interaction": "not_applicable",
+        "localMessages": "not_applicable",
+        "followupPayload": "not_applicable",
+        "hostFollowup": "not_applicable",
+        "layout": "not_applicable"
+      }
+    }
+  ],
+  "limitations": [
+    "No weighted overall score.",
+    "Pending, error and not_applicable are not passes.",
+    "Historical calibration is not a fresh prompt comparison.",
+    "Preview messages do not verify real Web follow-up or repair."
+  ]
+}

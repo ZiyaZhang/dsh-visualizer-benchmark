@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 2,
+  "id": "W03-A-2",
+  "roundId": "dev-A-connected-20260917",
+  "caseId": "W03",
+  "arm": "A",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "在这条回复里用一张静态图展示每月净新增用户：1月120人、2月0人、3月数据缺失、4月-30人、5月80人。我要直接看清月份间的比较，以及0、缺失和负数的区别。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "每月净新增用户（1–5月）",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/dev-A-connected-20260917/W03-A-2/widget-1.source.html",
+      "preview": "results/dev-A-connected-20260917/W03-A-2/widget-1.html",
+      "sha256": "f8ee62386c2099d5b270556c4b3af91899f31b542185787a98f6b3697cf67122",
+      "bytes": 6086
+    }
+  ],
+  "final": "上图用同一根 0 基线做比较，三类\"非正数\"各有独立编码：\n\n- **120 / 80（蓝柱向上）**：净新增，柱高可直接横向比。\n- **0（2月，基线上的圆点刻度 + 标注 0）**：有数据、确实没有变化，所以它有\"位置\"却没有柱高。\n- **数据缺失（3月，斜纹虚线空框）**：无数据，用整列留白表示，**不等于 0**——不能按\"没涨没跌\"解读。\n- **−30（4月，红柱向下）**：净流失，方向朝下与正值区分。\n\n若把 3 月误当成 0，会得出\"3 月持平\"的错误结论；正确说法是\"3 月无数据，需先补齐再判断趋势\"。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 18,
+        "callId": "call_00_ARE4Ok6YJVdP5jXpBQVm2149",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 19,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_DAGgN8mi4jvXqCbO4JPt6833",
+        "argumentsSha256": "66fca307d000b3a15ee650d56c84294b70fc73292e3d347e8a8014780f7a7648",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_tNgHC6aQ6Ij0XS7piK2f2920",
+        "argumentsSha256": "ac4ca12955dc6a9c398135a34c7e4f5b531d70439709e4fb42156d455d85c34f",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_NIZt0rNJxmkIFjpoTU9u5531",
+        "argumentsSha256": "2f3c2cb7b1ec0211e05058d6d5d20b26335289061367f8869b14dbf91b1506fc",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/charts.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "0778ef689dea193a21f6f319a3d915e268d184bdd377128fa6a272a4ff8a1d80",
+        "resultSha256": "0a81706e6b6c12ff2570c18ed64638d89cac0da609a79e263ceeb59990f77ca3"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "1049583aefea5f571d354fd18f7620dada6bfc7f3cecaedee4f5d20e8f1aa42e"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 18,
+        "resultSeq": 19,
+        "success": true,
+        "resultSha256": "2271794d8d5f420ec4427b16e376224b4a70ff4bc0a247f2706549574439d4b4"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "3e4f6f49361fc721dfe99288b36373d75f5e91320f81baeffaeec8b996000697"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8208,
+    "outputTokens": 7471,
+    "cacheReadTokens": 32512,
+    "cacheWriteTokens": 0,
+    "totalTokens": 48191
+  },
+  "elapsedSeconds": 63.047,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "199bdfafff86534ae6dda728f35188902f9807eb5fe50c599bd5523fd23d092c",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "cb489b7f2a7f98f50c73bdfa3d42d05f8abf8e313dc6f5e032ed4468d230e547",
+  "extractionCorrection": {
+    "kind": "visible-assistant-text-only",
+    "correctedAt": "2026-09-17T16:48:00.774Z",
+    "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+    "correctorSha256": "47a8c7617f9cc6fbdf2b33b085723fa5e02fb800caee20608c755c767c2c57b3",
+    "sourceSessionSha256": "0edb837354ef1d9a10c8e831f949aa5c1df57ae01f10ee6320e4a30af5ae20d0",
+    "assistantSeqs": [
+      38
+    ],
+    "previousFinalSha256": "199bdfafff86534ae6dda728f35188902f9807eb5fe50c599bd5523fd23d092c",
+    "previousCorrection": {
+      "kind": "visible-assistant-text-only",
+      "correctedAt": "2026-09-17T16:40:33.739Z",
+      "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+      "correctorSha256": "ef5a06fbafdc4b1a7032c073d912b16cbfe2dda9caa634ef3465a6deceb96ed3",
+      "sourceSessionSha256": "0edb837354ef1d9a10c8e831f949aa5c1df57ae01f10ee6320e4a30af5ae20d0",
+      "assistantSeq": 38,
+      "previousFinalSha256": "76da44637c0acc1944630cf17aa1f2473ffe598103c229a076299ef902f31aaf",
+      "finalChanged": true,
+      "reason": "Final replies include only text blocks. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+    },
+    "finalChanged": false,
+    "reason": "All visible assistant text blocks are included in chronological order. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+  }
+}

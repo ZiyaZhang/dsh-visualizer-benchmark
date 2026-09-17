@@ -26,7 +26,8 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 system-ui}select{f
 <small>DSH Visualizer · DeepSeek-V41-Flash / High</small>
 <h1>先看证据，再逐份评价内联成品</h1>
 <p class="lead">这里保留题目、版本、首次输出与失败，用于迭代 <code>show_widget</code> 和 Visualize Skill。路由、真实运行检查、人工四维评分分别展示；非内联任务只做路由检查。</p>
-<a class="entry" href="/label.html?stage=calibration">开始 6 份校准评分 →</a> <span class="muted" id="progress">正在读取</span>
+<a class="entry" id="review-entry" href="/label.html?stage=calibration">开始 6 份校准评分 →</a> <span class="muted" id="progress">正在读取</span>
+<p id="comparison-status" class="muted"></p>
 <div class="stats">
   <div class="stat"><strong id="history-count">—</strong><span>历史尝试，全部保留</span></div>
   <div class="stat"><strong id="calibration-count">—</strong><span>旧成品用于评分校准</span></div>
@@ -110,6 +111,17 @@ Promise.all(['/api/catalog','/api/annotations'].map(async url=>{const r=await fe
   $('history-count').textContent=data.trials.filter(t=>t.historical||t.origin==='historical-calibration').length;
   $('calibration-count').textContent=calibration.length+' 份';$('fresh-count').textContent=fresh.filter(t=>t.status==='completed').length+' / '+fresh.length;
   $('rated-count').textContent=complete+' / '+calibration.length;$('progress').textContent=complete+' 份已评分，'+(calibration.length-complete)+' 份尚未完成';
+  const comparison=data.stages.find(s=>s.id.startsWith('compare-'));
+  if(comparison){
+    const members=comparison.trialIds.map(id=>data.trials.find(t=>t.id===id));
+    const generated=members.filter(t=>t.status==='completed').length;
+    const rated=members.filter(t=>reviewFor(t)?.status==='complete').length;
+    $('review-entry').href='/label.html?stage='+encodeURIComponent(comparison.id);
+    $('review-entry').textContent='开始 A/B 同题评分 →';
+    $('progress').textContent=generated+' / '+members.length+' 份内联成品已生成，'+rated+' 份已评分';
+    $('comparison-status').append(node('span','公司接口已恢复。本轮使用 V41 Flash / High；同题成品混排，路由结果另列。'),node('br'));
+    const report=node('a','查看本轮结果与候选选择记录');report.href='/results/visualizer-dev-connected-20260917.md';$('comparison-status').append(report);
+  }
   if(data.catalogErrors.length){$('catalog-errors').hidden=false;$('catalog-errors').textContent='部分结果加载错误：'+data.catalogErrors.join('；');}
   for(const [index,trial] of calibration.entries()){
     const row=node('div');row.className='row';const description=node('div');description.append(node('b',trial.caseTitle+' · 成品 '+(trial.repeat||index+1)));
@@ -120,9 +132,9 @@ Promise.all(['/api/catalog','/api/annotations'].map(async url=>{const r=await fe
   const pending=[
     '人工校准：'+(calibration.length-complete)+' / '+calibration.length+' 份尚未完成四维与内容核对。',
     '当前题集 '+data.taskCount+' 题；新增 manifest 计划 '+fresh.length+' 次，完成 '+fresh.filter(t=>t.status==='completed').length+' 次。历史重放不计新生成。',
-    fresh.some(t=>t.status==='error') ? '新模型试跑目前有 '+fresh.filter(t=>t.status==='error').length+' 次错误，其余未开始项完整保留；当前连接受阻，没有新 A/B 结论。' : '新模型试跑进度按 manifest 展示；未完成前没有新 A/B 结论。',
+    fresh.some(t=>t.status==='error') ? '新模型试跑目前有 '+fresh.filter(t=>t.status==='error').length+' 次错误（含此前连接失败），完成与未开始项均保留；以各轮记录判断原因，不把环境错误计作模型质量失败。' : '新模型试跑进度按 manifest 展示；未完成前没有新 A/B 结论。',
     '控制台与动作检查之外，窄屏、主题、视觉关系和操作含义仍需按适用项人工观察。',
-    '先校准评分标准，再用固定模型与同题对照选候选；目前不能宣布新提示词全面优于当前版。'
+    '同题 A/B 的视觉质量仍待人工评分；完成候选选择后再运行保留测试集。目前不能宣布新提示词全面优于当前版。'
   ];
   pending.forEach(text=>$('pending').append(node('li',text)));
   $('product-summary').textContent='历史产品验证快照：'+(data.productValidation?.summary||'未记录；不据本地结果推断远端 CI。');

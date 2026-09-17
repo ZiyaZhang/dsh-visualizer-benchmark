@@ -1,0 +1,63 @@
+<div style="font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; color: var(--dsw-alias-label-primary, #1f2328); background: var(--dsw-alias-bg-layer-1, #ffffff); border: 1px solid var(--dsw-alias-border-l1, #d8dce3); border-radius: 14px; padding: 18px 20px; max-width: 420px; box-sizing: border-box;">
+  <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+    <div style="font-size: 14px; font-weight: 600;">数量</div>
+    <div style="font-size: 12px; color: var(--dsw-alias-label-tertiary, #6b7280);">范围 0 – 5</div>
+  </div>
+
+  <div role="group" aria-label="数量选择器，范围 0 到 5" style="display: flex; align-items: center; gap: 10px; margin-top: 14px;">
+    <button id="qty-dec" type="button" aria-label="减少数量" style="width: 44px; height: 44px; flex: 0 0 auto; font-size: 22px; line-height: 1; border-radius: 10px; cursor: pointer;">−</button>
+
+    <div id="qty-value" aria-live="polite" style="flex: 1 1 auto; min-width: 0; text-align: center; font-size: 34px; font-weight: 650; font-variant-numeric: tabular-nums; padding: 4px 0;">2</div>
+
+    <button id="qty-inc" type="button" aria-label="增加数量" style="width: 44px; height: 44px; flex: 0 0 auto; font-size: 22px; line-height: 1; border-radius: 10px; cursor: pointer;">+</button>
+  </div>
+
+  <div style="display: flex; gap: 6px; margin-top: 14px;" aria-hidden="true">
+    <div class="seg" style="flex: 1; height: 6px; border-radius: 3px; background: var(--dsw-alias-border-l1, #d8dce3);"></div>
+    <div class="seg" style="flex: 1; height: 6px; border-radius: 3px; background: var(--dsw-alias-border-l1, #d8dce3);"></div>
+    <div class="seg" style="flex: 1; height: 6px; border-radius: 3px; background: var(--dsw-alias-border-l1, #d8dce3);"></div>
+    <div class="seg" style="flex: 1; height: 6px; border-radius: 3px; background: var(--dsw-alias-border-l1, #d8dce3);"></div>
+    <div class="seg" style="flex: 1; height: 6px; border-radius: 3px; background: var(--dsw-alias-border-l1, #d8dce3);"></div>
+  </div>
+
+  <div id="qty-hint" style="margin-top: 10px; font-size: 12px; color: var(--dsw-alias-label-secondary, #4b5563); min-height: 16px;">可增减 · 步长 1</div>
+</div>
+
+<script>
+(function () {
+  var MIN = 0, MAX = 5;
+  var value = 2;
+  var dec = document.getElementById('qty-dec');
+  var inc = document.getElementById('qty-inc');
+  var out = document.getElementById('qty-value');
+  var hint = document.getElementById('qty-hint');
+  var segs = Array.prototype.slice.call(document.querySelectorAll('.seg'));
+
+  function render() {
+    out.textContent = String(value);
+    dec.disabled = value <= MIN;
+    inc.disabled = value >= MAX;
+    dec.style.cursor = dec.disabled ? 'not-allowed' : 'pointer';
+    inc.style.cursor = inc.disabled ? 'not-allowed' : 'pointer';
+    dec.style.opacity = dec.disabled ? 0.4 : 1;
+    inc.style.opacity = inc.disabled ? 0.4 : 1;
+    for (var i = 0; i < segs.length; i++) {
+      segs[i].style.background = i < value
+        ? 'var(--dsw-alias-brand-primary, #2f6feb)'
+        : 'var(--dsw-alias-border-l1, #d8dce3)';
+    }
+    if (value <= MIN) hint.textContent = '已达下限 0 · 减少按钮已禁用';
+    else if (value >= MAX) hint.textContent = '已达上限 5 · 增加按钮已禁用';
+    else hint.textContent = '可增减 · 步长 1';
+  }
+
+  dec.addEventListener('click', function () {
+    if (value > MIN) { value -= 1; render(); }
+  });
+  inc.addEventListener('click', function () {
+    if (value < MAX) { value += 1; render(); }
+  });
+
+  render();
+})();
+</script>

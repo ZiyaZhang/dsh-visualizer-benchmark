@@ -1,0 +1,496 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W02-A-1",
+  "caseId": "W02",
+  "scenario": "heat",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-A-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:07.429Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1",
+          "step-2",
+          "reset"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "step-2-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "step-2-736-light.png",
+      "state": "step-2",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "离散热传导 · 一根杆 5 个节点\n两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用上一时刻的温度同步更新全部节点，扩散系数 α = 0.25。\n步数 n = 0\n各节点温度（°C）\n小字 Δ = 本步 − 上一时刻\nT1\n固定\n100.00\n—\nT2\n0.00\n—\nT3\n0.00\n—\nT4\n0.00\n—\nT5\n固定\n0.00\n—\n0 °C\n色标（示意）\n100 °C\n温度分布（节点 1 → 5）\n第 0 步 · 初始\n0\n25\n50\n75\n100\nT1\n固定\nT2\nT3\nT4\nT5\n固定\n当前一步\n上一时刻\n单步\n重置\n初始状态：T2 = T3 = T4 = 0 °C\n0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定",
+      "temperature": [
+        0,
+        100
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 652,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "5 个节点的温度色块与读数",
+        "节点温度分布：T1 100.00 摄氏度，T2 0.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {},
+          "at": 55.700000047683716
+        },
+        {
+          "type": "rendered",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {},
+          "at": 84.30000019073486
+        },
+        {
+          "type": "resize",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {
+            "height": 652
+          },
+          "at": 84.30000019073486
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 离散热传导 · 一根杆 5 个节点 两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用\n- strong: 上一时刻\n- text: 的温度同步更新全部节点，扩散系数 α = 0.25。 步数 n = 0 各节点温度（°C） 小字 Δ = 本步 − 上一时刻\n- group \"5 个节点的温度色块与读数\": T1 固定 100.00 — T2 0.00 — T3 0.00 — T4 0.00 — T5 固定 0.00 —\n- text: 0 °C 色标（示意） 100 °C 温度分布（节点 1 → 5） 第 0 步 · 初始\n- img \"节点温度分布：T1 100.00 摄氏度，T2 0.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度\": 0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定\n- text: 当前一步 上一时刻\n- button \"单步\"\n- button \"重置\"\n- status: 初始状态：T2 = T3 = T4 = 0 °C",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "temperatureAccessibleValues": [
+        100,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "离散热传导 · 一根杆 5 个节点\n两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用上一时刻的温度同步更新全部节点，扩散系数 α = 0.25。\n步数 n = 1\n各节点温度（°C）\n小字 Δ = 本步 − 上一时刻\nT1\n固定\n100.00\n0.00\nT2\n25.00\n+25.00\nT3\n0.00\n0.00\nT4\n0.00\n0.00\nT5\n固定\n0.00\n0.00\n0 °C\n色标（示意）\n100 °C\n温度分布（节点 1 → 5）\n第 1 步\n0\n25\n50\n75\n100\nT1\n固定\nT2\nT3\nT4\nT5\n固定\n当前一步\n上一时刻\n单步\n重置\n已同步更新到第 1 步，最大变化 25.000 °C\n0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定",
+      "temperature": [
+        0,
+        100
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 652,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "5 个节点的温度色块与读数",
+        "节点温度分布：T1 100.00 摄氏度，T2 25.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {},
+          "at": 55.700000047683716
+        },
+        {
+          "type": "rendered",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {},
+          "at": 84.30000019073486
+        },
+        {
+          "type": "resize",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {
+            "height": 652
+          },
+          "at": 84.30000019073486
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 离散热传导 · 一根杆 5 个节点 两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用\n- strong: 上一时刻\n- text: 的温度同步更新全部节点，扩散系数 α = 0.25。 步数 n = 1 各节点温度（°C） 小字 Δ = 本步 − 上一时刻\n- group \"5 个节点的温度色块与读数\": T1 固定 100.00 0.00 T2 25.00 +25.00 T3 0.00 0.00 T4 0.00 0.00 T5 固定 0.00 0.00\n- text: 0 °C 色标（示意） 100 °C 温度分布（节点 1 → 5） 第 1 步\n- img \"节点温度分布：T1 100.00 摄氏度，T2 25.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度\": 0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定\n- text: 当前一步 上一时刻\n- button \"单步\"\n- button \"重置\"\n- status: 已同步更新到第 1 步，最大变化 25.000 °C",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        25,
+        0,
+        0,
+        0
+      ],
+      "temperatureAccessibleValues": [
+        100,
+        25,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "离散热传导 · 一根杆 5 个节点\n两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用上一时刻的温度同步更新全部节点，扩散系数 α = 0.25。\n步数 n = 2\n各节点温度（°C）\n小字 Δ = 本步 − 上一时刻\nT1\n固定\n100.00\n0.00\nT2\n37.50\n+12.50\nT3\n6.25\n+6.25\nT4\n0.00\n0.00\nT5\n固定\n0.00\n0.00\n0 °C\n色标（示意）\n100 °C\n温度分布（节点 1 → 5）\n第 2 步\n0\n25\n50\n75\n100\nT1\n固定\nT2\nT3\nT4\nT5\n固定\n当前一步\n上一时刻\n单步\n重置\n已同步更新到第 2 步，最大变化 12.500 °C\n0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定",
+      "temperature": [
+        0,
+        100
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 652,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "5 个节点的温度色块与读数",
+        "节点温度分布：T1 100.00 摄氏度，T2 37.50 摄氏度，T3 6.25 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {},
+          "at": 55.700000047683716
+        },
+        {
+          "type": "rendered",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {},
+          "at": 84.30000019073486
+        },
+        {
+          "type": "resize",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {
+            "height": 652
+          },
+          "at": 84.30000019073486
+        }
+      ],
+      "name": "step-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 离散热传导 · 一根杆 5 个节点 两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用\n- strong: 上一时刻\n- text: 的温度同步更新全部节点，扩散系数 α = 0.25。 步数 n = 2 各节点温度（°C） 小字 Δ = 本步 − 上一时刻\n- group \"5 个节点的温度色块与读数\": T1 固定 100.00 0.00 T2 37.50 +12.50 T3 6.25 +6.25 T4 0.00 0.00 T5 固定 0.00 0.00\n- text: 0 °C 色标（示意） 100 °C 温度分布（节点 1 → 5） 第 2 步\n- img \"节点温度分布：T1 100.00 摄氏度，T2 37.50 摄氏度，T3 6.25 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度\": 0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定\n- text: 当前一步 上一时刻\n- button \"单步\"\n- button \"重置\"\n- status: 已同步更新到第 2 步，最大变化 12.500 °C",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        37.5,
+        6.25,
+        0,
+        0
+      ],
+      "temperatureAccessibleValues": [
+        100,
+        37.5,
+        6.25,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "离散热传导 · 一根杆 5 个节点\n两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用上一时刻的温度同步更新全部节点，扩散系数 α = 0.25。\n步数 n = 0\n各节点温度（°C）\n小字 Δ = 本步 − 上一时刻\nT1\n固定\n100.00\n—\nT2\n0.00\n—\nT3\n0.00\n—\nT4\n0.00\n—\nT5\n固定\n0.00\n—\n0 °C\n色标（示意）\n100 °C\n温度分布（节点 1 → 5）\n第 0 步 · 初始\n0\n25\n50\n75\n100\nT1\n固定\nT2\nT3\nT4\nT5\n固定\n当前一步\n上一时刻\n单步\n重置\n已重置：T2 = T3 = T4 = 0 °C\n0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定",
+      "temperature": [
+        0,
+        100
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 652,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "5 个节点的温度色块与读数",
+        "节点温度分布：T1 100.00 摄氏度，T2 0.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {},
+          "at": 55.700000047683716
+        },
+        {
+          "type": "rendered",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {},
+          "at": 84.30000019073486
+        },
+        {
+          "type": "resize",
+          "channel": "232842a1d15bfcb1354e345855cf0869",
+          "payload": {
+            "height": 652
+          },
+          "at": 84.30000019073486
+        }
+      ],
+      "name": "reset",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 离散热传导 · 一根杆 5 个节点 两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用\n- strong: 上一时刻\n- text: 的温度同步更新全部节点，扩散系数 α = 0.25。 步数 n = 0 各节点温度（°C） 小字 Δ = 本步 − 上一时刻\n- group \"5 个节点的温度色块与读数\": T1 固定 100.00 — T2 0.00 — T3 0.00 — T4 0.00 — T5 固定 0.00 —\n- text: 0 °C 色标（示意） 100 °C 温度分布（节点 1 → 5） 第 0 步 · 初始\n- img \"节点温度分布：T1 100.00 摄氏度，T2 0.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度\": 0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定\n- text: 当前一步 上一时刻\n- button \"单步\"\n- button \"重置\"\n- status: 已重置：T2 = T3 = T4 = 0 °C",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "temperatureAccessibleValues": [
+        100,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "离散热传导 · 一根杆 5 个节点\n两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用上一时刻的温度同步更新全部节点，扩散系数 α = 0.25。\n步数 n = 0\n各节点温度（°C）\n小字 Δ = 本步 − 上一时刻\nT1\n固定\n100.00\n—\nT2\n0.00\n—\nT3\n0.00\n—\nT4\n0.00\n—\nT5\n固定\n0.00\n—\n0 °C\n色标（示意）\n100 °C\n温度分布（节点 1 → 5）\n第 0 步 · 初始\n0\n25\n50\n75\n100\nT1\n固定\nT2\nT3\nT4\nT5\n固定\n当前一步\n上一时刻\n单步\n重置\n初始状态：T2 = T3 = T4 = 0 °C\n0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定",
+      "temperature": [
+        0,
+        100
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 580,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "5 个节点的温度色块与读数",
+        "节点温度分布：T1 100.00 摄氏度，T2 0.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "ceab0e049187a064b15637533108f3ff",
+          "payload": {},
+          "at": 329.90000009536743
+        },
+        {
+          "type": "rendered",
+          "channel": "ceab0e049187a064b15637533108f3ff",
+          "payload": {},
+          "at": 333.5
+        },
+        {
+          "type": "resize",
+          "channel": "ceab0e049187a064b15637533108f3ff",
+          "payload": {
+            "height": 580
+          },
+          "at": 333.60000014305115
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 离散热传导 · 一根杆 5 个节点 两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用\n- strong: 上一时刻\n- text: 的温度同步更新全部节点，扩散系数 α = 0.25。 步数 n = 0 各节点温度（°C） 小字 Δ = 本步 − 上一时刻\n- group \"5 个节点的温度色块与读数\": T1 固定 100.00 — T2 0.00 — T3 0.00 — T4 0.00 — T5 固定 0.00 —\n- text: 0 °C 色标（示意） 100 °C 温度分布（节点 1 → 5） 第 0 步 · 初始\n- img \"节点温度分布：T1 100.00 摄氏度，T2 0.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度\": 0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定\n- text: 当前一步 上一时刻\n- button \"单步\"\n- button \"重置\"\n- status: 初始状态：T2 = T3 = T4 = 0 °C"
+    },
+    {
+      "text": "离散热传导 · 一根杆 5 个节点\n两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用上一时刻的温度同步更新全部节点，扩散系数 α = 0.25。\n步数 n = 0\n各节点温度（°C）\n小字 Δ = 本步 − 上一时刻\nT1\n固定\n100.00\n—\nT2\n0.00\n—\nT3\n0.00\n—\nT4\n0.00\n—\nT5\n固定\n0.00\n—\n0 °C\n色标（示意）\n100 °C\n温度分布（节点 1 → 5）\n第 0 步 · 初始\n0\n25\n50\n75\n100\nT1\n固定\nT2\nT3\nT4\nT5\n固定\n当前一步\n上一时刻\n单步\n重置\n初始状态：T2 = T3 = T4 = 0 °C\n0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定",
+      "temperature": [
+        0,
+        100
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 652,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "5 个节点的温度色块与读数",
+        "节点温度分布：T1 100.00 摄氏度，T2 0.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "a4264c4eb7aa5534542ba0bc37188e12",
+          "payload": {},
+          "at": 396.10000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "a4264c4eb7aa5534542ba0bc37188e12",
+          "payload": {},
+          "at": 401.30000019073486
+        },
+        {
+          "type": "resize",
+          "channel": "a4264c4eb7aa5534542ba0bc37188e12",
+          "payload": {
+            "height": 652
+          },
+          "at": 401.30000019073486
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 离散热传导 · 一根杆 5 个节点 两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用\n- strong: 上一时刻\n- text: 的温度同步更新全部节点，扩散系数 α = 0.25。 步数 n = 0 各节点温度（°C） 小字 Δ = 本步 − 上一时刻\n- group \"5 个节点的温度色块与读数\": T1 固定 100.00 — T2 0.00 — T3 0.00 — T4 0.00 — T5 固定 0.00 —\n- text: 0 °C 色标（示意） 100 °C 温度分布（节点 1 → 5） 第 0 步 · 初始\n- img \"节点温度分布：T1 100.00 摄氏度，T2 0.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度\": 0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定\n- text: 当前一步 上一时刻\n- button \"单步\"\n- button \"重置\"\n- status: 初始状态：T2 = T3 = T4 = 0 °C"
+    },
+    {
+      "text": "离散热传导 · 一根杆 5 个节点\n两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用上一时刻的温度同步更新全部节点，扩散系数 α = 0.25。\n步数 n = 0\n各节点温度（°C）\n小字 Δ = 本步 − 上一时刻\nT1\n固定\n100.00\n—\nT2\n0.00\n—\nT3\n0.00\n—\nT4\n0.00\n—\nT5\n固定\n0.00\n—\n0 °C\n色标（示意）\n100 °C\n温度分布（节点 1 → 5）\n第 0 步 · 初始\n0\n25\n50\n75\n100\nT1\n固定\nT2\nT3\nT4\nT5\n固定\n当前一步\n上一时刻\n单步\n重置\n初始状态：T2 = T3 = T4 = 0 °C\n0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定",
+      "temperature": [
+        0,
+        100
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 580,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "5 个节点的温度色块与读数",
+        "节点温度分布：T1 100.00 摄氏度，T2 0.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "c25819ec15afafb18d8ecfc969a0102d",
+          "payload": {},
+          "at": 471.7000000476837
+        },
+        {
+          "type": "rendered",
+          "channel": "c25819ec15afafb18d8ecfc969a0102d",
+          "payload": {},
+          "at": 471.80000019073486
+        },
+        {
+          "type": "resize",
+          "channel": "c25819ec15afafb18d8ecfc969a0102d",
+          "payload": {
+            "height": 580
+          },
+          "at": 471.80000019073486
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 离散热传导 · 一根杆 5 个节点 两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C。每步用\n- strong: 上一时刻\n- text: 的温度同步更新全部节点，扩散系数 α = 0.25。 步数 n = 0 各节点温度（°C） 小字 Δ = 本步 − 上一时刻\n- group \"5 个节点的温度色块与读数\": T1 固定 100.00 — T2 0.00 — T3 0.00 — T4 0.00 — T5 固定 0.00 —\n- text: 0 °C 色标（示意） 100 °C 温度分布（节点 1 → 5） 第 0 步 · 初始\n- img \"节点温度分布：T1 100.00 摄氏度，T2 0.00 摄氏度，T3 0.00 摄氏度，T4 0.00 摄氏度，T5 0.00 摄氏度\": 0 25 50 75 100 T1 固定 T2 T3 T4 T5 固定\n- text: 当前一步 上一时刻\n- button \"单步\"\n- button \"重置\"\n- status: 初始状态：T2 = T3 = T4 = 0 °C"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "232842a1d15bfcb1354e345855cf0869",
+      "payload": {},
+      "at": 55.700000047683716
+    },
+    {
+      "type": "rendered",
+      "channel": "232842a1d15bfcb1354e345855cf0869",
+      "payload": {},
+      "at": 84.30000019073486
+    },
+    {
+      "type": "resize",
+      "channel": "232842a1d15bfcb1354e345855cf0869",
+      "payload": {
+        "height": 652
+      },
+      "at": 84.30000019073486
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "3fc495ce937aaf0d66ad7170064a2ded318ae84071d651cf1a9bf806496eaad5",
+  "previewSha256": "4c32d289b7187c7edd5d8d00928f1ebd7420ca811406f0ac89fd704de3460860",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

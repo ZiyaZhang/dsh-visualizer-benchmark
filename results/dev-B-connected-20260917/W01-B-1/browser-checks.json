@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W01-B-1",
+  "caseId": "W01",
+  "scenario": "binary",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:03.948Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1",
+          "step-2",
+          "reset"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "step-2-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "step-2-736-light.png",
+      "state": "step-2",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "二分查找 · 在有序数组中找 23\n起始状态\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\n56\n7\nlow\nhigh\nlow\n0\nmid\n—\nhigh\n7\n已排除\n—\n初始状态：low = 0，high = 7，搜索区间 [0, 7] 覆盖整个数组。目标值是 23。二分查找每一轮都把区间从中间劈开。\n下一步 →\n重置\n当前区间\n本轮 mid\n已排除\n命中\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 417,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找",
+        "索引 0，值 2，在当前区间内",
+        "索引 1，值 5，在当前区间内",
+        "索引 2，值 8，在当前区间内",
+        "索引 3，值 12，在当前区间内",
+        "索引 4，值 16，在当前区间内",
+        "索引 5，值 23，在当前区间内",
+        "索引 6，值 38，在当前区间内",
+        "索引 7，值 56，在当前区间内"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {},
+          "at": 66.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {},
+          "at": 105.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {
+            "height": 417
+          },
+          "at": 105.10000014305115
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 起始状态\n- group \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找\": 2 0 5 1 8 2 12 3 16 4 23 5 38 6 56 7\n- text: low 0 mid — high 7 已排除 —\n- status: 初始状态：low = 0，high = 7，搜索区间 [0, 7] 覆盖整个数组。目标值是 23。二分查找每一轮都把区间从中间劈开。\n- button \"下一步 →\"\n- button \"重置\""
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\n第 1 / 2 轮\nmid\n2\n0\n5\n1\n8\n2\n×\n12\n3\n16\n4\n23\n5\n38\n6\n56\n7\nlow\nhigh\nlow\n4\nmid\n3\nhigh\n7\n已排除\n[0, 3]\n第 1 轮：mid = ⌊(0+7)/2⌋ = 3，a[3] = 12。因为 12 < 23，目标只可能在右半段，于是把 [0, 3] 整段排除（mid 自己也在里面，已排除）。新区间 low = 4，high = 7。\n下一步 →\n重置\n当前区间\n本轮 mid\n已排除\n命中\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 417,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找",
+        "索引 0，值 2，已排除",
+        "索引 1，值 5，已排除",
+        "索引 2，值 8，已排除",
+        "索引 3，值 12，已排除",
+        "索引 4，值 16，在当前区间内",
+        "索引 5，值 23，在当前区间内",
+        "索引 6，值 38，在当前区间内",
+        "索引 7，值 56，在当前区间内"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {},
+          "at": 66.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {},
+          "at": 105.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {
+            "height": 417
+          },
+          "at": 105.10000014305115
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 第 1 / 2 轮\n- group \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找\": 2 0 5 1 8 2 × 12 3 16 4 23 5 38 6 56 7\n- text: low 4 mid 3 high 7 已排除 [0, 3]\n- status: 第 1 轮：mid = ⌊(0+7)/2⌋ = 3，a[3] = 12。因为 12 < 23，目标只可能在右半段，于是把 [0, 3] 整段排除（mid 自己也在里面，已排除）。新区间 low = 4，high = 7。\n- button \"下一步 →\"\n- button \"重置\""
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\n第 2 / 2 轮\nmid\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n✓\n23\n5\n38\n6\n56\n7\nlow\nhigh\nlow\n4\nmid\n5\nhigh\n7\n已排除\n[0, 3]\n第 2 轮：mid = ⌊(4+7)/2⌋ = 5，a[5] = 23。因为 23 = 23，命中！返回索引 5。8 个元素只比较了 2 次。\n查找完成\n重置\n当前区间\n本轮 mid\n已排除\n命中\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 417,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找",
+        "索引 0，值 2，已排除",
+        "索引 1，值 5，已排除",
+        "索引 2，值 8，已排除",
+        "索引 3，值 12，已排除",
+        "索引 4，值 16，在当前区间内",
+        "索引 5，值 23，在当前区间内",
+        "索引 6，值 38，在当前区间内",
+        "索引 7，值 56，在当前区间内"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {},
+          "at": 66.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {},
+          "at": 105.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {
+            "height": 417
+          },
+          "at": 105.10000014305115
+        }
+      ],
+      "name": "step-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 第 2 / 2 轮\n- group \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找\": 2 0 5 1 8 2 12 3 16 4 ✓ 23 5 38 6 56 7\n- text: low 4 mid 5 high 7 已排除 [0, 3]\n- status: 第 2 轮：mid = ⌊(4+7)/2⌋ = 5，a[5] = 23。因为 23 = 23，命中！返回索引 5。8 个元素只比较了 2 次。\n- button \"查找完成\" [disabled]\n- button \"重置\""
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\n起始状态\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\n56\n7\nlow\nhigh\nlow\n0\nmid\n—\nhigh\n7\n已排除\n—\n初始状态：low = 0，high = 7，搜索区间 [0, 7] 覆盖整个数组。目标值是 23。二分查找每一轮都把区间从中间劈开。\n下一步 →\n重置\n当前区间\n本轮 mid\n已排除\n命中\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 417,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找",
+        "索引 0，值 2，在当前区间内",
+        "索引 1，值 5，在当前区间内",
+        "索引 2，值 8，在当前区间内",
+        "索引 3，值 12，在当前区间内",
+        "索引 4，值 16，在当前区间内",
+        "索引 5，值 23，在当前区间内",
+        "索引 6，值 38，在当前区间内",
+        "索引 7，值 56，在当前区间内"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {},
+          "at": 66.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {},
+          "at": 105.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "d1a635abcd556bc0497faade728e7883",
+          "payload": {
+            "height": 417
+          },
+          "at": 105.10000014305115
+        }
+      ],
+      "name": "reset",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 起始状态\n- group \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找\": 2 0 5 1 8 2 12 3 16 4 23 5 38 6 56 7\n- text: low 0 mid — high 7 已排除 —\n- status: 初始状态：low = 0，high = 7，搜索区间 [0, 7] 覆盖整个数组。目标值是 23。二分查找每一轮都把区间从中间劈开。\n- button \"下一步 →\"\n- button \"重置\""
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\n起始状态\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\n56\n7\nlow\nhigh\nlow\n0\nmid\n—\nhigh\n7\n已排除\n—\n初始状态：low = 0，high = 7，搜索区间 [0, 7] 覆盖整个数组。目标值是 23。二分查找每一轮都把区间从中间劈开。\n下一步 →\n重置\n当前区间\n本轮 mid\n已排除\n命中\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 494,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找",
+        "索引 0，值 2，在当前区间内",
+        "索引 1，值 5，在当前区间内",
+        "索引 2，值 8，在当前区间内",
+        "索引 3，值 12，在当前区间内",
+        "索引 4，值 16，在当前区间内",
+        "索引 5，值 23，在当前区间内",
+        "索引 6，值 38，在当前区间内",
+        "索引 7，值 56，在当前区间内"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "7aa79904ab55d03e27e65d454451bf74",
+          "payload": {},
+          "at": 355.7000000476837
+        },
+        {
+          "type": "rendered",
+          "channel": "7aa79904ab55d03e27e65d454451bf74",
+          "payload": {},
+          "at": 361.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "7aa79904ab55d03e27e65d454451bf74",
+          "payload": {
+            "height": 494
+          },
+          "at": 361.10000014305115
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 起始状态\n- group \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找\": 2 0 5 1 8 2 12 3 16 4 23 5 38 6 56 7\n- text: low 0 mid — high 7 已排除 —\n- status: 初始状态：low = 0，high = 7，搜索区间 [0, 7] 覆盖整个数组。目标值是 23。二分查找每一轮都把区间从中间劈开。\n- button \"下一步 →\"\n- button \"重置\""
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\n起始状态\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\n56\n7\nlow\nhigh\nlow\n0\nmid\n—\nhigh\n7\n已排除\n—\n初始状态：low = 0，high = 7，搜索区间 [0, 7] 覆盖整个数组。目标值是 23。二分查找每一轮都把区间从中间劈开。\n下一步 →\n重置\n当前区间\n本轮 mid\n已排除\n命中\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 417,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找",
+        "索引 0，值 2，在当前区间内",
+        "索引 1，值 5，在当前区间内",
+        "索引 2，值 8，在当前区间内",
+        "索引 3，值 12，在当前区间内",
+        "索引 4，值 16，在当前区间内",
+        "索引 5，值 23，在当前区间内",
+        "索引 6，值 38，在当前区间内",
+        "索引 7，值 56，在当前区间内"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d60af06c972fcc3a8b78f105b12fe21f",
+          "payload": {},
+          "at": 420.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "d60af06c972fcc3a8b78f105b12fe21f",
+          "payload": {},
+          "at": 428.7999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "d60af06c972fcc3a8b78f105b12fe21f",
+          "payload": {
+            "height": 417
+          },
+          "at": 428.90000009536743
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 起始状态\n- group \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找\": 2 0 5 1 8 2 12 3 16 4 23 5 38 6 56 7\n- text: low 0 mid — high 7 已排除 —\n- status: 初始状态：low = 0，high = 7，搜索区间 [0, 7] 覆盖整个数组。目标值是 23。二分查找每一轮都把区间从中间劈开。\n- button \"下一步 →\"\n- button \"重置\""
+    },
+    {
+      "text": "二分查找 · 在有序数组中找 23\n起始状态\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\n56\n7\nlow\nhigh\nlow\n0\nmid\n—\nhigh\n7\n已排除\n—\n初始状态：low = 0，high = 7，搜索区间 [0, 7] 覆盖整个数组。目标值是 23。二分查找每一轮都把区间从中间劈开。\n下一步 →\n重置\n当前区间\n本轮 mid\n已排除\n命中\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 494,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找",
+        "索引 0，值 2，在当前区间内",
+        "索引 1，值 5，在当前区间内",
+        "索引 2，值 8，在当前区间内",
+        "索引 3，值 12，在当前区间内",
+        "索引 4，值 16，在当前区间内",
+        "索引 5，值 23，在当前区间内",
+        "索引 6，值 38，在当前区间内",
+        "索引 7，值 56，在当前区间内"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "783b9b389ec635d91701a3f01e986921",
+          "payload": {},
+          "at": 490.2999999523163
+        },
+        {
+          "type": "rendered",
+          "channel": "783b9b389ec635d91701a3f01e986921",
+          "payload": {},
+          "at": 495.90000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "783b9b389ec635d91701a3f01e986921",
+          "payload": {
+            "height": 494
+          },
+          "at": 495.90000009536743
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 二分查找 · 在有序数组中找 23 起始状态\n- group \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标值 23，逐步展示二分查找\": 2 0 5 1 8 2 12 3 16 4 23 5 38 6 56 7\n- text: low 0 mid — high 7 已排除 —\n- status: 初始状态：low = 0，high = 7，搜索区间 [0, 7] 覆盖整个数组。目标值是 23。二分查找每一轮都把区间从中间劈开。\n- button \"下一步 →\"\n- button \"重置\""
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "d1a635abcd556bc0497faade728e7883",
+      "payload": {},
+      "at": 66.60000014305115
+    },
+    {
+      "type": "rendered",
+      "channel": "d1a635abcd556bc0497faade728e7883",
+      "payload": {},
+      "at": 105.10000014305115
+    },
+    {
+      "type": "resize",
+      "channel": "d1a635abcd556bc0497faade728e7883",
+      "payload": {
+        "height": 417
+      },
+      "at": 105.10000014305115
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "3433b16c8ce46d17356b8626a9f5c4dade16306d1c5f82f7049e36059307fb34",
+  "previewSha256": "ba312be2e8097016f15e9e2fdf61d36a7c0b1bea51894b3d78d65c22b749fa76",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

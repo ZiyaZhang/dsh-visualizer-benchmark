@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 2,
+  "trialId": "E01-A-1",
+  "caseId": "E01",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-A-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:03.428Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "not_applicable",
+      "reason": "No literal label oracle specified.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "三次握手：三步各验证一件事\n时间从上往下流动，箭头是实际发出的报文\n客户端 Client\n服务器 Server\n① SYN seq = x\n客户端：我要连，我的初始序号是 x\n服务端：✅ 收到你的报文 → 你有发的能力\n但我还不知道你是否能收\n② SYN + ACK seq = y, ack = x+1\n客户端：✅ 你收到了我的 SYN\n✅ 我也收到你的报文 → 你能发我能收\n服务端：我已发，但不知你收到没\n③ ACK ack = y+1\n客户端：确认收到你的 SYN\n服务端：✅ 你收到了 → 双向通道确认\nSYN_SENT\nLISTEN\nESTABLISHED\nSYN_RCVD\nESTABLISHED\n为什么不能少一次？\n两次：服务器发完 SYN-ACK 就以为连上了，\n却还没得到“对方确实收到”的确认。\n第三次 ACK 的作用就是补上这个确认。\n如果只有两次握手\n一个“过期”的 SYN 就能骗服务器建连\n客户端\n服务器\nSYN（旧连接的滞留报文）\n客户端早已放弃这次请求，正在做别的事\nSYN-ACK\n两次握手下，服务端认为连接已建立 →\n分配资源、进入 ESTABLISHED\n客户端一头雾水，直接忽略/回 RST\n后果：半开连接 / SYN Flood\n服务端白白保留一条没人认领的连接，\n占用内存和序号资源；大量伪造源地址的\nSYN 就能把连接表塞满，正常用户连不进来。\n第三次 ACK 让服务端先确认再投入资源。\n三次握手：三步各验证一件事 时间从上往下流动，箭头是实际发出的报文 客户端 Client 服务器 Server ① SYN  seq = x 客户端：我要连，我的初始序号是 x 服务端：✅ 收到你的报文 → 你有发的能力 但我还不知道你是否能收 ② SYN + ACK  seq = y, ack = x+1 客户端：✅ 你收到了我的 SYN ✅ 我也收到你的报文 → 你能发我能收 服务端：我已发，但不知你收到没 ③ ACK  ack = y+1 客户端：确认收到你的 SYN 服务端：✅ 你收到了 → 双向通道确认 SYN_SENT LISTEN ESTABLISHED SYN_RCVD ESTABLISHED 为什么不能少一次？ 两次：服务器发完 SYN-ACK 就以为连上了， 却还没得到“对方确实收到”的确认。 第三次 ACK 的作用就是补上这个确认。 如果只有两次握手 一个“过期”的 SYN 就能骗服务器建连 客户端 服务器 SYN（旧连接的滞留报文） 客户端早已放弃这次请求，正在做别的事 SYN-ACK 两次握手下，服务端认为连接已建立 → 分配资源、进入 ESTABLISHED 客户端一头雾水，直接忽略/回 RST 后果：半开连接 / SYN Flood 服务端白白保留一条没人认领的连接， 占用内存和序号资源；大量伪造源地址的 SYN 就能把连接表塞满，正常用户连不进来。 第三次 ACK 让服务端先确认再投入资源。",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 523,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- img \"TCP 三次握手时序图与两次握手的失效对比 左图显示客户端与服务器的三次握手：SYN、SYN-ACK、ACK，并标注每步验证的收发能力；右图显示仅两次握手时，延迟到达的历史 SYN 会让服务器提前建立连接并长期占用资源。\": 三次握手：三步各验证一件事 时间从上往下流动，箭头是实际发出的报文 客户端 Client 服务器 Server ① SYN seq = x 客户端：我要连，我的初始序号是 x 服务端：✅ 收到你的报文 → 你有发的能力 但我还不知道你是否能收 ② SYN + ACK seq = y, ack = x+1 客户端：✅ 你收到了我的 SYN ✅ 我也收到你的报文 → 你能发我能收 服务端：我已发，但不知你收到没 ③ ACK ack = y+1 客户端：确认收到你的 SYN 服务端：✅ 你收到了 → 双向通道确认 SYN_SENT LISTEN ESTABLISHED SYN_RCVD ESTABLISHED 为什么不能少一次？ 两次：服务器发完 SYN-ACK 就以为连上了， 却还没得到“对方确实收到”的确认。 第三次 ACK 的作用就是补上这个确认。 如果只有两次握手 一个“过期”的 SYN 就能骗服务器建连 客户端 服务器 SYN（旧连接的滞留报文） 客户端早已放弃这次请求，正在做别的事 SYN-ACK 两次握手下，服务端认为连接已建立 → 分配资源、进入 ESTABLISHED 客户端一头雾水，直接忽略/回 RST 后果：半开连接 / SYN Flood 服务端白白保留一条没人认领的连接， 占用内存和序号资源；大量伪造源地址的 SYN 就能把连接表塞满，正常用户连不进来。 第三次 ACK 让服务端先确认再投入资源。"
+    },
+    {
+      "text": "三次握手：三步各验证一件事\n时间从上往下流动，箭头是实际发出的报文\n客户端 Client\n服务器 Server\n① SYN seq = x\n客户端：我要连，我的初始序号是 x\n服务端：✅ 收到你的报文 → 你有发的能力\n但我还不知道你是否能收\n② SYN + ACK seq = y, ack = x+1\n客户端：✅ 你收到了我的 SYN\n✅ 我也收到你的报文 → 你能发我能收\n服务端：我已发，但不知你收到没\n③ ACK ack = y+1\n客户端：确认收到你的 SYN\n服务端：✅ 你收到了 → 双向通道确认\nSYN_SENT\nLISTEN\nESTABLISHED\nSYN_RCVD\nESTABLISHED\n为什么不能少一次？\n两次：服务器发完 SYN-ACK 就以为连上了，\n却还没得到“对方确实收到”的确认。\n第三次 ACK 的作用就是补上这个确认。\n如果只有两次握手\n一个“过期”的 SYN 就能骗服务器建连\n客户端\n服务器\nSYN（旧连接的滞留报文）\n客户端早已放弃这次请求，正在做别的事\nSYN-ACK\n两次握手下，服务端认为连接已建立 →\n分配资源、进入 ESTABLISHED\n客户端一头雾水，直接忽略/回 RST\n后果：半开连接 / SYN Flood\n服务端白白保留一条没人认领的连接，\n占用内存和序号资源；大量伪造源地址的\nSYN 就能把连接表塞满，正常用户连不进来。\n第三次 ACK 让服务端先确认再投入资源。\n三次握手：三步各验证一件事 时间从上往下流动，箭头是实际发出的报文 客户端 Client 服务器 Server ① SYN  seq = x 客户端：我要连，我的初始序号是 x 服务端：✅ 收到你的报文 → 你有发的能力 但我还不知道你是否能收 ② SYN + ACK  seq = y, ack = x+1 客户端：✅ 你收到了我的 SYN ✅ 我也收到你的报文 → 你能发我能收 服务端：我已发，但不知你收到没 ③ ACK  ack = y+1 客户端：确认收到你的 SYN 服务端：✅ 你收到了 → 双向通道确认 SYN_SENT LISTEN ESTABLISHED SYN_RCVD ESTABLISHED 为什么不能少一次？ 两次：服务器发完 SYN-ACK 就以为连上了， 却还没得到“对方确实收到”的确认。 第三次 ACK 的作用就是补上这个确认。 如果只有两次握手 一个“过期”的 SYN 就能骗服务器建连 客户端 服务器 SYN（旧连接的滞留报文） 客户端早已放弃这次请求，正在做别的事 SYN-ACK 两次握手下，服务端认为连接已建立 → 分配资源、进入 ESTABLISHED 客户端一头雾水，直接忽略/回 RST 后果：半开连接 / SYN Flood 服务端白白保留一条没人认领的连接， 占用内存和序号资源；大量伪造源地址的 SYN 就能把连接表塞满，正常用户连不进来。 第三次 ACK 让服务端先确认再投入资源。",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 256,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- img \"TCP 三次握手时序图与两次握手的失效对比 左图显示客户端与服务器的三次握手：SYN、SYN-ACK、ACK，并标注每步验证的收发能力；右图显示仅两次握手时，延迟到达的历史 SYN 会让服务器提前建立连接并长期占用资源。\": 三次握手：三步各验证一件事 时间从上往下流动，箭头是实际发出的报文 客户端 Client 服务器 Server ① SYN seq = x 客户端：我要连，我的初始序号是 x 服务端：✅ 收到你的报文 → 你有发的能力 但我还不知道你是否能收 ② SYN + ACK seq = y, ack = x+1 客户端：✅ 你收到了我的 SYN ✅ 我也收到你的报文 → 你能发我能收 服务端：我已发，但不知你收到没 ③ ACK ack = y+1 客户端：确认收到你的 SYN 服务端：✅ 你收到了 → 双向通道确认 SYN_SENT LISTEN ESTABLISHED SYN_RCVD ESTABLISHED 为什么不能少一次？ 两次：服务器发完 SYN-ACK 就以为连上了， 却还没得到“对方确实收到”的确认。 第三次 ACK 的作用就是补上这个确认。 如果只有两次握手 一个“过期”的 SYN 就能骗服务器建连 客户端 服务器 SYN（旧连接的滞留报文） 客户端早已放弃这次请求，正在做别的事 SYN-ACK 两次握手下，服务端认为连接已建立 → 分配资源、进入 ESTABLISHED 客户端一头雾水，直接忽略/回 RST 后果：半开连接 / SYN Flood 服务端白白保留一条没人认领的连接， 占用内存和序号资源；大量伪造源地址的 SYN 就能把连接表塞满，正常用户连不进来。 第三次 ACK 让服务端先确认再投入资源。"
+    },
+    {
+      "text": "三次握手：三步各验证一件事\n时间从上往下流动，箭头是实际发出的报文\n客户端 Client\n服务器 Server\n① SYN seq = x\n客户端：我要连，我的初始序号是 x\n服务端：✅ 收到你的报文 → 你有发的能力\n但我还不知道你是否能收\n② SYN + ACK seq = y, ack = x+1\n客户端：✅ 你收到了我的 SYN\n✅ 我也收到你的报文 → 你能发我能收\n服务端：我已发，但不知你收到没\n③ ACK ack = y+1\n客户端：确认收到你的 SYN\n服务端：✅ 你收到了 → 双向通道确认\nSYN_SENT\nLISTEN\nESTABLISHED\nSYN_RCVD\nESTABLISHED\n为什么不能少一次？\n两次：服务器发完 SYN-ACK 就以为连上了，\n却还没得到“对方确实收到”的确认。\n第三次 ACK 的作用就是补上这个确认。\n如果只有两次握手\n一个“过期”的 SYN 就能骗服务器建连\n客户端\n服务器\nSYN（旧连接的滞留报文）\n客户端早已放弃这次请求，正在做别的事\nSYN-ACK\n两次握手下，服务端认为连接已建立 →\n分配资源、进入 ESTABLISHED\n客户端一头雾水，直接忽略/回 RST\n后果：半开连接 / SYN Flood\n服务端白白保留一条没人认领的连接，\n占用内存和序号资源；大量伪造源地址的\nSYN 就能把连接表塞满，正常用户连不进来。\n第三次 ACK 让服务端先确认再投入资源。\n三次握手：三步各验证一件事 时间从上往下流动，箭头是实际发出的报文 客户端 Client 服务器 Server ① SYN  seq = x 客户端：我要连，我的初始序号是 x 服务端：✅ 收到你的报文 → 你有发的能力 但我还不知道你是否能收 ② SYN + ACK  seq = y, ack = x+1 客户端：✅ 你收到了我的 SYN ✅ 我也收到你的报文 → 你能发我能收 服务端：我已发，但不知你收到没 ③ ACK  ack = y+1 客户端：确认收到你的 SYN 服务端：✅ 你收到了 → 双向通道确认 SYN_SENT LISTEN ESTABLISHED SYN_RCVD ESTABLISHED 为什么不能少一次？ 两次：服务器发完 SYN-ACK 就以为连上了， 却还没得到“对方确实收到”的确认。 第三次 ACK 的作用就是补上这个确认。 如果只有两次握手 一个“过期”的 SYN 就能骗服务器建连 客户端 服务器 SYN（旧连接的滞留报文） 客户端早已放弃这次请求，正在做别的事 SYN-ACK 两次握手下，服务端认为连接已建立 → 分配资源、进入 ESTABLISHED 客户端一头雾水，直接忽略/回 RST 后果：半开连接 / SYN Flood 服务端白白保留一条没人认领的连接， 占用内存和序号资源；大量伪造源地址的 SYN 就能把连接表塞满，正常用户连不进来。 第三次 ACK 让服务端先确认再投入资源。",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 523,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- img \"TCP 三次握手时序图与两次握手的失效对比 左图显示客户端与服务器的三次握手：SYN、SYN-ACK、ACK，并标注每步验证的收发能力；右图显示仅两次握手时，延迟到达的历史 SYN 会让服务器提前建立连接并长期占用资源。\": 三次握手：三步各验证一件事 时间从上往下流动，箭头是实际发出的报文 客户端 Client 服务器 Server ① SYN seq = x 客户端：我要连，我的初始序号是 x 服务端：✅ 收到你的报文 → 你有发的能力 但我还不知道你是否能收 ② SYN + ACK seq = y, ack = x+1 客户端：✅ 你收到了我的 SYN ✅ 我也收到你的报文 → 你能发我能收 服务端：我已发，但不知你收到没 ③ ACK ack = y+1 客户端：确认收到你的 SYN 服务端：✅ 你收到了 → 双向通道确认 SYN_SENT LISTEN ESTABLISHED SYN_RCVD ESTABLISHED 为什么不能少一次？ 两次：服务器发完 SYN-ACK 就以为连上了， 却还没得到“对方确实收到”的确认。 第三次 ACK 的作用就是补上这个确认。 如果只有两次握手 一个“过期”的 SYN 就能骗服务器建连 客户端 服务器 SYN（旧连接的滞留报文） 客户端早已放弃这次请求，正在做别的事 SYN-ACK 两次握手下，服务端认为连接已建立 → 分配资源、进入 ESTABLISHED 客户端一头雾水，直接忽略/回 RST 后果：半开连接 / SYN Flood 服务端白白保留一条没人认领的连接， 占用内存和序号资源；大量伪造源地址的 SYN 就能把连接表塞满，正常用户连不进来。 第三次 ACK 让服务端先确认再投入资源。"
+    },
+    {
+      "text": "三次握手：三步各验证一件事\n时间从上往下流动，箭头是实际发出的报文\n客户端 Client\n服务器 Server\n① SYN seq = x\n客户端：我要连，我的初始序号是 x\n服务端：✅ 收到你的报文 → 你有发的能力\n但我还不知道你是否能收\n② SYN + ACK seq = y, ack = x+1\n客户端：✅ 你收到了我的 SYN\n✅ 我也收到你的报文 → 你能发我能收\n服务端：我已发，但不知你收到没\n③ ACK ack = y+1\n客户端：确认收到你的 SYN\n服务端：✅ 你收到了 → 双向通道确认\nSYN_SENT\nLISTEN\nESTABLISHED\nSYN_RCVD\nESTABLISHED\n为什么不能少一次？\n两次：服务器发完 SYN-ACK 就以为连上了，\n却还没得到“对方确实收到”的确认。\n第三次 ACK 的作用就是补上这个确认。\n如果只有两次握手\n一个“过期”的 SYN 就能骗服务器建连\n客户端\n服务器\nSYN（旧连接的滞留报文）\n客户端早已放弃这次请求，正在做别的事\nSYN-ACK\n两次握手下，服务端认为连接已建立 →\n分配资源、进入 ESTABLISHED\n客户端一头雾水，直接忽略/回 RST\n后果：半开连接 / SYN Flood\n服务端白白保留一条没人认领的连接，\n占用内存和序号资源；大量伪造源地址的\nSYN 就能把连接表塞满，正常用户连不进来。\n第三次 ACK 让服务端先确认再投入资源。\n三次握手：三步各验证一件事 时间从上往下流动，箭头是实际发出的报文 客户端 Client 服务器 Server ① SYN  seq = x 客户端：我要连，我的初始序号是 x 服务端：✅ 收到你的报文 → 你有发的能力 但我还不知道你是否能收 ② SYN + ACK  seq = y, ack = x+1 客户端：✅ 你收到了我的 SYN ✅ 我也收到你的报文 → 你能发我能收 服务端：我已发，但不知你收到没 ③ ACK  ack = y+1 客户端：确认收到你的 SYN 服务端：✅ 你收到了 → 双向通道确认 SYN_SENT LISTEN ESTABLISHED SYN_RCVD ESTABLISHED 为什么不能少一次？ 两次：服务器发完 SYN-ACK 就以为连上了， 却还没得到“对方确实收到”的确认。 第三次 ACK 的作用就是补上这个确认。 如果只有两次握手 一个“过期”的 SYN 就能骗服务器建连 客户端 服务器 SYN（旧连接的滞留报文） 客户端早已放弃这次请求，正在做别的事 SYN-ACK 两次握手下，服务端认为连接已建立 → 分配资源、进入 ESTABLISHED 客户端一头雾水，直接忽略/回 RST 后果：半开连接 / SYN Flood 服务端白白保留一条没人认领的连接， 占用内存和序号资源；大量伪造源地址的 SYN 就能把连接表塞满，正常用户连不进来。 第三次 ACK 让服务端先确认再投入资源。",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 256,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- img \"TCP 三次握手时序图与两次握手的失效对比 左图显示客户端与服务器的三次握手：SYN、SYN-ACK、ACK，并标注每步验证的收发能力；右图显示仅两次握手时，延迟到达的历史 SYN 会让服务器提前建立连接并长期占用资源。\": 三次握手：三步各验证一件事 时间从上往下流动，箭头是实际发出的报文 客户端 Client 服务器 Server ① SYN seq = x 客户端：我要连，我的初始序号是 x 服务端：✅ 收到你的报文 → 你有发的能力 但我还不知道你是否能收 ② SYN + ACK seq = y, ack = x+1 客户端：✅ 你收到了我的 SYN ✅ 我也收到你的报文 → 你能发我能收 服务端：我已发，但不知你收到没 ③ ACK ack = y+1 客户端：确认收到你的 SYN 服务端：✅ 你收到了 → 双向通道确认 SYN_SENT LISTEN ESTABLISHED SYN_RCVD ESTABLISHED 为什么不能少一次？ 两次：服务器发完 SYN-ACK 就以为连上了， 却还没得到“对方确实收到”的确认。 第三次 ACK 的作用就是补上这个确认。 如果只有两次握手 一个“过期”的 SYN 就能骗服务器建连 客户端 服务器 SYN（旧连接的滞留报文） 客户端早已放弃这次请求，正在做别的事 SYN-ACK 两次握手下，服务端认为连接已建立 → 分配资源、进入 ESTABLISHED 客户端一头雾水，直接忽略/回 RST 后果：半开连接 / SYN Flood 服务端白白保留一条没人认领的连接， 占用内存和序号资源；大量伪造源地址的 SYN 就能把连接表塞满，正常用户连不进来。 第三次 ACK 让服务端先确认再投入资源。"
+    }
+  ],
+  "messages": [],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "0aea5c883b7b972ffc217647ab4fcd3d2bebb4f452274225f2e290f6198c5973",
+  "previewSha256": "e0e27a9d23f54efd5c887ed9561d027b8f61849269e9dd2a14c65118ae5e0efd",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original light preview; dark SVG is rebuilt from unchanged source using checkerRuntimeRendererSha256.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "svg",
+  "sandbox": "",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

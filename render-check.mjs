@@ -14,11 +14,16 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((rows, value, index
   return rows;
 }, []));
 if ((!args.trial && !args['legacy-run']) || !args.output) {
-  console.error('Usage: node render-check.mjs (--trial trial.json | --legacy-run ID) --output DIR [--repo WEB_REPO] [--base-url URL] [--cases cases.json]');
+  console.error('Usage: node render-check.mjs (--trial trial.json | --legacy-run ID) --output DIR [--repo WEB_REPO] [--base-url URL] [--cases cases.json] [--widget-index N]');
   process.exit(2);
 }
 if (!args.repo && !DEFAULT_REPO) {
   console.error('Set DSH_EVAL_REPO to the installed DSH Web checkout, or pass --repo WEB_REPO.');
+  process.exit(2);
+}
+const widgetIndex = Number(args['widget-index'] ?? 0);
+if (!Number.isInteger(widgetIndex) || widgetIndex < 0) {
+  console.error('--widget-index must be a nonnegative integer (0 selects the first accepted component).');
   process.exit(2);
 }
 const out = path.resolve(args.output);
@@ -33,11 +38,11 @@ const cases = JSON.parse(casesBytes).cases;
 const legacy = {I01: 'binary', I02: 'heat', F01: 'sales', N04: 'quantity'};
 const caseId = trial.caseId || trial.case;
 const task = cases.find(c => c.id === caseId) || {id: caseId, browser: {scenario: legacy[caseId]}};
-const scenario = task.browser?.scenario || legacy[caseId];
-const widget = trial.widgets?.[0]; // First accepted source remains the first-render evidence.
-const visual = widget || trial.artifacts?.find(a => a.preview);
+const scenario = task.browser?.scenario || legacy[caseId] || (task.route === 'optional' ? 'static' : undefined);
+const widget = trial.widgets?.[widgetIndex]; // Default keeps the first accepted source as first-render evidence.
+const visual = widget || (widgetIndex === 0 ? trial.artifacts?.find(a => a.preview) : undefined);
 const result = {
-  schemaVersion: 2, trialId: trial.id, caseId, scenario, casesPath: path.relative(ROOT,path.resolve(casesPath)), casesSha256: hash(casesBytes), collectedAt: new Date().toISOString(),
+  schemaVersion: 2, trialId: trial.id, caseId, scenario, widgetIndex, callSeq: widget?.callSeq ?? null, resultSeq: widget?.resultSeq ?? null, casesPath: path.relative(ROOT,path.resolve(casesPath)), casesSha256: hash(casesBytes), collectedAt: new Date().toISOString(),
   scope: 'Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.',
   checks: {
     render: check('pending', 'Browser has not run.'), interaction: check('pending', 'Scenario has not run.'),
@@ -133,13 +138,13 @@ try {
     }, {document, sandbox: result.sandbox, tokens});
     const element = await page.$('#benchmark-frame');
     const frame = await element.contentFrame();
-    await frame.waitForLoadState('load', {timeout: 12000}).catch(() => {});
+    await frame.waitForURL(/^data:text\/html/, {waitUntil: 'load', timeout: 12000});
     if (widget?.kind === 'html') await page.waitForFunction(() => window.__evidence.some(e => ['rendered', 'error', 'resource_error'].includes(e.type)), null, {timeout: 12000}).catch(() => {});
     else {
       const height = await frame.evaluate(() => Math.ceil(document.body.scrollHeight));
       await element.evaluate((node, height) => { node.style.height = Math.min(8192, Math.max(1, height)) + 'px'; }, height);
     }
-    await frame.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     return frame;
   }
   const messages = () => page.evaluate(() => window.__evidence);
@@ -150,7 +155,8 @@ try {
       const visible = element => { const style = getComputedStyle(element); return style.display !== 'none' && style.visibility !== 'hidden' && element.getBoundingClientRect().width > 0 && element.getBoundingClientRect().height > 0; };
       const temperature = [...body.querySelectorAll('*')].filter(visible).map(e => (e.textContent || '').trim()).filter(t => /^-?\d+(?:\.\d+)?\s*(?:°\s*C|℃)$/.test(t)).map(t => Number.parseFloat(t));
       const text = body.innerText + '\n' + [...body.querySelectorAll('svg text')].filter(visible).map(e => e.textContent).join(' ');
-      return {text, temperature, bodyWidth: body.scrollWidth, viewportWidth: innerWidth, bodyHeight: body.scrollHeight,
+      const numericReadouts = [...body.querySelectorAll('[role="status"],output,[role="spinbutton"],input[type="number"]')].filter(visible).map(e=>(e.getAttribute('aria-valuenow') || e.value || e.textContent || '').trim()).filter(t=>/^-?\d+(?:\.\d+)?$/.test(t)).map(Number);
+      return {text, temperature, numericReadouts, bodyWidth: body.scrollWidth, viewportWidth: innerWidth, bodyHeight: body.scrollHeight,
         visibleGraphics: [...body.querySelectorAll('svg,canvas,img')].filter(visible).length,
         accessibleNames: [...body.querySelectorAll('[aria-label]')].filter(visible).map(e => e.getAttribute('aria-label'))};
     });
@@ -177,13 +183,22 @@ try {
   function requireTruth(value, reason) { if (!value) throw new OracleFailure(reason); }
   function numericLabel(text, label) {
     const specific = text.match(new RegExp(`(?:^|\\n)${label}[（(][^）)\\n]*[）)]\\s*[:：=]?\\s*(-?\\d+|—|–|-)`, 'i'));
-    const match = specific || [...text.matchAll(new RegExp(`(?:^|\\n)${label}\\s*[:：=]?\\s*(-?\\d+|—|–|-)`, 'ig'))].at(-1);
+    const annotated = [...text.matchAll(new RegExp(`(?:^|\\n)${label}[^\\d=\\n]{1,20}\\n\\s*(-?\\d+|—|–|-)`, 'ig'))].at(-1);
+    const match = specific || annotated || [...text.matchAll(new RegExp(`(?:^|\\n)${label}\\s*[:：=]?\\s*(-?\\d+|—|–|-)`, 'ig'))].at(-1);
     return match ? /^-?\d+$/.test(match[1]) ? Number(match[1]) : null : undefined;
   }
   function binaryRead(evidence) { return Object.fromEntries(['low','mid','high'].map(k => [k, numericLabel(evidence.text, k)])); }
   function heatRead(evidence, expected) {
-    const values = evidence.temperature;
-    if (values.length < 5) throw new Inconclusive('Five visible temperature readouts could not be identified; inspect screenshot/accessibility evidence.');
+    let values = evidence.temperature;
+    const pairs = [...evidence.text.matchAll(/(?:^|\n)(?:节点|T)\s*(\d+)[^\n]*\n(?:固定\s*\n)?\s*(-?\d+(?:\.\d+)?)/g)].map(match=>({index:Number(match[1]),value:Number(match[2])}));
+    const numbered = pairs.length===5 && [0,1].includes(pairs[0].index) && pairs.every((entry,i)=>entry.index===pairs[0].index+i);
+    if(numbered) { values=pairs.map(entry=>entry.value); evidence.temperatureReadoutSource='visible numbered-node readouts'; evidence.temperatureOracleValues=values; }
+    const accessible = evidence.accessibleNames.map(name=>[...name.matchAll(/(-?\d+(?:\.\d+)?)\s*(?:°\s*C|℃|摄氏度)/g)].map(match=>Number(match[1]))).find(values=>values.length===5);
+    if(accessible) {
+      evidence.temperatureAccessibleValues=accessible;
+      if(numbered && accessible.some((value,i)=>Math.abs(value-values[i])>.011)) result.flags.push({type:'accessible-temperature-difference',state:evidence.name,visible:values,accessible});
+    }
+    if (values.length < 5) throw new Inconclusive('Five precise visible temperature readouts could not be identified; accessible summaries may be rounded and cannot replace visible-state evidence.');
     requireTruth(values.some((_, i) => expected.every((n, j) => Math.abs(values[i+j] - n) < 0.011)), `Expected synchronous temperatures ${expected.join(', ')}; visible readouts: ${values.join(', ')}.`);
   }
   async function namedChoice(frame, expression) {
@@ -249,19 +264,27 @@ try {
       await button(frame, /重置|重新开始|Reset/i); heatRead(await state(frame, 'reset'), [100,0,0,0,0]);
       localCount = (await sends()).length;
     } else if (scenario === 'sales') {
-      await button(frame, /西部/);
+      const option = frame.getByRole('listbox').getByRole('option',{name:/西部/});
+      const grouped = frame.getByRole('group',{name:/选择地区|地区选择|select.*region|region.*selection/i}).getByRole('button',{name:/西部/});
+      const ordinary = frame.getByRole('button',{name:/西部/});
+      const isOption = await option.count()===1;
+      const selectedControl = isOption ? option : await grouped.count()===1 ? grouped : ordinary;
+      if(await selectedControl.count()!==1)throw new Inconclusive('Cannot identify one semantic region choice; inspect duplicated or nonsemantic controls.');
+      await selectedControl.click();
       const selected = await state(frame, 'selected-west',736,'light',true);
-      const selectedButton = frame.getByRole('button', {name:/西部/});
-      const pressed = await selectedButton.getAttribute('aria-pressed');
-      if (pressed !== 'true' && !/(?:已选|所选|选中)[^\n]{0,30}西部/.test(selected.text)) throw new Inconclusive('Selection appearance cannot be verified semantically; inspect selected-state screenshot.');
+      const selectedAttribute = await selectedControl.getAttribute(isOption?'aria-selected':'aria-pressed');
+      if(isOption) requireTruth(selectedAttribute==='true','The selected listbox option must expose aria-selected=true.');
+      else if (selectedAttribute !== 'true' && !/(?:已选|所选|选中)[^\n]{0,30}西部/.test(selected.text)) throw new Inconclusive('Selection appearance cannot be verified semantically; inspect selected-state screenshot.');
       localCount = (await sends()).length;
       await button(frame, /解释.*(?:所选|选中|地区)|Explain/i);
       const sent = await sends();
-      result.checks.followupPayload = check(sent.length === 1 && /西部/.test(sent[0]?.payload?.text || '') && /50\s*万/.test(sent[0]?.payload?.text || '') ? 'pass' : 'fail', 'Preview checks the emitted payload only; Host admission and model continuation remain separate.', {count:sent.length, payloads:sent.map(m=>m.payload?.text)});
+      const payloadText = sent[0]?.payload?.text || '';
+      const amounts = [...payloadText.matchAll(/(?<![\d.eE+-])([+-]?\d+(?:\.\d+)?)\s*万元/g)].map(match => Number(match[1]));
+      result.checks.followupPayload = check(sent.length === 1 && /西部/.test(payloadText) && amounts.includes(50) ? 'pass' : 'fail', 'Preview checks the emitted payload only; Host admission and model continuation remain separate.', {count:sent.length, payloads:sent.map(m=>m.payload?.text), amountsInTenThousandYuan:amounts});
       result.checks.hostFollowup = check('pending', 'Run this action in the real DSH conversation to verify Remote admission and the model response.');
       await state(frame,'explain-sent');
     } else if (scenario === 'quantity') {
-      const number = evidence => { const lines = evidence.text.split('\n').map(s=>s.trim()).filter(s=>/^\d+$/.test(s)); if(lines.length!==1)throw new Inconclusive('Quantity cannot be uniquely identified from visible readouts.'); return Number(lines[0]); };
+      const number = evidence => { const dedicated = [...new Set(evidence.numericReadouts)]; if(dedicated.length===1)return dedicated[0]; const lines = evidence.text.split('\n').map(s=>s.trim()).filter(s=>/^\d+$/.test(s)); if(lines.length!==1)throw new Inconclusive('Quantity cannot be uniquely identified from visible readouts.'); return Number(lines[0]); };
       requireTruth(number(initial) === 2, 'Initial quantity should be 2.');
       for(let i=0;i<3;i++)await button(frame,/增加|加一|Increase|Increment/i);
       requireTruth(number(await state(frame,'maximum',736,'light',true)) === 5, 'Maximum quantity should be 5.');
@@ -349,7 +372,8 @@ try {
     } else if (scenario === 'static') {
       const expected = task.browser?.expectedText || [];
       const text = initial.text + '\n' + initial.accessibleNames.join('\n');
-      const missing = expected.filter(label => !text.includes(label));
+      const normal = value=>value.replaceAll('−','-');
+      const missing = expected.filter(label => !normal(text).includes(normal(label)));
       result.checks.visibleLabels = check(!expected.length ? 'not_applicable' : missing.length ? 'pending' : 'pass', !expected.length ? 'No literal label oracle specified.' : missing.length ? 'Labels may be drawn rather than machine-readable; human inspection required.' : 'All requested literal labels are present in visible text or accessible names.', {expectedText:expected,missing});
       result.checks.content = check('pending', missing.length ? 'Some required labels were not machine-readable; inspect canvas/graphics and screenshots before grading.' : 'Required labels were observed; values, proportions and meaning still need content review.', {expectedText: expected, missing});
       result.checks.interaction = check('not_applicable','No automatic action sequence specified for this static inspection.');

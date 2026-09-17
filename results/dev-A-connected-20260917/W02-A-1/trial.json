@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 2,
+  "id": "W02-A-1",
+  "roundId": "dev-A-connected-20260917",
+  "caseId": "W02",
+  "arm": "A",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "在回复中做一个可交互热传导演示：一根杆离散成5个节点，两端固定为100°C和0°C，中间3个节点初始均为0°C。每步用上一时刻的温度同步更新，扩散系数取0.25。提供单步和重置，让我看每个节点的温度；明确这是离散示意。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "离散热传导：5 节点杆的单步演示",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/dev-A-connected-20260917/W02-A-1/widget-1.source.html",
+      "preview": "results/dev-A-connected-20260917/W02-A-1/widget-1.html",
+      "sha256": "3fc495ce937aaf0d66ad7170064a2ded318ae84071d651cf1a9bf806496eaad5",
+      "bytes": 10265
+    }
+  ],
+  "final": "上面的演示只是一个**离散示意**，不是连续杆的解析解：真实一根杆的温度是连续分布的，这里把它切成 5 个节点，只保留节点上的温度值，节点之间用差分近似扩散。\n\n**更新规则（同步更新）**\n\n对中间 3 个节点，每步都只读取**上一时刻**的邻居温度，一次性算出全部新值：\n\n$$T_i^{\\,n+1}=T_i^{\\,n}+\\alpha\\left(T_{i-1}^{\\,n}-2T_i^{\\,n}+T_{i+1}^{\\,n}\\right),\\qquad \\alpha=0.25$$\n\n- T1 = 100 °C、T5 = 0 °C 是固定边界，不参与更新；\n- T2、T3、T4 初始为 0 °C；\n- 系数 0.25 就是常说的 $r=\\alpha\\Delta t/\\Delta x^2$，低于 0.5 的稳定性上限，所以显式迭代稳定。\n\n**前几步手算结果**（点“单步”可逐格核对，灰色虚线是上一时刻，用来看清“同步”含义）\n\n| n | T2 | T3 | T4 |\n|---|---|---|---|\n| 0 | 0 | 0 | 0 |\n| 1 | 25 | 0 | 0 |\n| 2 | 37.50 | 6.25 | 0 |\n| 3 | 45.31 | 12.50 | 1.56 |\n\n对称地，热量从热端往冷端推进：T2 先动，T3 次之，T4 最慢。继续点“单步”，分布会越来越平缓，最终趋于线性稳定解 **75 / 50 / 25 °C**（继续加步数基本不变时，控制条下方会提示已接近稳定）。点“重置”回到全 0 的初始状态。\n\n注意两点离散化的含义：每个色块/圆点只代表一个节点的温度，色标是示意而非物理刻度；相邻节点之间的温度是插值画的直线，不代表杆上真有那么多测点。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_qCRcXE8MLRYJRJbcLhEE5703",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_uZZUQZtaTLbDEXETbesU1648",
+        "argumentsSha256": "7088902a91f03cb1993ee2b302ad21bbed2907f9cc8b6017d346740aea4f10ae",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_xHWWryfqQz4PjdHLKyxa7421",
+        "argumentsSha256": "ac4ca12955dc6a9c398135a34c7e4f5b531d70439709e4fb42156d455d85c34f",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_ZYIxwOLh0rEJi1cD2Nxb8793",
+        "argumentsSha256": "61cb0163dcbc78de02c75ba558b580e2a147df62c8fcbf8f094635654a0fcb6b",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "4bc68d1bb74895a8c147f056e9c8eac38c00ea6cc9960885dc5aad23b257c375"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "481cf1eeaf6abfab4a562ed854787b4fbdb756daeae17191741ddbb3e1135f64"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "cc986f86226b5b5ddfd6438b094436a5bcc8d8a05db70e978d1eecf6623f0804"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "dc3303da08f7eb7f7fc46b59b359cdfa0c954a45b2008468ba63e97670585668"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 20272,
+    "outputTokens": 13565,
+    "cacheReadTokens": 26624,
+    "cacheWriteTokens": 0,
+    "totalTokens": 60461
+  },
+  "elapsedSeconds": 70.149,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "2cecaae840e099fc53f81c781e108ffd265096dbdd87e8edc4a280484f24c3c7",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "b8a8616add98435344b6dee232b1c8ea036be0236af4854aae1d1bbf0bff4468",
+  "extractionCorrection": {
+    "kind": "visible-assistant-text-only",
+    "correctedAt": "2026-09-17T16:48:00.739Z",
+    "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+    "correctorSha256": "47a8c7617f9cc6fbdf2b33b085723fa5e02fb800caee20608c755c767c2c57b3",
+    "sourceSessionSha256": "b61122fb618ecacd7534d2a50b60c67856498da72b9514bce148b868d8c90d57",
+    "assistantSeqs": [
+      38
+    ],
+    "previousFinalSha256": "2cecaae840e099fc53f81c781e108ffd265096dbdd87e8edc4a280484f24c3c7",
+    "previousCorrection": {
+      "kind": "visible-assistant-text-only",
+      "correctedAt": "2026-09-17T16:40:33.705Z",
+      "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+      "correctorSha256": "ef5a06fbafdc4b1a7032c073d912b16cbfe2dda9caa634ef3465a6deceb96ed3",
+      "sourceSessionSha256": "b61122fb618ecacd7534d2a50b60c67856498da72b9514bce148b868d8c90d57",
+      "assistantSeq": 38,
+      "previousFinalSha256": "5424c1bc50f220650bc7d7ec65d8e192dcb4caf2d245bd9fde511542142c71d1",
+      "finalChanged": true,
+      "reason": "Final replies include only text blocks. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+    },
+    "finalChanged": false,
+    "reason": "All visible assistant text blocks are included in chronological order. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+  }
+}

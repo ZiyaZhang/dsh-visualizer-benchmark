@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W02-A-2",
+  "caseId": "W02",
+  "scenario": "heat",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-A-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:08.334Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1",
+          "step-2",
+          "reset"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "step-2-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "step-2-736-light.png",
+      "state": "step-2",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "一维热传导 · 离散 5 节点示意\n离散示意，不是连续解\nTin+1 = Tin + α · (Ti+1n − 2Tin + Ti−1n)　　内节点 i = 1, 2, 3　α = 0.25　（显式格式稳定：α ≤ 0.5）\n100.0\n0.0\n0.0\n0.0\n0.0\ni = 0\ni = 1\ni = 2\ni = 3\ni = 4\n固定 100 °C\n待求\n待求\n待求\n固定 0 °C\n0 °C\n100 °C\n颜色只辅助表示温度高低\n各节点温度 (°C)\n上一步：— （初始状态）\ni=0 · 固定\n100.00°C\ni=1 · 待求\n0.00°C\ni=2 · 待求\n0.00°C\ni=3 · 待求\n0.00°C\ni=4 · 固定\n0.00°C\n单步 →\n重置\nn = 0 · 初始状态\n\n离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用上一时刻 n 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。\n100.0 0.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C",
+      "temperature": [
+        0,
+        100,
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 525,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {},
+          "at": 53.5
+        },
+        {
+          "type": "rendered",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {},
+          "at": 83.5
+        },
+        {
+          "type": "resize",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {
+            "height": 525
+          },
+          "at": 83.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 一维热传导 · 离散 5 节点示意 离散示意，不是连续解 T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + α · (T\n- subscript: i+1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i−1\n- superscript: \"n\"\n- text: ) 内节点 i = 1, 2, 3 α = 0.25 （显式格式稳定：α ≤ 0.5）\n- img \"一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。\": 100.0 0.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C\n- text: 0 °C 100 °C 颜色只辅助表示温度高低 各节点温度 (°C) 上一步：— （初始状态） i=0 · 固定 100.00°C i=1 · 待求 0.00°C i=2 · 待求 0.00°C i=3 · 待求 0.00°C i=4 · 固定 0.00°C\n- button \"单步 →\"\n- button \"重置\"\n- text: n = 0 · 初始状态\n- paragraph:\n  - text: 离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用\n  - strong: 上一时刻 n\n  - text: 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。"
+    },
+    {
+      "text": "一维热传导 · 离散 5 节点示意\n离散示意，不是连续解\nTin+1 = Tin + α · (Ti+1n − 2Tin + Ti−1n)　　内节点 i = 1, 2, 3　α = 0.25　（显式格式稳定：α ≤ 0.5）\n100.0\n25.0\n0.0\n0.0\n0.0\ni = 0\ni = 1\ni = 2\ni = 3\ni = 4\n固定 100 °C\n待求\n待求\n待求\n固定 0 °C\n0 °C\n100 °C\n颜色只辅助表示温度高低\n各节点温度 (°C)\n上一步 (n=0)：100.00 | 0.00 | 0.00 | 0.00 | 0.00\ni=0 · 固定\n100.00°C\ni=1 · 待求\n25.00°C\ni=2 · 待求\n0.00°C\ni=3 · 待求\n0.00°C\ni=4 · 固定\n0.00°C\n单步 →\n重置\nn = 1 · 第 1 步完成\n\n离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用上一时刻 n 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。\n100.0 25.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C",
+      "temperature": [
+        0,
+        100,
+        100,
+        25,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 525,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {},
+          "at": 53.5
+        },
+        {
+          "type": "rendered",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {},
+          "at": 83.5
+        },
+        {
+          "type": "resize",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {
+            "height": 525
+          },
+          "at": 83.59999990463257
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 一维热传导 · 离散 5 节点示意 离散示意，不是连续解 T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + α · (T\n- subscript: i+1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i−1\n- superscript: \"n\"\n- text: ) 内节点 i = 1, 2, 3 α = 0.25 （显式格式稳定：α ≤ 0.5）\n- img \"一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。\": 100.0 25.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C\n- text: 0 °C 100 °C 颜色只辅助表示温度高低 各节点温度 (°C) 上一步 (n=0)：100.00 | 0.00 | 0.00 | 0.00 | 0.00 i=0 · 固定 100.00°C i=1 · 待求 25.00°C i=2 · 待求 0.00°C i=3 · 待求 0.00°C i=4 · 固定 0.00°C\n- button \"单步 →\"\n- button \"重置\"\n- text: n = 1 · 第 1 步完成\n- paragraph:\n  - text: 离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用\n  - strong: 上一时刻 n\n  - text: 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。"
+    },
+    {
+      "text": "一维热传导 · 离散 5 节点示意\n离散示意，不是连续解\nTin+1 = Tin + α · (Ti+1n − 2Tin + Ti−1n)　　内节点 i = 1, 2, 3　α = 0.25　（显式格式稳定：α ≤ 0.5）\n100.0\n37.5\n6.3\n0.0\n0.0\ni = 0\ni = 1\ni = 2\ni = 3\ni = 4\n固定 100 °C\n待求\n待求\n待求\n固定 0 °C\n0 °C\n100 °C\n颜色只辅助表示温度高低\n各节点温度 (°C)\n上一步 (n=1)：100.00 | 25.00 | 0.00 | 0.00 | 0.00\ni=0 · 固定\n100.00°C\ni=1 · 待求\n37.50°C\ni=2 · 待求\n6.25°C\ni=3 · 待求\n0.00°C\ni=4 · 固定\n0.00°C\n单步 →\n重置\nn = 2 · 第 2 步完成\n\n离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用上一时刻 n 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。\n100.0 37.5 6.3 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C",
+      "temperature": [
+        0,
+        100,
+        100,
+        37.5,
+        6.25,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 525,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {},
+          "at": 53.5
+        },
+        {
+          "type": "rendered",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {},
+          "at": 83.5
+        },
+        {
+          "type": "resize",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {
+            "height": 525
+          },
+          "at": 83.59999990463257
+        }
+      ],
+      "name": "step-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 一维热传导 · 离散 5 节点示意 离散示意，不是连续解 T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + α · (T\n- subscript: i+1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i−1\n- superscript: \"n\"\n- text: ) 内节点 i = 1, 2, 3 α = 0.25 （显式格式稳定：α ≤ 0.5）\n- img \"一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。\": 100.0 37.5 6.3 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C\n- text: 0 °C 100 °C 颜色只辅助表示温度高低 各节点温度 (°C) 上一步 (n=1)：100.00 | 25.00 | 0.00 | 0.00 | 0.00 i=0 · 固定 100.00°C i=1 · 待求 37.50°C i=2 · 待求 6.25°C i=3 · 待求 0.00°C i=4 · 固定 0.00°C\n- button \"单步 →\"\n- button \"重置\"\n- text: n = 2 · 第 2 步完成\n- paragraph:\n  - text: 离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用\n  - strong: 上一时刻 n\n  - text: 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。"
+    },
+    {
+      "text": "一维热传导 · 离散 5 节点示意\n离散示意，不是连续解\nTin+1 = Tin + α · (Ti+1n − 2Tin + Ti−1n)　　内节点 i = 1, 2, 3　α = 0.25　（显式格式稳定：α ≤ 0.5）\n100.0\n0.0\n0.0\n0.0\n0.0\ni = 0\ni = 1\ni = 2\ni = 3\ni = 4\n固定 100 °C\n待求\n待求\n待求\n固定 0 °C\n0 °C\n100 °C\n颜色只辅助表示温度高低\n各节点温度 (°C)\n上一步：— （初始状态）\ni=0 · 固定\n100.00°C\ni=1 · 待求\n0.00°C\ni=2 · 待求\n0.00°C\ni=3 · 待求\n0.00°C\ni=4 · 固定\n0.00°C\n单步 →\n重置\nn = 0 · 初始状态\n\n离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用上一时刻 n 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。\n100.0 0.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C",
+      "temperature": [
+        0,
+        100,
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 525,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {},
+          "at": 53.5
+        },
+        {
+          "type": "rendered",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {},
+          "at": 83.5
+        },
+        {
+          "type": "resize",
+          "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+          "payload": {
+            "height": 525
+          },
+          "at": 83.59999990463257
+        }
+      ],
+      "name": "reset",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 一维热传导 · 离散 5 节点示意 离散示意，不是连续解 T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + α · (T\n- subscript: i+1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i−1\n- superscript: \"n\"\n- text: ) 内节点 i = 1, 2, 3 α = 0.25 （显式格式稳定：α ≤ 0.5）\n- img \"一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。\": 100.0 0.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C\n- text: 0 °C 100 °C 颜色只辅助表示温度高低 各节点温度 (°C) 上一步：— （初始状态） i=0 · 固定 100.00°C i=1 · 待求 0.00°C i=2 · 待求 0.00°C i=3 · 待求 0.00°C i=4 · 固定 0.00°C\n- button \"单步 →\"\n- button \"重置\"\n- text: n = 0 · 初始状态\n- paragraph:\n  - text: 离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用\n  - strong: 上一时刻 n\n  - text: 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。"
+    },
+    {
+      "text": "一维热传导 · 离散 5 节点示意\n离散示意，不是连续解\nTin+1 = Tin + α · (Ti+1n − 2Tin + Ti−1n)　　内节点 i = 1, 2, 3　α = 0.25　（显式格式稳定：α ≤ 0.5）\n100.0\n0.0\n0.0\n0.0\n0.0\ni = 0\ni = 1\ni = 2\ni = 3\ni = 4\n固定 100 °C\n待求\n待求\n待求\n固定 0 °C\n0 °C\n100 °C\n颜色只辅助表示温度高低\n各节点温度 (°C)\n上一步：— （初始状态）\ni=0 · 固定\n100.00°C\ni=1 · 待求\n0.00°C\ni=2 · 待求\n0.00°C\ni=3 · 待求\n0.00°C\ni=4 · 固定\n0.00°C\n单步 →\n重置\nn = 0 · 初始状态\n\n离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用上一时刻 n 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。\n100.0 0.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C",
+      "temperature": [
+        0,
+        100,
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 576,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "ef8b5655d6085576416813c498096456",
+          "payload": {},
+          "at": 296.39999985694885
+        },
+        {
+          "type": "rendered",
+          "channel": "ef8b5655d6085576416813c498096456",
+          "payload": {},
+          "at": 300.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "ef8b5655d6085576416813c498096456",
+          "payload": {
+            "height": 576
+          },
+          "at": 300.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 一维热传导 · 离散 5 节点示意 离散示意，不是连续解 T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + α · (T\n- subscript: i+1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i−1\n- superscript: \"n\"\n- text: ) 内节点 i = 1, 2, 3 α = 0.25 （显式格式稳定：α ≤ 0.5）\n- img \"一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。\": 100.0 0.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C\n- text: 0 °C 100 °C 颜色只辅助表示温度高低 各节点温度 (°C) 上一步：— （初始状态） i=0 · 固定 100.00°C i=1 · 待求 0.00°C i=2 · 待求 0.00°C i=3 · 待求 0.00°C i=4 · 固定 0.00°C\n- button \"单步 →\"\n- button \"重置\"\n- text: n = 0 · 初始状态\n- paragraph:\n  - text: 离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用\n  - strong: 上一时刻 n\n  - text: 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。"
+    },
+    {
+      "text": "一维热传导 · 离散 5 节点示意\n离散示意，不是连续解\nTin+1 = Tin + α · (Ti+1n − 2Tin + Ti−1n)　　内节点 i = 1, 2, 3　α = 0.25　（显式格式稳定：α ≤ 0.5）\n100.0\n0.0\n0.0\n0.0\n0.0\ni = 0\ni = 1\ni = 2\ni = 3\ni = 4\n固定 100 °C\n待求\n待求\n待求\n固定 0 °C\n0 °C\n100 °C\n颜色只辅助表示温度高低\n各节点温度 (°C)\n上一步：— （初始状态）\ni=0 · 固定\n100.00°C\ni=1 · 待求\n0.00°C\ni=2 · 待求\n0.00°C\ni=3 · 待求\n0.00°C\ni=4 · 固定\n0.00°C\n单步 →\n重置\nn = 0 · 初始状态\n\n离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用上一时刻 n 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。\n100.0 0.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C",
+      "temperature": [
+        0,
+        100,
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 525,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "54f04aea08e985374e822be536f42096",
+          "payload": {},
+          "at": 361.2999999523163
+        },
+        {
+          "type": "rendered",
+          "channel": "54f04aea08e985374e822be536f42096",
+          "payload": {},
+          "at": 366.89999985694885
+        },
+        {
+          "type": "resize",
+          "channel": "54f04aea08e985374e822be536f42096",
+          "payload": {
+            "height": 525
+          },
+          "at": 366.89999985694885
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 一维热传导 · 离散 5 节点示意 离散示意，不是连续解 T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + α · (T\n- subscript: i+1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i−1\n- superscript: \"n\"\n- text: ) 内节点 i = 1, 2, 3 α = 0.25 （显式格式稳定：α ≤ 0.5）\n- img \"一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。\": 100.0 0.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C\n- text: 0 °C 100 °C 颜色只辅助表示温度高低 各节点温度 (°C) 上一步：— （初始状态） i=0 · 固定 100.00°C i=1 · 待求 0.00°C i=2 · 待求 0.00°C i=3 · 待求 0.00°C i=4 · 固定 0.00°C\n- button \"单步 →\"\n- button \"重置\"\n- text: n = 0 · 初始状态\n- paragraph:\n  - text: 离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用\n  - strong: 上一时刻 n\n  - text: 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。"
+    },
+    {
+      "text": "一维热传导 · 离散 5 节点示意\n离散示意，不是连续解\nTin+1 = Tin + α · (Ti+1n − 2Tin + Ti−1n)　　内节点 i = 1, 2, 3　α = 0.25　（显式格式稳定：α ≤ 0.5）\n100.0\n0.0\n0.0\n0.0\n0.0\ni = 0\ni = 1\ni = 2\ni = 3\ni = 4\n固定 100 °C\n待求\n待求\n待求\n固定 0 °C\n0 °C\n100 °C\n颜色只辅助表示温度高低\n各节点温度 (°C)\n上一步：— （初始状态）\ni=0 · 固定\n100.00°C\ni=1 · 待求\n0.00°C\ni=2 · 待求\n0.00°C\ni=3 · 待求\n0.00°C\ni=4 · 固定\n0.00°C\n单步 →\n重置\nn = 0 · 初始状态\n\n离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用上一时刻 n 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。\n100.0 0.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C",
+      "temperature": [
+        0,
+        100,
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 576,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "bc657d1d264e04eb6298718c77ea6029",
+          "payload": {},
+          "at": 436.5
+        },
+        {
+          "type": "rendered",
+          "channel": "bc657d1d264e04eb6298718c77ea6029",
+          "payload": {},
+          "at": 436.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "bc657d1d264e04eb6298718c77ea6029",
+          "payload": {
+            "height": 576
+          },
+          "at": 436.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 一维热传导 · 离散 5 节点示意 离散示意，不是连续解 T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + α · (T\n- subscript: i+1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i−1\n- superscript: \"n\"\n- text: ) 内节点 i = 1, 2, 3 α = 0.25 （显式格式稳定：α ≤ 0.5）\n- img \"一根杆被离散成 5 个节点的示意：节点 0 固定在 100 摄氏度，节点 4 固定在 0 摄氏度，节点 1 到 3 的温度每步同步更新。\": 100.0 0.0 0.0 0.0 0.0 i = 0 i = 1 i = 2 i = 3 i = 4 固定 100 °C 待求 待求 待求 固定 0 °C\n- text: 0 °C 100 °C 颜色只辅助表示温度高低 各节点温度 (°C) 上一步：— （初始状态） i=0 · 固定 100.00°C i=1 · 待求 0.00°C i=2 · 待求 0.00°C i=3 · 待求 0.00°C i=4 · 固定 0.00°C\n- button \"单步 →\"\n- button \"重置\"\n- text: n = 0 · 初始状态\n- paragraph:\n  - text: 离散示意：杆只取 5 个节点，节点之间没有连续温度值。每按一次「单步」，3 个内节点全部用\n  - strong: 上一时刻 n\n  - text: 的温度同时算出 n+1 时刻（同步 / Jacobi 更新），两端始终保持 100 °C 与 0 °C。取 α = 0.25 满足显式格式稳定条件 α ≤ 0.5，所以不会出现振荡。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+      "payload": {},
+      "at": 53.5
+    },
+    {
+      "type": "rendered",
+      "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+      "payload": {},
+      "at": 83.5
+    },
+    {
+      "type": "resize",
+      "channel": "4818e7c0528e7c8864c7a1ca3ddeaae4",
+      "payload": {
+        "height": 525
+      },
+      "at": 83.59999990463257
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "de5db14d72e075ec71632a38c45b24e74fb9cda7fdef980f2de643bd25e69b0f",
+  "previewSha256": "2c226e8cd60320c39a05c76ddbf587cf970ac0377ff321571b7bf638dd511ccd",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

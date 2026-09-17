@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W02-B-1",
+  "caseId": "W02",
+  "scenario": "heat",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:04.901Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1",
+          "step-2",
+          "reset"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "step-2-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": [
+          {
+            "type": "accessible-temperature-difference",
+            "state": "step-2",
+            "visible": [
+              100,
+              37.5,
+              6.25,
+              0,
+              0
+            ],
+            "accessible": [
+              100,
+              37.5,
+              6.3,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "step-2-736-light.png",
+      "state": "step-2",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "节点1 · x=0\n100.00\n固定\n节点2 · x=1\n0.00\n内部\n节点3 · x=2\n0.00\n内部\n节点4 · x=3\n0.00\n内部\n节点5 · x=4\n0.00\n固定\n°C\n100\n50\n0\n1\n2\n3\n4\n5\n单步更新\n重置\n第 0 步\n上一时刻（本次更新所用）：—\n°C 100 50 0 1 2 3 4 5",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 502,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "5节点杆离散温度示意：节点1 100.0摄氏度，节点2 0.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {},
+          "at": 57.09999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {},
+          "at": 79.5
+        },
+        {
+          "type": "resize",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {
+            "height": 502
+          },
+          "at": 79.5
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- img \"5节点杆离散温度示意：节点1 100.0摄氏度，节点2 0.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度\": 节点1 · x=0 100.00 固定 节点2 · x=1 0.00 内部 节点3 · x=2 0.00 内部 节点4 · x=3 0.00 内部 节点5 · x=4 0.00 固定\n- img \"5个节点上的离散温度分布，纵轴温度0至100摄氏度，虚线为两端固定温度连成的最终稳态直线\": °C 100 50 0 1 2 3 4 5\n- button \"单步更新\"\n- button \"重置\"\n- text: 第 0 步 上一时刻（本次更新所用）：—",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "temperatureAccessibleValues": [
+        100,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "节点1 · x=0\n100.00\n固定\n节点2 · x=1\n25.00\n内部\n节点3 · x=2\n0.00\n内部\n节点4 · x=3\n0.00\n内部\n节点5 · x=4\n0.00\n固定\n°C\n100\n50\n0\n1\n2\n3\n4\n5\n单步更新\n重置\n第 1 步\n上一时刻（本次更新所用）：100.00 / 0.00 / 0.00 / 0.00 / 0.00\n°C 100 50 0 1 2 3 4 5",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 502,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "5节点杆离散温度示意：节点1 100.0摄氏度，节点2 25.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {},
+          "at": 57.09999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {},
+          "at": 79.5
+        },
+        {
+          "type": "resize",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {
+            "height": 502
+          },
+          "at": 79.5
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- img \"5节点杆离散温度示意：节点1 100.0摄氏度，节点2 25.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度\": 节点1 · x=0 100.00 固定 节点2 · x=1 25.00 内部 节点3 · x=2 0.00 内部 节点4 · x=3 0.00 内部 节点5 · x=4 0.00 固定\n- img \"5个节点上的离散温度分布，纵轴温度0至100摄氏度，虚线为两端固定温度连成的最终稳态直线\": °C 100 50 0 1 2 3 4 5\n- button \"单步更新\"\n- button \"重置\"\n- text: 第 1 步 上一时刻（本次更新所用）：100.00 / 0.00 / 0.00 / 0.00 / 0.00",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        25,
+        0,
+        0,
+        0
+      ],
+      "temperatureAccessibleValues": [
+        100,
+        25,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "节点1 · x=0\n100.00\n固定\n节点2 · x=1\n37.50\n内部\n节点3 · x=2\n6.25\n内部\n节点4 · x=3\n0.00\n内部\n节点5 · x=4\n0.00\n固定\n°C\n100\n50\n0\n1\n2\n3\n4\n5\n单步更新\n重置\n第 2 步\n上一时刻（本次更新所用）：100.00 / 25.00 / 0.00 / 0.00 / 0.00\n°C 100 50 0 1 2 3 4 5",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 502,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "5节点杆离散温度示意：节点1 100.0摄氏度，节点2 37.5摄氏度，节点3 6.3摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {},
+          "at": 57.09999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {},
+          "at": 79.5
+        },
+        {
+          "type": "resize",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {
+            "height": 502
+          },
+          "at": 79.5
+        }
+      ],
+      "name": "step-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- img \"5节点杆离散温度示意：节点1 100.0摄氏度，节点2 37.5摄氏度，节点3 6.3摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度\": 节点1 · x=0 100.00 固定 节点2 · x=1 37.50 内部 节点3 · x=2 6.25 内部 节点4 · x=3 0.00 内部 节点5 · x=4 0.00 固定\n- img \"5个节点上的离散温度分布，纵轴温度0至100摄氏度，虚线为两端固定温度连成的最终稳态直线\": °C 100 50 0 1 2 3 4 5\n- button \"单步更新\"\n- button \"重置\"\n- text: 第 2 步 上一时刻（本次更新所用）：100.00 / 25.00 / 0.00 / 0.00 / 0.00",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        37.5,
+        6.25,
+        0,
+        0
+      ],
+      "temperatureAccessibleValues": [
+        100,
+        37.5,
+        6.3,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "节点1 · x=0\n100.00\n固定\n节点2 · x=1\n0.00\n内部\n节点3 · x=2\n0.00\n内部\n节点4 · x=3\n0.00\n内部\n节点5 · x=4\n0.00\n固定\n°C\n100\n50\n0\n1\n2\n3\n4\n5\n单步更新\n重置\n第 0 步\n上一时刻（本次更新所用）：—\n°C 100 50 0 1 2 3 4 5",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 502,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "5节点杆离散温度示意：节点1 100.0摄氏度，节点2 0.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {},
+          "at": 57.09999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {},
+          "at": 79.5
+        },
+        {
+          "type": "resize",
+          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "payload": {
+            "height": 502
+          },
+          "at": 79.5
+        }
+      ],
+      "name": "reset",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- img \"5节点杆离散温度示意：节点1 100.0摄氏度，节点2 0.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度\": 节点1 · x=0 100.00 固定 节点2 · x=1 0.00 内部 节点3 · x=2 0.00 内部 节点4 · x=3 0.00 内部 节点5 · x=4 0.00 固定\n- img \"5个节点上的离散温度分布，纵轴温度0至100摄氏度，虚线为两端固定温度连成的最终稳态直线\": °C 100 50 0 1 2 3 4 5\n- button \"单步更新\"\n- button \"重置\"\n- text: 第 0 步 上一时刻（本次更新所用）：—",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "temperatureAccessibleValues": [
+        100,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "节点1 · x=0\n100.00\n固定\n节点2 · x=1\n0.00\n内部\n节点3 · x=2\n0.00\n内部\n节点4 · x=3\n0.00\n内部\n节点5 · x=4\n0.00\n固定\n°C\n100\n50\n0\n1\n2\n3\n4\n5\n单步更新\n重置\n第 0 步\n上一时刻（本次更新所用）：—\n°C 100 50 0 1 2 3 4 5",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 336,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "5节点杆离散温度示意：节点1 100.0摄氏度，节点2 0.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "e338f8fdbf5679f1ee941a9aa3f00704",
+          "payload": {},
+          "at": 267.7000000476837
+        },
+        {
+          "type": "rendered",
+          "channel": "e338f8fdbf5679f1ee941a9aa3f00704",
+          "payload": {},
+          "at": 276.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "e338f8fdbf5679f1ee941a9aa3f00704",
+          "payload": {
+            "height": 336
+          },
+          "at": 276.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- img \"5节点杆离散温度示意：节点1 100.0摄氏度，节点2 0.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度\": 节点1 · x=0 100.00 固定 节点2 · x=1 0.00 内部 节点3 · x=2 0.00 内部 节点4 · x=3 0.00 内部 节点5 · x=4 0.00 固定\n- img \"5个节点上的离散温度分布，纵轴温度0至100摄氏度，虚线为两端固定温度连成的最终稳态直线\": °C 100 50 0 1 2 3 4 5\n- button \"单步更新\"\n- button \"重置\"\n- text: 第 0 步 上一时刻（本次更新所用）：—"
+    },
+    {
+      "text": "节点1 · x=0\n100.00\n固定\n节点2 · x=1\n0.00\n内部\n节点3 · x=2\n0.00\n内部\n节点4 · x=3\n0.00\n内部\n节点5 · x=4\n0.00\n固定\n°C\n100\n50\n0\n1\n2\n3\n4\n5\n单步更新\n重置\n第 0 步\n上一时刻（本次更新所用）：—\n°C 100 50 0 1 2 3 4 5",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 502,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "5节点杆离散温度示意：节点1 100.0摄氏度，节点2 0.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "c022d5b9d2aae364d1692ec7bfff4b74",
+          "payload": {},
+          "at": 343.59999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "c022d5b9d2aae364d1692ec7bfff4b74",
+          "payload": {},
+          "at": 351.09999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "c022d5b9d2aae364d1692ec7bfff4b74",
+          "payload": {
+            "height": 502
+          },
+          "at": 351.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- img \"5节点杆离散温度示意：节点1 100.0摄氏度，节点2 0.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度\": 节点1 · x=0 100.00 固定 节点2 · x=1 0.00 内部 节点3 · x=2 0.00 内部 节点4 · x=3 0.00 内部 节点5 · x=4 0.00 固定\n- img \"5个节点上的离散温度分布，纵轴温度0至100摄氏度，虚线为两端固定温度连成的最终稳态直线\": °C 100 50 0 1 2 3 4 5\n- button \"单步更新\"\n- button \"重置\"\n- text: 第 0 步 上一时刻（本次更新所用）：—"
+    },
+    {
+      "text": "节点1 · x=0\n100.00\n固定\n节点2 · x=1\n0.00\n内部\n节点3 · x=2\n0.00\n内部\n节点4 · x=3\n0.00\n内部\n节点5 · x=4\n0.00\n固定\n°C\n100\n50\n0\n1\n2\n3\n4\n5\n单步更新\n重置\n第 0 步\n上一时刻（本次更新所用）：—\n°C 100 50 0 1 2 3 4 5",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 336,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "5节点杆离散温度示意：节点1 100.0摄氏度，节点2 0.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "3e21b2d28e99ad8a2dc7df9e9be9d51a",
+          "payload": {},
+          "at": 413.09999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "3e21b2d28e99ad8a2dc7df9e9be9d51a",
+          "payload": {},
+          "at": 418.2999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "3e21b2d28e99ad8a2dc7df9e9be9d51a",
+          "payload": {
+            "height": 336
+          },
+          "at": 418.40000009536743
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- img \"5节点杆离散温度示意：节点1 100.0摄氏度，节点2 0.0摄氏度，节点3 0.0摄氏度，节点4 0.0摄氏度，节点5 0.0摄氏度\": 节点1 · x=0 100.00 固定 节点2 · x=1 0.00 内部 节点3 · x=2 0.00 内部 节点4 · x=3 0.00 内部 节点5 · x=4 0.00 固定\n- img \"5个节点上的离散温度分布，纵轴温度0至100摄氏度，虚线为两端固定温度连成的最终稳态直线\": °C 100 50 0 1 2 3 4 5\n- button \"单步更新\"\n- button \"重置\"\n- text: 第 0 步 上一时刻（本次更新所用）：—"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+      "payload": {},
+      "at": 57.09999990463257
+    },
+    {
+      "type": "rendered",
+      "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+      "payload": {},
+      "at": 79.5
+    },
+    {
+      "type": "resize",
+      "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+      "payload": {
+        "height": 502
+      },
+      "at": 79.5
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [
+    {
+      "type": "accessible-temperature-difference",
+      "state": "step-2",
+      "visible": [
+        100,
+        37.5,
+        6.25,
+        0,
+        0
+      ],
+      "accessible": [
+        100,
+        37.5,
+        6.3,
+        0,
+        0
+      ]
+    }
+  ],
+  "sourceSha256": "1dc0f79a96aa476f8d111104b5c8fb6de4cd5b0b6207cd930131f68bff5986ed",
+  "previewSha256": "e028f392de47d339f355744ff12a9906c6938d7a778dba9e94f9e5b948232b6c",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

@@ -1,0 +1,216 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+  .rs-root{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--dsw-alias-label-primary);background:var(--dsw-alias-bg-base);border:1px solid var(--dsw-alias-border-l1);border-radius:12px;padding:14px 16px 16px;max-width:560px;box-sizing:border-box}
+  .rs-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;margin-bottom:10px}
+  .rs-title{font-size:14px;font-weight:600}
+  .rs-unit{font-size:12px;color:var(--dsw-alias-label-tertiary)}
+  .rs-chart{display:block;width:100%;height:auto}
+  .rs-row{cursor:pointer;outline:none}
+  .rs-bar{fill:var(--dsw-alias-brand-primary);opacity:.45;transition:opacity .18s ease}
+  .rs-row:hover .rs-bar{opacity:.7}
+  .rs-row:focus-visible .rs-bar{stroke:var(--dsw-alias-brand-primary);stroke-width:2}
+  .rs-row.is-selected .rs-bar{opacity:1}
+  .rs-name{font-size:12.5px;fill:var(--dsw-alias-label-primary)}
+  .rs-val{font-size:12.5px;fill:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums}
+  .rs-row.is-selected .rs-name{font-weight:700}
+  .rs-row.is-selected .rs-val{fill:var(--dsw-alias-label-primary);font-weight:700}
+  .rs-baseline{stroke:var(--dsw-alias-border-l2);stroke-width:1}
+  .rs-readout{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--dsw-alias-border-l1);min-height:24px}
+  .rs-readout-label{font-size:12px;color:var(--dsw-alias-label-tertiary)}
+  .rs-readout-value{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+  .rs-hint{font-size:12px;color:var(--dsw-alias-label-tertiary)}
+  .rs-actions{margin-top:12px}
+  .rs-ask{font:inherit;font-size:13px;font-weight:600;padding:8px 14px;border-radius:8px;border:1px solid transparent;background:var(--dsw-alias-button-primary-fill);color:var(--dsw-alias-label-primary-inverted);cursor:pointer}
+  .rs-ask:disabled{opacity:.45;cursor:not-allowed}
+  .rs-ask:not(:disabled):hover{filter:brightness(1.06)}
+  @media (max-width:420px){.rs-chart .rs-val{display:none}}
+</style>
+
+<div class="rs-root">
+  <div class="rs-head">
+    <span class="rs-title">地区销售对比</span>
+    <span class="rs-unit">单位：万元</span>
+  </div>
+
+  <svg class="rs-chart" viewBox="0 0 460 150" role="listbox" aria-label="地区销售额，点击选择地区（单位：万元）">
+    <line class="rs-baseline" x1="76" y1="128" x2="436" y2="128"></line>
+
+    <g class="rs-row" id="row-east" data-key="east" role="option" tabindex="0" aria-selected="false">
+      <title>华东：120万元</title>
+      <text class="rs-name" x="0" y="28">华东</text>
+      <rect class="rs-bar" x="76" y="14" width="216" height="20" rx="4"></rect>
+      <text class="rs-val" x="300" y="28">120</text>
+    </g>
+
+    <g class="rs-row" id="row-south" data-key="south" role="option" tabindex="0" aria-selected="false">
+      <title>华南：80万元</title>
+      <text class="rs-name" x="0" y="72">华南</text>
+      <rect class="rs-bar" x="76" y="58" width="144" height="20" rx="4"></rect>
+      <text class="rs-val" x="228" y="72">80</text>
+    </g>
+
+    <g class="rs-row" id="row-west" data-key="west" role="option" tabindex="0" aria-selected="false">
+      <title>西部：50万元</title>
+      <text class="rs-name" x="0" y="116">西部</text>
+      <rect class="rs-bar" x="76" y="102" width="90" height="20" rx="4"></rect>
+      <text class="rs-val" x="174" y="116">50</text>
+    </g>
+  </svg>
+
+  <div class="rs-readout" id="readout" aria-live="polite">
+    <span class="rs-readout-label">当前所选</span>
+    <span class="rs-readout-value" id="readout-value">—</span>
+    <span class="rs-hint" id="readout-hint">点击柱条选择地区（仅本地选中）</span>
+  </div>
+
+  <div class="rs-actions">
+    <button class="rs-ask" id="ask" type="button" disabled>解释所选地区</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var REGIONS = {
+    east: { label: '华东', value: 120 },
+    south: { label: '华南', value: 80 },
+    west: { label: '西部', value: 50 }
+  };
+  var state = { selected: null };
+  var rowEls = Array.prototype.slice.call(document.querySelectorAll('.rs-row'));
+  var readoutValue = document.getElementById('readout-value');
+  var readoutHint = document.getElementById('readout-hint');
+  var askButton = document.getElementById('ask');
+
+  function render() {
+    rowEls.forEach(function (row) {
+      var isSelected = state.selected === row.getAttribute('data-key');
+      row.classList.toggle('is-selected', isSelected);
+      row.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+    });
+    if (state.selected) {
+      var region = REGIONS[state.selected];
+      readoutValue.textContent = region.label + ' · ' + region.value + ' 万元（本地选中）';
+      readoutHint.textContent = '点击下方按钮可向模型追问解释';
+      askButton.disabled = false;
+    } else {
+      readoutValue.textContent = '—';
+      readoutHint.textContent = '点击柱条选择地区（仅本地选中）';
+      askButton.disabled = true;
+    }
+  }
+
+  function select(key) {
+    state.selected = state.selected === key ? null : key;
+    render();
+  }
+
+  rowEls.forEach(function (row) {
+    var key = row.getAttribute('data-key');
+    row.addEventListener('click', function () { select(key); });
+    row.addEventListener('keydown', function (event) {
+      if (event.key === ' ' || event.key === 'Spacebar') {
+        event.preventDefault();
+        select(key);
+      }
+    });
+  });
+
+  askButton.addEventListener('click', function () {
+    if (!state.selected) { return; }
+    var region = REGIONS[state.selected];
+    var prompt = '请解释所选地区：' + region.label + '，销售额 ' + region.value +
+      ' 万元。请结合已给出的三地区数据（华东 120 万元、华南 80 万元、西部 50 万元）' +
+      '说明该地区在整体销售结构中的位置、与最高/最低地区的差距，以及可能的原因与建议。';
+    if (window.dshWidget && typeof window.dshWidget.sendPrompt === 'function') {
+      window.dshWidget.sendPrompt(prompt);
+    }
+  });
+
+  render();
+})();
+</script></body></html>

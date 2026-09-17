@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 2,
+  "id": "W03-B-1",
+  "roundId": "dev-B-connected-20260917",
+  "caseId": "W03",
+  "arm": "B",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "在这条回复里用一张静态图展示每月净新增用户：1月120人、2月0人、3月数据缺失、4月-30人、5月80人。我要直接看清月份间的比较，以及0、缺失和负数的区别。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "每月净新增用户（1–5月）",
+      "kind": "svg",
+      "callSeq": 41,
+      "resultSeq": 42,
+      "replace": null,
+      "source": "results/dev-B-connected-20260917/W03-B-1/widget-1.source.html",
+      "preview": "results/dev-B-connected-20260917/W03-B-1/widget-1.html",
+      "sha256": "cb7d51acf3b5473e788e0fb0de7cfa2c5b9c767e3f0e517065ec538b1587d66e",
+      "bytes": 4817
+    }
+  ],
+  "final": "上图把三种情况在同一个尺度上分开了：\n\n- **1月 +120**、**5月 +80** 是实心柱，位于 0 线以上，谁的柱子高一眼可辨（120 是 80 的 1.5 倍）。\n- **2月 0**：不是没有柱子，而是 0 线上一个圆点加“0”标注——明确表示“有数据，只是净变化为零”。\n- **3月数据缺失**：用虚线斜纹框（不是柱子），配“?”和“—”，表示没有任何数值，因此不能当成 0 参与比较。\n- **4月 −30**：柱子在 0 线以下、红色，表示净流失。\n\n读法上要注意：0 和“缺失”在视觉上刻意做成两种不同形状（圆点 vs 虚线框），负数则用方向（0 线之下）来区分。若只看排名，2月与3月都接近基线，但含义完全不同：2月 = 0 人，3月 = 未知。零线为统一基准，所以正负与大小都可以直接目视比较。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 17,
+        "callId": "call_00_PQCDvjvftQJseVH3nXKq3519",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 18,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_rU3sfqvFojKoKO03yAbY7110",
+        "argumentsSha256": "65e09ad1c2476e68f2a0160c84516456f89b132ae1b0a61365a4c29e086a591a",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_VM4OAiNAotGBMfwJqB6C8837",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 33,
+        "callId": "call_00_NW7JrCvzCVe56BX20F2r3665",
+        "argumentsSha256": "f6d9316b0add22ca788f428398553132f38813a106ffc3ff302f226a1868de9f",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 35,
+        "callId": "call_01_JsE1gkswKwM823RV0u1m3421",
+        "argumentsSha256": "45cbd76ede058087482f1507d6d27ddbdef871c28af3c66571f58c3fe513c3a3",
+        "wrapped": false,
+        "resultSeq": 36,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 41,
+        "callId": "call_00_77a5n8Q78Jxcq8rtblRC4367",
+        "argumentsSha256": "2dad922db87bbddc2fb54cd80b5718328db6f25b0749a9fae227ec6391d59be2",
+        "wrapped": false,
+        "resultSeq": 42,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/charts.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "0778ef689dea193a21f6f319a3d915e268d184bdd377128fa6a272a4ff8a1d80",
+        "resultSha256": "41442acae6568026b46a368b38881dbddfb9010dd7e30b6239036986e80fa141"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "f96b569108c689ec5372b66acea263ab5bf1b2f854aabba88691edd545072a6f"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 17,
+        "resultSeq": 18,
+        "success": true,
+        "resultSha256": "2dc18a60bec34ebe84a677a7b40706491a993baaa0de6d2b28eae31ef9871551"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "dbff999a8ffe99a604ab6d0952cbe75ea6cf6d6a3ec9f9b5c92596a82cf16975"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8552,
+    "outputTokens": 3981,
+    "cacheReadTokens": 38784,
+    "cacheWriteTokens": 0,
+    "totalTokens": 51317
+  },
+  "elapsedSeconds": 38.91,
+  "sourceHead": "9ca98673c522c0f74b11bbc640dbf92121442bb9",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "780fcd67cb23001964d65937db0ed69fb8182204b228098b0d6224ae3e5df7cd",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "27b9c0a5f0eea6d6581c5ea2527bdf5d3a5f1e3819f87d0272b8c7b78084d9ca",
+  "extractionCorrection": {
+    "kind": "visible-assistant-text-only",
+    "correctedAt": "2026-09-17T16:48:00.902Z",
+    "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+    "correctorSha256": "47a8c7617f9cc6fbdf2b33b085723fa5e02fb800caee20608c755c767c2c57b3",
+    "sourceSessionSha256": "78bc047f1b59c92d46642d5560584d02597174582c4317b3adfeafe8d5e6e318",
+    "assistantSeqs": [
+      46
+    ],
+    "previousFinalSha256": "780fcd67cb23001964d65937db0ed69fb8182204b228098b0d6224ae3e5df7cd",
+    "previousCorrection": {
+      "kind": "visible-assistant-text-only",
+      "correctedAt": "2026-09-17T16:40:33.861Z",
+      "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+      "correctorSha256": "ef5a06fbafdc4b1a7032c073d912b16cbfe2dda9caa634ef3465a6deceb96ed3",
+      "sourceSessionSha256": "78bc047f1b59c92d46642d5560584d02597174582c4317b3adfeafe8d5e6e318",
+      "assistantSeq": 46,
+      "previousFinalSha256": "20d985ea8ba5fcd3a54ab016185340f66f7331717968b521ea4774f7da9ebe98",
+      "finalChanged": true,
+      "reason": "Final replies include only text blocks. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+    },
+    "finalChanged": false,
+    "reason": "All visible assistant text blocks are included in chronological order. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+  }
+}

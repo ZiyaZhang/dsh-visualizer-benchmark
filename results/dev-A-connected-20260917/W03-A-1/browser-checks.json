@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W03-A-1",
+  "caseId": "W03",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-A-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:09.210Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [
+          "1月",
+          "2月",
+          "3月",
+          "4月",
+          "5月",
+          "120",
+          "-30",
+          "80"
+        ],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "pass",
+      "reason": "All requested literal labels are present in visible text or accessible names.",
+      "evidence": {
+        "expectedText": [
+          "1月",
+          "2月",
+          "3月",
+          "4月",
+          "5月",
+          "120",
+          "-30",
+          "80"
+        ],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "月度净新增用户\n单位：人 · 柱高以 0 为基线，正负方向不同\n?\n数据缺失\n120\n80\n40\n0\n−40\n+120\n0\n实测为 0\n−30\n+80\n1月\n2月\n3月\n4月\n5月\n基线之上：净增为正\n基线之下：净增为负\n贴着基线的短横：有数据、净增恰好为 0\n斜纹虚线空框：数据缺失（不等于 0）\n\n月份间直接比柱长：1月（+120）远超5月（+80）；4月柱子朝下，净减 30 人；2月不是“没有柱子”而是值为 0；3月没有数据，空缺待补，不计入比较。\n? 数据缺失 120 80 40 0 −40 +120 0 实测为 0 −30 +80 1月 2月 3月 4月 5月",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 587,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "月度净新增用户柱状图：1月120人，2月实测0人，3月数据缺失，4月负30人，5月80人。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "f9c55ec16f313317c656c6ce1a8001c0",
+          "payload": {},
+          "at": 64.40000009536743
+        },
+        {
+          "type": "rendered",
+          "channel": "f9c55ec16f313317c656c6ce1a8001c0",
+          "payload": {},
+          "at": 71.5
+        },
+        {
+          "type": "resize",
+          "channel": "f9c55ec16f313317c656c6ce1a8001c0",
+          "payload": {
+            "height": 587
+          },
+          "at": 71.5
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 月度净新增用户 单位：人 · 柱高以 0 为基线，正负方向不同\n- img \"月度净新增用户柱状图：1月120人，2月实测0人，3月数据缺失，4月负30人，5月80人。\": \"? 数据缺失 120 80 40 0 −40 +120 0 实测为 0 −30 +80 1月 2月 3月 4月 5月\"\n- list:\n  - listitem: 基线之上：净增为正\n  - listitem: 基线之下：净增为负\n  - listitem: 贴着基线的短横：有数据、净增恰好为 0\n  - listitem: 斜纹虚线空框：数据缺失（不等于 0）\n- paragraph: 月份间直接比柱长：1月（+120）远超5月（+80）；4月柱子朝下，净减 30 人；2月不是“没有柱子”而是值为 0；3月没有数据，空缺待补，不计入比较。"
+    },
+    {
+      "text": "月度净新增用户\n单位：人 · 柱高以 0 为基线，正负方向不同\n?\n数据缺失\n120\n80\n40\n0\n−40\n+120\n0\n实测为 0\n−30\n+80\n1月\n2月\n3月\n4月\n5月\n基线之上：净增为正\n基线之下：净增为负\n贴着基线的短横：有数据、净增恰好为 0\n斜纹虚线空框：数据缺失（不等于 0）\n\n月份间直接比柱长：1月（+120）远超5月（+80）；4月柱子朝下，净减 30 人；2月不是“没有柱子”而是值为 0；3月没有数据，空缺待补，不计入比较。\n? 数据缺失 120 80 40 0 −40 +120 0 实测为 0 −30 +80 1月 2月 3月 4月 5月",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 418,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "月度净新增用户柱状图：1月120人，2月实测0人，3月数据缺失，4月负30人，5月80人。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "4b530b2b5ca767fa44eacf0971c5184e",
+          "payload": {},
+          "at": 149.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "4b530b2b5ca767fa44eacf0971c5184e",
+          "payload": {},
+          "at": 153.40000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "4b530b2b5ca767fa44eacf0971c5184e",
+          "payload": {
+            "height": 418
+          },
+          "at": 153.40000009536743
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 月度净新增用户 单位：人 · 柱高以 0 为基线，正负方向不同\n- img \"月度净新增用户柱状图：1月120人，2月实测0人，3月数据缺失，4月负30人，5月80人。\": \"? 数据缺失 120 80 40 0 −40 +120 0 实测为 0 −30 +80 1月 2月 3月 4月 5月\"\n- list:\n  - listitem: 基线之上：净增为正\n  - listitem: 基线之下：净增为负\n  - listitem: 贴着基线的短横：有数据、净增恰好为 0\n  - listitem: 斜纹虚线空框：数据缺失（不等于 0）\n- paragraph: 月份间直接比柱长：1月（+120）远超5月（+80）；4月柱子朝下，净减 30 人；2月不是“没有柱子”而是值为 0；3月没有数据，空缺待补，不计入比较。"
+    },
+    {
+      "text": "月度净新增用户\n单位：人 · 柱高以 0 为基线，正负方向不同\n?\n数据缺失\n120\n80\n40\n0\n−40\n+120\n0\n实测为 0\n−30\n+80\n1月\n2月\n3月\n4月\n5月\n基线之上：净增为正\n基线之下：净增为负\n贴着基线的短横：有数据、净增恰好为 0\n斜纹虚线空框：数据缺失（不等于 0）\n\n月份间直接比柱长：1月（+120）远超5月（+80）；4月柱子朝下，净减 30 人；2月不是“没有柱子”而是值为 0；3月没有数据，空缺待补，不计入比较。\n? 数据缺失 120 80 40 0 −40 +120 0 实测为 0 −30 +80 1月 2月 3月 4月 5月",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 587,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "月度净新增用户柱状图：1月120人，2月实测0人，3月数据缺失，4月负30人，5月80人。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "3b932533579f4e111a756d190f0ec171",
+          "payload": {},
+          "at": 212.5
+        },
+        {
+          "type": "rendered",
+          "channel": "3b932533579f4e111a756d190f0ec171",
+          "payload": {},
+          "at": 213.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "3b932533579f4e111a756d190f0ec171",
+          "payload": {
+            "height": 587
+          },
+          "at": 213.10000014305115
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 月度净新增用户 单位：人 · 柱高以 0 为基线，正负方向不同\n- img \"月度净新增用户柱状图：1月120人，2月实测0人，3月数据缺失，4月负30人，5月80人。\": \"? 数据缺失 120 80 40 0 −40 +120 0 实测为 0 −30 +80 1月 2月 3月 4月 5月\"\n- list:\n  - listitem: 基线之上：净增为正\n  - listitem: 基线之下：净增为负\n  - listitem: 贴着基线的短横：有数据、净增恰好为 0\n  - listitem: 斜纹虚线空框：数据缺失（不等于 0）\n- paragraph: 月份间直接比柱长：1月（+120）远超5月（+80）；4月柱子朝下，净减 30 人；2月不是“没有柱子”而是值为 0；3月没有数据，空缺待补，不计入比较。"
+    },
+    {
+      "text": "月度净新增用户\n单位：人 · 柱高以 0 为基线，正负方向不同\n?\n数据缺失\n120\n80\n40\n0\n−40\n+120\n0\n实测为 0\n−30\n+80\n1月\n2月\n3月\n4月\n5月\n基线之上：净增为正\n基线之下：净增为负\n贴着基线的短横：有数据、净增恰好为 0\n斜纹虚线空框：数据缺失（不等于 0）\n\n月份间直接比柱长：1月（+120）远超5月（+80）；4月柱子朝下，净减 30 人；2月不是“没有柱子”而是值为 0；3月没有数据，空缺待补，不计入比较。\n? 数据缺失 120 80 40 0 −40 +120 0 实测为 0 −30 +80 1月 2月 3月 4月 5月",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 418,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "月度净新增用户柱状图：1月120人，2月实测0人，3月数据缺失，4月负30人，5月80人。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "582d79ec46c81281060824bfc7337a84",
+          "payload": {},
+          "at": 265.80000019073486
+        },
+        {
+          "type": "rendered",
+          "channel": "582d79ec46c81281060824bfc7337a84",
+          "payload": {},
+          "at": 269.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "582d79ec46c81281060824bfc7337a84",
+          "payload": {
+            "height": 418
+          },
+          "at": 269.10000014305115
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 月度净新增用户 单位：人 · 柱高以 0 为基线，正负方向不同\n- img \"月度净新增用户柱状图：1月120人，2月实测0人，3月数据缺失，4月负30人，5月80人。\": \"? 数据缺失 120 80 40 0 −40 +120 0 实测为 0 −30 +80 1月 2月 3月 4月 5月\"\n- list:\n  - listitem: 基线之上：净增为正\n  - listitem: 基线之下：净增为负\n  - listitem: 贴着基线的短横：有数据、净增恰好为 0\n  - listitem: 斜纹虚线空框：数据缺失（不等于 0）\n- paragraph: 月份间直接比柱长：1月（+120）远超5月（+80）；4月柱子朝下，净减 30 人；2月不是“没有柱子”而是值为 0；3月没有数据，空缺待补，不计入比较。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "f9c55ec16f313317c656c6ce1a8001c0",
+      "payload": {},
+      "at": 64.40000009536743
+    },
+    {
+      "type": "rendered",
+      "channel": "f9c55ec16f313317c656c6ce1a8001c0",
+      "payload": {},
+      "at": 71.5
+    },
+    {
+      "type": "resize",
+      "channel": "f9c55ec16f313317c656c6ce1a8001c0",
+      "payload": {
+        "height": 587
+      },
+      "at": 71.5
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "0f1b5fbe35e094477f3123736725f2d1625a29df446895c4a38412ca514647ce",
+  "previewSha256": "62c001dae0ca0b88cff545f518a148a43d4f58cb9e0310fbe7d0eb4af682b146",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

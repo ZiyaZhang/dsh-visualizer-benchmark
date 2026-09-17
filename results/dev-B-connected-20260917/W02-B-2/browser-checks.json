@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W02-B-2",
+  "caseId": "W02",
+  "scenario": "heat",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:10.838Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1",
+          "step-2",
+          "reset"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "step-2-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "step-2-736-light.png",
+      "state": "step-2",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "一维热传导 · 离散有限差演示\n5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C\nT′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n0°C\n50\n100\n节点 0\n节点 1\n节点 2\n节点 3\n节点 4\n节点 0 · 左端固定\n100.00 °C\n节点 1\n0.00 °C\n节点 2\n0.00 °C\n节点 3\n0.00 °C\n节点 4 · 右端固定\n0.00 °C\n初始条件：T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。\n步数 0 （初始状态）\n单步 ▸\n◂ 上一步\n重置\n这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。\n0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4",
+      "temperature": [
+        0,
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 704,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {},
+          "at": 55.200000047683716
+        },
+        {
+          "type": "rendered",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {},
+          "at": 89.40000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {
+            "height": 704
+          },
+          "at": 89.5
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 一维热传导 · 离散有限差演示 5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C T′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n- img \"杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度\": 0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4\n- text: 节点 0 · 左端固定 100.00 °C 节点 1 0.00 °C 节点 2 0.00 °C 节点 3 0.00 °C 节点 4 · 右端固定 0.00 °C 初始条件：T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。 步数 0 （初始状态）\n- button \"单步 ▸\"\n- button \"◂ 上一步\" [disabled]\n- button \"重置\"\n- text: 这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "一维热传导 · 离散有限差演示\n5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C\nT′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n0°C\n50\n100\n节点 0\n节点 1\n节点 2\n节点 3\n节点 4\n节点 0 · 左端固定\n100.00 °C\n节点 1\n25.00 °C\n节点 2\n0.00 °C\n节点 3\n0.00 °C\n节点 4 · 右端固定\n0.00 °C\n第 1 步（由第 0 步同步算得）：\nT′1 = 0.00 + 0.25×(100.00 − 2×0.00 + 0.00) = 25.00 °C\nT′2 = 0.00 + 0.25×(0.00 − 2×0.00 + 0.00) = 0.00 °C\nT′3 = 0.00 + 0.25×(0.00 − 2×0.00 + 0.00) = 0.00 °C\n步数 1 （已更新 1 次）\n单步 ▸\n◂ 上一步\n重置\n这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。\n0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4",
+      "temperature": [
+        0,
+        100,
+        25,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 765,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {},
+          "at": 55.200000047683716
+        },
+        {
+          "type": "rendered",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {},
+          "at": 89.40000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {
+            "height": 704
+          },
+          "at": 89.5
+        },
+        {
+          "type": "resize",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {
+            "height": 765
+          },
+          "at": 203.09999990463257
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 一维热传导 · 离散有限差演示 5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C T′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n- img \"杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度\": 0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4\n- text: 节点 0 · 左端固定 100.00 °C 节点 1 25.00 °C 节点 2 0.00 °C 节点 3 0.00 °C 节点 4 · 右端固定 0.00 °C 第 1 步（由第 0 步同步算得）： T′1 = 0.00 + 0.25×(100.00 − 2×0.00 + 0.00) = 25.00 °C T′2 = 0.00 + 0.25×(0.00 − 2×0.00 + 0.00) = 0.00 °C T′3 = 0.00 + 0.25×(0.00 − 2×0.00 + 0.00) = 0.00 °C 步数 1 （已更新 1 次）\n- button \"单步 ▸\"\n- button \"◂ 上一步\"\n- button \"重置\"\n- text: 这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        25,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "一维热传导 · 离散有限差演示\n5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C\nT′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n0°C\n50\n100\n节点 0\n节点 1\n节点 2\n节点 3\n节点 4\n节点 0 · 左端固定\n100.00 °C\n节点 1\n37.50 °C\n节点 2\n6.25 °C\n节点 3\n0.00 °C\n节点 4 · 右端固定\n0.00 °C\n第 2 步（由第 1 步同步算得）：\nT′1 = 25.00 + 0.25×(100.00 − 2×25.00 + 0.00) = 37.50 °C\nT′2 = 0.00 + 0.25×(25.00 − 2×0.00 + 0.00) = 6.25 °C\nT′3 = 0.00 + 0.25×(0.00 − 2×0.00 + 0.00) = 0.00 °C\n步数 2 （已更新 2 次）\n单步 ▸\n◂ 上一步\n重置\n这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。\n0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4",
+      "temperature": [
+        0,
+        100,
+        37.5,
+        6.25,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 765,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {},
+          "at": 55.200000047683716
+        },
+        {
+          "type": "rendered",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {},
+          "at": 89.40000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {
+            "height": 704
+          },
+          "at": 89.5
+        },
+        {
+          "type": "resize",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {
+            "height": 765
+          },
+          "at": 203.09999990463257
+        }
+      ],
+      "name": "step-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 一维热传导 · 离散有限差演示 5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C T′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n- img \"杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度\": 0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4\n- text: 节点 0 · 左端固定 100.00 °C 节点 1 37.50 °C 节点 2 6.25 °C 节点 3 0.00 °C 节点 4 · 右端固定 0.00 °C 第 2 步（由第 1 步同步算得）： T′1 = 25.00 + 0.25×(100.00 − 2×25.00 + 0.00) = 37.50 °C T′2 = 0.00 + 0.25×(25.00 − 2×0.00 + 0.00) = 6.25 °C T′3 = 0.00 + 0.25×(0.00 − 2×0.00 + 0.00) = 0.00 °C 步数 2 （已更新 2 次）\n- button \"单步 ▸\"\n- button \"◂ 上一步\"\n- button \"重置\"\n- text: 这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        37.5,
+        6.25,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "一维热传导 · 离散有限差演示\n5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C\nT′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n0°C\n50\n100\n节点 0\n节点 1\n节点 2\n节点 3\n节点 4\n节点 0 · 左端固定\n100.00 °C\n节点 1\n0.00 °C\n节点 2\n0.00 °C\n节点 3\n0.00 °C\n节点 4 · 右端固定\n0.00 °C\n初始条件：T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。\n步数 0 （初始状态）\n单步 ▸\n◂ 上一步\n重置\n这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。\n0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4",
+      "temperature": [
+        0,
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 704,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {},
+          "at": 55.200000047683716
+        },
+        {
+          "type": "rendered",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {},
+          "at": 89.40000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {
+            "height": 704
+          },
+          "at": 89.5
+        },
+        {
+          "type": "resize",
+          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "payload": {
+            "height": 765
+          },
+          "at": 203.09999990463257
+        }
+      ],
+      "name": "reset",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 一维热传导 · 离散有限差演示 5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C T′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n- img \"杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度\": 0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4\n- text: 节点 0 · 左端固定 100.00 °C 节点 1 0.00 °C 节点 2 0.00 °C 节点 3 0.00 °C 节点 4 · 右端固定 0.00 °C 初始条件：T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。 步数 0 （初始状态）\n- button \"单步 ▸\"\n- button \"◂ 上一步\" [disabled]\n- button \"重置\"\n- text: 这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。",
+      "temperatureReadoutSource": "visible numbered-node readouts",
+      "temperatureOracleValues": [
+        100,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "text": "一维热传导 · 离散有限差演示\n5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C\nT′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n0°C\n50\n100\n节点 0\n节点 1\n节点 2\n节点 3\n节点 4\n节点 0 · 左端固定\n100.00 °C\n节点 1\n0.00 °C\n节点 2\n0.00 °C\n节点 3\n0.00 °C\n节点 4 · 右端固定\n0.00 °C\n初始条件：T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。\n步数 0 （初始状态）\n单步 ▸\n◂ 上一步\n重置\n这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。\n0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4",
+      "temperature": [
+        0,
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 674,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "f41f13c98093554af7d20d049708140a",
+          "payload": {},
+          "at": 311
+        },
+        {
+          "type": "rendered",
+          "channel": "f41f13c98093554af7d20d049708140a",
+          "payload": {},
+          "at": 319
+        },
+        {
+          "type": "resize",
+          "channel": "f41f13c98093554af7d20d049708140a",
+          "payload": {
+            "height": 674
+          },
+          "at": 319
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 一维热传导 · 离散有限差演示 5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C T′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n- img \"杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度\": 0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4\n- text: 节点 0 · 左端固定 100.00 °C 节点 1 0.00 °C 节点 2 0.00 °C 节点 3 0.00 °C 节点 4 · 右端固定 0.00 °C 初始条件：T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。 步数 0 （初始状态）\n- button \"单步 ▸\"\n- button \"◂ 上一步\" [disabled]\n- button \"重置\"\n- text: 这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。"
+    },
+    {
+      "text": "一维热传导 · 离散有限差演示\n5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C\nT′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n0°C\n50\n100\n节点 0\n节点 1\n节点 2\n节点 3\n节点 4\n节点 0 · 左端固定\n100.00 °C\n节点 1\n0.00 °C\n节点 2\n0.00 °C\n节点 3\n0.00 °C\n节点 4 · 右端固定\n0.00 °C\n初始条件：T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。\n步数 0 （初始状态）\n单步 ▸\n◂ 上一步\n重置\n这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。\n0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4",
+      "temperature": [
+        0,
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 704,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "850ebe7c1cc0a07a448b82ba9c3fe1dc",
+          "payload": {},
+          "at": 390
+        },
+        {
+          "type": "rendered",
+          "channel": "850ebe7c1cc0a07a448b82ba9c3fe1dc",
+          "payload": {},
+          "at": 393.90000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "850ebe7c1cc0a07a448b82ba9c3fe1dc",
+          "payload": {
+            "height": 704
+          },
+          "at": 393.90000009536743
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 一维热传导 · 离散有限差演示 5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C T′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n- img \"杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度\": 0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4\n- text: 节点 0 · 左端固定 100.00 °C 节点 1 0.00 °C 节点 2 0.00 °C 节点 3 0.00 °C 节点 4 · 右端固定 0.00 °C 初始条件：T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。 步数 0 （初始状态）\n- button \"单步 ▸\"\n- button \"◂ 上一步\" [disabled]\n- button \"重置\"\n- text: 这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。"
+    },
+    {
+      "text": "一维热传导 · 离散有限差演示\n5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C\nT′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n0°C\n50\n100\n节点 0\n节点 1\n节点 2\n节点 3\n节点 4\n节点 0 · 左端固定\n100.00 °C\n节点 1\n0.00 °C\n节点 2\n0.00 °C\n节点 3\n0.00 °C\n节点 4 · 右端固定\n0.00 °C\n初始条件：T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。\n步数 0 （初始状态）\n单步 ▸\n◂ 上一步\n重置\n这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。\n0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4",
+      "temperature": [
+        0,
+        100,
+        0,
+        0,
+        0,
+        0
+      ],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 674,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "e3c1f9174a6981365813c0648a0d6756",
+          "payload": {},
+          "at": 451.2000000476837
+        },
+        {
+          "type": "rendered",
+          "channel": "e3c1f9174a6981365813c0648a0d6756",
+          "payload": {},
+          "at": 454.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "e3c1f9174a6981365813c0648a0d6756",
+          "payload": {
+            "height": 674
+          },
+          "at": 454.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 一维热传导 · 离散有限差演示 5 个节点 · 两端恒温 100°C / 0°C · 中间 3 节点初值 0°C T′ᵢ = Tᵢ + λ(Tᵢ₋₁ − 2Tᵢ + Tᵢ₊₁)，扩散系数 λ = 0.25；每步只用上一时刻的温度同步更新（不就地覆盖）。\n- img \"杆上5个节点的温度柱状图与温度折线，范围0到100摄氏度\": 0°C 50 100 节点 0 节点 1 节点 2 节点 3 节点 4\n- text: 节点 0 · 左端固定 100.00 °C 节点 1 0.00 °C 节点 2 0.00 °C 节点 3 0.00 °C 节点 4 · 右端固定 0.00 °C 初始条件：T = [100.00, 0.00, 0.00, 0.00, 0.00] °C。点“单步”看每个节点怎么变。 步数 0 （初始状态）\n- button \"单步 ▸\"\n- button \"◂ 上一步\" [disabled]\n- button \"重置\"\n- text: 这是离散示意：只算 5 个格点的差分方程，不是解析解；λ 越大每步传得越快，λ ≤ 0.5 时数值才稳定。两端节点温度始终固定，不参与更新。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+      "payload": {},
+      "at": 55.200000047683716
+    },
+    {
+      "type": "rendered",
+      "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+      "payload": {},
+      "at": 89.40000009536743
+    },
+    {
+      "type": "resize",
+      "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+      "payload": {
+        "height": 704
+      },
+      "at": 89.5
+    },
+    {
+      "type": "resize",
+      "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+      "payload": {
+        "height": 765
+      },
+      "at": 203.09999990463257
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "7d3242ad2b95f6ad0f1e5756c0d413179ccffd33ed846de26c9a71cb5e7243e8",
+  "previewSha256": "a074d7341bf4b2d5465716da91d035ca957d564e2b06b435446296d58ee0cda6",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

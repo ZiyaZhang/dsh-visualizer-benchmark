@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 2,
+  "trialId": "W06-B-1",
+  "caseId": "W06",
+  "scenario": "sales",
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:31:03.187Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pending",
+      "reason": "Expected one accessible button matching /西部/; found 0.",
+      "evidence": {
+        "states": [
+          "initial"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pending",
+      "reason": "Local actions have not run.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [],
+  "states": [
+    {
+      "text": "地区销售对比\n单位：万元\n华东\n120\n华南\n80\n西部\n50\n当前所选\n—\n点击柱条选择地区（仅本地选中）\n解释所选地区\n华东 120 华南 80 西部 50",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 357,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "地区销售额，点击选择地区（单位：万元）"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "3a325d40128ed2fa4acd3e42c24d4b7a",
+          "payload": {},
+          "at": 267.89999985694885
+        },
+        {
+          "type": "rendered",
+          "channel": "3a325d40128ed2fa4acd3e42c24d4b7a",
+          "payload": {},
+          "at": 272.69999980926514
+        },
+        {
+          "type": "resize",
+          "channel": "3a325d40128ed2fa4acd3e42c24d4b7a",
+          "payload": {
+            "height": 357
+          },
+          "at": 272.89999985694885
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 地区销售对比 单位：万元\n- listbox \"地区销售额，点击选择地区（单位：万元）\":\n  - option \"华东：120万元\": 华东 120\n  - option \"华南：80万元\": 华南 80\n  - option \"西部：50万元\": 西部 50\n- text: 当前所选 — 点击柱条选择地区（仅本地选中）\n- button \"解释所选地区\" [disabled]"
+    },
+    {
+      "text": "地区销售对比\n单位：万元\n华东\n华南\n西部\n当前所选\n—\n点击柱条选择地区（仅本地选中）\n解释所选地区\n华东 华南 西部",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 281,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "地区销售额，点击选择地区（单位：万元）"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "03482b72c00a4cd5988c2a8bbd09a1fe",
+          "payload": {},
+          "at": 358.89999985694885
+        },
+        {
+          "type": "rendered",
+          "channel": "03482b72c00a4cd5988c2a8bbd09a1fe",
+          "payload": {},
+          "at": 364.5
+        },
+        {
+          "type": "resize",
+          "channel": "03482b72c00a4cd5988c2a8bbd09a1fe",
+          "payload": {
+            "height": 281
+          },
+          "at": 364.5
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 地区销售对比 单位：万元\n- listbox \"地区销售额，点击选择地区（单位：万元）\":\n  - option \"华东：120万元\": 华东\n  - option \"华南：80万元\": 华南\n  - option \"西部：50万元\": 西部\n- text: 当前所选 — 点击柱条选择地区（仅本地选中）\n- button \"解释所选地区\" [disabled]"
+    },
+    {
+      "text": "地区销售对比\n单位：万元\n华东\n120\n华南\n80\n西部\n50\n当前所选\n—\n点击柱条选择地区（仅本地选中）\n解释所选地区\n华东 120 华南 80 西部 50",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 357,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "地区销售额，点击选择地区（单位：万元）"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "ee672a075cd7de2519c9a4ddda7f1cd9",
+          "payload": {},
+          "at": 423
+        },
+        {
+          "type": "rendered",
+          "channel": "ee672a075cd7de2519c9a4ddda7f1cd9",
+          "payload": {},
+          "at": 424.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "ee672a075cd7de2519c9a4ddda7f1cd9",
+          "payload": {
+            "height": 357
+          },
+          "at": 424.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 地区销售对比 单位：万元\n- listbox \"地区销售额，点击选择地区（单位：万元）\":\n  - option \"华东：120万元\": 华东 120\n  - option \"华南：80万元\": 华南 80\n  - option \"西部：50万元\": 西部 50\n- text: 当前所选 — 点击柱条选择地区（仅本地选中）\n- button \"解释所选地区\" [disabled]"
+    },
+    {
+      "text": "地区销售对比\n单位：万元\n华东\n华南\n西部\n当前所选\n—\n点击柱条选择地区（仅本地选中）\n解释所选地区\n华东 华南 西部",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 281,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "地区销售额，点击选择地区（单位：万元）"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "10549a3276ac8d9e0e98c31b0b0272b5",
+          "payload": {},
+          "at": 474.39999985694885
+        },
+        {
+          "type": "rendered",
+          "channel": "10549a3276ac8d9e0e98c31b0b0272b5",
+          "payload": {},
+          "at": 474.5
+        },
+        {
+          "type": "resize",
+          "channel": "10549a3276ac8d9e0e98c31b0b0272b5",
+          "payload": {
+            "height": 281
+          },
+          "at": 474.5
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 地区销售对比 单位：万元\n- listbox \"地区销售额，点击选择地区（单位：万元）\":\n  - option \"华东：120万元\": 华东\n  - option \"华南：80万元\": 华南\n  - option \"西部：50万元\": 西部\n- text: 当前所选 — 点击柱条选择地区（仅本地选中）\n- button \"解释所选地区\" [disabled]"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "3a325d40128ed2fa4acd3e42c24d4b7a",
+      "payload": {},
+      "at": 267.89999985694885
+    },
+    {
+      "type": "rendered",
+      "channel": "3a325d40128ed2fa4acd3e42c24d4b7a",
+      "payload": {},
+      "at": 272.69999980926514
+    },
+    {
+      "type": "resize",
+      "channel": "3a325d40128ed2fa4acd3e42c24d4b7a",
+      "payload": {
+        "height": 357
+      },
+      "at": 272.89999985694885
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "5cc81c371b162ea86378e872c1ce3b5aec292d9ca10dfc895ca20fed669521bd",
+  "previewSha256": "cae7fd226b2519e76b7806ab7f6ceb4fa2c9819f9c549044dbf30fea9545feb1",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "6f313bab30ffbef2ee4cba89e4fe19e36ced92db6c9bebd079e77fa07dd3030c",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "privateArchive": {
+    "id": "B-checker-history-20260917T165226Z",
+    "published": false,
+    "originalRecordSha256": "214df40d9c305de4c6bd052424c284f8fb8b794bbb2a1fea402230b00f3649a1",
+    "recordId": "W06-B-1/browser-checks/6f313bab30ff/browser-checks.json",
+    "note": "The complete original record and screenshots are retained in the private run archive. Archived screenshot names below are identifiers, not public file links. Public screenshots contains only retained explanatory evidence.",
+    "screenshots": [
+      {
+        "originalFileName": "initial-736-light.png",
+        "state": "initial",
+        "width": 736,
+        "appearance": "light"
+      },
+      {
+        "originalFileName": "initial-360-light.png",
+        "state": "initial",
+        "width": 360,
+        "appearance": "light"
+      },
+      {
+        "originalFileName": "initial-736-dark.png",
+        "state": "initial",
+        "width": 736,
+        "appearance": "dark"
+      },
+      {
+        "originalFileName": "initial-360-dark.png",
+        "state": "initial",
+        "width": 360,
+        "appearance": "dark"
+      }
+    ]
+  },
+  "retentionReason": {
+    "kind": "checker-result-changed",
+    "checks": {
+      "interaction": {
+        "previous": "pending",
+        "current": "pass"
+      },
+      "localMessages": {
+        "previous": "pending",
+        "current": "pass"
+      }
+    },
+    "finalRecord": "../../browser-checks.json"
+  }
+}

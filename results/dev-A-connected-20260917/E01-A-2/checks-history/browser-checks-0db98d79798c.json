@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 2,
+  "trialId": "E01-A-2",
+  "caseId": "E01",
+  "casesPath": "results/dev-A-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:35:46.924Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pending",
+      "reason": "Scenario (missing) needs a case-specific action/readout adapter; screenshots alone do not pass interaction.",
+      "evidence": {
+        "states": [
+          "initial"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pending",
+      "reason": "Local actions have not run.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "起点\n① SYN\n② SYN+ACK\n③ ACK\n▶ 播放\n客户端 Client\n服务端 Server\nSYN · seq=x\n① 请求建立连接，声明我的初始序号 x\nSYN+ACK · seq=y, ack=x+1\n② 同意并反向声明：收到 x，我的初始序号是 y\nACK · ack=y+1\n③ 确认 y：我收到了你的序号，双向都通了\nCLOSED\nLISTEN\n点击上面的步骤按钮（或「播放」）逐步走一遍：每一轮往返都在补齐一块信息。\n客户端视角\nCLOSED\n已发出 SYN（seq=x）：只是\"发出去了\"，还不知道是否送达\n收到 SYN+ACK（ack=x+1）：确认我能发、服务端能收；服务端能发、我能收\n发出 ACK（ack=y+1），进入 ESTABLISHED\n服务端视角\nLISTEN\n收到 SYN（seq=x）：确认对方能发、我能收；但还不知道我的回复能否送达\n发出 SYN+ACK（seq=y）：这条报文送出后，等待对方确认\n收到 ACK（ack=y+1）：确认我能发、对方能收，进入 ESTABLISHED\n为什么两次不够 ✗\n\n若服务端发出 SYN+ACK 后就认为连接建立：万一这个 SYN 是网络里滞留的过期副本，客户端会直接忽略后面的 SYN+ACK、不回 ACK，服务端却已分配资源 → 半开连接（half-open），白白占用连接与内存；同时服务端的初始序号 y 从未被确认，它无从知道自己的报文能否送达。\n\n为什么三次刚好 ✓\n\n第三个 ACK 是服务端唯一能确认\"我的 SYN 被收到、对方此刻在线且这次请求是新鲜的\"的方式，同时两个方向的初始序号都被显式确认。三次是\"双向收发能力 + 双向序号同步\"同时成立所需的最小往返次数。\n\n为什么不是四次？三次之后两端的信息已经完备，再来一轮不增加任何确认。四次挥手出现在关闭连接时，因为关闭是半双工的，两个方向需要各自确认。\n客户端 Client 服务端 Server SYN · seq=x ① 请求建立连接，声明我的初始序号 x SYN+ACK · seq=y, ack=x+1 ② 同意并反向声明：收到 x，我的初始序号是 y ACK · ack=y+1 ③ 确认 y：我收到了你的序号，双向都通了 CLOSED LISTEN",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 908,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "5976be895407792430970f721144c0dc",
+          "payload": {},
+          "at": 104
+        },
+        {
+          "type": "rendered",
+          "channel": "5976be895407792430970f721144c0dc",
+          "payload": {},
+          "at": 104.09999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "5976be895407792430970f721144c0dc",
+          "payload": {
+            "height": 908
+          },
+          "at": 104.89999985694885
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- group \"握手步骤\":\n  - button \"起点\" [pressed]\n  - button \"① SYN\"\n  - button \"② SYN+ACK\"\n  - button \"③ ACK\"\n- button \"▶ 播放\"\n- img \"TCP 三次握手时序图 客户端与服务端依次交换 SYN、SYN+ACK、ACK 三条报文，用于确认双向收发能力并同步双方初始序号。\": 客户端 Client 服务端 Server SYN · seq=x ① 请求建立连接，声明我的初始序号 x SYN+ACK · seq=y, ack=x+1 ② 同意并反向声明：收到 x，我的初始序号是 y ACK · ack=y+1 ③ 确认 y：我收到了你的序号，双向都通了 CLOSED LISTEN\n- text: 点击上面的步骤按钮（或「播放」）逐步走一遍：每一轮往返都在补齐一块信息。\n- heading \"客户端视角 CLOSED\" [level=4]\n- list:\n  - listitem: 已发出 SYN（seq=x）：只是\"发出去了\"，还不知道是否送达\n  - listitem: 收到 SYN+ACK（ack=x+1）：确认我能发、服务端能收；服务端能发、我能收\n  - listitem: 发出 ACK（ack=y+1），进入 ESTABLISHED\n- heading \"服务端视角 LISTEN\" [level=4]\n- list:\n  - listitem: 收到 SYN（seq=x）：确认对方能发、我能收；但还不知道我的回复能否送达\n  - listitem: 发出 SYN+ACK（seq=y）：这条报文送出后，等待对方确认\n  - listitem: 收到 ACK（ack=y+1）：确认我能发、对方能收，进入 ESTABLISHED\n- heading \"为什么两次不够 ✗\" [level=5]\n- paragraph: 若服务端发出 SYN+ACK 后就认为连接建立：万一这个 SYN 是网络里滞留的过期副本，客户端会直接忽略后面的 SYN+ACK、不回 ACK，服务端却已分配资源 → 半开连接（half-open），白白占用连接与内存；同时服务端的初始序号 y 从未被确认，它无从知道自己的报文能否送达。\n- heading \"为什么三次刚好 ✓\" [level=5]\n- paragraph: 第三个 ACK 是服务端唯一能确认\"我的 SYN 被收到、对方此刻在线且这次请求是新鲜的\"的方式，同时两个方向的初始序号都被显式确认。三次是\"双向收发能力 + 双向序号同步\"同时成立所需的最小往返次数。\n- text: 为什么不是四次？三次之后两端的信息已经完备，再来一轮不增加任何确认。四次挥手出现在关闭连接时，因为关闭是半双工的，两个方向需要各自确认。"
+    },
+    {
+      "text": "起点\n① SYN\n② SYN+ACK\n③ ACK\n▶ 播放\n客户端 Client\n服务端 Server\nSYN · seq=x\n① 请求建立连接，声明我的初始序号 x\nSYN+ACK · seq=y, ack=x+1\n② 同意并反向声明：收到 x，我的初始序号是 y\nACK · ack=y+1\n③ 确认 y：我收到了你的序号，双向都通了\nCLOSED\nLISTEN\n点击上面的步骤按钮（或「播放」）逐步走一遍：每一轮往返都在补齐一块信息。\n客户端视角\nCLOSED\n已发出 SYN（seq=x）：只是\"发出去了\"，还不知道是否送达\n收到 SYN+ACK（ack=x+1）：确认我能发、服务端能收；服务端能发、我能收\n发出 ACK（ack=y+1），进入 ESTABLISHED\n服务端视角\nLISTEN\n收到 SYN（seq=x）：确认对方能发、我能收；但还不知道我的回复能否送达\n发出 SYN+ACK（seq=y）：这条报文送出后，等待对方确认\n收到 ACK（ack=y+1）：确认我能发、对方能收，进入 ESTABLISHED\n为什么两次不够 ✗\n\n若服务端发出 SYN+ACK 后就认为连接建立：万一这个 SYN 是网络里滞留的过期副本，客户端会直接忽略后面的 SYN+ACK、不回 ACK，服务端却已分配资源 → 半开连接（half-open），白白占用连接与内存；同时服务端的初始序号 y 从未被确认，它无从知道自己的报文能否送达。\n\n为什么三次刚好 ✓\n\n第三个 ACK 是服务端唯一能确认\"我的 SYN 被收到、对方此刻在线且这次请求是新鲜的\"的方式，同时两个方向的初始序号都被显式确认。三次是\"双向收发能力 + 双向序号同步\"同时成立所需的最小往返次数。\n\n为什么不是四次？三次之后两端的信息已经完备，再来一轮不增加任何确认。四次挥手出现在关闭连接时，因为关闭是半双工的，两个方向需要各自确认。\n客户端 Client 服务端 Server SYN · seq=x ① 请求建立连接，声明我的初始序号 x SYN+ACK · seq=y, ack=x+1 ② 同意并反向声明：收到 x，我的初始序号是 y ACK · ack=y+1 ③ 确认 y：我收到了你的序号，双向都通了 CLOSED LISTEN",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 1092,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "25e4fb95e6c24e530af451ff93b7be19",
+          "payload": {},
+          "at": 188.59999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "25e4fb95e6c24e530af451ff93b7be19",
+          "payload": {},
+          "at": 191.89999985694885
+        },
+        {
+          "type": "resize",
+          "channel": "25e4fb95e6c24e530af451ff93b7be19",
+          "payload": {
+            "height": 1092
+          },
+          "at": 191.89999985694885
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- group \"握手步骤\":\n  - button \"起点\" [pressed]\n  - button \"① SYN\"\n  - button \"② SYN+ACK\"\n  - button \"③ ACK\"\n- button \"▶ 播放\"\n- img \"TCP 三次握手时序图 客户端与服务端依次交换 SYN、SYN+ACK、ACK 三条报文，用于确认双向收发能力并同步双方初始序号。\": 客户端 Client 服务端 Server SYN · seq=x ① 请求建立连接，声明我的初始序号 x SYN+ACK · seq=y, ack=x+1 ② 同意并反向声明：收到 x，我的初始序号是 y ACK · ack=y+1 ③ 确认 y：我收到了你的序号，双向都通了 CLOSED LISTEN\n- text: 点击上面的步骤按钮（或「播放」）逐步走一遍：每一轮往返都在补齐一块信息。\n- heading \"客户端视角 CLOSED\" [level=4]\n- list:\n  - listitem: 已发出 SYN（seq=x）：只是\"发出去了\"，还不知道是否送达\n  - listitem: 收到 SYN+ACK（ack=x+1）：确认我能发、服务端能收；服务端能发、我能收\n  - listitem: 发出 ACK（ack=y+1），进入 ESTABLISHED\n- heading \"服务端视角 LISTEN\" [level=4]\n- list:\n  - listitem: 收到 SYN（seq=x）：确认对方能发、我能收；但还不知道我的回复能否送达\n  - listitem: 发出 SYN+ACK（seq=y）：这条报文送出后，等待对方确认\n  - listitem: 收到 ACK（ack=y+1）：确认我能发、对方能收，进入 ESTABLISHED\n- heading \"为什么两次不够 ✗\" [level=5]\n- paragraph: 若服务端发出 SYN+ACK 后就认为连接建立：万一这个 SYN 是网络里滞留的过期副本，客户端会直接忽略后面的 SYN+ACK、不回 ACK，服务端却已分配资源 → 半开连接（half-open），白白占用连接与内存；同时服务端的初始序号 y 从未被确认，它无从知道自己的报文能否送达。\n- heading \"为什么三次刚好 ✓\" [level=5]\n- paragraph: 第三个 ACK 是服务端唯一能确认\"我的 SYN 被收到、对方此刻在线且这次请求是新鲜的\"的方式，同时两个方向的初始序号都被显式确认。三次是\"双向收发能力 + 双向序号同步\"同时成立所需的最小往返次数。\n- text: 为什么不是四次？三次之后两端的信息已经完备，再来一轮不增加任何确认。四次挥手出现在关闭连接时，因为关闭是半双工的，两个方向需要各自确认。"
+    },
+    {
+      "text": "起点\n① SYN\n② SYN+ACK\n③ ACK\n▶ 播放\n客户端 Client\n服务端 Server\nSYN · seq=x\n① 请求建立连接，声明我的初始序号 x\nSYN+ACK · seq=y, ack=x+1\n② 同意并反向声明：收到 x，我的初始序号是 y\nACK · ack=y+1\n③ 确认 y：我收到了你的序号，双向都通了\nCLOSED\nLISTEN\n点击上面的步骤按钮（或「播放」）逐步走一遍：每一轮往返都在补齐一块信息。\n客户端视角\nCLOSED\n已发出 SYN（seq=x）：只是\"发出去了\"，还不知道是否送达\n收到 SYN+ACK（ack=x+1）：确认我能发、服务端能收；服务端能发、我能收\n发出 ACK（ack=y+1），进入 ESTABLISHED\n服务端视角\nLISTEN\n收到 SYN（seq=x）：确认对方能发、我能收；但还不知道我的回复能否送达\n发出 SYN+ACK（seq=y）：这条报文送出后，等待对方确认\n收到 ACK（ack=y+1）：确认我能发、对方能收，进入 ESTABLISHED\n为什么两次不够 ✗\n\n若服务端发出 SYN+ACK 后就认为连接建立：万一这个 SYN 是网络里滞留的过期副本，客户端会直接忽略后面的 SYN+ACK、不回 ACK，服务端却已分配资源 → 半开连接（half-open），白白占用连接与内存；同时服务端的初始序号 y 从未被确认，它无从知道自己的报文能否送达。\n\n为什么三次刚好 ✓\n\n第三个 ACK 是服务端唯一能确认\"我的 SYN 被收到、对方此刻在线且这次请求是新鲜的\"的方式，同时两个方向的初始序号都被显式确认。三次是\"双向收发能力 + 双向序号同步\"同时成立所需的最小往返次数。\n\n为什么不是四次？三次之后两端的信息已经完备，再来一轮不增加任何确认。四次挥手出现在关闭连接时，因为关闭是半双工的，两个方向需要各自确认。\n客户端 Client 服务端 Server SYN · seq=x ① 请求建立连接，声明我的初始序号 x SYN+ACK · seq=y, ack=x+1 ② 同意并反向声明：收到 x，我的初始序号是 y ACK · ack=y+1 ③ 确认 y：我收到了你的序号，双向都通了 CLOSED LISTEN",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 908,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "9f1e8b23221c5d7d46f12c3b57606f6c",
+          "payload": {},
+          "at": 267
+        },
+        {
+          "type": "rendered",
+          "channel": "9f1e8b23221c5d7d46f12c3b57606f6c",
+          "payload": {},
+          "at": 269.09999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "9f1e8b23221c5d7d46f12c3b57606f6c",
+          "payload": {
+            "height": 908
+          },
+          "at": 269.09999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- group \"握手步骤\":\n  - button \"起点\" [pressed]\n  - button \"① SYN\"\n  - button \"② SYN+ACK\"\n  - button \"③ ACK\"\n- button \"▶ 播放\"\n- img \"TCP 三次握手时序图 客户端与服务端依次交换 SYN、SYN+ACK、ACK 三条报文，用于确认双向收发能力并同步双方初始序号。\": 客户端 Client 服务端 Server SYN · seq=x ① 请求建立连接，声明我的初始序号 x SYN+ACK · seq=y, ack=x+1 ② 同意并反向声明：收到 x，我的初始序号是 y ACK · ack=y+1 ③ 确认 y：我收到了你的序号，双向都通了 CLOSED LISTEN\n- text: 点击上面的步骤按钮（或「播放」）逐步走一遍：每一轮往返都在补齐一块信息。\n- heading \"客户端视角 CLOSED\" [level=4]\n- list:\n  - listitem: 已发出 SYN（seq=x）：只是\"发出去了\"，还不知道是否送达\n  - listitem: 收到 SYN+ACK（ack=x+1）：确认我能发、服务端能收；服务端能发、我能收\n  - listitem: 发出 ACK（ack=y+1），进入 ESTABLISHED\n- heading \"服务端视角 LISTEN\" [level=4]\n- list:\n  - listitem: 收到 SYN（seq=x）：确认对方能发、我能收；但还不知道我的回复能否送达\n  - listitem: 发出 SYN+ACK（seq=y）：这条报文送出后，等待对方确认\n  - listitem: 收到 ACK（ack=y+1）：确认我能发、对方能收，进入 ESTABLISHED\n- heading \"为什么两次不够 ✗\" [level=5]\n- paragraph: 若服务端发出 SYN+ACK 后就认为连接建立：万一这个 SYN 是网络里滞留的过期副本，客户端会直接忽略后面的 SYN+ACK、不回 ACK，服务端却已分配资源 → 半开连接（half-open），白白占用连接与内存；同时服务端的初始序号 y 从未被确认，它无从知道自己的报文能否送达。\n- heading \"为什么三次刚好 ✓\" [level=5]\n- paragraph: 第三个 ACK 是服务端唯一能确认\"我的 SYN 被收到、对方此刻在线且这次请求是新鲜的\"的方式，同时两个方向的初始序号都被显式确认。三次是\"双向收发能力 + 双向序号同步\"同时成立所需的最小往返次数。\n- text: 为什么不是四次？三次之后两端的信息已经完备，再来一轮不增加任何确认。四次挥手出现在关闭连接时，因为关闭是半双工的，两个方向需要各自确认。"
+    },
+    {
+      "text": "起点\n① SYN\n② SYN+ACK\n③ ACK\n▶ 播放\n客户端 Client\n服务端 Server\nSYN · seq=x\n① 请求建立连接，声明我的初始序号 x\nSYN+ACK · seq=y, ack=x+1\n② 同意并反向声明：收到 x，我的初始序号是 y\nACK · ack=y+1\n③ 确认 y：我收到了你的序号，双向都通了\nCLOSED\nLISTEN\n点击上面的步骤按钮（或「播放」）逐步走一遍：每一轮往返都在补齐一块信息。\n客户端视角\nCLOSED\n已发出 SYN（seq=x）：只是\"发出去了\"，还不知道是否送达\n收到 SYN+ACK（ack=x+1）：确认我能发、服务端能收；服务端能发、我能收\n发出 ACK（ack=y+1），进入 ESTABLISHED\n服务端视角\nLISTEN\n收到 SYN（seq=x）：确认对方能发、我能收；但还不知道我的回复能否送达\n发出 SYN+ACK（seq=y）：这条报文送出后，等待对方确认\n收到 ACK（ack=y+1）：确认我能发、对方能收，进入 ESTABLISHED\n为什么两次不够 ✗\n\n若服务端发出 SYN+ACK 后就认为连接建立：万一这个 SYN 是网络里滞留的过期副本，客户端会直接忽略后面的 SYN+ACK、不回 ACK，服务端却已分配资源 → 半开连接（half-open），白白占用连接与内存；同时服务端的初始序号 y 从未被确认，它无从知道自己的报文能否送达。\n\n为什么三次刚好 ✓\n\n第三个 ACK 是服务端唯一能确认\"我的 SYN 被收到、对方此刻在线且这次请求是新鲜的\"的方式，同时两个方向的初始序号都被显式确认。三次是\"双向收发能力 + 双向序号同步\"同时成立所需的最小往返次数。\n\n为什么不是四次？三次之后两端的信息已经完备，再来一轮不增加任何确认。四次挥手出现在关闭连接时，因为关闭是半双工的，两个方向需要各自确认。\n客户端 Client 服务端 Server SYN · seq=x ① 请求建立连接，声明我的初始序号 x SYN+ACK · seq=y, ack=x+1 ② 同意并反向声明：收到 x，我的初始序号是 y ACK · ack=y+1 ③ 确认 y：我收到了你的序号，双向都通了 CLOSED LISTEN",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 1092,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "2962b95772299432738f9d0ba4621fb2",
+          "payload": {},
+          "at": 328.39999985694885
+        },
+        {
+          "type": "rendered",
+          "channel": "2962b95772299432738f9d0ba4621fb2",
+          "payload": {},
+          "at": 333
+        },
+        {
+          "type": "resize",
+          "channel": "2962b95772299432738f9d0ba4621fb2",
+          "payload": {
+            "height": 1092
+          },
+          "at": 333
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- group \"握手步骤\":\n  - button \"起点\" [pressed]\n  - button \"① SYN\"\n  - button \"② SYN+ACK\"\n  - button \"③ ACK\"\n- button \"▶ 播放\"\n- img \"TCP 三次握手时序图 客户端与服务端依次交换 SYN、SYN+ACK、ACK 三条报文，用于确认双向收发能力并同步双方初始序号。\": 客户端 Client 服务端 Server SYN · seq=x ① 请求建立连接，声明我的初始序号 x SYN+ACK · seq=y, ack=x+1 ② 同意并反向声明：收到 x，我的初始序号是 y ACK · ack=y+1 ③ 确认 y：我收到了你的序号，双向都通了 CLOSED LISTEN\n- text: 点击上面的步骤按钮（或「播放」）逐步走一遍：每一轮往返都在补齐一块信息。\n- heading \"客户端视角 CLOSED\" [level=4]\n- list:\n  - listitem: 已发出 SYN（seq=x）：只是\"发出去了\"，还不知道是否送达\n  - listitem: 收到 SYN+ACK（ack=x+1）：确认我能发、服务端能收；服务端能发、我能收\n  - listitem: 发出 ACK（ack=y+1），进入 ESTABLISHED\n- heading \"服务端视角 LISTEN\" [level=4]\n- list:\n  - listitem: 收到 SYN（seq=x）：确认对方能发、我能收；但还不知道我的回复能否送达\n  - listitem: 发出 SYN+ACK（seq=y）：这条报文送出后，等待对方确认\n  - listitem: 收到 ACK（ack=y+1）：确认我能发、对方能收，进入 ESTABLISHED\n- heading \"为什么两次不够 ✗\" [level=5]\n- paragraph: 若服务端发出 SYN+ACK 后就认为连接建立：万一这个 SYN 是网络里滞留的过期副本，客户端会直接忽略后面的 SYN+ACK、不回 ACK，服务端却已分配资源 → 半开连接（half-open），白白占用连接与内存；同时服务端的初始序号 y 从未被确认，它无从知道自己的报文能否送达。\n- heading \"为什么三次刚好 ✓\" [level=5]\n- paragraph: 第三个 ACK 是服务端唯一能确认\"我的 SYN 被收到、对方此刻在线且这次请求是新鲜的\"的方式，同时两个方向的初始序号都被显式确认。三次是\"双向收发能力 + 双向序号同步\"同时成立所需的最小往返次数。\n- text: 为什么不是四次？三次之后两端的信息已经完备，再来一轮不增加任何确认。四次挥手出现在关闭连接时，因为关闭是半双工的，两个方向需要各自确认。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "5976be895407792430970f721144c0dc",
+      "payload": {},
+      "at": 104
+    },
+    {
+      "type": "rendered",
+      "channel": "5976be895407792430970f721144c0dc",
+      "payload": {},
+      "at": 104.09999990463257
+    },
+    {
+      "type": "resize",
+      "channel": "5976be895407792430970f721144c0dc",
+      "payload": {
+        "height": 908
+      },
+      "at": 104.89999985694885
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "abe1a8269f33d89d064a5c4d2109e9ed26732a7fe697d3822ce814f59994f95a",
+  "previewSha256": "24906d2746b7cd078a24fb3a8b33af9de3d24fa8d60ea857a3e803d60b050426",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0db98d79798cbe96e2a845a84e743be1594c8e7698e73ce11f7baf02d1809b37",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

@@ -1,0 +1,77 @@
+<div style="font-family:-apple-system,system-ui,'PingFang SC','Microsoft YaHei',sans-serif;color:var(--dsw-alias-label-primary,#1f2937);">
+  <div style="font-size:15px;font-weight:600;margin-bottom:2px;">月度净新增用户</div>
+  <div style="font-size:12px;color:var(--dsw-alias-label-secondary,#64748b);margin-bottom:8px;">单位：人 · 柱高以 0 为基线，正负方向不同</div>
+
+  <svg viewBox="0 0 720 410" style="width:100%;height:auto;display:block;" role="img" aria-label="月度净新增用户柱状图：1月120人，2月实测0人，3月数据缺失，4月负30人，5月80人。">
+    <title>月度净新增用户：1月 120，2月 0，3月缺失，4月 −30，5月 80</title>
+    <desc>1月与5月为正数，柱子在0基线之上；4月为负数，柱子向下到基线之下；2月实测为0，只在基线上显示一小段短横；3月数据缺失，用斜纹虚线空框表示，没有柱子。</desc>
+    <defs>
+      <pattern id="missingHatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#94a3b8" stroke-width="2.4" stroke-opacity="0.4"/>
+      </pattern>
+    </defs>
+
+    <!-- 网格线 -->
+    <g stroke="#e2e8f0" stroke-width="1">
+      <line x1="70" y1="84.4" x2="690" y2="84.4"/>
+      <line x1="70" y1="153.3" x2="690" y2="153.3"/>
+      <line x1="70" y1="222.2" x2="690" y2="222.2"/>
+      <line x1="70" y1="360" x2="690" y2="360"/>
+    </g>
+
+    <!-- 缺失占位（3月） -->
+    <rect x="344" y="60" width="72" height="231.1" rx="6" fill="url(#missingHatch)" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="380" y="196" text-anchor="middle" font-size="42" font-weight="700" fill="#94a3b8">?</text>
+    <text x="380" y="318" text-anchor="middle" font-size="12.5" font-weight="600" fill="#94a3b8">数据缺失</text>
+
+    <!-- 零基线 -->
+    <line x1="70" y1="291.1" x2="690" y2="291.1" stroke="#94a3b8" stroke-width="1.6"/>
+    <line x1="70" y1="50" x2="70" y2="360" stroke="#cbd5e1" stroke-width="1.2"/>
+
+    <!-- 刻度 -->
+    <g font-size="13" text-anchor="end" fill="#64748b">
+      <text x="60" y="89">120</text>
+      <text x="60" y="158">80</text>
+      <text x="60" y="227">40</text>
+      <text x="60" y="296">0</text>
+      <text x="60" y="365">−40</text>
+    </g>
+
+    <!-- 1月 +120 -->
+    <rect x="96" y="84.4" width="72" height="206.7" rx="5" fill="var(--dsw-alias-brand-primary,#2563eb)"/>
+    <text x="132" y="72" text-anchor="middle" font-size="17" font-weight="700" fill="var(--dsw-alias-brand-primary,#2563eb)">+120</text>
+
+    <!-- 2月 实测 0 -->
+    <rect x="232" y="287.6" width="48" height="7" rx="3.5" fill="var(--dsw-alias-label-secondary,#64748b)"/>
+    <text x="256" y="279" text-anchor="middle" font-size="17" font-weight="700" fill="var(--dsw-alias-label-secondary,#64748b)">0</text>
+    <text x="256" y="318" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--dsw-alias-label-secondary,#64748b)">实测为 0</text>
+
+    <!-- 4月 −30 -->
+    <rect x="468" y="291.1" width="72" height="51.7" rx="5" fill="var(--dsw-alias-state-error-primary,#dc2626)"/>
+    <text x="504" y="360" text-anchor="middle" font-size="17" font-weight="700" fill="var(--dsw-alias-state-error-primary,#dc2626)">−30</text>
+
+    <!-- 5月 +80 -->
+    <rect x="592" y="153.3" width="72" height="137.8" rx="5" fill="var(--dsw-alias-brand-primary,#2563eb)"/>
+    <text x="628" y="141" text-anchor="middle" font-size="17" font-weight="700" fill="var(--dsw-alias-brand-primary,#2563eb)">+80</text>
+
+    <!-- 月份标签 -->
+    <g font-size="15" font-weight="600" text-anchor="middle">
+      <text x="132" y="392" fill="var(--dsw-alias-label-primary,#1f2937)">1月</text>
+      <text x="256" y="392" fill="var(--dsw-alias-label-primary,#1f2937)">2月</text>
+      <text x="380" y="392" fill="#94a3b8">3月</text>
+      <text x="504" y="392" fill="var(--dsw-alias-label-primary,#1f2937)">4月</text>
+      <text x="628" y="392" fill="var(--dsw-alias-label-primary,#1f2937)">5月</text>
+    </g>
+  </svg>
+
+  <ul style="list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 0;padding:0;font-size:12.5px;color:var(--dsw-alias-label-secondary,#64748b);">
+    <li style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:var(--dsw-alias-brand-primary,#2563eb);flex:none;"></span>基线之上：净增为正</li>
+    <li style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:var(--dsw-alias-state-error-primary,#dc2626);flex:none;"></span>基线之下：净增为负</li>
+    <li style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:5px;border-radius:2px;background:var(--dsw-alias-label-secondary,#64748b);flex:none;"></span>贴着基线的短横：有数据、净增恰好为 0</li>
+    <li style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;border:1.5px dashed #94a3b8;background:repeating-linear-gradient(45deg,rgba(148,163,184,.45) 0 2px,transparent 2px 5px);flex:none;"></span>斜纹虚线空框：数据缺失（不等于 0）</li>
+  </ul>
+
+  <p style="margin:10px 0 0;font-size:12.5px;line-height:1.6;color:var(--dsw-alias-label-secondary,#64748b);">
+    月份间直接比柱长：1月（+120）远超5月（+80）；4月柱子朝下，净减 30 人；2月不是“没有柱子”而是值为 0；3月没有数据，空缺待补，不计入比较。
+  </p>
+</div>

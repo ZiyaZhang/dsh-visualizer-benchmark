@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 2,
+  "trialId": "E01-B-1",
+  "caseId": "E01",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 51,
+  "resultSeq": 52,
+  "casesPath": "results/dev-B-connected-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:45:08.985Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "not_applicable",
+      "reason": "No literal label oracle specified.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "客户端\n服务器\nSYN · seq = x\nSYN + ACK · seq = y · ack = x + 1\nACK · ack = y + 1\n迟到的旧 SYN（客户端毫不知情）\nSYN + ACK · 服务器立刻 ESTABLISHED\n客户端：没有这次连接 → RST / 丢弃\n状态\nCLOSED\n状态\nLISTEN\n三次握手\n假如只有两次\n上一步\n步骤 0 / 3\n下一步\n重置\n两个方向、四种能力\n0 / 4\n○\n服务器确认：客户端能发\n○\n客户端确认：服务器能收\n○\n客户端确认：服务器能发\n○\n服务器确认：客户端能收\n初始状态\n\n客户端还没发起连接，服务器在 LISTEN 等待。点「下一步」逐条查看报文。\n客户端 服务器 SYN · seq = x SYN + ACK · seq = y · ack = x + 1 ACK · ack = y + 1 状态 CLOSED 状态 LISTEN",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 669,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "TCP 三次握手时序图：客户端与服务器之间的 SYN、SYN+ACK、ACK 三条报文",
+        "选择场景"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+          "payload": {},
+          "at": 84.29999995231628
+        },
+        {
+          "type": "rendered",
+          "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+          "payload": {},
+          "at": 89
+        },
+        {
+          "type": "resize",
+          "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+          "payload": {
+            "height": 669
+          },
+          "at": 89
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- img \"TCP 三次握手时序图：客户端与服务器之间的 SYN、SYN+ACK、ACK 三条报文\": 客户端 服务器 SYN · seq = x SYN + ACK · seq = y · ack = x + 1 ACK · ack = y + 1 状态 CLOSED 状态 LISTEN\n- radiogroup \"选择场景\":\n  - radio \"三次握手\" [checked]\n  - text: 三次握手\n  - radio \"假如只有两次\"\n  - text: 假如只有两次\n- button \"上一步\" [disabled]\n- text: 步骤 0 / 3\n- button \"下一步\"\n- button \"重置\"\n- heading \"两个方向、四种能力 0 / 4\" [level=4]\n- list:\n  - listitem: ○ 服务器确认：客户端能发\n  - listitem: ○ 客户端确认：服务器能收\n  - listitem: ○ 客户端确认：服务器能发\n  - listitem: ○ 服务器确认：客户端能收\n- heading \"初始状态\" [level=4]\n- paragraph: 客户端还没发起连接，服务器在 LISTEN 等待。点「下一步」逐条查看报文。"
+    },
+    {
+      "text": "客户端\n服务器\nSYN · seq = x\nSYN + ACK · seq = y · ack = x + 1\nACK · ack = y + 1\n迟到的旧 SYN（客户端毫不知情）\nSYN + ACK · 服务器立刻 ESTABLISHED\n客户端：没有这次连接 → RST / 丢弃\n状态\nCLOSED\n状态\nLISTEN\n三次握手\n假如只有两次\n上一步\n步骤 0 / 3\n下一步\n重置\n两个方向、四种能力\n0 / 4\n○\n服务器确认：客户端能发\n○\n客户端确认：服务器能收\n○\n客户端确认：服务器能发\n○\n服务器确认：客户端能收\n初始状态\n\n客户端还没发起连接，服务器在 LISTEN 等待。点「下一步」逐条查看报文。\n客户端 服务器 SYN · seq = x SYN + ACK · seq = y · ack = x + 1 ACK · ack = y + 1 状态 CLOSED 状态 LISTEN",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 605,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "TCP 三次握手时序图：客户端与服务器之间的 SYN、SYN+ACK、ACK 三条报文",
+        "选择场景"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d1db08982306616c0ad8313169caaebb",
+          "payload": {},
+          "at": 156.29999995231628
+        },
+        {
+          "type": "rendered",
+          "channel": "d1db08982306616c0ad8313169caaebb",
+          "payload": {},
+          "at": 160.29999995231628
+        },
+        {
+          "type": "resize",
+          "channel": "d1db08982306616c0ad8313169caaebb",
+          "payload": {
+            "height": 605
+          },
+          "at": 160.29999995231628
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- img \"TCP 三次握手时序图：客户端与服务器之间的 SYN、SYN+ACK、ACK 三条报文\": 客户端 服务器 SYN · seq = x SYN + ACK · seq = y · ack = x + 1 ACK · ack = y + 1 状态 CLOSED 状态 LISTEN\n- radiogroup \"选择场景\":\n  - radio \"三次握手\" [checked]\n  - text: 三次握手\n  - radio \"假如只有两次\"\n  - text: 假如只有两次\n- button \"上一步\" [disabled]\n- text: 步骤 0 / 3\n- button \"下一步\"\n- button \"重置\"\n- heading \"两个方向、四种能力 0 / 4\" [level=4]\n- list:\n  - listitem: ○ 服务器确认：客户端能发\n  - listitem: ○ 客户端确认：服务器能收\n  - listitem: ○ 客户端确认：服务器能发\n  - listitem: ○ 服务器确认：客户端能收\n- heading \"初始状态\" [level=4]\n- paragraph: 客户端还没发起连接，服务器在 LISTEN 等待。点「下一步」逐条查看报文。"
+    },
+    {
+      "text": "客户端\n服务器\nSYN · seq = x\nSYN + ACK · seq = y · ack = x + 1\nACK · ack = y + 1\n迟到的旧 SYN（客户端毫不知情）\nSYN + ACK · 服务器立刻 ESTABLISHED\n客户端：没有这次连接 → RST / 丢弃\n状态\nCLOSED\n状态\nLISTEN\n三次握手\n假如只有两次\n上一步\n步骤 0 / 3\n下一步\n重置\n两个方向、四种能力\n0 / 4\n○\n服务器确认：客户端能发\n○\n客户端确认：服务器能收\n○\n客户端确认：服务器能发\n○\n服务器确认：客户端能收\n初始状态\n\n客户端还没发起连接，服务器在 LISTEN 等待。点「下一步」逐条查看报文。\n客户端 服务器 SYN · seq = x SYN + ACK · seq = y · ack = x + 1 ACK · ack = y + 1 状态 CLOSED 状态 LISTEN",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 669,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "TCP 三次握手时序图：客户端与服务器之间的 SYN、SYN+ACK、ACK 三条报文",
+        "选择场景"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "7ebc817ea00d2b7de33f71301b625bab",
+          "payload": {},
+          "at": 216.19999980926514
+        },
+        {
+          "type": "rendered",
+          "channel": "7ebc817ea00d2b7de33f71301b625bab",
+          "payload": {},
+          "at": 219.29999995231628
+        },
+        {
+          "type": "resize",
+          "channel": "7ebc817ea00d2b7de33f71301b625bab",
+          "payload": {
+            "height": 669
+          },
+          "at": 219.29999995231628
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- img \"TCP 三次握手时序图：客户端与服务器之间的 SYN、SYN+ACK、ACK 三条报文\": 客户端 服务器 SYN · seq = x SYN + ACK · seq = y · ack = x + 1 ACK · ack = y + 1 状态 CLOSED 状态 LISTEN\n- radiogroup \"选择场景\":\n  - radio \"三次握手\" [checked]\n  - text: 三次握手\n  - radio \"假如只有两次\"\n  - text: 假如只有两次\n- button \"上一步\" [disabled]\n- text: 步骤 0 / 3\n- button \"下一步\"\n- button \"重置\"\n- heading \"两个方向、四种能力 0 / 4\" [level=4]\n- list:\n  - listitem: ○ 服务器确认：客户端能发\n  - listitem: ○ 客户端确认：服务器能收\n  - listitem: ○ 客户端确认：服务器能发\n  - listitem: ○ 服务器确认：客户端能收\n- heading \"初始状态\" [level=4]\n- paragraph: 客户端还没发起连接，服务器在 LISTEN 等待。点「下一步」逐条查看报文。"
+    },
+    {
+      "text": "客户端\n服务器\nSYN · seq = x\nSYN + ACK · seq = y · ack = x + 1\nACK · ack = y + 1\n迟到的旧 SYN（客户端毫不知情）\nSYN + ACK · 服务器立刻 ESTABLISHED\n客户端：没有这次连接 → RST / 丢弃\n状态\nCLOSED\n状态\nLISTEN\n三次握手\n假如只有两次\n上一步\n步骤 0 / 3\n下一步\n重置\n两个方向、四种能力\n0 / 4\n○\n服务器确认：客户端能发\n○\n客户端确认：服务器能收\n○\n客户端确认：服务器能发\n○\n服务器确认：客户端能收\n初始状态\n\n客户端还没发起连接，服务器在 LISTEN 等待。点「下一步」逐条查看报文。\n客户端 服务器 SYN · seq = x SYN + ACK · seq = y · ack = x + 1 ACK · ack = y + 1 状态 CLOSED 状态 LISTEN",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 605,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "TCP 三次握手时序图：客户端与服务器之间的 SYN、SYN+ACK、ACK 三条报文",
+        "选择场景"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "85bc0e18b7e21e2c0d2521ce14581a7b",
+          "payload": {},
+          "at": 287.7999999523163
+        },
+        {
+          "type": "rendered",
+          "channel": "85bc0e18b7e21e2c0d2521ce14581a7b",
+          "payload": {},
+          "at": 294.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "85bc0e18b7e21e2c0d2521ce14581a7b",
+          "payload": {
+            "height": 605
+          },
+          "at": 294.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- img \"TCP 三次握手时序图：客户端与服务器之间的 SYN、SYN+ACK、ACK 三条报文\": 客户端 服务器 SYN · seq = x SYN + ACK · seq = y · ack = x + 1 ACK · ack = y + 1 状态 CLOSED 状态 LISTEN\n- radiogroup \"选择场景\":\n  - radio \"三次握手\" [checked]\n  - text: 三次握手\n  - radio \"假如只有两次\"\n  - text: 假如只有两次\n- button \"上一步\" [disabled]\n- text: 步骤 0 / 3\n- button \"下一步\"\n- button \"重置\"\n- heading \"两个方向、四种能力 0 / 4\" [level=4]\n- list:\n  - listitem: ○ 服务器确认：客户端能发\n  - listitem: ○ 客户端确认：服务器能收\n  - listitem: ○ 客户端确认：服务器能发\n  - listitem: ○ 服务器确认：客户端能收\n- heading \"初始状态\" [level=4]\n- paragraph: 客户端还没发起连接，服务器在 LISTEN 等待。点「下一步」逐条查看报文。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+      "payload": {},
+      "at": 84.29999995231628
+    },
+    {
+      "type": "rendered",
+      "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+      "payload": {},
+      "at": 89
+    },
+    {
+      "type": "resize",
+      "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+      "payload": {
+        "height": 669
+      },
+      "at": 89
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "5c7be9e897c3230f581fc857d4953d9c17355fe4cc2b0c556d17a2cbe9e9bb13",
+  "previewSha256": "6a1adc9748cbeda2ddab546cc3e6c474ddf9e95cd75ef5318e6a7ce4f52616cc",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

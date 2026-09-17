@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 2,
+  "id": "W01-B-2",
+  "roundId": "dev-B-connected-20260917",
+  "caseId": "W01",
+  "arm": "B",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "用一个可交互示意帮我理解二分查找。在有序数组 [2,5,8,12,16,23,38,56] 中找 23，可以点“下一步”逐轮看到 low、mid、high 和排除的区间，也能重置。直接在回复里演示。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "二分查找演示：在有序数组中找 23",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/dev-B-connected-20260917/W01-B-2/widget-1.source.html",
+      "preview": "results/dev-B-connected-20260917/W01-B-2/widget-1.html",
+      "sha256": "aedfe4f62e6a39b31164ba0fbca9209ed75e0b0d3d40bbbb0edd5dc02a6cbbf2",
+      "bytes": 8797
+    }
+  ],
+  "final": "I'll load the visualize skill first since this is exactly an interactive inline visual.\n\n上面的示意图已经可以直接交互了，试试点「下一步」：\n\n**演示的 3 个状态与 2 轮比较**\n\n| 状态 | low | mid | high | 动作 |\n|---|---|---|---|---|\n| 初始 | 0 | — | 7 | 候选区间 [0..7]，共 8 个元素 |\n| 第 1 轮 | 0 | 3 | 7 | a[3]=12 < 23 → 排除下标 0～3（红虚线），low 移到 4 |\n| 第 2 轮 | 4 | 5 | 7 | a[5]=23 = 23 → 命中，返回下标 5 |\n\n**看的时候抓三个点**\n\n1. **每轮砍掉一半**：不是\"排除左边那些数\"，而是\"排除下标 0～3 这段区间\"——有序性保证目标绝不可能藏在那里。第 1 轮后候选从 8 个缩到 4 个。\n2. **mid 的算法**：`mid = ⌊(low+high)/2⌋`，所以第 1 轮是 ⌊7/2⌋ = 3，第 2 轮是 ⌊11/2⌋ = 5（向下取整，不是四舍五入）。\n3. **为什么 low 跳到 mid+1**：a[mid] 已经比较过且不相等，它不可能是答案，所以新区间从 mid+1 开始（若 a[mid] > 目标，则 high 移到 mid-1）。这也是循环能终止、不会死循环的原因——区间每轮严格变小。\n\n**换个角度感受收益**：这个数组长度 8，线性查找最坏要 8 次比较；二分查找的判定树最深 4 层，所以最坏 4 次，而找 23 恰好只用了 2 次。点「重置」可以回到初始态重看，也可以自己在脑中把目标换成 2（最靠左）或 56（最靠右）走一遍，体会边界情况。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 18,
+        "callId": "call_00_ET_aQEYBWrZxYzmODBJxhAI1404",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 19,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_RKfAYqZA5Xk5PfxRFb7I1950",
+        "argumentsSha256": "3f1f4d803164e45e579e5cad2805766b4bfc778423caa51cf7013bd060b4f58b",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_y2EikZmIMFxv1hmwCqzK8177",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_Ro7KwqLod2Z6ldyhaGEx1279",
+        "argumentsSha256": "4a58130230244e302f311f059a1f0873939c09ed1c34170ef78fd2eb2657a4ef",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "0b8d12878afba1ec52f534faa5f1933e2ae97fc7167bae3adfeb025cd246ff18"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "d5bd699d85019ea4498dc335ff833863467549144cf9d55377819d157fcd2655"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 18,
+        "resultSeq": 19,
+        "success": true,
+        "resultSha256": "704341f3f16636b586f5bc73db7829ac4caf223d4867c927121426338a3b4adc"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "680989f23b07f000886f07576a5e47d7362019c16bd56a5cc7a11c20eb808805"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8339,
+    "outputTokens": 9053,
+    "cacheReadTokens": 34304,
+    "cacheWriteTokens": 0,
+    "totalTokens": 51696
+  },
+  "elapsedSeconds": 51.988,
+  "sourceHead": "9ca98673c522c0f74b11bbc640dbf92121442bb9",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "627aedfe78fb6ea99fe280360b4914bb5356cf4ca3a7fbd1efc6297d33ce1a9b",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "29c9532b565089b38fad5452dd737108c7e244992b2f01c0aa9ad3b68643a6a5",
+  "extractionCorrection": {
+    "kind": "visible-assistant-text-only",
+    "correctedAt": "2026-09-17T16:48:00.922Z",
+    "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+    "correctorSha256": "47a8c7617f9cc6fbdf2b33b085723fa5e02fb800caee20608c755c767c2c57b3",
+    "sourceSessionSha256": "c54875cd10cd81696d97112195ee7de30cd7bcb6b0d86654e73e281e4a53a794",
+    "assistantSeqs": [
+      17,
+      38
+    ],
+    "previousFinalSha256": "eb9c203c023aaa6016f1dd59c1c5c4e43afd1eb9661c828653342a417ae6c1a1",
+    "previousCorrection": {
+      "kind": "visible-assistant-text-only",
+      "correctedAt": "2026-09-17T16:40:33.879Z",
+      "frozenCollectorSha256": "1aff2650bd61bafdb8ebb90c70e7ea7290647bc1dff780dbfdaeae21ba485338",
+      "correctorSha256": "ef5a06fbafdc4b1a7032c073d912b16cbfe2dda9caa634ef3465a6deceb96ed3",
+      "sourceSessionSha256": "c54875cd10cd81696d97112195ee7de30cd7bcb6b0d86654e73e281e4a53a794",
+      "assistantSeq": 38,
+      "previousFinalSha256": "643e922c03f0fb500dc070640143f8d166911a939a58af74e4e237266480122e",
+      "finalChanged": true,
+      "reason": "Final replies include only text blocks. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+    },
+    "finalChanged": true,
+    "reason": "All visible assistant text blocks are included in chronological order. Non-display blocks remain in the private Session; generation and widget sources are unchanged."
+  }
+}
