@@ -1,0 +1,180 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><div class="wrap">
+  <style>
+    .wrap{font-family:inherit;color:var(--dsw-alias-label-primary);max-width:560px;min-width:0}
+    .head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between}
+    .title{font-size:15px;font-weight:600}
+    .hint{font-size:12px;color:var(--dsw-alias-label-tertiary)}
+    .chart{margin:14px 0 4px;display:flex;flex-direction:column;gap:10px}
+    .row{display:grid;grid-template-columns:minmax(52px,auto) 1fr minmax(84px,auto);gap:10px;align-items:center;padding:8px 10px;border-radius:10px;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-layer-1);cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;min-width:0;transition:background .15s,border-color .15s}
+    .row:hover{background:var(--dsw-alias-interactive-bg-hover)}
+    .row[aria-pressed="true"]{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-interactive-bg-active)}
+    .name{font-size:13px;font-weight:600;white-space:nowrap}
+    .track{position:relative;height:16px;border-radius:8px;background:var(--dsw-alias-bg-layer-2);overflow:hidden;min-width:0}
+    .bar{position:absolute;inset:0 auto 0 0;width:0;border-radius:8px;background:var(--dsw-alias-brand-primary);transition:width .35s ease}
+    .row[aria-pressed="true"] .bar{background:var(--dsw-alias-brand-primary)}
+    .row:not([aria-pressed="true"]) .bar{opacity:.55}
+    .val{font-size:13px;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+    .val b{font-weight:600}
+    .val span{font-size:11px;color:var(--dsw-alias-label-tertiary);margin-left:2px}
+    .foot{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+    .status{font-size:12px;color:var(--dsw-alias-label-secondary);min-height:18px;min-width:0}
+    .status b{color:var(--dsw-alias-label-primary)}
+    @media (prefers-reduced-motion: reduce){.bar{transition:none}}
+  </style>
+
+  <div class="head">
+    <div class="title">地区销售对比 · 单位：万元</div>
+    <div class="hint">点击地区可本地选中，不会自动提问</div>
+  </div>
+
+  <div class="chart" role="group" aria-label="地区销售对比，单位万元">
+    <button class="row" type="button" data-name="华东" data-val="120" aria-pressed="false">
+      <span class="name">华东</span>
+      <span class="track"><span class="bar" style="width:100%"></span></span>
+      <span class="val"><b>120</b><span>万元</span></span>
+    </button>
+    <button class="row" type="button" data-name="华南" data-val="80" aria-pressed="false">
+      <span class="name">华南</span>
+      <span class="track"><span class="bar" style="width:66.7%"></span></span>
+      <span class="val"><b>80</b><span>万元</span></span>
+    </button>
+    <button class="row" type="button" data-name="西部" data-val="50" aria-pressed="false">
+      <span class="name">西部</span>
+      <span class="track"><span class="bar" style="width:41.7%"></span></span>
+      <span class="val"><b>50</b><span>万元</span></span>
+    </button>
+  </div>
+
+  <div class="foot">
+    <div class="status" id="st" aria-live="polite">未选择地区</div>
+    <button type="button" id="ask" disabled>解释所选地区</button>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.currentScript.closest('.wrap');
+      var rows = Array.prototype.slice.call(root.querySelectorAll('.row'));
+      var status = root.querySelector('#st');
+      var ask = root.querySelector('#ask');
+      var sel = null;
+
+      function render() {
+        rows.forEach(function (r) {
+          r.setAttribute('aria-pressed', sel && r.dataset.name === sel.name ? 'true' : 'false');
+        });
+        if (!sel) {
+          status.textContent = '未选择地区';
+          ask.disabled = true;
+          ask.textContent = '解释所选地区';
+        } else {
+          status.innerHTML = '已选 <b>' + sel.name + '</b> · <b>' + sel.val + '</b> 万元';
+          ask.disabled = false;
+          ask.textContent = '解释所选地区：' + sel.name + '（' + sel.val + '万元）';
+        }
+      }
+
+      rows.forEach(function (r) {
+        r.addEventListener('click', function () {
+          sel = { name: r.dataset.name, val: r.dataset.val };
+          render();
+        });
+      });
+
+      ask.addEventListener('click', function () {
+        if (!sel) return;
+        window.dshWidget.sendPrompt(
+          '请解释所选地区的销售表现：地区＝' + sel.name + '，销售额＝' + sel.val +
+          '万元。背景：华东120万元、华南80万元、西部50万元。请说明该地区在整体中的位置、可能的驱动与风险，以及下一步建议。'
+        );
+      });
+
+      render();
+    })();
+  </script>
+</div></body></html>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360" role="img" aria-label="Sales bar chart: A equals 3, B equals 5">
+  <title>Sales</title>
+  <desc>Static bar chart of sales: A = 3, B = 5.</desc>
+
+  <rect x="0" y="0" width="480" height="360" fill="#ffffff"/>
+
+  <text x="240" y="36" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1f2933" text-anchor="middle">Sales</text>
+
+  <!-- Plot area: x 70..450, y 60..300 -->
+  <g stroke="#d9e2ec" stroke-width="1">
+    <line x1="70" y1="300" x2="450" y2="300"/>
+    <line x1="70" y1="252" x2="450" y2="252"/>
+    <line x1="70" y1="204" x2="450" y2="204"/>
+    <line x1="70" y1="156" x2="450" y2="156"/>
+    <line x1="70" y1="108" x2="450" y2="108"/>
+    <line x1="70" y1="60" x2="450" y2="60"/>
+  </g>
+
+  <!-- Y axis -->
+  <line x1="70" y1="60" x2="70" y2="300" stroke="#52606d" stroke-width="1.5"/>
+
+  <!-- Y tick labels: 0..5, 48px per unit -->
+  <g font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" text-anchor="end">
+    <text x="60" y="304">0</text>
+    <text x="60" y="256">1</text>
+    <text x="60" y="208">2</text>
+    <text x="60" y="160">3</text>
+    <text x="60" y="112">4</text>
+    <text x="60" y="64">5</text>
+  </g>
+
+  <!-- Bars: A = 3 (height 144), B = 5 (height 240) -->
+  <rect x="120" y="156" width="90" height="144" fill="#3d7ea6"/>
+  <rect x="300" y="60" width="90" height="240" fill="#e07a5f"/>
+
+  <!-- Value labels -->
+  <g font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1f2933" text-anchor="middle">
+    <text x="165" y="148">3</text>
+    <text x="345" y="52">5</text>
+  </g>
+
+  <!-- Category labels -->
+  <g font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f2933" text-anchor="middle">
+    <text x="165" y="324">A</text>
+    <text x="345" y="324">B</text>
+  </g>
+
+  <!-- Axis titles -->
+  <text x="240" y="350" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#52606d" text-anchor="middle">Category</text>
+</svg>

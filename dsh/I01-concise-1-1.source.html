@@ -1,0 +1,110 @@
+<style>
+  .bs-root{--cell:44px;font-family:inherit;color:var(--dsw-alias-label-primary);background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:12px;padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px;max-width:560px}
+  .bs-head{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;justify-content:space-between;min-width:0}
+  .bs-title{font-size:.82rem;font-weight:600;color:var(--dsw-alias-label-secondary)}
+  .bs-target{font-size:.8rem;font-variant-numeric:tabular-nums;background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l2);border-radius:999px;padding:2px 10px;white-space:nowrap}
+  .bs-array{display:flex;justify-content:center;gap:5px;padding:2px 0 4px;overflow-x:auto}
+  .bs-col{display:flex;flex-direction:column;align-items:center;gap:5px;flex:0 0 auto}
+  .bs-cell{width:var(--cell);height:var(--cell);border-radius:9px;background:var(--dsw-alias-bg-layer-2);border:2px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;transition:opacity .18s,background .18s,border-color .18s,transform .18s}
+  .bs-val{font-size:.72rem;font-weight:600;line-height:1.1}
+  .bs-idx{font-size:.6rem;color:var(--dsw-alias-label-tertiary);font-variant-numeric:tabular-nums;margin-top:1px}
+  .bs-col.out .bs-cell{opacity:.28;border-style:dashed;border-color:var(--dsw-alias-border-l2)}
+  .bs-col.active .bs-cell{border-color:var(--dsw-alias-border-l2)}
+  .bs-col.mid .bs-cell{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-interactive-bg-active);transform:translateY(-2px)}
+  .bs-col.found .bs-cell{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-button-primary-fill)}
+  .bs-col.found .bs-val,.bs-col.found .bs-idx{color:var(--dsw-alias-label-primary-inverted)}
+  .bs-ptr{height:1.05rem;font-size:.62rem;font-weight:700;line-height:1.05rem;letter-spacing:.02em;display:flex;flex-direction:column;align-items:center;gap:1px}
+  .bs-ptr span{background:var(--dsw-alias-bg-layer-2);border-radius:4px;padding:0 3px}
+  .bs-ptr span.p-low,.bs-ptr span.p-high{color:var(--dsw-alias-label-secondary)}
+  .bs-ptr span.p-mid{color:var(--dsw-alias-label-primary)}
+  .bs-status{font-size:.82rem;line-height:1.5;background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1);border-radius:9px;padding:8px 11px;font-variant-numeric:tabular-nums}
+  .bs-status b{color:var(--dsw-alias-brand-primary)}
+  .bs-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .bs-count{font-size:.75rem;color:var(--dsw-alias-label-tertiary);font-variant-numeric:tabular-nums;margin-right:auto}
+  .bs-btn{font:inherit;font-size:.8rem;padding:6px 14px;border-radius:8px;border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary);cursor:pointer}
+  .bs-btn.primary{background:var(--dsw-alias-button-primary-fill);color:var(--dsw-alias-label-primary-inverted);border-color:transparent}
+  .bs-btn:disabled{opacity:.45;cursor:not-allowed}
+</style>
+<div class="bs-root">
+  <div class="bs-head">
+    <div class="bs-title">二分查找 · 有序数组</div>
+    <div class="bs-target">目标值 23</div>
+  </div>
+  <div class="bs-array" id="bs-array" role="img" aria-label="有序数组 2 5 8 12 16 23 38 56，索引 0 到 7"></div>
+  <div class="bs-status" id="bs-status" aria-live="polite"></div>
+  <div class="bs-foot">
+    <div class="bs-count" id="bs-count">第 0 / 3 轮比较</div>
+    <button class="bs-btn primary" id="bs-next">下一步</button>
+    <button class="bs-btn" id="bs-reset">重置</button>
+  </div>
+</div>
+<script>
+(function(){
+  var arr=[2,5,8,12,16,23,38,56];
+  var steps=[
+    {low:0,high:7,mid:null,found:false,msg:'初始区间 [0, 7]：在 8 个元素中找 <b>23</b>。点击“下一步”开始比较。'},
+    {low:0,high:7,mid:3,found:false,msg:'mid = ⌊(0+7)/2⌋ = <b>3</b> → 值 12。12 &lt; 23，说明目标只在右半边 → 排除左半 [0, 3]。'},
+    {low:4,high:7,mid:null,found:false,msg:'新区间 [4, 7]，只剩 4 个元素。再取中：mid = ⌊(4+7)/2⌋ = 5。'},
+    {low:4,high:7,mid:5,found:true,msg:'mid = <b>5</b> → 值 23。23 == 23，命中！'},
+    {low:4,high:7,mid:5,found:true,msg:'找到 23，位于索引 <b>5</b>，共比较 2 轮（不是 8 次）。若第 3 步是 23 &gt; mid 值，则继续把 low 移到 mid+1。'}
+  ];
+  var i=0;
+  var arrayEl=document.getElementById('bs-array');
+  var statusEl=document.getElementById('bs-status');
+  var countEl=document.getElementById('bs-count');
+  var nextBtn=document.getElementById('bs-next');
+  var resetBtn=document.getElementById('bs-reset');
+  var cols=arr.map(function(v,idx){
+    var col=document.createElement('div');
+    col.className='bs-col';
+    var cell=document.createElement('div');
+    cell.className='bs-cell';
+    var val=document.createElement('div');
+    val.className='bs-val';
+    val.textContent=v;
+    var ix=document.createElement('div');
+    ix.className='bs-idx';
+    ix.textContent=idx;
+    cell.appendChild(val);cell.appendChild(ix);
+    var ptr=document.createElement('div');
+    ptr.className='bs-ptr';
+    col.appendChild(cell);col.appendChild(ptr);
+    arrayEl.appendChild(col);
+    return {col:col,ptr:ptr};
+  });
+  function render(){
+    var s=steps[i];
+    cols.forEach(function(c,idx){
+      c.col.classList.remove('out','active','mid','found');
+      c.ptr.textContent='';
+      var inRange=s.mid===null ? (idx>=s.low&&idx<=s.high) : (idx>=s.low&&idx<=s.high);
+      if(!inRange) c.col.classList.add('out');
+      else if(idx<s.low||idx>s.high) c.col.classList.add('out');
+      else c.col.classList.add('active');
+      if(i>=2 && idx<s.low) c.col.classList.add('out');
+      if(i>=2 && idx>s.high) c.col.classList.add('out');
+      if(s.mid===idx){
+        c.ptr.textContent='';
+        c.col.classList.add(s.found?'found':'mid');
+      }
+      var tags=[];
+      if(idx===s.low) tags.push(['L','p-low']);
+      if(idx===s.high) tags.push(['H','p-high']);
+      if(s.mid===idx) tags.push([s.found?'✓':'M','p-mid']);
+      tags.forEach(function(t){
+        var sp=document.createElement('span');
+        sp.className=t[1];
+        sp.textContent=t[0];
+        c.ptr.appendChild(sp);
+      });
+    });
+    statusEl.innerHTML=s.msg;
+    countEl.textContent='第 '+(i<=3?(s.mid===null?Math.max(i-1,0):Math.max(i-1,0)):2)+' / 3 轮比较';
+    nextBtn.disabled=(i>=steps.length-1);
+    nextBtn.textContent=(i>=steps.length-1)?'已完成':'下一步';
+  }
+  nextBtn.addEventListener('click',function(){ if(i<steps.length-1){i++;render();} });
+  resetBtn.addEventListener('click',function(){ i=0; render(); });
+  render();
+})();
+</script>

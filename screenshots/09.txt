@@ -1,0 +1,54 @@
+Cowork 地区销售成品截图
+
+Wall time: 0.4599 seconds
+Output:
+The following is a diff from the previous accessibility tree for Window: "Claude" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 355, 394-409, 413-452
+~			5 HTML 内容 地区销售对比 - Claude, URL: claude.ai/cowork/cse_01STH4SCsAEDyQHq2tEdZ4gG?artifact=dbb99d67-18d9-4382-9194-006b3c29752b
++									413 container Artifact panel: 三区销售对比
++										414 container
++											415 弹出式按钮 Artifact options, 三区销售对比
++												416 文本 三区销售对比
++											417 container Comments
++												418 切换按钮 Description: Comment, Value: 0
++												419 弹出式按钮 More comment options
++											420 弹出式按钮 Share. Only you
++											421 按钮 Close
++										422 container 三区销售对比
++											423 HTML 内容 三区销售对比, URL: claude.ai/code/artifact/dbb99d67-18d9-4382-9194-006b3c29752b?m=light&chrome=none&hostcaps=comment-mode+page-comments+artifact-nav+comment-summon+viewer-context+context-card+context-send+cowork-task+chrome+chrome-readonly+chat-beside+presence+export+header+duplicate+sheet-arrow+host-keys+comments-list&hostkeys=%5B%7B%22id%22%3A%22command_palette%22%2C%22key%22%3A%22k%22%7D%2C%7B%22id%22%3A%22search_palette%22%2C%22key%22%3A%22k%22%2C%22shift%22%3Atrue%7D%2C%7B%22id%22%3A%22toggle_sidebar%22%2C%22key%22%3A%22b%22%2C%22skipInEditable%22%3Atrue%7D%2C%7B%22id%22%3A%22toggle_sidebar%22%2C%22key%22%3A%22.%22%7D%5D&org=3f9ebc92-435d-45ed-bc1f-3ecddd205432&via=user_open&surface=cowork&product=cowork#n=0
++												424 container
++													425 container User-generated artifact content
++														426 HTML 内容 三区销售对比, URL: dbb99d67-18d9-4382-9194-006b3c29752b.frame.claudeusercontent.com/_f/1789635356-e4ae/
++															427 container
++																428 文本 销售额对比 · 单位 万元
++																429 标题 华东、华南、西部, Value: 1
++																	430 文本 华东、华南、西部
++																431 text 三个地区合计  250 万元 。华东以  120 万元  领先，接近西部的两倍半；西部  50 万元 ，占整体五分之一。
++															432 container 地区销售额对比图
++																433 text 各地区销售额（万元） 点选地区查看明细
++																434 选择地区
++																	435 单选按钮 华东 120万元 占整体 48% · 居首位, Value: 1
++																		436 文本 华东
++																		437 文本 120
++																		438 文本 万元
++																		439 文本 占整体 48% · 居首位
++																	440 单选按钮 华南 80万元 占整体 32% · 距首位 −40 万元, Value: 0
++																		441 文本 华南
++																		442 文本 80
++																		443 文本 万元
++																		444 文本 占整体 32% · 距首位 −40 万元
++																	445 单选按钮 西部 50万元 占整体 20% · 距首位 −70 万元, Value: 0
++																		446 文本 西部
++																		447 文本 50
++																		448 文本 万元
++																		449 文本 占整体 20% · 距首位 −70 万元
++															450 container
++																451 text 已选地区 华东 销售额 120 万元 占整体 48% 距首位 居首位
++																452 按钮 解释「华东」
++																453 text 点击后才会把  华东 · 120 万元  发给 Claude；单纯点选地区不会发送任何内容。
++															454 文本 数据为给定的三个地区销售总额，占比与差额由此计算得出。
+Selected text: ```
+￼
+```
+
+Note: Pay special attention to the content selected by the user. If the user asks a question or refers to the content they are looking at on-screen, they might be referring to the selected content (but they might be referring to something else that's visible, too).

@@ -1,0 +1,32 @@
+最新修订热传导交互及窄屏深色截图
+
+Wall time: 1.6164 seconds
+Output:
+Browser tab: 5, Title: "DSH 真实生成 · 操作验收", URL: "http://127.0.0.1:3092/dsh-view.html?run=I02-focused-2".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 26, 38, 41
++						45 text 25.0 °C
++				46 text 已执行 1 步
++				47 text 第 1 步：节点0 100.0°C，节点1 25.0°C，节点2 0.0°C，节点3 0.0°C，节点4 0.0°C
+The focused UI element is 36 button 单步 →, ID: ht-stepBrowser tab: 5, Title: "DSH 真实生成 · 操作验收", URL: "http://127.0.0.1:3092/dsh-view.html?run=I02-focused-2".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 29, 46
+~						45 text 37.5 °C
++						46 text 6.25 °C
+~				47 text 已执行 2 步
++				39 container
++					40 text 同步更新（Jacobi）：T i ′ = T i  + α·(T i−1  − 2T i  + T i+1 )，α = 0.25
++				48 text 第 2 步：节点0 100.0°C，节点1 37.5°C，节点2 6.25°C，节点3 0.0°C，节点4 0.0°C
+The focused UI element is 36 button 单步 →, ID: ht-stepBrowser tab: 5, Title: "DSH 真实生成 · 操作验收", URL: "http://127.0.0.1:3092/dsh-view.html?run=I02-focused-2".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~						45 text 0.0 °C
+~						46 text 0.0 °C
+~				47 text 已执行 0 步
+~				48 text 第 0 步：节点0 100.0°C，节点1 0.0°C，节点2 0.0°C，节点3 0.0°C，节点4 0.0°C
+The focused UI element is 37 button 重置, ID: ht-resetBrowser tab: 5, Title: "DSH 真实生成 · 操作验收", URL: "http://127.0.0.1:3092/dsh-view.html?run=I02-focused-2".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~		7 pop up button (collapsed, settable) 宽度 , Value: 360 px, ID: width, Secondary Actions: Expand
+~				9 736 px
+~				10 (selected) 360 px
+~		11 button 切换浅色, ID: theme
+The focused UI element is 11 button 切换浅色, ID: theme

@@ -1,0 +1,11 @@
+Cowork 二分查找排除区间截图
+
+Wall time: 0.4330 seconds
+Output:
+The following is a diff from the previous accessibility tree for Window: "Claude" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~															281 text M L H
+~															282 text 刚排除 4 个 候选区间 [4, 7] L  = low 下界　 M  = mid 中点（本轮唯一真正看过的元素）　 H  = high 上界　虚线划掉 = 已排除 LOW 4 a[4] = 16 MID 3 a[3] = 12 < 23 HIGH 7 a[7] = 56 候选区间 4 个元素待排查
+~															283 文本 第 1 轮 · 砍掉左半边
+~																284 text 12 < 23 。数组是升序的，所以 23 绝不可能落在下标 3 及其左边 —— 一次排除 4 个元素，low 跳到  4 。
+~															285 text 第 2 / 4 步 区间大小 8 → 4
+The focused UI element is 254 按钮 下一步 →

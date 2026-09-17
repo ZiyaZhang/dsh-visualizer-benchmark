@@ -1,0 +1,220 @@
+<style>
+  .ht-root { display:flex; flex-direction:column; gap:12px; padding:14px; min-width:0;
+    background:var(--dsw-alias-bg-layer-1,#fff); border:1px solid var(--dsw-alias-border-l1,#e3e6ea);
+    border-radius:12px; color:var(--dsw-alias-label-primary,#1b1f24); font-size:13px; }
+  .ht-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 14px; }
+  .ht-title { font-weight:600; font-size:14px; }
+  .ht-sub { color:var(--dsw-alias-label-secondary,#5b6570); font-size:12px; }
+  .ht-figs { display:flex; flex-wrap:wrap; gap:8px 16px; margin-left:auto; font-variant-numeric:tabular-nums;
+    color:var(--dsw-alias-label-secondary,#5b6570); font-size:12px; }
+  .ht-figs b { color:var(--dsw-alias-label-primary,#1b1f24); font-weight:600; }
+  .ht-plot { display:block; width:100%; height:auto; background:var(--dsw-alias-bg-base,#f7f8fa);
+    border:1px solid var(--dsw-alias-border-l1,#e3e6ea); border-radius:10px; }
+  .ht-legend { display:flex; align-items:center; gap:8px; font-size:11px;
+    color:var(--dsw-alias-label-secondary,#5b6570); font-variant-numeric:tabular-nums; }
+  .ht-ramp { flex:1 1 90px; max-width:180px; height:9px; border-radius:5px; min-width:60px;
+    background:linear-gradient(90deg,#2f6fd0,#41b6a8,#e6c34a,#e07f3c,#cf3b2f); }
+  .ht-tablewrap { overflow-x:auto; min-width:0; }
+  table.ht-tab { border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums; font-size:12.5px; }
+  table.ht-tab caption { text-align:left; font-size:12px; color:var(--dsw-alias-label-secondary,#5b6570); padding-bottom:6px; }
+  table.ht-tab th, table.ht-tab td { padding:5px 8px; text-align:right; border-bottom:1px solid var(--dsw-alias-border-l1,#e9ecf0); white-space:nowrap; }
+  table.ht-tab th:first-child, table.ht-tab td:first-child { text-align:left; }
+  table.ht-tab thead th { font-weight:600; color:var(--dsw-alias-label-secondary,#5b6570); border-bottom:1px solid var(--dsw-alias-border-l2,#d5dae0); }
+  table.ht-tab tbody tr.ht-bound td { color:var(--dsw-alias-label-tertiary,#8a939c); }
+  .ht-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:baseline; }
+  .ht-controls { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+  .ht-controls button { font:inherit; padding:7px 14px; border-radius:8px; cursor:pointer; }
+  .ht-controls button:disabled { cursor:not-allowed; opacity:.55; }
+  #ht-step { background:var(--dsw-alias-button-primary-fill,#2f6fd0); color:var(--dsw-alias-label-primary-inverted,#fff); border:1px solid transparent; font-weight:600; }
+  #ht-reset { background:var(--dsw-alias-bg-layer-2,#fff); color:var(--dsw-alias-label-primary,#1b1f24); border:1px solid var(--dsw-alias-border-l2,#cfd5db); }
+  .ht-status { font-size:12px; color:var(--dsw-alias-label-secondary,#5b6570); }
+  .ht-status.done { color:var(--dsw-alias-state-error-primary,#1f7a4d); font-weight:600; }
+</style>
+
+<div class="ht-root">
+  <div class="ht-head">
+    <span class="ht-title">一维热传导 · 离散示意图</span>
+    <span class="ht-sub">5 个节点，两端固定，显式同步迭代</span>
+    <span class="ht-figs">
+      <span>λ = Δt·α/Δx² = <b>0.25</b></span>
+      <span>层数 n = <b id="ht-n">0</b></span>
+    </span>
+  </div>
+
+  <svg class="ht-plot" id="ht-svg" viewBox="0 0 460 272" role="img"
+       aria-labelledby="ht-aria-t ht-aria-d">
+    <title id="ht-aria-t">5 节点杆的温度分布</title>
+    <desc id="ht-aria-d">柱高与数值表示各节点温度：节点0固定100摄氏度，节点4固定0摄氏度，中间3个节点由上一时刻温度同步更新。</desc>
+    <g id="ht-grid" stroke="#cfd5db" stroke-width="1"></g>
+    <g id="ht-yax" font-size="10" fill="#5b6570" text-anchor="end"></g>
+    <line x1="42" y1="232" x2="446" y2="232" stroke="#aab2ba" stroke-width="1.4"></line>
+    <g id="ht-bars"></g>
+    <g id="ht-axis"></g>
+  </svg>
+
+  <div class="ht-legend">
+    <span>0 °C</span><span class="ht-ramp" role="presentation"></span><span>100 °C</span>
+    <span style="margin-left:auto">实心柱 = 固定边界　空心柱 = 自由节点</span>
+  </div>
+
+  <div class="ht-tablewrap">
+    <table class="ht-tab">
+      <caption>各节点当前温度（°C，保留 4 位小数）</caption>
+      <thead>
+        <tr><th scope="col">节点</th><th scope="col">位置 x</th><th scope="col">温度 T<sub>i</sub><sup>n</sup></th><th scope="col">上一步变化</th></tr>
+      </thead>
+      <tbody id="ht-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="ht-controls">
+    <button id="ht-step" type="button">单步 ▶</button>
+    <button id="ht-reset" type="button">重置 ⟲</button>
+    <span class="ht-status" id="ht-status" role="status">初始状态：中间 3 个节点均为 0 °C</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.currentScript.closest('.ht-root');
+  var T0 = [100, 0, 0, 0, 0];
+  var LAM = 0.25;
+  var XS = [0, 0.25, 0.5, 0.75, 1];
+  var doneDelta = 0.01;
+  var state = { T: T0.slice(), n: 0, prev: [null, null, null, null, null], done: false };
+
+  var W = 460, H = 272, x0 = 42, x1 = 446, yT = 26, yB = 232;
+  var slot = (x1 - x0) / 5, barW = 28;
+  var STOPS = [[0,'#2f6fd0'],[25,'#41b6a8'],[50,'#e6c34a'],[75,'#e07f3c'],[100,'#cf3b2f']];
+
+  function hex2rgb(h) { return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)]; }
+  function colorFor(t) {
+    var c = Math.max(0, Math.min(100, t)), a = STOPS[0], b = STOPS[STOPS.length-1];
+    for (var i = 0; i < STOPS.length - 1; i++) {
+      if (c >= STOPS[i][0] && c <= STOPS[i+1][0]) { a = STOPS[i]; b = STOPS[i+1]; break; }
+    }
+    var f = (b[0] === a[0]) ? 0 : (c - a[0]) / (b[0] - a[0]);
+    var p = hex2rgb(a[1]), q = hex2rgb(b[1]);
+    var r = Math.round(p[0] + (q[0]-p[0])*f), g = Math.round(p[1] + (q[1]-p[1])*f), bl = Math.round(p[2] + (q[2]-p[2])*f);
+    return 'rgb(' + r + ',' + g + ',' + bl + ')';
+  }
+  function yFor(t) { return yB - (Math.max(0, Math.min(100, t)) / 100) * (yB - yT); }
+  function fmt(v) { return v.toFixed(4); }
+
+  var svgNS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs) {
+    var e = document.createElementNS(svgNS, tag);
+    for (var k in attrs) { e.setAttribute(k, attrs[k]); }
+    return e;
+  }
+  function txt(attrs, s) { var e = el('text', attrs); e.textContent = s; return e; }
+
+  // static grid + y axis
+  var grid = root.querySelector('#ht-grid'), yax = root.querySelector('#ht-yax');
+  var ticks = [0, 25, 50, 75, 100];
+  ticks.forEach(function (t) {
+    var y = yFor(t);
+    grid.appendChild(el('line', { x1: x0, y1: y, x2: x1, y2: y, 'stroke-dasharray': t === 0 ? '0' : '2 4' }));
+    yax.appendChild(txt({ x: x0 - 7, y: y + 3.5 }, t + '°'));
+  });
+  var axis = root.querySelector('#ht-axis');
+  XS.forEach(function (x, i) {
+    var cx = x0 + slot * (i + 0.5);
+    axis.appendChild(txt({ x: cx, y: yB + 15, 'text-anchor': 'middle', 'font-size': '10.5', fill: '#5b6570' }, 'x=' + x));
+    axis.appendChild(txt({ x: cx, y: yB + 29, 'text-anchor': 'middle', 'font-size': '10.5', fill: '#8a939c' }, '节点 ' + i));
+  });
+  var bars = root.querySelector('#ht-bars');
+
+  var nodeBar = [], nodeVal = [], nodeTag = [];
+  for (var i = 0; i < 5; i++) {
+    var cx = x0 + slot * (i + 0.5);
+    var fixed = (i === 0 || i === 4);
+    var bar = el('rect', {
+      x: cx - barW / 2, width: barW, rx: 5, 'stroke-width': 1.6,
+      fill: 'none', stroke: '#8a939c'
+    });
+    bars.appendChild(bar);
+    var val = txt({ x: cx, y: yB - 8, 'text-anchor': 'middle', 'font-size': '11', 'font-weight': '600', 'font-variant-numeric': 'tabular-nums' }, '');
+    var tag = txt({ x: cx, y: yB - 22, 'text-anchor': 'middle', 'font-size': '9.5', fill: '#8a939c' }, fixed ? '固定' : '自由');
+    bars.appendChild(val); bars.appendChild(tag);
+    nodeBar.push(bar); nodeVal.push(val); nodeTag.push(tag);
+  }
+
+  var tbody = root.querySelector('#ht-tbody');
+  var rows = [];
+  for (var j = 0; j < 5; j++) {
+    var tr = document.createElement('tr');
+    if (j === 0 || j === 4) tr.className = 'ht-bound';
+    var c0 = document.createElement('td');
+    var dot = document.createElement('span');
+    dot.className = 'ht-dot'; dot.style.background = '#8a939c';
+    c0.appendChild(dot);
+    c0.appendChild(document.createTextNode('节点 ' + j + ((j === 0 || j === 4) ? '（固定）' : '（自由）')));
+    var c1 = document.createElement('td'); c1.textContent = XS[j].toFixed(2);
+    var c2 = document.createElement('td');
+    var c3 = document.createElement('td');
+    tr.appendChild(c0); tr.appendChild(c1); tr.appendChild(c2); tr.appendChild(c3);
+    tbody.appendChild(tr);
+    rows.push({ dot: dot, temp: c2, delta: c3 });
+  }
+
+  var btnStep = root.querySelector('#ht-step');
+  var btnReset = root.querySelector('#ht-reset');
+  var status = root.querySelector('#ht-status');
+  var nOut = root.querySelector('#ht-n');
+
+  function render() {
+    nOut.textContent = state.n;
+    for (var i = 0; i < 5; i++) {
+      var t = state.T[i], color = colorFor(t), fixed = (i === 0 || i === 4);
+      var y = yFor(t), h = Math.max(0, yB - y);
+      nodeBar[i].setAttribute('y', y);
+      nodeBar[i].setAttribute('height', h);
+      nodeBar[i].setAttribute('fill', fixed ? color : 'none');
+      nodeBar[i].setAttribute('stroke', color);
+      nodeVal[i].setAttribute('y', y - 7);
+      nodeVal[i].setAttribute('fill', color);
+      nodeVal[i].textContent = fmt(t);
+      rows[i].dot.style.background = color;
+      rows[i].temp.textContent = fmt(t);
+      rows[i].temp.style.color = color;
+      rows[i].temp.style.fontWeight = '600';
+      var d = state.prev[i];
+      rows[i].delta.textContent = (d === null) ? '—' : (d >= 0 ? '+' : '−') + Math.abs(d).toFixed(4);
+    }
+    btnStep.disabled = state.done;
+    if (state.done) {
+      status.classList.add('done');
+      status.textContent = '已接近稳态：每步最大变化 < 0.01 °C，温度接近线性分布 100 → 0。';
+    } else if (state.n === 0) {
+      status.classList.remove('done');
+      status.textContent = '初始状态：中间 3 个节点均为 0 °C';
+    } else {
+      status.classList.remove('done');
+      status.textContent = '第 ' + state.n + ' 步完成（用上一步温度同步更新）。';
+    }
+  }
+
+  function step() {
+    if (state.done) return;
+    var T = state.T, next = T.slice(), prev = [null, null, null, null, null], maxd = 0;
+    for (var i = 1; i <= 3; i++) {
+      var v = T[i] + LAM * (T[i-1] - 2 * T[i] + T[i+1]);
+      next[i] = v; prev[i] = v - T[i];
+      maxd = Math.max(maxd, Math.abs(prev[i]));
+    }
+    state.T = next; state.prev = prev; state.n += 1;
+    if (maxd < doneDelta) state.done = true;
+    render();
+  }
+
+  function reset() {
+    state = { T: T0.slice(), n: 0, prev: [null, null, null, null, null], done: false };
+    render();
+  }
+
+  btnStep.addEventListener('click', step);
+  btnReset.addEventListener('click', reset);
+  render();
+})();
+</script>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>订购数量</title>
+</head>
+<body>
+  <main>
+    <h1>订购数量</h1>
+    <button id="decrease" type="button">减少</button>
+    <p id="quantity">2</p>
+    <button id="increase" type="button">增加</button>
+  </main>
+  <script>
+    (function () {
+      var MIN = 0;
+      var MAX = 5;
+      var quantity = 2;
+
+      var quantityEl = document.getElementById('quantity');
+      var decreaseBtn = document.getElementById('decrease');
+      var increaseBtn = document.getElementById('increase');
+
+      function render() {
+        quantityEl.textContent = String(quantity);
+        decreaseBtn.disabled = quantity <= MIN;
+        increaseBtn.disabled = quantity >= MAX;
+      }
+
+      decreaseBtn.addEventListener('click', function () {
+        if (quantity > MIN) {
+          quantity -= 1;
+          render();
+        }
+      });
+
+      increaseBtn.addEventListener('click', function () {
+        if (quantity < MAX) {
+          quantity += 1;
+          render();
+        }
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<style>
+.bs-wrap{display:flex;flex-direction:column;gap:13px;font-size:14px;line-height:1.45;color:var(--dsw-alias-label-primary,#17181a);background:var(--dsw-alias-bg-base,transparent);container-type:inline-size}
+.bs-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bs-chip{font-size:12px;padding:3px 10px;border-radius:999px;background:var(--dsw-alias-bg-layer-2,rgba(0,0,0,.05));border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.1));white-space:nowrap;font-variant-numeric:tabular-nums}
+.bs-chip-ghost{color:var(--dsw-alias-label-secondary,#5b5f66)}
+.bs-array{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+.bs-cell{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px 5px;border-radius:10px;border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.12));background:var(--dsw-alias-bg-layer-1,rgba(0,0,0,.02));min-width:0;transition:background .18s ease,border-color .18s ease,color .18s ease}
+.bs-idx{font-size:10px;color:var(--dsw-alias-label-tertiary,#8b9099);font-variant-numeric:tabular-nums}
+.bs-val{font-size:clamp(12px,3.6cqw,17px);font-weight:600;line-height:1.15;font-variant-numeric:tabular-nums}
+.bs-tags{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;min-height:13px}
+.bs-tag{font-size:9px;line-height:1.25;padding:1px 4px;border-radius:4px;background:var(--dsw-alias-bg-layer-2,rgba(0,0,0,.08));color:var(--dsw-alias-label-secondary,#5b5f66)}
+.bs-tag.mid{background:var(--dsw-alias-brand-primary,#3b6ef5);color:var(--dsw-alias-label-primary-inverted,#fff)}
+.bs-cell.excluded{background:transparent;border-style:dashed;color:var(--dsw-alias-label-tertiary,#9aa0a8)}
+.bs-cell.excluded .bs-val{text-decoration:line-through}
+.bs-cell.window{border-color:var(--dsw-alias-brand-primary,#3b6ef5);border-width:2px}
+.bs-cell.mid{background:var(--dsw-alias-interactive-bg-active,rgba(59,110,245,.14))}
+.bs-cell.found{background:var(--dsw-alias-brand-primary,#3b6ef5);color:var(--dsw-alias-label-primary-inverted,#fff);outline:2px solid var(--dsw-alias-brand-primary,#3b6ef5);outline-offset:2px}
+.bs-cell.found .bs-idx{color:inherit;opacity:.75}
+.bs-cell.found .bs-tag{background:rgba(255,255,255,.22);color:#fff}
+.bs-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.5px;color:var(--dsw-alias-label-secondary,#5b5f66)}
+.bs-legend span{display:inline-flex;align-items:center;gap:5px}
+.bs-sw{width:12px;height:12px;border-radius:4px;border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.15));display:inline-block}
+.bs-sw.mid{background:var(--dsw-alias-brand-primary,#3b6ef5);border-color:transparent}
+.bs-sw.ex{border-style:dashed;background:transparent}
+.bs-sw.win{border:2px solid var(--dsw-alias-brand-primary,#3b6ef5);background:transparent}
+.bs-desc{margin:0;font-size:13.5px;color:var(--dsw-alias-label-primary,#17181a);background:var(--dsw-alias-bg-layer-2,rgba(0,0,0,.04));border-radius:9px;padding:9px 11px}
+.bs-vars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.bs-var{display:flex;flex-direction:column;gap:1px;padding:6px 10px;border-radius:9px;background:var(--dsw-alias-bg-layer-2,rgba(0,0,0,.04));min-width:0}
+.bs-var .k{font-size:11px;color:var(--dsw-alias-label-secondary,#5b5f66)}
+.bs-var .v{font-size:16px;font-variant-numeric:tabular-nums}
+.bs-log{margin:0;padding:0 0 0 20px;max-height:98px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--dsw-alias-label-secondary,#4c5158)}
+.bs-log li{font-variant-numeric:tabular-nums}
+.bs-log li:last-child{color:var(--dsw-alias-label-primary,#17181a);font-weight:500}
+.bs-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bs-controls button{font:inherit;font-size:13.5px;padding:7px 15px;border-radius:9px;cursor:pointer}
+.bs-primary{background:var(--dsw-alias-button-primary-fill,#2f6bff);color:var(--dsw-alias-label-primary-inverted,#fff);border:1px solid transparent}
+.bs-controls button:disabled{opacity:.45;cursor:not-allowed}
+.bs-foot{margin:0;font-size:11.5px;color:var(--dsw-alias-label-tertiary,#8b9099)}
+</style>
+
+<div class="bs-wrap">
+  <div class="bs-top">
+    <span class="bs-chip">目标值 <b>23</b></span>
+    <span class="bs-chip">有序数组 · 8 个元素</span>
+    <span class="bs-chip bs-chip-ghost" id="bs-round">准备开始</span>
+  </div>
+
+  <div class="bs-array" id="bs-array" role="img" aria-labelledby="bs-desc"></div>
+
+  <div class="bs-legend">
+    <span><i class="bs-sw mid"></i>本轮 mid（被检查）</span>
+    <span><i class="bs-sw ex"></i>已排除</span>
+    <span><i class="bs-sw win"></i>当前搜索区间</span>
+  </div>
+
+  <p class="bs-desc" id="bs-desc" aria-live="polite">初始区间 [0, 7]：候选 8 个。点击「下一步」开始第一轮比较。</p>
+
+  <div class="bs-vars">
+    <div class="bs-var"><span class="k">low</span><b class="v" id="bs-low">0</b></div>
+    <div class="bs-var"><span class="k">mid</span><b class="v" id="bs-mid">–</b></div>
+    <div class="bs-var"><span class="k">high</span><b class="v" id="bs-high">7</b></div>
+    <div class="bs-var"><span class="k">候选个数</span><b class="v" id="bs-count">8</b></div>
+  </div>
+
+  <ol class="bs-log" id="bs-log" aria-label="每轮记录"></ol>
+
+  <div class="bs-controls">
+    <button type="button" id="bs-prev">上一步</button>
+    <button type="button" id="bs-next" class="bs-primary">下一步</button>
+    <button type="button" id="bs-reset">重置</button>
+  </div>
+
+  <p class="bs-foot">每比较一次就砍掉一半：8 → 4 → 1。上限 ⌈log₂8⌉ = 3 次；本例 2 次命中（顺序查找要 6 次）。</p>
+</div>
+
+<script>
+(function(){
+  var ARR=[2,5,8,12,16,23,38,56], TARGET=23;
+  var steps=[], excluded=new Set(), low=0, high=ARR.length-1, round=0;
+  function snap(o){
+    var s={low:low,high:high,mid:null,excluded:new Set(excluded),round:round,kind:'init',text:''};
+    for(var k in o) s[k]=o[k];
+    return s;
+  }
+  steps.push(snap({text:'初始区间 [0, 7]：候选 8 个。二分查找每次只检查正中间那个元素。'}));
+  while(low<=high){
+    round++;
+    var mid=(low+high)>>1, v=ARR[mid];
+    if(v===TARGET){
+      steps.push(snap({mid:mid,kind:'found',text:'第 '+round+' 轮：mid = ⌊('+low+'+'+high+')/2⌋ = '+mid+'，arr['+mid+'] = '+v+'，正好等于 23 → 命中，返回索引 '+mid+'。'}));
+      break;
+    }
+    if(v<TARGET){
+      for(var a=low;a<=mid;a++) excluded.add(a);
+      var s1=snap({mid:mid,kind:'right',text:'第 '+round+' 轮：mid = ⌊('+low+'+'+high+')/2⌋ = '+mid+'，arr['+mid+'] = '+v+' < 23 → 目标在右半边，排除索引 '+low+'–'+mid+'，新区间 ['+(mid+1)+', '+high+']。'});
+      s1.candBefore=high-low+1; s1.candAfter=high-mid;
+      steps.push(s1);
+      low=mid+1;
+    } else {
+      for(var b=mid;b<=high;b++) excluded.add(b);
+      var s2=snap({mid:mid,kind:'left',text:'第 '+round+' 轮：mid = ⌊('+low+'+'+high+')/2⌋ = '+mid+'，arr['+mid+'] = '+v+' > 23 → 目标在左半边，排除索引 '+mid+'–'+high+'，新区间 ['+low+', '+(mid-1)+']。'});
+      s2.candBefore=high-low+1; s2.candAfter=mid-low;
+      steps.push(s2);
+      high=mid-1;
+    }
+  }
+
+  function $(id){return document.getElementById(id);}
+  var arrayEl=$('bs-array'), descEl=$('bs-desc'), logEl=$('bs-log'),
+      lowEl=$('bs-low'), midEl=$('bs-mid'), highEl=$('bs-high'), countEl=$('bs-count'),
+      roundEl=$('bs-round'), prevBtn=$('bs-prev'), nextBtn=$('bs-next'), resetBtn=$('bs-reset');
+
+  ARR.forEach(function(v,i){
+    var c=document.createElement('div');
+    c.className='bs-cell';
+    c.innerHTML='<span class="bs-idx">'+i+'</span><span class="bs-val">'+v+'</span><span class="bs-tags"></span>';
+    arrayEl.appendChild(c);
+  });
+  var cells=[].slice.call(arrayEl.children);
+  var idx=0;
+
+  function render(){
+    var s=steps[idx];
+    cells.forEach(function(c,i){
+      var ex=s.excluded.has(i);
+      var inWin=(i>=s.low && i<=s.high);
+      var cls='bs-cell';
+      if(ex) cls+=' excluded';
+      else if(inWin) cls+=' window';
+      if(s.mid===i) cls+=' mid';
+      if(s.kind==='found' && s.mid===i) cls+=' found';
+      c.className=cls;
+      var tags=[];
+      if(i===s.low) tags.push('<span class="bs-tag">low</span>');
+      if(i===s.high) tags.push('<span class="bs-tag">high</span>');
+      if(s.mid===i) tags.push('<span class="bs-tag mid">'+(s.kind==='found'?'mid ✓':'mid')+'</span>');
+      c.lastElementChild.innerHTML=tags.join('');
+    });
+    lowEl.textContent=s.low;
+    highEl.textContent=s.high;
+    midEl.textContent=(s.mid===null?'–':s.mid);
+    countEl.textContent=(s.candAfter!==undefined ? s.candBefore+' → '+s.candAfter : String(s.high-s.low+1));
+    descEl.textContent=s.text;
+    roundEl.textContent = s.kind==='init' ? '准备开始' : (s.kind==='found' ? '第 '+s.round+' 轮 · 命中' : '第 '+s.round+' 轮 · 缩小范围');
+    logEl.innerHTML=steps.slice(0,idx+1).map(function(t){return '<li>'+t.text+'</li>';}).join('');
+    var last=logEl.lastElementChild;
+    if(last && last.scrollIntoView) last.scrollIntoView({block:'nearest'});
+    prevBtn.disabled=(idx===0);
+    nextBtn.disabled=(idx===steps.length-1);
+    nextBtn.textContent=(idx===steps.length-1 ? '已完成' : '下一步');
+  }
+
+  nextBtn.addEventListener('click',function(){ if(idx<steps.length-1){ idx++; render(); } });
+  prevBtn.addEventListener('click',function(){ if(idx>0){ idx--; render(); } });
+  resetBtn.addEventListener('click',function(){ idx=0; render(); });
+
+  render();
+})();
+</script>

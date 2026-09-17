@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 2,
+  "stage": "dev-master-20260917",
+  "description": "来自冻结 manifest；尚未产出的计划项仍然显示。",
+  "planned": 3,
+  "trialStatuses": {
+    "error": 1,
+    "planned": 2
+  },
+  "gates": {
+    "route": {
+      "pending": 3
+    },
+    "acceptance": {
+      "error": 1,
+      "not_applicable": 2
+    },
+    "content": {
+      "not_applicable": 3
+    }
+  },
+  "human": {
+    "eligible": 0,
+    "completed": 0,
+    "needsReview": 0,
+    "unreviewed": 0,
+    "stale": [],
+    "dimensions": {
+      "understanding": {},
+      "layout": {},
+      "operability": {},
+      "focus": {}
+    }
+  },
+  "trials": [
+    {
+      "trialId": "dev-master-20260917/N01-M-1",
+      "caseId": "N01",
+      "arm": "M",
+      "status": "error",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pending",
+        "acceptance": "error",
+        "content": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-master-20260917/N02-M-1",
+      "caseId": "N02",
+      "arm": "M",
+      "status": "planned",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pending",
+        "acceptance": "not_applicable",
+        "content": "not_applicable"
+      }
+    },
+    {
+      "trialId": "dev-master-20260917/N03-M-1",
+      "caseId": "N03",
+      "arm": "M",
+      "status": "planned",
+      "humanStatus": "not_applicable",
+      "checks": {
+        "route": "pending",
+        "acceptance": "not_applicable",
+        "content": "not_applicable"
+      }
+    }
+  ],
+  "limitations": [
+    "No weighted overall score.",
+    "Pending, error and not_applicable are not passes.",
+    "Historical calibration is not a fresh prompt comparison.",
+    "Preview messages do not verify real Web follow-up or repair."
+  ],
+  "generatedAt": "2026-09-17T16:13:37.716688+00:00"
+}

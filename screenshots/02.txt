@@ -1,0 +1,69 @@
+Cowork 二分查找初始界面截图
+
+Wall time: 0.1592 seconds
+Output:
+The following is a diff from the previous accessibility tree for Window: "Claude" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~											320 container binary-search-demo.html
++												321 HTML 内容 Claude User Content, URL: claudeusercontent.com/?domain=claude.ai&parentOrigin=https%3A%2F%2Fclaude.ai&errorReportingMode=parent&formattedSpreadsheets=true
++													322 container
++														323 container Rendered HTML content
++															324 HTML 内容 二分查找逐步演示, URL: about:srcdoc
++																325 container
++																	326 文本 有序数组 · 折半 · O(LOG N)
++																	327 标题 二分查找，一轮一轮看, Value: 1
++																		328 文本 二分查找，一轮一轮看
++																	329 container
++																		330 text 在升序数组  [2, 5, 8, 12, 16, 23, 38, 56]  里找  23 。每按一次「下一步」，只前进一个动作：先取中点，再据此砍掉一半。
++																	331 text L H
++																	332 文本 2
++																	333 文本 5
++																	334 文本 8
++																	335 文本 12
++																	336 文本 16
++																	337 文本 23
++																	338 文本 38
++																	339 文本 56
++																	340 文本 0
++																	341 文本 1
++																	342 文本 2
++																	343 文本 3
++																	344 文本 4
++																	345 文本 5
++																	346 文本 6
++																	347 文本 7
++																	348 text 候选区间 [0, 7] L  = low 下界　 M  = mid 中点（本轮唯一真正看过的元素）　 H  = high 上界　虚线划掉 = 已排除 LOW 0 a[0] = 2 MID — 还没取 HIGH 7 a[7] = 56 候选区间 8 个元素待排查
++																	349 文本 第 0 步 · 初始化
++																	350 container
++																		351 text low 指向  0 ，high 指向  7  —— 此刻整个数组都是候选区间，共 8 个元素。目标是  23 。
++																	352 按钮 下一步 →
++																	353 按钮 (disabled) ← 上一步
++																	354 按钮 重置
++																	355 text 第 0 / 4 步 区间大小 8
++																	356 文本 low, high = 0, n - 1
++																	357 文本 while low <= high:
++																	358 container
++																		359 text     mid = (low + high) // 2    # 取中点
++																	360 container
++																		361 text     if   a[mid] == target: return mid    # 命中
++																	362 container
++																		363 text     elif a[mid] <  target: low  = mid + 1    # 砍掉左半边
++																	364 container
++																		365 text     else:                  high = mid - 1    # 砍掉右半边
++																	366 container
++																		367 text return -1    # 区间空了，不存在
++																	368 文本 换个目标试试
++																	369 切换按钮 2, Value: 0
++																	370 切换按钮 16, Value: 0
++																	371 切换按钮 23, Value: 1
++																	372 切换按钮 38, Value: 0
++																	373 切换按钮 56, Value: 0
++																	374 切换按钮 7（不存在）, Value: 0
++																	375 container
++																		376 text 为什么快：每轮不管命不中，候选区间都 至少减半  —— 8 → 4 → 2 → 1，所以 8 个元素最多 3 次比较。顺序查找要一路数到第 6 个才碰到 23。数组涨到一百万个，二分也只要约 20 次。
++																	377 container
++																		378 text 前提只有一个： 数组必须有序 。顺序一乱，「目标不可能在这一边」这句推理就不成立了。
+Selected text: ```
+￼
+```
+
+Note: Pay special attention to the content selected by the user. If the user asks a question or refers to the content they are looking at on-screen, they might be referring to the selected content (but they might be referring to something else that's visible, too).

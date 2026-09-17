@@ -1,0 +1,250 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><div class="bsw" id="bsw">
+<style>
+.bsw{
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  display:flex;flex-direction:column;gap:14px;
+  padding:clamp(12px,3vw,18px);
+  border:1px solid var(--dsw-alias-border-l1,#e4e6eb);
+  border-radius:16px;
+  background:var(--dsw-alias-bg-layer-1,#fff);
+  color:var(--dsw-alias-label-primary,#1a1c1f);
+  max-width:680px;
+}
+.bsw *{box-sizing:border-box}
+.bsw-head{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;justify-content:space-between}
+.bsw-title{font-size:13.5px;font-weight:650}
+.bsw-title code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+.bsw-prog{font-size:11.5px;color:var(--dsw-alias-label-secondary,#5b616b);font-variant-numeric:tabular-nums}
+.bsw-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+.bsw-cell{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;
+  padding:9px 2px 6px;border-radius:11px;min-width:0;
+  border:1.5px solid var(--dsw-alias-border-l2,#dcdfe5);
+  background:var(--dsw-alias-bg-layer-2,#f4f5f7);
+  transition:background .25s ease,border-color .25s ease,opacity .25s ease,box-shadow .25s ease}
+.bsw-idx{font-size:10px;line-height:1.1;color:var(--dsw-alias-label-tertiary,#8b9098);font-variant-numeric:tabular-nums}
+.bsw-val{font-size:clamp(14px,4.2vw,17px);line-height:1.15;font-weight:650;font-variant-numeric:tabular-nums}
+.bsw-cell.is-out{opacity:.3;border-style:dashed;background:transparent;text-decoration:line-through}
+.bsw-cell.is-in{border-color:var(--dsw-alias-brand-primary,#3b82f6);
+  background:color-mix(in srgb,var(--dsw-alias-brand-primary,#3b82f6) 9%,transparent)}
+.bsw-cell.is-mid{border-color:#f59e0b;border-width:2px;
+  background:color-mix(in srgb,#f59e0b 18%,transparent);
+  box-shadow:0 0 0 3px color-mix(in srgb,#f59e0b 16%,transparent)}
+.bsw-cell.is-found{border-color:#16a34a;border-width:2px;
+  background:color-mix(in srgb,#16a34a 20%,transparent);
+  box-shadow:0 0 0 3px color-mix(in srgb,#16a34a 18%,transparent)}
+.bsw-ok{position:absolute;top:2px;right:4px;font-size:10px;font-weight:800;color:#16a34a;opacity:0;transition:opacity .25s ease}
+.bsw-cell.is-found .bsw-ok{opacity:1}
+.bsw-ptrs{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;margin-top:-8px}
+.bsw-ptr{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:4px}
+.bsw-tag{font-size:9.5px;font-weight:700;letter-spacing:.02em;padding:2px 6px;border-radius:999px;color:#fff;white-space:nowrap}
+.bsw-tag.low{background:#0ea5e9}
+.bsw-tag.mid{background:#f59e0b}
+.bsw-tag.high{background:#8b5cf6}
+.bsw-tag.found{background:#16a34a}
+.bsw-barwrap{display:flex;flex-direction:column;gap:6px}
+.bsw-barlabel{font-size:11.5px;color:var(--dsw-alias-label-secondary,#5b616b);font-variant-numeric:tabular-nums}
+.bsw-bar{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+.bsw-seg{height:7px;border-radius:999px;background:var(--dsw-alias-border-l1,#e6e8ec);
+  transition:background .25s ease}
+.bsw-seg.is-out{background:color-mix(in srgb,var(--dsw-alias-border-l2,#dcdfe5) 60%,transparent)}
+.bsw-seg.is-in{background:color-mix(in srgb,var(--dsw-alias-brand-primary,#3b82f6) 48%,transparent)}
+.bsw-seg.is-mid{background:#f59e0b}
+.bsw-seg.is-found{background:#16a34a}
+.bsw-note{font-size:12.8px;line-height:1.6;padding:10px 12px;border-radius:11px;
+  border:1px solid var(--dsw-alias-border-l1,#e6e8ec);
+  background:var(--dsw-alias-bg-layer-2,#f7f8fa)}
+.bsw-note b{font-weight:700}
+.bsw-ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bsw-btn{font:inherit;font-size:13px;font-weight:600;padding:8px 16px;border-radius:9px;cursor:pointer;
+  border:1px solid var(--dsw-alias-border-l2,#dcdfe5);
+  background:var(--dsw-alias-bg-layer-2,#fff);color:inherit}
+.bsw-btn.primary{border-color:transparent;color:var(--dsw-alias-label-primary-inverted,#fff);
+  background:var(--dsw-alias-button-primary-fill,#3b82f6)}
+.bsw-btn:not(.primary):not(:disabled):hover{background:var(--dsw-alias-interactive-bg-hover,#eef0f4)}
+.bsw-btn.primary:not(:disabled):hover{background:var(--dsw-alias-interactive-bg-active,#2563eb)}
+.bsw-btn:disabled{opacity:.45;cursor:default}
+.bsw-legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11px;color:var(--dsw-alias-label-secondary,#5b616b)}
+.bsw-legend span{display:inline-flex;align-items:center;gap:5px}
+.bsw-sw{width:10px;height:10px;border-radius:3px;display:inline-block}
+.bsw-sw.out{background:var(--dsw-alias-border-l2,#dcdfe5);opacity:.5}
+.bsw-sw.in{border:1.5px solid var(--dsw-alias-brand-primary,#3b82f6)}
+.bsw-sw.mid{background:#f59e0b}
+.bsw-sw.found{background:#16a34a}
+@media (prefers-reduced-motion:reduce){.bsw-cell,.bsw-seg,.bsw-ok{transition:none}}
+</style>
+
+<div class="bsw-head">
+  <div class="bsw-title">二分查找 · 在 <code>[2,5,8,12,16,23,38,56]</code> 中找 <code>23</code></div>
+  <div class="bsw-prog" id="bsw-prog"></div>
+</div>
+
+<div class="bsw-grid" id="bsw-grid" role="img" aria-label="数组单元格"></div>
+<div class="bsw-ptrs" id="bsw-ptrs" aria-hidden="true"></div>
+
+<div class="bsw-barwrap">
+  <div class="bsw-barlabel" id="bsw-barlabel"></div>
+  <div class="bsw-bar" id="bsw-bar" aria-hidden="true"></div>
+  <div class="bsw-legend">
+    <span><i class="bsw-sw out"></i>已排除</span>
+    <span><i class="bsw-sw in"></i>候选区间</span>
+    <span><i class="bsw-sw mid"></i>mid（本轮中点）</span>
+    <span><i class="bsw-sw found"></i>命中</span>
+  </div>
+</div>
+
+<div class="bsw-note" id="bsw-note" aria-live="polite"></div>
+
+<div class="bsw-ctrl">
+  <button class="bsw-btn primary" id="bsw-next" type="button">下一步</button>
+  <button class="bsw-btn" id="bsw-reset" type="button">重置</button>
+</div>
+
+<script>
+(function(){
+  var A=[2,5,8,12,16,23,38,56];
+  var STEPS=[
+    {low:0,high:7,mid:null,out:[],found:null,
+     note:'初始：候选区间覆盖整个数组 <b>A[0..7]</b>，low = 0，high = 7。每一轮都会把候选区间缩小大约一半。点“下一步”做第 1 轮比较。'},
+    {low:0,high:7,mid:3,out:[],found:null,
+     note:'第 1 轮：mid = ⌊(0+7)/2⌋ = <b>3</b>，取到 A[3] = <b>12</b>。因为 12 &lt; 23，目标只可能在右半边 → 排除 <b>A[0..3]</b>，新区间 low = 4、high = 7。'},
+    {low:4,high:7,mid:5,out:[0,1,2,3],found:5,
+     note:'第 2 轮：mid = ⌊(4+7)/2⌋ = <b>5</b>，取到 A[5] = <b>23</b>，正好等于目标 → <b>命中，下标 5</b>（第 6 个元素）。总共只比较了 2 次。'}
+  ];
+  var LAST=STEPS.length-1, i=0;
+
+  var grid=document.getElementById('bsw-grid');
+  var ptrs=document.getElementById('bsw-ptrs');
+  var bar=document.getElementById('bsw-bar');
+  var barLabel=document.getElementById('bsw-barlabel');
+  var note=document.getElementById('bsw-note');
+  var prog=document.getElementById('bsw-prog');
+  var next=document.getElementById('bsw-next');
+  var reset=document.getElementById('bsw-reset');
+
+  var cells=[], segs=[], ptrCols=[];
+  A.forEach(function(v,k){
+    var c=document.createElement('div');
+    c.className='bsw-cell';
+    c.innerHTML='<span class="bsw-ok">✓</span><span class="bsw-val">'+v+'</span><span class="bsw-idx">'+k+'</span>';
+    grid.appendChild(c); cells.push(c);
+    var s=document.createElement('div'); s.className='bsw-seg'; bar.appendChild(s); segs.push(s);
+    var pc=document.createElement('div'); pc.className='bsw-ptr'; ptrs.appendChild(pc); ptrCols.push(pc);
+  });
+
+  function render(){
+    var st=STEPS[i];
+    cells.forEach(function(c,k){
+      c.classList.remove('is-out','is-in','is-mid','is-found');
+      if(st.found===k){ c.classList.add('is-found'); }
+      else if(st.out.indexOf(k)>-1){ c.classList.add('is-out'); }
+      else if(k>=st.low&&k<=st.high){
+        if(st.mid===k){ c.classList.add('is-mid'); } else { c.classList.add('is-in'); }
+      }
+      segs[k].className='bsw-seg'+(st.found===k?' is-found':st.out.indexOf(k)>-1?' is-out':(k>=st.low&&k<=st.high)?(st.mid===k?' is-mid':' is-in'):'');
+      var tags='';
+      if(st.mid===k){ tags+='<span class="bsw-tag mid">mid</span>'; }
+      if(st.low===k){ tags+='<span class="bsw-tag low">low</span>'; }
+      if(st.high===k){ tags+='<span class="bsw-tag high">high</span>'; }
+      if(st.found===k){ tags+='<span class="bsw-tag found">命中</span>'; }
+      ptrCols[k].innerHTML=tags;
+    });
+    barLabel.innerHTML='候选区间：<b>A['+st.low+'..'+st.high+']</b> —— 第 '+i+' / '+LAST+' 轮';
+    note.innerHTML=st.note;
+    prog.textContent=(i===LAST? '第 '+LAST+' / '+LAST+' 轮 · 完成':'第 '+i+' / '+LAST+' 轮');
+    next.disabled=(i===LAST);
+    next.textContent=(i===LAST? '已找到 23':'下一步');
+    grid.setAttribute('aria-label','数组 A = ['+A.join(', ')+']，目标 23。'+st.note.replace(/<[^>]+>/g,''));
+  }
+
+  next.addEventListener('click',function(){ if(i<LAST){ i++; render(); } });
+  reset.addEventListener('click',function(){ i=0; render(); });
+  render();
+})();
+</script>
+</div></body></html>

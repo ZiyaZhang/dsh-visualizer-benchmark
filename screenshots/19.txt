@@ -1,0 +1,188 @@
+窄窗口 DSH 验收页排版截图
+
+Wall time: 0.3491 seconds
+Output:
+Browser tab: 5, Title: "Visualizer · 人工验收", URL: "http://127.0.0.1:3092/label.html?stage=focused".
+1 AXWebArea Visualizer · 人工验收, URL: 127.0.0.1:3092/label.html?stage=focused
+	2 container
+		3 heading DSH Visualizer 人工验收, Value: 1
+			4 text DSH Visualizer 人工验收
+		5 text 0 / 6 题已保存
+		6 link Description: 运行记录, Value: 127.0.0.1:3092/index.html
+		7 button 导出标注, ID: export
+	8 container app
+		9 container
+			10 heading DSH 提示词前后对照, Value: 2
+				11 text DSH 提示词前后对照
+			12 text 迭代轮次
+			13 pop up button (collapsed, settable) 迭代轮次, Value: 当前修订：DOM 与初始值, ID: stage, Secondary Actions: Expand
+				14 menu
+					15 (selected) 当前修订：DOM 与初始值
+					16 第一轮：布局与状态（已淘汰）
+					17 第二轮：提交前检查（已淘汰）
+			18 container Description: 待评价题目, ID: cases
+				19 button 二分查找 · 第 1 次 待判断
+					20 text 二分查找 · 第 1 次
+					21 text 待判断
+				22 button 二分查找 · 第 2 次 待判断
+					23 text 二分查找 · 第 2 次
+					24 text 待判断
+				25 button 热传导 · 第 1 次 待判断
+					26 text 热传导 · 第 1 次
+					27 text 待判断
+				28 button 热传导 · 第 2 次 待判断
+					29 text 热传导 · 第 2 次
+					30 text 待判断
+				31 button 地区追问 · 第 1 次 待判断
+					32 text 地区追问 · 第 1 次
+					33 text 待判断
+				34 button 地区追问 · 第 2 次 待判断
+					35 text 地区追问 · 第 2 次
+					36 text 待判断
+			37 text DSH：V41 Flash / High：已完成 32 次正式运行；当前修订 6 / 6。实际 Web 追问已跑通。
+			38 text 原版与候选使用同一 V41 Flash / High，每题各 2 次。每题只需选一次偏好；细分评分和备注可选。已发现的运行错误与数值问题会直接列出。 意见保存在这台 Mac，刷新后仍可继续；也可导出 JSON。
+		39 container
+			40 heading 二分查找 · 第 1 次, Value: 2, ID: title
+				41 text 二分查找 · 第 1 次
+			42 button 重置预览, ID: reload
+			43 text 用一个可交互示意帮我理解二分查找。在有序数组 [2,5,8,12,16,23,38,56] 中找 23，可以点“下一步”逐轮看到 low、mid、high 和排除的区间，也能重置。直接在回复里演示。
+			44 container review
+				45 container pair
+					46 container
+						47 heading 原版, Value: 3
+							48 text 原版
+						49 text V41 Flash / High · 第 1 次
+						50 link Description: 单独操作, Value: 127.0.0.1:3092/dsh-view.html?run=I01-baseline-1
+						51 link Description: 源码, Value: 127.0.0.1:3092/dsh/I01-baseline-1-1.source.html
+						52 container 原版 二分查找 · 第 1 次 交互成品
+							53 AXWebArea 127.0.0.1:3092/dsh/I01-baseline-1-1.html
+								54 container
+									55 text 二分查找 · 在有序数组中找  23
+								56 container
+									57 text 步骤 
+									58 text 1
+									59 text /4
+								60 container Description: 有序数组 2,5,8,12,16,23,38,56，二分查找目标 23, ID: bsv-grid
+									61 container 下标 0，值 2
+										62 text 0
+										63 text 2 低 low
+									64 container 下标 1，值 5
+										65 text 1
+										66 text 5
+									67 container 下标 2，值 8
+										68 text 2
+										69 text 8
+									70 container 下标 3，值 12
+										71 text 3
+										72 text 12
+									73 container 下标 4，值 16
+										74 text 4
+										75 text 16
+									76 container 下标 5，值 23
+										77 text 5
+										78 text 23
+									79 container 下标 6，值 38
+										80 text 6
+										81 text 38
+									82 container 下标 7，值 56
+										83 text 7
+										84 text 56 高 high
+								85 container bsv-read
+									86 text low =
+									87 text 0
+									88 text · mid =
+									89 text —
+									90 text · high =
+									91 text 7
+									92 text · 候选
+									93 text 8
+									94 text 个
+								95 container bsv-status
+									96 text 准备：候选区间是  [0…7] ，包含全部 8 个元素。先看正中间。
+								97 button 下一步, ID: bsv-next
+								98 button 重置, ID: bsv-reset
+						99 text 真实生成源码；追问仅预览发送内容。点“单独操作”可检查窄屏与深色。
+						100 button (collapsed) 已有检查 · 点击查看, Secondary Actions: Expand
+							101 text 已有检查 · 点击查看
+						102 button (collapsed) 细分评分 · 可选, Secondary Actions: Expand
+							103 text 细分评分 · 可选
+					104 container
+						105 heading 修订版, Value: 3
+							106 text 修订版
+						107 text V41 Flash / High · 第 1 次
+						108 link Description: 单独操作, Value: 127.0.0.1:3092/dsh-view.html?run=I01-focused-1
+						109 link Description: 源码, Value: 127.0.0.1:3092/dsh/I01-focused-1-1.source.html
+						110 container 修订版 二分查找 · 第 1 次 交互成品
+							111 AXWebArea 127.0.0.1:3092/dsh/I01-focused-1-1.html
+								112 container
+									113 text 二分查找：在升序数组中找  23
+								114 text a = [2, 5, 8, 12, 16, 23, 38, 56]，下标 0–7
+								115 text 第 0 / 3 步
+								116 container Description: 数组元素与查找区间, ID: bs-track
+									117 text 0
+									118 container Description: 下标 0，值 2，在查找区间内, ID: bs-cell-0
+										119 text 2
+									120 text low
+									121 text 1
+									122 container Description: 下标 1，值 5，在查找区间内, ID: bs-cell-1
+										123 text 5
+									124 text 2
+									125 container Description: 下标 2，值 8，在查找区间内, ID: bs-cell-2
+										126 text 8
+									127 text 3
+									128 container Description: 下标 3，值 12，在查找区间内, ID: bs-cell-3
+										129 text 12
+									130 text 4
+									131 container Description: 下标 4，值 16，在查找区间内, ID: bs-cell-4
+										132 text 16
+									133 text 5
+									134 container Description: 下标 5，值 23，在查找区间内, ID: bs-cell-5
+										135 text 23
+									136 text 6
+									137 container Description: 下标 6，值 38，在查找区间内, ID: bs-cell-6
+										138 text 38
+									139 text 7
+									140 container Description: 下标 7，值 56，在查找区间内, ID: bs-cell-7
+										141 text 56
+									142 text high
+								143 text low 
+								144 text 0
+								145 text mid 
+								146 text —
+								147 text high 
+								148 text 7
+								149 text 已排除 
+								150 text 无
+								151 text 第 0 步：目标 23，当前查找范围是整个数组 [0, 7]。每一轮都先算 mid，再拿 a[mid] 和目标比较。
+								152 container Description: 各轮记录, ID: bs-log
+								153 button 下一步, ID: bs-next
+								154 button 重置, ID: bs-reset
+						155 text 真实生成源码；追问仅预览发送内容。点“单独操作”可检查窄屏与深色。
+						156 button (collapsed) 已有检查 · 点击查看, Secondary Actions: Expand
+							157 text 已有检查 · 点击查看
+						158 button (collapsed) 细分评分 · 可选, Secondary Actions: Expand
+							159 text 细分评分 · 可选
+				160 container
+					161 container 作为回复里的交互示意，你更愿意使用哪一份？
+						162 text 作为回复里的交互示意，你更愿意使用哪一份？
+						163 container preference
+							164 radio button (settable, integer) Description: 原版, Value: 0
+							165 radio button (settable, integer) Description: 修订版, Value: 0
+							166 radio button (settable, integer) Description: 都可以, Value: 0
+							167 radio button (settable, integer) Description: 都不满意, Value: 0
+							168 radio button (settable, integer) Description: 暂不能判断, Value: 0
+					169 text 理由或具体问题  可选
+					170 text entry area (settable) 理由或具体问题 可选, ID: notes
+					171 button 保存并下一题
+					172 button 仅保存, ID: save
+					173 text 人工判断尚未填写
+			174 text “已有检查”记录本轮代理的实际操作与核对；细分评分可以留空，偏好仅由你保存。DSH 运行结果与原生 Web 追问验收单独记录。
+
+The focused UI element is 1 AXWebArea Visualizer · 人工验收, URL: 127.0.0.1:3092/label.html?stage=focused
+Browser notifications:
+
+WebMCP tools are available in tab 5:
+
+```json
+[{"name":"get_review_progress","title":"读取打标进度","description":"Read saved human reviews and pending pairs. Does not fill in or save human ratings.","inputSchema":{"type":"object","properties":{},"additionalProperties":false},"annotations":{"readOnlyHint":true},"origin":"http://127.0.0.1:3092","pageUrl":"http://127.0.0.1:3092/label.html?stage=focused"}]
+```

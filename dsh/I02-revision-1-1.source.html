@@ -1,0 +1,306 @@
+<style>
+  .hd { display:flex; flex-direction:column; gap:12px; color:var(--dsw-alias-label-primary);
+        background:var(--dsw-alias-bg-layer-1); border:1px solid var(--dsw-alias-border-l1);
+        border-radius:12px; padding:14px 16px; font-size:13px; line-height:1.5;
+        font-variant-numeric: tabular-nums; }
+  .hd .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .hd .spread { justify-content:space-between; }
+  .hd h4 { margin:0; font-size:13.5px; font-weight:650; }
+  .hd .badge { font-size:11.5px; font-weight:600; padding:2px 8px; border-radius:999px;
+        border:1px solid var(--dsw-alias-border-l2); color:var(--dsw-alias-label-secondary);
+        background:var(--dsw-alias-bg-layer-2); }
+  .hd .hint { font-size:11.5px; color:var(--dsw-alias-label-tertiary); }
+  .hd .sub { font-size:12px; color:var(--dsw-alias-label-secondary); }
+  .hd .chips { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+  .hd .chip { border:1px solid var(--dsw-alias-border-l1); border-radius:9px;
+        background:var(--dsw-alias-bg-layer-2); padding:6px 8px; text-align:center; min-width:0; }
+  .hd .chip b { display:block; font-size:10.5px; font-weight:600; color:var(--dsw-alias-label-tertiary); letter-spacing:.02em; }
+  .hd .chip .v { display:block; font-size:15px; font-weight:650; margin-top:1px; white-space:nowrap; }
+  .hd .chip .d { display:block; font-size:10.5px; color:var(--dsw-alias-label-secondary); white-space:nowrap; }
+  .hd .chip.bound { border-style:dashed; }
+  .hd .panel { border:1px solid var(--dsw-alias-border-l1); border-radius:10px;
+        background:var(--dsw-alias-bg-layer-2); padding:10px 12px; min-width:0; overflow-x:auto; }
+  .hd .grid2 { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px; align-items:start; }
+  @media (max-width:640px){ .hd .grid2 { grid-template-columns:minmax(0,1fr); } }
+  .hd table { border-collapse:collapse; width:100%; font-size:11.5px; }
+  .hd th, .hd td { padding:5px 7px; text-align:center; border-bottom:1px solid var(--dsw-alias-border-l1); white-space:nowrap; }
+  .hd th { font-weight:600; color:var(--dsw-alias-label-secondary); font-size:10.5px; }
+  .hd td.node { text-align:left; color:var(--dsw-alias-label-secondary); font-weight:600; }
+  .hd td .frac { display:block; color:var(--dsw-alias-label-tertiary); font-size:10px; }
+  .hd td .newv { font-weight:650; }
+  .hd td.dim { color:var(--dsw-alias-label-tertiary); }
+  .hd svg { display:block; width:100%; height:auto; }
+  .hd .barbox { transition: transform .42s cubic-bezier(.4,0,.2,1); }
+  @media (prefers-reduced-motion: reduce){ .hd .barbox { transition:none; } }
+  .hd .chartbox { transition: opacity .2s linear; }
+  .hd .btnrow { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .hd .legend { display:flex; gap:12px; flex-wrap:wrap; font-size:11px; color:var(--dsw-alias-label-secondary); }
+  .hd .legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:4px; vertical-align:-1px; }
+</style>
+
+<div class="hd" id="hdroot">
+  <div class="row spread">
+    <h4>离散热传导示意 · 1D 杆 5 节点</h4>
+    <span class="badge" id="hdBadge">第 0 步 · 初始扩散</span>
+  </div>
+
+  <!-- 节点温度条 -->
+  <div class="panel">
+    <svg viewBox="0 0 680 268" role="img" aria-labelledby="hdTitle hdDesc" id="hdSvg">
+      <title id="hdTitle">5 个节点的温度条与温度剖面</title>
+      <desc id="hdDesc">左端节点固定 100 摄氏度，右端节点固定 0 摄氏度，中间三个节点随步数更新。</desc>
+      <!-- rod -->
+      <line x1="70" y1="245" x2="610" y2="245" stroke="var(--dsw-alias-border-l2)" stroke-width="6" stroke-linecap="round"/>
+      <g id="hdBars"></g>
+      <line id="hdProfile" x1="70" y1="245" x2="610" y2="245" fill="none"
+            stroke="var(--dsw-alias-label-tertiary)" stroke-width="1.8" stroke-dasharray="5 4"/>
+      <text x="70" y="262" text-anchor="middle" font-size="10.5" fill="var(--dsw-alias-label-tertiary)" id="hdT0">x₁ 固定</text>
+      <text x="610" y="262" text-anchor="middle" font-size="10.5" fill="var(--dsw-alias-label-tertiary)" id="hdT4">x₅ 固定</text>
+    </svg>
+    <div class="legend" style="margin-top:2px">
+      <span><i style="background:var(--dsw-alias-border-l1);border:1px dashed var(--dsw-alias-border-l2)"></i>虚线柱 = 固定边界（不参与更新）</span>
+      <span><i style="background:var(--dsw-alias-border-l2)"></i>虚折线 = 上一时刻温度</span>
+      <span>柱下标 = 温度值</span>
+    </div>
+  </div>
+
+  <!-- 数值读数 -->
+  <div class="chips" id="hdChips"></div>
+
+  <!-- 控制 -->
+  <div class="btnrow">
+    <button id="hdStep" type="button">单步 → 下一时刻</button>
+    <button id="hdReset" type="button">重置</button>
+    <button id="hdAuto" type="button">自动推进</button>
+    <span class="hint" id="hdMsg"></span>
+  </div>
+
+  <div class="grid2">
+    <!-- 逐步历史 -->
+    <div class="panel">
+      <div class="row spread" style="margin-bottom:6px">
+        <span class="sub" style="font-weight:650">各节点温度（°C）</span>
+        <span class="hint">列 = 节点，行 = 步</span>
+      </div>
+      <table>
+        <thead><tr><th style="text-align:left">步</th><th>x₁ 固定</th><th>x₂</th><th>x₃</th><th>x₄</th><th>x₅ 固定</th></tr></thead>
+        <tbody id="hdHist"></tbody>
+      </table>
+    </div>
+
+    <!-- 单步算式 -->
+    <div class="panel">
+      <div class="row spread" style="margin-bottom:6px">
+        <span class="sub" style="font-weight:650" id="hdStencilTitle">下一步怎么算（同步更新）</span>
+      </div>
+      <table>
+        <thead><tr><th style="text-align:left">节点</th><th>算式 T + 0.25·(T<sub>左</sub>−2T+T<sub>右</sub>)</th></tr></thead>
+        <tbody id="hdStencil"></tbody>
+      </table>
+      <div class="hint" id="hdStencilFoot" style="margin-top:6px"></div>
+    </div>
+  </div>
+
+  <div class="row spread">
+    <span class="hint">离散示意：更新式 T<sub>i</sub><sup>n+1</sup> = T<sub>i</sub><sup>n</sup> + r·(T<sub>i−1</sub><sup>n</sup> − 2T<sub>i</sub><sup>n</sup> + T<sub>i+1</sub><sup>n</sup>)，r = 0.25；右端全部用<b>上一时刻</b>取值，因此可并行、同步。</span>
+    <button id="hdAsk" type="button">问模型：终点与稳定性</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root = document.getElementById('hdroot');
+  if(!root || root.dataset.init) return; root.dataset.init = '1';
+
+  var N = 5, R = 0.25, LEFT = 100, RIGHT = 0;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DUR = reduce ? 0 : 420;
+
+  var step = 0, vals = [LEFT,0,0,0,RIGHT], history = [[LEFT,0,0,0,RIGHT]];
+  var token = 0, busy = false, autoTimer = null;
+
+  var elBars = document.getElementById('hdBars');
+  var elProfile = document.getElementById('hdProfile');
+  var elChips = document.getElementById('hdChips');
+  var elHist = document.getElementById('hdHist');
+  var elStencil = document.getElementById('hdStencil');
+  var elBadge = document.getElementById('hdBadge');
+  var elMsg = document.getElementById('hdMsg');
+  var elStencilTitle = document.getElementById('hdStencilTitle');
+  var elStencilFoot = document.getElementById('hdStencilFoot');
+
+  var SX0 = 70, SX1 = 610, BASE = 245, MAXH = 155, BW = 34;
+  function sx(i){ return SX0 + (SX1 - SX0) * i / (N - 1); }
+  function heat(T){
+    var t = Math.max(0, Math.min(100, T)) / 100;
+    var h = (1 - t) * 210, s = 62, l = 30 + 34 * t;
+    return 'hsl(' + h.toFixed(1) + ' ' + s + '% ' + l.toFixed(1) + '%)';
+  }
+  function fmt(v){ return (Math.abs(v) < 5e-3 ? 0 : v).toFixed(1); }
+
+  // ---- 建立柱与读数 ----
+  var barEls = [], valEls = [], nameEls = [], glowEls = [];
+  for (var i = 0; i < N; i++){
+    var x = sx(i), fixed = (i === 0 || i === N - 1);
+    var g = document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('class','barbox');
+    g.setAttribute('transform','translate(0,' + MAXH + ')');
+
+    var bar = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    bar.setAttribute('x', x - BW/2); bar.setAttribute('y', -BASE);
+    bar.setAttribute('width', BW); bar.setAttribute('height', BASE);
+    bar.setAttribute('rx', 5);
+    bar.setAttribute('fill', heat(0));
+    if (fixed){ bar.setAttribute('stroke','var(--dsw-alias-border-l2)'); bar.setAttribute('stroke-dasharray','4 3'); bar.setAttribute('stroke-width','1.5'); }
+    g.appendChild(bar); elBars.appendChild(g);
+
+    var nm = document.createElementNS('http://www.w3.org/2000/svg','text');
+    nm.setAttribute('x', x); nm.setAttribute('y', BASE + 26);
+    nm.setAttribute('text-anchor','middle'); nm.setAttribute('font-size','10.5');
+    nm.setAttribute('fill','var(--dsw-alias-label-tertiary)');
+    nm.textContent = (i === 0 || i === N-1) ? ('x' + (i+1) + ' 固定') : ('x' + (i+1) + ' 自由');
+    elBars.appendChild(nm);
+
+    var gl = document.createElementNS('http://www.w3.org/2000/svg','g');
+    gl.setAttribute('class','barbox'); gl.setAttribute('transform','translate(0,' + MAXH + ')');
+    var vt = document.createElementNS('http://www.w3.org/2000/svg','text');
+    vt.setAttribute('x', x); vt.setAttribute('y', -BASE - 18);
+    vt.setAttribute('text-anchor','middle'); vt.setAttribute('font-size','12.5'); vt.setAttribute('font-weight','650');
+    vt.setAttribute('fill','var(--dsw-alias-label-primary)'); vt.textContent = '0.0';
+    gl.appendChild(vt); elBars.appendChild(gl);
+
+    barEls.push(bar); nameEls.push(nm); valEls.push(vt); glowEls.push(g); bar._vt = vt;
+
+    var chip = document.createElement('div');
+    chip.className = 'chip' + (fixed ? ' bound' : '');
+    chip.innerHTML = '<b>' + (i+1) + ' · x' + (i+1) + (fixed ? ' 固定' : '') + '</b>' +
+                     '<span class="v">–</span><span class="d">Δ –</span>';
+    elChips.appendChild(chip);
+  }
+
+  function paint(k, prev){
+    var s = vals[k];
+    for (var i = 0; i < N; i++){
+      var h = Math.max(2, s[i] / 100 * MAXH);
+      barEls[i].setAttribute('height', h.toFixed(1));
+      valEls[i].setAttribute('y', (-h - 18).toFixed(1));
+      barEls[i]._vt.setAttribute('y', (-h - 18).toFixed(1));
+      glowEls[i].setAttribute('transform','translate(0,' + (MAXH - h).toFixed(1) + ')');
+      valEls[i].textContent = fmt(s[i]);
+      barEls[i].setAttribute('fill', heat(s[i]));
+      var chip = elChips.children[i];
+      chip.querySelector('.v').textContent = fmt(s[i]) + ' °C';
+      if (prev) chip.querySelector('.d').textContent = 'Δ ' + (s[i] - prev[i] >= 0 ? '+' : '') + fmt(s[i] - prev[i]);
+      else chip.querySelector('.d').textContent = 'Δ 0.0';
+    }
+    var px = [], py = [];
+    for (var j = 0; j < N; j++){ px.push(sx(j)); py.push(BASE - Math.max(2, s[j]/100*MAXH)); }
+    elProfile.setAttribute('points', px.map(function(v,q){ return v.toFixed(1) + ',' + py[q].toFixed(1); }).join(' '));
+    elProfile.setAttribute('stroke', k > 0 ? 'var(--dsw-alias-label-secondary)' : 'var(--dsw-alias-label-tertiary)');
+  }
+
+  function renderHistory(){
+    var rows = '';
+    for (var k = history.length - 1; k >= 0; k--){
+      var s = history[k];
+      rows += '<tr><td class="node">' + k + '</td>' + s.map(function(v){ return '<td>' + fmt(v) + '</td>'; }).join('') + '</tr>';
+    }
+    elHist.innerHTML = rows;
+  }
+
+  function computeNext(s){
+    var out = s.slice();
+    for (var i = 1; i < N - 1; i++) out[i] = s[i] + R * (s[i-1] - 2*s[i] + s[i+1]);
+    out[0] = LEFT; out[N-1] = RIGHT;
+    return out;
+  }
+
+  function renderStencil(prior, next){
+    var rows = '', note = '';
+    for (var i = 0; i < N; i++){
+      if (i === 0 || i === N - 1){
+        rows += '<tr><td class="node">x' + (i+1) + '</td><td class="dim">固定边界，保持 ' + fmt(prior[i]) + '（不参与更新）</td></tr>';
+      } else {
+        var inc = next[i] - prior[i];
+        rows += '<tr><td class="node">x' + (i+1) + '</td><td>' +
+                '<span class="newv">' + fmt(next[i]) + '</span>' +
+                '<span class="frac">' + fmt(prior[i]) + ' + 0.25·(' + fmt(prior[i-1]) + ' − 2·' + fmt(prior[i]) + ' + ' + fmt(prior[i+1]) + ') = ' + fmt(prior[i]) + ' + ' + (inc>=0?'+':'') + fmt(inc) + '</span></td></tr>';
+      }
+    }
+    elStencil.innerHTML = rows;
+    elStencilTitle.textContent = '第 ' + step + ' 步的算式（用第 ' + step + ' 步的值同步算第 ' + (step+1) + ' 步）';
+    note = '所有新值只读上一时刻，先算完再一起替换，所以 3 个自由节点互不影响计算顺序。';
+    var mx = Math.max(Math.abs(next[1]-prior[1]), Math.abs(next[2]-prior[2]), Math.abs(next[3]-prior[3]));
+    if (step >= 21 || mx < 5e-3) note += ' 变化已 < 0.005 °C，接近稳态。';
+    elStencilFoot.textContent = note;
+  }
+
+  function derive(){
+    paint(step, step > 0 ? history[step-1] : null);
+    renderHistory();
+    renderStencil(vals, computeNext(vals));
+    elBadge.textContent = '第 ' + step + ' 步 · ' + (step === 0 ? '初始状态' : '已更新 ' + step + ' 次');
+  }
+
+  function clearAuto(){
+    if (autoTimer){ clearInterval(autoTimer); autoTimer = null; document.getElementById('hdAuto').textContent = '自动推进'; }
+  }
+
+  function doStep(){
+    if (busy) return;
+    busy = true; token++;
+    var my = token, prior = vals, next = computeNext(prior);
+    document.getElementById('hdStep').disabled = true;
+
+    paint({0: next, length: 1} && next, null); // 先把柱动起来（同步动画）
+    for (var i = 0; i < N; i++){
+      var chip = elChips.children[i];
+      chip.querySelector('.v').textContent = fmt(next[i]) + ' °C';
+      chip.querySelector('.d').textContent = 'Δ ' + (next[i] - prior[i] >= 0 ? '+' : '') + fmt(next[i] - prior[i]);
+    }
+    renderStencil(prior, next);
+    elMsg.textContent = '正在算第 ' + (step+1) + ' 步…';
+
+    window.setTimeout(function(){
+      if (my !== token) return;
+      vals = next; step++; history.push(next.slice());
+      busy = false; document.getElementById('hdStep').disabled = false;
+      renderHistory(); renderStencil(vals, computeNext(vals));
+      elBadge.textContent = '第 ' + step + ' 步 · 已更新 ' + step + ' 次';
+      var mx = Math.max(Math.abs(next[1]-prior[1]), Math.abs(next[2]-prior[2]), Math.abs(next[3]-prior[3]));
+      elMsg.textContent = '第 ' + step + ' 步完成' + (mx < 5e-3 && step > 3 ? ' · 已接近稳态（线性分布）' : '');
+    }, DUR + 30);
+  }
+
+  document.getElementById('hdStep').addEventListener('click', doStep);
+
+  document.getElementById('hdReset').addEventListener('click', function(){
+    clearAuto(); token++; busy = false;
+    step = 0; vals = [LEFT,0,0,0,RIGHT]; history = [[LEFT,0,0,0,RIGHT]];
+    document.getElementById('hdStep').disabled = false;
+    elMsg.textContent = '已重置为初始状态：中间 3 个节点均为 0 °C。';
+    derive();
+  });
+
+  document.getElementById('hdAuto').addEventListener('click', function(){
+    var btn = this;
+    if (autoTimer){ clearAuto(); elMsg.textContent = '已暂停在手第 ' + step + ' 步。'; return; }
+    btn.textContent = '暂停';
+    elMsg.textContent = '自动推进中…（每 0.5 s 一步）';
+    autoTimer = setInterval(function(){
+      if (busy) return;
+      if (step >= 200){ clearAuto(); elMsg.textContent = '已达 200 步，温度几乎不再变化（稳态）。'; return; }
+      doStep();
+    }, DUR + 120);
+  });
+
+  document.getElementById('hdAsk').addEventListener('click', function(){
+    if (window.dshWidget && window.dshWidget.sendPrompt){
+      window.dshWidget.sendPrompt('在这根 5 节点离散杆（r = 0.25，两端固定 100 °C / 0 °C）的示意中：它最终趋于什么温度分布？如果取 r = 0.6 或 r = 1 会发生什么，和稳定性条件 r ≤ 0.5 有什么关系？');
+    }
+  });
+
+  derive();
+  elMsg.textContent = '初始：x₁ = 100 °C，x₂ = x₃ = x₄ = 0 °C，x₅ = 0 °C。点「单步」看一步扩散。';
+})();
+</script>

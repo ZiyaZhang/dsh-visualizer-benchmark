@@ -1,0 +1,295 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+  #rsSalesWidget {
+    --rs-brand: var(--dsw-alias-brand-primary, #4c7dff);
+    --rs-fg: var(--dsw-alias-label-primary, #1b1f26);
+    --rs-fg2: var(--dsw-alias-label-secondary, #5b6472);
+    --rs-fg3: var(--dsw-alias-label-tertiary, #8b93a1);
+    --rs-line: var(--dsw-alias-border-l1, rgba(128, 138, 156, .3));
+    --rs-line-strong: var(--dsw-alias-border-l2, rgba(128, 138, 156, .5));
+    --rs-surface: var(--dsw-alias-bg-layer-1, rgba(128, 138, 156, .07));
+    --rs-hover: var(--dsw-alias-interactive-bg-hover, rgba(128, 138, 156, .14));
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 620px;
+    padding: 14px 16px 16px;
+    border: 1px solid var(--rs-line);
+    border-radius: 12px;
+    background: var(--dsw-alias-bg-base, transparent);
+    color: var(--rs-fg);
+    font-size: 13px;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  #rsSalesWidget * { box-sizing: border-box; }
+  #rsSalesWidget .rs-title { font-size: 14px; font-weight: 600; }
+  #rsSalesWidget .rs-sub { margin: 2px 0 0; font-size: 12px; color: var(--rs-fg2); }
+
+  #rsSalesWidget .rs-plot { position: relative; margin-top: 6px; }
+  #rsSalesWidget .rs-grid { position: absolute; inset: 0; pointer-events: none; }
+  #rsSalesWidget .rs-gline { position: absolute; left: 46px; right: 0; border-top: 1px dashed var(--rs-line); }
+  #rsSalesWidget .rs-gline.rs-zero { border-top-style: solid; border-top-color: var(--rs-line-strong); }
+  #rsSalesWidget .rs-gline > span {
+    position: absolute; left: -46px; width: 40px; text-align: right; top: -8px;
+    font-size: 11px; color: var(--rs-fg3);
+  }
+
+  #rsSalesWidget .rs-bars {
+    display: flex; align-items: flex-end; gap: 14px;
+    height: 194px; padding: 24px 0 0 46px;
+  }
+  #rsSalesWidget .rs-col {
+    flex: 1 1 0; min-width: 0; height: 100%;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    margin: 0; padding: 0; border: 0; background: none;
+    font: inherit; color: inherit; text-align: center; cursor: pointer;
+    border-radius: 8px;
+  }
+  #rsSalesWidget .rs-col:focus-visible { outline: 2px solid var(--rs-brand); outline-offset: 2px; }
+  #rsSalesWidget .rs-val { font-size: 12px; font-weight: 600; color: var(--rs-fg2); line-height: 18px; }
+  #rsSalesWidget .rs-bar {
+    align-self: center; width: min(88%, 92px);
+    background: var(--rs-brand); opacity: .32;
+    border-radius: 5px 5px 0 0;
+    transition: opacity .15s ease, outline-color .15s ease;
+    outline: 2px solid transparent; outline-offset: 3px;
+  }
+  #rsSalesWidget .rs-col:hover .rs-bar { opacity: .55; }
+  #rsSalesWidget .rs-col[aria-pressed="true"] .rs-bar { opacity: 1; outline-color: var(--rs-brand); }
+  #rsSalesWidget .rs-col[aria-pressed="true"] .rs-val { color: var(--rs-fg); }
+  #rsSalesWidget .rs-col[aria-pressed="true"] .rs-val::before { content: "✓ "; color: var(--rs-brand); }
+
+  #rsSalesWidget .rs-names { display: flex; gap: 14px; padding-left: 46px; margin-top: 8px; }
+  #rsSalesWidget .rs-names > span { flex: 1 1 0; min-width: 0; text-align: center; font-size: 13px; }
+  #rsSalesWidget .rs-col[aria-pressed="true"] ~ .rs-names { color: var(--rs-fg); }
+  #rsSalesWidget .rs-unit { margin: 8px 0 0 46px; font-size: 11px; color: var(--rs-fg3); }
+
+  #rsSalesWidget .rs-detail {
+    margin-top: 14px; padding: 10px 12px;
+    background: var(--rs-surface); border: 1px solid var(--rs-line); border-radius: 10px;
+  }
+  #rsSalesWidget .rs-row { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; }
+  #rsSalesWidget .rs-row + .rs-row { margin-top: 4px; }
+  #rsSalesWidget .rs-k { color: var(--rs-fg2); font-size: 12px; }
+  #rsSalesWidget .rs-v { font-weight: 600; }
+
+  #rsSalesWidget .rs-actions {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px;
+  }
+  #rsSalesWidget .rs-ask {
+    flex: 0 0 auto; padding: 7px 14px; border-radius: 8px;
+    border: 1px solid transparent;
+    background: var(--dsw-alias-button-primary-fill, var(--rs-brand));
+    color: var(--dsw-alias-label-primary-inverted, #fff);
+    font: inherit; font-weight: 600; cursor: pointer;
+  }
+  #rsSalesWidget .rs-ask:disabled { cursor: not-allowed; opacity: .45; }
+  #rsSalesWidget .rs-status { flex: 1 1 180px; min-width: 0; font-size: 12px; color: var(--rs-fg2); }
+
+  @media (prefers-reduced-motion: reduce) {
+    #rsSalesWidget .rs-bar { transition: none; }
+  }
+</style>
+
+<div id="rsSalesWidget">
+  <div class="rs-title">地区销售额对比</div>
+  <p class="rs-sub">点击条形只在本地选中，不会触发追问。</p>
+
+  <div class="rs-plot" role="group" aria-label="地区销售额条形图，单位万元：华东 120，华南 80，西部 50">
+    <div class="rs-grid" aria-hidden="true">
+      <div class="rs-gline" style="top:44px"><span>120</span></div>
+      <div class="rs-gline" style="top:94px"><span>80</span></div>
+      <div class="rs-gline" style="top:144px"><span>40</span></div>
+      <div class="rs-gline rs-zero" style="top:194px"><span>0</span></div>
+    </div>
+
+    <div class="rs-bars">
+      <button type="button" class="rs-col" data-region="华东" data-value="120" aria-pressed="false">
+        <span class="rs-val">120</span>
+        <span class="rs-bar" style="height:150px"></span>
+      </button>
+      <button type="button" class="rs-col" data-region="华南" data-value="80" aria-pressed="false">
+        <span class="rs-val">80</span>
+        <span class="rs-bar" style="height:100px"></span>
+      </button>
+      <button type="button" class="rs-col" data-region="西部" data-value="50" aria-pressed="false">
+        <span class="rs-val">50</span>
+        <span class="rs-bar" style="height:62.5px"></span>
+      </button>
+    </div>
+
+    <div class="rs-names" aria-hidden="true"><span>华东</span><span>华南</span><span>西部</span></div>
+    <p class="rs-unit">单位：万元 · 三地合计 250 万元</p>
+  </div>
+
+  <div class="rs-detail" aria-live="polite">
+    <div class="rs-row"><span class="rs-k">所选地区</span><span class="rs-v" id="rsRegion">—</span></div>
+    <div class="rs-row"><span class="rs-k">销售额</span><span class="rs-v" id="rsValue">—</span></div>
+    <div class="rs-row"><span class="rs-k">占三地合计</span><span class="rs-v" id="rsShare">—</span></div>
+  </div>
+
+  <div class="rs-actions">
+    <button type="button" class="rs-ask" id="rsAsk" disabled>解释所选地区</button>
+    <span class="rs-status" id="rsStatus">请先选择一个地区。</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('rsSalesWidget');
+  if (!root) return;
+
+  var cols = Array.prototype.slice.call(root.querySelectorAll('.rs-col'));
+  var els = {
+    region: root.querySelector('#rsRegion'),
+    value: root.querySelector('#rsValue'),
+    share: root.querySelector('#rsShare'),
+    ask: root.querySelector('#rsAsk'),
+    status: root.querySelector('#rsStatus')
+  };
+  var TOTAL = cols.reduce(function (sum, c) { return sum + Number(c.dataset.value); }, 0);
+  var selected = null;
+
+  function colFor(region) {
+    for (var i = 0; i < cols.length; i++) if (cols[i].dataset.region === region) return cols[i];
+    return null;
+  }
+
+  function render() {
+    var col = selected ? colFor(selected) : null;
+    cols.forEach(function (c) {
+      var on = c === col;
+      c.setAttribute('aria-pressed', on ? 'true' : 'false');
+      c.setAttribute('aria-label',
+        c.dataset.region + '，销售额 ' + c.dataset.value + ' 万元' + (on ? '，已选中' : '，点击选中'));
+    });
+    if (col) {
+      var v = Number(col.dataset.value);
+      els.region.textContent = col.dataset.region;
+      els.value.textContent = v + ' 万元';
+      els.share.textContent = Math.round((v / TOTAL) * 100) + '%';
+      els.ask.disabled = false;
+      els.status.textContent = '已在本地选中，尚未发送追问。';
+    } else {
+      els.region.textContent = '—';
+      els.value.textContent = '—';
+      els.share.textContent = '—';
+      els.ask.disabled = true;
+      els.status.textContent = '请先选择一个地区。';
+    }
+  }
+
+  cols.forEach(function (c) {
+    c.addEventListener('click', function () {
+      selected = c.dataset.region;   // 仅本地选中，不调用模型
+      render();
+    });
+  });
+
+  els.ask.addEventListener('click', function () {
+    var col = selected ? colFor(selected) : null;
+    if (!col) return;
+    var v = Number(col.dataset.value);
+    var share = Math.round((v / TOTAL) * 100);
+    var text = '请解释所选地区：' + col.dataset.region + '，销售额 ' + v + ' 万元（三地合计 ' + TOTAL +
+      ' 万元，占比 ' + share + '%）。请分析该地区的销售表现、与其他地区的差异及可能原因。';
+    try {
+      if (window.dshWidget && typeof window.dshWidget.sendPrompt === 'function') {
+        window.dshWidget.sendPrompt(text);
+        els.status.textContent = '已发送追问：' + col.dataset.region + ' · ' + v + ' 万元。';
+      } else {
+        els.status.textContent = '未发送（当前环境不支持追问）：' + text;
+      }
+    } catch (e) {
+      els.status.textContent = '发送失败，可重试。' + (e && e.message ? '（' + e.message + '）' : '');
+    }
+  });
+
+  render();
+})();
+</script></body></html>

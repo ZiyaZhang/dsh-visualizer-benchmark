@@ -1,0 +1,117 @@
+[
+  {
+    "title": "验证 Codex 同步更新数值并截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/01.jpg",
+    "callId": "call_8JCpQo6TKn5HeAA0JzZ68Zu8"
+  },
+  {
+    "title": "Cowork 二分查找初始界面截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/02.jpg",
+    "callId": "call_d4IVTqAyzIquebL0iJ2Tu44A"
+  },
+  {
+    "title": "Cowork 二分查找排除区间截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/03.jpg",
+    "callId": "call_lXVwASY5nfqipao0eqTiFYif"
+  },
+  {
+    "title": "Cowork 二分查找重置与完整示意截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/04.jpg",
+    "callId": "call_YQCT5EyOac9eeJqPJRxJYL03"
+  },
+  {
+    "title": "Codex 二分查找第一轮截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/05.jpg",
+    "callId": "call_2YAxQCFOpYzdsIZvmVgzRqgj"
+  },
+  {
+    "title": "Codex 二分查找命中与窄屏截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/06.jpg",
+    "callId": "call_MpT9rBBAFiarOIlByEzo5EAx"
+  },
+  {
+    "title": "Codex 地区本地选中截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/07.jpg",
+    "callId": "call_rjPi0csHStp0GXmz7x9MA3Og"
+  },
+  {
+    "title": "Cowork 热传导第二步结果截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/08.jpg",
+    "callId": "call_rEtj7DCmuH1XcRPG3xJjm0sa"
+  },
+  {
+    "title": "Cowork 地区销售成品截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/09.jpg",
+    "callId": "call_EzYn1CueCXu0J8fOmuKEKFqT"
+  },
+  {
+    "title": "Cowork 西部追问按钮实际发送截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/10.jpg",
+    "callId": "call_FU1whPNE5sTKJeZGUsajGOtR"
+  },
+  {
+    "title": "Cowork 追问结果留在组件内的截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/11.jpg",
+    "callId": "call_3xug4LBxzEySKvS1STgil6mu"
+  },
+  {
+    "title": "Cowork 西部解释完整结果截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/12.jpg",
+    "callId": "call_HbDnM8G5Vyo9DAFGllrtoT6K"
+  },
+  {
+    "title": "Cowork 二分查找最终版本截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/13.jpg",
+    "callId": "call_ECBUwgVIHo5dNdPlIzUxpUMq"
+  },
+  {
+    "title": "Cowork 最终版本找到 23 的截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/14.jpg",
+    "callId": "call_1Db26D9bNE3qkzthbM1GHa12"
+  },
+  {
+    "title": "DSH 原版热传导窄屏深色截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/15.jpg",
+    "callId": "call_jNHvvDSDGL0fx5MOKOuFmoAb"
+  },
+  {
+    "title": "DSH 自动修复后原卡片计数截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/16.jpg",
+    "callId": "call_gI34e4jV2kNCd1tETkxr3rTI"
+  },
+  {
+    "title": "最新修订热传导交互及窄屏深色截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/17.jpg",
+    "callId": "call_D71pxBXiiFGd4f14W8DODJwK"
+  },
+  {
+    "title": "DSH 原版与当前修订打标页截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/18.jpg",
+    "callId": "call_Lps6aRkjyrf3lfFMIWJPw5R7"
+  },
+  {
+    "title": "窄窗口 DSH 验收页排版截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/19.jpg",
+    "callId": "call_0wzBfywx5TvEIDvmMqHOmtlw"
+  },
+  {
+    "title": "更新 DSH 评测报告与适配窗口后的验收页截图",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/20.jpg",
+    "callId": "call_vzfxuyawMyiPpjciDYkBtvTB"
+  },
+  {
+    "title": "截图核验当前 DSH 成品与已知问题",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/21.jpg",
+    "callId": "call_hzhraYnWgxDCTnyYtjOQQb7q"
+  },
+  {
+    "title": "截图核验 master 对照报告和最终 PR 状态",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/22.jpg",
+    "callId": "call_OHxiqji8d61Pwta7jWpCr9k4"
+  },
+  {
+    "title": "截图核验回归结果可展开与报告首页",
+    "image": "/Users/ziya/harness/visualizer-benchmark-20260917/screenshots/23.jpg",
+    "callId": "call_kkEXTFSBeX3m3wbTBBdoFmZs"
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "id": "F01-integrated-2",
+  "roundId": "calibration-v2",
+  "caseId": "W06",
+  "arm": "historical-integrated",
+  "repeat": 2,
+  "status": "completed",
+  "origin": "historical-calibration",
+  "evidenceLevel": "Historical generation replayed for rubric/checker calibration; not a fresh candidate trial.",
+  "prompt": "在回复里做一个可交互地区销售对比：华东120万元、华南80万元、西部50万元。点击地区只做本地选中；另放一个“解释所选地区”按钮，点击后才向你追问，并把所选地区和数值带上。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "地区销售对比：点击选中，再按需追问",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "dsh/F01-integrated-2-1.source.html",
+      "preview": "dsh/F01-integrated-2-1.html",
+      "sha256": "d472c6c0015d26118b99a4e020db649265ac32aed8311e9f0ab3897738532f64",
+      "bytes": 5423
+    }
+  ],
+  "final": "已生成可交互的地区销售对比（单位：万元）：\n\n- **华东 120**、**华南 80**、**西部 50**，横向条形按最大值 120 万元归一化，条长与数值同时标注，便于直接比较。\n- **点击地区只做本地选中**：按钮切换选中高亮，底部实时显示“已选中：华东 · 120 万元（尚未提问）”，全程不向你发送任何消息；再次点击同一地区可取消选中。\n- **“解释所选地区”按钮是唯一的追问入口**：它默认在未选中时禁用，点击后会把地区名和数值（并附带三地区对比数据）一并带进追问，请我分析该地区的相对位置、占比及原因建议。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Historical route record; see original dsh-results.json."
+    },
+    "acceptance": {
+      "status": "pass",
+      "reason": "Accepted 1; rejected 0."
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Requires factual review of both visual and prose."
+    }
+  },
+  "trace": {
+    "tools": [
+      "skill",
+      "read",
+      "read",
+      "show_widget"
+    ],
+    "referencesRead": [
+      "interaction.md",
+      "style.md"
+    ]
+  },
+  "usage": {
+    "inputTokens": 8294,
+    "outputTokens": 2283,
+    "cacheReadTokens": 27520,
+    "cacheWriteTokens": 0,
+    "totalTokens": 38097
+  },
+  "elapsedSeconds": 24.3,
+  "sourceHead": "b6ce46d274644327e59745efdc82272669805652",
+  "rendererSha256": "1e0cce6941a30a88c8f5fb439973a7052d2bdf83bb6cc520bafd61ebeaf62b2f",
+  "rendererHashKind": "legacy rendered document bytes; original renderer source snapshot unavailable",
+  "model": "deepseek-flash",
+  "effort": "high",
+  "legacyId": "F01-integrated-2",
+  "historicalBrowserChecks": {
+    "passed": true,
+    "notes": [
+      "点击西部只本地选中，发送 0 次；点击解释后恰好捕获 1 条包含西部 50 万元的追问。"
+    ],
+    "viewport": 736,
+    "appearance": "light"
+  },
+  "sessionId": "session-3137aa37-a06d-4638-9930-7892406b2274"
+}

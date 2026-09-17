@@ -1,0 +1,454 @@
+{
+  "schemaVersion": 2,
+  "trialId": "I01-integrated-1",
+  "caseId": "W01",
+  "scenario": "binary",
+  "casesPath": "results/calibration-v2/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:15:12.011Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1",
+          "step-2",
+          "reset"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "step-2-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "step-2-736-light.png",
+      "state": "step-2",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "目标值 23\n未开始 · 共 2 轮\n已排除 0 / 8\n0\n2\n1\n5\n2\n8\n3\n12\n4\n16\n5\n23\n6\n38\n7\n56\nlow\nhigh\nLOW\n0\nMID\n—\nHIGH\n7\nA[MID]\n—\n等待开始\n区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\n下一步\n重置\n候选区间\nmid（本轮中点）\n已排除（虚线）\n命中\n",
+      "temperature": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 360,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "有序数组 2, 5, 8, 12, 16, 23, 38, 56。未开始 · 共 2 轮。low 是 0，high 是 7，mid 尚未确定。等待开始。区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {},
+          "at": 98
+        },
+        {
+          "type": "rendered",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {},
+          "at": 140.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {
+            "height": 360
+          },
+          "at": 140.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 目标值 23 未开始 · 共 2 轮 已排除 0 / 8\n- img \"有序数组 2, 5, 8, 12, 16, 23, 38, 56。未开始 · 共 2 轮。low 是 0，high 是 7，mid 尚未确定。等待开始。区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\": 0 2 1 5 2 8 3 12 4 16 5 23 6 38 7 56\n- text: low 0 mid — high 7 a[mid] — 等待开始 区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\n- button \"下一步\"\n- button \"重置\"\n- text: 候选区间 mid（本轮中点） 已排除（虚线） 命中"
+    },
+    {
+      "text": "目标值 23\n第 1 轮 · 共 2 轮\n已排除 4 / 8\n0\n2\n1\n5\n2\n8\n3\n12\n4\n16\n5\n23\n6\n38\n7\n56\nlow\nmid\nhigh\nLOW\n0\nMID\n3\nHIGH\n7\nA[MID]\n12\na[3] = 12 < 23\nmid = ⌊(0+7)/2⌋ = 3。12 小于 23，目标只可能在右半：排除索引 0–3（含 mid 本身），low 移到 mid+1 = 4，high 不变。\n下一步\n重置\n候选区间\nmid（本轮中点）\n已排除（虚线）\n命中\n",
+      "temperature": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 378,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "有序数组 2, 5, 8, 12, 16, 23, 38, 56。第 1 轮 · 共 2 轮。low 是 0，high 是 7，mid 是 3，a[mid] 是 12。a[3] = 12 < 23。mid = ⌊(0+7)/2⌋ = 3。12 小于 23，目标只可能在右半：排除索引 0–3（含 mid 本身），low 移到 mid+1 = 4，high 不变。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {},
+          "at": 98
+        },
+        {
+          "type": "rendered",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {},
+          "at": 140.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {
+            "height": 360
+          },
+          "at": 140.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {
+            "height": 378
+          },
+          "at": 273.89999985694885
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 目标值 23 第 1 轮 · 共 2 轮 已排除 4 / 8\n- img \"有序数组 2, 5, 8, 12, 16, 23, 38, 56。第 1 轮 · 共 2 轮。low 是 0，high 是 7，mid 是 3，a[mid] 是 12。a[3] = 12 < 23。mid = ⌊(0+7)/2⌋ = 3。12 小于 23，目标只可能在右半：排除索引 0–3（含 mid 本身），low 移到 mid+1 = 4，high 不变。\": 0 2 1 5 2 8 3 12 4 16 5 23 6 38 7 56\n- text: low 0 mid 3 high 7 a[mid] 12 a[3] = 12 < 23 mid = ⌊(0+7)/2⌋ = 3。12 小于 23，目标只可能在右半：排除索引 0–3（含 mid 本身），low 移到 mid+1 = 4，high 不变。\n- button \"下一步\"\n- button \"重置\"\n- text: 候选区间 mid（本轮中点） 已排除（虚线） 命中"
+    },
+    {
+      "text": "目标值 23\n第 2 轮 · 命中\n已排除 4 / 8\n0\n2\n1\n5\n2\n8\n3\n12\n4\n16\n5\n23\n6\n38\n7\n56\nlow\nmid\nhigh\nLOW\n4\nMID\n5\nHIGH\n7\nA[MID]\n23\na[5] = 23 = 23\nmid = ⌊(4+7)/2⌋ = 5。正好命中，返回索引 5。8 个元素只比较了 2 次。\n下一步\n重置\n候选区间\nmid（本轮中点）\n已排除（虚线）\n命中\n",
+      "temperature": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 360,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "有序数组 2, 5, 8, 12, 16, 23, 38, 56。第 2 轮 · 命中。low 是 4，high 是 7，mid 是 5，a[mid] 是 23。a[5] = 23 = 23。mid = ⌊(4+7)/2⌋ = 5。正好命中，返回索引 5。8 个元素只比较了 2 次。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {},
+          "at": 98
+        },
+        {
+          "type": "rendered",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {},
+          "at": 140.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {
+            "height": 360
+          },
+          "at": 140.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {
+            "height": 378
+          },
+          "at": 273.89999985694885
+        },
+        {
+          "type": "resize",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {
+            "height": 360
+          },
+          "at": 319.39999985694885
+        }
+      ],
+      "name": "step-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 目标值 23 第 2 轮 · 命中 已排除 4 / 8\n- img \"有序数组 2, 5, 8, 12, 16, 23, 38, 56。第 2 轮 · 命中。low 是 4，high 是 7，mid 是 5，a[mid] 是 23。a[5] = 23 = 23。mid = ⌊(4+7)/2⌋ = 5。正好命中，返回索引 5。8 个元素只比较了 2 次。\": 0 2 1 5 2 8 3 12 4 16 5 23 6 38 7 56\n- text: low 4 mid 5 high 7 a[mid] 23 a[5] = 23 = 23 mid = ⌊(4+7)/2⌋ = 5。正好命中，返回索引 5。8 个元素只比较了 2 次。\n- button \"下一步\" [disabled]\n- button \"重置\"\n- text: 候选区间 mid（本轮中点） 已排除（虚线） 命中"
+    },
+    {
+      "text": "目标值 23\n未开始 · 共 2 轮\n已排除 0 / 8\n0\n2\n1\n5\n2\n8\n3\n12\n4\n16\n5\n23\n6\n38\n7\n56\nlow\nhigh\nLOW\n0\nMID\n—\nHIGH\n7\nA[MID]\n—\n等待开始\n区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\n下一步\n重置\n候选区间\nmid（本轮中点）\n已排除（虚线）\n命中\n",
+      "temperature": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 360,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "有序数组 2, 5, 8, 12, 16, 23, 38, 56。未开始 · 共 2 轮。low 是 0，high 是 7，mid 尚未确定。等待开始。区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {},
+          "at": 98
+        },
+        {
+          "type": "rendered",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {},
+          "at": 140.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {
+            "height": 360
+          },
+          "at": 140.59999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {
+            "height": 378
+          },
+          "at": 273.89999985694885
+        },
+        {
+          "type": "resize",
+          "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+          "payload": {
+            "height": 360
+          },
+          "at": 319.39999985694885
+        }
+      ],
+      "name": "reset",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 目标值 23 未开始 · 共 2 轮 已排除 0 / 8\n- img \"有序数组 2, 5, 8, 12, 16, 23, 38, 56。未开始 · 共 2 轮。low 是 0，high 是 7，mid 尚未确定。等待开始。区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\": 0 2 1 5 2 8 3 12 4 16 5 23 6 38 7 56\n- text: low 0 mid — high 7 a[mid] — 等待开始 区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\n- button \"下一步\"\n- button \"重置\"\n- text: 候选区间 mid（本轮中点） 已排除（虚线） 命中"
+    },
+    {
+      "text": "目标值 23\n未开始 · 共 2 轮\n已排除 0 / 8\n0\n2\n1\n5\n2\n8\n3\n12\n4\n16\n5\n23\n6\n38\n7\n56\nlow\nhigh\nLOW\n0\nMID\n—\nHIGH\n7\nA[MID]\n—\n等待开始\n区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\n下一步\n重置\n候选区间\nmid（本轮中点）\n已排除（虚线）\n命中\n",
+      "temperature": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 470,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "有序数组 2, 5, 8, 12, 16, 23, 38, 56。未开始 · 共 2 轮。low 是 0，high 是 7，mid 尚未确定。等待开始。区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "bb33db0415d97a9384db3bb8deb3ea33",
+          "payload": {},
+          "at": 381
+        },
+        {
+          "type": "rendered",
+          "channel": "bb33db0415d97a9384db3bb8deb3ea33",
+          "payload": {},
+          "at": 385.69999980926514
+        },
+        {
+          "type": "resize",
+          "channel": "bb33db0415d97a9384db3bb8deb3ea33",
+          "payload": {
+            "height": 470
+          },
+          "at": 385.69999980926514
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 目标值 23 未开始 · 共 2 轮 已排除 0 / 8\n- img \"有序数组 2, 5, 8, 12, 16, 23, 38, 56。未开始 · 共 2 轮。low 是 0，high 是 7，mid 尚未确定。等待开始。区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\": 0 2 1 5 2 8 3 12 4 16 5 23 6 38 7 56\n- text: low 0 mid — high 7 a[mid] — 等待开始 区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\n- button \"下一步\"\n- button \"重置\"\n- text: 候选区间 mid（本轮中点） 已排除（虚线） 命中"
+    },
+    {
+      "text": "目标值 23\n未开始 · 共 2 轮\n已排除 0 / 8\n0\n2\n1\n5\n2\n8\n3\n12\n4\n16\n5\n23\n6\n38\n7\n56\nlow\nhigh\nLOW\n0\nMID\n—\nHIGH\n7\nA[MID]\n—\n等待开始\n区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\n下一步\n重置\n候选区间\nmid（本轮中点）\n已排除（虚线）\n命中\n",
+      "temperature": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 360,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "有序数组 2, 5, 8, 12, 16, 23, 38, 56。未开始 · 共 2 轮。low 是 0，high 是 7，mid 尚未确定。等待开始。区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "ad210eb5cdcdeb20fe9d95cca790e15d",
+          "payload": {},
+          "at": 444.89999985694885
+        },
+        {
+          "type": "rendered",
+          "channel": "ad210eb5cdcdeb20fe9d95cca790e15d",
+          "payload": {},
+          "at": 453.09999990463257
+        },
+        {
+          "type": "resize",
+          "channel": "ad210eb5cdcdeb20fe9d95cca790e15d",
+          "payload": {
+            "height": 360
+          },
+          "at": 453.09999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 目标值 23 未开始 · 共 2 轮 已排除 0 / 8\n- img \"有序数组 2, 5, 8, 12, 16, 23, 38, 56。未开始 · 共 2 轮。low 是 0，high 是 7，mid 尚未确定。等待开始。区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\": 0 2 1 5 2 8 3 12 4 16 5 23 6 38 7 56\n- text: low 0 mid — high 7 a[mid] — 等待开始 区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\n- button \"下一步\"\n- button \"重置\"\n- text: 候选区间 mid（本轮中点） 已排除（虚线） 命中"
+    },
+    {
+      "text": "目标值 23\n未开始 · 共 2 轮\n已排除 0 / 8\n0\n2\n1\n5\n2\n8\n3\n12\n4\n16\n5\n23\n6\n38\n7\n56\nlow\nhigh\nLOW\n0\nMID\n—\nHIGH\n7\nA[MID]\n—\n等待开始\n区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\n下一步\n重置\n候选区间\nmid（本轮中点）\n已排除（虚线）\n命中\n",
+      "temperature": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 470,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "有序数组 2, 5, 8, 12, 16, 23, 38, 56。未开始 · 共 2 轮。low 是 0，high 是 7，mid 尚未确定。等待开始。区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "b634f12ca9a3d9deee23a18917b8e0f7",
+          "payload": {},
+          "at": 520.8999998569489
+        },
+        {
+          "type": "rendered",
+          "channel": "b634f12ca9a3d9deee23a18917b8e0f7",
+          "payload": {},
+          "at": 528.0999999046326
+        },
+        {
+          "type": "resize",
+          "channel": "b634f12ca9a3d9deee23a18917b8e0f7",
+          "payload": {
+            "height": 470
+          },
+          "at": 528.0999999046326
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 目标值 23 未开始 · 共 2 轮 已排除 0 / 8\n- img \"有序数组 2, 5, 8, 12, 16, 23, 38, 56。未开始 · 共 2 轮。low 是 0，high 是 7，mid 尚未确定。等待开始。区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\": 0 2 1 5 2 8 3 12 4 16 5 23 6 38 7 56\n- text: low 0 mid — high 7 a[mid] — 等待开始 区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。\n- button \"下一步\"\n- button \"重置\"\n- text: 候选区间 mid（本轮中点） 已排除（虚线） 命中"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+      "payload": {},
+      "at": 98
+    },
+    {
+      "type": "rendered",
+      "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+      "payload": {},
+      "at": 140.59999990463257
+    },
+    {
+      "type": "resize",
+      "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+      "payload": {
+        "height": 360
+      },
+      "at": 140.59999990463257
+    },
+    {
+      "type": "resize",
+      "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+      "payload": {
+        "height": 378
+      },
+      "at": 273.89999985694885
+    },
+    {
+      "type": "resize",
+      "channel": "d7aa4506d06b1ba9da0e1143b5dfb6fc",
+      "payload": {
+        "height": 360
+      },
+      "at": 319.39999985694885
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "0f2fb129f13b4bba4e2eadd97204c110bd677531af12882b11aaccae5e652d28",
+  "previewSha256": "2dfc680459dcfa370569b36a66df7f6de968e30d658c39ea75f6e3c7f1435535",
+  "rendererSha256": "2dfc680459dcfa370569b36a66df7f6de968e30d658c39ea75f6e3c7f1435535",
+  "rendererHashKind": "legacy rendered document bytes; original renderer source snapshot unavailable",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "d67469b7ca3943c11eae35a8d4acaeca62207d50d2705feae478e05bcd541c21",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

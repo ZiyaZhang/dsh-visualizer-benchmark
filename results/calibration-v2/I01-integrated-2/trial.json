@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 2,
+  "id": "I01-integrated-2",
+  "roundId": "calibration-v2",
+  "caseId": "W01",
+  "arm": "historical-integrated",
+  "repeat": 2,
+  "status": "completed",
+  "origin": "historical-calibration",
+  "evidenceLevel": "Historical generation replayed for rubric/checker calibration; not a fresh candidate trial.",
+  "prompt": "用一个可交互示意帮我理解二分查找。在有序数组 [2,5,8,12,16,23,38,56] 中找 23，可以点“下一步”逐轮看到 low、mid、high 和排除的区间，也能重置。直接在回复里演示。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "二分查找交互演示：在 [2,5,8,12,16,23,38,56] 中查找 23",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "dsh/I01-integrated-2-1.source.html",
+      "preview": "dsh/I01-integrated-2-1.html",
+      "sha256": "46d856d0adb5a20998d4da40cc4e84f83935608b2424d59320219cfdf763c1e7",
+      "bytes": 14947
+    }
+  ],
+  "final": "上面就是可点的演示：**下一步 / 上一步 / 重置**，每轮会更新 low、mid、high 三个指针对，灰色虚线框是已被排除的区间，绿色 ✓ 是最终命中的位置。\n\n查找 23 的过程只有 2 轮：\n\n1. **第 1 轮**：low=0, high=7 → mid = ⌊(0+7)/2⌋ = 3，a[3] = 12。因为 12 < 23，目标只可能在右半区，于是把索引 0–3 整段丢掉（mid 本身也一起丢，它已经验证过不是答案），区间收缩为 [4, 7]。\n2. **第 2 轮**：low=4, high=7 → mid = ⌊(4+7)/2⌋ = 5，a[5] = 23，命中，返回索引 5。\n\n两个关键点：每次比较都能一次性排除**一半**候选，所以 8 个元素最多 3 次比较、n 个元素约 log₂n 次；而这个\"排除一半\"的推理只在**数组有序**时才成立——演示里正是靠 12 < 23 推断出\"左半边全都 ≤ 12\"，才敢整段丢弃。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Historical route record; see original dsh-results.json."
+    },
+    "acceptance": {
+      "status": "pass",
+      "reason": "Accepted 1; rejected 0."
+    },
+    "content": {
+      "status": "fail",
+      "reason": "incorrect worst-case prose and stale final candidate count"
+    }
+  },
+  "trace": {
+    "tools": [
+      "skill",
+      "read",
+      "read",
+      "show_widget"
+    ],
+    "referencesRead": [
+      "interaction.md",
+      "style.md"
+    ]
+  },
+  "usage": {
+    "inputTokens": 8357,
+    "outputTokens": 22059,
+    "cacheReadTokens": 47104,
+    "cacheWriteTokens": 0,
+    "totalTokens": 77520
+  },
+  "elapsedSeconds": 105.3,
+  "sourceHead": "b6ce46d274644327e59745efdc82272669805652",
+  "rendererSha256": "8c9dc6b3b4bcfd958f6d0a62cf4b8fd01dee6b5e25045d98f9e1234dba784cb6",
+  "rendererHashKind": "legacy rendered document bytes; original renderer source snapshot unavailable",
+  "model": "deepseek-flash",
+  "effort": "high",
+  "legacyId": "I01-integrated-2",
+  "historicalBrowserChecks": {
+    "passed": true,
+    "notes": [
+      "两次下一步分别比较 mid 3 / 12、mid 5 / 23 并命中；重置正确；本地操作未发送。",
+      "正文错误声称 8 个元素最多比较 3 次；命中后卡片还显示“剩 4 个候选”，说明与最终状态不完全一致。"
+    ],
+    "contentIssue": "incorrect worst-case prose and stale final candidate count",
+    "viewport": 736,
+    "appearance": "light"
+  },
+  "sessionId": "session-8f7fcbdb-fbf5-470e-b09a-56d7596cb168"
+}

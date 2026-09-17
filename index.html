@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSH Visualizer · 评测证据与人工评分</title>
+<style>
+:root{color-scheme:light;--ink:#17232b;--muted:#61727e;--line:#dce3e8;--blue:#245bc4}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fa;color:var(--ink);font:16px/1.6 system-ui,-apple-system,sans-serif}
+main{max-width:1180px;padding:36px 24px 70px;margin:auto}a{color:var(--blue);text-underline-offset:3px}
+h1{font-size:30px;line-height:1.25;margin:8px 0 16px}h2{font-size:21px;margin:0 0 12px}h3{font-size:17px;margin:18px 0 8px}
+p{margin:8px 0 16px}.muted,small{color:var(--muted)}.lead{max-width:880px}
+.entry{display:inline-block;padding:10px 18px;border-radius:6px;background:var(--blue);color:white;text-decoration:none}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0}
+.stat,section{background:white;border:1px solid var(--line);border-radius:8px;padding:20px}
+.stat strong{display:block;font-size:27px}.stat span{font-size:14px;color:var(--muted)}
+section{margin-top:18px}table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{padding:11px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}tr:last-child td{border-bottom:0}.scroll{overflow-x:auto}
+.notice{border-left:3px solid #be8d2f;padding-left:15px;color:#75531e}
+.rows{display:grid;gap:10px}.row{display:flex;gap:16px;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px}
+code{font-size:.9em}details{margin:14px 0}summary{cursor:pointer}footer{margin-top:24px;font-size:14px;color:var(--muted)}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 system-ui}select{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:5px;background:white}
+.fail{color:#a32f23}.pass{color:#216344}
+@media(max-width:760px){main{padding:22px 16px}.stats{grid-template-columns:1fr 1fr}.row{display:block}td,th{min-width:120px}}
+</style>
+<main>
+<small>DSH Visualizer · DeepSeek-V41-Flash / High</small>
+<h1>先看证据，再逐份评价内联成品</h1>
+<p class="lead">这里保留题目、版本、首次输出与失败，用于迭代 <code>show_widget</code> 和 Visualize Skill。路由、真实运行检查、人工四维评分分别展示；非内联任务只做路由检查。</p>
+<a class="entry" href="/label.html?stage=calibration">开始 6 份校准评分 →</a> <span class="muted" id="progress">正在读取</span>
+<div class="stats">
+  <div class="stat"><strong id="history-count">—</strong><span>历史尝试，全部保留</span></div>
+  <div class="stat"><strong id="calibration-count">—</strong><span>旧成品用于评分校准</span></div>
+  <div class="stat"><strong id="fresh-count">—</strong><span>新增实验已完成 / 已计划</span></div>
+  <div class="stat"><strong id="rated-count">—</strong><span>校准成品已完成四维评分</span></div>
+</div>
+<p class="notice">6 份校准成品来自同一版本、3 道题各两次，不能当作新版提示词 A/B 结果。交互通过不代表内容无误：两份二分查找回复把最坏比较次数写错，失败证据仍保留。</p>
+<div id="catalog-errors" class="notice" hidden></div>
+
+<section>
+<h2>当前证据</h2>
+<div class="rows" id="calibration"></div>
+<p class="muted">预览中“追问”只捕获文本。真实会话里继续回答、同卡修复、版本与预算，另由已记录的 Web 验收及产品回归验证支持；预览检查不能替代这些证据。</p>
+<details><summary>之前的 master 对照与产品验证</summary>
+<p>历史普通任务有 32 次同题对照：纯 master 和两个 PR 组各 16 次。记录显示目标检查全部通过，误调用组件为 0；这是历史小样本结果，不等于新题集全部通过，也不证明所有任务零影响。</p>
+<p>最短算术请求的输入含缓存读取由 6,936 增至 7,579 token，增加 643。普通任务用时中位数 9.65 / 10.55 秒；样本小且有异常值，不据此宣称速度改善。</p>
+<p id="product-summary" class="muted"></p>
+<p><a href="/dsh-results.json">历史 73 条原始汇总</a> · <a href="/history/cases-v1.json">当时的题目与判据</a></p>
+</details>
+</section>
+
+<section>
+<h2>还没完成什么</h2>
+<ul id="pending"></ul>
+<p class="muted">任何未运行、超时、无组件、准入失败和未检查项都留在清单。未评不是 0；N/A 也不记作通过。</p>
+</section>
+
+<section>
+<h2>四维人工评分</h2>
+<p>每次生成作为一份完整成品，查看全部组件与回复正文后评分。内容正确性和任务完成情况另外核对；不设可掩盖失败的加权总分。</p>
+<div class="scroll"><table><thead><tr><th>维度</th><th>0</th><th>1</th><th>2</th></tr></thead><tbody>
+<tr><td>理解价值</td><td>看图仍难理解关系</td><td>配合正文才能理解</td><td>图中直接看清关键关系或变化</td></tr>
+<tr><td>信息与布局</td><td>关键内容难读、遮挡或层次混乱</td><td>能读懂，有局部拥挤或不协调</td><td>层次清楚，文字、标记和留白协调</td></tr>
+<tr><td>操作可理解性</td><td>难以识别操作入口或状态含义</td><td>需要摸索才能知道怎么用</td><td>入口、当前状态与反馈含义清楚</td></tr>
+<tr><td>简洁与聚焦</td><td>无关内容或装饰明显干扰任务</td><td>有些冗余，主要内容仍突出</td><td>内容聚焦，呈现协调，无不必要负担</td></tr>
+</tbody></table></div>
+<p class="muted">静态图没有交互要求时，操作项填 N/A 并注明原因；无法观察也须明确原因。任务完成情况与质量维度分开。评分绑定题目、全部源码、预览和完整回复，内容变更后需重新核查。</p>
+<p><a href="/rubric.md">完整评分说明</a> · <a href="/api/annotations/export">导出新的四维标注</a> · <a href="/api/annotations/legacy">查看旧版偏好标注（独立保留）</a></p>
+<div id="human-summary"></div>
+</section>
+
+<section>
+<h2>全部尝试与路由结果</h2>
+<label>轮次 <select id="stage"></select></label>
+<p id="stage-description" class="muted"></p>
+<div class="scroll"><table><thead><tr><th>题目 / 成品</th><th>运行状态</th><th>路由</th><th>组件 / 客观问题</th><th>人工质量</th></tr></thead><tbody id="trials"></tbody></table></div>
+</section>
+
+<section>
+<h2>复跑、版本与选择记录</h2>
+<p><a href="/README.md">README 与复跑说明</a> · <a href="/cases.json">当前冻结题集</a> · <a href="/api/results">统一结果目录</a></p>
+<p>每轮保留 manifest、题目快照、模型配置、产品提交、实际读取的 references、原始成品及判据结果。提示词候选必须说明针对的失败和选择理由；没有稳定收益的候选如实保留为未采用。</p>
+<p><a href="/reference.html">Codex / Cowork 历史成品与截图</a>只作产品效果参照，不占用本轮打标。<a href="/screenshots/index.json">历史截图索引</a>保留原始证据。</p>
+<details><summary>历史提示词迭代的结论</summary><p>前期 A/B/C/D 候选及本轮额外两种简短收尾提示均有独立结果。后两种提示未稳定改善内容错误，其中一次还猜测修复标识导致拒绝，已撤回。新评分协议不会把这些旧结果重新包装成新 A/B 实验。</p></details>
+</section>
+<footer>标注只由人工保存；机器与代理已有检查不冒充人工得分。密钥、原始私有 Session 和标注存储位于网页目录之外。</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id), node=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;};
+const names={pass:'通过',fail:'失败',pending:'待检查',error:'运行/检查错误',not_applicable:'不适用',completed:'已生成',planned:'尚未运行',running:'运行中',timed_out:'超时'};
+const dims=[['understanding','理解'],['layout','布局'],['operability','操作'],['focus','简洁']];
+let data,annotations;
+const reviewFor=trial=>{const r=annotations.reviews[trial.id];return r?.artifactHash===trial.artifactHash?r:null;};
+function reviewLink(trial,stage,title){const a=node('a',title||trial.caseTitle);a.href='/label.html?stage='+encodeURIComponent(stage)+'&run='+encodeURIComponent(trial.id);return a;}
+function renderTrials(){
+  const stage=data.stages.find(s=>s.id===$('stage').value);$('stage-description').textContent=stage.description;$('trials').replaceChildren();
+  stage.trialIds.forEach((id,index)=>{
+    const trial=data.trials.find(t=>t.id===id);if(!trial)return;const row=node('tr'),title=node('td');title.append(reviewLink(trial,stage.id,trial.caseTitle+' · '+(index+1)));
+    row.append(title,node('td',names[trial.status]||trial.status),node('td',names[trial.checks?.route?.status]||'待检查'));
+    const failures=Object.values(trial.checks||{}).filter(c=>c?.status==='fail'||c?.status==='error').length;
+    row.append(node('td',trial.widgets.length+' 份；'+failures+' 项已知失败'));
+    const review=reviewFor(trial),human=!trial.qualityEligible?(trial.qualityExpected?'尚无成品，不评分':'仅路由'):review?.status==='complete'?dims.map(([key,name])=>name+' '+(review.ratings[key]==='n/a'?'N/A':review.ratings[key])).join(' / '):review?.status==='needs_review'?'待核：'+review.pendingReason:annotations.reviews[id]?'内容已变，需重评':'未评';
+    row.append(node('td',human));$('trials').append(row);
+  });
+}
+Promise.all(['/api/catalog','/api/annotations'].map(async url=>{const r=await fetch(url);if(!r.ok)throw Error('服务不可用');return r.json();})).then(([catalog,saved])=>{
+  data=catalog;annotations=saved;if(data.schemaVersion!==2)throw Error('请先重启新版打标服务。');
+  const calibration=data.stages.find(stage=>stage.id==='calibration').trialIds.map(id=>data.trials.find(t=>t.id===id));
+  const fresh=data.trials.filter(t=>!t.historical&&t.origin!=='historical-calibration');
+  const complete=calibration.filter(t=>reviewFor(t)?.status==='complete').length;
+  $('history-count').textContent=data.trials.filter(t=>t.historical||t.origin==='historical-calibration').length;
+  $('calibration-count').textContent=calibration.length+' 份';$('fresh-count').textContent=fresh.filter(t=>t.status==='completed').length+' / '+fresh.length;
+  $('rated-count').textContent=complete+' / '+calibration.length;$('progress').textContent=complete+' 份已评分，'+(calibration.length-complete)+' 份尚未完成';
+  if(data.catalogErrors.length){$('catalog-errors').hidden=false;$('catalog-errors').textContent='部分结果加载错误：'+data.catalogErrors.join('；');}
+  for(const [index,trial] of calibration.entries()){
+    const row=node('div');row.className='row';const description=node('div');description.append(node('b',trial.caseTitle+' · 成品 '+(trial.repeat||index+1)));
+    const issues=Object.entries(trial.checks||{}).filter(([,value])=>value?.status==='fail'||value?.status==='error');
+    description.append(node('p',issues.length?issues.map(([key,value])=>key+'：'+value.reason).join('；'):'无已记录的硬失败；完整检查与待核项见成品。'));
+    row.append(description,reviewLink(trial,'calibration','逐份评分'));$('calibration').append(row);
+  }
+  const pending=[
+    '人工校准：'+(calibration.length-complete)+' / '+calibration.length+' 份尚未完成四维与内容核对。',
+    '当前题集 '+data.taskCount+' 题；新增 manifest 计划 '+fresh.length+' 次，完成 '+fresh.filter(t=>t.status==='completed').length+' 次。历史重放不计新生成。',
+    fresh.some(t=>t.status==='error') ? '新模型试跑目前有 '+fresh.filter(t=>t.status==='error').length+' 次错误，其余未开始项完整保留；当前连接受阻，没有新 A/B 结论。' : '新模型试跑进度按 manifest 展示；未完成前没有新 A/B 结论。',
+    '控制台与动作检查之外，窄屏、主题、视觉关系和操作含义仍需按适用项人工观察。',
+    '先校准评分标准，再用固定模型与同题对照选候选；目前不能宣布新提示词全面优于当前版。'
+  ];
+  pending.forEach(text=>$('pending').append(node('li',text)));
+  $('product-summary').textContent='历史产品验证快照：'+(data.productValidation?.summary||'未记录；不据本地结果推断远端 CI。');
+  const counts=dims.map(([key,name])=>{const values=calibration.map(reviewFor).filter(r=>r?.status==='complete').map(r=>r.ratings[key]);return name+'：'+[0,1,2].map(score=>score+'分 '+values.filter(v=>v===score).length+'份').join('，')+'；N/A '+values.filter(v=>v==='n/a').length+'份';});
+  $('human-summary').append(node('p',complete?'校准评分分布（不合成总分）：'+counts.join('。'):'尚无完成的新四维人工评分，未生成任何质量均分。'));
+  data.stages.forEach(stage=>{const option=node('option',stage.title);option.value=stage.id;$('stage').append(option);});$('stage').value='calibration';renderTrials();$('stage').onchange=renderTrials;
+}).catch(error=>$('progress').textContent='读取失败：'+error.message);
+</script>
+</html>

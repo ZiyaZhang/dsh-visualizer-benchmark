@@ -1,0 +1,206 @@
+{
+  "date": "2026-09-17",
+  "scope": "Three identical prompts, one fresh generation per app per prompt. Product comparison, not an isolated model benchmark. No aggregate pass rate or statistical claim.",
+  "generationRuns": {
+    "codex": 3,
+    "cowork": 3,
+    "dsh": {
+      "blockedBeforeModelOutput": 1
+    }
+  },
+  "models": {
+    "codex": "gpt-6-astra / max, local task default from turn_context",
+    "cowork": "Opus 5 / Max, observed in native app",
+    "dsh": "DeepSeek-V41-Flash / High, existing 3091 configuration"
+  },
+  "commits": {
+    "host": "008053709514f13db41adaa02b723fbbd3aa389a",
+    "web": "544dcef7a94443a4d9de72544e5ddd83ab18c72d"
+  },
+  "skillSha256": {
+    "src/model.ts": "401a939fa634fbf26a219432a5509b01a41680c4ab6953ffe34b7a5d580ec5de",
+    "assets/visualize.md": "7f35e62ae95e8642170aecfdb2d3a816904c3418096610e7492b0b2b777ebf58",
+    "assets/references/charts.md": "0778ef689dea193a21f6f319a3d915e268d184bdd377128fa6a272a4ff8a1d80",
+    "assets/references/diagrams.md": "26916fe9f5dbc4ae81203e343e310a30146003f315a8fb2affc5026bac33cceb",
+    "assets/references/interaction.md": "ec6b6f571083758376c576de9eed3568e034d13118e7bf8d2faf0ba7e8c6c7e0",
+    "assets/references/style.md": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6"
+  },
+  "inspection": {
+    "codex": "Actual generated fragments, unmodified, wrapped by the installed visualize official render.py and clicked using CUA. Native Codex UI could not be automated; original conversation follow-up was not tested.",
+    "cowork": "Native Claude Desktop Cowork UI, generated HTML file / Artifacts, clicked using CUA.",
+    "screenshots": "Unmodified CUA output, matching accessibility observations in screenshots/*.txt. Early draft screenshots 02-04 are not the final binary-search output; 13-14 are final.",
+    "tokens": "Not collected for both products; no token/cost comparison.",
+    "themes": "Light only. Codex binary search additionally inspected at 360 px; no claim of full narrow/dark coverage."
+  },
+  "runs": [
+    {
+      "case": "I01",
+      "app": "codex",
+      "task": "01a0ae8c-c1e5-7992-b419-cdf213739216",
+      "elapsedMs": 160233,
+      "source": "/Users/ziya/.codex/visualizations/2026/09/17/01a0ae8c-c1e5-7992-b419-cdf213739216/binary-search-steps.html",
+      "preview": "codex-binary.html",
+      "checks": {
+        "localControls": "pass",
+        "expectedMidpointsAndFoundIndex": "pass",
+        "reset": "pass",
+        "360px": "pass",
+        "nativeFollowup": "not applicable"
+      },
+      "observed": "Two Next clicks find index 5; marks, summary and disabled next agree. Compact layout.",
+      "screenshots": [
+        "05.jpg",
+        "06.jpg"
+      ]
+    },
+    {
+      "case": "I01",
+      "app": "cowork",
+      "url": "https://claude.ai/cowork/cse_01C72VE2BgMJ2hJ6RWEKkiSL",
+      "output": "HTML file in preview panel",
+      "checks": {
+        "localControls": "pass",
+        "expectedMidpointsAndFoundIndex": "pass",
+        "reset": "pass",
+        "finalStateCopy": "minor inconsistency",
+        "narrowViewport": "not run"
+      },
+      "observed": "Two comparisons split into four actions. Correct index 5. Final found state retains 4 elements pending text. Large headings, per-value cards and supplementary code require scrolling. Final text correctly says worst case four comparisons for eight elements; earlier draft said three and was self-corrected.",
+      "screenshots": [
+        "13.jpg",
+        "14.jpg"
+      ]
+    },
+    {
+      "case": "I02",
+      "app": "codex",
+      "task": "01a0ae8c-e2de-7ee2-8205-d05f1704fa53",
+      "elapsedMs": 113104,
+      "source": "/Users/ziya/.codex/visualizations/2026/09/17/01a0ae8c-e2de-7ee2-8205-d05f1704fa53/heat-conduction-five-nodes.html",
+      "preview": "codex-heat.html",
+      "checks": {
+        "step1": "pass: [100,25,0,0,0]",
+        "step2": "pass: [100,37.5,6.25,0,0]",
+        "reset": "pass",
+        "fixedBoundaries": "pass",
+        "discreteLabel": "pass"
+      },
+      "observed": "Compact rod, temperature values and controls.",
+      "screenshots": [
+        "01.jpg"
+      ]
+    },
+    {
+      "case": "I02",
+      "app": "cowork",
+      "url": "https://claude.ai/cowork/cse_01TbWvkUsCuwAfoTUxtp8AnZ",
+      "output": "Private Artifact 五节点热扩散演示",
+      "checks": {
+        "step1": "pass: [100,25,0,0,0]",
+        "step2": "pass: [100,37.5,6.25,0,0]",
+        "reset": "pass",
+        "fixedBoundaries": "pass",
+        "discreteLabel": "pass"
+      },
+      "observed": "Correct synchronous updates. Precise explanation of dimensionless r. Adds rod, profile curve, derivations and history table; longer than a compact inline demonstration.",
+      "screenshots": [
+        "08.jpg"
+      ]
+    },
+    {
+      "case": "F01",
+      "app": "codex",
+      "task": "01a0ae8c-fbd3-7b82-83e4-ab63fa787f42",
+      "elapsedMs": 159087,
+      "source": "/Users/ziya/.codex/visualizations/2026/09/17/01a0ae8c-fbd3-7b82-83e4-ab63fa787f42/regional-sales.html",
+      "preview": "codex-sales.html",
+      "checks": {
+        "selectWest": "pass: 50万元",
+        "selectionStaysLocal": "pass in source and preview",
+        "followupPayload": "source inspected: west, 50 and comparison values included",
+        "nativeConversationDelivery": "not tested"
+      },
+      "observed": "Uses window.openai.sendFollowUpMessage only in Explain handler. Native Codex bridge absent in standalone preview.",
+      "screenshots": [
+        "07.jpg"
+      ]
+    },
+    {
+      "case": "F01",
+      "app": "cowork",
+      "url": "https://claude.ai/cowork/cse_01STH4SCsAEDyQHq2tEdZ4gG",
+      "output": "Private Artifact 三区销售对比",
+      "checks": {
+        "selectWest": "pass: 50万元",
+        "selectionStaysLocal": "pass observed",
+        "explicitModelRequest": "pass, clicked Explain and granted Use Claude for this artifact",
+        "correctSelectedExplanation": "pass: west 50, 20%, gaps 70 and 30",
+        "originalConversationDelivery": "different behavior: response stays inside Artifact; original conversation remains two messages"
+      },
+      "observed": "Working AI-powered Artifact, not the DSH original-conversation follow-up flow.",
+      "screenshots": [
+        "09.jpg",
+        "10.jpg",
+        "12.jpg"
+      ]
+    },
+    {
+      "case": "I01",
+      "app": "dsh",
+      "session": "session-0cb59088-1426-423e-86d1-df085c95043f",
+      "status": "blocked",
+      "reason": "DeepSeek Messages transport failed TRANSPORT after retries; api.deepseek.com DNS lookup fails locally; no show_widget call or generated source.",
+      "countsAsGenerationFailure": false
+    }
+  ],
+  "localRegression": {
+    "unit": {
+      "command": "pnpm exec vitest run packages/visualizer/tool-visualizer/tests packages/visualizer/ui-visualizer/tests",
+      "files": 8,
+      "tests": 91,
+      "result": "pass"
+    },
+    "browserReplay": {
+      "command": "DSH_SNAPSHOT=replay pnpm exec vitest run --config vitest.web.config.ts apps/web/tests/visualizer.e2e.ts",
+      "files": 1,
+      "tests": 4,
+      "result": "pass"
+    },
+    "claims": "Existing regressions on unchanged Web head; not fresh model-quality evaluation, not current full coverage/type/lint/doc/remote-CI evidence."
+  },
+  "pullRequests": {
+    "host": {
+      "number": 3820,
+      "state": "OPEN",
+      "review": "REVIEW_REQUIRED",
+      "mergeable": "UNKNOWN",
+      "base": "master"
+    },
+    "web": {
+      "number": 3340,
+      "state": "OPEN",
+      "review": "APPROVED",
+      "mergeable": "UNKNOWN",
+      "base": "feat/visualizer-host-v0-relaunch"
+    },
+    "mergeRehearsal": "After refreshing master to be246be3f9, Host has conflicts in packages/README.i18n.yaml and scripts/check-workspace-constraints.ts. No actual merge/rebase/push.",
+    "remoteCI": "Only weighted approval publisher checks observed successful; approval status pending. Full remote CI not established."
+  },
+  "promptIteration": {
+    "status": "candidate only; not applied to either PR, effect not measured because DSH baseline is blocked",
+    "candidate": [
+      {
+        "path": "assets/references/interaction.md",
+        "text": "Derive visual marks, readouts, and enabled controls from the same current state; make completed states explicit.",
+        "evidence": "Cowork I01 final state found 23 but retains pending-elements copy."
+      },
+      {
+        "path": "assets/references/style.md",
+        "text": "Keep the main visual, its current state, and the controls that change it together; put extended explanation in the reply.",
+        "evidence": "Codex compact examples keep state and controls together; Cowork panels separate them by scrolling."
+      }
+    ],
+    "toolSchema": "No change supported by these samples; current sendPrompt text and replacement identity/version API already express required behavior."
+  },
+  "notice": "历史 Codex/Cowork 对照，仅供设计参考，不参与当前人工打标。最新 DSH 正式运行见 dsh-results.json，主页与 label.html 以 DSH 前后对照为主。"
+}

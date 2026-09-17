@@ -1,0 +1,221 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+  .ht-demo{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--dsw-alias-label-primary,#1b1b1b);background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,#e4e4e4);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:11px;max-width:660px;box-sizing:border-box}
+  .ht-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+  .ht-title{font-size:15px;font-weight:650}
+  .ht-sub{font-size:12px;color:var(--dsw-alias-label-secondary,#666)}
+  .ht-plot{width:100%;height:auto;display:block}
+  .ht-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  .ht-cell{min-width:0;border:1px solid var(--dsw-alias-border-l1,#e4e4e4);border-radius:9px;padding:6px 8px;background:var(--dsw-alias-bg-layer-2,#f7f7f7)}
+  .ht-cell.fixed{border-color:var(--dsw-alias-border-l2,#c8c8c8)}
+  .ht-name{display:flex;justify-content:space-between;gap:4px;font-size:11px;color:var(--dsw-alias-label-secondary,#666)}
+  .ht-tag{font-size:10px;color:var(--dsw-alias-label-tertiary,#8c8c8c)}
+  .ht-num{font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+  .ht-unit{font-size:10px;color:var(--dsw-alias-label-tertiary,#8c8c8c);margin-left:2px}
+  .ht-controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+  .ht-btn{border-radius:9px;border:1px solid var(--dsw-alias-border-l2,#c8c8c8);background:var(--dsw-alias-bg-layer-1,#fff);color:inherit;font:inherit;font-size:13px;font-weight:550;padding:7px 16px;cursor:pointer}
+  .ht-btn:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.05))}
+  .ht-btn.primary{background:var(--dsw-alias-button-primary-fill,#2b6cf6);color:var(--dsw-alias-label-primary-inverted,#fff);border-color:transparent}
+  .ht-steps{font-size:12px;color:var(--dsw-alias-label-secondary,#666);font-variant-numeric:tabular-nums}
+  .ht-formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;line-height:1.5;color:var(--dsw-alias-label-secondary,#666);overflow-wrap:anywhere}
+  .ht-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
+</style>
+<div class="ht-demo">
+  <div class="ht-head">
+    <div class="ht-title">一维热传导 · 5 节点离散示意</div>
+    <div class="ht-sub">两端固定 100 °C / 0 °C，中间 3 个节点初始 0 °C</div>
+  </div>
+  <svg class="ht-plot" viewBox="0 0 440 208" role="img" aria-label="5 个离散节点的温度分布：两端固定为 100 摄氏度与 0 摄氏度，中间节点由上一时刻温度同步更新">
+    <g id="ht-static"></g>
+    <g id="ht-dyn"></g>
+  </svg>
+  <div class="ht-grid" id="ht-readout"></div>
+  <div class="ht-controls">
+    <button class="ht-btn primary" id="ht-step" type="button">单步 →</button>
+    <button class="ht-btn" id="ht-reset" type="button">重置</button>
+    <span class="ht-steps" id="ht-steps">已执行 0 步</span>
+  </div>
+  <div class="ht-formula">同步更新（Jacobi）：T<sub>i</sub>′ = T<sub>i</sub> + α·(T<sub>i−1</sub> − 2T<sub>i</sub> + T<sub>i+1</sub>)，α = 0.25</div>
+  <p class="ht-sr" id="ht-live" aria-live="polite"></p>
+</div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var TEMPS=[100,0,0,0,0];
+  var XS=[52,142,232,322,412], YBASE=170, PLOT=140, COEF=0.25;
+  var FIXED={0:true,4:true};
+  var temps=TEMPS.slice(), step=0;
+
+  function yOf(t){return YBASE-(t/100)*PLOT;}
+  function colorOf(t){return 'hsl('+(215-1.95*t).toFixed(1)+' 78% 52%)';}
+  function fmt(v){var r=Math.round(v*100)/100;return Number.isInteger(r)?r.toFixed(1):String(r);}
+  function mk(tag,attrs,text){
+    var e=document.createElementNS(NS,tag);
+    for(var k in attrs){e.setAttribute(k,attrs[k]);}
+    if(text!=null){e.textContent=text;}
+    return e;
+  }
+
+  /* 静态：网格、坐标、节点编号 */
+  var st=document.getElementById('ht-static');
+  [0,25,50,75,100].forEach(function(v){
+    var y=yOf(v);
+    st.appendChild(mk('line',{x1:52,x2:412,y1:y,y2:y,stroke:'var(--dsw-alias-border-l1,#e6e6e6)','stroke-width':1,'stroke-dasharray':v===0?'':'3 4'}));
+    st.appendChild(mk('text',{x:46,y:y+3.5,'text-anchor':'end','font-size':10,fill:'var(--dsw-alias-label-tertiary,#8c8c8c)'},String(v)));
+  });
+  st.appendChild(mk('text',{x:46,y:20,'text-anchor':'end','font-size':10,fill:'var(--dsw-alias-label-tertiary,#8c8c8c)'},'°C'));
+  st.appendChild(mk('line',{x1:24,x2:416,y1:YBASE,y2:YBASE,stroke:'var(--dsw-alias-border-l2,#c8c8c8)','stroke-width':1.5}));
+  st.appendChild(mk('rect',{x:26,y:178,width:388,height:7,rx:3.5,fill:'var(--dsw-alias-border-l1,#e6e6e6)',opacity:0.7}));
+  for(var i=0;i<5;i++){
+    st.appendChild(mk('text',{x:XS[i],y:199,'text-anchor':'middle','font-size':11,fill:'var(--dsw-alias-label-secondary,#666)'},'节点'+i));
+  }
+
+  /* 动态：柱、曲线、节点圆、温度值、固定环 */
+  var dyn=document.getElementById('ht-dyn');
+  var bars=[],dots=[],labels=[],rings=[];
+  for(var j=0;j<5;j++){
+    var b=mk('rect',{x:XS[j]-28,y:yOf(temps[j]),width:56,height:YBASE-yOf(temps[j]),rx:5,fill:colorOf(temps[j]),opacity:0.22});
+    dyn.appendChild(b);bars.push(b);
+  }
+  var line=mk('polyline',{fill:'none',stroke:'var(--dsw-alias-brand-primary,#2b6cf6)','stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'});
+  dyn.appendChild(line);
+  for(var k=0;k<5;k++){
+    if(FIXED[k]){
+      var r=mk('circle',{cx:XS[k],cy:yOf(temps[k]),r:11.5,fill:'none','stroke-width':1.5,'stroke-dasharray':'2 3','stroke':colorOf(temps[k])});
+      dyn.appendChild(r);rings.push(r);
+    }else{rings.push(null);}
+    var d=mk('circle',{cx:XS[k],cy:yOf(temps[k]),r:7,fill:colorOf(temps[k]),stroke:'var(--dsw-alias-bg-layer-1,#fff)','stroke-width':2});
+    dyn.appendChild(d);dots.push(d);
+  }
+  for(var m=0;m<5;m++){
+    var t=mk('text',{x:XS[m],y:yOf(temps[m])-11,'text-anchor':'middle','font-size':12,'font-weight':600,fill:'var(--dsw-alias-label-primary,#1b1b1b)','font-variant-numeric':'tabular-nums'});
+    dyn.appendChild(t);labels.push(t);
+  }
+
+  /* 读数卡片 */
+  var readout=document.getElementById('ht-readout'), cells=[];
+  for(var n=0;n<5;n++){
+    var cell=document.createElement('div');
+    cell.className='ht-cell'+(FIXED[n]?' fixed':'');
+    cell.innerHTML='<div class="ht-name"><span>节点 '+n+'</span><span class="ht-tag">'+(FIXED[n]?'固定':'自由')+'</span></div><div><span class="ht-num">–</span><span class="ht-unit">°C</span></div>';
+    readout.appendChild(cell);cells.push(cell.querySelector('.ht-num'));
+  }
+
+  var stepsEl=document.getElementById('ht-steps'), liveEl=document.getElementById('ht-live');
+  function render(){
+    for(var i=0;i<5;i++){
+      var y=yOf(temps[i]), c=colorOf(temps[i]);
+      bars[i].setAttribute('y',y);
+      bars[i].setAttribute('height',Math.max(0,YBASE-y));
+      bars[i].setAttribute('fill',c);
+      dots[i].setAttribute('cy',y);
+      dots[i].setAttribute('fill',c);
+      labels[i].setAttribute('y',Math.max(14,y-11));
+      labels[i].textContent=fmt(temps[i])+'°';
+      if(rings[i]){rings[i].setAttribute('cy',y);rings[i].setAttribute('stroke',c);}
+      cells[i].textContent=fmt(temps[i]);
+    }
+    var pts=[];
+    for(var q=0;q<5;q++){pts.push(XS[q]+','+yOf(temps[q]));}
+    line.setAttribute('points',pts.join(' '));
+    stepsEl.textContent='已执行 '+step+' 步';
+    var parts=[];
+    for(var w=0;w<5;w++){parts.push('节点'+w+' '+fmt(temps[w])+'°C');}
+    liveEl.textContent='第 '+step+' 步：'+parts.join('，');
+  }
+  function stepOnce(){
+    var next=temps.slice();
+    for(var i=1;i<4;i++){next[i]=temps[i]+COEF*(temps[i-1]-2*temps[i]+temps[i+1]);}
+    temps=next;step++;render();
+  }
+  function reset(){temps=TEMPS.slice();step=0;render();}
+  document.getElementById('ht-step').addEventListener('click',stepOnce);
+  document.getElementById('ht-reset').addEventListener('click',reset);
+  render();
+})();
+</script></body></html>

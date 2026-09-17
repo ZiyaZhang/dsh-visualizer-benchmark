@@ -1,0 +1,178 @@
+截图核验 master 对照报告和最终 PR 状态
+
+Wall time: 0.4314 seconds
+Output:
+Browser tab: 2, Title: "DSH Visualizer · 生成评测与人工验收", URL: "http://127.0.0.1:3092/".
+1 AXWebArea DSH Visualizer · 生成评测与人工验收, URL: 127.0.0.1:3092/
+	2 container
+		3 text 2026-09-17 · 本地实测 · DeepSeek-V41-Flash / High
+		4 heading 两个 PR 加到最新 master 后，DSH 表现怎样？, Value: 1
+			5 text 两个 PR 加到最新 master 后，DSH 表现怎样？
+		6 text 普通任务与
+		7 text 不含这两个 PR 的 master
+		8 text 做同题对照；可交互示意另看成品。人工验收集中在 DSH 的准确性、表达与操作体验。
+		9 link Description: 验收当前 DSH 成品 →, Value: 127.0.0.1:3092/label.html?stage=integrated
+		10 text 已保存 0 / 3 题
+		11 text 16 / 16 纯 master 普通任务达标 16 / 16 加两个 PR 后普通任务达标 0 / 16 PR 组误调用可视化工具 6 份 当前交互示意待人工验收 这组普通任务未发现质量退化，但不等于零成本或全面无回归。6 份可视化都通过指定交互检查，两份二分查找的回复正文却把最坏比较次数写错，不能记作整体质量全通过。
+		12 heading 普通任务：master / master + 两个 PR, Value: 2
+			13 text 普通任务：master / master + 两个 PR
+		14 text 8 类任务，每组各 2 次，共 32 次。题目、输入文件、模型、推理强度与其他工具定义一致。
+		15 table
+			16 row
+				17 cell
+					18 text 任务
+				19 cell
+					20 text 核验内容
+				21 cell
+					22 text 纯 master
+				23 cell
+					24 text 加两个 PR
+				25 cell
+					26 text 原始成品
+			27 container regression
+				28 row
+					29 cell
+						30 text 只答算术
+					31 cell
+						32 text 精确回答 42，无工具和文件改动
+					33 cell
+						34 text 2 / 2
+					35 cell
+						36 text 2 / 2
+					37 cell
+						38 button (collapsed) 查看同题 4 份结果, Secondary Actions: Expand
+							39 text 查看同题 4 份结果
+				40 row
+					41 cell
+						42 text Markdown 表格
+					43 cell
+						44 text 水果与数量正确
+					45 cell
+						46 text 2 / 2
+					47 cell
+						48 text 2 / 2
+					49 cell
+						50 button (collapsed) 查看同题 4 份结果, Secondary Actions: Expand
+							51 text 查看同题 4 份结果
+				52 row
+					53 cell
+						54 text 仅返回 TypeScript
+					55 cell
+						56 text 执行 8 个边界用例，无落盘
+					57 cell
+						58 text 2 / 2
+					59 cell
+						60 text 2 / 2
+					61 cell
+						62 button (collapsed) 查看同题 4 份结果, Secondary Actions: Expand
+							63 text 查看同题 4 份结果
+				64 row
+					65 cell
+						66 text 生成 SVG 文件
+					67 cell
+						68 text XML、标签与柱高比例 3:5
+					69 cell
+						70 text 2 / 2
+					71 cell
+						72 text 2 / 2
+					73 cell
+						74 button (collapsed) 查看同题 4 份结果, Secondary Actions: Expand
+							75 text 查看同题 4 份结果
+				76 row
+					77 cell
+						78 text 修复现有代码
+					79 cell
+						80 text 原有及额外边界通过，只改目标文件
+					81 cell
+						82 text 2 / 2
+					83 cell
+						84 text 2 / 2
+					85 cell
+						86 button (collapsed) 查看同题 4 份结果, Secondary Actions: Expand
+							87 text 查看同题 4 份结果
+				88 row
+					89 cell
+						90 text 分析 CSV
+					91 cell
+						92 text 已支付 310、东部 150、西部占 19.35%
+					93 cell
+						94 text 2 / 2
+					95 cell
+						96 text 2 / 2
+					97 cell
+						98 button (collapsed) 查看同题 4 份结果, Secondary Actions: Expand
+							99 text 查看同题 4 份结果
+				100 row
+					101 cell
+						102 text 会议行动项
+					103 cell
+						104 text 3 项行动与负责人、日期一致
+					105 cell
+						106 text 2 / 2
+					107 cell
+						108 text 2 / 2
+					109 cell
+						110 button (collapsed) 查看同题 4 份结果, Secondary Actions: Expand
+							111 text 查看同题 4 份结果
+				112 row
+					113 cell
+						114 text 修改现有网页
+					115 cell
+						116 text 保留标题，0–5 边界与按钮禁用正确
+					117 cell
+						118 text 2 / 2
+					119 cell
+						120 text 2 / 2
+					121 cell
+						122 button (collapsed) 查看同题 4 份结果, Secondary Actions: Expand
+							123 text 查看同题 4 份结果
+		124 text 4 份项目页面都在真实浏览器点击过：2 → 5 禁用增加 → 0 禁用减少 → 1。代码、TypeScript 和 SVG 另有执行或解析检查。
+		125 button (collapsed) 成本与比较边界, Secondary Actions: Expand
+			126 text 成本与比较边界
+		127 heading 当前交互示意：3 题 × 2 次, Value: 2
+			128 text 当前交互示意：3 题 × 2 次
+		129 container
+			130 text 二分查找
+			131 text mid 3（12）→ mid 5（23），命中下标 5，重置正确。两份正文均错称 8 个元素最多比较 3 次（应为 4）；第二份命中后仍显示“剩 4 个候选”。
+		132 link Description: 验收成品, Value: 127.0.0.1:3092/label.html?stage=integrated&case=dsh-integrated-I01
+		133 container
+			134 text 热传导
+			135 text 两步为 [100,25,0,0,0]、[100,37.5,6.25,0,0]；重置正确，本地操作不发消息。
+		136 link Description: 验收成品, Value: 127.0.0.1:3092/label.html?stage=integrated&case=dsh-integrated-I02
+		137 container
+			138 text 地区选择与追问
+			139 text 选择西部 50 万元不发送；点解释后恰好捕获一次带所选数据的追问。
+		140 link Description: 验收成品, Value: 127.0.0.1:3092/label.html?stage=integrated&case=dsh-integrated-F01
+		141 text 两列是同一当前版本的独立生成，用于观察稳定性。正文与已知问题可见，源码可查看；人工评分留给你。
+		142 heading 从评测落实到原 PR, Value: 2
+			143 text 从评测落实到原 PR
+		144 container
+			145 link Description: Host #3820, Value: github.com/deepseek-harness/deepseek-harness/pull/3820
+			146 text  保留已提交的短 Skill 指导、修复参数说明和工具结果提示。
+			147 link Description: Web #3340, Value: github.com/deepseek-harness/deepseek-harness/pull/3340
+			148 text  保留按内容确定卡片高度；新增修复 Chat 被关闭时 Visualizer 阻塞插件加载的问题，仅在 Chat 服务可用时注册节点位置。
+		149 text 新修复已推至原 Web PR（5aefdb9332）。既有关闭 Chat 用例先复现失败、修复后通过；普通文件编辑回放仅更新 Skill 目录预期，模型输出与业务工具参数未改。三个相关回放共 9 项通过，UI 60 项与四项源码覆盖率 100%，41 项文档检查通过。
+		150 text Host a754eacf66、Web 5aefdb9332 均已推送，包含 master 305f10f586。两个 PR 的远端 CI 均通过；Web 的滚动断言与 Windows worker 退出在相同提交重跑后通过。Host 仍待 review，Web 已获批准，仓库审批门槛仍待满足；两者无合并冲突，均未合并。状态核验于 9 月 17 日 04:38（本机时间）。
+		151 button (collapsed) 提示词迭代与失败记录, Secondary Actions: Expand
+			152 text 提示词迭代与失败记录
+		153 heading 真实 Web 链路与范围, Value: 2
+			154 text 真实 Web 链路与范围
+		155 text 3091 的真实 DSH 页面已验证：选择后发送 1 条含西部 50 万元的追问，模型继续回答；受控渲染错误触发一次自动修复，引用 widget 25 / result 26，原卡片更新后仍为 1 张，计数可从 0 点到 3。旧源码、错误和调用留在日志。对照页仅捕获发送文本，不重复请求模型。
+		156 text 刷新、取消、上下文压缩与修复预算由现有单测和回放覆盖。整合验证有 Host 31 项、UI 60 项、Chat 8 项及 17 项浏览器检查，两包源码覆盖率四项 100%；新增修复验证另列在上面，数字有重叠，不相加。
+		157 text 当前 6 份均按 736px 浅色操作核验。历史样本另抽查过 360px 深色，不宣称当前全题完成窄屏和主题遍历。
+		158 heading 记录与 README 讨论, Value: 2
+			159 text 记录与 README 讨论
+		160 text 本轮新增 32 次普通任务对照、6 次功能生成、3 次失败提示试验；历史正式运行 32 次独立保留。16 道题库执行了 11 道，其余 5 道未运行。配置试跑、内置 Skill 校准与一次未正确重编译的试跑不计入正式比较。
+		161 container
+			162 link Description: 完整运行记录, Value: 127.0.0.1:3092/dsh-results.json
+			163 text  · 
+			164 link Description: 题目与判据, Value: 127.0.0.1:3092/cases.json
+			165 text  · 
+			166 link Description: 人工意见, Value: 127.0.0.1:3092/api/annotations
+			167 text  · 
+			168 link Description: 历史截图索引, Value: 127.0.0.1:3092/screenshots/index.json
+		169 button (collapsed) README 建议口径（待讨论，未写入产品 README）, Secondary Actions: Expand
+			170 text README 建议口径（待讨论，未写入产品 README）
+		171 text 人工偏好仅由你保存。原始 Session 和密钥配置留在本机私有目录；网页提供成品、摘要与截图。
+
+The focused UI element is 1 AXWebArea DSH Visualizer · 生成评测与人工验收, URL: 127.0.0.1:3092/

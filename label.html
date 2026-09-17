@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSH Visualizer · 逐份人工评分</title>
+<style>
+:root{color-scheme:light;--ink:#17232b;--muted:#61727e;--line:#dce3e8;--blue:#245bc4;--bg:#f4f7fa}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg)}
+button,input,textarea,select{font:inherit}button,a{touch-action:manipulation}
+button,select{padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--ink)}
+button{cursor:pointer}button:disabled{opacity:.45;cursor:default}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #80a8ed;outline-offset:2px}
+a{color:var(--blue);text-underline-offset:3px}header{display:flex;align-items:center;gap:16px;padding:14px 22px;border-bottom:1px solid var(--line);background:white;flex-wrap:wrap}
+header h1{font-size:20px;margin:0}.spacer{flex:1}.subtle,.hint{color:var(--muted);font-size:14px}.hint{margin:9px 0}
+.shell{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:calc(100vh - 65px)}
+aside{background:#eef2f6;padding:22px 16px;border-right:1px solid var(--line)}aside select{width:100%;margin:8px 0 12px}
+.cases{display:grid;gap:8px;max-height:65vh;overflow:auto}.cases button{text-align:left;padding:10px;display:grid;gap:4px}
+.cases button[aria-current=true]{border-color:var(--blue);color:var(--blue);background:#e6efff}.cases span{font-size:12px}
+main{min-width:0;padding:22px 24px 35px;max-width:1140px}h2{font-size:23px;margin:0}h3{font-size:18px;margin:0}
+.prompt,.prose{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.65 system-ui}.prompt{margin:12px 0}
+.panel,.result{background:white;border:1px solid var(--line);border-radius:8px;margin:16px 0;padding:16px}
+.result{padding:0;overflow:hidden}.result-head{padding:12px 16px;border-bottom:1px solid var(--line)}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:14px 0}
+.preview-scroll{overflow:auto;background:#fafbfd;padding:0}.visual{width:736px;margin:auto;background:white}
+.visual[data-theme=dark]{background:#1c2128}.visual iframe{border:0;width:100%;display:block;min-height:100px}
+.caption{font-size:13px;color:var(--muted);padding:8px 16px;border-top:1px solid var(--line);white-space:pre-wrap}
+fieldset{border:0;margin:0 0 22px;padding:0;min-width:0}legend{font-weight:600;margin-bottom:8px}
+.choices{display:grid;gap:7px}.choices label{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--line);border-radius:5px;padding:9px 11px;font-size:14px;cursor:pointer}
+.choices label:has(input:checked){background:#e6efff;border-color:var(--blue)}input[type=radio]{accent-color:var(--blue);margin:4px 0 0;flex:none}
+textarea{display:block;width:100%;padding:9px;border:1px solid var(--line);border-radius:5px;resize:vertical;min-height:58px;margin-top:7px}
+.reason{margin-top:8px}details{margin:13px 0}summary{cursor:pointer}ul{padding-left:21px}
+.checks li{margin:7px 0}.pill{font-size:12px;border-radius:4px;background:#edf2f6;padding:2px 6px;margin-right:7px}
+.pill.fail,.error{color:#a32f23}.pill.pass,.ok{color:#216344}.warning{border-left:3px solid #b48027;padding:9px 12px;background:#fcf6e8}
+.savebar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}.primary{background:var(--blue);border-color:var(--blue);color:white}
+#loading{padding:30px}#notice{min-height:22px}#trace pre{font:13px/1.5 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.objective{display:grid;grid-template-columns:1fr 1fr;gap:15px}.objective select{display:block;width:100%;margin-top:7px}
+.hidden{display:none!important}@media(max-width:850px){.shell{grid-template-columns:180px minmax(0,1fr)}main{padding:18px 14px}}
+@media(max-width:640px){.shell{display:block}aside{padding:12px 16px;border-right:0;border-bottom:1px solid var(--line)}.cases{display:flex;max-height:180px}.cases button{min-width:135px}.objective{grid-template-columns:1fr}header{padding:12px 16px}.toolbar{gap:7px}}
+.prose{white-space:normal;overflow-wrap:anywhere}.prose p{margin:9px 0}.prose h1,.prose h2,.prose h3{margin:16px 0 8px;font-size:18px}.prose ul,.prose ol{padding-left:24px}.prose pre{white-space:pre-wrap;background:#f4f6f8;padding:12px;border-radius:5px;overflow-wrap:anywhere}.prose code{font:13px/1.5 ui-monospace,monospace}.prose table{border-collapse:collapse;width:100%}.prose td,.prose th{padding:6px;border-bottom:1px solid #dce3e8;text-align:left}
+</style>
+<header>
+  <h1>DSH Visualizer 人工评分</h1>
+  <span id="progress" class="subtle">正在读取</span><span class="spacer"></span>
+  <a href="/index.html">评测结果</a><button id="export">导出标注</button>
+</header>
+<div id="loading" role="status">正在读取成品与标注…</div>
+<div class="shell" id="app" hidden>
+<aside>
+  <label for="stage">评测轮次</label><select id="stage"></select>
+  <label for="filter" class="subtle">显示范围</label>
+  <select id="filter"><option value="all">全部记录</option><option value="quality">需要质量评分</option><option value="routing">只看路由</option><option value="pending">尚未完成评分</option></select>
+  <nav id="cases" class="cases" aria-label="待评价成品"></nav>
+  <p id="stage-description" class="hint"></p>
+  <p class="hint">逐份填写四维 0 / 1 / 2。静态无交互或无法观察时选 N/A 并说明原因。未评不计为 0。</p>
+  <p class="hint">版本在评分完成前隐藏。保存到这台 Mac 后可继续修改；旧版偏好标注独立保留。</p>
+</aside>
+<main>
+  <h2 id="title"></h2><p class="prompt" id="prompt"></p>
+  <details id="oracle-box" open><summary>题目真值与应满足的行为</summary><ul id="oracle"></ul><details id="original-oracle" hidden><summary>原始判据（冻结记录）</summary><ul id="raw-oracle"></ul></details></details>
+  <p id="run-status" class="hint"></p>
+  <div id="catalog-error" class="warning" hidden></div>
+  <div class="toolbar">
+    <label>预览宽度 <select id="width"><option value="736">736 px</option><option value="360">360 px</option></select></label>
+    <label>外观 <select id="theme"><option value="light">浅色</option><option value="dark">深色</option></select></label>
+    <button id="reload" type="button">重置预览</button>
+  </div>
+  <p class="hint">下方是完整成品中的全部组件，按所选 736 / 360 px 固定宽度预览；空间不足时可横向滚动。追问只捕获文本，不请求模型；更换外观会重置预览状态。</p>
+  <div id="widgets"></div>
+  <section class="panel"><h3>完整回复正文</h3><div id="final" class="prose"></div><details><summary>原始 Markdown（未经改写）</summary><pre id="raw-final" class="prompt"></pre></details><p class="hint">正文以安全 Markdown 排版，原始 HTML 与外链图片不执行；全部原文保留。</p></section>
+  <details id="evidence"><summary>已有客观检查 · 与人工评分分开</summary><p class="hint">脚本、代理或历史预览证据；不是你已打的分，也不代替完整 Web 会话验收。</p><ul id="checks" class="checks"></ul><div id="evidence-notes" class="prose"></div></details>
+  <form id="review">
+    <section class="panel">
+      <h3>四维质量评分</h3>
+      <p class="hint">事实是否正确、控件是否真正工作和路由是否正确单独记录。质量分不能抵销这些失败，也不要因此把四维全部打 0。</p>
+      <div id="ratings"></div>
+      <details open><summary>人工核对内容与完成情况 · 与四维质量独立</summary>
+        <div class="objective">
+          <label>内容正确性<select id="correctness"><option value="not_reviewed">尚未核查</option><option value="pass">正确</option><option value="fail">有内容错误</option><option value="uncertain">尚无法判断</option></select></label>
+          <label>任务完成情况<select id="completion"><option value="not_reviewed">尚未核查</option><option value="pass">已完成要求</option><option value="fail">未完成要求</option><option value="uncertain">尚无法判断</option></select></label>
+        </div>
+      </details>
+      <label for="notes">具体意见 <span class="subtle">可选</span></label>
+      <textarea id="notes" maxlength="4000" placeholder="写出你看到的问题或值得保留的表达。"></textarea>
+      <label for="pending-reason">待核原因 <span class="subtle">“保存待核”时必填</span></label>
+      <textarea id="pending-reason" maxlength="4000" placeholder="例如：窄屏还未检查；需要核对某个状态。"></textarea>
+      <div class="savebar">
+        <button type="submit" class="primary">保存并下一份</button>
+        <button type="button" id="save">仅保存</button>
+        <button type="button" id="pending-save">保存待核</button>
+      </div>
+      <p id="notice" role="status" aria-live="polite" class="hint">尚未评分</p>
+    </section>
+  </form>
+  <p id="routing-only" class="warning" hidden>这条是非内联任务，只展示路由结果与轨迹，不要求填写视觉质量分。</p>
+  <details id="trace"><summary>版本、完整工具轨迹与产物</summary><p id="trace-lock" class="hint"></p><div id="trace-body"></div></details>
+  <div class="savebar"><button id="previous" type="button">上一份</button><button id="next" type="button">下一份</button></div>
+</main>
+</div>
+<script src="/vendor/marked-16.4.2.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const node = (tag, text) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; return e; };
+
+const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const markdown = new marked.Marked({gfm:true, renderer:{
+  html(token) { return escapeHtml(token.text); },
+  image(token) { return '<span>[图片未加载：' + escapeHtml(token.text || '无文字说明') + ']</span>'; },
+  link(token) {
+    const text = this.parser.parseInline(token.tokens);
+    if (!/^(https?:|#|\/(?!\/))/i.test(token.href)) return text;
+    return '<a href="' + escapeHtml(token.href) + '" target="_blank" rel="noopener noreferrer">' + text + '</a>';
+  }
+}});
+
+const dimensions = [
+  ['understanding', '理解价值', ['看图仍难理解所要表达的关系', '配合正文才能理解', '图中直接看清关键关系或变化']],
+  ['layout', '信息与布局', ['关键内容难读、遮挡或层次混乱', '能读懂，有局部拥挤或不协调', '层次清楚，文字、标记和留白协调']],
+  ['operability', '操作可理解性', ['难以识别操作入口或状态含义', '需要摸索才能知道怎么用', '操作入口、当前状态和反馈含义清楚']],
+  ['focus', '简洁与聚焦', ['无关内容或装饰明显干扰主要任务', '有些冗余，主要内容仍突出', '内容聚焦，呈现协调，无不必要负担']]
+];
+const statusText = {pass:'通过',fail:'失败',pending:'待检查',not_applicable:'不适用',error:'检查出错',completed:'已生成',planned:'尚未运行',running:'运行中',timed_out:'超时'};
+const checkNames = {route:'输出路由',acceptance:'工具准入',render:'首次渲染',interaction:'控件与状态',content:'内容正确性',followup:'追问',layout:'布局检查',messages:'消息',runtime:'运行',localMessages:'本地操作不发送',followupPayload:'追问内容',hostFollowup:'真实对话发送'};
+const calibrationOracles = {
+  W01:['初始搜索范围为下标 0～7；第一轮中点是下标 3，值为 12。','下一轮范围为下标 4～7；中点是下标 5，值为 23，找到目标。','重置后回到初始状态；“下一步”和“重置”不向模型发消息。','图中状态、说明和回复正文应一致。若提到最坏比较次数，8 个元素最多需要 4 次比较；本题找到 23 实际比较 2 次。'],
+  W02:['初始温度为 [100, 0, 0, 0, 0] °C。','每一步均使用上一时刻的温度同步计算，扩散系数为 0.25。','第 1 步为 [100, 25, 0, 0, 0] °C；第 2 步为 [100, 37.5, 6.25, 0, 0] °C。','两端始终保持 100°C 和 0°C；重置恢复初始值；明确这是离散示意。'],
+  W06:['数据为华东 120 万元、华南 80 万元、西部 50 万元。','选中西部只改变本地选择，不发送追问。','点击“解释所选地区”后恰好发送一次，内容包含西部及 50 万元。','这里的预览只捕获追问文本；真正进入原对话、模型回答所选地区，以及发送状态与渲染错误的区分，由真实 Web 会话另外验证。']
+};
+const themes = {
+  light:{'--dsh-widget-color-scheme':'light','--dsw-alias-bg-base':'#fff','--dsw-alias-bg-layer-1':'#fff','--dsw-alias-bg-layer-2':'#f4f5f7','--dsw-alias-label-primary':'#1f2329','--dsw-alias-label-secondary':'#606875','--dsw-alias-label-tertiary':'#9299a3','--dsw-alias-label-primary-inverted':'#fff','--dsw-alias-border-l1':'#e5e7eb','--dsw-alias-border-l2':'#d1d5db','--dsw-alias-brand-primary':'#4d6bfe','--dsw-alias-button-primary-fill':'#4d6bfe','--dsw-alias-interactive-bg-hover':'#eef1ff','--dsw-alias-interactive-bg-active':'#e0e7ff','--dsw-alias-state-error-primary':'#c43535'},
+  dark:{'--dsh-widget-color-scheme':'dark','--dsw-alias-bg-base':'#1c2128','--dsw-alias-bg-layer-1':'#1c2128','--dsw-alias-bg-layer-2':'#292f38','--dsw-alias-label-primary':'#e5e7eb','--dsw-alias-label-secondary':'#abb4c0','--dsw-alias-label-tertiary':'#929ba8','--dsw-alias-label-primary-inverted':'#1c2128','--dsw-alias-border-l1':'#373e48','--dsw-alias-border-l2':'#4b5563','--dsw-alias-brand-primary':'#8195ff','--dsw-alias-button-primary-fill':'#8195ff','--dsw-alias-interactive-bg-hover':'#343f69','--dsw-alias-interactive-bg-active':'#3e4b7a','--dsw-alias-state-error-primary':'#ff8177'}
+};
+let data, saved, stage, activeFilter = "all", list = [], index = 0, dirty = false, saving = false, renderToken = 0;
+const selected = () => list[index];
+const validReview = trial => { const review = saved.reviews[trial.id]; return review?.artifactHash === trial.artifactHash ? review : null; };
+const complete = trial => validReview(trial)?.status === 'complete';
+function label(trial) {
+  const peers = data.stages.find(s => s.id === stage).trialIds.map(id => data.trials.find(t => t.id === id)).filter(t => t?.caseId === trial.caseId);
+  return trial.caseTitle + ' · 成品 ' + (peers.findIndex(t => t.id === trial.id) + 1);
+}
+function updateNav() {
+  $('cases').replaceChildren();
+  for (const [i, trial] of list.entries()) {
+    const button = node('button'); button.type = 'button';
+    const review = validReview(trial);
+    const state = trial.status === 'planned' ? '尚未运行' : trial.status === 'running' ? '运行中' : trial.status === 'error' || trial.status === 'timed_out' ? '连接 / 运行错误' : !trial.qualityEligible ? (trial.qualityExpected ? '未生成组件，不评分' : '仅路由') : complete(trial) ? '已评分' : review?.status === 'needs_review' ? '待核' : saved.reviews[trial.id] ? '内容已变，需重评' : '未评';
+    button.append(node('b', label(trial)), node('span', state));
+    button.setAttribute('aria-current', String(i === index));
+    button.onclick = () => navigate(i);
+    $('cases').append(button);
+  }
+  const quality = list.filter(t => t.qualityEligible);
+  $('progress').textContent = quality.filter(complete).length + ' / ' + quality.length + ' 份已评分 · ' + quality.filter(t => validReview(t)?.status === 'needs_review').length + ' 份待核';
+}
+function radio(parent, name, value, text, selectedValue) {
+  const label = node('label'), input = node('input'); input.type = 'radio'; input.name = name; input.value = String(value);
+  input.checked = value === selectedValue; label.append(input, node('span', text)); parent.append(label);
+}
+function ratings(old) {
+  $('ratings').replaceChildren();
+  for (const [key, title, anchors] of dimensions) {
+    const field = node('fieldset'); field.append(node('legend', title));
+    const choices = node('div'); choices.className = 'choices';
+    anchors.forEach((anchor, value) => radio(choices, key, value, value + ' · ' + anchor, old?.ratings?.[key]));
+    radio(choices, key, 'n/a', 'N/A · 不适用或无法观察（请说明）', old?.ratings?.[key]);
+    field.append(choices);
+    const reason = node('label', 'N/A 原因'); reason.className = 'reason'; reason.hidden = old?.ratings?.[key] !== 'n/a';
+    const input = node('textarea'); input.id = 'reason-' + key; input.maxLength = 1000; input.value = old?.naReasons?.[key] || '';
+    input.placeholder = key === 'operability' ? '例如：这是静态图，无交互要求。' : '写明该项无法观察或不适用的原因。';
+    reason.append(input); field.append(reason);
+    choices.onchange = () => { reason.hidden = new FormData($('review')).get(key) !== 'n/a'; };
+    $('ratings').append(field);
+  }
+}
+async function preview(widget, position, token) {
+  const article = node('article'); article.className = 'result';
+  const head = node('div'); head.className = 'result-head'; head.append(node('h3', '组件 ' + (position + 1) + ' · ' + (widget.title || widget.kind || '未命名')));
+  const scroll = node('div'); scroll.className = 'preview-scroll';
+  const visual = node('div'); visual.className = 'visual'; visual.style.width = $('width').value + 'px'; visual.dataset.theme = $('theme').value;
+  const caption = node('div', '正在加载；追问只预览，不会发送给模型。'); caption.className = 'caption';
+  article.append(head, scroll, caption); scroll.append(visual); $('widgets').append(article);
+  if (!widget.previewAvailable) { visual.append(node('p', '没有可加载的预览，原始失败记录仍保留。')); return; }
+  const frame = node('iframe'); frame.sandbox = 'allow-scripts'; frame.title = '组件 ' + (position + 1) + '：' + widget.title;
+  frame.dataset.count = '0'; frame.style.height = '350px'; visual.append(frame);
+  try {
+    const response = await fetch('/' + widget.preview); if (!response.ok) throw Error('预览文件无法读取');
+    let html = await response.text();
+    if (token !== renderToken) return;
+    const style = '<style>:root{' + Object.entries(themes[$('theme').value]).map(([key,value]) => key + ':' + value).join(';') + '}</style>';
+    html = html.replace('</head>', style + '</head>');
+    frame.srcdoc = html;
+    if (widget.kind === 'svg' && widget.sourceAvailable) {
+      const source = await (await fetch('/' + widget.source)).text();
+      const viewBox = source.match(/\bviewBox\s*=\s*["']([^"']+)["']/i)?.[1].trim().split(/[\s,]+/).map(Number);
+      if (viewBox?.length === 4 && viewBox[2] > 0 && viewBox[3] > 0) { frame.dataset.aspect = String(viewBox[3] / viewBox[2]); frame.style.height = Math.ceil(visual.clientWidth * Number(frame.dataset.aspect)) + 'px'; }
+      caption.textContent = '静态 SVG 预览；没有脚本事件不代表渲染失败，请查看图像。';
+    }
+  } catch (error) { caption.textContent = '预览无法加载：' + error.message; caption.classList.add('error'); }
+}
+function showWidgets(trial) {
+  $('widgets').replaceChildren(); const token = ++renderToken;
+  if (!trial.widgets.length) {
+    const notice = node('p', trial.status === 'planned' ? '这次尝试尚未运行，仍计入计划清单。' : '这次尝试没有已接受的内联组件；请查看路由、正文与失败记录。');
+    notice.className = 'warning'; $('widgets').append(notice);
+  }
+  trial.widgets.forEach((widget, i) => preview(widget, i, token));
+}
+function evidence(trial) {
+  $('checks').replaceChildren();
+  const checks = trial.qualityExpected ? trial.checks : {route: trial.checks.route};
+  for (const [key, value] of Object.entries(checks || {})) {
+    if (!value || typeof value !== 'object' || !value.status) continue;
+    const li = node('li'), pill = node('span', statusText[value.status] || value.status); pill.className = 'pill ' + value.status;
+    li.append(pill, node('b', checkNames[key] || key), document.createTextNode(' · ' + (value.reason || '没有说明')));
+    $('checks').append(li);
+  }
+  $('evidence-notes').textContent = trial.evidenceNotes?.length ? '历史预览核查（' + (trial.evidenceViewport || '未记录宽度') + ' / ' + (trial.evidenceAppearance || '未记录主题') + '）：\n' + trial.evidenceNotes.join('\n') : '';
+  $('evidence').open = Object.values(checks || {}).some(value => value?.status === 'fail' || value?.status === 'error');
+}
+function trace(trial) {
+  const unlocked = complete(trial) || !trial.qualityEligible;
+  $('trace-lock').textContent = unlocked ? '版本已解盲；以下是运行元数据，不是人工评分。' : '四维评分完成后可查看版本与轨迹；成品、正文和已有问题已完整显示。';
+  $('trace-body').replaceChildren(); if (!unlocked) return;
+  const pre = node('pre', JSON.stringify({id:trial.id,roundId:trial.roundId,arm:trial.arm,repeat:trial.repeat,model:trial.modelLabel,effort:trial.effort,status:trial.status,sourceHead:trial.sourceHead,rendererSha256:trial.rendererSha256,artifactHash:trial.artifactHash,elapsedSeconds:trial.elapsedSeconds,usage:trial.usage,trace:trial.trace}, null, 2));
+  $('trace-body').append(pre);
+  trial.widgets.forEach((widget, i) => {
+    const row = node('p');
+    if (widget.sourceAvailable) { const a = node('a','组件 ' + (i + 1) + ' 原始源码'); a.href = '/' + widget.source; a.target = '_blank'; a.rel = 'noopener'; row.append(a, ' · '); }
+    const a = node('a','独立预览'); a.href = '/dsh-view.html?run=' + encodeURIComponent(trial.id) + '&widget=' + i; a.target = '_blank'; a.rel = 'noopener'; row.append(a); $('trace-body').append(row);
+  });
+}
+function render() {
+  const trial = selected(); if (!trial) { $('title').textContent = '这个范围暂无记录'; for (const id of ['prompt','oracle','run-status','widgets','final','raw-final','checks','evidence-notes','trace-body','trace-lock']) $(id).replaceChildren(); $('review').hidden = true; $('routing-only').hidden = true; $('previous').disabled = true; $('next').disabled = true; updateNav(); return; }
+  const old = validReview(trial);
+  $('title').textContent = label(trial); $('prompt').textContent = trial.prompt;
+  $('run-status').textContent = '运行：' + (statusText[trial.status] || trial.status) + ' · ' + trial.widgets.length + ' 份组件 · ' + (trial.origin === 'historical-calibration' || trial.historical ? '历史证据；不是本轮新增生成' : '本轮试验');
+  $('oracle').replaceChildren(); $('raw-oracle').replaceChildren();
+  const facts = Array.isArray(trial.oracle) ? trial.oracle : [JSON.stringify(trial.oracle)];
+  const translated = trial.origin === 'historical-calibration' ? calibrationOracles[trial.caseId] : null;
+  (translated || facts).forEach(fact => $('oracle').append(node('li', typeof fact === 'string' ? fact : JSON.stringify(fact))));
+  $('original-oracle').hidden = !translated;
+  if (translated) facts.forEach(fact => $('raw-oracle').append(node('li', typeof fact === 'string' ? fact : JSON.stringify(fact))));
+  $('final').innerHTML = markdown.parse(trial.final || '没有回复正文。'); $('raw-final').textContent = trial.final;
+  $('review').hidden = !trial.qualityEligible; $('routing-only').hidden = trial.qualityEligible;
+  $('routing-only').textContent = trial.qualityExpected ? '这次还没有可评分的成品；错误或尚未运行不计作人工 0 分。' : '这条是非内联任务，只展示路由结果与轨迹，不要求填写视觉质量分。';
+  showWidgets(trial); evidence(trial); ratings(old); trace(trial);
+  $('notes').value = old?.notes || ''; $('pending-reason').value = old?.pendingReason || '';
+  $('correctness').value = old?.correctness || 'not_reviewed'; $('completion').value = old?.completion || 'not_reviewed';
+  $('notice').textContent = saved.reviews[trial.id] && !old ? '旧评分的成品哈希已不同，已保留原意见，请重新评分。' : old?.status === 'complete' ? '已保存四维评分，可修改。' : old?.status === 'needs_review' ? '已保存待核：' + old.pendingReason : '尚未评分；所有项目保持未选。';
+  $('notice').className = old?.status === 'complete' ? 'ok' : 'hint'; dirty = false;
+  $('previous').disabled = index === 0; $('next').disabled = index === list.length - 1; updateNav();
+}
+function navigate(next) {
+  if (dirty && !confirm('当前修改尚未保存，仍要切换吗？')) return;
+  index = Math.max(0, Math.min(next, list.length - 1)); render();
+}
+function makePayload(status) {
+  const form = new FormData($('review')), ratings = {}, naReasons = {};
+  dimensions.forEach(([key]) => { const value = form.get(key); ratings[key] = value === null ? null : value === 'n/a' ? value : Number(value); if (value === 'n/a') naReasons[key] = $('reason-' + key).value; });
+  return {trialId:selected().id,artifactHash:selected().artifactHash,status,ratings,naReasons,correctness:$('correctness').value,completion:$('completion').value,notes:$('notes').value,pendingReason:$('pending-reason').value};
+}
+async function save(status, next) {
+  if (saving) return; saving = true;
+  try {
+    const response = await fetch('/api/annotations',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(makePayload(status))});
+    const result = await response.json(); if (!response.ok) throw Error(result.error);
+    saved.reviews[result.review.trialId] = result.review; dirty = false; $('notice').textContent = status === 'complete' ? '已保存到本机。' : '待核原因已保存。'; $('notice').className = 'ok';
+    updateNav(); trace(selected()); if (next && index < list.length - 1) navigate(index + 1);
+  } catch (error) { $('notice').textContent = error.message; $('notice').className = 'error'; }
+  finally { saving = false; }
+}
+function filterTrials() {
+  const stageData = data.stages.find(s => s.id === stage), scope = $('filter').value;
+  list = stageData.trialIds.map(id => data.trials.find(trial => trial.id === id)).filter(Boolean).filter(trial => scope === 'quality' ? trial.qualityEligible : scope === 'routing' ? !trial.qualityExpected : scope === 'pending' ? trial.qualityEligible && !complete(trial) : true);
+  $('stage-description').textContent = stageData.description; activeFilter = scope; index = 0; render();
+}
+addEventListener('message', event => {
+  for (const frame of document.querySelectorAll('.visual iframe')) {
+    if (event.source !== frame.contentWindow || event.data?.source !== 'dsh-widget') continue;
+    const message = event.data, caption = frame.closest('.result').querySelector('.caption');
+    if (message.type === 'resize' && Number.isFinite(message.payload?.height) && message.payload.height > 0 && message.payload.height < 50000) frame.style.height = Math.ceil(message.payload.height) + 'px';
+    if (message.type === 'ready') frame.contentWindow.postMessage({source:'dsh-widget',type:'theme',payload:{tokens:themes[$('theme').value]}},'*');
+    if (message.type === 'rendered') caption.textContent = '已渲染 · 捕获追问 ' + frame.dataset.count + ' 次；未向模型发送。';
+    if (message.type === 'send_prompt') { frame.dataset.count = String(Number(frame.dataset.count) + 1); caption.textContent = '捕获追问 ' + frame.dataset.count + ' 次（未向模型发送）：\n' + String(message.payload?.text); }
+    if (message.type === 'error' || message.type === 'resource_error') { caption.textContent = '预览错误：' + String(message.payload?.message); caption.classList.add('error'); }
+  }
+});
+$('stage').onchange = () => { if (dirty && !confirm('当前修改未保存，仍要切换轮次吗？')) { $('stage').value = stage; return; } stage = $('stage').value; filterTrials(); };
+$('filter').onchange = () => { if (dirty && !confirm('当前修改未保存，仍要切换范围吗？')) { $('filter').value = activeFilter; return; } filterTrials(); };
+$('width').onchange = () => document.querySelectorAll('.visual').forEach(visual => { visual.style.width = $('width').value + 'px'; const frame = visual.querySelector('iframe'); if (frame?.dataset.aspect) frame.style.height = Math.ceil(visual.clientWidth * Number(frame.dataset.aspect)) + 'px'; });
+$('theme').onchange = () => { if (selected()) showWidgets(selected()); }; $('reload').onclick = () => { if (selected()) showWidgets(selected()); };
+$('previous').onclick = () => navigate(index - 1); $('next').onclick = () => navigate(index + 1);
+$('review').onsubmit = event => { event.preventDefault(); save('complete',true); };
+$('save').onclick = () => save('complete',false); $('pending-save').onclick = () => save('needs_review',false);
+$('review').oninput = () => { dirty = true; $('notice').textContent = '有修改尚未保存。'; $('notice').className = 'hint'; };
+$('export').onclick = async () => {
+  if (dirty) { $('notice').textContent = '请先保存当前修改，再导出。'; return; }
+  const response = await fetch('/api/annotations/export'); if (!response.ok) return;
+  const blob = new Blob([JSON.stringify(await response.json(),null,2)+'\n'],{type:'application/json'});
+  const url = URL.createObjectURL(blob), anchor = node('a'); anchor.href = url; anchor.download = 'visualizer-human-annotations-v2.json'; anchor.click(); setTimeout(() => URL.revokeObjectURL(url),1000);
+};
+addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
+async function init() {
+  try {
+    [data,saved] = await Promise.all(['/api/catalog','/api/annotations'].map(async url => { const response = await fetch(url); if (!response.ok) throw Error('本地服务不可用'); return response.json(); }));
+    if (data.schemaVersion !== 2) throw Error('服务仍为旧版，请由运行器重启打标服务。');
+    data.stages.forEach(item => { const option = node('option',item.title); option.value = item.id; $('stage').append(option); });
+    const params = new URLSearchParams(location.search), requested = params.get('stage') === 'integrated' ? 'calibration' : params.get('stage');
+    stage = data.stages.some(item => item.id === requested) ? requested : data.defaultStage; $('stage').value = stage;
+    $('loading').hidden = true; $('app').hidden = false;
+    if (data.catalogErrors.length) { $('catalog-error').hidden = false; $('catalog-error').textContent = '部分记录未加载：' + data.catalogErrors.join('；'); }
+    filterTrials();
+    const requestedRun = params.get('run'); const requestedCase = params.get('case')?.replace('dsh-integrated-','');
+    const found = list.findIndex(trial => (trial.id === requestedRun || trial.localTrialId === requestedRun) || requestedCase && (trial.legacyId?.startsWith(requestedCase + '-') || trial.caseId === requestedCase));
+    if (found >= 0) { index = found; render(); }
+  } catch (error) { $('loading').textContent = '无法读取：' + error.message; }
+}
+init();
+</script>
+</html>

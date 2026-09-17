@@ -1,0 +1,292 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+  .bs{
+    --brand:var(--dsw-alias-brand-primary,#2f6bff);
+    --ok:#1a9c5b;
+    --bd:var(--dsw-alias-border-l1,rgba(128,128,128,.35));
+    --bd2:var(--dsw-alias-border-l2,rgba(128,128,128,.55));
+    --tx:var(--dsw-alias-label-primary,#111);
+    --tx2:var(--dsw-alias-label-secondary,#555);
+    --tx3:var(--dsw-alias-label-tertiary,#888);
+    --lay1:var(--dsw-alias-bg-layer-1,rgba(255,255,255,1));
+    --lay2:var(--dsw-alias-bg-layer-2,rgba(128,128,128,.08));
+    --hover:var(--dsw-alias-interactive-bg-hover,rgba(128,128,128,.14));
+    --inv:var(--dsw-alias-label-primary-inverted,#fff);
+    display:flex;flex-direction:column;gap:12px;
+    color:var(--tx);font-size:14px;line-height:1.5;min-width:0;
+  }
+  .bs *{box-sizing:border-box}
+  .bs-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .bs-goal{font-weight:600}
+  .bs-goal b{color:var(--brand);font-variant-numeric:tabular-nums}
+  .bs-chip{font-size:12px;color:var(--tx2);border:1px solid var(--bd);border-radius:999px;padding:2px 9px;font-variant-numeric:tabular-nums}
+  .bs-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+  .bs-ptrrow{margin-top:5px}
+  .cell{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+    padding:6px 1px;border:1px solid var(--bd);border-radius:8px;background:var(--lay2);
+    min-width:0;transition:background .25s,border-color .25s,opacity .25s,box-shadow .25s;
+  }
+  .cell .idx{font-size:10px;color:var(--tx3);font-variant-numeric:tabular-nums}
+  .cell .val{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+  .cell.active{background:color-mix(in srgb,var(--brand) 10%,transparent);border-color:color-mix(in srgb,var(--brand) 40%,transparent)}
+  .cell.excl{opacity:.42;border-style:dashed;background:transparent}
+  .cell.excl .val{text-decoration:line-through}
+  .cell.excl-mid{opacity:.8;border-style:dashed;border-color:var(--brand);background:color-mix(in srgb,var(--brand) 15%,transparent)}
+  .cell.excl-mid .val{text-decoration:line-through}
+  .cell.found{background:color-mix(in srgb,var(--ok) 20%,transparent);border-color:var(--ok);border-style:solid;box-shadow:inset 0 0 0 1px var(--ok)}
+  .ptr{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+  .tag{font-size:10px;line-height:1.5;padding:0 5px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+  .tag.low,.tag.high{background:var(--lay2);border-color:var(--bd2);color:var(--tx2)}
+  .tag.mid{background:var(--brand);color:var(--inv);font-weight:600}
+  .bs-read{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .tile{display:flex;flex-direction:column;gap:1px;min-width:0;border:1px solid var(--bd);border-radius:8px;padding:6px 9px;background:var(--lay2)}
+  .tile .k{font-size:10px;letter-spacing:.05em;color:var(--tx3);text-transform:uppercase}
+  .tile .v{font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+  .bs-cmp{display:flex;flex-direction:column;gap:3px;border:1px solid var(--bd);border-left:3px solid var(--tx3);border-radius:8px;padding:8px 11px;background:var(--lay2);transition:border-color .25s,background .25s}
+  .bs-cmp.less{border-left-color:var(--brand)}
+  .bs-cmp.eq{border-left-color:var(--ok);background:color-mix(in srgb,var(--ok) 13%,transparent)}
+  .bs-cmp .formula{font-weight:600;font-variant-numeric:tabular-nums}
+  .bs-cmp .explain{font-size:12.5px;color:var(--tx2)}
+  .bs-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .bs button{font:inherit;padding:7px 15px;border-radius:8px;border:1px solid var(--bd2);background:var(--lay1);color:var(--tx);cursor:pointer;transition:background .2s,opacity .2s}
+  .bs button:hover:not(:disabled){background:var(--hover)}
+  .bs button:disabled{opacity:.45;cursor:default}
+  .bs button.primary{background:var(--dsw-alias-button-primary-fill,var(--brand));border-color:transparent;color:var(--inv);font-weight:600}
+  .bs-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11.5px;color:var(--tx2)}
+  .bs-legend span{display:inline-flex;align-items:center;gap:5px}
+  .sw{width:14px;height:14px;border-radius:4px;border:1px solid var(--bd);display:inline-block}
+  .sw.active{background:color-mix(in srgb,var(--brand) 12%,transparent);border-color:color-mix(in srgb,var(--brand) 40%,transparent)}
+  .sw.excl{border-style:dashed;opacity:.5}
+  .sw.found{background:color-mix(in srgb,var(--ok) 20%,transparent);border-color:var(--ok)}
+  .sw.mid{background:var(--brand);border-color:var(--brand)}
+  @media (max-width:420px){.bs-read{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (prefers-reduced-motion:reduce){.bs *{transition:none!important}}
+</style>
+
+<div class="bs">
+  <div class="bs-head">
+    <span class="bs-goal">目标值 <b>23</b></span>
+    <span class="bs-chip" id="bs-round">未开始 · 共 2 轮</span>
+    <span class="bs-chip" id="bs-excl">已排除 0 / 8</span>
+  </div>
+
+  <div role="img" id="bs-plot" aria-label="有序数组 2, 5, 8, 12, 16, 23, 38, 56。点击下一步开始二分查找。">
+    <div class="bs-grid" id="bs-array"></div>
+    <div class="bs-grid bs-ptrrow" id="bs-pointers" aria-hidden="true"></div>
+  </div>
+
+  <div class="bs-read">
+    <div class="tile"><span class="k">low</span><span class="v" id="v-low">0</span></div>
+    <div class="tile"><span class="k">mid</span><span class="v" id="v-mid">—</span></div>
+    <div class="tile"><span class="k">high</span><span class="v" id="v-high">7</span></div>
+    <div class="tile"><span class="k">a[mid]</span><span class="v" id="v-amid">—</span></div>
+  </div>
+
+  <div class="bs-cmp" id="bs-cmp" aria-live="polite">
+    <span class="formula" id="v-cmp">等待开始</span>
+    <span class="explain" id="v-note">区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。</span>
+  </div>
+
+  <div class="bs-ctrl">
+    <button class="primary" id="bs-next">下一步</button>
+    <button id="bs-reset">重置</button>
+  </div>
+
+  <div class="bs-legend">
+    <span><i class="sw active"></i>候选区间</span>
+    <span><i class="sw mid"></i>mid（本轮中点）</span>
+    <span><i class="sw excl"></i>已排除（虚线）</span>
+    <span><i class="sw found"></i>命中</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var A = [2, 5, 8, 12, 16, 23, 38, 56];
+  var TARGET = 23;
+  var STEPS = [
+    {
+      round: 0, low: 0, high: 7, mid: null, found: null, excluded: [],
+      cmp: '等待开始', kind: 'idle',
+      note: '区间是索引 0–7，覆盖全部 8 个元素。点“下一步”执行第 1 轮比较。'
+    },
+    {
+      round: 1, low: 0, high: 7, mid: 3, found: null, excluded: [0, 1, 2, 3],
+      cmp: 'a[3] = 12 < 23', kind: 'less',
+      note: 'mid = ⌊(0+7)/2⌋ = 3。12 小于 23，目标只可能在右半：排除索引 0–3（含 mid 本身），low 移到 mid+1 = 4，high 不变。'
+    },
+    {
+      round: 2, low: 4, high: 7, mid: 5, found: 5, excluded: [0, 1, 2, 3],
+      cmp: 'a[5] = 23 = 23', kind: 'eq',
+      note: 'mid = ⌊(4+7)/2⌋ = 5。正好命中，返回索引 5。8 个元素只比较了 2 次。'
+    }
+  ];
+
+  var arr = document.getElementById('bs-array');
+  var ptr = document.getElementById('bs-pointers');
+  var cells = [], slots = [];
+
+  A.forEach(function (v, i) {
+    var c = document.createElement('div');
+    c.className = 'cell';
+    var idx = document.createElement('span');
+    idx.className = 'idx';
+    idx.textContent = i;
+    var val = document.createElement('span');
+    val.className = 'val';
+    val.textContent = v;
+    c.appendChild(idx); c.appendChild(val);
+    arr.appendChild(c); cells.push(c);
+
+    var p = document.createElement('div');
+    p.className = 'ptr';
+    ptr.appendChild(p); slots.push(p);
+  });
+
+  var cur = 0;
+
+  function render() {
+    var s = STEPS[cur];
+    var isEx = {};
+    s.excluded.forEach(function (i) { isEx[i] = true; });
+
+    cells.forEach(function (c, i) {
+      var cls = 'cell';
+      if (s.found === i) cls = 'cell found';
+      else if (isEx[i] && i === s.mid) cls += ' excl excl-mid';
+      else if (isEx[i]) cls += ' excl';
+      else cls += ' active';
+      c.className = cls;
+    });
+
+    slots.forEach(function (p, i) {
+      var html = '';
+      if (s.low === i) html += '<span class="tag low">low</span>';
+      if (s.mid === i) html += '<span class="tag mid">mid</span>';
+      if (s.high === i) html += '<span class="tag high">high</span>';
+      p.innerHTML = html;
+    });
+
+    document.getElementById('v-low').textContent = s.low;
+    document.getElementById('v-high').textContent = s.high;
+    document.getElementById('v-mid').textContent = s.mid === null ? '—' : s.mid;
+    document.getElementById('v-amid').textContent = s.mid === null ? '—' : A[s.mid];
+
+    var cmp = document.getElementById('bs-cmp');
+    cmp.className = 'bs-cmp' + (s.kind === 'idle' ? '' : ' ' + s.kind);
+    document.getElementById('v-cmp').textContent = s.cmp;
+    document.getElementById('v-note').textContent = s.note;
+
+    var roundTxt;
+    if (s.found !== null) roundTxt = '第 ' + s.round + ' 轮 · 命中';
+    else if (s.round === 0) roundTxt = '未开始 · 共 2 轮';
+    else roundTxt = '第 ' + s.round + ' 轮 · 共 2 轮';
+    document.getElementById('bs-round').textContent = roundTxt;
+    document.getElementById('bs-excl').textContent = '已排除 ' + s.excluded.length + ' / 8';
+
+    var plot = document.getElementById('bs-plot');
+    plot.setAttribute('aria-label',
+      '有序数组 2, 5, 8, 12, 16, 23, 38, 56。' + roundTxt + '。' +
+      'low 是 ' + s.low + '，high 是 ' + s.high + '，' +
+      (s.mid === null ? 'mid 尚未确定。' : 'mid 是 ' + s.mid + '，a[mid] 是 ' + A[s.mid] + '。') +
+      s.cmp + '。' + s.note);
+
+    document.getElementById('bs-next').disabled = (cur === STEPS.length - 1);
+  }
+
+  document.getElementById('bs-next').addEventListener('click', function () {
+    if (cur < STEPS.length - 1) { cur += 1; render(); }
+  });
+  document.getElementById('bs-reset').addEventListener('click', function () {
+    cur = 0; render();
+  });
+
+  render();
+})();
+</script></body></html>

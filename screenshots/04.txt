@@ -1,0 +1,13 @@
+Cowork 二分查找重置与完整示意截图
+
+Wall time: 0.5627 seconds
+Output:
+The following is a diff from the previous accessibility tree for Window: "Claude" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~															281 text L H
+~															282 text 候选区间 [0, 7] L  = low 下界　 M  = mid 中点（本轮唯一真正看过的元素）　 H  = high 上界　虚线划掉 = 已排除 LOW 0 a[0] = 2 MID — 还没取 HIGH 7 a[7] = 56 候选区间 8 个元素待排查
+~															283 文本 第 0 步 · 初始化
+~																284 text low 指向  0 ，high 指向  7  —— 此刻整个数组都是候选区间，共 8 个元素。目标是  23 。
+~															254 按钮 下一步 →
+~															255 按钮 (disabled) ← 上一步
+~															285 text 第 0 / 4 步 区间大小 8
+The focused UI element is 256 按钮 重置

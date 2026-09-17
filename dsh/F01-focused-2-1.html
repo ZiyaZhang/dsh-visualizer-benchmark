@@ -1,0 +1,220 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><div class="rs" id="rs">
+  <style>
+    .rs { font-family: inherit; color: var(--dsw-alias-label-primary); background: var(--dsw-alias-bg-layer-1); border: 1px solid var(--dsw-alias-border-l1); border-radius: 12px; padding: 14px 16px 12px; max-width: 520px; box-sizing: border-box; }
+    .rs *, .rs *::before, .rs *::after { box-sizing: border-box; }
+    .rs-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .rs-title { font-size: 13px; font-weight: 600; }
+    .rs-sub { font-size: 11px; color: var(--dsw-alias-label-tertiary); margin-top: 2px; }
+    .rs-total { flex: 0 0 auto; text-align: right; line-height: 1.15; }
+    .rs-total-num { font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .rs-total-unit { display: block; font-size: 11px; color: var(--dsw-alias-label-tertiary); }
+    .rs-chart { display: flex; flex-direction: column; gap: 6px; }
+    .rs-row { display: grid; grid-template-columns: 52px minmax(0, 1fr) 78px; align-items: center; gap: 10px; width: 100%; padding: 7px 8px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+    .rs-row:hover { background: var(--dsw-alias-interactive-bg-hover); }
+    .rs-row:focus-visible { outline: 2px solid var(--dsw-alias-brand-primary); outline-offset: 1px; }
+    .rs-row.is-on { border-color: var(--dsw-alias-brand-primary); background: var(--dsw-alias-interactive-bg-active); }
+    .rs-name { font-size: 12px; white-space: nowrap; }
+    .rs-check { display: inline-block; width: 13px; margin-right: 3px; font-size: 11px; color: var(--dsw-alias-brand-primary); opacity: 0; }
+    .rs-row.is-on .rs-check { opacity: 1; }
+    .rs-track { position: relative; height: 18px; min-width: 0; border-radius: 4px; background: var(--dsw-alias-bg-layer-2); overflow: hidden; }
+    .rs-fill { display: block; height: 100%; border-radius: 4px; background: var(--dsw-alias-brand-primary); opacity: .38; transition: width .35s ease, opacity .15s ease; }
+    .rs-row:hover .rs-fill { opacity: .6; }
+    .rs-row.is-on .rs-fill { opacity: 1; }
+    .rs-val { font-size: 12px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .rs-unit { margin-left: 2px; font-size: 10px; color: var(--dsw-alias-label-tertiary); }
+    .rs-foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--dsw-alias-border-l1); }
+    .rs-sel { min-width: 0; min-height: 18px; font-size: 12px; color: var(--dsw-alias-label-secondary); }
+    .rs-sel b { font-weight: 600; color: var(--dsw-alias-label-primary); }
+    .rs-num { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--dsw-alias-label-primary); }
+    .rs-btn { flex: 0 0 auto; font: inherit; font-size: 12px; font-weight: 500; padding: 7px 14px; border: 1px solid transparent; border-radius: 8px; background: var(--dsw-alias-button-primary-fill); color: var(--dsw-alias-label-primary-inverted); cursor: pointer; }
+    .rs-btn:hover:not(:disabled) { filter: brightness(1.06); }
+    .rs-btn:disabled { opacity: .45; cursor: not-allowed; }
+    .rs-hint { margin: 8px 0 0; font-size: 11px; line-height: 1.5; color: var(--dsw-alias-label-tertiary); }
+    @media (max-width: 360px) { .rs-row { grid-template-columns: 46px minmax(0, 1fr) 66px; gap: 8px; } }
+    @media (prefers-reduced-motion: reduce) { .rs-fill { transition: none; } }
+  </style>
+
+  <div class="rs-head">
+    <div>
+      <div class="rs-title">地区销售额对比</div>
+      <div class="rs-sub">单位：万元 · 点击柱子仅在本图内选中</div>
+    </div>
+    <div class="rs-total">
+      <span class="rs-total-num">250</span>
+      <span class="rs-total-unit">万元 · 合计</span>
+    </div>
+  </div>
+
+  <div class="rs-chart" id="rsChart" role="group"
+       aria-label="三个地区销售额对比，单位万元：华东 120 万元，华南 80 万元，西部 50 万元，合计 250 万元。点击可选中一个地区，选中只在本图内生效。">
+    <button type="button" class="rs-row" data-region="华东" data-value="120" aria-pressed="false" aria-label="华东 120 万元">
+      <span class="rs-name"><span class="rs-check" aria-hidden="true">✓</span>华东</span>
+      <span class="rs-track"><span class="rs-fill" style="width:100%"></span></span>
+      <span class="rs-val">120<span class="rs-unit">万元</span></span>
+    </button>
+    <button type="button" class="rs-row" data-region="华南" data-value="80" aria-pressed="false" aria-label="华南 80 万元">
+      <span class="rs-name"><span class="rs-check" aria-hidden="true">✓</span>华南</span>
+      <span class="rs-track"><span class="rs-fill" style="width:66.7%"></span></span>
+      <span class="rs-val">80<span class="rs-unit">万元</span></span>
+    </button>
+    <button type="button" class="rs-row" data-region="西部" data-value="50" aria-pressed="false" aria-label="西部 50 万元">
+      <span class="rs-name"><span class="rs-check" aria-hidden="true">✓</span>西部</span>
+      <span class="rs-track"><span class="rs-fill" style="width:41.7%"></span></span>
+      <span class="rs-val">50<span class="rs-unit">万元</span></span>
+    </button>
+  </div>
+
+  <div class="rs-foot">
+    <div class="rs-sel" id="rsSel" aria-live="polite">尚未选择地区</div>
+    <button type="button" class="rs-btn" id="rsAsk" disabled>解释所选地区</button>
+  </div>
+  <p class="rs-hint" id="rsHint">选择地区只更新本图；点击“解释所选地区”才会把所选地区与数值带上，向我追问。</p>
+
+  <script>
+    (function () {
+      var root = document.getElementById('rs');
+      if (!root) return;
+      var rows = Array.prototype.slice.call(root.querySelectorAll('.rs-row'));
+      var ask = root.querySelector('#rsAsk');
+      var selBox = root.querySelector('#rsSel');
+      var hint = root.querySelector('#rsHint');
+      var current = null;
+      var sending = false;
+
+      function render() {
+        rows.forEach(function (r) {
+          var on = !!current && r.getAttribute('data-region') === current.region;
+          r.classList.toggle('is-on', on);
+          r.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        if (current) {
+          selBox.innerHTML = '已选中 <b>' + current.region + '</b> · <span class="rs-num">' + current.value + '</span> 万元';
+          ask.disabled = false;
+        } else {
+          selBox.textContent = '尚未选择地区';
+          ask.disabled = true;
+        }
+      }
+
+      rows.forEach(function (r) {
+        r.addEventListener('click', function () {
+          var region = r.getAttribute('data-region');
+          var value = r.getAttribute('data-value');
+          current = (current && current.region === region) ? null : { region: region, value: value };
+          if (!sending) {
+            hint.textContent = '选择地区只更新本图；点击“解释所选地区”才会把所选地区与数值带上，向我追问。';
+          }
+          render();
+        });
+      });
+
+      ask.addEventListener('click', function () {
+        if (!current || sending) return;
+        var text = '请解释「' + current.region + '」的销售额 ' + current.value +
+          ' 万元（全部数据：华东 120 万元、华南 80 万元、西部 50 万元）。' +
+          '说明该地区为什么处于这个水平，以及与另外两个地区的差异可能来自什么因素。';
+
+        if (window.dshWidget && typeof window.dshWidget.sendPrompt === 'function') {
+          window.dshWidget.sendPrompt(text);
+          sending = true;
+          ask.disabled = true;
+          hint.textContent = '已把「' + current.region + ' ' + current.value + ' 万元」连同问题发到对话。';
+          window.setTimeout(function () {
+            sending = false;
+            if (current) ask.disabled = false;
+          }, 1200);
+        } else {
+          hint.textContent = '当前环境无法直接发起追问，请手动发送：' + text;
+        }
+      });
+
+      render();
+    })();
+  </script>
+</div></body></html>

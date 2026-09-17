@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "trialId": "N01-M-1",
+  "caseId": "N01",
+  "scope": "route evidence and narrow inline facts, not ordinary-task correctness",
+  "checkerSha256": "20bbddb594251700f04babf4772ae78c14b1bd3fede1b2015f68f9067dc90359",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "Trial did not complete; do not score a setup/transport block as a product routing failure.",
+      "evidence": {
+        "trialStatus": "error"
+      }
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case does not require an inline widget.",
+      "evidence": {}
+    },
+    "content": {
+      "status": "not_applicable",
+      "reason": "Ordinary-task correctness is outside this route check; historical results remain unchanged.",
+      "evidence": {}
+    }
+  }
+}

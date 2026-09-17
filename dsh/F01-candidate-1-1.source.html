@@ -1,0 +1,143 @@
+<style>
+  .sr-wrap{font-family:inherit;color:var(--dsw-alias-label-primary,#111);background:transparent;padding:2px 0;max-width:760px;}
+  .sr-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;justify-content:space-between;margin:0 0 6px;}
+  .sr-title{font-size:15px;font-weight:600;}
+  .sr-sub{font-size:12px;color:var(--dsw-alias-label-secondary,#666);}
+  .sr-chart{position:relative;width:100%;}
+  .sr-chart svg{display:block;width:100%;height:auto;min-width:300px;}
+  .sr-bar{cursor:pointer;}
+  .sr-bar .sr-hit{fill:transparent;}
+  .sr-bar .sr-fill{fill:var(--dsw-alias-brand-primary,#4c7dff);opacity:.32;transition:opacity .15s ease;}
+  .sr-bar .sr-mark{fill:var(--dsw-alias-brand-primary,#4c7dff);transition:opacity .15s ease;}
+  .sr-bar:hover .sr-fill{opacity:.5;}
+  .sr-bar:hover .sr-hit{fill:var(--dsw-alias-interactive-bg-hover,rgba(76,125,255,.10));}
+  .sr-bar.is-selected .sr-fill{opacity:.85;}
+  .sr-bar.is-selected .sr-mark{opacity:1;}
+  .sr-bar .sr-hit:focus-visible{stroke:var(--dsw-alias-brand-primary,#4c7dff);stroke-width:2;}
+  .sr-name{font-size:13px;font-weight:600;fill:var(--dsw-alias-label-primary,#111);pointer-events:none;}
+  .sr-val{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;fill:var(--dsw-alias-label-primary,#111);pointer-events:none;}
+  .sr-flag{font-size:11px;font-weight:600;fill:var(--dsw-alias-brand-primary,#4c7dff);pointer-events:none;opacity:0;transition:opacity .15s ease;}
+  .sr-flag.on{opacity:1;}
+  .sr-foot{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:8px;}
+  .sr-status{font-size:12px;color:var(--dsw-alias-label-secondary,#666);min-height:18px;flex:1 1 190px;min-width:0;}
+  .sr-status b{color:var(--dsw-alias-label-primary,#111);font-variant-numeric:tabular-nums;}
+  .sr-btn{font-size:13px;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid var(--dsw-alias-border-l2,rgba(0,0,0,.16));background:var(--dsw-alias-button-primary-fill,#2f6bff);color:var(--dsw-alias-label-primary-inverted,#fff);cursor:pointer;}
+  .sr-btn:hover:not(:disabled){filter:brightness(1.08);}
+  .sr-btn:disabled{opacity:.45;cursor:not-allowed;}
+  .sr-reset{font-size:12px;padding:6px 10px;border-radius:8px;border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.12));background:var(--dsw-alias-bg-layer-2,rgba(127,127,127,.08));color:var(--dsw-alias-label-primary,#111);cursor:pointer;}
+  .sr-reset:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(127,127,127,.16));}
+</style>
+
+<div class="sr-wrap">
+  <div class="sr-head">
+    <div class="sr-title">2024 年地区销售额对比</div>
+    <div class="sr-sub">单位：万元 · 点击柱条选择地区</div>
+  </div>
+
+  <div class="sr-chart">
+    <svg viewBox="0 0 720 400" role="img"
+         aria-label="地区销售额条形图：华东 120 万元、华南 80 万元、西部 50 万元，可点击选择地区">
+      <title>地区销售额对比</title>
+      <line x1="152" y1="24" x2="152" y2="368" stroke="var(--dsw-alias-border-l1,rgba(0,0,0,.12))" stroke-width="1"></line>
+      <line x1="152" y1="368" x2="700" y2="368" stroke="var(--dsw-alias-border-l1,rgba(0,0,0,.12))" stroke-width="1"></line>
+      <text x="700" y="386" text-anchor="end" font-size="11" fill="var(--dsw-alias-label-tertiary,#999)">销售额（万元）</text>
+
+      <text class="sr-name" x="140" y="90" text-anchor="end">华东</text>
+      <rect class="sr-fill" x="152" y="68" width="456" height="32" rx="0"></rect>
+      <text class="sr-val" x="622" y="90" text-anchor="start">120 万元</text>
+      <text class="sr-flag" data-flag="0" x="140" y="112" text-anchor="end">已选</text>
+      <rect class="sr-hit" x="0" y="58" width="720" height="52" rx="6" tabindex="0" role="button" aria-pressed="false" data-name="华东" data-value="120"></rect>
+
+      <text class="sr-name" x="140" y="222" text-anchor="end">华南</text>
+      <rect class="sr-fill" x="152" y="200" width="304" height="32" rx="0"></rect>
+      <text class="sr-val" x="470" y="222" text-anchor="start">80 万元</text>
+      <text class="sr-flag" data-flag="1" x="140" y="244" text-anchor="end">已选</text>
+      <rect class="sr-hit" x="0" y="190" width="720" height="52" rx="6" tabindex="0" role="button" aria-pressed="false" data-name="华南" data-value="80"></rect>
+
+      <text class="sr-name" x="140" y="354" text-anchor="end">西部</text>
+      <rect class="sr-fill" x="152" y="332" width="190" height="32" rx="0"></rect>
+      <text class="sr-val" x="356" y="354" text-anchor="start">50 万元</text>
+      <text class="sr-flag" data-flag="2" x="140" y="376" text-anchor="end">已选</text>
+      <rect class="sr-hit" x="0" y="322" width="720" height="52" rx="6" tabindex="0" role="button" aria-pressed="false" data-name="西部" data-value="50"></rect>
+    </svg>
+  </div>
+
+  <div class="sr-foot">
+    <button id="sr-pick-btn" class="sr-btn" type="button" disabled>解释所选地区</button>
+    <button id="sr-reset-btn" class="sr-reset" type="button" hidden>清除选择</button>
+    <div id="sr-status" class="sr-status" aria-live="polite">尚未选择地区：点击任一柱条，仅在本图内选中。</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.currentScript.closest(".sr-wrap");
+  var hits = Array.prototype.slice.call(root.querySelectorAll(".sr-hit"));
+  var bars = hits.map(function (h) { return h.closest(".sr-bar"); });
+  var flags = Array.prototype.slice.call(root.querySelectorAll(".sr-flag"));
+  var pickBtn = root.querySelector("#sr-pick-btn");
+  var resetBtn = root.querySelector("#sr-reset-btn");
+  var status = root.querySelector("#sr-status");
+  var selected = null;
+
+  function render() {
+    bars.forEach(function (b) { b.classList.remove("is-selected"); });
+    hits.forEach(function (h) { h.setAttribute("aria-pressed", "false"); });
+    flags.forEach(function (f) { f.classList.remove("on"); });
+
+    if (!selected) {
+      pickBtn.disabled = true;
+      resetBtn.hidden = true;
+      status.innerHTML = "尚未选择地区：点击任一柱条，仅在本图内选中。";
+      return;
+    }
+    var idx = hits.findIndex(function (h) { return h.dataset.name === selected.name; });
+    if (idx < 0) { selected = null; render(); return; }
+    bars[idx].classList.add("is-selected");
+    hits[idx].setAttribute("aria-pressed", "true");
+    flags[idx].classList.add("on");
+    pickBtn.disabled = false;
+    resetBtn.hidden = false;
+    status.innerHTML = "已选：<b>" + selected.name + "</b>，销售额 <b>" + selected.value + " 万元</b>（仅本地选中，未发送）。";
+  }
+
+  function select(name, value) {
+    if (selected && selected.name === name) {   // 再次点击可取消
+      selected = null;
+    } else {
+      selected = { name: name, value: value };
+    }
+    render();
+  }
+
+  hits.forEach(function (h) {
+    h.addEventListener("click", function () { select(h.dataset.name, h.dataset.value); });
+    h.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+        e.preventDefault();
+        select(h.dataset.name, h.dataset.value);
+      }
+    });
+  });
+
+  resetBtn.addEventListener("click", function () { selected = null; render(); });
+
+  pickBtn.addEventListener("click", function () {
+    if (!selected) { return; }
+    var others = hits
+      .filter(function (h) { return h.dataset.name !== selected.name; })
+      .map(function (h) { return h.dataset.name + " " + h.dataset.value + " 万元"; })
+      .join("、");
+    var text = "请解释所选地区 " + selected.name + " 的销售额 " + selected.value +
+      " 万元（对比地区： " + others + "）。请说明该地区销售表现的可能原因和值得关注的点。";
+    pickBtn.disabled = true;
+    status.innerHTML = "已发送追问：<b>" + selected.name + " " + selected.value + " 万元</b>";
+    if (window.dshWidget && typeof window.dshWidget.sendPrompt === "function") {
+      window.dshWidget.sendPrompt(text);
+    }
+    window.setTimeout(function () { pickBtn.disabled = false; }, 1200);
+  });
+
+  render();
+})();
+</script>

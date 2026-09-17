@@ -1,0 +1,124 @@
+更新 DSH 评测报告与适配窗口后的验收页截图
+
+Wall time: 0.7262 seconds
+Output:
+Browser tab: 2, Title: "DSH Visualizer · 生成评测与人工验收", URL: "http://127.0.0.1:3092/".
+1 AXWebArea DSH Visualizer · 生成评测与人工验收, URL: 127.0.0.1:3092/
+	2 container
+		3 text 2026-09-17 · 本地实测 · DeepSeek-V41-Flash / High
+		4 heading 先看 DSH 的成品，再决定保留哪种改动, Value: 1
+			5 text 先看 DSH 的成品，再决定保留哪种改动
+		6 text 本轮以 DSH 原版与提示词修订版为主。你的任务是判断 6 组同题成品的表达和使用体验；运行错误、数值与消息发送已先核查。Codex/Cowork 仅留作设计参考。
+		7 link Description: 开始 DSH 打标 →, Value: 127.0.0.1:3092/label.html?stage=focused
+		8 text 已保存 0 / 6 组
+		9 text 32
+		10 text 正式生成运行，含失败试验 6 / 6 当前修订基本交互通过 4 / 4 当前修订负例路由正确 6 组 待你判断的原版 / 修订版 原版同样有 6 / 6 份通过基本交互检查。这组小样本尚不能证明修订整体更好；“更容易懂、更紧凑”保留人工判断。当前修订仍有 1 / 6 次多调用 bash，窄屏热传导的数值排布也仍拥挤。
+		11 heading 迭代记录, Value: 2
+			12 text 迭代记录
+		13 table
+			14 row
+				15 cell
+					16 text 版本
+				17 cell
+					18 text 这轮改什么
+				19 cell
+					20 text 实际观察
+				21 cell
+					22 text 处理
+			23 row
+				24 cell
+					25 text 原版 A · 6 次
+				26 cell
+					27 text 原 PR 的 Skill 与工具提示
+				28 cell
+					29 text 6 份可操作。一份二分查找把最坏比较次数写成 3（应为 4）；一份结束后候选数量文案未收拢。
+				30 cell
+					31 text 作为对照保留
+			32 row
+				33 cell
+					34 text 试验 B · 6 次
+				35 cell
+					36 text 增加状态一致性、紧凑布局指导
+				37 cell
+					38 text 3 份首屏报错，另 1 份初始区间错误；还出现 2 次猜测修复标识，被 Host 拒绝。
+				39 cell
+					40 text 淘汰 · 
+					41 link Description: 看失败成品, Value: 127.0.0.1:3092/label.html?stage=candidate
+			42 row
+				43 cell
+					44 text 试验 C · 6 次
+				45 cell
+					46 text 增加提交前检查与完成提示
+				47 cell
+					48 text 发现 1 份首屏报错、1 次生成两张卡片；其余成品未继续逐项浏览器验收。
+				49 cell
+					50 text 淘汰 · 
+					51 link Description: 看运行记录, Value: 127.0.0.1:3092/label.html?stage=revision
+			52 row
+				53 cell
+					54 text 当前 D · 6 次
+				55 cell
+					56 text 针对 DOM 定位、首次渲染空值、精确修复标识给短指导；收敛无关控件
+				57 cell
+					58 text 6 份首次渲染、目标操作通过；无重复卡片或被拒绝替换。仍有 1 次额外 bash。
+				59 cell
+					60 text 进入人工验收 · 
+					61 link Description: 比较 A / D, Value: 127.0.0.1:3092/label.html?stage=focused
+		62 text 三道核心题：二分查找、五节点热传导、地区选择与追问；每版每题独立生成两次。原版平均 39.7 秒，当前修订 49.3 秒，不能宣称提速。
+		63 heading 已经核验的交互, Value: 2
+			64 text 已经核验的交互
+		65 container
+			66 text 二分查找
+			67 text mid 3（12）→ mid 5（23）；命中下标 5；重置；本地步进发送 0 次追问。
+		68 text 当前 2 / 2 通过
+		69 container
+			70 text 热传导
+			71 text 两步分别为 [100,25,0,0,0]、[100,37.5,6.25,0,0]；重置正确；本地操作不发消息。
+		72 text 当前 2 / 2 通过
+		73 container
+			74 text 地区追问
+			75 text 西部 50 万元只在组件内选中；点解释后恰好捕获一次带所选数据的追问。
+		76 text 当前 2 / 2 通过
+		77 container
+			78 text 负例路由
+			79 text 算术、仅 Markdown、仅 TypeScript、保存 SVG 文件均未误触发内联卡片；两份 SVG 文件均通过 XML 解析并含所需标签与数值。
+		80 text 原版 4 / 4 · 当前 4 / 4
+		81 heading 真实 DSH Web 链路, Value: 2
+			82 text 真实 DSH Web 链路
+		83 text 在 3091 的原生 Web 页面另做了两次实时验收，使用原版代码与 V41 Flash / High。对照预览只捕获追问文本，不向模型发请求。
+		84 container
+			85 text 发送追问
+			86 text 选择西部不发送；点击解释后，当前会话收到 1 条含西部 50 万元的消息，模型继续回答。日志事件：39 → 40 → 51。
+		87 text 通过
+		88 container
+			89 text 原位自动修复
+			90 text 故意提交缺少 renderCount 的组件；错误触发一次自动修复，模型精确引用 widget 25 / result 26，原卡片更新后仍为 1 张，计数可从 0 点到 3。原源码、错误及两次调用保留。
+		91 text 通过
+		92 text 刷新、取消、压缩与修复预算的边界由现有单测和浏览器回放覆盖；两次实时样本不代表穷尽所有边界。
+		93 heading 两个原 PR 的收尾, Value: 2
+			94 text 两个原 PR 的收尾
+		95 container
+			96 link Description: Host #3820, Value: github.com/deepseek-harness/deepseek-harness/pull/3820
+			97 text ：只改 Skill 的短指导、修复参数说明和接受结果提示。
+			98 link Description: Web #3340, Value: github.com/deepseek-harness/deepseek-harness/pull/3340
+			99 text ：去掉短组件的 160px 最小高度，让实际内容决定卡片高度。
+		100 text 提示词和高度修正已通过 31 项 Host、60 项 UI 单测及 4 个浏览器回放。正在同步 master 并核验整合结果；远端 CI 尚未确认，两个 PR 未合并。
+		101 heading 证据与范围, Value: 2
+			102 text 证据与范围
+		103 text 32 次正式运行 = 24 次核心生成 + 8 次负例；另有 4 次配置试跑和 1 次内置 Skill 校准，不计入正式分母。12 道题的题库中，本轮执行了 7 道；其余 5 道标记为未运行。
+		104 text 核心交互以 736px 浅色检查，另抽查了热传导的 360px 深色效果，未宣称全题完成窄屏与主题遍历。每次使用独立 DSH headless 会话、实际 Host 工具与同一 Skill 加载方式；源码交给原 PR 渲染器，不人工修饰生成结果。
+		105 container
+			106 link Description: DSH 完整运行记录, Value: 127.0.0.1:3092/dsh-results.json
+			107 text  · 
+			108 link Description: 固定题目与判据, Value: 127.0.0.1:3092/cases.json
+			109 text  · 
+			110 link Description: 已保存的人工意见, Value: 127.0.0.1:3092/api/annotations
+			111 text  · 
+			112 link Description: 原始截图索引, Value: 127.0.0.1:3092/screenshots/index.json
+		113 button (collapsed) 竞品设计参考与 README 讨论, Secondary Actions: Expand
+			114 text 竞品设计参考与 README 讨论
+		115 text 人工偏好只由你保存。原始 Session 日志与密钥相关配置保留在本机私有目录；网页提供源码、运行摘要和原始截图。
+
+The focused UI element is 1 AXWebArea DSH Visualizer · 生成评测与人工验收, URL: 127.0.0.1:3092/Browser tab: 3, Title: "Visualizer · 人工验收", URL: "http://127.0.0.1:3092/label.html".
+There has been no change in the accessibility tree.
+The focused UI element is 1 AXWebArea Visualizer · 人工验收, URL: 127.0.0.1:3092/label.html

@@ -1,0 +1,211 @@
+<style>
+  .bs-wrap{--bs-brand:var(--dsw-alias-brand-primary,#2f6feb);
+    --bs-brand-fill:var(--dsw-alias-button-primary-fill,#2f6feb);
+    font:inherit;color:var(--dsw-alias-label-primary,#1f2328);
+    background:var(--dsw-alias-bg-base,transparent);
+    border:1px solid var(--dsw-alias-border-l1,#d7dbe0);border-radius:14px;padding:14px;
+    display:flex;flex-direction:column;gap:12px;}
+  .bs-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;}
+  .bs-title{font-weight:700;font-size:15px;}
+  .bs-target{font-size:12px;padding:2px 9px;border-radius:999px;
+    border:1px solid var(--dsw-alias-border-l2,#c8ced5);color:var(--dsw-alias-label-secondary,#5a6472);}
+  .bs-round{margin-left:auto;font-size:12px;color:var(--dsw-alias-label-tertiary,#7a8390);font-variant-numeric:tabular-nums;}
+  .bs-scroll{overflow-x:auto;padding:2px 2px 4px;}
+  .bs-row{display:flex;gap:6px;min-width:340px;}
+  .cell{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .ptr{min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px;}
+  .tag{font-size:10px;font-weight:700;line-height:1.5;padding:0 6px;border-radius:999px;white-space:nowrap;}
+  .tag.low,.tag.high{color:var(--dsw-alias-label-secondary,#5a6472);
+    background:var(--dsw-alias-bg-layer-2,#eef1f4);border:1px solid var(--dsw-alias-border-l2,#c8ced5);}
+  .tag.midtag{color:var(--dsw-alias-label-primary-inverted,#fff);background:var(--bs-brand,#2f6feb);}
+  .idx{font-size:11px;color:var(--dsw-alias-label-tertiary,#7a8390);font-variant-numeric:tabular-nums;}
+  .val{width:100%;min-width:0;box-sizing:border-box;padding:9px 2px;text-align:center;border-radius:9px;
+    border:1px solid var(--dsw-alias-border-l1,#d7dbe0);background:var(--dsw-alias-bg-layer-2,#eef1f4);
+    font-weight:650;font-size:clamp(13px,2.4vw,17px);font-variant-numeric:tabular-nums;
+    transition:background .18s,color .18s,opacity .18s,transform .18s,border-color .18s;}
+  .cell.mid .val{background:var(--bs-brand,#2f6feb);color:var(--dsw-alias-label-primary-inverted,#fff);
+    border-color:var(--bs-brand,#2f6feb);transform:scale(1.07);}
+  .cell.found .val{background:#16894a;color:#fff;border-color:#16894a;transform:scale(1.07);}
+  .cell.excluded .val{opacity:.38;text-decoration:line-through;background:transparent;}
+  .note{font-size:10px;line-height:14px;min-height:14px;white-space:nowrap;
+    color:var(--dsw-alias-label-tertiary,#7a8390);}
+  .cell.mid .note{color:var(--bs-brand,#2f6feb);font-weight:700;}
+  .cell.found .note{color:#16894a;font-weight:700;}
+  .bs-readout{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-size:12px;padding:4px 10px;border-radius:8px;font-variant-numeric:tabular-nums;
+    background:var(--dsw-alias-bg-layer-1,#f7f8fa);border:1px solid var(--dsw-alias-border-l1,#d7dbe0);
+    color:var(--dsw-alias-label-secondary,#5a6472);}
+  .chip b{font-weight:700;color:var(--dsw-alias-label-primary,#1f2328);}
+  .chip.midc b{color:var(--bs-brand,#2f6feb);}
+  .bs-status{font-size:13px;line-height:1.6;padding:10px 12px;border-radius:10px;min-height:52px;
+    background:var(--dsw-alias-bg-layer-1,#f7f8fa);border:1px solid var(--dsw-alias-border-l1,#d7dbe0);}
+  .bs-status .em{color:var(--bs-brand,#2f6feb);font-weight:700;}
+  .bs-controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
+  .bs-btn{font:inherit;font-size:13px;font-weight:600;padding:7px 16px;border-radius:9px;cursor:pointer;
+    border:1px solid var(--dsw-alias-border-l2,#c8ced5);
+    background:var(--dsw-alias-bg-layer-2,#eef1f4);color:inherit;}
+  .bs-btn.primary{background:var(--bs-brand-fill);color:var(--dsw-alias-label-primary-inverted,#fff);
+    border-color:var(--bs-brand-fill);}
+  .bs-btn:not(:disabled):hover{filter:brightness(1.06);}
+  .bs-btn:disabled{opacity:.45;cursor:not-allowed;}
+  .bs-dots{display:flex;align-items:center;gap:5px;margin-left:auto;}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;
+    background:var(--dsw-alias-border-l2,#c8ced5);}
+  .dot.on{background:var(--bs-brand,#2f6feb);}
+  .bs-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;
+    color:var(--dsw-alias-label-tertiary,#7a8390);}
+  .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;}
+  .sw.m{background:var(--bs-brand,#2f6feb);}
+  .sw.e{border:1px solid var(--dsw-alias-border-l2,#c8ced5);background:transparent;}
+  .sw.f{background:#16894a;}
+</style>
+<div class="bs-wrap">
+  <div class="bs-head">
+    <span class="bs-title">二分查找 · 有序数组</span>
+    <span class="bs-target">目标 target = 23</span>
+    <span class="bs-round" id="bs-round">第 0 轮 · 比较 0 次</span>
+  </div>
+
+  <div class="bs-scroll">
+    <div class="bs-row" id="bs-row" role="group" aria-label="有序数组及当前搜索区间"></div>
+  </div>
+
+  <div class="bs-readout">
+    <span class="chip">low = <b id="bs-low">0</b></span>
+    <span class="chip midc">mid = <b id="bs-mid">—</b></span>
+    <span class="chip">high = <b id="bs-high">7</b></span>
+    <span class="chip">剩余候选 <b id="bs-cand">8</b> 个</span>
+  </div>
+
+  <div class="bs-status" id="bs-status" aria-live="polite"></div>
+
+  <div class="bs-controls">
+    <button type="button" class="bs-btn primary" id="bs-next">下一步</button>
+    <button type="button" class="bs-btn" id="bs-reset">重置</button>
+    <span class="bs-dots" id="bs-dots" aria-hidden="true"></span>
+  </div>
+
+  <div class="bs-legend">
+    <span><i class="sw m"></i>本轮 mid（正在比较）</span>
+    <span><i class="sw e"></i>已排除</span>
+    <span><i class="sw f"></i>命中目标</span>
+  </div>
+</div>
+<script>
+(function(){
+  var arr=[2,5,8,12,16,23,38,56], target=23;
+
+  function build(){
+    var steps=[], low=0, high=arr.length-1, excluded=[], comparisons=0, round=0;
+    steps.push({low:low,high:high,mid:null,excluded:[],round:0,comparisons:0,found:false,
+      text:'准备开始：在 '+arr.length+' 个有序数中查找 '+target+'。当前搜索区间是下标 '+low+' 到 '+high+'。'});
+    while(low<=high){
+      round++; comparisons++;
+      var mid=Math.floor((low+high)/2), v=arr[mid];
+      if(v===target){
+        steps.push({low:low,high:high,mid:mid,excluded:excluded.slice(),round:round,
+          comparisons:comparisons,found:true,
+          text:'第 '+round+' 轮：mid = \u230A('+low+'+'+high+')/2\u230B = '+mid+
+               '，a['+mid+'] = '+v+'，正好等于 <span class="em">'+target+' \u2713 命中！</span>'+
+               '只用了 '+comparisons+' 次比较，a[4]、a[6]、a[7] 从头到尾都没看过。'});
+        break;
+      }
+      if(v<target){
+        var fromL=low, toL=mid;
+        for(var k=fromL;k<=toL;k++) excluded.push(k);
+        var nlow=mid+1;
+        steps.push({low:nlow,high:high,mid:mid,excluded:excluded.slice(),round:round,
+          comparisons:comparisons,found:false,
+          text:'第 '+round+' 轮：mid = \u230A('+low+'+'+high+')/2\u230B = '+mid+'，a['+mid+'] = '+v+
+               ' < '+target+'，目标只可能在<b>右半边</b> \u2192 排除下标 '+fromL+'\u2013'+toL+
+               '，新区间 ['+nlow+', '+high+']。'});
+        low=nlow;
+      }else{
+        var fromR=mid, toR=high;
+        for(var j=fromR;j<=toR;j++) excluded.push(j);
+        var nhigh=mid-1;
+        steps.push({low:low,high:nhigh,mid:mid,excluded:excluded.slice(),round:round,
+          comparisons:comparisons,found:false,
+          text:'第 '+round+' 轮：mid = \u230A('+low+'+'+high+')/2\u230B = '+mid+'，a['+mid+'] = '+v+
+               ' > '+target+'，目标只可能在<b>左半边</b> \u2192 排除下标 '+fromR+'\u2013'+toR+
+               '，新区间 ['+low+', '+nhigh+']。'});
+        high=nhigh;
+      }
+    }
+    if(!steps[steps.length-1].found){
+      steps.push({low:low,high:high,mid:null,excluded:arr.map(function(_,k){return k;}),
+        round:round,comparisons:comparisons,found:false,
+        text:'low > high，区间已空，说明 '+target+' 不在数组中。'});
+    }
+    return steps;
+  }
+
+  var steps=build(), i=0;
+  var row=document.getElementById('bs-row');
+  if(!row) return;
+
+  arr.forEach(function(v,idx){
+    var c=document.createElement('div');
+    c.className='cell'; c.id='bs-cell-'+idx;
+    c.innerHTML='<div class="ptr"></div><div class="idx">'+idx+'</div>'+
+                '<div class="val">'+v+'</div><div class="note"></div>';
+    row.appendChild(c);
+  });
+
+  var nextBtn=document.getElementById('bs-next'),
+      resetBtn=document.getElementById('bs-reset'),
+      status=document.getElementById('bs-status'),
+      dots=document.getElementById('bs-dots'),
+      roundEl=document.getElementById('bs-round'),
+      outLow=document.getElementById('bs-low'),
+      outMid=document.getElementById('bs-mid'),
+      outHigh=document.getElementById('bs-high'),
+      outCand=document.getElementById('bs-cand');
+
+  dots.innerHTML='';
+  for(var r=0;r<steps.length-1;r++){
+    var d=document.createElement('i'); d.className='dot'; dots.appendChild(d);
+  }
+
+  function render(){
+    var s=steps[i];
+    arr.forEach(function(v,idx){
+      var cell=document.getElementById('bs-cell-'+idx);
+      var ex=s.excluded.indexOf(idx)>=0;
+      var isMid=(s.mid===idx);
+      var isFound=(!!s.found && isMid);
+      cell.className='cell'+(isFound?' found':(isMid?' mid':(ex?' excluded':'')));
+
+      var ptr=cell.querySelector('.ptr');
+      ptr.innerHTML='';
+      function add(cls,txt){
+        var t=document.createElement('span'); t.className='tag '+cls; t.textContent=txt; ptr.appendChild(t);
+      }
+      if(idx===s.low) add('low','low');
+      if(isMid) add('midtag','mid');
+      if(idx===s.high) add('high','high');
+
+      cell.querySelector('.note').textContent = isFound?'\u2713 命中':(isMid?'比较':(ex?'排除':''));
+    });
+
+    outLow.textContent=s.low;
+    outMid.textContent=(s.mid===null?'\u2014':s.mid);
+    outHigh.textContent=(s.high<0?'\u2014':s.high);
+    var n = s.found ? 1 : Math.max(0, s.high-s.low+1);
+    outCand.textContent=n;
+
+    status.innerHTML=s.text;
+    roundEl.textContent='第 '+s.round+' 轮 · 比较 '+s.comparisons+' 次';
+    var last=(i>=steps.length-1);
+    nextBtn.disabled=last;
+    nextBtn.textContent=last?'已结束':'下一步';
+
+    var ds=dots.querySelectorAll('.dot');
+    for(var k=0;k<ds.length;k++) ds[k].className='dot'+(k<i?' on':'');
+  }
+
+  nextBtn.addEventListener('click',function(){ if(i<steps.length-1){ i++; render(); } });
+  resetBtn.addEventListener('click',function(){ i=0; render(); });
+  render();
+})();
+</script>

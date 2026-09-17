@@ -1,0 +1,107 @@
+<style>
+  .rs-wrap{display:flex;flex-direction:column;gap:12px;padding:14px 16px;border:1px solid var(--dsw-alias-border-l1,#e3e6ea);border-radius:12px;background:var(--dsw-alias-bg-layer-1,#fff);color:var(--dsw-alias-label-primary,#1a1d21);font-size:14px;line-height:1.45;box-sizing:border-box;}
+  .rs-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .rs-title{font-weight:600;font-size:15px;}
+  .rs-unit{color:var(--dsw-alias-label-tertiary,#8a9099);font-size:12px;}
+  .rs-chart{display:flex;flex-direction:column;gap:6px;}
+  .rs-row{display:grid;grid-template-columns:3.5em minmax(0,1fr) 5.6em;align-items:center;gap:10px;width:100%;padding:6px 8px;border:1px solid transparent;border-radius:8px;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer;}
+  .rs-row:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.04));}
+  .rs-row[aria-pressed="true"]{border-color:var(--dsw-alias-brand-primary,#3b6ef5);background:var(--dsw-alias-interactive-bg-active,rgba(59,110,245,.1));}
+  .rs-name{font-weight:500;}
+  .rs-track{height:18px;border-radius:4px;background:var(--dsw-alias-bg-layer-2,#f1f3f5);overflow:hidden;min-width:0;}
+  .rs-bar{display:block;height:100%;border-radius:4px;background:var(--dsw-alias-brand-primary,#3b6ef5);opacity:.5;transition:width .25s ease,opacity .15s ease;}
+  .rs-row[aria-pressed="true"] .rs-bar{opacity:1;}
+  .rs-val{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .rs-foot{display:flex;flex-direction:column;gap:2px;}
+  .rs-sum{font-size:12px;color:var(--dsw-alias-label-tertiary,#8a9099);font-variant-numeric:tabular-nums;}
+  .rs-detail{font-size:13px;color:var(--dsw-alias-label-secondary,#5a6169);font-variant-numeric:tabular-nums;min-height:2.6em;}
+  .rs-btn{align-self:flex-start;padding:7px 14px;border-radius:8px;border:1px solid transparent;background:var(--dsw-alias-button-primary-fill,#3b6ef5);color:var(--dsw-alias-label-primary-inverted,#fff);font:inherit;font-weight:500;cursor:pointer;}
+  .rs-btn:disabled{cursor:not-allowed;opacity:.45;}
+  .rs-btn:not(:disabled):hover{filter:brightness(1.06);}
+  @media (max-width:420px){ .rs-row{grid-template-columns:3.2em minmax(0,1fr) 4.9em;font-size:13px;} }
+  @media (prefers-reduced-motion: reduce){ .rs-bar{transition:none;} }
+</style>
+<div class="rs-wrap">
+  <div class="rs-head">
+    <div class="rs-title">地区销售额对比</div>
+    <div class="rs-unit">单位：万元 · 条形从 0 起算，满格 = 120 万元</div>
+  </div>
+  <div class="rs-chart" role="group" aria-label="地区销售额条形对比，点击任一地区进行本地选中">
+    <button type="button" class="rs-row" data-region="华东" data-value="120" aria-pressed="false">
+      <span class="rs-name">华东</span>
+      <span class="rs-track"><span class="rs-bar" style="width:100%"></span></span>
+      <span class="rs-val">120</span>
+    </button>
+    <button type="button" class="rs-row" data-region="华南" data-value="80" aria-pressed="false">
+      <span class="rs-name">华南</span>
+      <span class="rs-track"><span class="rs-bar" style="width:66.7%"></span></span>
+      <span class="rs-val">80</span>
+    </button>
+    <button type="button" class="rs-row" data-region="西部" data-value="50" aria-pressed="false">
+      <span class="rs-name">西部</span>
+      <span class="rs-track"><span class="rs-bar" style="width:41.7%"></span></span>
+      <span class="rs-val">50</span>
+    </button>
+  </div>
+  <div class="rs-foot">
+    <div class="rs-sum" id="rs-sum">合计 250 万元</div>
+    <div class="rs-detail" id="rs-detail" aria-live="polite">尚未选择地区 —— 点击条形仅做本地选中，不会发出提问。</div>
+  </div>
+  <button type="button" class="rs-btn" id="rs-explain" disabled>解释所选地区</button>
+</div>
+<script>
+(function () {
+  var TOTAL = 250;
+  var MAX = 120;
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.rs-row'));
+  var detail = document.getElementById('rs-detail');
+  var explain = document.getElementById('rs-explain');
+  var selected = null;
+
+  function fmt(n) {
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function render() {
+    rows.forEach(function (row) {
+      row.setAttribute('aria-pressed', row === selected ? 'true' : 'false');
+    });
+    if (!selected) {
+      detail.textContent = '尚未选择地区 —— 点击条形仅做本地选中，不会发出提问。';
+      explain.disabled = true;
+      return;
+    }
+    var region = selected.getAttribute('data-region');
+    var value = Number(selected.getAttribute('data-value'));
+    var share = (value / TOTAL * 100).toFixed(1);
+    var gapEast = value - 120;
+    var cmp = gapEast === 0
+      ? '为三地区中最高'
+      : '比华东少 ' + fmt(Math.abs(gapEast)) + ' 万元';
+    detail.textContent = '已选：' + region + ' · ' + fmt(value) + ' 万元 · 占合计 ' + share + '% · ' + cmp;
+    explain.disabled = false;
+  }
+
+  rows.forEach(function (row) {
+    row.addEventListener('click', function () {
+      selected = row;          /* 纯本地状态，不发消息 */
+      render();
+    });
+  });
+
+  explain.addEventListener('click', function () {
+    if (!selected) return;
+    var region = selected.getAttribute('data-region');
+    var value = Number(selected.getAttribute('data-value'));
+    var share = (value / TOTAL * 100).toFixed(1);
+    var text = '请解释所选地区：' + region + '，销售额 ' + value + ' 万元（占三地区合计 250 万元的 ' + share + '%）。'
+      + '地区数据为：华东 120 万元、华南 80 万元、西部 50 万元。'
+      + '请说明该地区处于这一水平可能的原因，以及与另外两个地区的差异来源。';
+    if (window.dshWidget && typeof window.dshWidget.sendPrompt === 'function') {
+      window.dshWidget.sendPrompt(text);
+    }
+  });
+
+  render();
+})();
+</script>

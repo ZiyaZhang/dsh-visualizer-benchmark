@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "id": "W04-A-1",
+  "roundId": "dev-current-20260917",
+  "caseId": "W04",
+  "arm": "A",
+  "repeat": 1,
+  "status": "planned",
+  "prompt": "在回复里用一张静态横向条形图对比四个功能的使用次数：长文档的跨章节证据追溯120次、多轮对话中的上下文恢复80次、插件热更新后继续当前任务45次、直接生成一个简短答案300次。完整显示名称，手机上也要能读懂。",
+  "expectedRoute": "widget",
+  "widgets": [],
+  "final": "",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "Trial has not completed"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [],
+    "referencesRead": []
+  },
+  "usage": {},
+  "elapsedSeconds": null,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2"
+}

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="300" viewBox="0 0 480 300" role="img" aria-labelledby="salesTitle salesDesc" font-family="Helvetica, Arial, sans-serif">
+  <title id="salesTitle">Sales by category</title>
+  <desc id="salesDesc">Static bar chart: category A has a value of 3 and category B has a value of 5.</desc>
+
+  <rect x="0" y="0" width="480" height="300" fill="#ffffff"/>
+
+  <text x="240" y="30" text-anchor="middle" font-size="18" font-weight="700" fill="#1f2933">Sales</text>
+
+  <!-- horizontal grid lines and y-axis tick labels -->
+  <g stroke="#e3e7eb" stroke-width="1">
+    <line x1="60" y1="250" x2="450" y2="250"/>
+    <line x1="60" y1="183.33" x2="450" y2="183.33"/>
+    <line x1="60" y1="116.67" x2="450" y2="116.67"/>
+    <line x1="60" y1="50" x2="450" y2="50"/>
+  </g>
+  <g font-size="12" fill="#6b7280" text-anchor="end">
+    <text x="50" y="254">0</text>
+    <text x="50" y="187.33">2</text>
+    <text x="50" y="120.67">4</text>
+    <text x="50" y="54">6</text>
+  </g>
+
+  <!-- y-axis -->
+  <line x1="60" y1="50" x2="60" y2="250" stroke="#9aa5b1" stroke-width="1.5"/>
+
+  <!-- bar A = 3 -->
+  <rect x="112.5" y="150" width="90" height="100" fill="#4c78a8"/>
+  <text x="157.5" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2933">3</text>
+
+  <!-- bar B = 5 -->
+  <rect x="307.5" y="83.33" width="90" height="166.67" fill="#f58518"/>
+  <text x="352.5" y="73.33" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2933">5</text>
+
+  <!-- category labels -->
+  <g font-size="14" fill="#1f2933" text-anchor="middle">
+    <text x="157.5" y="272">A</text>
+    <text x="352.5" y="272">B</text>
+  </g>
+</svg>

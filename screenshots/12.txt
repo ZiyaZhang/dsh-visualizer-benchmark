@@ -1,0 +1,6 @@
+Cowork 西部解释完整结果截图
+
+Wall time: 0.5373 seconds
+Output:
+There has been no change in the accessibility tree for Window: "Claude".
+The focused UI element is 173 HTML 内容 三区销售对比, URL: dbb99d67-18d9-4382-9194-006b3c29752b.frame.claudeusercontent.com/_f/1789635356-e4ae/

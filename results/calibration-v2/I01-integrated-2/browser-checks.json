@@ -1,0 +1,454 @@
+{
+  "schemaVersion": 2,
+  "trialId": "I01-integrated-2",
+  "caseId": "W01",
+  "scenario": "binary",
+  "casesPath": "results/calibration-v2/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:15:13.124Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1",
+          "step-2",
+          "reset"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "step-2-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "step-2-736-light.png",
+      "state": "step-2",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "二分查找 · 目标 23\n有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引\n未开始 · 最多 2 轮\n[0, 7]\nlow\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\n\n候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\n\nlow（左边界）\n0\na[0] = 2\nmid（中点）\n—\na[mid] = —\nhigh（右边界）\n7\na[7] = 56\n本轮比较\n—\n等待开始\n已排除区间\n无\n剩 8 个候选\n下一步\n上一步\n重置\n比较历史\n还没有比较 —— 点「下一步」开始第 1 轮。\n",
+      "temperature": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 495,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。当前候选区间索引 0 到 7。候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {},
+          "at": 86.40000009536743
+        },
+        {
+          "type": "rendered",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {},
+          "at": 106.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {
+            "height": 495
+          },
+          "at": 106.10000014305115
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 目标 23 有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引 未开始 · 最多 2 轮\n- img \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。当前候选区间索引 0 到 7。候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\": \"[0, 7] low 2 0 5 1 8 2 12 3 16 4 23 5 38 6 high 56 7\"\n- paragraph: 候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\n- text: low（左边界） 0 a[0] = 2 mid（中点） — a[mid] = — high（右边界） 7 a[7] = 56 本轮比较 — 等待开始 已排除区间 无 剩 8 个候选\n- button \"下一步\"\n- button \"上一步\" [disabled]\n- button \"重置\" [disabled]\n- text: 比较历史\n- list\n- text: 还没有比较 —— 点「下一步」开始第 1 轮。"
+    },
+    {
+      "text": "二分查找 · 目标 23\n有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引\n第 1 / 2 轮\n[0, 7]\nlow\n2\n0\n5\n1\n8\n2\n12\nmid\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\n\na[3] = 12 比目标 23 小 → 目标只可能出现在右半区。于是排除索引 0–3（含 mid 自己），区间收缩为 [4, 7]。\n\nlow（左边界）\n0\na[0] = 2\nmid（中点）\n3\na[3] = 12\nhigh（右边界）\n7\na[7] = 56\n本轮比较\n12 < 23\n目标在右半区\n已排除区间\n0 – 3\n剩 8 个候选\n下一步\n上一步\n重置\n比较历史\n第 1 轮 · low=0 · mid=3 · high=7 · a[3] = 12 < 23 → 排除 0 – 3，新区间 [4, 7]\n",
+      "temperature": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 530,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。本轮 low=0，mid=3，high=7，a[mid]=12。a[3] = 12 比目标 23 小 → 目标只可能出现在右半区。于是排除索引 0–3（含 mid 自己），区间收缩为 [4, 7]。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {},
+          "at": 86.40000009536743
+        },
+        {
+          "type": "rendered",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {},
+          "at": 106.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {
+            "height": 495
+          },
+          "at": 106.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {
+            "height": 530
+          },
+          "at": 243.10000014305115
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 目标 23 有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引 第 1 / 2 轮\n- img \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。本轮 low=0，mid=3，high=7，a[mid]=12。a[3] = 12 比目标 23 小 → 目标只可能出现在右半区。于是排除索引 0–3（含 mid 自己），区间收缩为 [4, 7]。\": \"[0, 7] low 2 0 5 1 8 2 12 mid 3 16 4 23 5 38 6 high 56 7\"\n- paragraph: a[3] = 12 比目标 23 小 → 目标只可能出现在右半区。于是排除索引 0–3（含 mid 自己），区间收缩为 [4, 7]。\n- text: low（左边界） 0 a[0] = 2 mid（中点） 3 a[3] = 12 high（右边界） 7 a[7] = 56 本轮比较 12 < 23 目标在右半区 已排除区间 0 – 3 剩 8 个候选\n- button \"下一步\"\n- button \"上一步\"\n- button \"重置\"\n- text: 比较历史\n- list:\n  - listitem: 第 1 轮 · low=0 · mid=3 · high=7 · a[3] = 12 < 23 → 排除 0 – 3，新区间 [4, 7]"
+    },
+    {
+      "text": "二分查找 · 目标 23\n有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引\n第 2 / 2 轮 · 命中\n[4, 7]\n2\n0\n5\n1\n8\n2\n12\n3\nlow\n16\n4\n23\nmid ✓\n5\n38\n6\nhigh\n56\n7\n\nmid = ⌊(4 + 7) ÷ 2⌋ = 5，a[5] = 23 与目标相等 → 命中，返回索引 5。8 个元素总共只比较了 2 次。\n\nlow（左边界）\n4\na[4] = 16\nmid（中点）\n5\na[5] = 23\nhigh（右边界）\n7\na[7] = 56\n本轮比较\n23 = 23\n命中，返回索引 5\n已排除区间\n0 – 3\n剩 4 个候选\n下一步\n上一步\n重置\n比较历史\n第 1 轮 · low=0 · mid=3 · high=7 · a[3] = 12 < 23 → 排除 0 – 3，新区间 [4, 7]\n第 2 轮 · low=4 · mid=5 · high=7 · a[5] = 23 = 23 → 命中，返回索引 5\n",
+      "temperature": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 543,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。本轮 low=4，mid=5，high=7，a[mid]=23。mid = ⌊(4 + 7) ÷ 2⌋ = 5，a[5] = 23 与目标相等 → 命中，返回索引 5。8 个元素总共只比较了 2 次。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {},
+          "at": 86.40000009536743
+        },
+        {
+          "type": "rendered",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {},
+          "at": 106.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {
+            "height": 495
+          },
+          "at": 106.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {
+            "height": 530
+          },
+          "at": 243.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {
+            "height": 543
+          },
+          "at": 293.2000000476837
+        }
+      ],
+      "name": "step-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 目标 23 有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引 第 2 / 2 轮 · 命中\n- img \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。本轮 low=4，mid=5，high=7，a[mid]=23。mid = ⌊(4 + 7) ÷ 2⌋ = 5，a[5] = 23 与目标相等 → 命中，返回索引 5。8 个元素总共只比较了 2 次。\": \"[4, 7] 2 0 5 1 8 2 12 3 low 16 4 23 ✓ mid ✓ 5 38 6 high 56 7\"\n- paragraph: mid = ⌊(4 + 7) ÷ 2⌋ = 5，a[5] = 23 与目标相等 → 命中，返回索引 5。8 个元素总共只比较了 2 次。\n- text: low（左边界） 4 a[4] = 16 mid（中点） 5 a[5] = 23 high（右边界） 7 a[7] = 56 本轮比较 23 = 23 命中，返回索引 5 已排除区间 0 – 3 剩 4 个候选\n- button \"下一步\" [disabled]\n- button \"上一步\"\n- button \"重置\"\n- text: 比较历史\n- list:\n  - listitem: 第 1 轮 · low=0 · mid=3 · high=7 · a[3] = 12 < 23 → 排除 0 – 3，新区间 [4, 7]\n  - listitem: 第 2 轮 · low=4 · mid=5 · high=7 · a[5] = 23 = 23 → 命中，返回索引 5"
+    },
+    {
+      "text": "二分查找 · 目标 23\n有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引\n未开始 · 最多 2 轮\n[0, 7]\nlow\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\n\n候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\n\nlow（左边界）\n0\na[0] = 2\nmid（中点）\n—\na[mid] = —\nhigh（右边界）\n7\na[7] = 56\n本轮比较\n—\n等待开始\n已排除区间\n无\n剩 8 个候选\n下一步\n上一步\n重置\n比较历史\n还没有比较 —— 点「下一步」开始第 1 轮。\n",
+      "temperature": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 495,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。当前候选区间索引 0 到 7。候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {},
+          "at": 86.40000009536743
+        },
+        {
+          "type": "rendered",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {},
+          "at": 106.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {
+            "height": 495
+          },
+          "at": 106.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {
+            "height": 530
+          },
+          "at": 243.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "1ea880497526e09cd046793fc785d595",
+          "payload": {
+            "height": 543
+          },
+          "at": 293.2000000476837
+        }
+      ],
+      "name": "reset",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 目标 23 有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引 未开始 · 最多 2 轮\n- img \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。当前候选区间索引 0 到 7。候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\": \"[0, 7] low 2 0 5 1 8 2 12 3 16 4 23 5 38 6 high 56 7\"\n- paragraph: 候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\n- text: low（左边界） 0 a[0] = 2 mid（中点） — a[mid] = — high（右边界） 7 a[7] = 56 本轮比较 — 等待开始 已排除区间 无 剩 8 个候选\n- button \"下一步\"\n- button \"上一步\" [disabled]\n- button \"重置\" [disabled]\n- text: 比较历史\n- list\n- text: 还没有比较 —— 点「下一步」开始第 1 轮。"
+    },
+    {
+      "text": "二分查找 · 目标 23\n有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引\n未开始 · 最多 2 轮\n[0, 7]\nlow\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\n\n候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\n\nlow（左边界）\n0\na[0] = 2\nmid（中点）\n—\na[mid] = —\nhigh（右边界）\n7\na[7] = 56\n本轮比较\n—\n等待开始\n已排除区间\n无\n剩 8 个候选\n下一步\n上一步\n重置\n比较历史\n还没有比较 —— 点「下一步」开始第 1 轮。\n",
+      "temperature": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 585,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。当前候选区间索引 0 到 7。候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "ae23355b7e262358e56b4b85b8fe43a3",
+          "payload": {},
+          "at": 383.80000019073486
+        },
+        {
+          "type": "rendered",
+          "channel": "ae23355b7e262358e56b4b85b8fe43a3",
+          "payload": {},
+          "at": 386.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "ae23355b7e262358e56b4b85b8fe43a3",
+          "payload": {
+            "height": 585
+          },
+          "at": 386.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 二分查找 · 目标 23 有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引 未开始 · 最多 2 轮\n- img \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。当前候选区间索引 0 到 7。候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\": \"[0, 7] low 2 0 5 1 8 2 12 3 16 4 23 5 38 6 high 56 7\"\n- paragraph: 候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\n- text: low（左边界） 0 a[0] = 2 mid（中点） — a[mid] = — high（右边界） 7 a[7] = 56 本轮比较 — 等待开始 已排除区间 无 剩 8 个候选\n- button \"下一步\"\n- button \"上一步\" [disabled]\n- button \"重置\" [disabled]\n- text: 比较历史\n- list\n- text: 还没有比较 —— 点「下一步」开始第 1 轮。"
+    },
+    {
+      "text": "二分查找 · 目标 23\n有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引\n未开始 · 最多 2 轮\n[0, 7]\nlow\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\n\n候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\n\nlow（左边界）\n0\na[0] = 2\nmid（中点）\n—\na[mid] = —\nhigh（右边界）\n7\na[7] = 56\n本轮比较\n—\n等待开始\n已排除区间\n无\n剩 8 个候选\n下一步\n上一步\n重置\n比较历史\n还没有比较 —— 点「下一步」开始第 1 轮。\n",
+      "temperature": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 495,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。当前候选区间索引 0 到 7。候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "9a36f633c0898622f95af058d1d46cb1",
+          "payload": {},
+          "at": 443.40000009536743
+        },
+        {
+          "type": "rendered",
+          "channel": "9a36f633c0898622f95af058d1d46cb1",
+          "payload": {},
+          "at": 445.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "9a36f633c0898622f95af058d1d46cb1",
+          "payload": {
+            "height": 495
+          },
+          "at": 445.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 二分查找 · 目标 23 有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引 未开始 · 最多 2 轮\n- img \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。当前候选区间索引 0 到 7。候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\": \"[0, 7] low 2 0 5 1 8 2 12 3 16 4 23 5 38 6 high 56 7\"\n- paragraph: 候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\n- text: low（左边界） 0 a[0] = 2 mid（中点） — a[mid] = — high（右边界） 7 a[7] = 56 本轮比较 — 等待开始 已排除区间 无 剩 8 个候选\n- button \"下一步\"\n- button \"上一步\" [disabled]\n- button \"重置\" [disabled]\n- text: 比较历史\n- list\n- text: 还没有比较 —— 点「下一步」开始第 1 轮。"
+    },
+    {
+      "text": "二分查找 · 目标 23\n有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引\n未开始 · 最多 2 轮\n[0, 7]\nlow\n2\n0\n5\n1\n8\n2\n12\n3\n16\n4\n23\n5\n38\n6\nhigh\n56\n7\n\n候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\n\nlow（左边界）\n0\na[0] = 2\nmid（中点）\n—\na[mid] = —\nhigh（右边界）\n7\na[7] = 56\n本轮比较\n—\n等待开始\n已排除区间\n无\n剩 8 个候选\n下一步\n上一步\n重置\n比较历史\n还没有比较 —— 点「下一步」开始第 1 轮。\n",
+      "temperature": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 585,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。当前候选区间索引 0 到 7。候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "148a7f75483fbef4891760d5bfbc73db",
+          "payload": {},
+          "at": 515.2000000476837
+        },
+        {
+          "type": "rendered",
+          "channel": "148a7f75483fbef4891760d5bfbc73db",
+          "payload": {},
+          "at": 519.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "148a7f75483fbef4891760d5bfbc73db",
+          "payload": {
+            "height": 585
+          },
+          "at": 519.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 二分查找 · 目标 23 有序数组 [2, 5, 8, 12, 16, 23, 38, 56] · 8 个元素 · 方框下方数字是索引 未开始 · 最多 2 轮\n- img \"数组 [2, 5, 8, 12, 16, 23, 38, 56]，目标 23。当前候选区间索引 0 到 7。候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\": \"[0, 7] low 2 0 5 1 8 2 12 3 16 4 23 5 38 6 high 56 7\"\n- paragraph: 候选区间是索引 0–7，覆盖整个数组。点「下一步」计算 mid = ⌊(0 + 7) ÷ 2⌋ = 3。\n- text: low（左边界） 0 a[0] = 2 mid（中点） — a[mid] = — high（右边界） 7 a[7] = 56 本轮比较 — 等待开始 已排除区间 无 剩 8 个候选\n- button \"下一步\"\n- button \"上一步\" [disabled]\n- button \"重置\" [disabled]\n- text: 比较历史\n- list\n- text: 还没有比较 —— 点「下一步」开始第 1 轮。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "1ea880497526e09cd046793fc785d595",
+      "payload": {},
+      "at": 86.40000009536743
+    },
+    {
+      "type": "rendered",
+      "channel": "1ea880497526e09cd046793fc785d595",
+      "payload": {},
+      "at": 106.10000014305115
+    },
+    {
+      "type": "resize",
+      "channel": "1ea880497526e09cd046793fc785d595",
+      "payload": {
+        "height": 495
+      },
+      "at": 106.10000014305115
+    },
+    {
+      "type": "resize",
+      "channel": "1ea880497526e09cd046793fc785d595",
+      "payload": {
+        "height": 530
+      },
+      "at": 243.10000014305115
+    },
+    {
+      "type": "resize",
+      "channel": "1ea880497526e09cd046793fc785d595",
+      "payload": {
+        "height": 543
+      },
+      "at": 293.2000000476837
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "46d856d0adb5a20998d4da40cc4e84f83935608b2424d59320219cfdf763c1e7",
+  "previewSha256": "8c9dc6b3b4bcfd958f6d0a62cf4b8fd01dee6b5e25045d98f9e1234dba784cb6",
+  "rendererSha256": "8c9dc6b3b4bcfd958f6d0a62cf4b8fd01dee6b5e25045d98f9e1234dba784cb6",
+  "rendererHashKind": "legacy rendered document bytes; original renderer source snapshot unavailable",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "d67469b7ca3943c11eae35a8d4acaeca62207d50d2705feae478e05bcd541c21",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

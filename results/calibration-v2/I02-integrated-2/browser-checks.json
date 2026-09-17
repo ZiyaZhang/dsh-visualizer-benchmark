@@ -1,0 +1,454 @@
+{
+  "schemaVersion": 2,
+  "trialId": "I02-integrated-2",
+  "caseId": "W02",
+  "scenario": "heat",
+  "casesPath": "results/calibration-v2/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T16:15:14.970Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1",
+          "step-2",
+          "reset"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "step-2-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "step-2-736-light.png",
+      "state": "step-2",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "第 0 步 · 扩散系数 α = 0.25 · 节点数 5\n单步\n重置\n同步更新（全部节点都用上一步的温度）： Tin+1 = Tin + 0.25·(Ti−1n − 2Tin + Ti+1n)，两端固定不参与计算\n100.00 °C\nx₀\n固定 100\n—\n0.00 °C\nx₁\n自由\n—\n0.00 °C\nx₂\n自由\n—\n0.00 °C\nx₃\n自由\n—\n0.00 °C\nx₄\n固定 0\n—\n0 °C\n柱高 ∝ 温度 · Δ = 本步相对上一步的变化\n100 °C\n离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。\n",
+      "temperature": [
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        100
+      ],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 380,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {},
+          "at": 74
+        },
+        {
+          "type": "rendered",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {},
+          "at": 107.60000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {
+            "height": 380
+          },
+          "at": 107.60000014305115
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 第 0 步 · 扩散系数 α = 0.25 · 节点数 5\n- button \"单步\"\n- button \"重置\"\n- text: 同步更新（全部节点都用上一步的温度）： T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + 0.25·(T\n- subscript: i−1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i+1\n- superscript: \"n\"\n- text: )，两端固定不参与计算\n- img \"一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温\": 100.00 °C x₀ 固定 100 — 0.00 °C x₁ 自由 — 0.00 °C x₂ 自由 — 0.00 °C x₃ 自由 — 0.00 °C x₄ 固定 0 —\n- text: 0 °C 柱高 ∝ 温度 · Δ = 本步相对上一步的变化 100 °C 离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。"
+    },
+    {
+      "text": "第 1 步 · 扩散系数 α = 0.25 · 节点数 5\n单步\n重置\n同步更新（全部节点都用上一步的温度）： Tin+1 = Tin + 0.25·(Ti−1n − 2Tin + Ti+1n)，两端固定不参与计算\n100.00 °C\nx₀\n固定 100\n—\n25.00 °C\nx₁\n自由\nΔ +25.00\n0.00 °C\nx₂\n自由\nΔ +0.00\n0.00 °C\nx₃\n自由\nΔ +0.00\n0.00 °C\nx₄\n固定 0\n—\n0 °C\n柱高 ∝ 温度 · Δ = 本步相对上一步的变化\n100 °C\n离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。\n",
+      "temperature": [
+        100,
+        25,
+        0,
+        0,
+        0,
+        0,
+        100
+      ],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 380,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {},
+          "at": 74
+        },
+        {
+          "type": "rendered",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {},
+          "at": 107.60000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {
+            "height": 380
+          },
+          "at": 107.60000014305115
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 第 1 步 · 扩散系数 α = 0.25 · 节点数 5\n- button \"单步\"\n- button \"重置\"\n- text: 同步更新（全部节点都用上一步的温度）： T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + 0.25·(T\n- subscript: i−1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i+1\n- superscript: \"n\"\n- text: )，两端固定不参与计算\n- img \"一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温\": 100.00 °C x₀ 固定 100 — 25.00 °C x₁ 自由 Δ +25.00 0.00 °C x₂ 自由 Δ +0.00 0.00 °C x₃ 自由 Δ +0.00 0.00 °C x₄ 固定 0 —\n- text: 0 °C 柱高 ∝ 温度 · Δ = 本步相对上一步的变化 100 °C 离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。"
+    },
+    {
+      "text": "第 2 步 · 扩散系数 α = 0.25 · 节点数 5\n单步\n重置\n同步更新（全部节点都用上一步的温度）： Tin+1 = Tin + 0.25·(Ti−1n − 2Tin + Ti+1n)，两端固定不参与计算\n100.00 °C\nx₀\n固定 100\n—\n37.50 °C\nx₁\n自由\nΔ +12.50\n6.25 °C\nx₂\n自由\nΔ +6.25\n0.00 °C\nx₃\n自由\nΔ +0.00\n0.00 °C\nx₄\n固定 0\n—\n0 °C\n柱高 ∝ 温度 · Δ = 本步相对上一步的变化\n100 °C\n离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。\n",
+      "temperature": [
+        100,
+        37.5,
+        6.25,
+        0,
+        0,
+        0,
+        100
+      ],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 380,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {},
+          "at": 74
+        },
+        {
+          "type": "rendered",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {},
+          "at": 107.60000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {
+            "height": 380
+          },
+          "at": 107.60000014305115
+        }
+      ],
+      "name": "step-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 第 2 步 · 扩散系数 α = 0.25 · 节点数 5\n- button \"单步\"\n- button \"重置\"\n- text: 同步更新（全部节点都用上一步的温度）： T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + 0.25·(T\n- subscript: i−1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i+1\n- superscript: \"n\"\n- text: )，两端固定不参与计算\n- img \"一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温\": 100.00 °C x₀ 固定 100 — 37.50 °C x₁ 自由 Δ +12.50 6.25 °C x₂ 自由 Δ +6.25 0.00 °C x₃ 自由 Δ +0.00 0.00 °C x₄ 固定 0 —\n- text: 0 °C 柱高 ∝ 温度 · Δ = 本步相对上一步的变化 100 °C 离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。"
+    },
+    {
+      "text": "第 0 步 · 扩散系数 α = 0.25 · 节点数 5\n单步\n重置\n同步更新（全部节点都用上一步的温度）： Tin+1 = Tin + 0.25·(Ti−1n − 2Tin + Ti+1n)，两端固定不参与计算\n100.00 °C\nx₀\n固定 100\n—\n0.00 °C\nx₁\n自由\n—\n0.00 °C\nx₂\n自由\n—\n0.00 °C\nx₃\n自由\n—\n0.00 °C\nx₄\n固定 0\n—\n0 °C\n柱高 ∝ 温度 · Δ = 本步相对上一步的变化\n100 °C\n离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。\n",
+      "temperature": [
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        100
+      ],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 380,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {},
+          "at": 74
+        },
+        {
+          "type": "rendered",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {},
+          "at": 107.60000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "57beedd9adc75027074db7c662da3e8a",
+          "payload": {
+            "height": 380
+          },
+          "at": 107.60000014305115
+        }
+      ],
+      "name": "reset",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 第 0 步 · 扩散系数 α = 0.25 · 节点数 5\n- button \"单步\"\n- button \"重置\"\n- text: 同步更新（全部节点都用上一步的温度）： T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + 0.25·(T\n- subscript: i−1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i+1\n- superscript: \"n\"\n- text: )，两端固定不参与计算\n- img \"一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温\": 100.00 °C x₀ 固定 100 — 0.00 °C x₁ 自由 — 0.00 °C x₂ 自由 — 0.00 °C x₃ 自由 — 0.00 °C x₄ 固定 0 —\n- text: 0 °C 柱高 ∝ 温度 · Δ = 本步相对上一步的变化 100 °C 离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。"
+    },
+    {
+      "text": "第 0 步 · 扩散系数 α = 0.25 · 节点数 5\n单步\n重置\n同步更新（全部节点都用上一步的温度）： Tin+1 = Tin + 0.25·(Ti−1n − 2Tin + Ti+1n)，两端固定不参与计算\n100.00 °C\nx₀\n固定 100\n—\n0.00 °C\nx₁\n自由\n—\n0.00 °C\nx₂\n自由\n—\n0.00 °C\nx₃\n自由\n—\n0.00 °C\nx₄\n固定 0\n—\n0 °C\n柱高 ∝ 温度 · Δ = 本步相对上一步的变化\n100 °C\n离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。\n",
+      "temperature": [
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        100
+      ],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 413,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "1306f7da1bd028eb2aebc853783c17fe",
+          "payload": {},
+          "at": 287.5
+        },
+        {
+          "type": "rendered",
+          "channel": "1306f7da1bd028eb2aebc853783c17fe",
+          "payload": {},
+          "at": 290.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "1306f7da1bd028eb2aebc853783c17fe",
+          "payload": {
+            "height": 413
+          },
+          "at": 290.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 第 0 步 · 扩散系数 α = 0.25 · 节点数 5\n- button \"单步\"\n- button \"重置\"\n- text: 同步更新（全部节点都用上一步的温度）： T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + 0.25·(T\n- subscript: i−1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i+1\n- superscript: \"n\"\n- text: )，两端固定不参与计算\n- img \"一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温\": 100.00 °C x₀ 固定 100 — 0.00 °C x₁ 自由 — 0.00 °C x₂ 自由 — 0.00 °C x₃ 自由 — 0.00 °C x₄ 固定 0 —\n- text: 0 °C 柱高 ∝ 温度 · Δ = 本步相对上一步的变化 100 °C 离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。"
+    },
+    {
+      "text": "第 0 步 · 扩散系数 α = 0.25 · 节点数 5\n单步\n重置\n同步更新（全部节点都用上一步的温度）： Tin+1 = Tin + 0.25·(Ti−1n − 2Tin + Ti+1n)，两端固定不参与计算\n100.00 °C\nx₀\n固定 100\n—\n0.00 °C\nx₁\n自由\n—\n0.00 °C\nx₂\n自由\n—\n0.00 °C\nx₃\n自由\n—\n0.00 °C\nx₄\n固定 0\n—\n0 °C\n柱高 ∝ 温度 · Δ = 本步相对上一步的变化\n100 °C\n离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。\n",
+      "temperature": [
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        100
+      ],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 380,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "339add020ea35c7d1bc10efea7274e16",
+          "payload": {},
+          "at": 345.2000000476837
+        },
+        {
+          "type": "rendered",
+          "channel": "339add020ea35c7d1bc10efea7274e16",
+          "payload": {},
+          "at": 347.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "339add020ea35c7d1bc10efea7274e16",
+          "payload": {
+            "height": 380
+          },
+          "at": 347.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 第 0 步 · 扩散系数 α = 0.25 · 节点数 5\n- button \"单步\"\n- button \"重置\"\n- text: 同步更新（全部节点都用上一步的温度）： T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + 0.25·(T\n- subscript: i−1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i+1\n- superscript: \"n\"\n- text: )，两端固定不参与计算\n- img \"一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温\": 100.00 °C x₀ 固定 100 — 0.00 °C x₁ 自由 — 0.00 °C x₂ 自由 — 0.00 °C x₃ 自由 — 0.00 °C x₄ 固定 0 —\n- text: 0 °C 柱高 ∝ 温度 · Δ = 本步相对上一步的变化 100 °C 离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。"
+    },
+    {
+      "text": "第 0 步 · 扩散系数 α = 0.25 · 节点数 5\n单步\n重置\n同步更新（全部节点都用上一步的温度）： Tin+1 = Tin + 0.25·(Ti−1n − 2Tin + Ti+1n)，两端固定不参与计算\n100.00 °C\nx₀\n固定 100\n—\n0.00 °C\nx₁\n自由\n—\n0.00 °C\nx₂\n自由\n—\n0.00 °C\nx₃\n自由\n—\n0.00 °C\nx₄\n固定 0\n—\n0 °C\n柱高 ∝ 温度 · Δ = 本步相对上一步的变化\n100 °C\n离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。\n",
+      "temperature": [
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        100
+      ],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 413,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "022b6460beb4ca4137c00062b8ce64a1",
+          "payload": {},
+          "at": 398.5
+        },
+        {
+          "type": "rendered",
+          "channel": "022b6460beb4ca4137c00062b8ce64a1",
+          "payload": {},
+          "at": 405
+        },
+        {
+          "type": "resize",
+          "channel": "022b6460beb4ca4137c00062b8ce64a1",
+          "payload": {
+            "height": 413
+          },
+          "at": 405
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 第 0 步 · 扩散系数 α = 0.25 · 节点数 5\n- button \"单步\"\n- button \"重置\"\n- text: 同步更新（全部节点都用上一步的温度）： T\n- subscript: i\n- superscript: n+1\n- text: = T\n- subscript: i\n- superscript: \"n\"\n- text: + 0.25·(T\n- subscript: i−1\n- superscript: \"n\"\n- text: − 2T\n- subscript: i\n- superscript: \"n\"\n- text: + T\n- subscript: i+1\n- superscript: \"n\"\n- text: )，两端固定不参与计算\n- img \"一维杆上 5 个节点的温度柱状图；左右端点分别固定为 100 和 0 摄氏度，中间 3 个节点随步数升温\": 100.00 °C x₀ 固定 100 — 0.00 °C x₁ 自由 — 0.00 °C x₂ 自由 — 0.00 °C x₃ 自由 — 0.00 °C x₄ 固定 0 —\n- text: 0 °C 柱高 ∝ 温度 · Δ = 本步相对上一步的变化 100 °C 离散示意：整根杆只保留这 5 个节点，节点之间没有内部结构；温度只在节点上取值，热扩散完全由上面的差分式在相邻节点间逐步传递。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "57beedd9adc75027074db7c662da3e8a",
+      "payload": {},
+      "at": 74
+    },
+    {
+      "type": "rendered",
+      "channel": "57beedd9adc75027074db7c662da3e8a",
+      "payload": {},
+      "at": 107.60000014305115
+    },
+    {
+      "type": "resize",
+      "channel": "57beedd9adc75027074db7c662da3e8a",
+      "payload": {
+        "height": 380
+      },
+      "at": 107.60000014305115
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "ad10971a0769d83a6bfb119b18440246eea85c3eee1f295d1c3e5ca82ff7fdc9",
+  "previewSha256": "8b78046b05f7d4784ab0a0f4b3108322aa69c08c5ecce51920c4086f1972816c",
+  "rendererSha256": "8b78046b05f7d4784ab0a0f4b3108322aa69c08c5ecce51920c4086f1972816c",
+  "rendererHashKind": "legacy rendered document bytes; original renderer source snapshot unavailable",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
+  "checkerSha256": "d67469b7ca3943c11eae35a8d4acaeca62207d50d2705feae478e05bcd541c21",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55"
+}

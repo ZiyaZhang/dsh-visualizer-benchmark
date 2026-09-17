@@ -1,0 +1,18 @@
+Cowork 西部追问按钮实际发送截图
+
+Wall time: 0.7588 seconds
+Output:
+The following is a diff from the previous accessibility tree for Window: "Claude" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 428-452, 454-455
+~													425 container This artifact uses connectors
+~														426 标题 This artifact uses connectors, Value: 2
+~															427 文本 This artifact uses connectors
++														428 文本 If you trust this artifact, you can grant it access to communicate with outside services.
++														429 按钮 Close
++														430 container Requested access
++															431 文本 Use Claude
++															432 弹出式按钮 About using Claude
++															433 文本 This usage counts toward your usage limits.
++															434 切换 Description: Use Claude in this artifact, Value: on
++														435 按钮 (disabled) Continue
+The focused UI element is 425 container This artifact uses connectors
