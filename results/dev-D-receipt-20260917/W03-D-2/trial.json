@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W03-D-2",
+  "roundId": "dev-D-receipt-20260917",
+  "caseId": "W03",
+  "arm": "D",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "在这条回复里用一张静态图展示每月净新增用户：1月120人、2月0人、3月数据缺失、4月-30人、5月80人。我要直接看清月份间的比较，以及0、缺失和负数的区别。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "每月净新增用户（1–5月）",
+      "kind": "svg",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/dev-D-receipt-20260917/W03-D-2/widget-1.source.html",
+      "preview": "results/dev-D-receipt-20260917/W03-D-2/widget-1.html",
+      "sha256": "520ce595b9ebeb992877f4b279675f18723bb8b18ef9055c639b6b26377827f3",
+      "bytes": 5658
+    }
+  ],
+  "final": "上图用零线作基准，柱体方向直接给出月度比较：1月 +120、5月 +80 在零线以上，4月 −30 在零线以下；2月没有任何柱体，只在基线处画了一个已上报的 **0** 标记；3月则是一根带虚线斜纹和问号的空柱，表示数值未知而非 0。所以\"零\"\"缺失\"\"负数\"在形状、颜色和文字标注上三者互不混淆。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_CLzcFKp3eKOmzfdzFZwZ2085",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_42bfYB8GbjEifsZzgIZ81837",
+        "argumentsSha256": "65e09ad1c2476e68f2a0160c84516456f89b132ae1b0a61365a4c29e086a591a",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_G2lzNbNTQguAomyGWN2A8848",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_3ZaZxpFSfklqClaOqbtx8503",
+        "argumentsSha256": "86c246d9c6e15cb4b684626730fde30b769158310e072736280d51d0d7858fba",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/charts.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "0778ef689dea193a21f6f319a3d915e268d184bdd377128fa6a272a4ff8a1d80",
+        "resultSha256": "8fe86526de2bb9c87418d71898dd05a9ddb3a6bcae96685fe9161f6401832d00"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "b28393389ba33ae996895bd33aa42ec7dbd98fdf8633e8f2fb5b1c8da366188d"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "969fa6a57181f3463ce3c5863c50d58d4693fd41ac002507203e2aa93075e93a"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "14666feb810b2f253b98c40f7e6cafb2fb630b0b978bc7e7de67cdd128f11576"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8195,
+    "outputTokens": 6949,
+    "cacheReadTokens": 32128,
+    "cacheWriteTokens": 0,
+    "totalTokens": 47272
+  },
+  "elapsedSeconds": 30.457,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "bd29946086b2db43e94d64f68f61aa617f7d78bbbc86a80e6a82e473567d7b2b",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "5ac96a8fd82beed3277f35e74461323a98d9b250335e02a22b593b895fe53833"
+}

@@ -1,0 +1,364 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "W07-A-1",
+  "caseId": "W07",
+  "scenario": "backoff",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/test-A-frozen-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:12:00.232Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pending",
+      "reason": "Not enough distinct visible retry states to check the sequence.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pending",
+      "reason": "Local actions have not run.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "指数退避演示（示意，不实际发网络请求）\n最多 4 次请求 · 第 3 次成功即停止\n等待推进速度\n快（1 秒等待 ≈ 0.6 秒）\n实时（1 秒 ≈ 1 秒）\n极快（1 秒等待 ≈ 0.2 秒）\n实时走秒\n自动播放\n1\n待定\n2\n待定\n3\n待定\n4\n待定\nt = 0.0 秒\n累计等待\n0.0 秒\n下一次等待\n—\n当前时刻 t\n0.0 秒\n状态\n未开始\n下一步\n重置\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 370,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "等待推进速度",
+        "请求时间线：请求 1 失败，等待 1 秒；请求 2 失败，等待 2 秒；请求 3 成功并停止"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "b5bcb993d45039805f18a63c26641300",
+          "payload": {},
+          "at": 131.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "b5bcb993d45039805f18a63c26641300",
+          "payload": {},
+          "at": 147.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "b5bcb993d45039805f18a63c26641300",
+          "payload": {
+            "height": 370
+          },
+          "at": 147.70000004768372
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 指数退避演示（示意，不实际发网络请求） 最多 4 次请求 · 第 3 次成功即停止 等待推进速度\n- combobox \"等待推进速度\":\n  - option \"快（1 秒等待 ≈ 0.6 秒）\" [selected]\n  - option \"实时（1 秒 ≈ 1 秒）\"\n  - option \"极快（1 秒等待 ≈ 0.2 秒）\"\n- checkbox \"实时走秒\"\n- text: 实时走秒\n- button \"自动播放\"\n- img \"请求时间线：请求 1 失败，等待 1 秒；请求 2 失败，等待 2 秒；请求 3 成功并停止\": 1 待定 2 待定 3 待定 4 待定 t = 0.0 秒\n- text: 累计等待 0.0 秒 下一次等待 — 当前时刻 t 0.0 秒 状态 未开始\n- button \"下一步\"\n- button \"重置\""
+    },
+    {
+      "text": "指数退避演示（示意，不实际发网络请求）\n最多 4 次请求 · 第 3 次成功即停止\n等待推进速度\n快（1 秒等待 ≈ 0.6 秒）\n实时（1 秒 ≈ 1 秒）\n极快（1 秒等待 ≈ 0.2 秒）\n实时走秒\n自动播放\n1\n进行中\n预计失败\n等待 1 秒\n0.0 / 1 秒\n2\n待定\n3\n待定\n4\n待定\nt = 0.0 秒\n累计等待\n0.0 秒\n下一次等待\n1.0 秒（共 1 秒）\n当前时刻 t\n0.0 秒\n状态\n请求 1 进行中（首次）\n下一步\n重置\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 370,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "等待推进速度",
+        "请求时间线：请求 1 失败，等待 1 秒；请求 2 失败，等待 2 秒；请求 3 成功并停止"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "b5bcb993d45039805f18a63c26641300",
+          "payload": {},
+          "at": 131.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "b5bcb993d45039805f18a63c26641300",
+          "payload": {},
+          "at": 147.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "b5bcb993d45039805f18a63c26641300",
+          "payload": {
+            "height": 370
+          },
+          "at": 147.70000004768372
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 指数退避演示（示意，不实际发网络请求） 最多 4 次请求 · 第 3 次成功即停止 等待推进速度\n- combobox \"等待推进速度\" [disabled]:\n  - option \"快（1 秒等待 ≈ 0.6 秒）\" [selected]\n  - option \"实时（1 秒 ≈ 1 秒）\"\n  - option \"极快（1 秒等待 ≈ 0.2 秒）\"\n- checkbox \"实时走秒\"\n- text: 实时走秒\n- button \"自动播放\" [disabled]\n- img \"请求时间线：请求 1 失败，等待 1 秒；请求 2 失败，等待 2 秒；请求 3 成功并停止\": 1 进行中 预计失败 等待 1 秒 0.0 / 1 秒 2 待定 3 待定 4 待定 t = 0.0 秒\n- text: 累计等待 0.0 秒 下一次等待 1.0 秒（共 1 秒） 当前时刻 t 0.0 秒 状态 请求 1 进行中（首次）\n- button \"下一步\" [disabled]\n- button \"重置\""
+    },
+    {
+      "text": "指数退避演示（示意，不实际发网络请求）\n最多 4 次请求 · 第 3 次成功即停止\n等待推进速度\n快（1 秒等待 ≈ 0.6 秒）\n实时（1 秒 ≈ 1 秒）\n极快（1 秒等待 ≈ 0.2 秒）\n实时走秒\n自动播放\n1\n待定\n2\n待定\n3\n待定\n4\n待定\nt = 0.0 秒\n累计等待\n0.0 秒\n下一次等待\n—\n当前时刻 t\n0.0 秒\n状态\n未开始\n下一步\n重置\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 654,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "等待推进速度",
+        "请求时间线：请求 1 失败，等待 1 秒；请求 2 失败，等待 2 秒；请求 3 成功并停止"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "444338d5fc08a6efe235b624d69d1dbd",
+          "payload": {},
+          "at": 1349.6000001430511
+        },
+        {
+          "type": "rendered",
+          "channel": "444338d5fc08a6efe235b624d69d1dbd",
+          "payload": {},
+          "at": 1350.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "444338d5fc08a6efe235b624d69d1dbd",
+          "payload": {
+            "height": 654
+          },
+          "at": 1350.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 指数退避演示（示意，不实际发网络请求） 最多 4 次请求 · 第 3 次成功即停止 等待推进速度\n- combobox \"等待推进速度\":\n  - option \"快（1 秒等待 ≈ 0.6 秒）\" [selected]\n  - option \"实时（1 秒 ≈ 1 秒）\"\n  - option \"极快（1 秒等待 ≈ 0.2 秒）\"\n- checkbox \"实时走秒\"\n- text: 实时走秒\n- button \"自动播放\"\n- img \"请求时间线：请求 1 失败，等待 1 秒；请求 2 失败，等待 2 秒；请求 3 成功并停止\": 1 待定 2 待定 3 待定 4 待定 t = 0.0 秒\n- text: 累计等待 0.0 秒 下一次等待 — 当前时刻 t 0.0 秒 状态 未开始\n- button \"下一步\"\n- button \"重置\""
+    },
+    {
+      "text": "指数退避演示（示意，不实际发网络请求）\n最多 4 次请求 · 第 3 次成功即停止\n等待推进速度\n快（1 秒等待 ≈ 0.6 秒）\n实时（1 秒 ≈ 1 秒）\n极快（1 秒等待 ≈ 0.2 秒）\n实时走秒\n自动播放\n1\n待定\n2\n待定\n3\n待定\n4\n待定\nt = 0.0 秒\n累计等待\n0.0 秒\n下一次等待\n—\n当前时刻 t\n0.0 秒\n状态\n未开始\n下一步\n重置\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 370,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "等待推进速度",
+        "请求时间线：请求 1 失败，等待 1 秒；请求 2 失败，等待 2 秒；请求 3 成功并停止"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "6128af045edd1968ac42d75738d86429",
+          "payload": {},
+          "at": 1945.2000000476837
+        },
+        {
+          "type": "rendered",
+          "channel": "6128af045edd1968ac42d75738d86429",
+          "payload": {},
+          "at": 1946.7999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "6128af045edd1968ac42d75738d86429",
+          "payload": {
+            "height": 370
+          },
+          "at": 1946.7999999523163
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 指数退避演示（示意，不实际发网络请求） 最多 4 次请求 · 第 3 次成功即停止 等待推进速度\n- combobox \"等待推进速度\":\n  - option \"快（1 秒等待 ≈ 0.6 秒）\" [selected]\n  - option \"实时（1 秒 ≈ 1 秒）\"\n  - option \"极快（1 秒等待 ≈ 0.2 秒）\"\n- checkbox \"实时走秒\"\n- text: 实时走秒\n- button \"自动播放\"\n- img \"请求时间线：请求 1 失败，等待 1 秒；请求 2 失败，等待 2 秒；请求 3 成功并停止\": 1 待定 2 待定 3 待定 4 待定 t = 0.0 秒\n- text: 累计等待 0.0 秒 下一次等待 — 当前时刻 t 0.0 秒 状态 未开始\n- button \"下一步\"\n- button \"重置\""
+    },
+    {
+      "text": "指数退避演示（示意，不实际发网络请求）\n最多 4 次请求 · 第 3 次成功即停止\n等待推进速度\n快（1 秒等待 ≈ 0.6 秒）\n实时（1 秒 ≈ 1 秒）\n极快（1 秒等待 ≈ 0.2 秒）\n实时走秒\n自动播放\n1\n待定\n2\n待定\n3\n待定\n4\n待定\nt = 0.0 秒\n累计等待\n0.0 秒\n下一次等待\n—\n当前时刻 t\n0.0 秒\n状态\n未开始\n下一步\n重置\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 654,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "等待推进速度",
+        "请求时间线：请求 1 失败，等待 1 秒；请求 2 失败，等待 2 秒；请求 3 成功并停止"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d8781be50d6d911b1e5c72d0329f7c12",
+          "payload": {},
+          "at": 2542
+        },
+        {
+          "type": "rendered",
+          "channel": "d8781be50d6d911b1e5c72d0329f7c12",
+          "payload": {},
+          "at": 2542.2000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "d8781be50d6d911b1e5c72d0329f7c12",
+          "payload": {
+            "height": 654
+          },
+          "at": 2542.2000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 指数退避演示（示意，不实际发网络请求） 最多 4 次请求 · 第 3 次成功即停止 等待推进速度\n- combobox \"等待推进速度\":\n  - option \"快（1 秒等待 ≈ 0.6 秒）\" [selected]\n  - option \"实时（1 秒 ≈ 1 秒）\"\n  - option \"极快（1 秒等待 ≈ 0.2 秒）\"\n- checkbox \"实时走秒\"\n- text: 实时走秒\n- button \"自动播放\"\n- img \"请求时间线：请求 1 失败，等待 1 秒；请求 2 失败，等待 2 秒；请求 3 成功并停止\": 1 待定 2 待定 3 待定 4 待定 t = 0.0 秒\n- text: 累计等待 0.0 秒 下一次等待 — 当前时刻 t 0.0 秒 状态 未开始\n- button \"下一步\"\n- button \"重置\""
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "b5bcb993d45039805f18a63c26641300",
+      "payload": {},
+      "at": 131.60000014305115
+    },
+    {
+      "type": "rendered",
+      "channel": "b5bcb993d45039805f18a63c26641300",
+      "payload": {},
+      "at": 147.20000004768372
+    },
+    {
+      "type": "resize",
+      "channel": "b5bcb993d45039805f18a63c26641300",
+      "payload": {
+        "height": 370
+      },
+      "at": 147.70000004768372
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "11a3156378f4edce399448f7842c582381e7966d46fce72d5308df342ab47cc0",
+  "previewSha256": "48670c51e342c1bd27e1a9f4c9043adb0b4c593089375c35f40b2333de08fa9b",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

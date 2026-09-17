@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "E01-C-2",
+  "roundId": "dev-C-grounded-20260917",
+  "caseId": "E01",
+  "arm": "C",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "帮我理解一下 TCP 三次握手，为什么要三次？",
+  "expectedRoute": "optional",
+  "widgets": [
+    {
+      "title": "TCP 三次握手：每一步之后双方各确认了什么",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/dev-C-grounded-20260917/E01-C-2/widget-1.source.html",
+      "preview": "results/dev-C-grounded-20260917/E01-C-2/widget-1.html",
+      "sha256": "cc41a4fae173fa66fdd91af7d6d44a445a03ad7848572f025dd01ae1afd626b0",
+      "bytes": 13891
+    }
+  ],
+  "final": "记住一句话就够了：**三次握手不是为了多传一次，而是为了让双方都各自完成两个方向上的确认。**\n\n- **两次不够**——第 2 步之后，只有客户端知道「服务器能发、我能收」。服务器始终不知道自己发出的 SYN+ACK 有没有到达，于是它会在收到 SYN 时就提前分配资源、认定连接建立。一个延迟到达的旧 SYN 就会凭空占用一条半开连接（勾选图中的对比项可看这条路径）。\n- **三次刚好**——加上第 3 个 ACK，服务器才确认「客户端能收、我能发」，四个方向性确认全部到位；同时双方的初始序号 x、y 都已被对方确认，后续数据编号不会错乱。\n- **四次多余**——第 3 步之后已经没有未确认的方向了，再发一条不携带任何新确认信息。\n\n两个容易被追问的细节：SYN 本身会消耗一个序号，所以确认号是 `x+1` / `y+1`；另外如果双方同时主动打开（同时发 SYN），报文会变成四条，这是特例而非常规流程。第 3 次 ACK 通常还能顺带带上首批数据，因此这次往返在实践中并不算纯粹的额外开销。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_l8Mu31sHS1EiBFuxjsnl4671",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_JvXXaKLkKl3xdQztlpeB3051",
+        "argumentsSha256": "8b6a2772c5ef05aa7a67379490b98695928c001262df4b01bf3c0efb0e8a5ff4",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_nPqYfisrPbMUN9LNGs5u5179",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_MsML2j4z7F2hgJU2Hldk4488",
+        "argumentsSha256": "0f3ae76b269390027c74548215b46aae5bdae470a03eb4fc81ef5732821141c5",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/diagrams.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "26916fe9f5dbc4ae81203e343e310a30146003f315a8fb2affc5026bac33cceb",
+        "resultSha256": "32981139069d099b35254251b6e344d70b47211e9fd805c52b4081969a973386"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "3633f2ff752f02cd9d9d152f709793d786ff671a67e52c7fed9844a5ebe5ffe9",
+        "resultSha256": "935c9fc8bb1b1767a59175f957993305ae7e4df5509af9d6fd154e2f3690514f"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "c5506b7d13718e2469b44d2fdb4c8db41298dff5b1c06d25a74a8ef37bdebf98"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "3238eddacd0da2ec217aab8aaa52f79eaf57f822f2c936c0ccde428843964c99"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 18731,
+    "outputTokens": 17155,
+    "cacheReadTokens": 32000,
+    "cacheWriteTokens": 0,
+    "totalTokens": 67886
+  },
+  "elapsedSeconds": 70.807,
+  "sourceHead": "db0399958b07ce2a85088ddc8fcb3c5b49a2cb10",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "730c5257a680c3ff837ff4d5d6ab8cbd024ee76e3c139975da839092cc48b1f7",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "426df773342b98a5312ed0ea02e4acd92f2c884a994ef18801d6825a9b1eadc6"
+}

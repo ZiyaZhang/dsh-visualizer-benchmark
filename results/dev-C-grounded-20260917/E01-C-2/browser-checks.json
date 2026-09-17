@@ -1,0 +1,327 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "E01-C-2",
+  "caseId": "E01",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-C-grounded-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:08:54.157Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "not_applicable",
+      "reason": "No literal label oracle specified.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "TCP 三次握手\n\n逐步查看每条报文之后，客户端和服务器各自确认了什么。\n\n起点\n① SYN\n② SYN+ACK\n③ ACK\n▶ 自动演示\n客户端\n服务器\nCLOSED\nLISTEN\nSYN seq=x\nSYN+ACK seq=y, ack=x+1\nACK ack=y+1\n双方 ESTABLISHED，连接建立\n第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返\n时间从上到下\n信道 客户端 → 服务器\n✓\n服务器确认：客户端能发、我已经收到\n第 1 步\n✓\n客户端确认：服务器收到了我的 SYN\n第 2 步\n信道 服务器 → 客户端\n✓\n客户端确认：服务器能发、我已经收到\n第 2 步\n✓\n服务器确认：客户端收到了我的 SYN\n第 3 步\n\n起点：服务器已被动打开并处于 LISTEN，等待连接；客户端处于 CLOSED。此时双方对彼此一无所知。\n\n四个方向性确认全部亮起，连接才建立。三条报文是最少的：任意一条去掉，都会有一个确认缺位；再来第 4 条也不会带来新的确认信息。\n\n对比：如果只握手两次，会出什么问题？\n客户端 服务器 CLOSED LISTEN SYN  seq=x SYN+ACK  seq=y, ack=x+1 ACK  ack=y+1 双方 ESTABLISHED，连接建立 第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返 时间从上到下",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 868,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "456396f7caceefb18435b0c7261ca272",
+          "payload": {},
+          "at": 68.20000004768372
+        },
+        {
+          "type": "rendered",
+          "channel": "456396f7caceefb18435b0c7261ca272",
+          "payload": {},
+          "at": 89.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "456396f7caceefb18435b0c7261ca272",
+          "payload": {
+            "height": 868
+          },
+          "at": 89.80000019073486
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"TCP 三次握手\" [level=3]\n- paragraph: 逐步查看每条报文之后，客户端和服务器各自确认了什么。\n- group \"握手步骤\":\n  - button \"起点\" [pressed]\n  - button \"① SYN\"\n  - button \"② SYN+ACK\"\n  - button \"③ ACK\"\n  - button \"▶ 自动演示\"\n- img \"TCP 三次握手时序图 客户端与服务器依次交换 SYN、SYN+ACK、ACK 三条报文；到第三步，双方各自对两个方向的收发能力都完成确认，连接建立。\": 客户端 服务器 CLOSED LISTEN SYN seq=x SYN+ACK seq=y, ack=x+1 ACK ack=y+1 双方 ESTABLISHED，连接建立 第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返 时间从上到下\n- text: 信道 客户端 → 服务器 ✓ 服务器确认：客户端能发、我已经收到\n- emphasis: 第 1 步\n- text: ✓ 客户端确认：服务器收到了我的 SYN\n- emphasis: 第 2 步\n- text: 信道 服务器 → 客户端 ✓ 客户端确认：服务器能发、我已经收到\n- emphasis: 第 2 步\n- text: ✓ 服务器确认：客户端收到了我的 SYN\n- emphasis: 第 3 步\n- paragraph:\n  - strong: 起点：\n  - text: 服务器已被动打开并处于 LISTEN，等待连接；客户端处于 CLOSED。此时双方对彼此一无所知。\n- paragraph: 四个方向性确认全部亮起，连接才建立。三条报文是最少的：任意一条去掉，都会有一个确认缺位；再来第 4 条也不会带来新的确认信息。\n- checkbox \"对比：如果只握手两次，会出什么问题？\"\n- text: 对比：如果只握手两次，会出什么问题？"
+    },
+    {
+      "text": "TCP 三次握手\n\n逐步查看每条报文之后，客户端和服务器各自确认了什么。\n\n起点\n① SYN\n② SYN+ACK\n③ ACK\n▶ 自动演示\n客户端\n服务器\nCLOSED\nLISTEN\nSYN seq=x\nSYN+ACK seq=y, ack=x+1\nACK ack=y+1\n双方 ESTABLISHED，连接建立\n第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返\n时间从上到下\n信道 客户端 → 服务器\n✓\n服务器确认：客户端能发、我已经收到\n第 1 步\n✓\n客户端确认：服务器收到了我的 SYN\n第 2 步\n信道 服务器 → 客户端\n✓\n客户端确认：服务器能发、我已经收到\n第 2 步\n✓\n服务器确认：客户端收到了我的 SYN\n第 3 步\n\n起点：服务器已被动打开并处于 LISTEN，等待连接；客户端处于 CLOSED。此时双方对彼此一无所知。\n\n四个方向性确认全部亮起，连接才建立。三条报文是最少的：任意一条去掉，都会有一个确认缺位；再来第 4 条也不会带来新的确认信息。\n\n对比：如果只握手两次，会出什么问题？\n客户端 服务器 CLOSED LISTEN SYN  seq=x SYN+ACK  seq=y, ack=x+1 ACK  ack=y+1 双方 ESTABLISHED，连接建立 第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返 时间从上到下",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 1019,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0d555b58f2ad66c8b27817d5e95a67b5",
+          "payload": {},
+          "at": 681.9000000953674
+        },
+        {
+          "type": "rendered",
+          "channel": "0d555b58f2ad66c8b27817d5e95a67b5",
+          "payload": {},
+          "at": 685.4000000953674
+        },
+        {
+          "type": "resize",
+          "channel": "0d555b58f2ad66c8b27817d5e95a67b5",
+          "payload": {
+            "height": 1019
+          },
+          "at": 685.4000000953674
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- heading \"TCP 三次握手\" [level=3]\n- paragraph: 逐步查看每条报文之后，客户端和服务器各自确认了什么。\n- group \"握手步骤\":\n  - button \"起点\" [pressed]\n  - button \"① SYN\"\n  - button \"② SYN+ACK\"\n  - button \"③ ACK\"\n  - button \"▶ 自动演示\"\n- img \"TCP 三次握手时序图 客户端与服务器依次交换 SYN、SYN+ACK、ACK 三条报文；到第三步，双方各自对两个方向的收发能力都完成确认，连接建立。\": 客户端 服务器 CLOSED LISTEN SYN seq=x SYN+ACK seq=y, ack=x+1 ACK ack=y+1 双方 ESTABLISHED，连接建立 第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返 时间从上到下\n- text: 信道 客户端 → 服务器 ✓ 服务器确认：客户端能发、我已经收到\n- emphasis: 第 1 步\n- text: ✓ 客户端确认：服务器收到了我的 SYN\n- emphasis: 第 2 步\n- text: 信道 服务器 → 客户端 ✓ 客户端确认：服务器能发、我已经收到\n- emphasis: 第 2 步\n- text: ✓ 服务器确认：客户端收到了我的 SYN\n- emphasis: 第 3 步\n- paragraph:\n  - strong: 起点：\n  - text: 服务器已被动打开并处于 LISTEN，等待连接；客户端处于 CLOSED。此时双方对彼此一无所知。\n- paragraph: 四个方向性确认全部亮起，连接才建立。三条报文是最少的：任意一条去掉，都会有一个确认缺位；再来第 4 条也不会带来新的确认信息。\n- checkbox \"对比：如果只握手两次，会出什么问题？\"\n- text: 对比：如果只握手两次，会出什么问题？"
+    },
+    {
+      "text": "TCP 三次握手\n\n逐步查看每条报文之后，客户端和服务器各自确认了什么。\n\n起点\n① SYN\n② SYN+ACK\n③ ACK\n▶ 自动演示\n客户端\n服务器\nCLOSED\nLISTEN\nSYN seq=x\nSYN+ACK seq=y, ack=x+1\nACK ack=y+1\n双方 ESTABLISHED，连接建立\n第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返\n时间从上到下\n信道 客户端 → 服务器\n✓\n服务器确认：客户端能发、我已经收到\n第 1 步\n✓\n客户端确认：服务器收到了我的 SYN\n第 2 步\n信道 服务器 → 客户端\n✓\n客户端确认：服务器能发、我已经收到\n第 2 步\n✓\n服务器确认：客户端收到了我的 SYN\n第 3 步\n\n起点：服务器已被动打开并处于 LISTEN，等待连接；客户端处于 CLOSED。此时双方对彼此一无所知。\n\n四个方向性确认全部亮起，连接才建立。三条报文是最少的：任意一条去掉，都会有一个确认缺位；再来第 4 条也不会带来新的确认信息。\n\n对比：如果只握手两次，会出什么问题？\n客户端 服务器 CLOSED LISTEN SYN  seq=x SYN+ACK  seq=y, ack=x+1 ACK  ack=y+1 双方 ESTABLISHED，连接建立 第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返 时间从上到下",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 868,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "c56700a5999821a4a65487c3473e1dd1",
+          "payload": {},
+          "at": 1267.9000000953674
+        },
+        {
+          "type": "rendered",
+          "channel": "c56700a5999821a4a65487c3473e1dd1",
+          "payload": {},
+          "at": 1270.5
+        },
+        {
+          "type": "resize",
+          "channel": "c56700a5999821a4a65487c3473e1dd1",
+          "payload": {
+            "height": 868
+          },
+          "at": 1270.5
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- heading \"TCP 三次握手\" [level=3]\n- paragraph: 逐步查看每条报文之后，客户端和服务器各自确认了什么。\n- group \"握手步骤\":\n  - button \"起点\" [pressed]\n  - button \"① SYN\"\n  - button \"② SYN+ACK\"\n  - button \"③ ACK\"\n  - button \"▶ 自动演示\"\n- img \"TCP 三次握手时序图 客户端与服务器依次交换 SYN、SYN+ACK、ACK 三条报文；到第三步，双方各自对两个方向的收发能力都完成确认，连接建立。\": 客户端 服务器 CLOSED LISTEN SYN seq=x SYN+ACK seq=y, ack=x+1 ACK ack=y+1 双方 ESTABLISHED，连接建立 第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返 时间从上到下\n- text: 信道 客户端 → 服务器 ✓ 服务器确认：客户端能发、我已经收到\n- emphasis: 第 1 步\n- text: ✓ 客户端确认：服务器收到了我的 SYN\n- emphasis: 第 2 步\n- text: 信道 服务器 → 客户端 ✓ 客户端确认：服务器能发、我已经收到\n- emphasis: 第 2 步\n- text: ✓ 服务器确认：客户端收到了我的 SYN\n- emphasis: 第 3 步\n- paragraph:\n  - strong: 起点：\n  - text: 服务器已被动打开并处于 LISTEN，等待连接；客户端处于 CLOSED。此时双方对彼此一无所知。\n- paragraph: 四个方向性确认全部亮起，连接才建立。三条报文是最少的：任意一条去掉，都会有一个确认缺位；再来第 4 条也不会带来新的确认信息。\n- checkbox \"对比：如果只握手两次，会出什么问题？\"\n- text: 对比：如果只握手两次，会出什么问题？"
+    },
+    {
+      "text": "TCP 三次握手\n\n逐步查看每条报文之后，客户端和服务器各自确认了什么。\n\n起点\n① SYN\n② SYN+ACK\n③ ACK\n▶ 自动演示\n客户端\n服务器\nCLOSED\nLISTEN\nSYN seq=x\nSYN+ACK seq=y, ack=x+1\nACK ack=y+1\n双方 ESTABLISHED，连接建立\n第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返\n时间从上到下\n信道 客户端 → 服务器\n✓\n服务器确认：客户端能发、我已经收到\n第 1 步\n✓\n客户端确认：服务器收到了我的 SYN\n第 2 步\n信道 服务器 → 客户端\n✓\n客户端确认：服务器能发、我已经收到\n第 2 步\n✓\n服务器确认：客户端收到了我的 SYN\n第 3 步\n\n起点：服务器已被动打开并处于 LISTEN，等待连接；客户端处于 CLOSED。此时双方对彼此一无所知。\n\n四个方向性确认全部亮起，连接才建立。三条报文是最少的：任意一条去掉，都会有一个确认缺位；再来第 4 条也不会带来新的确认信息。\n\n对比：如果只握手两次，会出什么问题？\n客户端 服务器 CLOSED LISTEN SYN  seq=x SYN+ACK  seq=y, ack=x+1 ACK  ack=y+1 双方 ESTABLISHED，连接建立 第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返 时间从上到下",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 1019,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "握手步骤"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "e93ef2ce3d9e361fc03d4a626b73d375",
+          "payload": {},
+          "at": 1840.4000000953674
+        },
+        {
+          "type": "rendered",
+          "channel": "e93ef2ce3d9e361fc03d4a626b73d375",
+          "payload": {},
+          "at": 1843.8000001907349
+        },
+        {
+          "type": "resize",
+          "channel": "e93ef2ce3d9e361fc03d4a626b73d375",
+          "payload": {
+            "height": 1019
+          },
+          "at": 1843.8000001907349
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- heading \"TCP 三次握手\" [level=3]\n- paragraph: 逐步查看每条报文之后，客户端和服务器各自确认了什么。\n- group \"握手步骤\":\n  - button \"起点\" [pressed]\n  - button \"① SYN\"\n  - button \"② SYN+ACK\"\n  - button \"③ ACK\"\n  - button \"▶ 自动演示\"\n- img \"TCP 三次握手时序图 客户端与服务器依次交换 SYN、SYN+ACK、ACK 三条报文；到第三步，双方各自对两个方向的收发能力都完成确认，连接建立。\": 客户端 服务器 CLOSED LISTEN SYN seq=x SYN+ACK seq=y, ack=x+1 ACK ack=y+1 双方 ESTABLISHED，连接建立 第 3 次 ACK 还可以顺带携带数据，不会浪费一次往返 时间从上到下\n- text: 信道 客户端 → 服务器 ✓ 服务器确认：客户端能发、我已经收到\n- emphasis: 第 1 步\n- text: ✓ 客户端确认：服务器收到了我的 SYN\n- emphasis: 第 2 步\n- text: 信道 服务器 → 客户端 ✓ 客户端确认：服务器能发、我已经收到\n- emphasis: 第 2 步\n- text: ✓ 服务器确认：客户端收到了我的 SYN\n- emphasis: 第 3 步\n- paragraph:\n  - strong: 起点：\n  - text: 服务器已被动打开并处于 LISTEN，等待连接；客户端处于 CLOSED。此时双方对彼此一无所知。\n- paragraph: 四个方向性确认全部亮起，连接才建立。三条报文是最少的：任意一条去掉，都会有一个确认缺位；再来第 4 条也不会带来新的确认信息。\n- checkbox \"对比：如果只握手两次，会出什么问题？\"\n- text: 对比：如果只握手两次，会出什么问题？"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "456396f7caceefb18435b0c7261ca272",
+      "payload": {},
+      "at": 68.20000004768372
+    },
+    {
+      "type": "rendered",
+      "channel": "456396f7caceefb18435b0c7261ca272",
+      "payload": {},
+      "at": 89.10000014305115
+    },
+    {
+      "type": "resize",
+      "channel": "456396f7caceefb18435b0c7261ca272",
+      "payload": {
+        "height": 868
+      },
+      "at": 89.80000019073486
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "cc41a4fae173fa66fdd91af7d6d44a445a03ad7848572f025dd01ae1afd626b0",
+  "previewSha256": "10eacd980b7ab5b9af8d8a47869a095995ab0ce7e3a03f38978ea1c1640940cf",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

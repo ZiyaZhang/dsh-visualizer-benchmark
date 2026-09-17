@@ -1,5 +1,6 @@
 {
   "schemaVersion": 2,
+  "visualSettleMs": 500,
   "trialId": "E01-B-2",
   "caseId": "E01",
   "scenario": "static",
@@ -8,7 +9,7 @@
   "resultSeq": 52,
   "casesPath": "results/dev-B-connected-20260917/cases.json",
   "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
-  "collectedAt": "2026-09-17T16:45:16.017Z",
+  "collectedAt": "2026-09-17T18:36:15.671Z",
   "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
   "checks": {
     "render": {
@@ -111,23 +112,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+          "channel": "21ce89a5fa12883f6d1a084d358e65b5",
           "payload": {},
-          "at": 51
+          "at": 141
         },
         {
           "type": "rendered",
-          "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+          "channel": "21ce89a5fa12883f6d1a084d358e65b5",
           "payload": {},
-          "at": 91.70000004768372
+          "at": 289.2999999523163
         },
         {
           "type": "resize",
-          "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+          "channel": "21ce89a5fa12883f6d1a084d358e65b5",
           "payload": {
             "height": 731
           },
-          "at": 92.59999990463257
+          "at": 289.2999999523163
         }
       ],
       "name": "initial",
@@ -151,23 +152,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "e329e8267207cf93e20a689f2c4f0b5a",
+          "channel": "97a7d563e9439b721c95c5f00f9c21ee",
           "payload": {},
-          "at": 177.59999990463257
+          "at": 877.2999999523163
         },
         {
           "type": "rendered",
-          "channel": "e329e8267207cf93e20a689f2c4f0b5a",
+          "channel": "97a7d563e9439b721c95c5f00f9c21ee",
           "payload": {},
-          "at": 181.59999990463257
+          "at": 880.7999999523163
         },
         {
           "type": "resize",
-          "channel": "e329e8267207cf93e20a689f2c4f0b5a",
+          "channel": "97a7d563e9439b721c95c5f00f9c21ee",
           "payload": {
             "height": 724
           },
-          "at": 181.89999985694885
+          "at": 880.7999999523163
         }
       ],
       "name": "initial",
@@ -191,23 +192,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "4109f18944f10d6cf0754c8cda30b1d8",
+          "channel": "4b15bb1a98bd0d343b20ef0c642c9c73",
           "payload": {},
-          "at": 253.39999985694885
+          "at": 1444.2999999523163
         },
         {
           "type": "rendered",
-          "channel": "4109f18944f10d6cf0754c8cda30b1d8",
+          "channel": "4b15bb1a98bd0d343b20ef0c642c9c73",
           "payload": {},
-          "at": 256.89999985694885
+          "at": 1448.2000000476837
         },
         {
           "type": "resize",
-          "channel": "4109f18944f10d6cf0754c8cda30b1d8",
+          "channel": "4b15bb1a98bd0d343b20ef0c642c9c73",
           "payload": {
             "height": 731
           },
-          "at": 256.89999985694885
+          "at": 1448.2000000476837
         }
       ],
       "name": "initial",
@@ -231,23 +232,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "235680fe8c9b40ee4df3378a020539d5",
+          "channel": "e968c09106682d4735fc160c318533a5",
           "payload": {},
-          "at": 316
+          "at": 2016.7000000476837
         },
         {
           "type": "rendered",
-          "channel": "235680fe8c9b40ee4df3378a020539d5",
+          "channel": "e968c09106682d4735fc160c318533a5",
           "payload": {},
-          "at": 320.2000000476837
+          "at": 2023
         },
         {
           "type": "resize",
-          "channel": "235680fe8c9b40ee4df3378a020539d5",
+          "channel": "e968c09106682d4735fc160c318533a5",
           "payload": {
             "height": 724
           },
-          "at": 320.2000000476837
+          "at": 2023
         }
       ],
       "name": "initial",
@@ -259,23 +260,23 @@
   "messages": [
     {
       "type": "ready",
-      "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+      "channel": "21ce89a5fa12883f6d1a084d358e65b5",
       "payload": {},
-      "at": 51
+      "at": 141
     },
     {
       "type": "rendered",
-      "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+      "channel": "21ce89a5fa12883f6d1a084d358e65b5",
       "payload": {},
-      "at": 91.70000004768372
+      "at": 289.2999999523163
     },
     {
       "type": "resize",
-      "channel": "6f609ab120bbaa77794f5d1cb11a17f4",
+      "channel": "21ce89a5fa12883f6d1a084d358e65b5",
       "payload": {
         "height": 731
       },
-      "at": 92.59999990463257
+      "at": 289.2999999523163
     }
   ],
   "console": [],
@@ -287,11 +288,48 @@
   "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
   "rendererHashKind": "recorded trial renderer source hash",
   "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
-  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
-  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
   "kind": "html",
   "sandbox": "allow-scripts",
   "playwrightVersion": "1.61.1",
   "networkRequests": [],
-  "browserVersion": "149.0.7827.55"
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
 }

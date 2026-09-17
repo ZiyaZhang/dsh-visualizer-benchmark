@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 2,
+  "id": "N04-A-2",
+  "roundId": "test-A-frozen-20260917",
+  "caseId": "N04",
+  "arm": "A",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "请在当前工作目录创建一份可保存的 sales.svg，内容是A=3、B=5的静态条形图，并给我文件路径，我要放到文档里。",
+  "expectedRoute": "file",
+  "widgets": [],
+  "final": "I'll create the SVG file directly — this is a persistent file deliverable, so no temporary inline widget is needed.\n\n已创建，文件路径：\n\n```\n[private path]/test-A-frozen-20260917/trials/N04-A-2/workspace/sales.svg\n```\n\n说明：\n- 纯静态 SVG（无脚本、无外部字体/图片依赖），XML 校验通过，可直接嵌入文档或转成 PNG/PDF。\n- 尺寸 `400×300`，含标题 “Sales”、0–5 的网格线与刻度、A=3（蓝色）与 B=5（橙色）两根条形，并标注了数值。\n- 若放入 Markdown 文档，可用：`![Sales](sales.svg)`；若放 HTML，可用 `<img src=\"sales.svg\" alt=\"Sales bar chart\">`。\n\n需要改成别的标题、配色、横向条形图，或换成别的尺寸/透明背景，告诉我即可。",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "No inline widget attempt; verify the requested delivery form with check-dsh.py"
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case evaluates routing only"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "write",
+        "loggedName": "write",
+        "callSeq": 19,
+        "callId": "call_00_beo3OJESRTjoYqGfeIkV6937",
+        "argumentsSha256": "b880716aa61d8b68459a154343edae69f518fd746513fbf232849e41352e81cb",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 25,
+        "callId": "call_00_H9z3sOQ7IYpvfkqSecnz7137",
+        "argumentsSha256": "ec9e58a12bfa05b5b722fea957b7ca16ba3a2e55c04379aca416ac614a6c234b",
+        "wrapped": false,
+        "resultSeq": 26,
+        "error": false
+      }
+    ],
+    "referencesRead": [],
+    "skillLoads": [],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "3198dde89909520a0892de3533a59bb59bc28090420d89505d0d45c7ff0b6104"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 7352,
+    "outputTokens": 2030,
+    "cacheReadTokens": 18816,
+    "cacheWriteTokens": 0,
+    "totalTokens": 28198
+  },
+  "elapsedSeconds": 10.521,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "a5cba872cd41f6af27a02016b8ebb4fd93a2135b23930e41dfa583a7ba038858",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [
+    {
+      "path": "sales.svg",
+      "beforeSha256": null,
+      "afterSha256": "5b871db3615f458e394630dba4daf81e0319911c6573e755aa6e62c9a987ee1f"
+    }
+  ],
+  "artifactSetSha256": "574808b2377c0fb981263d71bdf123e283f0e4df48ee7174bc51566710b63502"
+}

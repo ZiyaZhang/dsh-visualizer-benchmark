@@ -1,0 +1,164 @@
+{
+  "scope": "Isolated unchanged source, explicit reviewer operations; not Host delivery.",
+  "states": [
+    {
+      "action": "initial",
+      "text": "沿时间轴依次交换三个报文，右侧矩阵显示每一步之后双方各自“确认”了什么\n三次握手\n如果只有两次？\n客户端\n服务端\nCLOSED\nLISTEN\n① SYN　seq=x\n「我能发，你能收吗？」\n② SYN + ACK　seq=y, ack=x+1\n「我能发也能收，你能收吗？」\n③ ACK　ack=y+1\n「收到，我也能收」\n连接建立：双方 ESTABLISHED，可双向传数据\n▶ 播放\n0 初始\n1 SYN\n2 SYN+ACK\n3 ACK\n0 · 初始\n客户端认为\n自己能发\n? 未知\n自己能收\n? 未知\n对方能发\n? 未知\n对方能收\n? 未知\n服务端认为\n自己能发\n? 未知\n自己能收\n? 未知\n对方能发\n? 未知\n对方能收\n? 未知\n\n还没发出任何报文：双方对彼此一无所知。",
+      "controls": [
+        {
+          "text": "三次握手",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "如果只有两次？",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "▶ 播放",
+          "id": "twPlay",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "握手步骤",
+          "id": "twStep",
+          "disabled": false,
+          "value": "0",
+          "checked": false
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "a5ef853e6ad9dd24853db0066bed2482",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "a5ef853e6ad9dd24853db0066bed2482",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "a5ef853e6ad9dd24853db0066bed2482",
+          "type": "resize",
+          "payload": {
+            "height": 704
+          }
+        }
+      ]
+    },
+    {
+      "action": "#twStep: 3",
+      "text": "沿时间轴依次交换三个报文，右侧矩阵显示每一步之后双方各自“确认”了什么\n三次握手\n如果只有两次？\n客户端\n服务端\nESTABLISHED\nESTABLISHED\n① SYN　seq=x\n「我能发，你能收吗？」\n② SYN + ACK　seq=y, ack=x+1\n「我能发也能收，你能收吗？」\n③ ACK　ack=y+1\n「收到，我也能收」\n连接建立：双方 ESTABLISHED，可双向传数据\n▶ 播放\n0 初始\n1 SYN\n2 SYN+ACK\n3 ACK\n3 · ACK\n客户端认为\n自己能发\n✓ 确认\n自己能收\n✓ 确认\n对方能发\n✓ 确认\n对方能收\n✓ 确认\n服务端认为\n自己能发\n✓ 确认\n自己能收\n✓ 确认\n对方能发\n✓ 确认\n对方能收\n✓ 确认\n\n第三次 ACK 到达，服务端补上最后一格「客户端能收」，双方都进入 ESTABLISHED。",
+      "controls": [
+        {
+          "text": "三次握手",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "如果只有两次？",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "▶ 播放",
+          "id": "twPlay",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "握手步骤",
+          "id": "twStep",
+          "disabled": false,
+          "value": "3",
+          "checked": false
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "a5ef853e6ad9dd24853db0066bed2482",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "a5ef853e6ad9dd24853db0066bed2482",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "a5ef853e6ad9dd24853db0066bed2482",
+          "type": "resize",
+          "payload": {
+            "height": 704
+          }
+        }
+      ]
+    },
+    {
+      "action": "#twStep: 0",
+      "text": "沿时间轴依次交换三个报文，右侧矩阵显示每一步之后双方各自“确认”了什么\n三次握手\n如果只有两次？\n客户端\n服务端\nCLOSED\nLISTEN\n① SYN　seq=x\n「我能发，你能收吗？」\n② SYN + ACK　seq=y, ack=x+1\n「我能发也能收，你能收吗？」\n③ ACK　ack=y+1\n「收到，我也能收」\n连接建立：双方 ESTABLISHED，可双向传数据\n▶ 播放\n0 初始\n1 SYN\n2 SYN+ACK\n3 ACK\n0 · 初始\n客户端认为\n自己能发\n? 未知\n自己能收\n? 未知\n对方能发\n? 未知\n对方能收\n? 未知\n服务端认为\n自己能发\n? 未知\n自己能收\n? 未知\n对方能发\n? 未知\n对方能收\n? 未知\n\n还没发出任何报文：双方对彼此一无所知。",
+      "controls": [
+        {
+          "text": "三次握手",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "如果只有两次？",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "▶ 播放",
+          "id": "twPlay",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "握手步骤",
+          "id": "twStep",
+          "disabled": false,
+          "value": "0",
+          "checked": false
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "a5ef853e6ad9dd24853db0066bed2482",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "a5ef853e6ad9dd24853db0066bed2482",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "a5ef853e6ad9dd24853db0066bed2482",
+          "type": "resize",
+          "payload": {
+            "height": 704
+          }
+        }
+      ]
+    }
+  ]
+}

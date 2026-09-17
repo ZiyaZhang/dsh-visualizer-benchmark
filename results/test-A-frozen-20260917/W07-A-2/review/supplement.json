@@ -1,0 +1,149 @@
+{
+  "scope": "Isolated unchanged source, explicit reviewer operations; not Host delivery.",
+  "states": [
+    {
+      "action": "initial",
+      "text": "发起第 1 次请求\n重置\n\n尚未发起请求。最多 4 次，第 3 次成功后停止。\n\n第 1 次\n待发起\n未发送（示意）\n第 2 次\n待发起\n未发送（示意）\n第 3 次\n待发起\n未发送（示意）\n第 4 次\n待发起\n备用：前 3 次都失败才会用到\n退避等待时间轴（上限 1s + 2s = 3s）\n阶段：待开始\n0 秒\n1 秒\n3 秒\n本次结果\n—\n下一次等待\n—\n累计等待\n0.0 秒\n\n示意演示，不实际发送网络请求。规则：失败后按 1s → 2s 翻倍退避，最多 4 次；第 3 次成功立即停止。",
+      "controls": [
+        {
+          "text": "发起第 1 次请求",
+          "id": "ebdStep",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "ebdReset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "resize",
+          "payload": {
+            "height": 341
+          }
+        }
+      ]
+    },
+    {
+      "action": "#ebdStep: advance",
+      "text": "已完成（第 3 次成功）\n重置\n\n第 3 次请求成功，停止重试：共请求 3 次，累计等待 3.0 秒。\n\n第 1 次\n失败\n请求超时（示意），未成功\n已等待 1 秒\n第 2 次\n失败\n请求超时（示意），未成功\n已等待 2 秒\n第 3 次\n成功\n第 3 次请求成功\n成功 → 停止重试\n第 4 次\n未使用\n第 3 次已成功，无需第 4 次\n退避等待时间轴（上限 1s + 2s = 3s）\n阶段：已结束：成功停止\n0 秒\n1 秒\n3 秒\n本次结果\n第 3 次请求 → 成功\n下一次等待\n—（不再重试）\n累计等待\n3.0 秒\n\n示意演示，不实际发送网络请求。规则：失败后按 1s → 2s 翻倍退避，最多 4 次；第 3 次成功立即停止。",
+      "controls": [
+        {
+          "text": "已完成（第 3 次成功）",
+          "id": "ebdStep",
+          "disabled": true,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "ebdReset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "resize",
+          "payload": {
+            "height": 341
+          }
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "resize",
+          "payload": {
+            "height": 339
+          }
+        }
+      ]
+    },
+    {
+      "action": "#ebdReset: 1",
+      "text": "发起第 1 次请求\n重置\n\n尚未发起请求。最多 4 次，第 3 次成功后停止。\n\n第 1 次\n待发起\n未发送（示意）\n第 2 次\n待发起\n未发送（示意）\n第 3 次\n待发起\n未发送（示意）\n第 4 次\n待发起\n备用：前 3 次都失败才会用到\n退避等待时间轴（上限 1s + 2s = 3s）\n阶段：待开始\n0 秒\n1 秒\n3 秒\n本次结果\n—\n下一次等待\n—\n累计等待\n0.0 秒\n\n示意演示，不实际发送网络请求。规则：失败后按 1s → 2s 翻倍退避，最多 4 次；第 3 次成功立即停止。",
+      "controls": [
+        {
+          "text": "发起第 1 次请求",
+          "id": "ebdStep",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "ebdReset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "resize",
+          "payload": {
+            "height": 341
+          }
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "resize",
+          "payload": {
+            "height": 339
+          }
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f5cc2c92b6ebb598a4bfee1bba01bf3a",
+          "type": "resize",
+          "payload": {
+            "height": 341
+          }
+        }
+      ]
+    }
+  ]
+}

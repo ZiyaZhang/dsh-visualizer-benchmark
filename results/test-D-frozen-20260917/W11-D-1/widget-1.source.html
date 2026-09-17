@@ -1,0 +1,164 @@
+<div class="fw">
+  <style>
+    .fw{font-family:inherit;color:var(--dsw-alias-label-primary,#1a1a1a);display:flex;flex-direction:column;gap:12px;max-width:420px;min-width:0}
+    .fw *{box-sizing:border-box}
+    .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .trigger{font:inherit;font-size:13px;padding:7px 14px;border-radius:8px;border:1px solid var(--dsw-alias-border-l2,rgba(0,0,0,.18));background:var(--dsw-alias-bg-layer-1,#fff);color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+    .trigger:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.05))}
+    .trigger .dot{width:6px;height:6px;border-radius:50%;background:var(--dsw-alias-brand-primary,#2563eb);display:none}
+    .trigger.has .dot{display:block}
+    .note{font-size:12px;color:var(--dsw-alias-label-tertiary,#9aa1ab)}
+    .popup{background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.1));border-radius:12px;box-shadow:0 12px 28px rgba(15,23,42,.14);padding:16px;display:flex;flex-direction:column;gap:16px;animation:fwIn .16s ease-out}
+    @keyframes fwIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+    .popup[hidden]{display:none}
+    .head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .head h3{margin:0;font-size:15px;font-weight:600}
+    .x{border:0;background:transparent;color:var(--dsw-alias-label-secondary,#6b7280);font-size:18px;line-height:1;padding:2px 6px;border-radius:6px;cursor:pointer}
+    .x:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.06))}
+    .field{display:flex;flex-direction:column;gap:7px;min-width:0}
+    .lab{font-size:12px;font-weight:600;color:var(--dsw-alias-label-secondary,#5b6472)}
+    .seg{display:flex;gap:4px;padding:3px;border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.1));border-radius:9px;background:var(--dsw-alias-bg-layer-2,rgba(0,0,0,.03))}
+    .seg button{flex:1;min-width:0;font:inherit;font-size:13px;padding:7px 8px;border:0;border-radius:7px;background:transparent;color:var(--dsw-alias-label-secondary,#5b6472);cursor:pointer}
+    .seg button[aria-checked="true"]{background:var(--dsw-alias-bg-layer-1,#fff);color:var(--dsw-alias-brand-primary,#2563eb);font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.12)}
+    .seg button:focus-visible{outline:2px solid var(--dsw-alias-brand-primary,#2563eb);outline-offset:1px}
+    input[type=text]{font:inherit;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--dsw-alias-border-l2,rgba(0,0,0,.18));background:var(--dsw-alias-bg-base,transparent);color:inherit;min-width:0;width:100%}
+    input[type=text]:focus-visible{outline:2px solid var(--dsw-alias-brand-primary,#2563eb);outline-offset:0}
+    .hint{margin:0;font-size:12px;color:var(--dsw-alias-label-tertiary,#9aa1ab);min-height:16px}
+    .hint.warn{color:var(--dsw-alias-state-error-primary,#d64545)}
+    .foot{display:flex;justify-content:flex-end;gap:8px;border-top:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.1));padding-top:13px}
+    .btn{font:inherit;font-size:13px;padding:8px 16px;border-radius:8px;cursor:pointer;border:1px solid transparent}
+    .btn.ghost{background:transparent;border-color:var(--dsw-alias-border-l2,rgba(0,0,0,.18));color:var(--dsw-alias-label-secondary,#5b6472)}
+    .btn.ghost:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.05))}
+    .btn.primary{background:var(--dsw-alias-button-primary-fill,#2563eb);color:var(--dsw-alias-label-primary-inverted,#fff);font-weight:600}
+    .btn.primary:disabled{opacity:.45;cursor:not-allowed}
+    .summary{background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.1));border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:11px;animation:fwIn .16s ease-out}
+    .summary[hidden]{display:none}
+    .srow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px}
+    .tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--dsw-alias-interactive-bg-active,rgba(37,99,235,.12));color:var(--dsw-alias-brand-primary,#2563eb)}
+    .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px}
+    .kv dt{color:var(--dsw-alias-label-tertiary,#9aa1ab)}
+    .kv dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+    .altered{border-color:var(--dsw-alias-brand-primary,#2563eb);border-style:dashed}
+    @media (prefers-reduced-motion:reduce){.popup,.summary{animation:none}}
+  </style>
+
+  <div class="toolbar">
+    <button id="fwTrigger" class="trigger" aria-haspopup="dialog" aria-expanded="true" aria-controls="fwPopup">筛选<span class="dot" aria-hidden="true"></span></button>
+    <span class="note">交互原型 · 仅本地演示</span>
+  </div>
+
+  <div id="fwPopup" class="popup" role="dialog" aria-labelledby="fwTitle">
+    <div class="head">
+      <h3 id="fwTitle">筛选</h3>
+      <button id="fwClose" class="x" type="button" aria-label="关闭筛选">×</button>
+    </div>
+
+    <div class="field">
+      <span class="lab" id="fwStatusLab">状态</span>
+      <div class="seg" role="radiogroup" aria-labelledby="fwStatusLab" id="fwSeg">
+        <button type="button" role="radio" aria-checked="true" data-status="进行中">进行中</button>
+        <button type="button" role="radio" aria-checked="false" data-status="已完成">已完成</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="lab" for="fwOwner">负责人</label>
+      <input id="fwOwner" type="text" placeholder="输入负责人姓名" autocomplete="off" aria-describedby="fwOwnerHint">
+      <p id="fwOwnerHint" class="hint">负责人为空时无法应用</p>
+    </div>
+
+    <div class="foot">
+      <button id="fwReset" class="btn ghost" type="button">重置</button>
+      <button id="fwApply" class="btn primary" type="button" disabled>应用</button>
+    </div>
+  </div>
+
+  <div id="fwSummary" class="summary" role="status" aria-live="polite" hidden>
+    <div class="srow"><span class="tag">已应用</span><span id="fwCount">1 个筛选条件</span></div>
+    <dl class="kv">
+      <dt>状态</dt><dd id="fwOutStatus">—</dd>
+      <dt>负责人</dt><dd id="fwOutOwner">—</dd>
+    </dl>
+    <div class="foot" style="padding-top:4px;border-top:0">
+      <button id="fwEdit" class="btn ghost" type="button">修改筛选</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var popup=document.getElementById('fwPopup'),
+      trigger=document.getElementById('fwTrigger'),
+      closeBtn=document.getElementById('fwClose'),
+      seg=document.getElementById('fwSeg'),
+      owner=document.getElementById('fwOwner'),
+      hint=document.getElementById('fwOwnerHint'),
+      apply=document.getElementById('fwApply'),
+      reset=document.getElementById('fwReset'),
+      summary=document.getElementById('fwSummary'),
+      outStatus=document.getElementById('fwOutStatus'),
+      outOwner=document.getElementById('fwOutOwner'),
+      count=document.getElementById('fwCount'),
+      edit=document.getElementById('fwEdit');
+
+  var state={status:'进行中',owner:''};
+
+  function sync(){
+    state.owner=owner.value.trim();
+    var ok=state.owner.length>0;
+    apply.disabled=!ok;
+    if(!ok){hint.textContent=owner.value.length?'负责人不能只包含空格':'负责人为空时无法应用';hint.className='hint warn';}
+    else{hint.textContent='将按「'+state.status+' · '+state.owner+'」筛选';hint.className='hint';}
+  }
+  function setStatus(v){
+    state.status=v;
+    Array.prototype.forEach.call(seg.querySelectorAll('button'),function(b){
+      var on=b.getAttribute('data-status')===v;
+      b.setAttribute('aria-checked',on?'true':'false');
+      b.tabIndex=on?0:-1;
+    });
+    sync();
+  }
+  function open(){
+    popup.hidden=false;summary.hidden=true;
+    trigger.setAttribute('aria-expanded','true');
+    owner.focus();
+  }
+  function hide(){
+    popup.hidden=true;trigger.setAttribute('aria-expanded','false');
+    trigger.focus();
+  }
+  function showSummary(){
+    outStatus.textContent=state.status;
+    outOwner.textContent=state.owner;
+    count.textContent='1 个筛选条件';
+    popup.hidden=true;summary.hidden=false;
+    trigger.setAttribute('aria-expanded','false');
+    trigger.classList.add('has');
+    summary.classList.add('altered');
+    setTimeout(function(){summary.classList.remove('altered');},900);
+    edit.focus();
+  }
+
+  seg.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-status]'); if(b) setStatus(b.getAttribute('data-status'));
+  });
+  seg.addEventListener('keydown',function(e){
+    if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+    e.preventDefault();
+    var next=state.status==='进行中'?'已完成':'进行中';
+    setStatus(next);
+    seg.querySelector('button[data-status="'+next+'"]').focus();
+  });
+  owner.addEventListener('input',sync);
+  owner.addEventListener('keydown',function(e){if(e.key==='Enter'&&!apply.disabled)apply.click();});
+  apply.addEventListener('click',function(){ if(!apply.disabled) {state.owner=owner.value.trim(); showSummary();} });
+  reset.addEventListener('click',function(){ owner.value=''; setStatus('进行中'); owner.focus(); });
+  trigger.addEventListener('click',function(){ popup.hidden?open():hide(); });
+  closeBtn.addEventListener('click',function(){ if(!summary.hidden)summary.hidden=true; popup.hidden=true; trigger.setAttribute('aria-expanded','false'); trigger.focus(); });
+  edit.addEventListener('click',open);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!popup.hidden) {popup.hidden=true;trigger.setAttribute('aria-expanded','false');trigger.focus();} });
+
+  setStatus('进行中');
+})();
+</script>

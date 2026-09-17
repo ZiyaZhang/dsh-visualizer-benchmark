@@ -1,0 +1,329 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><div class="ebd" id="ebdRoot" role="group" aria-label="指数退避重试演示：最多 4 次请求，第 3 次成功后停止">
+  <style>
+    .ebd{display:flex;flex-direction:column;gap:12px;font:inherit;font-size:13.5px;line-height:1.45;color:var(--dsw-alias-label-primary,inherit)}
+    .ebd .num{font-variant-numeric:tabular-nums}
+    .ebd-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+    .ebd-btns{display:flex;gap:8px;flex:0 0 auto}
+    #ebdStep{background:var(--dsw-alias-button-primary-fill,var(--dsw-alias-brand-primary,#3b6fe0));color:var(--dsw-alias-label-primary-inverted,#fff);border:0;border-radius:8px;padding:7px 13px;font:inherit;font-weight:600;cursor:pointer}
+    #ebdStep:disabled{opacity:.55;cursor:default}
+    #ebdReset{background:transparent;color:var(--dsw-alias-label-secondary,inherit);border:1px solid var(--dsw-alias-border-l1,rgba(127,127,127,.4));border-radius:8px;padding:7px 13px;font:inherit;cursor:pointer}
+    #ebdReset:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(127,127,127,.12))}
+    .ebd-status{flex:1 1 200px;min-width:0;margin:0;font-size:12.5px;color:var(--dsw-alias-label-secondary,#6b6b6b)}
+    .ebd-rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:8px}
+    .slot{min-width:0;display:flex;flex-direction:column;gap:6px;padding:9px 10px;border-radius:10px;background:var(--dsw-alias-bg-layer-2,rgba(127,127,127,.09));border:1px solid var(--dsw-alias-border-l1,rgba(127,127,127,.25));transition:border-color .2s,opacity .2s}
+    .slot.pending{opacity:.6}
+    .slot.unused{opacity:.45;border-style:dashed}
+    .slot.fail{border-color:var(--ebd-fail)}
+    .slot.ok{border-color:var(--ebd-ok)}
+    .ebd{--ebd-fail:var(--dsw-alias-state-error-primary,#d64545);--ebd-ok:var(--dsw-alias-brand-primary,#3b6fe0)}
+    .slot-top{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+    .slot-top .num{font-size:12.5px;font-weight:600;white-space:nowrap}
+    .badge{font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+    .badge.pending{color:var(--dsw-alias-label-tertiary,#8a8a8a)}
+    .badge.ready{color:var(--ebd-ok);font-weight:600}
+    .badge.fail{color:var(--ebd-fail);font-weight:600}
+    .badge.ok{color:var(--ebd-ok);font-weight:600}
+    .badge.unused{color:var(--dsw-alias-label-tertiary,#8a8a8a);border-style:dashed}
+    .slot-msg{font-size:12px;color:var(--dsw-alias-label-secondary,#6b6b6b);min-height:2.5em}
+    .chip{font-size:11.5px;color:var(--ebd-ok);min-height:1.2em}
+    .ebd-wait{display:flex;flex-direction:column;gap:4px}
+    .ebd-waithead{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--dsw-alias-label-secondary,#6b6b6b)}
+    .track{position:relative;height:14px;border-radius:7px;overflow:hidden;background:var(--dsw-alias-bg-layer-2,rgba(127,127,127,.14));border:1px solid var(--dsw-alias-border-l1,rgba(127,127,127,.25))}
+    .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--ebd-ok);transition:width .08s linear}
+    .mark{position:absolute;top:0;bottom:0;width:1px;background:var(--dsw-alias-border-l2,rgba(127,127,127,.7))}
+    .axis{position:relative;height:15px;font-size:11px;color:var(--dsw-alias-label-tertiary,#8a8a8a)}
+    .axis span{position:absolute;top:0}
+    .ebd-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+    .cell{min-width:0;display:flex;flex-direction:column;gap:2px;padding:8px 10px;border-radius:10px;background:var(--dsw-alias-bg-layer-1,rgba(127,127,127,.06))}
+    .cell .k{font-size:11px;color:var(--dsw-alias-label-tertiary,#8a8a8a)}
+    .cell .v{font-size:13.5px;font-weight:600;overflow-wrap:anywhere}
+    .ebd-note{margin:0;font-size:11.5px;color:var(--dsw-alias-label-tertiary,#8a8a8a)}
+    @media (prefers-reduced-motion: reduce){.fill,.slot{transition:none}}
+  </style>
+
+  <div class="ebd-top">
+    <div class="ebd-btns">
+      <button id="ebdStep" type="button">发起第 1 次请求</button>
+      <button id="ebdReset" type="button">重置</button>
+    </div>
+    <p class="ebd-status" id="ebdStatus" aria-live="polite">尚未发起请求。最多 4 次，第 3 次成功后停止。</p>
+  </div>
+
+  <div class="ebd-rail">
+    <div class="slot pending" id="ebdS1">
+      <div class="slot-top"><span class="num">第 1 次</span><span class="badge pending" id="ebdB1">待发起</span></div>
+      <div class="slot-msg" id="ebdM1">未发送（示意）</div>
+      <div class="chip" id="ebdW1"></div>
+    </div>
+    <div class="slot pending" id="ebdS2">
+      <div class="slot-top"><span class="num">第 2 次</span><span class="badge pending" id="ebdB2">待发起</span></div>
+      <div class="slot-msg" id="ebdM2">未发送（示意）</div>
+      <div class="chip" id="ebdW2"></div>
+    </div>
+    <div class="slot pending" id="ebdS3">
+      <div class="slot-top"><span class="num">第 3 次</span><span class="badge pending" id="ebdB3">待发起</span></div>
+      <div class="slot-msg" id="ebdM3">未发送（示意）</div>
+      <div class="chip" id="ebdW3"></div>
+    </div>
+    <div class="slot pending" id="ebdS4">
+      <div class="slot-top"><span class="num">第 4 次</span><span class="badge pending" id="ebdB4">待发起</span></div>
+      <div class="slot-msg" id="ebdM4">备用：前 3 次都失败才会用到</div>
+      <div class="chip" id="ebdW4"></div>
+    </div>
+  </div>
+
+  <div class="ebd-wait">
+    <div class="ebd-waithead">
+      <span>退避等待时间轴（上限 1s + 2s = 3s）</span>
+      <span id="ebdPhase">阶段：待开始</span>
+    </div>
+    <div class="track" role="img" aria-label="累计等待时间条，从 0 秒到 3 秒">
+      <div class="fill" id="ebdFill"></div>
+      <div class="mark" style="left:33.333%"></div>
+    </div>
+    <div class="axis"><span style="left:0">0 秒</span><span style="left:33.333%;transform:translateX(-50%)">1 秒</span><span style="right:0">3 秒</span></div>
+  </div>
+
+  <div class="ebd-summary">
+    <div class="cell"><span class="k">本次结果</span><span class="v" id="ebdResult">—</span></div>
+    <div class="cell"><span class="k">下一次等待</span><span class="v" id="ebdNext">—</span></div>
+    <div class="cell"><span class="k">累计等待</span><span class="v num" id="ebdTotal">0.0 秒</span></div>
+  </div>
+
+  <p class="ebd-note">示意演示，不实际发送网络请求。规则：失败后按 1s → 2s 翻倍退避，最多 4 次；第 3 次成功立即停止。</p>
+
+  <script>
+  (function () {
+    var root = document.getElementById('ebdRoot');
+    if (!root || root.dataset.ready === '1') return;
+    root.dataset.ready = '1';
+
+    var steps = [
+      { n: 1, outcome: 'fail', wait: 1000 },
+      { n: 2, outcome: 'fail', wait: 2000 },
+      { n: 3, outcome: 'success', wait: 0 }
+    ];
+    var TOTAL = 3000;
+    var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    var idx = 0, credited = 0, waiting = false, raf = 0;
+    var fill = document.getElementById('ebdFill');
+    var stepBtn = document.getElementById('ebdStep');
+    var resetBtn = document.getElementById('ebdReset');
+
+    function $(id) { return document.getElementById(id); }
+    function sec(ms) { return (Math.round(ms / 100) / 10).toFixed(1) + ' 秒'; }
+    function setStatus(t) { $('ebdStatus').textContent = t; }
+    function setResult(t) { $('ebdResult').textContent = t; }
+    function setNext(t) { $('ebdNext').textContent = t; }
+    function setPhase(t) { $('ebdPhase').textContent = '阶段：' + t; }
+    function setBadge(n, cls, text) { var b = $('ebdB' + n); b.className = 'badge ' + cls; b.textContent = text; }
+
+    function render(ms) {
+      var p = Math.max(0, Math.min(1, ms / TOTAL));
+      fill.style.width = (p * 100).toFixed(2) + '%';
+      $('ebdTotal').textContent = sec(ms);
+    }
+
+    function updateStepLabel() {
+      if (waiting) { stepBtn.disabled = true; stepBtn.textContent = '等待中…'; return; }
+      if (idx >= steps.length) { stepBtn.disabled = true; stepBtn.textContent = '已完成（第 3 次成功）'; return; }
+      stepBtn.disabled = false;
+      stepBtn.textContent = '发起第 ' + (idx + 1) + ' 次请求';
+    }
+
+    function finishWait(ms, n) {
+      raf = 0;
+      waiting = false;
+      $('ebdW' + n).textContent = '已等待 ' + (ms / 1000) + ' 秒';
+      setNext('—（等待已结束）');
+      var ns = $('ebdS' + (n + 1));
+      if (ns) {
+        ns.classList.remove('pending');
+        setBadge(n + 1, 'ready', '就绪');
+        $('ebdM' + (n + 1)).textContent = '已就绪，等待发起';
+      }
+      setPhase('退避结束，可发起第 ' + (n + 1) + ' 次请求');
+      setStatus('已等待 ' + (ms / 1000) + ' 秒，现在可以发起第 ' + (n + 1) + ' 次请求。');
+      updateStepLabel();
+    }
+
+    function runWait(ms, n) {
+      waiting = true;
+      updateStepLabel();
+      setPhase('退避等待中');
+      var from = credited;
+      if (reduce) {
+        credited = from + ms;
+        render(credited);
+        finishWait(ms, n);
+        return;
+      }
+      var t0 = null;
+      function frame(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min(1, (t - t0) / ms);
+        var cur = from + ms * p;
+        render(cur);
+        setNext((ms / 1000) + ' 秒（剩余 ' + sec(ms - cur) + '）');
+        if (p < 1) { raf = requestAnimationFrame(frame); }
+        else { credited = from + ms; render(credited); finishWait(ms, n); }
+      }
+      raf = requestAnimationFrame(frame);
+    }
+
+    function markUnused(n) {
+      var s = $('ebdS' + n);
+      if (!s) return;
+      s.className = 'slot unused';
+      setBadge(n, 'unused', '未使用');
+      $('ebdM' + n).textContent = '第 3 次已成功，无需第 4 次';
+      $('ebdW' + n).textContent = '';
+    }
+
+    function doStep() {
+      if (waiting || idx >= steps.length) return;
+      var st = steps[idx];
+      var s = $('ebdS' + st.n);
+      s.classList.remove('pending');
+
+      if (st.outcome === 'fail') {
+        s.classList.add('fail');
+        setBadge(st.n, 'fail', '失败');
+        $('ebdM' + st.n).textContent = '请求超时（示意），未成功';
+        $('ebdW' + st.n).textContent = '等待 ' + (st.wait / 1000) + ' 秒后重试';
+        setResult('第 ' + st.n + ' 次请求 → 失败');
+        setNext((st.wait / 1000) + ' 秒');
+        setStatus('第 ' + st.n + ' 次请求失败，进入 ' + (st.wait / 1000) + ' 秒退避等待。');
+        var ns = $('ebdS' + (st.n + 1));
+        if (ns) {
+          ns.classList.remove('pending');
+          setBadge(st.n + 1, 'pending', '等待中');
+          $('ebdM' + (st.n + 1)).textContent = '等待退避结束后重试';
+        }
+        idx++;
+        runWait(st.wait, st.n);
+      } else {
+        s.classList.add('ok');
+        setBadge(st.n, 'ok', '成功');
+        $('ebdM' + st.n).textContent = '第 ' + st.n + ' 次请求成功';
+        $('ebdW' + st.n).textContent = '成功 → 停止重试';
+        setResult('第 ' + st.n + ' 次请求 → 成功');
+        setNext('—（不再重试）');
+        setPhase('已结束：成功停止');
+        setStatus('第 ' + st.n + ' 次请求成功，停止重试：共请求 ' + st.n + ' 次，累计等待 ' + sec(credited) + '。');
+        idx++;
+        markUnused(st.n + 1);
+        updateStepLabel();
+      }
+    }
+
+    function reset() {
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      idx = 0; credited = 0; waiting = false;
+      for (var i = 1; i <= 4; i++) {
+        $('ebdS' + i).className = 'slot pending';
+        setBadge(i, 'pending', '待发起');
+        $('ebdM' + i).textContent = (i === 4) ? '备用：前 3 次都失败才会用到' : '未发送（示意）';
+        $('ebdW' + i).textContent = '';
+      }
+      render(0);
+      setResult('—');
+      setNext('—');
+      setPhase('待开始');
+      setStatus('尚未发起请求。最多 4 次，第 3 次成功后停止。');
+      updateStepLabel();
+    }
+
+    stepBtn.addEventListener('click', doStep);
+    resetBtn.addEventListener('click', reset);
+    reset();
+  })();
+  </script>
+</div></body></html>

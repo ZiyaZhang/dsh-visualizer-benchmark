@@ -1,0 +1,226 @@
+<style>
+  .cc-wrap {
+    --cc-hit: var(--dsw-alias-brand-primary, #3b6ef6);
+    --cc-miss: var(--dsw-alias-label-tertiary, #8b93a1);
+    --cc-line: var(--dsw-alias-border-l1, rgba(127, 127, 127, 0.28));
+    --cc-panel: var(--dsw-alias-bg-layer-1, rgba(127, 127, 127, 0.07));
+    --cc-track: var(--dsw-alias-bg-layer-2, rgba(127, 127, 127, 0.16));
+    display: grid;
+    gap: 14px;
+    padding: 2px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--dsw-alias-label-primary, #1f2328);
+  }
+  .cc-wrap * { box-sizing: border-box; }
+  .cc-controls { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+  .cc-presets { display: flex; gap: 6px; }
+  .cc-presets button {
+    font: inherit;
+    font-variant-numeric: tabular-nums;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--cc-line);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+  .cc-presets button:hover { background: var(--dsw-alias-interactive-bg-hover, var(--cc-panel)); }
+  .cc-presets button[aria-pressed="true"] {
+    background: var(--dsw-alias-button-primary-fill, var(--cc-hit));
+    border-color: transparent;
+    color: var(--dsw-alias-label-primary-inverted, #fff);
+  }
+  .cc-slider { display: flex; align-items: center; gap: 10px; flex: 1 1 220px; min-width: 0; }
+  .cc-slider label { white-space: nowrap; color: var(--dsw-alias-label-secondary, #5b6470); }
+  .cc-slider input[type="range"] { flex: 1 1 auto; min-width: 90px; }
+  .cc-rate-out { min-width: 3.6em; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .cc-panel {
+    display: grid;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--cc-line);
+    border-radius: 10px;
+    background: var(--cc-panel);
+  }
+  .cc-title {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--dsw-alias-label-secondary, #5b6470);
+  }
+  .cc-track-wrap { position: relative; }
+  .cc-ref {
+    position: absolute;
+    top: -3px;
+    bottom: -3px;
+    right: 0;
+    border-left: 1.5px dashed var(--dsw-alias-label-tertiary, #8b93a1);
+    opacity: 0.75;
+  }
+  .cc-bar {
+    display: flex;
+    width: 100%;
+    height: 24px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--cc-track);
+  }
+  .cc-bar.cost { height: 20px; }
+  .cc-seg { flex: 0 0 auto; height: 100%; transition: width 0.18s ease; }
+  .cc-seg.hit { background: var(--cc-hit); }
+  .cc-swatch.hit { background: var(--cc-hit); }
+  .cc-seg.miss, .cc-swatch.miss {
+    background-color: var(--cc-miss);
+    background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0 3px, rgba(255, 255, 255, 0) 3px 7px);
+  }
+  .cc-scale {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--dsw-alias-label-tertiary, #8b93a1);
+    font-variant-numeric: tabular-nums;
+  }
+  .cc-legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 3px 16px; }
+  .cc-item { display: flex; align-items: center; gap: 7px; min-width: 0; }
+  .cc-swatch { flex: 0 0 auto; width: 12px; height: 12px; border-radius: 3px; }
+  .cc-val { margin-left: auto; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .cc-total {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    align-items: baseline;
+    padding-top: 10px;
+    border-top: 1px dashed var(--cc-line);
+  }
+  .cc-total-label { color: var(--dsw-alias-label-secondary, #5b6470); }
+  .cc-big { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .cc-unit { font-size: 12px; color: var(--dsw-alias-label-secondary, #5b6470); }
+  .cc-save { font-size: 12px; color: var(--dsw-alias-label-secondary, #5b6470); font-variant-numeric: tabular-nums; }
+  .cc-save b { font-weight: 600; }
+  .cc-note { margin: 0; font-size: 11px; color: var(--dsw-alias-label-tertiary, #8b93a1); }
+  @media (prefers-reduced-motion: reduce) { .cc-seg { transition: none; } }
+</style>
+<section class="cc-wrap" aria-label="缓存命中率与输入成本示意">
+  <div class="cc-controls">
+    <div class="cc-presets" role="group" aria-label="命中率快捷选择">
+      <button type="button" data-rate="0" aria-pressed="false">0%</button>
+      <button type="button" data-rate="50" aria-pressed="true">50%</button>
+      <button type="button" data-rate="100" aria-pressed="false">100%</button>
+    </div>
+    <div class="cc-slider">
+      <label for="cc-rate">命中率</label>
+      <input type="range" id="cc-rate" min="0" max="100" step="1" value="50" aria-valuetext="命中率 50%">
+      <span class="cc-rate-out" id="cc-rate-out">50%</span>
+    </div>
+  </div>
+
+  <div class="cc-panel">
+    <div class="cc-title"><span>输入构成 · 固定 1000 token</span><span>每格 = 1000 token 总量</span></div>
+    <div class="cc-bar" id="cc-tok-bar" role="img" aria-label="命中 500 token，未命中 500 token">
+      <div class="cc-seg hit" id="cc-hit-tok-bar" style="width:50%"></div>
+      <div class="cc-seg miss" id="cc-miss-tok-bar" style="width:50%"></div>
+    </div>
+    <div class="cc-legend">
+      <div class="cc-item"><span class="cc-swatch hit" aria-hidden="true"></span><span>命中</span><span class="cc-val" id="cc-hit-tok">500 token · 50%</span></div>
+      <div class="cc-item"><span class="cc-swatch miss" aria-hidden="true"></span><span>未命中</span><span class="cc-val" id="cc-miss-tok">500 token · 50%</span></div>
+    </div>
+  </div>
+
+  <div class="cc-panel">
+    <div class="cc-title"><span>成本构成 · 示意成本单位</span><span>标尺 0 – 1.00</span></div>
+    <div class="cc-track-wrap">
+      <div class="cc-bar cost" id="cc-cost-bar" role="img" aria-label="命中成本 0.05，未命中成本 0.50，合计 0.55">
+        <div class="cc-seg hit" id="cc-hit-cost-bar" style="width:5%"></div>
+        <div class="cc-seg miss" id="cc-miss-cost-bar" style="width:50%"></div>
+      </div>
+      <span class="cc-ref" aria-hidden="true"></span>
+    </div>
+    <div class="cc-scale"><span>0</span><span>1.00 · 全未命中</span></div>
+    <div class="cc-legend">
+      <div class="cc-item"><span class="cc-swatch hit" aria-hidden="true"></span><span>命中成本</span><span class="cc-val" id="cc-hit-cost">0.05</span></div>
+      <div class="cc-item"><span class="cc-swatch miss" aria-hidden="true"></span><span>未命中成本</span><span class="cc-val" id="cc-miss-cost">0.50</span></div>
+    </div>
+  </div>
+
+  <div class="cc-total">
+    <div><span class="cc-total-label">总成本</span> <span class="cc-big" id="cc-total">0.55</span> <span class="cc-unit">示意成本单位</span></div>
+    <div class="cc-save">较全未命中（1.00）节省 <b id="cc-save">0.45</b> · <b id="cc-save-pct">45%</b></div>
+  </div>
+  <p class="cc-note">单价示意：未命中 1 单位 / 1000 token，命中 0.1 单位 / 1000 token。总输入固定 1000 token，所以总成本也就是每 1000 token 的示意成本。数值仅作演示，不代表真实价格。</p>
+</section>
+<script>
+  (function () {
+    var rate = document.getElementById('cc-rate');
+    var rateOut = document.getElementById('cc-rate-out');
+    var tokBar = document.getElementById('cc-tok-bar');
+    var costBar = document.getElementById('cc-cost-bar');
+    var hitTokBar = document.getElementById('cc-hit-tok-bar');
+    var missTokBar = document.getElementById('cc-miss-tok-bar');
+    var hitCostBar = document.getElementById('cc-hit-cost-bar');
+    var missCostBar = document.getElementById('cc-miss-cost-bar');
+    var hitTok = document.getElementById('cc-hit-tok');
+    var missTok = document.getElementById('cc-miss-tok');
+    var hitCostOut = document.getElementById('cc-hit-cost');
+    var missCostOut = document.getElementById('cc-miss-cost');
+    var totalOut = document.getElementById('cc-total');
+    var saveOut = document.getElementById('cc-save');
+    var savePctOut = document.getElementById('cc-save-pct');
+    var presets = Array.prototype.slice.call(document.querySelectorAll('.cc-presets button'));
+
+    var TOTAL_TOKENS = 1000;
+    var MISS_UNIT = 1;
+    var HIT_UNIT = 0.1;
+    var MAX_COST = TOTAL_TOKENS / 1000 * MISS_UNIT;
+
+    function fmtCost(v) {
+      var s = v.toFixed(3);
+      return s.charAt(s.length - 1) === '0' ? v.toFixed(2) : s;
+    }
+
+    function render() {
+      var r = Number(rate.value);
+      var hitTokens = TOTAL_TOKENS * r / 100;
+      var missTokens = TOTAL_TOKENS - hitTokens;
+      var hitCost = hitTokens / 1000 * HIT_UNIT;
+      var missCost = missTokens / 1000 * MISS_UNIT;
+      var total = hitCost + missCost;
+      var saved = MAX_COST - total;
+      var pct = Math.round(saved / MAX_COST * 100);
+
+      rateOut.textContent = r + '%';
+      rate.setAttribute('aria-valuetext', '命中率 ' + r + '%，1000 token 中命中 ' + hitTokens + ' token，未命中 ' + missTokens + ' token');
+
+      hitTokBar.style.width = r + '%';
+      missTokBar.style.width = (100 - r) + '%';
+      hitCostBar.style.width = (hitCost / MAX_COST * 100) + '%';
+      missCostBar.style.width = (missCost / MAX_COST * 100) + '%';
+
+      tokBar.setAttribute('aria-label', '命中 ' + hitTokens + ' token，未命中 ' + missTokens + ' token');
+      costBar.setAttribute('aria-label', '命中成本 ' + fmtCost(hitCost) + '，未命中成本 ' + fmtCost(missCost) + '，合计 ' + fmtCost(total));
+
+      hitTok.textContent = hitTokens + ' token · ' + r + '%';
+      missTok.textContent = missTokens + ' token · ' + (100 - r) + '%';
+      hitCostOut.textContent = fmtCost(hitCost);
+      missCostOut.textContent = fmtCost(missCost);
+      totalOut.textContent = fmtCost(total);
+      saveOut.textContent = fmtCost(saved);
+      savePctOut.textContent = pct + '%';
+
+      presets.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(Number(b.dataset.rate) === r));
+      });
+    }
+
+    rate.addEventListener('input', render);
+    presets.forEach(function (b) {
+      b.addEventListener('click', function () {
+        rate.value = b.dataset.rate;
+        render();
+      });
+    });
+    render();
+  })();
+</script>

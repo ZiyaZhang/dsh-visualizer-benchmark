@@ -1,0 +1,56 @@
+<style>
+  .qs { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--dsw-alias-label-primary); background: var(--dsw-alias-bg-layer-1); border: 1px solid var(--dsw-alias-border-l1); border-radius: 14px; padding: 18px 18px 14px; max-width: 340px; box-sizing: border-box; }
+  .qs-title { font-size: 13px; font-weight: 600; color: var(--dsw-alias-label-secondary); letter-spacing: .02em; }
+  .qs-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 14px 0 12px; }
+  .qs-btn { width: 46px; height: 46px; flex: 0 0 auto; font-size: 24px; line-height: 1; border-radius: 12px; border: 1px solid var(--dsw-alias-border-l2); background: var(--dsw-alias-bg-layer-2); color: var(--dsw-alias-label-primary); cursor: pointer; transition: background .12s ease, transform .06s ease; }
+  .qs-btn:hover:not(:disabled) { background: var(--dsw-alias-interactive-bg-hover); }
+  .qs-btn:active:not(:disabled) { background: var(--dsw-alias-interactive-bg-active); transform: translateY(1px); }
+  .qs-btn:disabled { opacity: .35; cursor: not-allowed; }
+  .qs-value { min-width: 78px; text-align: center; font-size: 44px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+  .qs-slots { display: flex; gap: 6px; justify-content: center; margin-bottom: 12px; }
+  .qs-slot { width: 30px; height: 6px; border-radius: 3px; background: var(--dsw-alias-border-l1); transition: background .12s ease; }
+  .qs-slot--on { background: var(--dsw-alias-brand-primary, var(--dsw-alias-button-primary-fill)); }
+  .qs-hint { font-size: 12.5px; text-align: center; color: var(--dsw-alias-label-tertiary); min-height: 1.2em; }
+  .qs-hint b { color: var(--dsw-alias-label-secondary); font-weight: 600; }
+</style>
+<div class="qs" role="group" aria-label="数量选择器，范围 0 到 5，当前值 2">
+  <div class="qs-title">数量选择器 · 范围 0–5</div>
+  <div class="qs-row">
+    <button id="qs-minus" class="qs-btn" type="button" aria-label="减少 1">−</button>
+    <div id="qs-value" class="qs-value" role="status" aria-live="polite">2</div>
+    <button id="qs-plus" class="qs-btn" type="button" aria-label="增加 1">+</button>
+  </div>
+  <div class="qs-slots" id="qs-slots" aria-hidden="true"></div>
+  <div class="qs-hint" id="qs-hint"></div>
+</div>
+<script>
+(function () {
+  var MIN = 0, MAX = 5, value = 2;
+  var valueEl = document.getElementById('qs-value');
+  var minus = document.getElementById('qs-minus');
+  var plus = document.getElementById('qs-plus');
+  var slots = document.getElementById('qs-slots');
+  var hint = document.getElementById('qs-hint');
+  var slotEls = [];
+  for (var i = 0; i < MAX; i++) {
+    var s = document.createElement('span');
+    s.className = 'qs-slot';
+    slots.appendChild(s);
+    slotEls.push(s);
+  }
+  function render() {
+    valueEl.textContent = value;
+    minus.disabled = value <= MIN;
+    plus.disabled = value >= MAX;
+    for (var i = 0; i < slotEls.length; i++) {
+      slotEls[i].className = 'qs-slot' + (i < value ? ' qs-slot--on' : '');
+    }
+    hint.innerHTML = '当前 <b>' + value + '</b>' +
+      (value <= MIN ? ' · 已到下限，减少已禁用' :
+       value >= MAX ? ' · 已到上限，增加已禁用' : ' · 步长 1');
+  }
+  minus.addEventListener('click', function () { if (value > MIN) { value--; render(); } });
+  plus.addEventListener('click', function () { if (value < MAX) { value++; render(); } });
+  render();
+})();
+</script>

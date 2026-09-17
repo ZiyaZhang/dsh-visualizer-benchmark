@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 2,
+  "id": "N01-C-2",
+  "roundId": "dev-C-grounded-20260917",
+  "caseId": "N01",
+  "arm": "C",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "给我一个 TypeScript 二分查找函数，输入已排序的 number[] 和 target，返回索引或 -1。我会复制到代码文件中使用。",
+  "expectedRoute": "code",
+  "widgets": [],
+  "final": "```typescript\n/**\n * 在已升序排序的数组中查找 target 的索引。\n * @param nums   已升序排序的数组（不要求元素唯一）\n * @param target 要查找的目标值\n * @returns 找到时返回其索引；未找到返回 -1\n */\nexport function binarySearch(nums: number[], target: number): number {\n  let left = 0;\n  let right = nums.length - 1;\n\n  while (left <= right) {\n    // 这样写可避免 (left + right) 在极端大数组下溢出\n    const mid = left + ((right - left) >> 1);\n    const value = nums[mid];\n\n    if (value === target) {\n      return mid;\n    }\n    if (value < target) {\n      left = mid + 1;\n    } else {\n      right = mid - 1;\n    }\n  }\n\n  return -1;\n}\n```\n\n要点说明：\n\n- **区间语义**：使用闭区间 `[left, right]`，所以循环条件是 `left <= right`，且收缩时是 `mid ± 1`，不会死循环。\n- **溢出安全**：`left + ((right - left) >> 1)` 比 `(left + right) / 2` 更稳妥。注意 `>>` 对超过 2^31 的索引会有问题；若数组理论上可能超过约 21 亿元素，把 `>> 1` 换成 `Math.floor((right - left) / 2)`。\n- **重复元素**：该实现返回“任意一个”匹配位置。如果你需要**第一个**匹配项，把命中分支改为 `right = mid - 1` 并记录答案；需要**最后一个**则改为 `left = mid + 1`。\n- **空数组**：`right = -1`，循环不执行，直接返回 `-1`。\n\n如果你还想要一个带比较器的泛型版本（用于对象数组），或者上面提到的“第一个/最后一个”变体，告诉我即可。",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "No inline widget attempt; verify the requested delivery form with check-dsh.py"
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case evaluates routing only"
+    }
+  },
+  "trace": {
+    "tools": [],
+    "referencesRead": [],
+    "skillLoads": [],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "ba5da995eb56d24554d0cff4d872d91f089bb5471d160ddde7d5465d61e02143"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 6853,
+    "outputTokens": 477,
+    "cacheReadTokens": 768,
+    "cacheWriteTokens": 0,
+    "totalTokens": 8098
+  },
+  "elapsedSeconds": 4.129,
+  "sourceHead": "db0399958b07ce2a85088ddc8fcb3c5b49a2cb10",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "f33bffbc7e832d384c34179da2901f3bf7347e06436747274f16de8f08a3f406",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "d3d9eed46a8fa0006e21e9765db378862cf1d748670eaf200b9558011e55acd9"
+}

@@ -1,0 +1,102 @@
+<svg viewBox="0 0 960 720" width="100%" role="img" aria-labelledby="wfTitle wfDesc" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:960px;display:block">
+  <title id="wfTitle">模型提交源码、Host 校验记录、Web 隔离渲染与运行报错修复流程图</title>
+  <desc id="wfDesc">三方泳道流程图：模型在模型泳道提交源码；Host 在 Host 泳道校验并记录当前源码版本 v1；Web 在沙箱中隔离渲染。Web 判断运行是否报错：成功则用户操作卡片；失败则 Web 请求修复，Host 从日志取出当前源码 v1 并请求模型生成修复版 v2，Host 校验记录并更新原卡片后重新渲染同一张卡片。</desc>
+  <style>
+    .lanebg{fill:var(--dsw-alias-bg-layer-1,#f6f8fa);stroke:var(--dsw-alias-border-l1,#e2e6ea);stroke-width:1}
+    .lanehd{fill:var(--dsw-alias-bg-layer-2,#eaeef3);stroke:var(--dsw-alias-border-l1,#e2e6ea);stroke-width:1}
+    .lt{fill:var(--dsw-alias-label-primary,#12161b);font-size:14px;font-weight:600}
+    .lr{fill:var(--dsw-alias-label-tertiary,#6b7480);font-size:10.5px}
+    .nd{fill:var(--dsw-alias-bg-base,#fff);stroke:var(--dsw-alias-border-l2,#c9cfd6);stroke-width:1.25}
+    .nd-fix{fill:var(--dsw-alias-bg-base,#fff);stroke:var(--dsw-alias-state-error-primary,#d64545);stroke-width:1.4}
+    .nt{fill:var(--dsw-alias-label-primary,#12161b);font-size:13px;font-weight:600}
+    .ns{fill:var(--dsw-alias-label-secondary,#5b6470);font-size:11px}
+    .ln{fill:none;stroke:var(--dsw-alias-brand-primary,#2f6fed);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+    .ln-fix{fill:none;stroke:var(--dsw-alias-state-error-primary,#d64545);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+    .al{fill:var(--dsw-alias-label-secondary,#5b6470);font-size:10.5px}
+    .al-fix{fill:var(--dsw-alias-state-error-primary,#d64545);font-size:10px}
+    .lg{fill:var(--dsw-alias-label-secondary,#5b6470);font-size:10.5px;font-weight:600}
+    text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0.5,0.9 L9.5,5 L0.5,9.1 Z" fill="var(--dsw-alias-brand-primary,#2f6fed)"/>
+    </marker>
+    <marker id="af" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0.5,0.9 L9.5,5 L0.5,9.1 Z" fill="var(--dsw-alias-state-error-primary,#d64545)"/>
+    </marker>
+  </defs>
+
+  <rect class="lanebg" x="16" y="68" width="224" height="536" rx="10"/>
+  <rect class="lanebg" x="300" y="68" width="340" height="536" rx="10"/>
+  <rect class="lanebg" x="700" y="68" width="244" height="536" rx="10"/>
+  <rect class="lanebg" x="300" y="616" width="644" height="88" rx="10"/>
+
+  <rect class="lanehd" x="16" y="14" width="224" height="46" rx="10"/>
+  <rect class="lanehd" x="300" y="14" width="340" height="46" rx="10"/>
+  <rect class="lanehd" x="700" y="14" width="244" height="46" rx="10"/>
+  <text class="lt" x="128" y="36" text-anchor="middle">模型 · LLM</text>
+  <text class="lr" x="128" y="52" text-anchor="middle">产出 / 修复卡片源码</text>
+  <text class="lt" x="470" y="36" text-anchor="middle">Host · 后端服务</text>
+  <text class="lr" x="470" y="52" text-anchor="middle">校验 · 记录版本 · 调度修复</text>
+  <text class="lt" x="822" y="36" text-anchor="middle">Web · 前端沙箱</text>
+  <text class="lr" x="822" y="52" text-anchor="middle">隔离渲染 · 上报运行错误</text>
+
+  <rect class="nd" x="30" y="92" width="196" height="68" rx="10"/>
+  <text class="nt" x="128" y="122" text-anchor="middle">① 提交源码</text>
+  <text class="ns" x="128" y="142" text-anchor="middle">模型产出卡片源码</text>
+
+  <rect class="nd" x="314" y="92" width="312" height="68" rx="10"/>
+  <text class="nt" x="470" y="122" text-anchor="middle">② 校验并记录</text>
+  <text class="ns" x="470" y="142" text-anchor="middle">校验通过 · 记录当前源码 v1</text>
+
+  <rect class="nd" x="714" y="92" width="216" height="68" rx="10"/>
+  <text class="nt" x="822" y="122" text-anchor="middle">③ 隔离渲染</text>
+  <text class="ns" x="822" y="142" text-anchor="middle">沙箱 iframe 内执行</text>
+
+  <polygon class="nd" points="800,198 896,260 800,322 704,260"/>
+  <text class="nt" x="800" y="255" text-anchor="middle">源码运行</text>
+  <text class="nt" x="800" y="273" text-anchor="middle">是否报错？</text>
+
+  <rect class="nd-fix" x="340" y="226" width="300" height="68" rx="10"/>
+  <text class="nt" x="490" y="256" text-anchor="middle">⑤ 响应修复请求</text>
+  <text class="ns" x="490" y="276" text-anchor="middle">从日志取出当前源码 v1</text>
+
+  <rect class="nd-fix" x="30" y="226" width="196" height="68" rx="10"/>
+  <text class="nt" x="128" y="256" text-anchor="middle">⑥ 生成修复版</text>
+  <text class="ns" x="128" y="276" text-anchor="middle">基于 v1 产出 v2</text>
+
+  <rect class="nd-fix" x="340" y="376" width="300" height="68" rx="10"/>
+  <text class="nt" x="490" y="406" text-anchor="middle">⑦ 校验并记录 v2</text>
+  <text class="ns" x="490" y="426" text-anchor="middle">更新原卡片数据</text>
+
+  <text class="lt" x="322" y="666">用户</text>
+  <rect class="nd" x="380" y="630" width="540" height="60" rx="10"/>
+  <text class="nt" x="650" y="656" text-anchor="middle">④ 用户操作卡片</text>
+  <text class="ns" x="650" y="676" text-anchor="middle">交互 · 复制 · 下载</text>
+
+  <rect x="16" y="616" width="268" height="88" rx="10" fill="none" stroke="var(--dsw-alias-border-l1,#e2e6ea)" stroke-width="1" stroke-dasharray="4 4"/>
+  <text class="lg" x="32" y="638">图例</text>
+  <path class="ln" d="M32,660 H58" marker-end="url(#ah)"/>
+  <text class="al" x="66" y="664">成功路径 ① → ④</text>
+  <path class="ln-fix" d="M32,684 H58" marker-end="url(#af)"/>
+  <text class="al-fix" x="66" y="688">失败 → 修复 ⑤ → ⑦</text>
+
+  <path class="ln" d="M226,126 H314" marker-end="url(#ah)"/>
+  <text class="al" x="270" y="116" text-anchor="middle">提交源码</text>
+  <path class="ln" d="M626,126 H714" marker-end="url(#ah)"/>
+  <text class="al" x="670" y="116" text-anchor="middle">已记录 v1</text>
+  <path class="ln" d="M800,160 V198" marker-end="url(#ah)"/>
+  <text class="al" x="810" y="184">执行</text>
+  <path class="ln" d="M800,322 V630" marker-end="url(#ah)"/>
+  <text class="al" x="810" y="470">成功</text>
+
+  <path class="ln-fix" d="M704,260 H640" marker-end="url(#af)"/>
+  <text class="al-fix" x="672" y="250" text-anchor="middle">失败</text>
+  <text class="al-fix" x="672" y="274" text-anchor="middle">请求修复</text>
+  <path class="ln-fix" d="M340,260 H226" marker-end="url(#af)"/>
+  <text class="al-fix" x="283" y="250" text-anchor="middle">附 v1 请求修复</text>
+  <path class="ln-fix" d="M128,294 V410 H340" marker-end="url(#af)"/>
+  <text class="al-fix" x="234" y="400" text-anchor="middle">返回修复版 v2</text>
+  <path class="ln-fix" d="M640,410 H670 V272 A8,8 0 0 0 670 256 V182 H748 V160" marker-end="url(#af)"/>
+  <text class="al-fix" x="678" y="346">原卡片重新渲染</text>
+</svg>

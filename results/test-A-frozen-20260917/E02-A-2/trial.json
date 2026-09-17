@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 2,
+  "id": "E02-A-2",
+  "roundId": "test-A-frozen-20260917",
+  "caseId": "E02",
+  "arm": "A",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "一个小团队要给移动端提供数据接口，怎么理解 REST 和 GraphQL 的取舍？",
+  "expectedRoute": "optional",
+  "widgets": [
+    {
+      "title": "REST 与 GraphQL 的取舍：按移动端场景看",
+      "kind": "html",
+      "callSeq": 41,
+      "resultSeq": 42,
+      "replace": null,
+      "source": "results/test-A-frozen-20260917/E02-A-2/widget-1.source.html",
+      "preview": "results/test-A-frozen-20260917/E02-A-2/widget-1.html",
+      "sha256": "bd089f29b7f2b4e7487b9e156ebd51a35d7296dd34cfbfbdcd264c1da038559b",
+      "bytes": 15407
+    }
+  ],
+  "final": "## 先破一个过时前提\n「REST 一定过取、GraphQL 一定优雅」是 2015 年的说法。今天的常见做法是：REST 团队用 **BFF / 聚合端点**（`/home-feed` 一次返回整屏）把往返压下来；GraphQL 团队则要额外养一套 **限流、复杂度上限、N+1 治理**。所以选择点不在「能力」，而在**复杂度放在哪一侧**——是让小团队多写几个端点，还是多养一层服务端。\n\n## 三个真正的差异维度\n- **取数形状**：REST 是「端点定形状」，页面变了往往要加端点；GraphQL 是「客户端定形状」，字段级演进不用发版，但允许无限组合。\n- **缓存**：REST 的 URL 就是缓存键，HTTP/CDN/`ETag` 开箱即用；GraphQL 单端点 `POST` 默认不可缓存，缓存失效要自己设计（持久化查询、CDN 按 query hash 才勉强可用）。\n- **团队成本曲线**：REST 前期快、后期随页面数线性增长；GraphQL 前期要投 schema 设计 + 治理工具，之后每个新页面的边际成本更低。**转折点大约在「客户端品类数 × 页面异质度」**。\n\n## 给这个小团队的判定顺序\n1. 接口大多像「设置页/个人资料」这种单表读取 → **REST**，别上 GraphQL。\n2. 只有一两个聚合屏 → **REST + BFF**，成本最低。\n3. 同屏要跨 3+ 资源、且要支持 iOS/Android/小程序/Web 四种客户端各自取不同字段 → **GraphQL 的收益才开始覆盖成本**。\n4. 无论选哪个，先把分页游标、错误码规范、鉴权、埋点统一——这些做不好，换协议救不了。\n\n**可落地的折中**：核心资源留 REST（缓存、鉴权、监控都省事），只在客户端最痛的那几个聚合屏上引一层 GraphQL/BFF 网关，而不是全量迁移。上面的控件可以按你们实际的页面切换场景，看往返数、传输量级和各自要付的代价。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_iW263hI61ieLUuMVrHJd9814",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_TyS9IxrTknjLsjJG7LvI6477",
+        "argumentsSha256": "c1f14839e6acb69637ad7de05aba38232f21fe2aa6f53b8f55db9ebdd3ceb4e2",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_gRBHjkfaEdY6qBJAVJhY7589",
+        "argumentsSha256": "7088902a91f03cb1993ee2b302ad21bbed2907f9cc8b6017d346740aea4f10ae",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 33,
+        "callId": "call_00_KAV45GFjokDnYycKWdmT0525",
+        "argumentsSha256": "ac4ca12955dc6a9c398135a34c7e4f5b531d70439709e4fb42156d455d85c34f",
+        "wrapped": false,
+        "resultSeq": 35,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 34,
+        "callId": "call_01_rqDFp6W9GTrMq0naTlPn5410",
+        "argumentsSha256": "66fca307d000b3a15ee650d56c84294b70fc73292e3d347e8a8014780f7a7648",
+        "wrapped": false,
+        "resultSeq": 36,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 41,
+        "callId": "call_00_97BvWxM55AGWC9bDab9H5069",
+        "argumentsSha256": "6764a0168fdcfe87c6848735f22d84d72cd5496d1c5c56857be93f5001844764",
+        "wrapped": false,
+        "resultSeq": 42,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/diagrams.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "26916fe9f5dbc4ae81203e343e310a30146003f315a8fb2affc5026bac33cceb",
+        "resultSha256": "050933a784d592cd206a20f13c7d38005065e77130569a09e0eadb4927f70fd6"
+      },
+      {
+        "path": "references/interaction.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "16abc2c3a806e33d8f12ed486c8505fe5a34fa735b27b2f1807c06d534435e59"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 33,
+        "resultSeq": 35,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "eee8a719e9d6513b8218ec0c003ff4339703919b604ef121e4dfe0967a717ae1"
+      },
+      {
+        "path": "references/charts.md",
+        "callSeq": 34,
+        "resultSeq": 36,
+        "success": true,
+        "sha256": "0778ef689dea193a21f6f319a3d915e268d184bdd377128fa6a272a4ff8a1d80",
+        "resultSha256": "56a27c9c10c3e66ddd2488ee9a7dec7b39dbcf8da36225cafceb5390a48b7a11"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "5a21a68fe89e926bfb20ac091c5fdb7f9877f58c7145e7129cf350dee887d567"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "022c384225e229ceae605bc7ca812bf3130884d72fec178c976ff7cfb3d05fb7"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8728,
+    "outputTokens": 7021,
+    "cacheReadTokens": 41856,
+    "cacheWriteTokens": 0,
+    "totalTokens": 57605
+  },
+  "elapsedSeconds": 32.892,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "7a83cb8e5921e0ccdf4adc61cb315eb2ac64f63aeb0fca59c38a9f784d19c52f",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "f1dcd8d016504cd7b01dd94a522f47e3f7fefc8f827bae09765420fd58cf9759"
+}

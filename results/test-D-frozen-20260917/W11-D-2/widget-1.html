@@ -1,0 +1,213 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><div class="fd-root" id="fdRoot">
+  <style>
+    .fd-root{font-family:inherit;color:var(--dsw-alias-label-primary,#1f2329);max-width:440px;min-width:0}
+    .fd-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .fd-title{font-size:13px;font-weight:600;color:var(--dsw-alias-label-secondary,#5c6270)}
+    .fd-anchor{position:relative}
+    .fd-trigger,.fd-btn{font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;border:1px solid transparent}
+    .fd-trigger,.fd-btn.ghost{border-color:var(--dsw-alias-border-l1,#e5e7eb);background:transparent;color:var(--dsw-alias-label-primary,#1f2329)}
+    .fd-trigger:hover,.fd-btn.ghost:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.05))}
+    .fd-btn.primary{background:var(--dsw-alias-button-primary-fill,var(--dsw-alias-brand-primary,#3b6cf6));color:var(--dsw-alias-label-primary-inverted,#fff)}
+    .fd-btn.primary:disabled{opacity:.45;cursor:not-allowed}
+    .fd-popup{position:absolute;right:0;top:calc(100% + 8px);z-index:10;width:min(300px,84vw);box-sizing:border-box;padding:14px;border-radius:10px;display:grid;gap:12px;background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,#e5e7eb);box-shadow:0 10px 26px rgba(0,0,0,.16)}
+    .fd-popup[hidden]{display:none}
+    .fd-popup fieldset{border:0;margin:0;padding:0;min-width:0}
+    .fd-popup legend{padding:0;margin-bottom:6px;font-size:12px;color:var(--dsw-alias-label-secondary,#5c6270)}
+    .fd-seg{display:flex;gap:8px;flex-wrap:wrap}
+    .fd-seg label{position:relative;flex:1 1 0;min-width:100px}
+    .fd-seg input{position:absolute;opacity:0;width:1px;height:1px}
+    .fd-seg span{display:block;text-align:center;padding:7px 10px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid var(--dsw-alias-border-l2,#d0d3d9);background:var(--dsw-alias-bg-layer-2,transparent)}
+    .fd-seg input:checked+span{border-color:var(--dsw-alias-brand-primary,#3b6cf6);color:var(--dsw-alias-brand-primary,#3b6cf6);font-weight:600;background:color-mix(in srgb,var(--dsw-alias-brand-primary,#3b6cf6) 10%,transparent)}
+    .fd-seg input:focus-visible+span{outline:2px solid var(--dsw-alias-brand-primary,#3b6cf6);outline-offset:2px}
+    .fd-field{display:grid;gap:6px;min-width:0}
+    .fd-label{font-size:12px;color:var(--dsw-alias-label-secondary,#5c6270)}
+    .fd-input{width:100%;box-sizing:border-box;padding:8px 10px;border-radius:8px;font-size:13px;background:var(--dsw-alias-bg-base,#fff);color:inherit;border:1px solid var(--dsw-alias-border-l2,#d0d3d9)}
+    .fd-hint{margin:0;min-height:16px;font-size:12px;color:var(--dsw-alias-label-tertiary,#8a909c)}
+    .fd-actions{display:flex;justify-content:flex-end;gap:8px}
+    .fd-summary{margin-top:14px;padding:10px 12px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--dsw-alias-bg-layer-2,rgba(0,0,0,.03));border:1px solid var(--dsw-alias-border-l1,#e5e7eb)}
+    .fd-summary-text{display:grid;gap:2px;min-width:0}
+    .fd-summary-label{font-size:12px;color:var(--dsw-alias-label-tertiary,#8a909c)}
+    .fd-summary-value{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+    .fd-clear{font-size:12px;padding:5px 10px;border-radius:7px;cursor:pointer;background:transparent;border:1px solid var(--dsw-alias-border-l1,#e5e7eb);color:var(--dsw-alias-label-secondary,#5c6270)}
+    .fd-clear:disabled{opacity:.45;cursor:not-allowed}
+  </style>
+
+  <div class="fd-bar">
+    <span class="fd-title">任务列表 · 筛选原型</span>
+    <div class="fd-anchor">
+      <button type="button" class="fd-trigger" id="fdTrigger" aria-haspopup="dialog" aria-expanded="false">筛选</button>
+      <div class="fd-popup" id="fdPopup" role="dialog" aria-label="筛选条件">
+        <fieldset>
+          <legend>状态</legend>
+          <div class="fd-seg">
+            <label><input type="radio" name="fdStatus" value="进行中" checked><span>进行中</span></label>
+            <label><input type="radio" name="fdStatus" value="已完成"><span>已完成</span></label>
+          </div>
+        </fieldset>
+        <div class="fd-field">
+          <label class="fd-label" for="fdOwner">负责人</label>
+          <input class="fd-input" id="fdOwner" type="text" placeholder="输入负责人姓名" autocomplete="off">
+        </div>
+        <p class="fd-hint" id="fdHint">负责人不能为空，应用不可用</p>
+        <div class="fd-actions">
+          <button type="button" class="fd-btn ghost" id="fdCancel">取消</button>
+          <button type="button" class="fd-btn primary" id="fdApply" disabled>应用</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fd-summary">
+    <div class="fd-summary-text">
+      <span class="fd-summary-label">当前筛选</span>
+      <span class="fd-summary-value" id="fdSummary" role="status" aria-live="polite">尚未应用筛选</span>
+    </div>
+    <button type="button" class="fd-clear" id="fdClear" disabled>清除</button>
+  </div>
+
+  <script>
+    (function () {
+      var trigger = document.getElementById('fdTrigger');
+      var popup = document.getElementById('fdPopup');
+      var owner = document.getElementById('fdOwner');
+      var hint = document.getElementById('fdHint');
+      var apply = document.getElementById('fdApply');
+      var cancel = document.getElementById('fdCancel');
+      var summary = document.getElementById('fdSummary');
+      var clear = document.getElementById('fdClear');
+
+      function statusValue() {
+        return document.querySelector('input[name="fdStatus"]:checked').value;
+      }
+      function syncState() {
+        var filled = owner.value.trim().length > 0;
+        apply.disabled = !filled;
+        hint.textContent = filled ? '条件已就绪，点击应用' : '负责人不能为空，应用不可用';
+      }
+      function open(focusField) {
+        popup.hidden = false;
+        trigger.setAttribute('aria-expanded', 'true');
+        if (focusField) { owner.focus(); }
+      }
+      function close() {
+        popup.hidden = true;
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      owner.addEventListener('input', syncState);
+      trigger.addEventListener('click', function () {
+        if (popup.hidden) { open(true); } else { close(); }
+      });
+      cancel.addEventListener('click', function () { close(); trigger.focus(); });
+      apply.addEventListener('click', function () {
+        var name = owner.value.trim();
+        if (!name) { return; }
+        summary.textContent = '状态：' + statusValue() + ' · 负责人：' + name;
+        clear.disabled = false;
+        close();
+        trigger.focus();
+      });
+      clear.addEventListener('click', function () {
+        summary.textContent = '尚未应用筛选';
+        clear.disabled = true;
+        owner.value = '';
+        syncState();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !popup.hidden) { close(); trigger.focus(); }
+      });
+      document.addEventListener('click', function (e) {
+        if (!popup.hidden && !popup.contains(e.target) && !trigger.contains(e.target)) { close(); }
+      });
+
+      syncState();
+      open(false);
+    })();
+  </script>
+</div></body></html>

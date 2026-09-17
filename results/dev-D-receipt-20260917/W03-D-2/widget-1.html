@@ -1,0 +1,109 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}:where(body){padding:0}:where(body>svg){width:100%;height:auto}</style></head><body><svg viewBox="0 0 640 368" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="chartTitle chartDesc" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <title id="chartTitle">每月净新增用户对比：1月120人、2月0人、3月数据缺失、4月-30人、5月80人</title>
+  <desc id="chartDesc">柱状图以零线为基准：1月向上120人，2月在基线处标记为已上报的0，3月为空白虚线柱表示数据缺失，4月向下30人为负值，5月向上80人。</desc>
+  <style>
+    .t-title { font-size: 14px; font-weight: 600; fill: var(--dsw-alias-label-primary, #111827); }
+    .t-axis  { font-size: 11px; fill: var(--dsw-alias-label-tertiary, #9ca3af); }
+    .t-month { font-size: 13px; font-weight: 600; fill: var(--dsw-alias-label-primary, #111827); }
+    .t-state { font-size: 11px; fill: var(--dsw-alias-label-secondary, #6b7280); }
+    .v-pos   { font-size: 15px; font-weight: 700; fill: var(--dsw-alias-brand-primary, #3b82f6); }
+    .v-neg   { font-size: 15px; font-weight: 700; fill: var(--dsw-alias-state-error-primary, #dc2626); }
+    .v-zero  { font-size: 14px; font-weight: 700; fill: var(--dsw-alias-label-secondary, #6b7280); }
+    .v-miss  { font-size: 13px; font-weight: 600; fill: var(--dsw-alias-label-secondary, #6b7280); }
+    .legend  { font-size: 11px; fill: var(--dsw-alias-label-secondary, #6b7280); }
+    .grid    { stroke: var(--dsw-alias-border-l1, #e5e7eb); stroke-width: 1; stroke-dasharray: 3 4; }
+    .axisline{ stroke: var(--dsw-alias-border-l2, #d1d5db); stroke-width: 1; }
+    .zeroline{ stroke: var(--dsw-alias-label-secondary, #6b7280); stroke-width: 1.6; }
+    .bar-pos { fill: var(--dsw-alias-brand-primary, #3b82f6); }
+    .bar-neg { fill: var(--dsw-alias-state-error-primary, #dc2626); }
+    .zero-mark { fill: var(--dsw-alias-bg-base, #fff); stroke: var(--dsw-alias-label-secondary, #6b7280); stroke-width: 2; }
+    .miss-col { fill: url(#hatch); stroke: var(--dsw-alias-label-tertiary, #9ca3af); stroke-width: 1.4; stroke-dasharray: 5 4; }
+  </style>
+
+  <defs>
+    <pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="var(--dsw-alias-label-tertiary, #9ca3af)" stroke-width="1.4" opacity="0.45"/>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="640" height="368" rx="12" fill="var(--dsw-alias-bg-layer-1, transparent)"/>
+
+  <text class="t-title" x="24" y="26">每月净新增用户（人）</text>
+
+  <!-- gridlines + y ticks -->
+  <line class="grid" x1="56" y1="104.2" x2="616" y2="104.2"/>
+  <text class="t-axis" x="48" y="108.2" text-anchor="end">100</text>
+  <line class="grid" x1="56" y1="160.4" x2="616" y2="160.4"/>
+  <text class="t-axis" x="48" y="164.4" text-anchor="end">50</text>
+  <line class="grid" x1="56" y1="272.8" x2="616" y2="272.8"/>
+  <text class="t-axis" x="48" y="276.8" text-anchor="end">−50</text>
+  <text class="t-axis" x="48" y="220.6" text-anchor="end">0</text>
+
+  <!-- baseline (zero) -->
+  <line class="zeroline" x1="56" y1="216.6" x2="616" y2="216.6"/>
+
+  <!-- 1月 +120 -->
+  <rect class="bar-pos" x="84" y="81.7" width="56" height="134.9" rx="3"/>
+  <text class="v-pos" x="112" y="72" text-anchor="middle">120</text>
+
+  <!-- 2月 0（已上报） -->
+  <line class="zeroline" x1="196" y1="216.6" x2="252" y2="216.6" stroke-width="2.4"/>
+  <circle class="zero-mark" cx="224" cy="216.6" r="4.5"/>
+  <text class="v-zero" x="224" y="204" text-anchor="middle">0</text>
+
+  <!-- 3月 缺失 -->
+  <rect class="miss-col" x="308" y="48" width="56" height="168.6" rx="3"/>
+  <text x="336" y="140" text-anchor="middle" font-size="26" font-weight="600" fill="var(--dsw-alias-label-tertiary, #9ca3af)">?</text>
+  <text class="v-miss" x="336" y="66" text-anchor="middle">缺失</text>
+
+  <!-- 4月 −30 -->
+  <rect class="bar-neg" x="420" y="216.6" width="56" height="33.7" rx="3"/>
+  <text class="v-neg" x="448" y="266" text-anchor="middle">−30</text>
+
+  <!-- 5月 +80 -->
+  <rect class="bar-pos" x="532" y="126.7" width="56" height="89.9" rx="3"/>
+  <text class="v-pos" x="560" y="117" text-anchor="middle">80</text>
+
+  <!-- x axis -->
+  <line class="axisline" x1="56" y1="290" x2="616" y2="290"/>
+  <text class="t-month" x="112" y="308" text-anchor="middle">1月</text>
+  <text class="t-state" x="112" y="324" text-anchor="middle">正值</text>
+  <text class="t-month" x="224" y="308" text-anchor="middle">2月</text>
+  <text class="t-state" x="224" y="324" text-anchor="middle">0（已上报）</text>
+  <text class="t-month" x="336" y="308" text-anchor="middle">3月</text>
+  <text class="t-state" x="336" y="324" text-anchor="middle">数据缺失</text>
+  <text class="t-month" x="448" y="308" text-anchor="middle">4月</text>
+  <text class="t-state" x="448" y="324" text-anchor="middle">负值</text>
+  <text class="t-month" x="560" y="308" text-anchor="middle">5月</text>
+  <text class="t-state" x="560" y="324" text-anchor="middle">正值</text>
+
+  <!-- legend -->
+  <rect class="bar-pos" x="56" y="338" width="14" height="12" rx="2"/>
+  <text class="legend" x="76" y="348">正值（净增）</text>
+
+  <line class="zeroline" x1="196" y1="344" x2="210" y2="344" stroke-width="2.4"/>
+  <circle class="zero-mark" cx="203" cy="344" r="4"/>
+  <text class="legend" x="216" y="348">0（已上报，无增减）</text>
+
+  <rect class="miss-col" x="358" y="338" width="14" height="12" rx="2"/>
+  <text class="legend" x="378" y="348">缺失（未上报）</text>
+
+  <rect class="bar-neg" x="500" y="338" width="14" height="12" rx="2"/>
+  <text class="legend" x="520" y="348">负值（净减）</text>
+</svg></body></html>

@@ -1,5 +1,6 @@
 {
   "schemaVersion": 2,
+  "visualSettleMs": 500,
   "trialId": "W02-B-1",
   "caseId": "W02",
   "scenario": "heat",
@@ -8,7 +9,7 @@
   "resultSeq": 34,
   "casesPath": "results/dev-B-connected-20260917/cases.json",
   "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
-  "collectedAt": "2026-09-17T16:45:04.901Z",
+  "collectedAt": "2026-09-17T18:08:45.724Z",
   "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
   "checks": {
     "render": {
@@ -133,23 +134,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {},
-          "at": 57.09999990463257
+          "at": 81.70000004768372
         },
         {
           "type": "rendered",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {},
-          "at": 79.5
+          "at": 101
         },
         {
           "type": "resize",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {
             "height": 502
           },
-          "at": 79.5
+          "at": 101.70000004768372
         }
       ],
       "name": "initial",
@@ -186,23 +187,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {},
-          "at": 57.09999990463257
+          "at": 81.70000004768372
         },
         {
           "type": "rendered",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {},
-          "at": 79.5
+          "at": 101
         },
         {
           "type": "resize",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {
             "height": 502
           },
-          "at": 79.5
+          "at": 101.70000004768372
         }
       ],
       "name": "step-1",
@@ -239,23 +240,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {},
-          "at": 57.09999990463257
+          "at": 81.70000004768372
         },
         {
           "type": "rendered",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {},
-          "at": 79.5
+          "at": 101
         },
         {
           "type": "resize",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {
             "height": 502
           },
-          "at": 79.5
+          "at": 101.70000004768372
         }
       ],
       "name": "step-2",
@@ -292,23 +293,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {},
-          "at": 57.09999990463257
+          "at": 81.70000004768372
         },
         {
           "type": "rendered",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {},
-          "at": 79.5
+          "at": 101
         },
         {
           "type": "resize",
-          "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+          "channel": "f13de8b9019ee86e41b07a435fe87a01",
           "payload": {
             "height": 502
           },
-          "at": 79.5
+          "at": 101.70000004768372
         }
       ],
       "name": "reset",
@@ -345,23 +346,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "e338f8fdbf5679f1ee941a9aa3f00704",
+          "channel": "f3fa6c0892155fd3c54f1666272eff21",
           "payload": {},
-          "at": 267.7000000476837
+          "at": 2319.7999999523163
         },
         {
           "type": "rendered",
-          "channel": "e338f8fdbf5679f1ee941a9aa3f00704",
+          "channel": "f3fa6c0892155fd3c54f1666272eff21",
           "payload": {},
-          "at": 276.59999990463257
+          "at": 2323.600000143051
         },
         {
           "type": "resize",
-          "channel": "e338f8fdbf5679f1ee941a9aa3f00704",
+          "channel": "f3fa6c0892155fd3c54f1666272eff21",
           "payload": {
             "height": 336
           },
-          "at": 276.59999990463257
+          "at": 2323.600000143051
         }
       ],
       "name": "initial",
@@ -383,23 +384,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "c022d5b9d2aae364d1692ec7bfff4b74",
+          "channel": "b6ab91add37548504229ce71c667b872",
           "payload": {},
-          "at": 343.59999990463257
+          "at": 2873.4000000953674
         },
         {
           "type": "rendered",
-          "channel": "c022d5b9d2aae364d1692ec7bfff4b74",
+          "channel": "b6ab91add37548504229ce71c667b872",
           "payload": {},
-          "at": 351.09999990463257
+          "at": 2877.7000000476837
         },
         {
           "type": "resize",
-          "channel": "c022d5b9d2aae364d1692ec7bfff4b74",
+          "channel": "b6ab91add37548504229ce71c667b872",
           "payload": {
             "height": 502
           },
-          "at": 351.2000000476837
+          "at": 2877.7000000476837
         }
       ],
       "name": "initial",
@@ -421,23 +422,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "3e21b2d28e99ad8a2dc7df9e9be9d51a",
+          "channel": "b61208496574bdfbb7fefd956ab7bce9",
           "payload": {},
-          "at": 413.09999990463257
+          "at": 3447
         },
         {
           "type": "rendered",
-          "channel": "3e21b2d28e99ad8a2dc7df9e9be9d51a",
+          "channel": "b61208496574bdfbb7fefd956ab7bce9",
           "payload": {},
-          "at": 418.2999999523163
+          "at": 3452.7000000476837
         },
         {
           "type": "resize",
-          "channel": "3e21b2d28e99ad8a2dc7df9e9be9d51a",
+          "channel": "b61208496574bdfbb7fefd956ab7bce9",
           "payload": {
             "height": 336
           },
-          "at": 418.40000009536743
+          "at": 3452.7000000476837
         }
       ],
       "name": "initial",
@@ -449,23 +450,23 @@
   "messages": [
     {
       "type": "ready",
-      "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+      "channel": "f13de8b9019ee86e41b07a435fe87a01",
       "payload": {},
-      "at": 57.09999990463257
+      "at": 81.70000004768372
     },
     {
       "type": "rendered",
-      "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+      "channel": "f13de8b9019ee86e41b07a435fe87a01",
       "payload": {},
-      "at": 79.5
+      "at": 101
     },
     {
       "type": "resize",
-      "channel": "4f275a366866c68d5fd99c3f3b01cfdb",
+      "channel": "f13de8b9019ee86e41b07a435fe87a01",
       "payload": {
         "height": 502
       },
-      "at": 79.5
+      "at": 101.70000004768372
     }
   ],
   "console": [],
@@ -496,11 +497,48 @@
   "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
   "rendererHashKind": "recorded trial renderer source hash",
   "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
-  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
-  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
   "kind": "html",
   "sandbox": "allow-scripts",
   "playwrightVersion": "1.61.1",
   "networkRequests": [],
-  "browserVersion": "149.0.7827.55"
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
 }

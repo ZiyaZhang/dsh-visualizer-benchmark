@@ -89,6 +89,12 @@ class BrowserChecks(unittest.TestCase):
                         key = 'followupPayload' if scenario == 'errors' else 'interaction'
                         self.assertEqual(result['checks'][key]['status'], 'fail' if bad else 'pass', result['checks'][key])
                         self.assertEqual(result['checks']['content']['status'], 'pending')
+                        # A dark foreground with a light hover token produced false visual failures.
+                        light = result['themeTokens']['light']
+                        dark = result['themeTokens']['dark']
+                        self.assertNotEqual(light['--dsw-alias-interactive-bg-hover'], dark['--dsw-alias-interactive-bg-hover'])
+                        self.assertNotEqual(light['--dsw-alias-label-primary'], dark['--dsw-alias-label-primary'])
+                        self.assertTrue(all(value for value in dark.values()))
 
 
 if __name__ == '__main__':

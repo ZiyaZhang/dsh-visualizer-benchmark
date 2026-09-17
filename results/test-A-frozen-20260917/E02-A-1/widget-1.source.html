@@ -1,0 +1,109 @@
+<style>
+  .rg-wrap{font-family:ui-sans-serif,-apple-system,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;max-width:740px;margin:0 auto;color:#1f2937;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px 18px 14px;}
+  .rg-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+  .rg-title{font-size:16px;font-weight:700;letter-spacing:.01em;}
+  .rg-sub{font-size:12px;color:#6b7280;}
+  .rg-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .rg-chip{font:inherit;font-size:12.5px;padding:6px 12px;border:1px solid #d1d5db;background:#f9fafb;color:#374151;border-radius:999px;cursor:pointer;transition:.18s;}
+  .rg-chip:hover{border-color:#9ca3af;background:#f3f4f6;}
+  .rg-chip.on{background:#1f2937;border-color:#1f2937;color:#fff;}
+  .rg-stage{position:relative;}
+  .rg-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .rg-card{border:1.5px solid #e5e7eb;border-radius:12px;padding:14px;transition:.25s;background:#fff;}
+  .rg-card.win{border-color:#111827;box-shadow:0 4px 16px rgba(17,24,39,.10);}
+  .rg-card.dim{opacity:.42;filter:saturate(.4);}
+  .rg-card h3{margin:0 0 2px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:7px;}
+  .rg-dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .rg-rest .rg-dot{background:#0ea5e9;} .rg-gql .rg-dot{background:#e11d48;}
+  .rg-tag{font-size:11px;color:#6b7280;margin:0 0 10px;letter-spacing:.02em;}
+  .rg-verdict{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:6px;vertical-align:1px;}
+  .rg-verdict.pick{background:#dcfce7;color:#166534;}
+  .rg-verdict.alt{background:#f3f4f6;color:#6b7280;}
+  .rg-rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .rg-row{display:grid;grid-template-columns:62px 1fr;gap:9px;font-size:12.5px;line-height:1.45;}
+  .rg-k{color:#9ca3af;font-size:11px;padding-top:2px;white-space:nowrap;}
+  .rg-v{color:#374151;}
+  .rg-scale{margin-top:16px;border-top:1px dashed #e5e7eb;padding-top:12px;}
+  .rg-scale-lbl{display:flex;justify-content:space-between;font-size:11px;color:#6b7280;margin-bottom:6px;}
+  .rg-bar{position:relative;height:8px;border-radius:999px;background:linear-gradient(90deg,#0ea5e9,#93c5fd 46%,#fda4af 54%,#e11d48);}
+  .rg-mark{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:#fff;border:2.5px solid #111827;transform:translate(-50%,-50%);transition:left .35s cubic-bezier(.4,0,.2,1);box-shadow:0 1px 4px rgba(0,0,0,.18);}
+  .rg-note{margin-top:10px;font-size:11.5px;color:#6b7280;line-height:1.5;}
+  @media(max-width:560px){.rg-cols{grid-template-columns:1fr}.rg-row{grid-template-columns:56px 1fr}}
+</style>
+<div class="rg-wrap">
+  <div class="rg-head">
+    <div class="rg-title">REST vs GraphQL · 移动端接口取舍</div>
+    <div class="rg-sub">选一个团队现状，看推荐与理由</div>
+  </div>
+  <div class="rg-chips" id="rgChips"></div>
+
+  <div class="rg-cols">
+    <div class="rg-card rg-rest" id="cardRest">
+      <h3><span class="rg-dot"></span>REST <span class="rg-verdict" id="vRest">推荐</span></h3>
+      <p class="rg-tag">资源导向 · 约定优先 · 基建几乎为零</p>
+      <ul class="rg-rows">
+        <li class="rg-row"><span class="rg-k">上手成本</span><span class="rg-v">路径 + 动词即全部心智模型，新人当天能提交接口</span></li>
+        <li class="rg-row"><span class="rg-k">移动收益</span><span class="rg-v">HTTP 缓存 / CDN / ETag 直接可用，省流量省电</span></li>
+        <li class="rg-row"><span class="rg-k">主要代价</span><span class="rg-v">聚合靠 BFF 或多次往返；字段多了易接口膨胀</span></li>
+        <li class="rg-row"><span class="rg-k">运维面</span><span class="rg-v">无网关、无 resolver，看日志就能定位问题</span></li>
+        <li class="rg-row"><span class="rg-k">演进</span><span class="rg-v">/v1 /v2 并行，老客户端留在旧版本更省事</span></li>
+      </ul>
+    </div>
+
+    <div class="rg-card rg-gql" id="cardGql">
+      <h3><span class="rg-dot"></span>GraphQL <span class="rg-verdict" id="vGql">备选</span></h3>
+      <p class="rg-tag">契约导向 · 单端点 · 需要持续投入</p>
+      <ul class="rg-rows">
+        <li class="rg-row"><span class="rg-k">上手成本</span><span class="rg-v">schema / resolver / 前端 client 一套都要学，约 2 周起步</span></li>
+        <li class="rg-row"><span class="rg-k">移动收益</span><span class="rg-v">一屏一次请求精准取数，慢网下明显少一次往返</span></li>
+        <li class="rg-row"><span class="rg-k">主要代价</span><span class="rg-v">N+1、查询深度、响应体积必须主动设限</span></li>
+        <li class="rg-row"><span class="rg-k">运维面</span><span class="rg-v">网关 + 逐字段鉴权 + 可观测，都是长期税</span></li>
+        <li class="rg-row"><span class="rg-k">演进</span><span class="rg-v">单版本 + @deprecated，但客户端缓存更难做对</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rg-scale">
+    <div class="rg-scale-lbl"><span>适合 REST 的团队阶段</span><span>适合 GraphQL 的团队阶段</span></div>
+    <div class="rg-bar"><div class="rg-mark" id="rgMark" style="left:20%"></div></div>
+    <div class="rg-note" id="rgNote"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.getElementById('rgChips');
+  var cases=[
+    {t:'3 人 / 单一 App',pick:'rest',pos:18,
+     n:'结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。'},
+    {t:'5 人 / 开始有第二个客户端',pick:'rest',pos:44,
+     n:'结论：REST + BFF 过渡。多端差异先在服务端聚合解决，等差异固化、人手到位再评估 GraphQL。'},
+    {t:'8 人 / 多端 + 前端饱和',pick:'gql',pos:72,
+     n:'结论：GraphQL 开始划算。前端不再排队等接口，schema 成为真正的契约，但要先有人专职守网关。'},
+    {t:'10 人+ / 字段级授权',pick:'gql',pos:90,
+     n:'结论：GraphQL 收益最大。逐字段鉴权与审计只有 schema 层能优雅表达，此时 REST 的版本矩阵更痛。'}
+  ];
+  var note=document.getElementById('rgNote'), mark=document.getElementById('rgMark');
+  var cR=document.getElementById('cardRest'), cG=document.getElementById('cardGql');
+  var vR=document.getElementById('vRest'), vG=document.getElementById('vGql');
+  function select(i){
+    var c=cases[i];
+    [].forEach.call(root.children,function(b,j){b.classList.toggle('on',i===j);});
+    var restWins=c.pick==='rest';
+    cR.classList.toggle('win',restWins); cR.classList.toggle('dim',!restWins);
+    cG.classList.toggle('win',!restWins); cG.classList.toggle('dim',restWins);
+    vR.textContent=restWins?'推荐':'备选';
+    vG.textContent=restWins?'备选':'推荐';
+    vR.className='rg-verdict '+(restWins?'pick':'alt');
+    vG.className='rg-verdict '+(restWins?'alt':'pick');
+    mark.style.left=c.pos+'%';
+    note.textContent=c.n;
+  }
+  cases.forEach(function(c,i){
+    var b=document.createElement('button');
+    b.className='rg-chip'; b.type='button'; b.textContent=c.t;
+    b.addEventListener('click',function(){select(i);});
+    root.appendChild(b);
+  });
+  select(0);
+})();
+</script>

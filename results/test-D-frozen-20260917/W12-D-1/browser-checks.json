@@ -1,0 +1,490 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "W12-D-1",
+  "caseId": "W12",
+  "scenario": "errors",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/test-D-frozen-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:17:06.378Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pass",
+      "reason": "Requested implemented action sequence matched its visible-state oracle.",
+      "evidence": {
+        "states": [
+          "initial",
+          "selected-day-4",
+          "selected-day-2"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pass",
+      "reason": "Local-only action sequence must emit zero model follow-ups.",
+      "evidence": {
+        "sendPromptCount": 0
+      }
+    },
+    "followupPayload": {
+      "status": "pass",
+      "reason": "Each explicit analysis action must emit exactly one payload for the current selected day and rate.",
+      "evidence": {
+        "payloads": [
+          {
+            "day": 4,
+            "rate": "2.8",
+            "messages": [
+              "请分析我选中的日期：第4天，错误率 2.8%。（同期其余各天：0.4%、0.5%、0.3%、0.6%、0.5%、0.4%）为什么这一天的错误率会明显偏高，最可能的原因是什么，需要优先核查哪些环节？"
+            ]
+          },
+          {
+            "day": 2,
+            "rate": "0.5",
+            "messages": [
+              "请分析我选中的日期：第2天，错误率 0.5%。（同期其余各天：0.4%、0.3%、2.8%、0.6%、0.5%、0.4%）为什么这一天的错误率会明显偏高，最可能的原因是什么，需要优先核查哪些环节？"
+            ]
+          }
+        ]
+      }
+    },
+    "hostFollowup": {
+      "status": "pending",
+      "reason": "Real Host admission and model interpretation are not exercised in the preview.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "selected-day-4-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "selected-day-4-736-light.png",
+      "state": "selected-day-4",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "近 7 天错误率\n\n单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n\n错误率（%）\n0.0\n0.5\n1.0\n1.5\n2.0\n2.5\n3.0\n基线 0.5%\n0.4\n0.5\n0.3\n2.8\n0.6\n0.5\n0.4\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n已选日期\n未选择（点击某一天以选中）\n分析所选日期\n\n第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。\n错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5% 0.4 0.5 0.3 2.8 0.6 0.5 0.4 第1天 第2天 第3天 第4天 第5天 第6天 第7天",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 497,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "柱状图：第1至7天错误率，可点击选择一天",
+        "第1天 错误率 0.4%",
+        "第2天 错误率 0.5%",
+        "第3天 错误率 0.3%",
+        "第4天 错误率 2.8%，明显高于其余各天",
+        "第5天 错误率 0.6%",
+        "第6天 错误率 0.5%",
+        "第7天 错误率 0.4%"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+          "payload": {},
+          "at": 68
+        },
+        {
+          "type": "rendered",
+          "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+          "payload": {},
+          "at": 103.29999995231628
+        },
+        {
+          "type": "resize",
+          "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+          "payload": {
+            "height": 497
+          },
+          "at": 103.29999995231628
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"近 7 天错误率\" [level=3]\n- paragraph: 单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n- group \"柱状图：第1至7天错误率，可点击选择一天\":\n  - text: 错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5%\n  - button \"第1天 错误率 0.4%\": \"0.4\"\n  - button \"第2天 错误率 0.5%\": \"0.5\"\n  - button \"第3天 错误率 0.3%\": \"0.3\"\n  - button \"第4天 错误率 2.8%，明显高于其余各天\": \"2.8\"\n  - button \"第5天 错误率 0.6%\": \"0.6\"\n  - button \"第6天 错误率 0.5%\": \"0.5\"\n  - button \"第7天 错误率 0.4%\": \"0.4\"\n  - text: 第1天 第2天 第3天 第4天 第5天 第6天 第7天\n- text: 已选日期 未选择（点击某一天以选中）\n- button \"分析所选日期\" [disabled]\n- paragraph: 第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。"
+    },
+    {
+      "text": "近 7 天错误率\n\n单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n\n错误率（%）\n0.0\n0.5\n1.0\n1.5\n2.0\n2.5\n3.0\n基线 0.5%\n0.4\n0.5\n0.3\n2.8\n0.6\n0.5\n0.4\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n已选日期\n第4天 · 2.8% 错误率\n分析所选日期\n\n第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。\n错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5% 0.4 0.5 0.3 2.8 0.6 0.5 0.4 第1天 第2天 第3天 第4天 第5天 第6天 第7天",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 497,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "柱状图：第1至7天错误率，可点击选择一天",
+        "第1天 错误率 0.4%",
+        "第2天 错误率 0.5%",
+        "第3天 错误率 0.3%",
+        "第4天 错误率 2.8%，明显高于其余各天",
+        "第5天 错误率 0.6%",
+        "第6天 错误率 0.5%",
+        "第7天 错误率 0.4%"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+          "payload": {},
+          "at": 68
+        },
+        {
+          "type": "rendered",
+          "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+          "payload": {},
+          "at": 103.29999995231628
+        },
+        {
+          "type": "resize",
+          "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+          "payload": {
+            "height": 497
+          },
+          "at": 103.29999995231628
+        }
+      ],
+      "name": "selected-day-4",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"近 7 天错误率\" [level=3]\n- paragraph: 单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n- group \"柱状图：第1至7天错误率，可点击选择一天\":\n  - text: 错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5%\n  - button \"第1天 错误率 0.4%\": \"0.4\"\n  - button \"第2天 错误率 0.5%\": \"0.5\"\n  - button \"第3天 错误率 0.3%\": \"0.3\"\n  - button \"第4天 错误率 2.8%，明显高于其余各天\" [pressed]: \"2.8\"\n  - button \"第5天 错误率 0.6%\": \"0.6\"\n  - button \"第6天 错误率 0.5%\": \"0.5\"\n  - button \"第7天 错误率 0.4%\": \"0.4\"\n  - text: 第1天 第2天 第3天 第4天 第5天 第6天 第7天\n- text: 已选日期 第4天 · 2.8% 错误率\n- button \"分析所选日期\"\n- paragraph: 第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。"
+    },
+    {
+      "text": "近 7 天错误率\n\n单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n\n错误率（%）\n0.0\n0.5\n1.0\n1.5\n2.0\n2.5\n3.0\n基线 0.5%\n0.4\n0.5\n0.3\n2.8\n0.6\n0.5\n0.4\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n已选日期\n第2天 · 0.5% 错误率\n分析所选日期\n\n第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。\n错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5% 0.4 0.5 0.3 2.8 0.6 0.5 0.4 第1天 第2天 第3天 第4天 第5天 第6天 第7天",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 497,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "柱状图：第1至7天错误率，可点击选择一天",
+        "第1天 错误率 0.4%",
+        "第2天 错误率 0.5%",
+        "第3天 错误率 0.3%",
+        "第4天 错误率 2.8%，明显高于其余各天",
+        "第5天 错误率 0.6%",
+        "第6天 错误率 0.5%",
+        "第7天 错误率 0.4%"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+          "payload": {},
+          "at": 68
+        },
+        {
+          "type": "rendered",
+          "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+          "payload": {},
+          "at": 103.29999995231628
+        },
+        {
+          "type": "resize",
+          "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+          "payload": {
+            "height": 497
+          },
+          "at": 103.29999995231628
+        },
+        {
+          "type": "send_prompt",
+          "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+          "payload": {
+            "text": "请分析我选中的日期：第4天，错误率 2.8%。（同期其余各天：0.4%、0.5%、0.3%、0.6%、0.5%、0.4%）为什么这一天的错误率会明显偏高，最可能的原因是什么，需要优先核查哪些环节？"
+          },
+          "at": 1281.3999998569489
+        }
+      ],
+      "name": "selected-day-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"近 7 天错误率\" [level=3]\n- paragraph: 单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n- group \"柱状图：第1至7天错误率，可点击选择一天\":\n  - text: 错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5%\n  - button \"第1天 错误率 0.4%\": \"0.4\"\n  - button \"第2天 错误率 0.5%\" [pressed]: \"0.5\"\n  - button \"第3天 错误率 0.3%\": \"0.3\"\n  - button \"第4天 错误率 2.8%，明显高于其余各天\": \"2.8\"\n  - button \"第5天 错误率 0.6%\": \"0.6\"\n  - button \"第6天 错误率 0.5%\": \"0.5\"\n  - button \"第7天 错误率 0.4%\": \"0.4\"\n  - text: 第1天 第2天 第3天 第4天 第5天 第6天 第7天\n- text: 已选日期 第2天 · 0.5% 错误率\n- button \"分析所选日期\"\n- paragraph: 第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。"
+    },
+    {
+      "text": "近 7 天错误率\n\n单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n\n错误率（%）\n0.0\n0.5\n1.0\n1.5\n2.0\n2.5\n3.0\n基线 0.5%\n0.4\n0.5\n0.3\n2.8\n0.6\n0.5\n0.4\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n已选日期\n未选择（点击某一天以选中）\n分析所选日期\n\n第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。\n错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5% 0.4 0.5 0.3 2.8 0.6 0.5 0.4 第1天 第2天 第3天 第4天 第5天 第6天 第7天",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 432,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "柱状图：第1至7天错误率，可点击选择一天",
+        "第1天 错误率 0.4%",
+        "第2天 错误率 0.5%",
+        "第3天 错误率 0.3%",
+        "第4天 错误率 2.8%，明显高于其余各天",
+        "第5天 错误率 0.6%",
+        "第6天 错误率 0.5%",
+        "第7天 错误率 0.4%"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "20be87ef62a18ae8c2f233b403d4b916",
+          "payload": {},
+          "at": 1849.5
+        },
+        {
+          "type": "rendered",
+          "channel": "20be87ef62a18ae8c2f233b403d4b916",
+          "payload": {},
+          "at": 1849.7000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "20be87ef62a18ae8c2f233b403d4b916",
+          "payload": {
+            "height": 432
+          },
+          "at": 1849.7000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- heading \"近 7 天错误率\" [level=3]\n- paragraph: 单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n- group \"柱状图：第1至7天错误率，可点击选择一天\":\n  - text: 错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5%\n  - button \"第1天 错误率 0.4%\": \"0.4\"\n  - button \"第2天 错误率 0.5%\": \"0.5\"\n  - button \"第3天 错误率 0.3%\": \"0.3\"\n  - button \"第4天 错误率 2.8%，明显高于其余各天\": \"2.8\"\n  - button \"第5天 错误率 0.6%\": \"0.6\"\n  - button \"第6天 错误率 0.5%\": \"0.5\"\n  - button \"第7天 错误率 0.4%\": \"0.4\"\n  - text: 第1天 第2天 第3天 第4天 第5天 第6天 第7天\n- text: 已选日期 未选择（点击某一天以选中）\n- button \"分析所选日期\" [disabled]\n- paragraph: 第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。"
+    },
+    {
+      "text": "近 7 天错误率\n\n单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n\n错误率（%）\n0.0\n0.5\n1.0\n1.5\n2.0\n2.5\n3.0\n基线 0.5%\n0.4\n0.5\n0.3\n2.8\n0.6\n0.5\n0.4\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n已选日期\n未选择（点击某一天以选中）\n分析所选日期\n\n第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。\n错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5% 0.4 0.5 0.3 2.8 0.6 0.5 0.4 第1天 第2天 第3天 第4天 第5天 第6天 第7天",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 497,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "柱状图：第1至7天错误率，可点击选择一天",
+        "第1天 错误率 0.4%",
+        "第2天 错误率 0.5%",
+        "第3天 错误率 0.3%",
+        "第4天 错误率 2.8%，明显高于其余各天",
+        "第5天 错误率 0.6%",
+        "第6天 错误率 0.5%",
+        "第7天 错误率 0.4%"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "ce2c43fffca3c116ac80b13e02f3dbd7",
+          "payload": {},
+          "at": 2406.5
+        },
+        {
+          "type": "rendered",
+          "channel": "ce2c43fffca3c116ac80b13e02f3dbd7",
+          "payload": {},
+          "at": 2409
+        },
+        {
+          "type": "resize",
+          "channel": "ce2c43fffca3c116ac80b13e02f3dbd7",
+          "payload": {
+            "height": 497
+          },
+          "at": 2409
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- heading \"近 7 天错误率\" [level=3]\n- paragraph: 单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n- group \"柱状图：第1至7天错误率，可点击选择一天\":\n  - text: 错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5%\n  - button \"第1天 错误率 0.4%\": \"0.4\"\n  - button \"第2天 错误率 0.5%\": \"0.5\"\n  - button \"第3天 错误率 0.3%\": \"0.3\"\n  - button \"第4天 错误率 2.8%，明显高于其余各天\": \"2.8\"\n  - button \"第5天 错误率 0.6%\": \"0.6\"\n  - button \"第6天 错误率 0.5%\": \"0.5\"\n  - button \"第7天 错误率 0.4%\": \"0.4\"\n  - text: 第1天 第2天 第3天 第4天 第5天 第6天 第7天\n- text: 已选日期 未选择（点击某一天以选中）\n- button \"分析所选日期\" [disabled]\n- paragraph: 第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。"
+    },
+    {
+      "text": "近 7 天错误率\n\n单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n\n错误率（%）\n0.0\n0.5\n1.0\n1.5\n2.0\n2.5\n3.0\n基线 0.5%\n0.4\n0.5\n0.3\n2.8\n0.6\n0.5\n0.4\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n已选日期\n未选择（点击某一天以选中）\n分析所选日期\n\n第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。\n错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5% 0.4 0.5 0.3 2.8 0.6 0.5 0.4 第1天 第2天 第3天 第4天 第5天 第6天 第7天",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 432,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "柱状图：第1至7天错误率，可点击选择一天",
+        "第1天 错误率 0.4%",
+        "第2天 错误率 0.5%",
+        "第3天 错误率 0.3%",
+        "第4天 错误率 2.8%，明显高于其余各天",
+        "第5天 错误率 0.6%",
+        "第6天 错误率 0.5%",
+        "第7天 错误率 0.4%"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "2d80f125cc079cda44405451abd46a5e",
+          "payload": {},
+          "at": 2969.5
+        },
+        {
+          "type": "rendered",
+          "channel": "2d80f125cc079cda44405451abd46a5e",
+          "payload": {},
+          "at": 2973.2999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "2d80f125cc079cda44405451abd46a5e",
+          "payload": {
+            "height": 432
+          },
+          "at": 2973.2999999523163
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- heading \"近 7 天错误率\" [level=3]\n- paragraph: 单位：%（纵轴自 0 起）。点击某一天只会选中它；确认后按“分析所选日期”再发起追问。\n- group \"柱状图：第1至7天错误率，可点击选择一天\":\n  - text: 错误率（%） 0.0 0.5 1.0 1.5 2.0 2.5 3.0 基线 0.5%\n  - button \"第1天 错误率 0.4%\": \"0.4\"\n  - button \"第2天 错误率 0.5%\": \"0.5\"\n  - button \"第3天 错误率 0.3%\": \"0.3\"\n  - button \"第4天 错误率 2.8%，明显高于其余各天\": \"2.8\"\n  - button \"第5天 错误率 0.6%\": \"0.6\"\n  - button \"第6天 错误率 0.5%\": \"0.5\"\n  - button \"第7天 错误率 0.4%\": \"0.4\"\n  - text: 第1天 第2天 第3天 第4天 第5天 第6天 第7天\n- text: 已选日期 未选择（点击某一天以选中）\n- button \"分析所选日期\" [disabled]\n- paragraph: 第 4 天 2.8% 约为其余各天（0.3%–0.6%）的 5–9 倍，是这一周唯一的异常点。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+      "payload": {},
+      "at": 68
+    },
+    {
+      "type": "rendered",
+      "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+      "payload": {},
+      "at": 103.29999995231628
+    },
+    {
+      "type": "resize",
+      "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+      "payload": {
+        "height": 497
+      },
+      "at": 103.29999995231628
+    },
+    {
+      "type": "send_prompt",
+      "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+      "payload": {
+        "text": "请分析我选中的日期：第4天，错误率 2.8%。（同期其余各天：0.4%、0.5%、0.3%、0.6%、0.5%、0.4%）为什么这一天的错误率会明显偏高，最可能的原因是什么，需要优先核查哪些环节？"
+      },
+      "at": 1281.3999998569489
+    },
+    {
+      "type": "send_prompt",
+      "channel": "3a43dbc7fa2ccd5b25bf09bf60108651",
+      "payload": {
+        "text": "请分析我选中的日期：第2天，错误率 0.5%。（同期其余各天：0.4%、0.3%、2.8%、0.6%、0.5%、0.4%）为什么这一天的错误率会明显偏高，最可能的原因是什么，需要优先核查哪些环节？"
+      },
+      "at": 1831.7000000476837
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "a3ef74708bbdfb61227a6f08f5ce41e34d46c007eb0c7d8c590d738eda529f3a",
+  "previewSha256": "91a4e0e07acb51e39eb4b4c08551609834fd9ecd209b282f623dc2fb6340efb2",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

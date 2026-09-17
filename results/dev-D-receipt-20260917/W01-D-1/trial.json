@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W01-D-1",
+  "roundId": "dev-D-receipt-20260917",
+  "caseId": "W01",
+  "arm": "D",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "用一个可交互示意帮我理解二分查找。在有序数组 [2,5,8,12,16,23,38,56] 中找 23，可以点“下一步”逐轮看到 low、mid、high 和排除的区间，也能重置。直接在回复里演示。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "二分查找交互演示：在有序数组中查找 23",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/dev-D-receipt-20260917/W01-D-1/widget-1.source.html",
+      "preview": "results/dev-D-receipt-20260917/W01-D-1/widget-1.html",
+      "sha256": "544f8d92a6a50708aa657107160c47f1c840f4f3e82ae59c34b2686a40aea8bd",
+      "bytes": 10927
+    }
+  ],
+  "final": "I'll load the visualization skill first, since this is exactly an interactive-explanation task.\n\n上面就是可点的二分查找演示：每点一次「下一步」推进一轮，数组格子里会更新 low / mid / high 指针、当前候选区间（高亮）和被排除的区间（斜纹删除线），下方同步给出轮次、比较次数与判定结论；「重置」回到初始状态。\n\n核心在于每轮只比较一次 arr[mid]，就能丢掉一半候选——找 23 只用了 2 次比较（mid=3 时 12<23 排除 [0…3]，mid=5 时命中）。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_1TgVTWjBFhiDzXlT9kg41769",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_oHEJy58EYqM2kLBVrxLZ8295",
+        "argumentsSha256": "3f1f4d803164e45e579e5cad2805766b4bfc778423caa51cf7013bd060b4f58b",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_Fyuop87wiNhwyvKmEFMZ0588",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_fOT1IhzFdfosPulPeEeh2712",
+        "argumentsSha256": "671f8907c3359fc1298cf5bd04aaf3adbbcd95089053887067fc51d5e3fa7791",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "b4a61486776c236857ebf729e1a9152220db456275793758a10a6d92bff4fd0e"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "3da05db35392dabe5e809f19452c1e8f649551587bf4e8ac8cbdfb8879c0eeed"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "f6040c803166f23fa3550b41228002ea112a78d12284479bb426c5c90af0c3c8"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "3e0c8ea7b7a1c83ab7407b19c77ed0c5615aebbd08702182b9101bf415f79d1c"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8321,
+    "outputTokens": 12369,
+    "cacheReadTokens": 37760,
+    "cacheWriteTokens": 0,
+    "totalTokens": 58450
+  },
+  "elapsedSeconds": 48.819,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "52a73ba234c229626e55f7d840b4e9c9e493d0a62dcec5784668fac1bdd90843",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "9fc5c7cc88304fbfa1bfdbded0833c962b25307ad13cc55b3e7927557dc159d4"
+}

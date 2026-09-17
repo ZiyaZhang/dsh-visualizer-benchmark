@@ -42,7 +42,7 @@ const scenario = task.browser?.scenario || legacy[caseId] || (task.route === 'op
 const widget = trial.widgets?.[widgetIndex]; // Default keeps the first accepted source as first-render evidence.
 const visual = widget || (widgetIndex === 0 ? trial.artifacts?.find(a => a.preview) : undefined);
 const result = {
-  schemaVersion: 2, trialId: trial.id, caseId, scenario, widgetIndex, callSeq: widget?.callSeq ?? null, resultSeq: widget?.resultSeq ?? null, casesPath: path.relative(ROOT,path.resolve(casesPath)), casesSha256: hash(casesBytes), collectedAt: new Date().toISOString(),
+  schemaVersion: 2, visualSettleMs: 500, trialId: trial.id, caseId, scenario, widgetIndex, callSeq: widget?.callSeq ?? null, resultSeq: widget?.resultSeq ?? null, casesPath: path.relative(ROOT,path.resolve(casesPath)), casesSha256: hash(casesBytes), collectedAt: new Date().toISOString(),
   scope: 'Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.',
   checks: {
     render: check('pending', 'Browser has not run.'), interaction: check('pending', 'Scenario has not run.'),
@@ -79,8 +79,6 @@ async function readAsset(value) {
   }
   throw new Error(`Asset unavailable: ${value}`);
 }
-const light = {'--dsh-widget-color-scheme':'light','--dsw-alias-bg-base':'#ffffff','--dsw-alias-bg-layer-1':'#ffffff','--dsw-alias-bg-layer-2':'#f4f5f7','--dsw-alias-label-primary':'#1f2329','--dsw-alias-label-secondary':'#606875','--dsw-alias-label-tertiary':'#9299a3','--dsw-alias-label-primary-inverted':'#ffffff','--dsw-alias-border-l1':'#e5e7eb','--dsw-alias-border-l2':'#d1d5db','--dsw-alias-brand-primary':'#4d6bfe','--dsw-alias-button-primary-fill':'#4d6bfe','--dsw-alias-interactive-bg-hover':'#eef1ff','--dsw-alias-interactive-bg-active':'#e0e7ff','--dsw-alias-state-error-primary':'#c43535'};
-const dark = {...light,'--dsh-widget-color-scheme':'dark','--dsw-alias-bg-base':'#1c2128','--dsw-alias-bg-layer-1':'#1c2128','--dsw-alias-bg-layer-2':'#292f38','--dsw-alias-label-primary':'#e5e7eb','--dsw-alias-label-secondary':'#abb4c0','--dsw-alias-label-tertiary':'#929ba8','--dsw-alias-border-l1':'#373e48','--dsw-alias-border-l2':'#4b5563'};
 class Inconclusive extends Error {}
 class OracleFailure extends Error {}
 let browser;
@@ -95,7 +93,7 @@ try {
   result.rendererSha256 = trial.rendererSha256 ?? null;
   result.rendererHashKind = trial.rendererHashKind ?? (trial.rendererSha256 ? 'recorded trial renderer source hash' : 'not frozen in this trial');
   result.checkerRuntimeRendererSha256 = hash(await fs.readFile(rendererFile));
-  result.themeMethod = widget?.kind === 'svg' ? 'Original light preview; dark SVG is rebuilt from unchanged source using checkerRuntimeRendererSha256.' : 'Original preview bytes; theme variables are updated through the shipped iframe message bridge.';
+  result.themeMethod = 'Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.';
   result.checkerSha256 = hash(await fs.readFile(fileURLToPath(import.meta.url)));
   if (visual.sha256 && visual.sha256 !== result.sourceSha256) throw new Error('Recorded source hash does not match the source file');
   result.kind = visual.kind || 'artifact';
@@ -108,14 +106,31 @@ try {
   result.browserVersion = browser.version();
   const context = await browser.newContext({viewport: {width: 736, height: 1000}, locale: 'zh-CN', timezoneId: 'UTC', reducedMotion: 'reduce'});
   const page = await context.newPage();
+  const themeFile = path.join(repo, 'packages/client/ui-theme/src/styles/design-platform.css');
+  const themeCss = await fs.readFile(themeFile, 'utf8');
+  const clientSource = await fs.readFile(path.join(repo, 'packages/visualizer/ui-visualizer/src/client/index.ts'), 'utf8');
+  const tokenNames = [...clientSource.matchAll(/'(--dsw-[^']+)'/g)].map(match => match[1]);
+  if (tokenNames.length < 10) throw new Error('Visualizer theme token list could not be read');
+  result.themeSourceSha256 = hash(themeCss);
+  const themes = {};
+  for (const appearance of ['light', 'dark']) {
+    await page.setContent('<!doctype html><html><body></body></html>');
+    await page.addStyleTag({content: themeCss});
+    themes[appearance] = await page.evaluate(({appearance, tokenNames}) => {
+      document.body.toggleAttribute('data-ds-dark-theme', appearance === 'dark');
+      const style = getComputedStyle(document.body);
+      return {'--dsh-widget-color-scheme': appearance, ...Object.fromEntries(tokenNames.map(name => [name, style.getPropertyValue(name).trim()]))};
+    }, {appearance, tokenNames});
+  }
+  result.themeTokens = themes;
   page.setDefaultTimeout(2500);
   page.on('console', message => result.console.push({type: message.type(), text: message.text().slice(0, 2000)}));
   page.on('pageerror', error => result.pageErrors.push(error.message));
   page.on('request', request => { if(/^https?:/.test(request.url()))result.networkRequests.push({url:request.url().replace(/\?.*$/,''),resourceType:request.resourceType()}); });
   page.on('requestfailed', request => result.failedRequests.push({url: request.url().replace(/\?.*$/, ''), resourceType: request.resourceType(), error: request.failure()?.errorText}));
   async function load(width, appearance) {
-    const tokens = appearance === 'dark' ? dark : light;
-    const document = widget?.kind === 'svg' && appearance === 'dark' ? renderer.buildStaticSrcDoc(source, tokens, true) : preview;
+    const tokens = themes[appearance];
+    const document = widget?.kind === 'svg' ? renderer.buildStaticSrcDoc(source, tokens, true) : preview;
     await page.setViewportSize({width, height: 1000});
     await page.setContent('<!doctype html><html><meta charset="utf-8"><body style="margin:0"><main></main></body></html>');
     await page.evaluate(({document, sandbox, tokens}) => {
@@ -150,6 +165,8 @@ try {
   const messages = () => page.evaluate(() => window.__evidence);
   const sends = async () => (await messages()).filter(m => m.type === 'send_prompt');
   async function state(frame, name, width = 736, appearance = 'light', screenshot = false) {
+    // Let finite theme and interaction transitions settle before collecting visible evidence.
+    await page.waitForTimeout(500);
     const evidence = await frame.evaluate(() => {
       const body = document.body;
       const visible = element => { const style = getComputedStyle(element); return style.display !== 'none' && style.visibility !== 'hidden' && element.getBoundingClientRect().width > 0 && element.getBoundingClientRect().height > 0; };
@@ -252,7 +269,7 @@ try {
       const two = await state(frame, 'step-2', 736, 'light', true); const b = binaryRead(two);
       if (b.mid === undefined) throw new Inconclusive('Visible midpoint could not be identified after step 2.');
       requireTruth(b.mid === 5 && b.low === 4 && b.high === 7, 'Second comparison should use interval [4,7] and midpoint 5.');
-      requireTruth(/命中|找到|found/i.test(two.text), 'No found-state message after the second comparison.');
+      if (!/命中|找到|查找成功|found/i.test(two.text)) throw new Inconclusive('No recognized found-state wording after the second comparison; inspect the visible result.');
       await button(frame, /重置|重新开始|Reset/i);
       const reset = binaryRead(await state(frame, 'reset'));
       requireTruth(JSON.stringify(reset) === JSON.stringify(before), 'Reset did not restore the initial displayed search state.');

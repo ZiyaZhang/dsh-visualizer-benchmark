@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W08-D-2",
+  "roundId": "test-D-frozen-20260917",
+  "caseId": "W08",
+  "arm": "D",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "做一个可以拖动缓存命中率的成本示意。总输入固定1000个token，未命中每1000 token计1个示意成本单位，命中计0.1单位。显示命中与未命中的构成和总成本，0%、50%、100%都能选。直接在回复里演示，不代表真实价格。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "缓存命中率与输入成本示意",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/test-D-frozen-20260917/W08-D-2/widget-1.source.html",
+      "preview": "results/test-D-frozen-20260917/W08-D-2/widget-1.html",
+      "sha256": "cefb06ffb51007e7ab00e3417172ab9a541137019aecac193b0189d9caa932d6",
+      "bytes": 8394
+    }
+  ],
+  "final": "I'll load the visualization skill first, since this is an interactive inline visual.\n\n拖动滑块或点选 0% / 50% / 100%，上方看 token 构成的比例，下方看成本条相对“全未命中 1.00 单位”的伸缩：命中率越高，成本条越短，斜纹部分就是省下的份额（0% → 1.00、50% → 0.55、100% → 0.10 单位）。这只是按你给的示意口径（未命中 1 单位、命中 0.1 单位 / 1,000 token）算出的说明性数值，不代表任何真实价格。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_n4faXQ1XNYmbIklqtYEZ6668",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_xnSuItbLMaB1sVH7UzOd9663",
+        "argumentsSha256": "3f1f4d803164e45e579e5cad2805766b4bfc778423caa51cf7013bd060b4f58b",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_0TxKTFn5Kqv2fLaxhQIH5994",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_Be6maPzncrygFHrox2dN3876",
+        "argumentsSha256": "baad6dee046f672b86a8fcad7a8e8a59e1c79cea60595002ad2d988efd17cdfb",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "66437fc79e71d158e681f9b85437631ba2de7c220b45aba11e503cb26a822152"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "afc8eaa07838f5641f750c5f5b212d0719f1aaba2895cf1a5fbf553bb3ac8121"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "ce5dad0916a76361298524d207a8f8292d340929a9eb0863ca8e137db288cb0a"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "128b9ae50eb9fa04e7eee5fea14ddeae3ef71f1d947a2a173fa18f51f02822c2"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8401,
+    "outputTokens": 10751,
+    "cacheReadTokens": 36224,
+    "cacheWriteTokens": 0,
+    "totalTokens": 55376
+  },
+  "elapsedSeconds": 38.915,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "3bbd97ec1155f5fb444b268fae12f25e41b1b3c12c5e7399826b33ff87ebaffc",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "9d2fe7f2f1c33830b7f871c81f4f9b592b5ea116c82e035b83ed74206a1423c3"
+}

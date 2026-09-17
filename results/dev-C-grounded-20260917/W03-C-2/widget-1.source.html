@@ -1,0 +1,106 @@
+<style>
+  .nv-wrap { display: flex; flex-direction: column; gap: 10px; font-family: inherit; color: var(--dsw-alias-label-primary, #111827); }
+  .nv-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .nv-title { font-size: 14px; font-weight: 600; }
+  .nv-unit { font-size: 12px; color: var(--dsw-alias-label-tertiary, #6b7280); }
+  .nv-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--dsw-alias-label-secondary, #4b5563); }
+  .nv-li { display: flex; align-items: center; gap: 6px; }
+  .nv-swatch { width: 14px; height: 14px; flex: none; display: block; }
+  .nv-chart { width: 100%; max-width: 520px; height: auto; display: block; }
+</style>
+
+<div class="nv-wrap">
+  <div class="nv-head">
+    <span class="nv-title">每月净新增用户</span>
+    <span class="nv-unit">单位：人 · 1–5月</span>
+  </div>
+
+  <div class="nv-legend">
+    <span class="nv-li">
+      <svg class="nv-swatch" viewBox="0 0 14 14" aria-hidden="true"><rect width="14" height="14" rx="3" fill="var(--dsw-alias-brand-primary, #3b82f6)"/></svg>
+      正值：净增长
+    </span>
+    <span class="nv-li">
+      <svg class="nv-swatch" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="var(--dsw-alias-bg-base, #ffffff)" stroke="var(--dsw-alias-label-secondary, #4b5563)" stroke-width="2"/></svg>
+      0：无净变化
+    </span>
+    <span class="nv-li">
+      <svg class="nv-swatch" viewBox="0 0 14 14" aria-hidden="true"><rect y="9.5" width="14" height="4.5" rx="2" fill="var(--dsw-alias-state-error-primary, #dc2626)"/><rect width="14" height="1.5" fill="var(--dsw-alias-bg-base, #ffffff)"/></svg>
+      负值：净流失
+    </span>
+    <span class="nv-li">
+      <svg class="nv-swatch" viewBox="0 0 14 14" aria-hidden="true">
+        <defs>
+          <pattern id="nvHatchL" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+            <rect width="6" height="6" fill="var(--dsw-alias-bg-layer-2, #f3f4f6)"/>
+            <line x1="0" y1="0" x2="0" y2="6" stroke="var(--dsw-alias-label-tertiary, #9ca3af)" stroke-width="1.5" opacity="0.5"/>
+          </pattern>
+        </defs>
+        <rect x="0.5" y="0.5" width="13" height="13" rx="2" fill="url(#nvHatchL)" stroke="var(--dsw-alias-border-l2, #d1d5db)" stroke-dasharray="3 2"/>
+      </svg>
+      缺失：无记录
+    </span>
+  </div>
+
+  <svg class="nv-chart" viewBox="0 0 400 348" role="img" aria-label="每月净新增用户柱状图：1月120人，2月0人，3月数据缺失，4月-30人，5月80人">
+    <title>每月净新增用户（1–5月）</title>
+    <desc>以0为基准的柱状图：1月向上120人，2月为0（零线空心底点），3月数据缺失（斜纹占位，不画柱），4月向下30人，5月向上80人。</desc>
+    <defs>
+      <pattern id="nvHatch" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+        <rect width="8" height="8" fill="var(--dsw-alias-bg-layer-2, #f3f4f6)"/>
+        <line x1="0" y1="0" x2="0" y2="8" stroke="var(--dsw-alias-label-tertiary, #9ca3af)" stroke-width="1.5" opacity="0.5"/>
+      </pattern>
+    </defs>
+
+    <!-- 网格线：同一 0 基准的两侧刻度 -->
+    <g stroke="var(--dsw-alias-border-l1, #e5e7eb)" stroke-width="1">
+      <line x1="46" y1="30" x2="396" y2="30"/>
+      <line x1="46" y1="92" x2="396" y2="92"/>
+      <line x1="46" y1="154" x2="396" y2="154"/>
+      <line x1="46" y1="262.5" x2="396" y2="262.5"/>
+    </g>
+    <g font-size="12" text-anchor="end" fill="var(--dsw-alias-label-tertiary, #6b7280)">
+      <text x="40" y="34.5">120</text>
+      <text x="40" y="96.5">80</text>
+      <text x="40" y="158.5">40</text>
+      <text x="40" y="220.5">0</text>
+      <text x="40" y="267">-30</text>
+    </g>
+    <line x1="46" y1="26" x2="46" y2="266" stroke="var(--dsw-alias-border-l1, #e5e7eb)" stroke-width="1"/>
+
+    <!-- 3月：缺失，用斜纹占位，不画柱 -->
+    <rect x="202" y="30" width="38" height="232.5" rx="3" fill="url(#nvHatch)" stroke="var(--dsw-alias-border-l2, #d1d5db)" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="221" y="146" text-anchor="middle" font-size="13" font-weight="600" fill="var(--dsw-alias-label-secondary, #4b5563)">缺失</text>
+    <text x="221" y="164" text-anchor="middle" font-size="11" fill="var(--dsw-alias-label-tertiary, #6b7280)">无记录</text>
+
+    <!-- 0 基准线 -->
+    <line x1="46" y1="216" x2="396" y2="216" stroke="var(--dsw-alias-label-tertiary, #6b7280)" stroke-width="1.5"/>
+
+    <!-- 柱形：正值向上，负值向下 -->
+    <rect x="62" y="30" width="38" height="186" rx="3" fill="var(--dsw-alias-brand-primary, #3b82f6)"/>
+    <rect x="272" y="216" width="38" height="46.5" rx="3" fill="var(--dsw-alias-state-error-primary, #dc2626)"/>
+    <rect x="342" y="92" width="38" height="124" rx="3" fill="var(--dsw-alias-brand-primary, #3b82f6)"/>
+
+    <!-- 2月：恰好为 0，零线空心底点 -->
+    <circle cx="151" cy="216" r="5.5" fill="var(--dsw-alias-bg-base, #ffffff)" stroke="var(--dsw-alias-label-secondary, #4b5563)" stroke-width="2"/>
+
+    <!-- 数值标签 -->
+    <g text-anchor="middle" font-size="14" font-weight="700">
+      <text x="81" y="21" fill="var(--dsw-alias-label-primary, #111827)">120</text>
+      <text x="151" y="203" fill="var(--dsw-alias-label-secondary, #4b5563)">0</text>
+      <text x="291" y="279" fill="var(--dsw-alias-state-error-primary, #dc2626)">-30</text>
+      <text x="361" y="83" fill="var(--dsw-alias-label-primary, #111827)">80</text>
+    </g>
+
+    <!-- 月份 -->
+    <g text-anchor="middle" font-size="13" fill="var(--dsw-alias-label-secondary, #4b5563)">
+      <text x="81" y="304">1月</text>
+      <text x="151" y="304">2月</text>
+      <text x="221" y="304">3月</text>
+      <text x="291" y="304">4月</text>
+      <text x="361" y="304">5月</text>
+    </g>
+
+    <text x="46" y="332" font-size="11.5" fill="var(--dsw-alias-label-tertiary, #6b7280)">柱形以 0 为基准，向上为正、向下为负；斜纹仅表示数据缺失，不代表 0。</text>
+  </svg>
+</div>

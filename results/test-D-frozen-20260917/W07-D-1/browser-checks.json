@@ -1,0 +1,568 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "W07-D-1",
+  "caseId": "W07",
+  "scenario": "backoff",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/test-D-frozen-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:12:23.095Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pending",
+      "reason": "Cannot identify one step control.",
+      "evidence": {
+        "states": [
+          "initial",
+          "step-1",
+          "step-2",
+          "step-3",
+          "step-4",
+          "step-5"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pending",
+      "reason": "Local actions have not run.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "step-3-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "step-3-736-light.png",
+      "state": "step-3",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "指数退避 · 单步演示\n\n示意场景，不发起真实网络请求\n\n下一步\n重置\n已用请求\n0 / 4\n累计等待\n0 s\n下一次等待\n1 s\n状态\n待开始\n\n事件时间线\n\n请求 #1\n待执行\n等待 1 s\n待执行\n请求 #2\n待执行\n等待 2 s\n待执行\n请求 #3\n待执行\n\n退避阶梯（等待时长）\n\n第 1 次失败后\n1 s\n第 2 次失败后\n2 s\n第 3 次若也失败 未触发\n4 s\n\n待开始\n\n规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 470,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 112.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 470
+          },
+          "at": 155.20000004768372
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"指数退避 · 单步演示\" [level=3]\n- paragraph: 示意场景，不发起真实网络请求\n- button \"下一步\"\n- button \"重置\"\n- text: 已用请求 0 / 4 累计等待 0 s 下一次等待 1 s 状态 待开始\n- paragraph: 事件时间线\n- list:\n  - listitem: \"请求 #1 待执行\"\n  - listitem: 等待 1 s 待执行\n  - listitem: \"请求 #2 待执行\"\n  - listitem: 等待 2 s 待执行\n  - listitem: \"请求 #3 待执行\"\n- paragraph: 退避阶梯（等待时长）\n- text: 第 1 次失败后 1 s 第 2 次失败后 2 s 第 3 次若也失败 未触发 4 s\n- paragraph: 待开始\n- paragraph: 规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。"
+    },
+    {
+      "text": "指数退避 · 单步演示\n\n示意场景，不发起真实网络请求\n\n下一步\n重置\n已用请求\n1 / 4\n累计等待\n0 s\n下一次等待\n1 s\n状态\n第 1 次失败 · 准备等待 1 s\n\n事件时间线\n\n请求 #1 → 失败\n下一次等待 1 s\n等待 1 s\n待执行\n请求 #2\n待执行\n等待 2 s\n待执行\n请求 #3\n待执行\n\n退避阶梯（等待时长）\n\n第 1 次失败后\n1 s\n第 2 次失败后\n2 s\n第 3 次若也失败 未触发\n4 s\n\n第 1 次失败 · 准备等待 1 s\n\n规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 482,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 112.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 470
+          },
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 482
+          },
+          "at": 812.7999999523163
+        }
+      ],
+      "name": "step-1",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"指数退避 · 单步演示\" [level=3]\n- paragraph: 示意场景，不发起真实网络请求\n- button \"下一步\"\n- button \"重置\"\n- text: 已用请求 1 / 4 累计等待 0 s 下一次等待 1 s 状态 第 1 次失败 · 准备等待 1 s\n- paragraph: 事件时间线\n- list:\n  - listitem: \"请求 #1 → 失败 下一次等待 1 s\"\n  - listitem: 等待 1 s 待执行\n  - listitem: \"请求 #2 待执行\"\n  - listitem: 等待 2 s 待执行\n  - listitem: \"请求 #3 待执行\"\n- paragraph: 退避阶梯（等待时长）\n- text: 第 1 次失败后 1 s 第 2 次失败后 2 s 第 3 次若也失败 未触发 4 s\n- paragraph: 第 1 次失败 · 准备等待 1 s\n- paragraph: 规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。"
+    },
+    {
+      "text": "指数退避 · 单步演示\n\n示意场景，不发起真实网络请求\n\n下一步\n重置\n已用请求\n1 / 4\n累计等待\n1 s\n下一次等待\n2 s\n状态\n等待完成 · 准备第 2 次请求\n\n事件时间线\n\n请求 #1 → 失败\n下一次等待 1 s\n已等待 1 s\n累计 1 s\n请求 #2\n待执行\n等待 2 s\n待执行\n请求 #3\n待执行\n\n退避阶梯（等待时长）\n\n第 1 次失败后\n1 s\n第 2 次失败后\n2 s\n第 3 次若也失败 未触发\n4 s\n\n等待完成 · 准备第 2 次请求\n\n规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 482,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 112.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 470
+          },
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 482
+          },
+          "at": 812.7999999523163
+        }
+      ],
+      "name": "step-2",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"指数退避 · 单步演示\" [level=3]\n- paragraph: 示意场景，不发起真实网络请求\n- button \"下一步\"\n- button \"重置\"\n- text: 已用请求 1 / 4 累计等待 1 s 下一次等待 2 s 状态 等待完成 · 准备第 2 次请求\n- paragraph: 事件时间线\n- list:\n  - listitem: \"请求 #1 → 失败 下一次等待 1 s\"\n  - listitem: 已等待 1 s 累计 1 s\n  - listitem: \"请求 #2 待执行\"\n  - listitem: 等待 2 s 待执行\n  - listitem: \"请求 #3 待执行\"\n- paragraph: 退避阶梯（等待时长）\n- text: 第 1 次失败后 1 s 第 2 次失败后 2 s 第 3 次若也失败 未触发 4 s\n- paragraph: 等待完成 · 准备第 2 次请求\n- paragraph: 规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。"
+    },
+    {
+      "text": "指数退避 · 单步演示\n\n示意场景，不发起真实网络请求\n\n下一步\n重置\n已用请求\n2 / 4\n累计等待\n1 s\n下一次等待\n2 s\n状态\n第 2 次失败 · 准备等待 2 s\n\n事件时间线\n\n请求 #1 → 失败\n下一次等待 1 s\n已等待 1 s\n累计 1 s\n请求 #2 → 失败\n下一次等待 2 s\n等待 2 s\n待执行\n请求 #3\n待执行\n\n退避阶梯（等待时长）\n\n第 1 次失败后\n1 s\n第 2 次失败后\n2 s\n第 3 次若也失败 未触发\n4 s\n\n第 2 次失败 · 准备等待 2 s\n\n规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 482,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 112.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 470
+          },
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 482
+          },
+          "at": 812.7999999523163
+        }
+      ],
+      "name": "step-3",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"指数退避 · 单步演示\" [level=3]\n- paragraph: 示意场景，不发起真实网络请求\n- button \"下一步\"\n- button \"重置\"\n- text: 已用请求 2 / 4 累计等待 1 s 下一次等待 2 s 状态 第 2 次失败 · 准备等待 2 s\n- paragraph: 事件时间线\n- list:\n  - listitem: \"请求 #1 → 失败 下一次等待 1 s\"\n  - listitem: 已等待 1 s 累计 1 s\n  - listitem: \"请求 #2 → 失败 下一次等待 2 s\"\n  - listitem: 等待 2 s 待执行\n  - listitem: \"请求 #3 待执行\"\n- paragraph: 退避阶梯（等待时长）\n- text: 第 1 次失败后 1 s 第 2 次失败后 2 s 第 3 次若也失败 未触发 4 s\n- paragraph: 第 2 次失败 · 准备等待 2 s\n- paragraph: 规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。"
+    },
+    {
+      "text": "指数退避 · 单步演示\n\n示意场景，不发起真实网络请求\n\n下一步\n重置\n已用请求\n2 / 4\n累计等待\n3 s\n下一次等待\n— s\n状态\n等待完成 · 准备第 3 次请求\n\n事件时间线\n\n请求 #1 → 失败\n下一次等待 1 s\n已等待 1 s\n累计 1 s\n请求 #2 → 失败\n下一次等待 2 s\n已等待 2 s\n累计 3 s\n请求 #3\n待执行\n\n退避阶梯（等待时长）\n\n第 1 次失败后\n1 s\n第 2 次失败后\n2 s\n第 3 次若也失败 未触发\n4 s\n\n等待完成 · 准备第 3 次请求\n\n规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 482,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 112.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 470
+          },
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 482
+          },
+          "at": 812.7999999523163
+        }
+      ],
+      "name": "step-4",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"指数退避 · 单步演示\" [level=3]\n- paragraph: 示意场景，不发起真实网络请求\n- button \"下一步\"\n- button \"重置\"\n- text: 已用请求 2 / 4 累计等待 3 s 下一次等待 — s 状态 等待完成 · 准备第 3 次请求\n- paragraph: 事件时间线\n- list:\n  - listitem: \"请求 #1 → 失败 下一次等待 1 s\"\n  - listitem: 已等待 1 s 累计 1 s\n  - listitem: \"请求 #2 → 失败 下一次等待 2 s\"\n  - listitem: 已等待 2 s 累计 3 s\n  - listitem: \"请求 #3 待执行\"\n- paragraph: 退避阶梯（等待时长）\n- text: 第 1 次失败后 1 s 第 2 次失败后 2 s 第 3 次若也失败 未触发 4 s\n- paragraph: 等待完成 · 准备第 3 次请求\n- paragraph: 规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。"
+    },
+    {
+      "text": "指数退避 · 单步演示\n\n示意场景，不发起真实网络请求\n\n已结束\n重置\n已用请求\n3 / 4\n累计等待\n3 s\n下一次等待\n— s\n状态\n第 3 次成功 · 已停止\n\n事件时间线\n\n请求 #1 → 失败\n下一次等待 1 s\n已等待 1 s\n累计 1 s\n请求 #2 → 失败\n下一次等待 2 s\n已等待 2 s\n累计 3 s\n请求 #3 → 成功\n停止重试\n\n退避阶梯（等待时长）\n\n第 1 次失败后\n1 s\n第 2 次失败后\n2 s\n第 3 次若也失败 未触发\n4 s\n\n第 3 次成功 · 已停止\n\n规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 470,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 112.60000014305115
+        },
+        {
+          "type": "rendered",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {},
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 470
+          },
+          "at": 155.20000004768372
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 482
+          },
+          "at": 812.7999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "0654a14c6c4da30024fd9bc89675d97a",
+          "payload": {
+            "height": 470
+          },
+          "at": 3028.4000000953674
+        }
+      ],
+      "name": "step-5",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"指数退避 · 单步演示\" [level=3]\n- paragraph: 示意场景，不发起真实网络请求\n- button \"已结束\" [disabled]\n- button \"重置\"\n- text: 已用请求 3 / 4 累计等待 3 s 下一次等待 — s 状态 第 3 次成功 · 已停止\n- paragraph: 事件时间线\n- list:\n  - listitem: \"请求 #1 → 失败 下一次等待 1 s\"\n  - listitem: 已等待 1 s 累计 1 s\n  - listitem: \"请求 #2 → 失败 下一次等待 2 s\"\n  - listitem: 已等待 2 s 累计 3 s\n  - listitem: \"请求 #3 → 成功 停止重试\"\n- paragraph: 退避阶梯（等待时长）\n- text: 第 1 次失败后 1 s 第 2 次失败后 2 s 第 3 次若也失败 未触发 4 s\n- paragraph: 第 3 次成功 · 已停止\n- paragraph: 规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。"
+    },
+    {
+      "text": "指数退避 · 单步演示\n\n示意场景，不发起真实网络请求\n\n下一步\n重置\n已用请求\n0 / 4\n累计等待\n0 s\n下一次等待\n1 s\n状态\n待开始\n\n事件时间线\n\n请求 #1\n待执行\n等待 1 s\n待执行\n请求 #2\n待执行\n等待 2 s\n待执行\n请求 #3\n待执行\n\n退避阶梯（等待时长）\n\n第 1 次失败后\n1 s\n第 2 次失败后\n2 s\n第 3 次若也失败 未触发\n4 s\n\n待开始\n\n规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 796,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "e31f10174a9696603d3e01c321e3c1da",
+          "payload": {},
+          "at": 3556
+        },
+        {
+          "type": "rendered",
+          "channel": "e31f10174a9696603d3e01c321e3c1da",
+          "payload": {},
+          "at": 3561.100000143051
+        },
+        {
+          "type": "resize",
+          "channel": "e31f10174a9696603d3e01c321e3c1da",
+          "payload": {
+            "height": 796
+          },
+          "at": 3561.100000143051
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- heading \"指数退避 · 单步演示\" [level=3]\n- paragraph: 示意场景，不发起真实网络请求\n- button \"下一步\"\n- button \"重置\"\n- text: 已用请求 0 / 4 累计等待 0 s 下一次等待 1 s 状态 待开始\n- paragraph: 事件时间线\n- list:\n  - listitem: \"请求 #1 待执行\"\n  - listitem: 等待 1 s 待执行\n  - listitem: \"请求 #2 待执行\"\n  - listitem: 等待 2 s 待执行\n  - listitem: \"请求 #3 待执行\"\n- paragraph: 退避阶梯（等待时长）\n- text: 第 1 次失败后 1 s 第 2 次失败后 2 s 第 3 次若也失败 未触发 4 s\n- paragraph: 待开始\n- paragraph: 规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。"
+    },
+    {
+      "text": "指数退避 · 单步演示\n\n示意场景，不发起真实网络请求\n\n下一步\n重置\n已用请求\n0 / 4\n累计等待\n0 s\n下一次等待\n1 s\n状态\n待开始\n\n事件时间线\n\n请求 #1\n待执行\n等待 1 s\n待执行\n请求 #2\n待执行\n等待 2 s\n待执行\n请求 #3\n待执行\n\n退避阶梯（等待时长）\n\n第 1 次失败后\n1 s\n第 2 次失败后\n2 s\n第 3 次若也失败 未触发\n4 s\n\n待开始\n\n规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 470,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "8f3bdba9b755ac2ce3c308f3480d7c1d",
+          "payload": {},
+          "at": 4131.400000095367
+        },
+        {
+          "type": "rendered",
+          "channel": "8f3bdba9b755ac2ce3c308f3480d7c1d",
+          "payload": {},
+          "at": 4136.100000143051
+        },
+        {
+          "type": "resize",
+          "channel": "8f3bdba9b755ac2ce3c308f3480d7c1d",
+          "payload": {
+            "height": 470
+          },
+          "at": 4136.100000143051
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- heading \"指数退避 · 单步演示\" [level=3]\n- paragraph: 示意场景，不发起真实网络请求\n- button \"下一步\"\n- button \"重置\"\n- text: 已用请求 0 / 4 累计等待 0 s 下一次等待 1 s 状态 待开始\n- paragraph: 事件时间线\n- list:\n  - listitem: \"请求 #1 待执行\"\n  - listitem: 等待 1 s 待执行\n  - listitem: \"请求 #2 待执行\"\n  - listitem: 等待 2 s 待执行\n  - listitem: \"请求 #3 待执行\"\n- paragraph: 退避阶梯（等待时长）\n- text: 第 1 次失败后 1 s 第 2 次失败后 2 s 第 3 次若也失败 未触发 4 s\n- paragraph: 待开始\n- paragraph: 规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。"
+    },
+    {
+      "text": "指数退避 · 单步演示\n\n示意场景，不发起真实网络请求\n\n下一步\n重置\n已用请求\n0 / 4\n累计等待\n0 s\n下一次等待\n1 s\n状态\n待开始\n\n事件时间线\n\n请求 #1\n待执行\n等待 1 s\n待执行\n请求 #2\n待执行\n等待 2 s\n待执行\n请求 #3\n待执行\n\n退避阶梯（等待时长）\n\n第 1 次失败后\n1 s\n第 2 次失败后\n2 s\n第 3 次若也失败 未触发\n4 s\n\n待开始\n\n规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 796,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "3a8dad13e2e1fe2c5ac79fdc4e206815",
+          "payload": {},
+          "at": 4699.700000047684
+        },
+        {
+          "type": "rendered",
+          "channel": "3a8dad13e2e1fe2c5ac79fdc4e206815",
+          "payload": {},
+          "at": 4703.400000095367
+        },
+        {
+          "type": "resize",
+          "channel": "3a8dad13e2e1fe2c5ac79fdc4e206815",
+          "payload": {
+            "height": 796
+          },
+          "at": 4703.400000095367
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- heading \"指数退避 · 单步演示\" [level=3]\n- paragraph: 示意场景，不发起真实网络请求\n- button \"下一步\"\n- button \"重置\"\n- text: 已用请求 0 / 4 累计等待 0 s 下一次等待 1 s 状态 待开始\n- paragraph: 事件时间线\n- list:\n  - listitem: \"请求 #1 待执行\"\n  - listitem: 等待 1 s 待执行\n  - listitem: \"请求 #2 待执行\"\n  - listitem: 等待 2 s 待执行\n  - listitem: \"请求 #3 待执行\"\n- paragraph: 退避阶梯（等待时长）\n- text: 第 1 次失败后 1 s 第 2 次失败后 2 s 第 3 次若也失败 未触发 4 s\n- paragraph: 待开始\n- paragraph: 规则：最多 4 次请求；第 3 次成功即停止，因此第 4 次不会发起，等待阶梯中的 4 s 也不会被触发。等待按 1 → 2 → 4 秒翻倍。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "0654a14c6c4da30024fd9bc89675d97a",
+      "payload": {},
+      "at": 112.60000014305115
+    },
+    {
+      "type": "rendered",
+      "channel": "0654a14c6c4da30024fd9bc89675d97a",
+      "payload": {},
+      "at": 155.20000004768372
+    },
+    {
+      "type": "resize",
+      "channel": "0654a14c6c4da30024fd9bc89675d97a",
+      "payload": {
+        "height": 470
+      },
+      "at": 155.20000004768372
+    },
+    {
+      "type": "resize",
+      "channel": "0654a14c6c4da30024fd9bc89675d97a",
+      "payload": {
+        "height": 482
+      },
+      "at": 812.7999999523163
+    },
+    {
+      "type": "resize",
+      "channel": "0654a14c6c4da30024fd9bc89675d97a",
+      "payload": {
+        "height": 470
+      },
+      "at": 3028.4000000953674
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "0f000504e323ffae90e2fd81af2109b1bcc61e9088a547d42419969bc4a16bb0",
+  "previewSha256": "129ccc554505e3cd2eb1960be1d43766610c809b745f372cff1e2c146f0ec2b2",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

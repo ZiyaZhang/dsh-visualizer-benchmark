@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "E02-D-1",
+  "roundId": "test-D-frozen-20260917",
+  "caseId": "E02",
+  "arm": "D",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "一个小团队要给移动端提供数据接口，怎么理解 REST 和 GraphQL 的取舍？",
+  "expectedRoute": "optional",
+  "widgets": [
+    {
+      "title": "REST 还是 GraphQL：小团队的取舍天平",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/test-D-frozen-20260917/E02-D-1/widget-1.source.html",
+      "preview": "results/test-D-frozen-20260917/E02-D-1/widget-1.html",
+      "sha256": "a2aa9659c950e58ac4c0587bb0daf467c8efc9e4ade10a416d59847d6c926ee3",
+      "bytes": 14328
+    }
+  ],
+  "final": "**换个角度问就不会纠结：这不是“谁更先进”，而是这笔复杂度你打算记在谁的账上。**\n\n- **REST** 把复杂度推给调用方：客户端拼装、多次往返，后端在客户端分化时被迫长出一堆“给某端专用”的字段和版本。\n- **GraphQL** 把复杂度收到服务端平台层：一张 schema 换来客户端自由，但 N+1、查询限流、缓存失效、字段级授权、错误语义都得你自己建，而且是长期维护。\n\n对你们这种规模，判别式其实很硬：**客户端只有 1–2 个且同属你们、后端是单体、接口变化不算剧烈 → REST（必要时加一层薄 BFF 聚合端点）**；**有 3 个以上需求分化的端、界面迭代快、后端已经是多服务要聚合、且有人愿意长期维护网关 → GraphQL 才开始划算**。缺了最后一条“有人维护”，前几条再成立也容易烂尾。\n\n还有两条中间路线值得先试：REST 内部接口 + 边缘 GraphQL 网关，只覆盖最重的聚合场景；或者全栈 TypeScript 时用 tRPC 这类类型化 RPC，用最低成本拿到“改字段不用同步文档”的收益。\n\n上面那个天平可以按你们的真实条件拨一拨——把“平台人力”设成 0 人，你会看到天平明显倒向 REST，这正是小团队最常被低估的一项成本。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_JFd91Tc0jHAn0x4G6agC2485",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_qwB4HsG3kDP30Vaez0vq9706",
+        "argumentsSha256": "3f1f4d803164e45e579e5cad2805766b4bfc778423caa51cf7013bd060b4f58b",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_ylkVqqTUsXsPnClQUR2X6852",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_iaxLDtY9gnVmAp7rRGUM6186",
+        "argumentsSha256": "eb3aeeeaa3a5fd72e1e01c4d2616b4887c2270c9fdab3d2117c48e78fd421290",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "5528b573ad65e12b1fb3824c00d4f855fa40ecae71c50c425e90d2782f9b4f04"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "187033f8223da5da858a6431752b3f3f3aa855bb51899d9367a48df20de7cf6c"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "24a624b5f8ed18307c9afda83bc2e5cca3f702cb254d20e306f0a82d3581606a"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "32737f7b81592d2939faed8ab221099f66a4806f0874177fb26306c23e21777a"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8440,
+    "outputTokens": 14261,
+    "cacheReadTokens": 39424,
+    "cacheWriteTokens": 0,
+    "totalTokens": 62125
+  },
+  "elapsedSeconds": 56.191,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "96693fc2775304c63cbfb7529797e9f4931c175d2382ae8caf4726914d60b29a",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "aa1fb24d1eb28a1cfc10d042439ebc436cfee7a46b8273c37be2117e08bf3290"
+}

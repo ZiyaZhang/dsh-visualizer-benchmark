@@ -1,0 +1,244 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><div class="hc">
+  <style>
+    .hc{position:relative;max-width:640px;display:flex;flex-direction:column;gap:12px;padding:14px 16px;border:1px solid var(--dsw-alias-border-l1,rgba(127,127,127,.25));border-radius:14px;background:var(--dsw-alias-bg-layer-1,rgba(127,127,127,.06));color:var(--dsw-alias-label-primary,#1f2328);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .hc-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .hc-title{font-size:14px;font-weight:650}
+    .hc-sub{font-size:11.5px;color:var(--dsw-alias-label-tertiary,#6b7280);margin-top:2px}
+    .hc-count{font-size:12px;font-variant-numeric:tabular-nums;color:var(--dsw-alias-label-secondary,#4b5563);background:var(--dsw-alias-bg-layer-2,rgba(127,127,127,.12));border-radius:999px;padding:3px 10px;white-space:nowrap}
+    .hc svg{width:100%;height:auto;display:block;overflow:visible}
+    .hc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(94px,1fr));gap:8px}
+    .hc-node{min-width:0;display:flex;flex-direction:column;gap:2px;padding:7px 9px;border:1px solid var(--dsw-alias-border-l1,rgba(127,127,127,.2));border-radius:10px;background:var(--dsw-alias-bg-layer-2,rgba(127,127,127,.1))}
+    .hc-nlabel{font-size:11px;color:var(--dsw-alias-label-tertiary,#6b7280)}
+    .hc-temp{font-size:17px;font-weight:650;line-height:1.15;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .hc-unit{font-size:11px;font-weight:500;color:var(--dsw-alias-label-secondary,#4b5563);margin-left:2px}
+    .hc-delta{font-size:10.5px;min-height:13px;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--dsw-alias-label-secondary,#4b5563)}
+    .hc-dim{color:var(--dsw-alias-label-tertiary,#9ca3af)}
+    .hc-fixed{color:var(--dsw-alias-brand-primary,#2563eb)}
+    .hc-ctrl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    button.hc-btn{font:inherit;font-size:13px;font-weight:600;padding:7px 16px;border-radius:9px;cursor:pointer;border:1px solid var(--dsw-alias-border-l2,rgba(127,127,127,.4));background:var(--dsw-alias-bg-layer-2,rgba(127,127,127,.12));color:inherit}
+    button.hc-btn:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(127,127,127,.2))}
+    button.hc-primary{background:var(--dsw-alias-button-primary-fill,#2563eb);color:var(--dsw-alias-label-primary-inverted,#fff);border-color:transparent}
+    button.hc-primary:hover{filter:brightness(1.07)}
+    button.hc-btn:focus-visible{outline:2px solid var(--dsw-alias-brand-primary,#2563eb);outline-offset:2px}
+    .hc-note{margin:0;font-size:11.5px;line-height:1.55;color:var(--dsw-alias-label-secondary,#4b5563)}
+    .hc-note strong{color:var(--dsw-alias-label-primary,#1f2328);font-weight:650}
+    .hc-note code{display:inline-block;margin:3px 0;padding:2px 6px;border-radius:6px;background:var(--dsw-alias-bg-layer-2,rgba(127,127,127,.12));font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--dsw-alias-label-primary,#1f2328)}
+    .hc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    @media (prefers-reduced-motion:no-preference){.hc-bar,.hc-mark{transition:y .2s ease,cy .2s ease,height .2s ease,fill .25s ease}}
+  </style>
+
+  <div class="hc-head">
+    <div>
+      <div class="hc-title">一维热传导 · 5 节点离散演示</div>
+      <div class="hc-sub">x₀ = 100°C、x₄ = 0°C 固定，x₁ x₂ x₃ 初始 0°C</div>
+    </div>
+    <span class="hc-count" id="hc-count">步数 n = 0</span>
+  </div>
+
+  <svg id="hc-svg" viewBox="0 0 560 236" role="img" aria-label="5 节点杆的温度分布">
+    <g stroke="var(--dsw-alias-border-l1,rgba(127,127,127,.28))" stroke-width="1" stroke-dasharray="3 5">
+      <line x1="54" y1="28" x2="512" y2="28"/>
+      <line x1="54" y1="65" x2="512" y2="65"/>
+      <line x1="54" y1="102" x2="512" y2="102"/>
+      <line x1="54" y1="139" x2="512" y2="139"/>
+    </g>
+    <g font-size="11" text-anchor="end" font-variant-numeric="tabular-nums" fill="var(--dsw-alias-label-tertiary,#6b7280)">
+      <text x="46" y="32">100</text>
+      <text x="46" y="69">75</text>
+      <text x="46" y="106">50</text>
+      <text x="46" y="143">25</text>
+      <text x="46" y="180">0</text>
+    </g>
+    <text x="46" y="15" font-size="10.5" text-anchor="start" fill="var(--dsw-alias-label-tertiary,#6b7280)">°C</text>
+    <g id="hc-bars"></g>
+    <polyline id="hc-line" fill="none" stroke="var(--dsw-alias-label-tertiary,#9ca3af)" stroke-width="1.5" stroke-dasharray="4 4" stroke-opacity=".7"/>
+    <g id="hc-marks"></g>
+    <g id="hc-vals" font-size="13" font-weight="650" text-anchor="middle" font-variant-numeric="tabular-nums" fill="var(--dsw-alias-label-primary,#1f2328)"></g>
+    <line x1="54" y1="176" x2="512" y2="176" stroke="var(--dsw-alias-border-l2,rgba(127,127,127,.55))" stroke-width="1.2"/>
+    <g font-size="11.5" text-anchor="middle" fill="var(--dsw-alias-label-secondary,#4b5563)">
+      <text x="88" y="195">x₀</text><text x="193" y="195">x₁</text><text x="298" y="195">x₂</text><text x="403" y="195">x₃</text><text x="508" y="195">x₄</text>
+    </g>
+    <g font-size="10.5" text-anchor="middle" fill="var(--dsw-alias-brand-primary,#2563eb)">
+      <text x="88" y="214">两端固定 100°C</text><text x="508" y="214">两端固定 0°C</text>
+    </g>
+    <text x="298" y="214" font-size="10.5" text-anchor="middle" fill="var(--dsw-alias-label-tertiary,#9ca3af)">中间 3 个节点参与更新</text>
+  </svg>
+
+  <div class="hc-grid" id="hc-readout">
+    <div class="hc-node"><div class="hc-nlabel">节点 x₀</div><div class="hc-temp"><span id="hc-v0">100</span><span class="hc-unit">°C</span></div><div class="hc-delta hc-fixed" id="hc-d0">两端固定</div></div>
+    <div class="hc-node"><div class="hc-nlabel">节点 x₁</div><div class="hc-temp"><span id="hc-v1">0</span><span class="hc-unit">°C</span></div><div class="hc-delta hc-dim" id="hc-d1">—</div></div>
+    <div class="hc-node"><div class="hc-nlabel">节点 x₂</div><div class="hc-temp"><span id="hc-v2">0</span><span class="hc-unit">°C</span></div><div class="hc-delta hc-dim" id="hc-d2">—</div></div>
+    <div class="hc-node"><div class="hc-nlabel">节点 x₃</div><div class="hc-temp"><span id="hc-v3">0</span><span class="hc-unit">°C</span></div><div class="hc-delta hc-dim" id="hc-d3">—</div></div>
+    <div class="hc-node"><div class="hc-nlabel">节点 x₄</div><div class="hc-temp"><span id="hc-v4">0</span><span class="hc-unit">°C</span></div><div class="hc-delta hc-fixed" id="hc-d4">两端固定</div></div>
+  </div>
+
+  <div class="hc-ctrl">
+    <button type="button" class="hc-btn hc-primary" id="hc-step">单步 ▶</button>
+    <button type="button" class="hc-btn" id="hc-reset">重置</button>
+  </div>
+
+  <p class="hc-note">
+    <strong>离散示意：</strong>这是把杆离散成 5 个节点的显式差分格式，不是连续杆的精确解；虚线只连接相邻节点，节点之间没有定义温度。<br>
+    每步用<strong>同一时刻（上一步）</strong>的温度同步更新三个中间节点：<br>
+    <code>Tᵢⁿ⁺¹ = Tᵢⁿ + 0.25 · (Tᵢ₋₁ⁿ − 2Tᵢⁿ + Tᵢ₊₁ⁿ)</code><br>
+    系数 0.25 = αΔt/Δx²（无量纲），小于 0.5 所以该显式格式稳定；两端节点每步都保持 100°C 和 0°C。
+  </p>
+
+  <div class="hc-sr" id="hc-live" aria-live="polite"></div>
+</div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var ALPHA=0.25, N=5, TMAX=100;
+  var INIT=[100,0,0,0,0];
+  var FIXED=[true,false,false,false,true];
+  var XL=88, XR=508, YT=28, YB=176;
+  var XS=[0,1,2,3,4].map(function(i){return XL+i*(XR-XL)/4;});
+  function yFor(t){var c=Math.max(0,Math.min(TMAX,t));return YB-(c/TMAX)*(YB-YT);}
+  function fmt(t){if(Math.abs(t)<5e-5)return '0';return t.toFixed(4).replace(/0+$/,'').replace(/\.$/,'');}
+  function color(t){var r=Math.max(0,Math.min(1,t/TMAX));return 'hsl('+Math.round(212-206*r)+' '+Math.round(68+12*r)+'% '+Math.round(50-5*r)+'%)';}
+
+  var barsG=document.getElementById('hc-bars'),marksG=document.getElementById('hc-marks'),
+      valsG=document.getElementById('hc-vals'),line=document.getElementById('hc-line');
+  var bars=[],marks=[],vals=[];
+  for(var i=0;i<N;i++){
+    var x=XS[i];
+    var rect=document.createElementNS(NS,'rect');
+    rect.setAttribute('class','hc-bar');rect.setAttribute('x',x-34);rect.setAttribute('width',68);rect.setAttribute('rx',7);
+    barsG.appendChild(rect);bars.push(rect);
+    var c=document.createElementNS(NS,'circle');
+    c.setAttribute('class','hc-mark');c.setAttribute('cx',x);c.setAttribute('r',6.5);c.setAttribute('stroke-width',2);
+    c.style.stroke='var(--dsw-alias-bg-base,#ffffff)';
+    marksG.appendChild(c);marks.push(c);
+    var tx=document.createElementNS(NS,'text');
+    tx.setAttribute('class','hc-val');tx.setAttribute('x',x);tx.setAttribute('text-anchor','middle');
+    valsG.appendChild(tx);vals.push(tx);
+  }
+
+  var state=null,prev=null,step=0;
+  var svg=document.getElementById('hc-svg'),counter=document.getElementById('hc-count'),live=document.getElementById('hc-live');
+
+  function render(){
+    for(var i=0;i<N;i++){
+      var t=state[i],y=yFor(t);
+      bars[i].setAttribute('y',y);
+      bars[i].setAttribute('height',Math.max(0,YB-y));
+      bars[i].setAttribute('fill',color(t));
+      bars[i].setAttribute('opacity',FIXED[i]?'0.6':'0.95');
+      marks[i].setAttribute('cy',y);
+      marks[i].setAttribute('fill',color(t));
+      vals[i].setAttribute('y',Math.max(16,y-13));
+      vals[i].textContent=fmt(t);
+    }
+    line.setAttribute('points',state.map(function(t,i){return XS[i]+','+yFor(t);}).join(' '));
+    for(var j=0;j<N;j++){
+      document.getElementById('hc-v'+j).textContent=fmt(state[j]);
+      var d=document.getElementById('hc-d'+j),cls='hc-delta';
+      if(FIXED[j]){d.textContent='两端固定';cls+=' hc-fixed';}
+      else if(prev){var dv=state[j]-prev[j];d.textContent='上一步 '+(dv>=0?'+':'−')+fmt(Math.abs(dv));}
+      else{d.textContent='—';cls+=' hc-dim';}
+      d.className=cls;
+    }
+    counter.textContent='步数 n = '+step;
+    var summary='第 '+step+' 步温度：'+state.map(function(t,idx){return '节点'+idx+' '+fmt(t);}).join('，')+' 摄氏度';
+    svg.setAttribute('aria-label','5 节点杆温度分布，'+summary);
+    live.textContent=summary;
+  }
+  function reset(){state=INIT.slice();prev=null;step=0;render();}
+  function doStep(){
+    var nx=state.slice();prev=state.slice();
+    for(var i=1;i<N-1;i++){nx[i]=state[i]+ALPHA*(state[i-1]-2*state[i]+state[i+1]);}
+    state=nx;step++;render();
+  }
+  document.getElementById('hc-step').addEventListener('click',doStep);
+  document.getElementById('hc-reset').addEventListener('click',reset);
+  reset();
+})();
+</script></body></html>

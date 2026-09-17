@@ -1,0 +1,154 @@
+<div class="cwrap" id="cwrap">
+<style>
+.cwrap{--hitC:#157f72;--missC:#b45309;--track:rgba(127,127,127,.16);
+  font:inherit;color:var(--dsw-alias-label-primary,#16181d);
+  background:var(--dsw-alias-bg-layer-1,#fff);
+  border:1px solid var(--dsw-alias-border-l1,rgba(128,128,128,.22));
+  border-radius:12px;padding:14px 16px 15px;display:grid;gap:10px;max-width:600px;line-height:1.45}
+.cwrap *{box-sizing:border-box;min-width:0}
+.chead{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.chead h3{margin:0;font-size:13.5px;font-weight:600}
+.chead .csub{font-size:11.5px;color:var(--dsw-alias-label-tertiary,#6b7280);font-variant-numeric:tabular-nums}
+.crow{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.crate{display:flex;align-items:baseline;gap:6px}
+.crate .cl{font-size:12px;color:var(--dsw-alias-label-secondary,#4b5563)}
+.crate .cv{font-size:24px;font-weight:650;font-variant-numeric:tabular-nums;min-width:4.5ch;text-align:right}
+.seg{display:flex;gap:6px}
+.seg button{font:inherit;font-size:12.5px;padding:3px 11px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--dsw-alias-border-l2,rgba(128,128,128,.35));background:transparent;color:inherit}
+.seg button:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(128,128,128,.1))}
+.seg button[aria-pressed="true"]{background:var(--dsw-alias-button-primary-fill,#1f6feb);
+  color:var(--dsw-alias-label-primary-inverted,#fff);border-color:transparent}
+.sl{display:grid;gap:2px}
+.sl label{font-size:12px;color:var(--dsw-alias-label-secondary,#4b5563)}
+.sl input[type=range]{width:100%;margin:0}
+.bar{display:flex;height:34px;border-radius:8px;overflow:hidden;background:var(--track)}
+.bar .sg{display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:nowrap;
+  font-size:11.5px;font-weight:600;color:#fff;transition:width .13s linear}
+.bar .sg.hit{background:var(--hitC)}
+.bar .sg.miss{background:repeating-linear-gradient(135deg,var(--missC) 0 7px,#9a4407 7px 14px)}
+.bar .sg.nar{color:transparent}
+.bar.thin{height:14px}
+.bar .ghost{background:repeating-linear-gradient(135deg,transparent 0 5px,rgba(128,128,128,.22) 5px 7px)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--dsw-alias-label-secondary,#4b5563)}
+.sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;flex:none}
+.sw.hit{background:var(--hitC)}
+.sw.miss{background:var(--missC)}
+.tbl{display:grid;border-top:1px solid var(--dsw-alias-border-l1,rgba(128,128,128,.22));font-size:12.5px}
+.tbl .tr{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;padding:6px 2px;
+  align-items:baseline;border-bottom:1px solid var(--dsw-alias-border-l1,rgba(128,128,128,.14))}
+.tbl .tr:last-child{border-bottom:0}
+.tbl .th{font-size:11px;color:var(--dsw-alias-label-tertiary,#6b7280)}
+.tbl .num{font-variant-numeric:tabular-nums;text-align:right;min-width:7.5ch}
+.tbl .strong{font-weight:650}
+.tbl .k{display:flex;align-items:center}
+.note{font-size:11.5px;color:var(--dsw-alias-label-tertiary,#6b7280)}
+.note b{color:var(--dsw-alias-label-secondary,#4b5563);font-weight:600;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.bar .sg{transition:none}}
+</style>
+
+<div class="chead">
+  <h3>输入缓存成本示意</h3>
+  <span class="csub">总输入固定 1,000 token</span>
+</div>
+
+<div class="crow">
+  <div class="crate"><span class="cl">缓存命中率</span><span class="cv" id="cv">50%</span></div>
+  <div class="seg" id="presets" role="group" aria-label="快速选择命中率">
+    <button type="button" data-r="0" aria-pressed="false">0%</button>
+    <button type="button" data-r="50" aria-pressed="true">50%</button>
+    <button type="button" data-r="100" aria-pressed="false">100%</button>
+  </div>
+</div>
+
+<div class="sl">
+  <label for="rs">拖动调整命中率</label>
+  <input type="range" id="rs" min="0" max="100" step="1" value="50" aria-label="缓存命中率（百分比）">
+</div>
+
+<div class="bar" id="tokbar" role="img" aria-label="输入构成：命中 500 token，未命中 500 token">
+  <div class="sg hit" id="sgHit" style="width:50%">命中 500</div>
+  <div class="sg miss" id="sgMiss" style="width:50%">未命中 500</div>
+</div>
+<div class="legend">
+  <span><i class="sw hit"></i>命中输入</span>
+  <span><i class="sw miss"></i>未命中输入</span>
+  <span>token 构成（合计 1,000）</span>
+</div>
+
+<div class="bar thin" id="costbar" role="img" aria-label="示意成本 0.55 单位，节省 0.45 单位">
+  <div class="sg miss" id="csMiss" style="width:50%"></div>
+  <div class="sg hit" id="csHit" style="width:5%"></div>
+  <div class="ghost" id="csGhost" style="width:45%"></div>
+</div>
+<div class="legend">
+  <span><i class="sw miss"></i>未命中成本</span>
+  <span><i class="sw hit"></i>命中成本</span>
+  <span>斜纹 ＝ 相比全未命中省下的部分</span>
+</div>
+
+<div class="tbl">
+  <div class="tr th"><span>构成</span><span class="num">token 数</span><span class="num">示意成本</span></div>
+  <div class="tr">
+    <span class="k"><i class="sw hit"></i>命中输入</span>
+    <span class="num" id="rHitTok">500 token</span>
+    <span class="num strong" id="rHitCost">0.05 单位</span>
+  </div>
+  <div class="tr">
+    <span class="k"><i class="sw miss"></i>未命中输入</span>
+    <span class="num" id="rMissTok">500 token</span>
+    <span class="num strong" id="rMissCost">0.50 单位</span>
+  </div>
+  <div class="tr">
+    <span class="k">总输入 / 总成本</span>
+    <span class="num strong">1,000 token</span>
+    <span class="num strong" id="rTotCost">0.55 单位</span>
+  </div>
+</div>
+
+<div class="note">相比“全部未命中”的 1.00 单位，当前节省 <b id="sv">0.45</b> 单位（<b id="sv2">45%</b>）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。</div>
+
+<script>
+(function(){
+  var rs=document.getElementById('rs'),cv=document.getElementById('cv'),
+      presets=document.getElementById('presets'),
+      sgHit=document.getElementById('sgHit'),sgMiss=document.getElementById('sgMiss'),
+      csMiss=document.getElementById('csMiss'),csHit=document.getElementById('csHit'),
+      csGhost=document.getElementById('csGhost'),tokbar=document.getElementById('tokbar'),
+      costbar=document.getElementById('costbar'),
+      rHitTok=document.getElementById('rHitTok'),rHitCost=document.getElementById('rHitCost'),
+      rMissTok=document.getElementById('rMissTok'),rMissCost=document.getElementById('rMissCost'),
+      rTotCost=document.getElementById('rTotCost'),
+      sv=document.getElementById('sv'),sv2=document.getElementById('sv2');
+  if(!rs) return;
+  function nf(n){return n.toLocaleString('en-US');}
+  function render(){
+    var r=+rs.value;
+    var hitTok=Math.round(1000*r/100), missTok=1000-hitTok;
+    var hitCost=hitTok/1000*0.1, missCost=missTok/1000*1;
+    var total=hitCost+missCost, saved=1-total;
+    cv.textContent=r+'%';
+    sgHit.style.width=r+'%'; sgMiss.style.width=(100-r)+'%';
+    sgHit.textContent='命中 '+nf(hitTok); sgMiss.textContent='未命中 '+nf(missTok);
+    sgHit.classList.toggle('nar',r<17); sgMiss.classList.toggle('nar',(100-r)<17);
+    csMiss.style.width=(missCost*100)+'%';
+    csHit.style.width=(hitCost*100)+'%';
+    csGhost.style.width=(saved*100)+'%';
+    rHitTok.textContent=nf(hitTok)+' token'; rHitCost.textContent=hitCost.toFixed(2)+' 单位';
+    rMissTok.textContent=nf(missTok)+' token'; rMissCost.textContent=missCost.toFixed(2)+' 单位';
+    rTotCost.textContent=total.toFixed(2)+' 单位';
+    sv.textContent=saved.toFixed(2); sv2.textContent=Math.round(saved*100)+'%';
+    tokbar.setAttribute('aria-label','输入构成：命中 '+hitTok+' token，未命中 '+missTok+' token');
+    costbar.setAttribute('aria-label','示意成本 '+total.toFixed(2)+' 单位，相比全未命中节省 '+saved.toFixed(2)+' 单位');
+    var bs=presets.querySelectorAll('button');
+    for(var i=0;i<bs.length;i++){bs[i].setAttribute('aria-pressed',String(+bs[i].getAttribute('data-r')===r));}
+  }
+  rs.addEventListener('input',render);
+  presets.addEventListener('click',function(e){
+    var t=e.target, b=t&&t.closest?t.closest('button'):null;
+    if(b&&b.getAttribute('data-r')!==null){rs.value=b.getAttribute('data-r');render();}
+  });
+  render();
+})();
+</script>
+</div>

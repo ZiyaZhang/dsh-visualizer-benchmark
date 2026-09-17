@@ -1,0 +1,125 @@
+{
+  "scope": "Isolated unchanged source, explicit reviewer operations; not Host delivery.",
+  "states": [
+    {
+      "action": "initial",
+      "text": "二分查找 · 逐步演示\n有序数组，索引 0–7\n目标 = 23\n0\n2\nlow\n1\n5\n2\n8\n3\n12\n4\n16\n5\n23\n6\n38\n7\n56\nhigh\nmid\n本轮比较的位置\nlow\nhigh\n候选区间的两个边界\n斜纹 = 本轮被排除的区间\n轮次\n未开始\n比较次数\n0\nlow\n0\nmid\n—\nhigh\n7\narr[mid]\n—\n判定\n—\n已排除\n无\n数组是升序的，所以二分查找每轮只看中间位置 arr[mid]：一次比较就能丢掉一半候选。点击「下一步」开始第 1 轮。\n下一步\n重置",
+      "controls": [
+        {
+          "text": "下一步",
+          "id": "bs-next",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "bs-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "36bb07cf4adbbf42f4a999cf6d3bb28c",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "36bb07cf4adbbf42f4a999cf6d3bb28c",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "36bb07cf4adbbf42f4a999cf6d3bb28c",
+          "type": "resize",
+          "payload": {
+            "height": 515
+          }
+        }
+      ]
+    },
+    {
+      "action": "#bs-next: 2",
+      "text": "二分查找 · 逐步演示\n有序数组，索引 0–7\n目标 = 23\n0\n2\n1\n5\n2\n8\n3\n12\n4\n16\nlow\n5\n23\nmid\n6\n38\n7\n56\nhigh\nmid\n本轮比较的位置\nlow\nhigh\n候选区间的两个边界\n斜纹 = 本轮被排除的区间\n轮次\n2 / 2\n比较次数\n2\nlow\n4\nmid\n5\nhigh\n7\narr[mid]\n23\n判定\n23 = 23 ✓\n已排除\n[0…3]\nlow=4、high=7 → mid = ⌊(4+7)/2⌋ = 5，arr[5] = 23 正好等于目标，查找成功，总共只比较了 2 次。候选区间里剩下的 [6…7] 已经用不到了（虚线标出）。\n查找完成\n重置",
+      "controls": [
+        {
+          "text": "查找完成",
+          "id": "bs-next",
+          "disabled": true,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "bs-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "36bb07cf4adbbf42f4a999cf6d3bb28c",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "36bb07cf4adbbf42f4a999cf6d3bb28c",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "36bb07cf4adbbf42f4a999cf6d3bb28c",
+          "type": "resize",
+          "payload": {
+            "height": 515
+          }
+        }
+      ]
+    },
+    {
+      "action": "#bs-reset: 1",
+      "text": "二分查找 · 逐步演示\n有序数组，索引 0–7\n目标 = 23\n0\n2\nlow\n1\n5\n2\n8\n3\n12\n4\n16\n5\n23\n6\n38\n7\n56\nhigh\nmid\n本轮比较的位置\nlow\nhigh\n候选区间的两个边界\n斜纹 = 本轮被排除的区间\n轮次\n未开始\n比较次数\n0\nlow\n0\nmid\n—\nhigh\n7\narr[mid]\n—\n判定\n—\n已排除\n无\n数组是升序的，所以二分查找每轮只看中间位置 arr[mid]：一次比较就能丢掉一半候选。点击「下一步」开始第 1 轮。\n下一步\n重置",
+      "controls": [
+        {
+          "text": "下一步",
+          "id": "bs-next",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "bs-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "36bb07cf4adbbf42f4a999cf6d3bb28c",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "36bb07cf4adbbf42f4a999cf6d3bb28c",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "36bb07cf4adbbf42f4a999cf6d3bb28c",
+          "type": "resize",
+          "payload": {
+            "height": 515
+          }
+        }
+      ]
+    }
+  ]
+}

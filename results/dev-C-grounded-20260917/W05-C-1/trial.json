@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W05-C-1",
+  "roundId": "dev-C-grounded-20260917",
+  "caseId": "W05",
+  "arm": "C",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "先在回复里让我试试一个数量选择器的手感：初始为2，每次增加或减少1，范围0到5，到达边界时禁用对应按钮。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "数量选择器（0–5）",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/dev-C-grounded-20260917/W05-C-1/widget-1.source.html",
+      "preview": "results/dev-C-grounded-20260917/W05-C-1/widget-1.html",
+      "sha256": "e95761fbfc0903a81a97c9222b11e35c472bbed297e46e302633a2412246ef69",
+      "bytes": 4480
+    }
+  ],
+  "final": "一个可试的选择器已在上面渲染：初始 2，点 **−** / **+** 每次各走 1 格，范围 0–5。\n\n- 到 0 时左侧按钮变灰禁用，到 5 时右侧按钮禁用；刻度行和下方提示都由同一个当前值推导，状态不会互相打架。\n- 提示文字会顺带告诉你还剩几次可增减（例如 2 时：还可增加 3 次、减少 2 次），到达边界时转为红色边界的说明。\n\n一点说明：这是纯前端本地状态，刷新即回到初始值 2；按钮是原生控件，可以用 Tab 聚焦、回车/空格触发。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 18,
+        "callId": "call_00_OwlsOPytNi5dKj3OVrcE3011",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 19,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_ON5PTECz3aMqN0sAb6do1721",
+        "argumentsSha256": "3f1f4d803164e45e579e5cad2805766b4bfc778423caa51cf7013bd060b4f58b",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_Xl9kry3JsvYMkwS0svQX6035",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_tWWwzUxeizk76GvUj6bK9578",
+        "argumentsSha256": "9763252dd351e001fb58337ffe28c955c086f1afad1f0bed75c5a458a0f36a01",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "a2deb84adee091a12c717aef4dd7e1da3347effcb698dea94dfa8c56da0d915d",
+        "resultSha256": "b2e1487c1a148e735fc548a892f6249608eadffd84178c6f461c527243f9df04"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "3633f2ff752f02cd9d9d152f709793d786ff671a67e52c7fed9844a5ebe5ffe9",
+        "resultSha256": "4588c1ecaa32192967768344c6b128bb3509ccbd7eda96fd9aec9bb01202e4ef"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 18,
+        "resultSeq": 19,
+        "success": true,
+        "resultSha256": "b1585e5aa95aa9bf0ad21892cedad8b68b19d73a5b5e00330c1ceb39f78009c5"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "18c6211cedbb3f5cb84bd89634ab926e28f52e6dc5c75121fdfc4eff93472298"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8541,
+    "outputTokens": 2766,
+    "cacheReadTokens": 28032,
+    "cacheWriteTokens": 0,
+    "totalTokens": 39339
+  },
+  "elapsedSeconds": 13.237,
+  "sourceHead": "db0399958b07ce2a85088ddc8fcb3c5b49a2cb10",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "44cfc06451351c03b4f0a2e3e48670b59865dfeb0c294f7685cfe042d441f698",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "f6abb8b9a24652ebfddbe25f62cc9413d97a14bfcb6f4b3808846eacb1914db5"
+}

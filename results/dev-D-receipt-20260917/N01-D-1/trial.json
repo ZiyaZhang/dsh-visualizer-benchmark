@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 2,
+  "id": "N01-D-1",
+  "roundId": "dev-D-receipt-20260917",
+  "caseId": "N01",
+  "arm": "D",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "给我一个 TypeScript 二分查找函数，输入已排序的 number[] 和 target，返回索引或 -1。我会复制到代码文件中使用。",
+  "expectedRoute": "code",
+  "widgets": [],
+  "final": "```ts\n/**\n * 二分查找（迭代版）\n * @param arr    已按升序排序的数组\n * @param target 要查找的目标值\n * @returns 目标值的索引；不存在时返回 -1\n */\nfunction binarySearch(arr: readonly number[], target: number): number {\n  let lo = 0;\n  let hi = arr.length - 1;\n\n  while (lo <= hi) {\n    // 这样写中点可避免 lo + hi 溢出（虽然 JS 数组下标基本不会溢出）\n    const mid = lo + ((hi - lo) >> 1);\n    const value = arr[mid];\n\n    if (value === target) {\n      return mid;\n    } else if (value < target) {\n      lo = mid + 1;\n    } else {\n      hi = mid - 1;\n    }\n  }\n\n  return -1;\n}\n```\n\n几点使用说明：\n\n- 数组必须**已升序排序**，否则结果无意义。\n- 若数组中有重复的 `target`，返回的是其中**任意一个**索引，不保证是最左/最右那个。需要第一个出现的位置时，把 `value === target` 时改成 `hi = mid - 1` 并记录答案（lower bound 写法）。\n- 参数用 `readonly number[]`，所以 `number[]` 和只读数组都能传入，不会修改原数组。\n\n如果你还需要「返回第一个 ≥ target 的位置」的下界版本，我可以再给一份。",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "No inline widget attempt; verify the requested delivery form with check-dsh.py"
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case evaluates routing only"
+    }
+  },
+  "trace": {
+    "tools": [],
+    "referencesRead": [],
+    "skillLoads": [],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "653fc304d3ec35ef02c38043a52623a800ca63ed9c3a5e8b1f53efc9f5bed128"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 6855,
+    "outputTokens": 645,
+    "cacheReadTokens": 768,
+    "cacheWriteTokens": 0,
+    "totalTokens": 8268
+  },
+  "elapsedSeconds": 4.876,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "f22357bf67e6b959af4f536daac19652f36c3a28b33d926c73c3478aeaa54e61",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "8b8aa607cb96b5ab708ee640d7de4e93e92daa41691d59616c21c583ab375bab"
+}

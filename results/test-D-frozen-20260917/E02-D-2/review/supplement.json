@@ -1,0 +1,221 @@
+{
+  "scope": "Isolated unchanged source, explicit reviewer operations; not Host delivery.",
+  "states": [
+    {
+      "action": "initial",
+      "text": "小团队移动端接口选型天平\n\n按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n\n客户端种类\n只有 1 个 App\n2–3 个端，形态相近\n4 个以上，还在增加\n页面数据形状的变化\n基本稳定，一季度动几次\n每季度都有几次改动\n几乎每周都在改\n一个屏幕的数据来源\n基本对应一个接口\n常要拼 2–4 个接口\n大量跨模块拼装，字段还要各自裁剪\nHTTP 缓存 / CDN / 网关复用\n很重要，靠它扛量\n有就行，不指望\n不太在意\n团队 GraphQL 经验\n没人写过\n有人写过，没形成基建\n熟练，愿意建网关与可观测\n接口形态\n以查询为主\n读写各半\n大量写、事务、文件上传\n混合，按路径分\nREST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\nREST 更合适\nGraphQL 更合适\n倾向度 +8 （−100 纯 REST … +100 纯 GraphQL）\n权重最大的两个因素\n+6\n一个屏幕的数据来源：常要拼 2–4 个接口\n+4\n客户端种类：2–3 个端，形态相近\n把你拉回 REST 的信号\n-4\nHTTP 缓存 / CDN / 网关复用：有就行，不指望\n按这套条件给具体方案\n重置",
+      "controls": [
+        {
+          "text": "按这套条件给具体方案",
+          "id": "rv-ask",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "rv-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "resize",
+          "payload": {
+            "height": 519
+          }
+        }
+      ]
+    },
+    {
+      "action": "#rv-clients: [object Object]",
+      "text": "小团队移动端接口选型天平\n\n按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n\n客户端种类\n只有 1 个 App\n2–3 个端，形态相近\n4 个以上，还在增加\n页面数据形状的变化\n基本稳定，一季度动几次\n每季度都有几次改动\n几乎每周都在改\n一个屏幕的数据来源\n基本对应一个接口\n常要拼 2–4 个接口\n大量跨模块拼装，字段还要各自裁剪\nHTTP 缓存 / CDN / 网关复用\n很重要，靠它扛量\n有就行，不指望\n不太在意\n团队 GraphQL 经验\n没人写过\n有人写过，没形成基建\n熟练，愿意建网关与可观测\n接口形态\n以查询为主\n读写各半\n大量写、事务、文件上传\n混合，按路径分\nREST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\nREST 更合适\nGraphQL 更合适\n倾向度 -8 （−100 纯 REST … +100 纯 GraphQL）\n权重最大的两个因素\n-12\n客户端种类：只有 1 个 App\n+6\n一个屏幕的数据来源：常要拼 2–4 个接口\n把你推向 GraphQL 的信号\n+6\n一个屏幕的数据来源：常要拼 2–4 个接口\n+2\n页面数据形状的变化：每季度都有几次改动\n按这套条件给具体方案\n重置",
+      "controls": [
+        {
+          "text": "按这套条件给具体方案",
+          "id": "rv-ask",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "rv-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "resize",
+          "payload": {
+            "height": 519
+          }
+        }
+      ]
+    },
+    {
+      "action": "#rv-cache: [object Object]",
+      "text": "小团队移动端接口选型天平\n\n按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n\n客户端种类\n只有 1 个 App\n2–3 个端，形态相近\n4 个以上，还在增加\n页面数据形状的变化\n基本稳定，一季度动几次\n每季度都有几次改动\n几乎每周都在改\n一个屏幕的数据来源\n基本对应一个接口\n常要拼 2–4 个接口\n大量跨模块拼装，字段还要各自裁剪\nHTTP 缓存 / CDN / 网关复用\n很重要，靠它扛量\n有就行，不指望\n不太在意\n团队 GraphQL 经验\n没人写过\n有人写过，没形成基建\n熟练，愿意建网关与可观测\n接口形态\n以查询为主\n读写各半\n大量写、事务、文件上传\n偏向 REST\n用 REST 加一个很薄的 BFF 聚合层：只对着真实屏幕做少量专用端点，比引入 GraphQL 全量基建更省。\nREST 更合适\nGraphQL 更合适\n倾向度 -18 （−100 纯 REST … +100 纯 GraphQL）\n为什么偏 REST\n-14\nHTTP 缓存 / CDN / 网关复用：很重要，靠它扛量\n-12\n客户端种类：只有 1 个 App\n如果这些变强，天平会倒向 GraphQL\n+6\n一个屏幕的数据来源：常要拼 2–4 个接口\n+2\n页面数据形状的变化：每季度都有几次改动\n按这套条件给具体方案\n重置",
+      "controls": [
+        {
+          "text": "按这套条件给具体方案",
+          "id": "rv-ask",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "rv-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "resize",
+          "payload": {
+            "height": 519
+          }
+        }
+      ]
+    },
+    {
+      "action": "#rv-ask: 1",
+      "text": "小团队移动端接口选型天平\n\n按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n\n客户端种类\n只有 1 个 App\n2–3 个端，形态相近\n4 个以上，还在增加\n页面数据形状的变化\n基本稳定，一季度动几次\n每季度都有几次改动\n几乎每周都在改\n一个屏幕的数据来源\n基本对应一个接口\n常要拼 2–4 个接口\n大量跨模块拼装，字段还要各自裁剪\nHTTP 缓存 / CDN / 网关复用\n很重要，靠它扛量\n有就行，不指望\n不太在意\n团队 GraphQL 经验\n没人写过\n有人写过，没形成基建\n熟练，愿意建网关与可观测\n接口形态\n以查询为主\n读写各半\n大量写、事务、文件上传\n偏向 REST\n用 REST 加一个很薄的 BFF 聚合层：只对着真实屏幕做少量专用端点，比引入 GraphQL 全量基建更省。\nREST 更合适\nGraphQL 更合适\n倾向度 -18 （−100 纯 REST … +100 纯 GraphQL）\n为什么偏 REST\n-14\nHTTP 缓存 / CDN / 网关复用：很重要，靠它扛量\n-12\n客户端种类：只有 1 个 App\n如果这些变强，天平会倒向 GraphQL\n+6\n一个屏幕的数据来源：常要拼 2–4 个接口\n+2\n页面数据形状的变化：每季度都有几次改动\n按这套条件给具体方案\n重置",
+      "controls": [
+        {
+          "text": "按这套条件给具体方案",
+          "id": "rv-ask",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "rv-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "resize",
+          "payload": {
+            "height": 519
+          }
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "send_prompt",
+          "payload": {
+            "text": "我的移动端接口条件是：客户端种类=只有 1 个 App；页面数据形状的变化=每季度都有几次改动；一个屏幕的数据来源=常要拼 2–4 个接口；HTTP 缓存 / CDN / 网关复用=很重要，靠它扛量；团队 GraphQL 经验=有人写过，没形成基建；接口形态=读写各半。请据此给出具体方案：选 REST、GraphQL 还是混合，并列出接口或类型边界示例与迁移步骤。"
+          }
+        }
+      ]
+    },
+    {
+      "action": "#rv-reset: 1",
+      "text": "小团队移动端接口选型天平\n\n按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n\n客户端种类\n只有 1 个 App\n2–3 个端，形态相近\n4 个以上，还在增加\n页面数据形状的变化\n基本稳定，一季度动几次\n每季度都有几次改动\n几乎每周都在改\n一个屏幕的数据来源\n基本对应一个接口\n常要拼 2–4 个接口\n大量跨模块拼装，字段还要各自裁剪\nHTTP 缓存 / CDN / 网关复用\n很重要，靠它扛量\n有就行，不指望\n不太在意\n团队 GraphQL 经验\n没人写过\n有人写过，没形成基建\n熟练，愿意建网关与可观测\n接口形态\n以查询为主\n读写各半\n大量写、事务、文件上传\n混合，按路径分\nREST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\nREST 更合适\nGraphQL 更合适\n倾向度 +8 （−100 纯 REST … +100 纯 GraphQL）\n权重最大的两个因素\n+6\n一个屏幕的数据来源：常要拼 2–4 个接口\n+4\n客户端种类：2–3 个端，形态相近\n把你拉回 REST 的信号\n-4\nHTTP 缓存 / CDN / 网关复用：有就行，不指望\n按这套条件给具体方案\n重置",
+      "controls": [
+        {
+          "text": "按这套条件给具体方案",
+          "id": "rv-ask",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "rv-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "resize",
+          "payload": {
+            "height": 519
+          }
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "8061bcce4789a92656b2e71cb2011fb8",
+          "type": "send_prompt",
+          "payload": {
+            "text": "我的移动端接口条件是：客户端种类=只有 1 个 App；页面数据形状的变化=每季度都有几次改动；一个屏幕的数据来源=常要拼 2–4 个接口；HTTP 缓存 / CDN / 网关复用=很重要，靠它扛量；团队 GraphQL 经验=有人写过，没形成基建；接口形态=读写各半。请据此给出具体方案：选 REST、GraphQL 还是混合，并列出接口或类型边界示例与迁移步骤。"
+          }
+        }
+      ]
+    }
+  ]
+}

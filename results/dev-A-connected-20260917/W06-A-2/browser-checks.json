@@ -1,5 +1,6 @@
 {
   "schemaVersion": 2,
+  "visualSettleMs": 500,
   "trialId": "W06-A-2",
   "caseId": "W06",
   "scenario": "sales",
@@ -8,7 +9,7 @@
   "resultSeq": 34,
   "casesPath": "results/dev-A-connected-20260917/cases.json",
   "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
-  "collectedAt": "2026-09-17T16:45:14.997Z",
+  "collectedAt": "2026-09-17T18:08:15.961Z",
   "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
   "checks": {
     "render": {
@@ -128,23 +129,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "8fbb0d008f28800e4a7f36d403329352",
+          "channel": "e2771c51610857b76d6637f15d653e4e",
           "payload": {},
-          "at": 51.10000014305115
+          "at": 69.5
         },
         {
           "type": "rendered",
-          "channel": "8fbb0d008f28800e4a7f36d403329352",
+          "channel": "e2771c51610857b76d6637f15d653e4e",
           "payload": {},
-          "at": 68.5
+          "at": 86.59999990463257
         },
         {
           "type": "resize",
-          "channel": "8fbb0d008f28800e4a7f36d403329352",
+          "channel": "e2771c51610857b76d6637f15d653e4e",
           "payload": {
             "height": 468
           },
-          "at": 68.5
+          "at": 86.59999990463257
         }
       ],
       "name": "initial",
@@ -169,23 +170,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "8fbb0d008f28800e4a7f36d403329352",
+          "channel": "e2771c51610857b76d6637f15d653e4e",
           "payload": {},
-          "at": 51.10000014305115
+          "at": 69.5
         },
         {
           "type": "rendered",
-          "channel": "8fbb0d008f28800e4a7f36d403329352",
+          "channel": "e2771c51610857b76d6637f15d653e4e",
           "payload": {},
-          "at": 68.5
+          "at": 86.59999990463257
         },
         {
           "type": "resize",
-          "channel": "8fbb0d008f28800e4a7f36d403329352",
+          "channel": "e2771c51610857b76d6637f15d653e4e",
           "payload": {
             "height": 468
           },
-          "at": 68.5
+          "at": 86.59999990463257
         }
       ],
       "name": "selected-west",
@@ -210,31 +211,31 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "8fbb0d008f28800e4a7f36d403329352",
+          "channel": "e2771c51610857b76d6637f15d653e4e",
           "payload": {},
-          "at": 51.10000014305115
+          "at": 69.5
         },
         {
           "type": "rendered",
-          "channel": "8fbb0d008f28800e4a7f36d403329352",
+          "channel": "e2771c51610857b76d6637f15d653e4e",
           "payload": {},
-          "at": 68.5
+          "at": 86.59999990463257
         },
         {
           "type": "resize",
-          "channel": "8fbb0d008f28800e4a7f36d403329352",
+          "channel": "e2771c51610857b76d6637f15d653e4e",
           "payload": {
             "height": 468
           },
-          "at": 68.5
+          "at": 86.59999990463257
         },
         {
           "type": "send_prompt",
-          "channel": "8fbb0d008f28800e4a7f36d403329352",
+          "channel": "e2771c51610857b76d6637f15d653e4e",
           "payload": {
             "text": "请解释所选地区：西部，销售额 50 万元。（对比数据：华东 120 万元、华南 80 万元、西部 50 万元；西部占三地区合计 250 万元的 20%。）请分析这个业绩水平、可能的原因和值得关注的方向。"
           },
-          "at": 248.40000009536743
+          "at": 1253
         }
       ],
       "name": "explain-sent",
@@ -259,23 +260,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "da84e6d523d90040384d234a5a762140",
+          "channel": "cedbed6473cde6d11b873d08b1e0f480",
           "payload": {},
-          "at": 279
+          "at": 1784.8999998569489
         },
         {
           "type": "rendered",
-          "channel": "da84e6d523d90040384d234a5a762140",
+          "channel": "cedbed6473cde6d11b873d08b1e0f480",
           "payload": {},
-          "at": 282.7000000476837
+          "at": 1786.5
         },
         {
           "type": "resize",
-          "channel": "da84e6d523d90040384d234a5a762140",
+          "channel": "cedbed6473cde6d11b873d08b1e0f480",
           "payload": {
             "height": 455
           },
-          "at": 282.7000000476837
+          "at": 1786.5
         }
       ],
       "name": "initial",
@@ -300,23 +301,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "fb89ebc5c9e31f53de9136504e2d2de3",
+          "channel": "2ed9ff9d97b8701f385125b3311e81c6",
           "payload": {},
-          "at": 335
+          "at": 2359.5999999046326
         },
         {
           "type": "rendered",
-          "channel": "fb89ebc5c9e31f53de9136504e2d2de3",
+          "channel": "2ed9ff9d97b8701f385125b3311e81c6",
           "payload": {},
-          "at": 335.10000014305115
+          "at": 2361.2000000476837
         },
         {
           "type": "resize",
-          "channel": "fb89ebc5c9e31f53de9136504e2d2de3",
+          "channel": "2ed9ff9d97b8701f385125b3311e81c6",
           "payload": {
             "height": 468
           },
-          "at": 335.2000000476837
+          "at": 2361.2000000476837
         }
       ],
       "name": "initial",
@@ -341,23 +342,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "1f2826aace0adb61ce3870895fc15f53",
+          "channel": "9052ae51e7e4da8b774d0b17f901c045",
           "payload": {},
-          "at": 391.80000019073486
+          "at": 2922.0999999046326
         },
         {
           "type": "rendered",
-          "channel": "1f2826aace0adb61ce3870895fc15f53",
+          "channel": "9052ae51e7e4da8b774d0b17f901c045",
           "payload": {},
-          "at": 393.30000019073486
+          "at": 2928
         },
         {
           "type": "resize",
-          "channel": "1f2826aace0adb61ce3870895fc15f53",
+          "channel": "9052ae51e7e4da8b774d0b17f901c045",
           "payload": {
             "height": 455
           },
-          "at": 393.30000019073486
+          "at": 2928
         }
       ],
       "name": "initial",
@@ -369,31 +370,31 @@
   "messages": [
     {
       "type": "ready",
-      "channel": "8fbb0d008f28800e4a7f36d403329352",
+      "channel": "e2771c51610857b76d6637f15d653e4e",
       "payload": {},
-      "at": 51.10000014305115
+      "at": 69.5
     },
     {
       "type": "rendered",
-      "channel": "8fbb0d008f28800e4a7f36d403329352",
+      "channel": "e2771c51610857b76d6637f15d653e4e",
       "payload": {},
-      "at": 68.5
+      "at": 86.59999990463257
     },
     {
       "type": "resize",
-      "channel": "8fbb0d008f28800e4a7f36d403329352",
+      "channel": "e2771c51610857b76d6637f15d653e4e",
       "payload": {
         "height": 468
       },
-      "at": 68.5
+      "at": 86.59999990463257
     },
     {
       "type": "send_prompt",
-      "channel": "8fbb0d008f28800e4a7f36d403329352",
+      "channel": "e2771c51610857b76d6637f15d653e4e",
       "payload": {
         "text": "请解释所选地区：西部，销售额 50 万元。（对比数据：华东 120 万元、华南 80 万元、西部 50 万元；西部占三地区合计 250 万元的 20%。）请分析这个业绩水平、可能的原因和值得关注的方向。"
       },
-      "at": 248.40000009536743
+      "at": 1253
     }
   ],
   "console": [],
@@ -405,11 +406,48 @@
   "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
   "rendererHashKind": "recorded trial renderer source hash",
   "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
-  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
-  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
   "kind": "html",
   "sandbox": "allow-scripts",
   "playwrightVersion": "1.61.1",
   "networkRequests": [],
-  "browserVersion": "149.0.7827.55"
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
 }

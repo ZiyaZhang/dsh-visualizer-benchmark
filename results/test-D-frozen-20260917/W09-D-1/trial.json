@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 2,
+  "id": "W09-D-1",
+  "roundId": "test-D-frozen-20260917",
+  "caseId": "W09",
+  "arm": "D",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "读取 monthly.csv，在回复里用一张静态趋势图展示这6个月的净新增用户，并标出最高和最低的月份及数值。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "近6个月净新增用户趋势",
+      "kind": "html",
+      "callSeq": 41,
+      "resultSeq": 42,
+      "replace": null,
+      "source": "results/test-D-frozen-20260917/W09-D-1/widget-1.source.html",
+      "preview": "results/test-D-frozen-20260917/W09-D-1/widget-1.html",
+      "sha256": "993bd9010118e692e9900c04d03056165cf9ef59f768369bd3e1d371979a5ea6",
+      "bytes": 4643
+    }
+  ],
+  "final": "已按 monthly.csv 绘制静态趋势图（虚线为 0 基线，绿/红分别标出最高与最低）：**最高 3月 160 人，最低 4月 −20 人**——4 月出现净流失，是 6 个月中唯一负值月份，随后 5 月持平、6 月回升至 100 人。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_vbiixvuHPK3GU1MH7CAI3729",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 21,
+        "callId": "call_01_d6lIhqHJ5OS72SlEBbKn0081",
+        "argumentsSha256": "96503a9cf0bb32b6f73a36aa410a53e0a7d83373ec3905414613ddf6d8f4843c",
+        "wrapped": false,
+        "resultSeq": 22,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 27,
+        "callId": "call_00_ET_bBhPeYYwqhcea2we0vGV2913",
+        "argumentsSha256": "6ed30bd75f07df8ff30e742c923d8d08ee4ed1b21b2e6104ed4fcc467439d259",
+        "wrapped": false,
+        "resultSeq": 29,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 28,
+        "callId": "call_01_ET_iUzvgQAm5vYoH8BdmzGr3683",
+        "argumentsSha256": "65e09ad1c2476e68f2a0160c84516456f89b132ae1b0a61365a4c29e086a591a",
+        "wrapped": false,
+        "resultSeq": 30,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 35,
+        "callId": "call_00_4yVzLrC9ufg2s9zaup4R8832",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 36,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 41,
+        "callId": "call_00_BVV6BDx4P6bAoViCKZ3y0470",
+        "argumentsSha256": "6cbbb7f3636936d2101eb7213f4e8f5dce1a291d91c0dced3f6f91651f3548e7",
+        "wrapped": false,
+        "resultSeq": 42,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/charts.md",
+        "callSeq": 28,
+        "resultSeq": 30,
+        "success": true,
+        "sha256": "0778ef689dea193a21f6f319a3d915e268d184bdd377128fa6a272a4ff8a1d80",
+        "resultSha256": "16bf3df723af9b8291d97cca43f615d92c3604033aab6200084a4613ed3f1ddb"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 35,
+        "resultSeq": 36,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "69e7666388ca31234a018a30e2e9df82e46a3cdf3190c9046df6090e477c2f40"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "553b6de0477b022c251b8c241557114ef48547d588f05199067d655b8756ed61"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "1f6ffb22cad2dd553aff9473fc177fe72316e3be76b3a0c45ec9673f6087c2e2"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8397,
+    "outputTokens": 5912,
+    "cacheReadTokens": 42624,
+    "cacheWriteTokens": 0,
+    "totalTokens": 56933
+  },
+  "elapsedSeconds": 26.261,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "8f293237144cec322ee5341e169287ab0df6113437dc2ed8ae64f26abee3ced6",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "b76dd490de45674391a36957d51cae99d31a033d62ba2e8388e9df8321ea24b7"
+}

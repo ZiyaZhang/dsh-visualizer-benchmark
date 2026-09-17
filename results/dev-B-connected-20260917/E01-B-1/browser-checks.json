@@ -1,5 +1,6 @@
 {
   "schemaVersion": 2,
+  "visualSettleMs": 500,
   "trialId": "E01-B-1",
   "caseId": "E01",
   "scenario": "static",
@@ -8,7 +9,7 @@
   "resultSeq": 52,
   "casesPath": "results/dev-B-connected-20260917/cases.json",
   "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
-  "collectedAt": "2026-09-17T16:45:08.985Z",
+  "collectedAt": "2026-09-17T18:08:33.604Z",
   "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
   "checks": {
     "render": {
@@ -110,23 +111,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+          "channel": "6138484488f41c86983a741f8e3ab1f3",
           "payload": {},
-          "at": 84.29999995231628
+          "at": 73.20000004768372
         },
         {
           "type": "rendered",
-          "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+          "channel": "6138484488f41c86983a741f8e3ab1f3",
           "payload": {},
-          "at": 89
+          "at": 100.09999990463257
         },
         {
           "type": "resize",
-          "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+          "channel": "6138484488f41c86983a741f8e3ab1f3",
           "payload": {
             "height": 669
           },
-          "at": 89
+          "at": 100.09999990463257
         }
       ],
       "name": "initial",
@@ -149,23 +150,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "d1db08982306616c0ad8313169caaebb",
+          "channel": "c536e307807e16706eb110f322beebea",
           "payload": {},
-          "at": 156.29999995231628
+          "at": 691.7999999523163
         },
         {
           "type": "rendered",
-          "channel": "d1db08982306616c0ad8313169caaebb",
+          "channel": "c536e307807e16706eb110f322beebea",
           "payload": {},
-          "at": 160.29999995231628
+          "at": 691.7999999523163
         },
         {
           "type": "resize",
-          "channel": "d1db08982306616c0ad8313169caaebb",
+          "channel": "c536e307807e16706eb110f322beebea",
           "payload": {
             "height": 605
           },
-          "at": 160.29999995231628
+          "at": 691.7999999523163
         }
       ],
       "name": "initial",
@@ -188,23 +189,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "7ebc817ea00d2b7de33f71301b625bab",
+          "channel": "6d8134e439d359b7a22badb5d5a0094f",
           "payload": {},
-          "at": 216.19999980926514
+          "at": 1267.9000000953674
         },
         {
           "type": "rendered",
-          "channel": "7ebc817ea00d2b7de33f71301b625bab",
+          "channel": "6d8134e439d359b7a22badb5d5a0094f",
           "payload": {},
-          "at": 219.29999995231628
+          "at": 1270.7999999523163
         },
         {
           "type": "resize",
-          "channel": "7ebc817ea00d2b7de33f71301b625bab",
+          "channel": "6d8134e439d359b7a22badb5d5a0094f",
           "payload": {
             "height": 669
           },
-          "at": 219.29999995231628
+          "at": 1270.7999999523163
         }
       ],
       "name": "initial",
@@ -227,23 +228,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "85bc0e18b7e21e2c0d2521ce14581a7b",
+          "channel": "0d5b7298e3a6b3708c978df6c242ab85",
           "payload": {},
-          "at": 287.7999999523163
+          "at": 1835.7999999523163
         },
         {
           "type": "rendered",
-          "channel": "85bc0e18b7e21e2c0d2521ce14581a7b",
+          "channel": "0d5b7298e3a6b3708c978df6c242ab85",
           "payload": {},
-          "at": 294.59999990463257
+          "at": 1838.7000000476837
         },
         {
           "type": "resize",
-          "channel": "85bc0e18b7e21e2c0d2521ce14581a7b",
+          "channel": "0d5b7298e3a6b3708c978df6c242ab85",
           "payload": {
             "height": 605
           },
-          "at": 294.59999990463257
+          "at": 1838.7000000476837
         }
       ],
       "name": "initial",
@@ -255,23 +256,23 @@
   "messages": [
     {
       "type": "ready",
-      "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+      "channel": "6138484488f41c86983a741f8e3ab1f3",
       "payload": {},
-      "at": 84.29999995231628
+      "at": 73.20000004768372
     },
     {
       "type": "rendered",
-      "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+      "channel": "6138484488f41c86983a741f8e3ab1f3",
       "payload": {},
-      "at": 89
+      "at": 100.09999990463257
     },
     {
       "type": "resize",
-      "channel": "7031c7adf228eae77d2ec33711ec5c0f",
+      "channel": "6138484488f41c86983a741f8e3ab1f3",
       "payload": {
         "height": 669
       },
-      "at": 89
+      "at": 100.09999990463257
     }
   ],
   "console": [],
@@ -283,11 +284,48 @@
   "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
   "rendererHashKind": "recorded trial renderer source hash",
   "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
-  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
-  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
   "kind": "html",
   "sandbox": "allow-scripts",
   "playwrightVersion": "1.61.1",
   "networkRequests": [],
-  "browserVersion": "149.0.7827.55"
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
 }

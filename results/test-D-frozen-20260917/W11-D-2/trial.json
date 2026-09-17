@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W11-D-2",
+  "roundId": "test-D-frozen-20260917",
+  "caseId": "W11",
+  "arm": "D",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "先在这条回复里让我试用一个筛选弹窗：状态可选“进行中”或“已完成”，负责人是文本输入框。负责人为空时“应用”不可用；填写后可以应用，随后显示所选状态和负责人摘要。这只是交互原型。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "筛选弹窗原型",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/test-D-frozen-20260917/W11-D-2/widget-1.source.html",
+      "preview": "results/test-D-frozen-20260917/W11-D-2/widget-1.html",
+      "sha256": "13eff47e45d8c3734bb2350f478da1be9de05b2f1f8dd5a58346ee7302f88af4",
+      "bytes": 7275
+    }
+  ],
+  "final": "弹窗已直接打开，可以先点“已完成”切换状态、再输入负责人姓名试一下“应用”的启用/禁用变化，应用后下方会显示状态与负责人摘要。这只是前端交互原型，不会真的过滤任务数据，点“清除”或重开弹窗即可重置。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_6r4Ly80exk6z96EfHytx5819",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_mwnUX6UkhgKeOhSlBtPa3819",
+        "argumentsSha256": "3f1f4d803164e45e579e5cad2805766b4bfc778423caa51cf7013bd060b4f58b",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_roaT5QPl0eIqFBrFzVVd0161",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_4xSvKKlM5zCFJnv4m9ND9556",
+        "argumentsSha256": "6aa77b7f8bb2ea7a6b426064673e23aa6f9ff30f67c5f699652a80001646328a",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "b2f5383a29fc40ac84f40757ff160c57d48c351ab771f1d007ea6af621075f34"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "8e73a402364cfac13f2820f80c4cce0c2ead20b2b0d4008739a7bc5a9b64432d"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "52d83694842b8414267bb62defc40deac68b929bfe9fbc85cac70079848a76cc"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "6fb511f6b1ce97be1a09f5e9c1a2ff34b7ad3878667c1a56579abb1f07b93514"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8256,
+    "outputTokens": 5544,
+    "cacheReadTokens": 30976,
+    "cacheWriteTokens": 0,
+    "totalTokens": 44776
+  },
+  "elapsedSeconds": 22.677,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "439164f56a95080e445c7ad4ee95b17e03fa9299651e8aaf4329bf84af97fce4",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "28c11cd679195923889707489a4aa4e502a18c9c3542e7273bfd92e95435fb12"
+}

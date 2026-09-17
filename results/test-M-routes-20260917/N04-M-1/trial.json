@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 2,
+  "id": "N04-M-1",
+  "roundId": "test-M-routes-20260917",
+  "caseId": "N04",
+  "arm": "M",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "请在当前工作目录创建一份可保存的 sales.svg，内容是A=3、B=5的静态条形图，并给我文件路径，我要放到文档里。",
+  "expectedRoute": "file",
+  "widgets": [],
+  "final": "工作目录是空的，我直接创建一份自包含的静态 SVG。\n\n已创建并校验通过（`xmllint` 无报错，2.5 KB）。\n\n**文件路径：**\n```\n[private path]/test-M-routes-20260917/trials/N04-M-1/workspace/sales.svg\n```\n\n图表内容：\n- 静态条形图，A = 3、B = 5（B 高度按 5 比例绘制，是 A 的 5/3 倍）\n- `viewBox=\"0 0 440 320\"`，可无损缩放到文档任意尺寸\n- 自包含：样式内嵌在 `<style>` 中，无外部字体/图片/脚本依赖，直接拖入 Word、Markdown、HTML 或 LaTeX 均可\n- 含标题、y 轴刻度（0–5）、数值标签与分类标签，并带 `<title>`/`<desc>` 无障碍说明\n\n如需调整配色（当前 A 蓝 `#3b82f6`、B 橙 `#f59e0b`）、尺寸或改成横向条形图，告诉我即可。",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "No inline widget attempt; verify the requested delivery form with check-dsh.py"
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case evaluates routing only"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 18,
+        "callId": "call_00_UzwE90BGvxNbUcEiXnWM8132",
+        "argumentsSha256": "96503a9cf0bb32b6f73a36aa410a53e0a7d83373ec3905414613ddf6d8f4843c",
+        "wrapped": false,
+        "resultSeq": 19,
+        "error": false
+      },
+      {
+        "name": "glob",
+        "loggedName": "glob",
+        "callSeq": 20,
+        "callId": "call_01_EE35WIWFZm1vNkcLvhqh8461",
+        "argumentsSha256": "69d6e1527e4619068bedea40dad927f661315486029121a8169bf7b88a79f822",
+        "wrapped": false,
+        "resultSeq": 21,
+        "error": false
+      },
+      {
+        "name": "write",
+        "loggedName": "write",
+        "callSeq": 26,
+        "callId": "call_00_rNTMtA9G3sI5VN6SgK9o4333",
+        "argumentsSha256": "c0c63f74f935f2817116221664f5925137cdab6c51928c9381a3dc4895d3b9e6",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 32,
+        "callId": "call_00_HZk8NEudGPw42qOOdZtv9755",
+        "argumentsSha256": "5aa5f36c90dc7796b787d2a4aec675ec45a1bb8e04f6d0afb5efd292617a915e",
+        "wrapped": false,
+        "resultSeq": 33,
+        "error": false
+      }
+    ],
+    "referencesRead": [],
+    "skillLoads": [],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "2fd9b055cb7fbbeed2592b0b19df2bbdb1e44806752d8d8b78312acfa4aa5379"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 10,
+        "sha256": "86e10cc0c28dec776a21e0428ceb573f39a8cad6d0e683f4a8ab01bdb41618dd",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 6877,
+    "outputTokens": 1809,
+    "cacheReadTokens": 24448,
+    "cacheWriteTokens": 0,
+    "totalTokens": 33134
+  },
+  "elapsedSeconds": 9.3,
+  "sourceHead": "62b700bba7bb71e66d2d5a3b850ba8f4dd0fd6b4",
+  "rendererSha256": null,
+  "rejected": [],
+  "finalSha256": "319fc88334b0b2b295e38064b9cbf87f8c94cbe767e41d7d886dd19ff4057f20",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "fa26c056a8967efe8ef307333fe0842f98f6f034eebd0acd16905b8e2255e904",
+  "turnEnd": "completed",
+  "workspaceChanges": [
+    {
+      "path": "sales.svg",
+      "beforeSha256": null,
+      "afterSha256": "6952f43770697e6f0597b9e1bfec910d4324ec686867b8c344f70fd229cf6805"
+    }
+  ],
+  "artifactSetSha256": "e2f38827dc4ff2f51cc12d73d74be0154d01241b3cf93dddcbedeba809208ebf"
+}

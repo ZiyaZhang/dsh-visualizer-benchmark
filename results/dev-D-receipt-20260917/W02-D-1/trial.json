@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 2,
+  "id": "W02-D-1",
+  "roundId": "dev-D-receipt-20260917",
+  "caseId": "W02",
+  "arm": "D",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "在回复中做一个可交互热传导演示：一根杆离散成5个节点，两端固定为100°C和0°C，中间3个节点初始均为0°C。每步用上一时刻的温度同步更新，扩散系数取0.25。提供单步和重置，让我看每个节点的温度；明确这是离散示意。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "一维热传导离散演示（5节点）",
+      "kind": "html",
+      "callSeq": 39,
+      "resultSeq": 40,
+      "replace": null,
+      "source": "results/dev-D-receipt-20260917/W02-D-1/widget-1.source.html",
+      "preview": "results/dev-D-receipt-20260917/W02-D-1/widget-1.html",
+      "sha256": "1e3fb70aebab65b616189ff40c28536f23fd04a30075d3cf8ff736a95c36dc17",
+      "bytes": 15372
+    }
+  ],
+  "final": "这是一个 5 节点显式差分的离散示意（非解析解）：默认 α=0.25、两端固定，单步后中间节点的首步值为 25、0、0，之后逐步向右侧传播并趋向线性分布。为便于观察也可拖动滑块调整 α（超过 0.5 会提示可能不稳定），折线是离散点的连线，不代表连续杆的真实曲线。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 18,
+        "callId": "call_00_B1Q7YarcL4b6ctL34D4y0374",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 19,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 25,
+        "callId": "call_00_oTdyTNwGPOoGpTy6kYb82323",
+        "argumentsSha256": "45cbd76ede058087482f1507d6d27ddbdef871c28af3c66571f58c3fe513c3a3",
+        "wrapped": false,
+        "resultSeq": 26,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 31,
+        "callId": "call_00_ET_hT31ipsDCCF7EFpGJnx96555",
+        "argumentsSha256": "3f1f4d803164e45e579e5cad2805766b4bfc778423caa51cf7013bd060b4f58b",
+        "wrapped": false,
+        "resultSeq": 33,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 32,
+        "callId": "call_01_ET_MfHDoIx57HV5eYf9DJPo6226",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 39,
+        "callId": "call_00_e8LTTowfM1mr3MXxBERS1801",
+        "argumentsSha256": "7d11fb14d1f0bc119166b862705755c5fe5351b9033afed7ef751fc625d6fba8",
+        "wrapped": false,
+        "resultSeq": 40,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 31,
+        "resultSeq": 33,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "f4969775df3489daac4186c43a12b6be5d24a140903ad1179fbfb5173cb838b4"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 32,
+        "resultSeq": 34,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "f07c56dbba1c7a16af806935c09697786585827a08a98e735414a790e47a0dd3"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 18,
+        "resultSeq": 19,
+        "success": true,
+        "resultSha256": "fa4bfd69a064e381189cee49c8fcfe8a5530c59f5afc32cf647581dcee94adfc"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "c3b38a7f92764c2453e34a34361afa4f977559f91a3536a9b50280c144f0dcfa"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 13688,
+    "outputTokens": 6033,
+    "cacheReadTokens": 34688,
+    "cacheWriteTokens": 0,
+    "totalTokens": 54409
+  },
+  "elapsedSeconds": 23.523,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "b8043e6f59588bc8591698787bceb634718d0a41e45f7cd653890ad349f53ec9",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "5cfbe715115c034f525a9ba2998ee73c1ad5efc6bd938f607c70e3a401fa85d1"
+}

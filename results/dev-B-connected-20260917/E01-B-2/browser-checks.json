@@ -1,5 +1,6 @@
 {
   "schemaVersion": 2,
+  "visualSettleMs": 500,
   "trialId": "E01-B-2",
   "caseId": "E01",
   "scenario": "static",
@@ -8,7 +9,7 @@
   "resultSeq": 40,
   "casesPath": "results/dev-B-connected-20260917/cases.json",
   "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
-  "collectedAt": "2026-09-17T16:45:15.110Z",
+  "collectedAt": "2026-09-17T18:08:43.358Z",
   "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
   "checks": {
     "render": {
@@ -18,11 +19,11 @@
         "errors": [
           {
             "type": "error",
-            "channel": "98476910dfea6b094444cec4036fb467",
+            "channel": "e971ad7e7a63a802e0dfd84ae0326921",
             "payload": {
               "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
             },
-            "at": 97.70000004768372
+            "at": 132.09999990463257
           }
         ]
       }
@@ -118,25 +119,25 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "98476910dfea6b094444cec4036fb467",
+          "channel": "e971ad7e7a63a802e0dfd84ae0326921",
           "payload": {},
-          "at": 57.5
+          "at": 93
         },
         {
           "type": "error",
-          "channel": "98476910dfea6b094444cec4036fb467",
+          "channel": "e971ad7e7a63a802e0dfd84ae0326921",
           "payload": {
             "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
           },
-          "at": 97.70000004768372
+          "at": 132.09999990463257
         },
         {
           "type": "resize",
-          "channel": "98476910dfea6b094444cec4036fb467",
+          "channel": "e971ad7e7a63a802e0dfd84ae0326921",
           "payload": {
             "height": 680
           },
-          "at": 110.90000009536743
+          "at": 139.5
         }
       ],
       "name": "initial",
@@ -158,25 +159,25 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "ddf5f466035d5a433025767132ca823c",
+          "channel": "7fa874ed299edfd9cdc74e84dd21b8da",
           "payload": {},
-          "at": 193.20000004768372
+          "at": 739.8999998569489
         },
         {
           "type": "error",
-          "channel": "ddf5f466035d5a433025767132ca823c",
+          "channel": "7fa874ed299edfd9cdc74e84dd21b8da",
           "payload": {
             "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
           },
-          "at": 196
+          "at": 742.3999998569489
         },
         {
           "type": "resize",
-          "channel": "ddf5f466035d5a433025767132ca823c",
+          "channel": "7fa874ed299edfd9cdc74e84dd21b8da",
           "payload": {
             "height": 643
           },
-          "at": 197.20000004768372
+          "at": 744.0999999046326
         }
       ],
       "name": "initial",
@@ -198,25 +199,25 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "7bf636035fde84633bbcd63a1836a3e4",
+          "channel": "02a7fd97697624fcb5975e0e1a06bfe5",
           "payload": {},
-          "at": 258.7000000476837
+          "at": 1312.2999999523163
         },
         {
           "type": "error",
-          "channel": "7bf636035fde84633bbcd63a1836a3e4",
+          "channel": "02a7fd97697624fcb5975e0e1a06bfe5",
           "payload": {
             "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
           },
-          "at": 260.60000014305115
+          "at": 1314.2000000476837
         },
         {
           "type": "resize",
-          "channel": "7bf636035fde84633bbcd63a1836a3e4",
+          "channel": "02a7fd97697624fcb5975e0e1a06bfe5",
           "payload": {
             "height": 680
           },
-          "at": 262.40000009536743
+          "at": 1315.7000000476837
         }
       ],
       "name": "initial",
@@ -238,25 +239,25 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "a4a611d2e97fdb430974ad833a078ec8",
+          "channel": "df8823be40918ed64488a518524163a0",
           "payload": {},
-          "at": 323
+          "at": 1883.0999999046326
         },
         {
           "type": "error",
-          "channel": "a4a611d2e97fdb430974ad833a078ec8",
+          "channel": "df8823be40918ed64488a518524163a0",
           "payload": {
             "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
           },
-          "at": 325
+          "at": 1885.5999999046326
         },
         {
           "type": "resize",
-          "channel": "a4a611d2e97fdb430974ad833a078ec8",
+          "channel": "df8823be40918ed64488a518524163a0",
           "payload": {
             "height": 643
           },
-          "at": 328
+          "at": 1886.2000000476837
         }
       ],
       "name": "initial",
@@ -268,25 +269,25 @@
   "messages": [
     {
       "type": "ready",
-      "channel": "98476910dfea6b094444cec4036fb467",
+      "channel": "e971ad7e7a63a802e0dfd84ae0326921",
       "payload": {},
-      "at": 57.5
+      "at": 93
     },
     {
       "type": "error",
-      "channel": "98476910dfea6b094444cec4036fb467",
+      "channel": "e971ad7e7a63a802e0dfd84ae0326921",
       "payload": {
         "message": "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')"
       },
-      "at": 97.70000004768372
+      "at": 132.09999990463257
     },
     {
       "type": "resize",
-      "channel": "98476910dfea6b094444cec4036fb467",
+      "channel": "e971ad7e7a63a802e0dfd84ae0326921",
       "payload": {
         "height": 680
       },
-      "at": 110.90000009536743
+      "at": 139.5
     }
   ],
   "console": [],
@@ -303,11 +304,48 @@
   "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
   "rendererHashKind": "recorded trial renderer source hash",
   "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
-  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
-  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
   "kind": "html",
   "sandbox": "allow-scripts",
   "playwrightVersion": "1.61.1",
   "networkRequests": [],
-  "browserVersion": "149.0.7827.55"
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
 }

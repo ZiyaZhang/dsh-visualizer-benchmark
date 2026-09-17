@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 2,
+  "id": "W12-A-1",
+  "roundId": "test-A-frozen-20260917",
+  "caseId": "W12",
+  "arm": "A",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "在回复里做一个可交互的7天错误率图：第1至7天依次为0.4%、0.5%、0.3%、2.8%、0.6%、0.5%、0.4%。点击某天只选中；另放“分析所选日期”按钮，点击后才向你追问，带上日期和错误率。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "7天错误率（可点击选择）",
+      "kind": "html",
+      "callSeq": 39,
+      "resultSeq": 40,
+      "replace": null,
+      "source": "results/test-A-frozen-20260917/W12-A-1/widget-1.source.html",
+      "preview": "results/test-A-frozen-20260917/W12-A-1/widget-1.html",
+      "sha256": "cb9a56fcda6485f75769c22a9f70f51aaadc51e1f625d1ba3da43c9de3baaab6",
+      "bytes": 7112
+    }
+  ],
+  "final": "I'll load the visualization skill first.\n\n上面是 7 天错误率柱状图（纵轴 0–3%，单位 %）。\n\n- **点击某一天**：只做选中——柱子高亮、顶端数值加粗，下方读数显示“第 X 天 · 错误率 Y%”，不会自动发问。\n- **“分析所选日期”按钮**：未选中时禁用；点击后才把“第 X 天，错误率 Y%”发给我，我据此分析这一天错误率偏高的原因。\n\n从数据看，第 4 天 2.8% 明显高于其余各天（0.3%–0.6%），选中第 4 天后点按钮，我可以直接围绕这天展开排查。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 18,
+        "callId": "call_00_ET_Y5C6tYYoQoFhAvq5Im8g6982",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 19,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_ruuzWTma5BXTtPGHuxiR8972",
+        "argumentsSha256": "7088902a91f03cb1993ee2b302ad21bbed2907f9cc8b6017d346740aea4f10ae",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_DAIC4eXeH6PEfMXctbIJ6588",
+        "argumentsSha256": "66fca307d000b3a15ee650d56c84294b70fc73292e3d347e8a8014780f7a7648",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 33,
+        "callId": "call_00_mBfp3riSv8PC9jizIVIE9212",
+        "argumentsSha256": "ac4ca12955dc6a9c398135a34c7e4f5b531d70439709e4fb42156d455d85c34f",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 39,
+        "callId": "call_00_oq61Y6En2tg36obJU1uO7780",
+        "argumentsSha256": "5b0e5c230c78748cec420a5d2ca6291ac76005acc696c3569f831d4294a26d68",
+        "wrapped": false,
+        "resultSeq": 40,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "61015029bf960ffa4665b7226b33810884fd76610f8e22154c3b5e3bb0a3c8ce"
+      },
+      {
+        "path": "references/charts.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "0778ef689dea193a21f6f319a3d915e268d184bdd377128fa6a272a4ff8a1d80",
+        "resultSha256": "b60285ddfeddf48c0bd2d95f73a948cad4d040fd5bb1915a679e2f0f452fd2f7"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 33,
+        "resultSeq": 34,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "bb5c2e40e5ed14033a50e4045e737b69162cd10e7c055d20a4a4f91c8c547781"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 18,
+        "resultSeq": 19,
+        "success": true,
+        "resultSha256": "15bc6c7f7ff001d6117eb6c15bb05c4a97d27a444264f79d7deb04eaa29043ac"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "a0ca7f3adecddf3c4a9961119996c0a3d56d874f547a4fcd393a6fa781a53591"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8526,
+    "outputTokens": 6743,
+    "cacheReadTokens": 41344,
+    "cacheWriteTokens": 0,
+    "totalTokens": 56613
+  },
+  "elapsedSeconds": 29.023,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "6b1b060e56a007c07ab211ff360c68f16bc60e76235da877b2aedcacb289a77e",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "19d3438023c10d257f77d52e20287dc7df75eb2a96cb3c1d22418fcae0daf08b"
+}

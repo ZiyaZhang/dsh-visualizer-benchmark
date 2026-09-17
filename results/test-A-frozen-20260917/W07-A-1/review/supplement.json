@@ -1,0 +1,164 @@
+{
+  "scope": "Isolated unchanged source, explicit reviewer operations; not Host delivery.",
+  "states": [
+    {
+      "action": "initial",
+      "text": "指数退避演示（示意，不实际发网络请求）\n最多 4 次请求 · 第 3 次成功即停止\n等待推进速度\n快（1 秒等待 ≈ 0.6 秒）\n实时（1 秒 ≈ 1 秒）\n极快（1 秒等待 ≈ 0.2 秒）\n实时走秒\n自动播放\n1\n待定\n2\n待定\n3\n待定\n4\n待定\nt = 0.0 秒\n累计等待\n0.0 秒\n下一次等待\n—\n当前时刻 t\n0.0 秒\n状态\n未开始\n下一步\n重置",
+      "controls": [
+        {
+          "text": null,
+          "id": "eb-live",
+          "disabled": false,
+          "value": "on",
+          "checked": false
+        },
+        {
+          "text": "自动播放",
+          "id": "eb-auto",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "下一步",
+          "id": "eb-step",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "eb-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "74977e66f5328dd2bbf97178708d3e01",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "74977e66f5328dd2bbf97178708d3e01",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "74977e66f5328dd2bbf97178708d3e01",
+          "type": "resize",
+          "payload": {
+            "height": 370
+          }
+        }
+      ]
+    },
+    {
+      "action": "#eb-step: advance",
+      "text": "指数退避演示（示意，不实际发网络请求）\n最多 4 次请求 · 第 3 次成功即停止\n等待推进速度\n快（1 秒等待 ≈ 0.6 秒）\n实时（1 秒 ≈ 1 秒）\n极快（1 秒等待 ≈ 0.2 秒）\n实时走秒\n自动播放\n1\n失败\n等待 1 秒\n1.0 / 1 秒\n2\n进行中\n预计失败\n等待 2 秒\n0.0 / 2 秒\n3\n待定\n4\n待定\nt = 0.0 秒\n累计等待\n1.2 秒\n下一次等待\n1.0 秒（共 1 秒）\n当前时刻 t\n0.0 秒\n状态\n请求 2 进行中（第 2 次尝试）\n下一步\n重置",
+      "controls": [
+        {
+          "text": null,
+          "id": "eb-live",
+          "disabled": false,
+          "value": "on",
+          "checked": false
+        },
+        {
+          "text": "自动播放",
+          "id": "eb-auto",
+          "disabled": true,
+          "value": ""
+        },
+        {
+          "text": "下一步",
+          "id": "eb-step",
+          "disabled": true,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "eb-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "74977e66f5328dd2bbf97178708d3e01",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "74977e66f5328dd2bbf97178708d3e01",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "74977e66f5328dd2bbf97178708d3e01",
+          "type": "resize",
+          "payload": {
+            "height": 370
+          }
+        }
+      ]
+    },
+    {
+      "action": "#eb-reset: 1",
+      "text": "指数退避演示（示意，不实际发网络请求）\n最多 4 次请求 · 第 3 次成功即停止\n等待推进速度\n快（1 秒等待 ≈ 0.6 秒）\n实时（1 秒 ≈ 1 秒）\n极快（1 秒等待 ≈ 0.2 秒）\n实时走秒\n自动播放\n1\n待定\n2\n待定\n3\n待定\n4\n待定\nt = 0.0 秒\n累计等待\n0.0 秒\n下一次等待\n—\n当前时刻 t\n0.0 秒\n状态\n未开始\n下一步\n重置",
+      "controls": [
+        {
+          "text": null,
+          "id": "eb-live",
+          "disabled": false,
+          "value": "on",
+          "checked": false
+        },
+        {
+          "text": "自动播放",
+          "id": "eb-auto",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "下一步",
+          "id": "eb-step",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "eb-reset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "74977e66f5328dd2bbf97178708d3e01",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "74977e66f5328dd2bbf97178708d3e01",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "74977e66f5328dd2bbf97178708d3e01",
+          "type": "resize",
+          "payload": {
+            "height": 370
+          }
+        }
+      ]
+    }
+  ]
+}

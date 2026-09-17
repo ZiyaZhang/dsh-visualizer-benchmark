@@ -1,0 +1,327 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "E02-A-2",
+  "caseId": "E02",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 41,
+  "resultSeq": 42,
+  "casesPath": "results/test-A-frozen-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:19:42.110Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "not_applicable",
+      "reason": "No literal label oracle specified.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "移动端取数：同一块屏，两套接口的代价\n首页信息流\n商品详情\n消息/会话\n设置/个人资料\n首页 / 商品详情屏\n需要 4 类数据\nREST\n/feed\n/users/:id\n/posts/:id/likes\n/ads\n移动端\n4 次往返 / 4 个解析\n同一个屏\n声明所需字段\n单次\n单端点 + 精确字段\n1 次往返，字段按需\n代价：服务端解析复杂度上移\n示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。\nREST：资源 + 多端点\n缓存友好 · 契约粗\n/feed?limit=20\n2800×\n460ms\n/users/:id（作者，批量缺）\n1400×\n380ms\n/posts/:id/likes（逐条）\n600×\n410ms\n/ads/config\n300×\n80ms\n场景\n列表 + 作者 + 点赞态 + 广告\n· 往返\n5100\n· 完成\n460ms\n· 传输量级\n3864000B\n轮数 = 400×3 = 1200ms（串行水瀑布）；列表里 20 条要 N+1 拼接，容易过取字段。\n\n后端成本：低到中。端点即契约，用 OpenAPI/文档就能冻结；缺点是页面一变就要新端点（或开 BFF）。\nGraphQL：单端点 + 声明式字段\n取数精准 · 服务端复杂\nfeed {...}（一次声明全部）\n1×\n2150ms\n场景\n列表 + 作者 + 点赞态 + 广告\n· 往返\n1\n· 完成\n2150ms\n· 传输量级\n750B\n服务端要为同一查询写 resolver 聚合；限流与复杂度上限必须配上，否则一个恶意深层查询能打穿数据库。\n\n后端成本：中到高。schema、resolver、N+1 与复杂度限流都得有；好处是字段级演进不用发版。\n本屏倾向 · GraphQL\n首页是典型「跨资源聚合」屏。REST 要么多端点串行，要么专门开 BFF 聚合端点；GraphQL 在这里省的是往返次数和客户端拼装逻辑。\nREST 请求\nGraphQL 请求\n条形起点错开 = 串行等待（先拿到 id 才能查详情）\n首页 / 商品详情屏 需要 4 类数据 REST /feed /users/:id /posts/:id/likes /ads 移动端 4 次往返 / 4 个解析 同一个屏 声明所需字段 单次 单端点 + 精确字段 1 次往返，字段按需 代价：服务端解析复杂度上移 示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 804,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "选择移动端页面场景"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "db64668b394bb6ef9d87152d0b3db798",
+          "payload": {},
+          "at": 67.70000004768372
+        },
+        {
+          "type": "rendered",
+          "channel": "db64668b394bb6ef9d87152d0b3db798",
+          "payload": {},
+          "at": 115.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "db64668b394bb6ef9d87152d0b3db798",
+          "payload": {
+            "height": 804
+          },
+          "at": 116
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 移动端取数：同一块屏，两套接口的代价\n- group \"选择移动端页面场景\":\n  - button \"首页信息流\" [pressed]\n  - button \"商品详情\"\n  - button \"消息/会话\"\n  - button \"设置/个人资料\"\n- img \"同一屏所需数据在 REST 与 GraphQL 下的请求形状：REST 多端点往返，GraphQL 单端点一次取回\":\n  - img \"同一屏所需数据在 REST 与 GraphQL 下的请求形状：REST 多端点往返，GraphQL 单端点一次取回\": 首页 / 商品详情屏 需要 4 类数据 REST /feed /users/:id /posts/:id/likes /ads 移动端 4 次往返 / 4 个解析 同一个屏 声明所需字段 单次 单端点 + 精确字段 1 次往返，字段按需 代价：服务端解析复杂度上移 示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。\n- heading \"REST：资源 + 多端点 缓存友好 · 契约粗\" [level=3]\n- text: /feed?limit=20 2800× 460ms /users/:id（作者，批量缺） 1400× 380ms /posts/:id/likes（逐条） 600× 410ms /ads/config 300× 80ms 场景 列表 + 作者 + 点赞态 + 广告 · 往返 5100 · 完成 460ms · 传输量级 3864000B 轮数 = 400×3 = 1200ms（串行水瀑布）；列表里 20 条要 N+1 拼接，容易过取字段。 后端成本：低到中。端点即契约，用 OpenAPI/文档就能冻结；缺点是页面一变就要新端点（或开 BFF）。\n- heading \"GraphQL：单端点 + 声明式字段 取数精准 · 服务端复杂\" [level=3]\n- text: \"feed {...}（一次声明全部） 1× 2150ms 场景 列表 + 作者 + 点赞态 + 广告 · 往返 1 · 完成 2150ms · 传输量级 750B 服务端要为同一查询写 resolver 聚合；限流与复杂度上限必须配上，否则一个恶意深层查询能打穿数据库。 后端成本：中到高。schema、resolver、N+1 与复杂度限流都得有；好处是字段级演进不用发版。 本屏倾向 · GraphQL 首页是典型「跨资源聚合」屏。REST 要么多端点串行，要么专门开 BFF 聚合端点；GraphQL 在这里省的是往返次数和客户端拼装逻辑。 REST 请求 GraphQL 请求 条形起点错开 = 串行等待（先拿到 id 才能查详情）\""
+    },
+    {
+      "text": "移动端取数：同一块屏，两套接口的代价\n首页信息流\n商品详情\n消息/会话\n设置/个人资料\n首页 / 商品详情屏\n需要 4 类数据\nREST\n/feed\n/users/:id\n/posts/:id/likes\n/ads\n移动端\n4 次往返 / 4 个解析\n同一个屏\n声明所需字段\n单次\n单端点 + 精确字段\n1 次往返，字段按需\n代价：服务端解析复杂度上移\n示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。\nREST：资源 + 多端点\n缓存友好 · 契约粗\n/feed?limit=20\n2800×\n460ms\n/users/:id（作者，批量缺）\n1400×\n380ms\n/posts/:id/likes（逐条）\n600×\n410ms\n/ads/config\n300×\n80ms\n场景\n列表 + 作者 + 点赞态 + 广告\n· 往返\n5100\n· 完成\n460ms\n· 传输量级\n3864000B\n轮数 = 400×3 = 1200ms（串行水瀑布）；列表里 20 条要 N+1 拼接，容易过取字段。\n\n后端成本：低到中。端点即契约，用 OpenAPI/文档就能冻结；缺点是页面一变就要新端点（或开 BFF）。\nGraphQL：单端点 + 声明式字段\n取数精准 · 服务端复杂\nfeed {...}（一次声明全部）\n1×\n2150ms\n场景\n列表 + 作者 + 点赞态 + 广告\n· 往返\n1\n· 完成\n2150ms\n· 传输量级\n750B\n服务端要为同一查询写 resolver 聚合；限流与复杂度上限必须配上，否则一个恶意深层查询能打穿数据库。\n\n后端成本：中到高。schema、resolver、N+1 与复杂度限流都得有；好处是字段级演进不用发版。\n本屏倾向 · GraphQL\n首页是典型「跨资源聚合」屏。REST 要么多端点串行，要么专门开 BFF 聚合端点；GraphQL 在这里省的是往返次数和客户端拼装逻辑。\nREST 请求\nGraphQL 请求\n条形起点错开 = 串行等待（先拿到 id 才能查详情）\n首页 / 商品详情屏 需要 4 类数据 REST /feed /users/:id /posts/:id/likes /ads 移动端 4 次往返 / 4 个解析 同一个屏 声明所需字段 单次 单端点 + 精确字段 1 次往返，字段按需 代价：服务端解析复杂度上移 示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 1196,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "选择移动端页面场景"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "96ae0609045153f41513f3c41be0976d",
+          "payload": {},
+          "at": 702
+        },
+        {
+          "type": "rendered",
+          "channel": "96ae0609045153f41513f3c41be0976d",
+          "payload": {},
+          "at": 705.4000000953674
+        },
+        {
+          "type": "resize",
+          "channel": "96ae0609045153f41513f3c41be0976d",
+          "payload": {
+            "height": 1196
+          },
+          "at": 705.6000001430511
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 移动端取数：同一块屏，两套接口的代价\n- group \"选择移动端页面场景\":\n  - button \"首页信息流\" [pressed]\n  - button \"商品详情\"\n  - button \"消息/会话\"\n  - button \"设置/个人资料\"\n- img \"同一屏所需数据在 REST 与 GraphQL 下的请求形状：REST 多端点往返，GraphQL 单端点一次取回\":\n  - img \"同一屏所需数据在 REST 与 GraphQL 下的请求形状：REST 多端点往返，GraphQL 单端点一次取回\": 首页 / 商品详情屏 需要 4 类数据 REST /feed /users/:id /posts/:id/likes /ads 移动端 4 次往返 / 4 个解析 同一个屏 声明所需字段 单次 单端点 + 精确字段 1 次往返，字段按需 代价：服务端解析复杂度上移 示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。\n- heading \"REST：资源 + 多端点 缓存友好 · 契约粗\" [level=3]\n- text: /feed?limit=20 2800× 460ms /users/:id（作者，批量缺） 1400× 380ms /posts/:id/likes（逐条） 600× 410ms /ads/config 300× 80ms 场景 列表 + 作者 + 点赞态 + 广告 · 往返 5100 · 完成 460ms · 传输量级 3864000B 轮数 = 400×3 = 1200ms（串行水瀑布）；列表里 20 条要 N+1 拼接，容易过取字段。 后端成本：低到中。端点即契约，用 OpenAPI/文档就能冻结；缺点是页面一变就要新端点（或开 BFF）。\n- heading \"GraphQL：单端点 + 声明式字段 取数精准 · 服务端复杂\" [level=3]\n- text: \"feed {...}（一次声明全部） 1× 2150ms 场景 列表 + 作者 + 点赞态 + 广告 · 往返 1 · 完成 2150ms · 传输量级 750B 服务端要为同一查询写 resolver 聚合；限流与复杂度上限必须配上，否则一个恶意深层查询能打穿数据库。 后端成本：中到高。schema、resolver、N+1 与复杂度限流都得有；好处是字段级演进不用发版。 本屏倾向 · GraphQL 首页是典型「跨资源聚合」屏。REST 要么多端点串行，要么专门开 BFF 聚合端点；GraphQL 在这里省的是往返次数和客户端拼装逻辑。 REST 请求 GraphQL 请求 条形起点错开 = 串行等待（先拿到 id 才能查详情）\""
+    },
+    {
+      "text": "移动端取数：同一块屏，两套接口的代价\n首页信息流\n商品详情\n消息/会话\n设置/个人资料\n首页 / 商品详情屏\n需要 4 类数据\nREST\n/feed\n/users/:id\n/posts/:id/likes\n/ads\n移动端\n4 次往返 / 4 个解析\n同一个屏\n声明所需字段\n单次\n单端点 + 精确字段\n1 次往返，字段按需\n代价：服务端解析复杂度上移\n示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。\nREST：资源 + 多端点\n缓存友好 · 契约粗\n/feed?limit=20\n2800×\n460ms\n/users/:id（作者，批量缺）\n1400×\n380ms\n/posts/:id/likes（逐条）\n600×\n410ms\n/ads/config\n300×\n80ms\n场景\n列表 + 作者 + 点赞态 + 广告\n· 往返\n5100\n· 完成\n460ms\n· 传输量级\n3864000B\n轮数 = 400×3 = 1200ms（串行水瀑布）；列表里 20 条要 N+1 拼接，容易过取字段。\n\n后端成本：低到中。端点即契约，用 OpenAPI/文档就能冻结；缺点是页面一变就要新端点（或开 BFF）。\nGraphQL：单端点 + 声明式字段\n取数精准 · 服务端复杂\nfeed {...}（一次声明全部）\n1×\n2150ms\n场景\n列表 + 作者 + 点赞态 + 广告\n· 往返\n1\n· 完成\n2150ms\n· 传输量级\n750B\n服务端要为同一查询写 resolver 聚合；限流与复杂度上限必须配上，否则一个恶意深层查询能打穿数据库。\n\n后端成本：中到高。schema、resolver、N+1 与复杂度限流都得有；好处是字段级演进不用发版。\n本屏倾向 · GraphQL\n首页是典型「跨资源聚合」屏。REST 要么多端点串行，要么专门开 BFF 聚合端点；GraphQL 在这里省的是往返次数和客户端拼装逻辑。\nREST 请求\nGraphQL 请求\n条形起点错开 = 串行等待（先拿到 id 才能查详情）\n首页 / 商品详情屏 需要 4 类数据 REST /feed /users/:id /posts/:id/likes /ads 移动端 4 次往返 / 4 个解析 同一个屏 声明所需字段 单次 单端点 + 精确字段 1 次往返，字段按需 代价：服务端解析复杂度上移 示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 804,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "选择移动端页面场景"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "16d95a897e8da9d71a7ab919d3119b3e",
+          "payload": {},
+          "at": 1310.2999999523163
+        },
+        {
+          "type": "rendered",
+          "channel": "16d95a897e8da9d71a7ab919d3119b3e",
+          "payload": {},
+          "at": 1313.5
+        },
+        {
+          "type": "resize",
+          "channel": "16d95a897e8da9d71a7ab919d3119b3e",
+          "payload": {
+            "height": 804
+          },
+          "at": 1313.5
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 移动端取数：同一块屏，两套接口的代价\n- group \"选择移动端页面场景\":\n  - button \"首页信息流\" [pressed]\n  - button \"商品详情\"\n  - button \"消息/会话\"\n  - button \"设置/个人资料\"\n- img \"同一屏所需数据在 REST 与 GraphQL 下的请求形状：REST 多端点往返，GraphQL 单端点一次取回\":\n  - img \"同一屏所需数据在 REST 与 GraphQL 下的请求形状：REST 多端点往返，GraphQL 单端点一次取回\": 首页 / 商品详情屏 需要 4 类数据 REST /feed /users/:id /posts/:id/likes /ads 移动端 4 次往返 / 4 个解析 同一个屏 声明所需字段 单次 单端点 + 精确字段 1 次往返，字段按需 代价：服务端解析复杂度上移 示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。\n- heading \"REST：资源 + 多端点 缓存友好 · 契约粗\" [level=3]\n- text: /feed?limit=20 2800× 460ms /users/:id（作者，批量缺） 1400× 380ms /posts/:id/likes（逐条） 600× 410ms /ads/config 300× 80ms 场景 列表 + 作者 + 点赞态 + 广告 · 往返 5100 · 完成 460ms · 传输量级 3864000B 轮数 = 400×3 = 1200ms（串行水瀑布）；列表里 20 条要 N+1 拼接，容易过取字段。 后端成本：低到中。端点即契约，用 OpenAPI/文档就能冻结；缺点是页面一变就要新端点（或开 BFF）。\n- heading \"GraphQL：单端点 + 声明式字段 取数精准 · 服务端复杂\" [level=3]\n- text: \"feed {...}（一次声明全部） 1× 2150ms 场景 列表 + 作者 + 点赞态 + 广告 · 往返 1 · 完成 2150ms · 传输量级 750B 服务端要为同一查询写 resolver 聚合；限流与复杂度上限必须配上，否则一个恶意深层查询能打穿数据库。 后端成本：中到高。schema、resolver、N+1 与复杂度限流都得有；好处是字段级演进不用发版。 本屏倾向 · GraphQL 首页是典型「跨资源聚合」屏。REST 要么多端点串行，要么专门开 BFF 聚合端点；GraphQL 在这里省的是往返次数和客户端拼装逻辑。 REST 请求 GraphQL 请求 条形起点错开 = 串行等待（先拿到 id 才能查详情）\""
+    },
+    {
+      "text": "移动端取数：同一块屏，两套接口的代价\n首页信息流\n商品详情\n消息/会话\n设置/个人资料\n首页 / 商品详情屏\n需要 4 类数据\nREST\n/feed\n/users/:id\n/posts/:id/likes\n/ads\n移动端\n4 次往返 / 4 个解析\n同一个屏\n声明所需字段\n单次\n单端点 + 精确字段\n1 次往返，字段按需\n代价：服务端解析复杂度上移\n示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。\nREST：资源 + 多端点\n缓存友好 · 契约粗\n/feed?limit=20\n2800×\n460ms\n/users/:id（作者，批量缺）\n1400×\n380ms\n/posts/:id/likes（逐条）\n600×\n410ms\n/ads/config\n300×\n80ms\n场景\n列表 + 作者 + 点赞态 + 广告\n· 往返\n5100\n· 完成\n460ms\n· 传输量级\n3864000B\n轮数 = 400×3 = 1200ms（串行水瀑布）；列表里 20 条要 N+1 拼接，容易过取字段。\n\n后端成本：低到中。端点即契约，用 OpenAPI/文档就能冻结；缺点是页面一变就要新端点（或开 BFF）。\nGraphQL：单端点 + 声明式字段\n取数精准 · 服务端复杂\nfeed {...}（一次声明全部）\n1×\n2150ms\n场景\n列表 + 作者 + 点赞态 + 广告\n· 往返\n1\n· 完成\n2150ms\n· 传输量级\n750B\n服务端要为同一查询写 resolver 聚合；限流与复杂度上限必须配上，否则一个恶意深层查询能打穿数据库。\n\n后端成本：中到高。schema、resolver、N+1 与复杂度限流都得有；好处是字段级演进不用发版。\n本屏倾向 · GraphQL\n首页是典型「跨资源聚合」屏。REST 要么多端点串行，要么专门开 BFF 聚合端点；GraphQL 在这里省的是往返次数和客户端拼装逻辑。\nREST 请求\nGraphQL 请求\n条形起点错开 = 串行等待（先拿到 id 才能查详情）\n首页 / 商品详情屏 需要 4 类数据 REST /feed /users/:id /posts/:id/likes /ads 移动端 4 次往返 / 4 个解析 同一个屏 声明所需字段 单次 单端点 + 精确字段 1 次往返，字段按需 代价：服务端解析复杂度上移 示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 1196,
+      "visibleGraphics": 3,
+      "accessibleNames": [
+        "选择移动端页面场景"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "199cf1419c1ea73eaf983a7828edff1d",
+          "payload": {},
+          "at": 1894.7000000476837
+        },
+        {
+          "type": "rendered",
+          "channel": "199cf1419c1ea73eaf983a7828edff1d",
+          "payload": {},
+          "at": 1897.7000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "199cf1419c1ea73eaf983a7828edff1d",
+          "payload": {
+            "height": 1196
+          },
+          "at": 1897.7000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 移动端取数：同一块屏，两套接口的代价\n- group \"选择移动端页面场景\":\n  - button \"首页信息流\" [pressed]\n  - button \"商品详情\"\n  - button \"消息/会话\"\n  - button \"设置/个人资料\"\n- img \"同一屏所需数据在 REST 与 GraphQL 下的请求形状：REST 多端点往返，GraphQL 单端点一次取回\":\n  - img \"同一屏所需数据在 REST 与 GraphQL 下的请求形状：REST 多端点往返，GraphQL 单端点一次取回\": 首页 / 商品详情屏 需要 4 类数据 REST /feed /users/:id /posts/:id/likes /ads 移动端 4 次往返 / 4 个解析 同一个屏 声明所需字段 单次 单端点 + 精确字段 1 次往返，字段按需 代价：服务端解析复杂度上移 示意：真实延迟取决于网络与后端实现，条形为估算量级，非实测。\n- heading \"REST：资源 + 多端点 缓存友好 · 契约粗\" [level=3]\n- text: /feed?limit=20 2800× 460ms /users/:id（作者，批量缺） 1400× 380ms /posts/:id/likes（逐条） 600× 410ms /ads/config 300× 80ms 场景 列表 + 作者 + 点赞态 + 广告 · 往返 5100 · 完成 460ms · 传输量级 3864000B 轮数 = 400×3 = 1200ms（串行水瀑布）；列表里 20 条要 N+1 拼接，容易过取字段。 后端成本：低到中。端点即契约，用 OpenAPI/文档就能冻结；缺点是页面一变就要新端点（或开 BFF）。\n- heading \"GraphQL：单端点 + 声明式字段 取数精准 · 服务端复杂\" [level=3]\n- text: \"feed {...}（一次声明全部） 1× 2150ms 场景 列表 + 作者 + 点赞态 + 广告 · 往返 1 · 完成 2150ms · 传输量级 750B 服务端要为同一查询写 resolver 聚合；限流与复杂度上限必须配上，否则一个恶意深层查询能打穿数据库。 后端成本：中到高。schema、resolver、N+1 与复杂度限流都得有；好处是字段级演进不用发版。 本屏倾向 · GraphQL 首页是典型「跨资源聚合」屏。REST 要么多端点串行，要么专门开 BFF 聚合端点；GraphQL 在这里省的是往返次数和客户端拼装逻辑。 REST 请求 GraphQL 请求 条形起点错开 = 串行等待（先拿到 id 才能查详情）\""
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "db64668b394bb6ef9d87152d0b3db798",
+      "payload": {},
+      "at": 67.70000004768372
+    },
+    {
+      "type": "rendered",
+      "channel": "db64668b394bb6ef9d87152d0b3db798",
+      "payload": {},
+      "at": 115.10000014305115
+    },
+    {
+      "type": "resize",
+      "channel": "db64668b394bb6ef9d87152d0b3db798",
+      "payload": {
+        "height": 804
+      },
+      "at": 116
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "bd089f29b7f2b4e7487b9e156ebd51a35d7296dd34cfbfbdcd264c1da038559b",
+  "previewSha256": "d665570327ce16e14b7f97abae65702839b8c90110904458fbe8568314ab5900",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

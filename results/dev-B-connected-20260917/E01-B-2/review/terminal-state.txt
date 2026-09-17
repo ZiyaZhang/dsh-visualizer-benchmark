@@ -1,0 +1,36 @@
+客户端
+ESTABLISHED
+服务端
+ESTABLISHED
+←
+→
+双向可达已确认，连接建立完成
+客户端
+ESTABLISHED
+服务端
+ESTABLISHED
+SYN seq = x
+SYN seq = y, ack = x + 1
+ACK ack = y + 1
+每一方都要收到对方的初始序列号，并让对方确认自己已被收到
+箭头表示实际发送的报文段（示意，未按比例）
+00
+初始状态
+01
+SYN →
+02
+← SYN + ACK
+03
+ACK →
+第三次握手
+客户端：ACK, ack = y + 1
+
+客户端回 ACK：ack = y + 1（你的 y 我也收到了），同时带上 seq = x + 1。此后双方都进入 ESTABLISHED，连接建立完成。
+
+双方序列号由此对齐（各自随机选择，避免旧报文造成混淆）
+方向	报文	seq	ack
+客户端 → 服务端	SYN	x	—
+服务端 → 客户端	SYN + ACK	y	x + 1
+客户端 → 服务端	ACK	x + 1	y + 1
+
+阅读提示：SYN 表示“我的初始序列号是……”，ACK 表示“你上一条我收到了”。

@@ -1,5 +1,6 @@
 {
   "schemaVersion": 2,
+  "visualSettleMs": 500,
   "trialId": "W02-B-2",
   "caseId": "W02",
   "scenario": "heat",
@@ -8,7 +9,7 @@
   "resultSeq": 34,
   "casesPath": "results/dev-B-connected-20260917/cases.json",
   "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
-  "collectedAt": "2026-09-17T16:45:10.838Z",
+  "collectedAt": "2026-09-17T18:08:30.867Z",
   "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
   "checks": {
     "render": {
@@ -121,23 +122,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {},
-          "at": 55.200000047683716
+          "at": 107.59999990463257
         },
         {
           "type": "rendered",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {},
-          "at": 89.40000009536743
+          "at": 107.79999995231628
         },
         {
           "type": "resize",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {
             "height": 704
           },
-          "at": 89.5
+          "at": 112.5
         }
       ],
       "name": "initial",
@@ -174,31 +175,31 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {},
-          "at": 55.200000047683716
+          "at": 107.59999990463257
         },
         {
           "type": "rendered",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {},
-          "at": 89.40000009536743
+          "at": 107.79999995231628
         },
         {
           "type": "resize",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {
             "height": 704
           },
-          "at": 89.5
+          "at": 112.5
         },
         {
           "type": "resize",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {
             "height": 765
           },
-          "at": 203.09999990463257
+          "at": 749.7999999523163
         }
       ],
       "name": "step-1",
@@ -235,31 +236,31 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {},
-          "at": 55.200000047683716
+          "at": 107.59999990463257
         },
         {
           "type": "rendered",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {},
-          "at": 89.40000009536743
+          "at": 107.79999995231628
         },
         {
           "type": "resize",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {
             "height": 704
           },
-          "at": 89.5
+          "at": 112.5
         },
         {
           "type": "resize",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {
             "height": 765
           },
-          "at": 203.09999990463257
+          "at": 749.7999999523163
         }
       ],
       "name": "step-2",
@@ -296,31 +297,39 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {},
-          "at": 55.200000047683716
+          "at": 107.59999990463257
         },
         {
           "type": "rendered",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {},
-          "at": 89.40000009536743
+          "at": 107.79999995231628
         },
         {
           "type": "resize",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {
             "height": 704
           },
-          "at": 89.5
+          "at": 112.5
         },
         {
           "type": "resize",
-          "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
           "payload": {
             "height": 765
           },
-          "at": 203.09999990463257
+          "at": 749.7999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "3261c8f3095bdb5898fb2fb9460c696e",
+          "payload": {
+            "height": 704
+          },
+          "at": 1843.5
         }
       ],
       "name": "reset",
@@ -357,23 +366,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "f41f13c98093554af7d20d049708140a",
+          "channel": "724bde09751077ab47332e499961971e",
           "payload": {},
-          "at": 311
+          "at": 2366.199999809265
         },
         {
           "type": "rendered",
-          "channel": "f41f13c98093554af7d20d049708140a",
+          "channel": "724bde09751077ab47332e499961971e",
           "payload": {},
-          "at": 319
+          "at": 2369.5
         },
         {
           "type": "resize",
-          "channel": "f41f13c98093554af7d20d049708140a",
+          "channel": "724bde09751077ab47332e499961971e",
           "payload": {
             "height": 674
           },
-          "at": 319
+          "at": 2369.5
         }
       ],
       "name": "initial",
@@ -402,23 +411,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "850ebe7c1cc0a07a448b82ba9c3fe1dc",
+          "channel": "4ae96cef6c3037d82783414335a9f946",
           "payload": {},
-          "at": 390
+          "at": 2917.399999856949
         },
         {
           "type": "rendered",
-          "channel": "850ebe7c1cc0a07a448b82ba9c3fe1dc",
+          "channel": "4ae96cef6c3037d82783414335a9f946",
           "payload": {},
-          "at": 393.90000009536743
+          "at": 2920.2999999523163
         },
         {
           "type": "resize",
-          "channel": "850ebe7c1cc0a07a448b82ba9c3fe1dc",
+          "channel": "4ae96cef6c3037d82783414335a9f946",
           "payload": {
             "height": 704
           },
-          "at": 393.90000009536743
+          "at": 2920.2999999523163
         }
       ],
       "name": "initial",
@@ -447,23 +456,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "e3c1f9174a6981365813c0648a0d6756",
+          "channel": "be1196e38f7ee238cbca5f94f66dd3ae",
           "payload": {},
-          "at": 451.2000000476837
+          "at": 3471.699999809265
         },
         {
           "type": "rendered",
-          "channel": "e3c1f9174a6981365813c0648a0d6756",
+          "channel": "be1196e38f7ee238cbca5f94f66dd3ae",
           "payload": {},
-          "at": 454.2000000476837
+          "at": 3471.899999856949
         },
         {
           "type": "resize",
-          "channel": "e3c1f9174a6981365813c0648a0d6756",
+          "channel": "be1196e38f7ee238cbca5f94f66dd3ae",
           "payload": {
             "height": 674
           },
-          "at": 454.2000000476837
+          "at": 3471.899999856949
         }
       ],
       "name": "initial",
@@ -475,31 +484,39 @@
   "messages": [
     {
       "type": "ready",
-      "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+      "channel": "3261c8f3095bdb5898fb2fb9460c696e",
       "payload": {},
-      "at": 55.200000047683716
+      "at": 107.59999990463257
     },
     {
       "type": "rendered",
-      "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+      "channel": "3261c8f3095bdb5898fb2fb9460c696e",
       "payload": {},
-      "at": 89.40000009536743
+      "at": 107.79999995231628
     },
     {
       "type": "resize",
-      "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+      "channel": "3261c8f3095bdb5898fb2fb9460c696e",
       "payload": {
         "height": 704
       },
-      "at": 89.5
+      "at": 112.5
     },
     {
       "type": "resize",
-      "channel": "f00dd518534de8e8ba4a969b66cb4f55",
+      "channel": "3261c8f3095bdb5898fb2fb9460c696e",
       "payload": {
         "height": 765
       },
-      "at": 203.09999990463257
+      "at": 749.7999999523163
+    },
+    {
+      "type": "resize",
+      "channel": "3261c8f3095bdb5898fb2fb9460c696e",
+      "payload": {
+        "height": 704
+      },
+      "at": 1843.5
     }
   ],
   "console": [],
@@ -511,11 +528,48 @@
   "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
   "rendererHashKind": "recorded trial renderer source hash",
   "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
-  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
-  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
   "kind": "html",
   "sandbox": "allow-scripts",
   "playwrightVersion": "1.61.1",
   "networkRequests": [],
-  "browserVersion": "149.0.7827.55"
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
 }

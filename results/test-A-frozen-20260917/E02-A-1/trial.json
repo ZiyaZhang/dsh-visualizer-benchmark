@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 2,
+  "id": "E02-A-1",
+  "roundId": "test-A-frozen-20260917",
+  "caseId": "E02",
+  "arm": "A",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "一个小团队要给移动端提供数据接口，怎么理解 REST 和 GraphQL 的取舍？",
+  "expectedRoute": "optional",
+  "widgets": [
+    {
+      "title": "REST vs GraphQL：小团队移动接口决策卡",
+      "kind": "html",
+      "callSeq": 25,
+      "resultSeq": 26,
+      "replace": null,
+      "source": "results/test-A-frozen-20260917/E02-A-1/widget-1.source.html",
+      "preview": "results/test-A-frozen-20260917/E02-A-1/widget-1.html",
+      "sha256": "89384f9ec130f63e141714ebda3235f23c73bb1d2c66ca96dfaff24cfb30c273",
+      "bytes": 7355
+    }
+  ],
+  "final": "上面那张卡可以直接点——四个团队阶段对应不同的推荐和理由，横条是\"成本重心\"的迁移位置。核心判断可以压成三句话：\n\n1. **GraphQL 卖的是\"客户端取数自由度\"，收的是\"服务端运维复杂度\"。** REST 把复杂度压在客户端（多次往返、接口膨胀），GraphQL 把它搬到服务端（resolver、N+1、逐字段鉴权、网关可观测）。小团队人手少，通常更愿意让复杂度待在客户端——因为它不需要专人值守。\n\n2. **成本拐点由\"客户端数量\"而不是\"接口数量\"触发。** 只有一个 App、迭代节奏统一时，REST 的版本化（`/v1`、`/v2`）几乎零成本。一旦出现第二、第三个端，或者前端开始排队等后端加接口，GraphQL 的\"前端自己决定取什么\"才开始真正回本。3~5 人的小团队用 REST + 一个薄 BFF 就能覆盖这个过渡期，不必一步到位。\n\n3. **移动端特有的两个点别忽略。** 一是 REST 天然吃得到 HTTP 缓存 / ETag / CDN，弱网和流量敏感场景很实在；二是 GraphQL 的响应体积不设限反而是移动端最大的坑，上它之前先定好持久化查询、深度限制和响应大小上限。\n\n务实路径：现在 REST + OpenAPI 契约 + 单一 BFF；等第二客户端落地、且团队里有人能专职守网关时，再按域（比如\"首页聚合\"这一个域）逐步引入 GraphQL，而不是全站迁移。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_LBgf9oJ21SHpmMj5guGG9505",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 25,
+        "callId": "call_00_efH56Yvf7QsYpoKE3k1x8563",
+        "argumentsSha256": "f05d065c738b7174826b7a452af15c02515a0ecade13c4502067f7e2a10900ae",
+        "wrapped": false,
+        "resultSeq": 26,
+        "error": false
+      }
+    ],
+    "referencesRead": [],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "71ca8e6caa9c4f6a85ceab061a3bdd1a4d9a50a2119caa76bdb621d3a9b1a2bd"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "8faf1ac885f301c05c6e6024612bfd1c8fef364d9c475054adc9b8b4cad486f7"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 10652,
+    "outputTokens": 3735,
+    "cacheReadTokens": 16640,
+    "cacheWriteTokens": 0,
+    "totalTokens": 31027
+  },
+  "elapsedSeconds": 21.051,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "ef82737339e5c9bcc445909da60e71bde964faa26d594160301f58b9f501eb5c",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "36f073d61b2092ea60bdf57a23b75aab41e34c27c48ac803b2f1883bed08df85"
+}

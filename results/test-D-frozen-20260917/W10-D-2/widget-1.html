@@ -1,0 +1,205 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+.fc{--ok:#22a06b;--err:#e05252;--loop:#5b8def;--mut:#94a3b8;overflow-x:auto;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;color:var(--dsw-alias-label-primary,#1f2329)}
+.fc svg{display:block;width:100%;min-width:800px;height:auto}
+.lane{fill:var(--dsw-alias-bg-layer-1,#f5f6f8);stroke:var(--dsw-alias-border-l1,#e4e7ec);stroke-width:1}
+.div{stroke:var(--dsw-alias-border-l1,#e4e7ec);stroke-width:1}
+.lt{fill:var(--dsw-alias-label-primary,#1f2329);font-size:14px;font-weight:650}
+.lr{fill:var(--dsw-alias-label-tertiary,#808795);font-size:10.5px}
+.node{fill:var(--dsw-alias-bg-base,#fff);stroke:var(--dsw-alias-border-l2,#cfd5dd);stroke-width:1.3}
+.node.ok{stroke:var(--ok);stroke-width:1.7}
+.node.err{stroke:var(--err);stroke-width:1.7}
+.t{font-size:13px;font-weight:650;fill:var(--dsw-alias-label-primary,#1f2329);text-anchor:middle}
+.s{font-size:10.5px;fill:var(--dsw-alias-label-secondary,#5b6270);text-anchor:middle}
+.t.ok{fill:var(--ok)}
+.t.err{fill:var(--err)}
+.ln{fill:none;stroke:var(--mut);stroke-width:1.7}
+.ln.ok{stroke:var(--ok)}
+.ln.err{stroke:var(--err)}
+.ln.loop{stroke:var(--loop);stroke-dasharray:7 6}
+.lb{font-size:11px;font-weight:650;text-anchor:middle}
+.lb.ok{fill:var(--ok)}
+.lb.err{fill:var(--err)}
+.lb.loop{fill:var(--loop)}
+.lba{text-anchor:start}
+.sec{font-size:11px;font-weight:650;fill:var(--err)}
+.sec.ok{fill:var(--ok)}
+.mt{font-size:10.5px;fill:var(--dsw-alias-label-secondary,#5b6270)}
+.mc{font-size:10.5px;font-weight:650;fill:var(--err);text-anchor:middle}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:12px;color:var(--dsw-alias-label-secondary,#5b6270)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:20px;border-top:2px solid var(--mut)}
+.legend i.ok{border-color:var(--ok)}
+.legend i.err{border-color:var(--err)}
+.legend i.loop{border-color:var(--loop);border-top-style:dashed}
+</style>
+<div class="fc">
+<svg viewBox="0 0 956 920" role="img" aria-labelledby="fcT fcD">
+<title id="fcT">模型 / Host / Web 三方协作的源码提交与修复流程图</title>
+<desc id="fcD">模型提交源码，Host 校验并记录版本，Web 隔离渲染。成功则用户在卡片上操作；运行报错时 Web 发起修复请求，Host 从运行日志取回当前源码并请模型修复，再更新原卡片，随后重新隔离渲染。</desc>
+<defs>
+<marker id="mN" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#94a3b8"/></marker>
+<marker id="mOk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#22a06b"/></marker>
+<marker id="mErr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e05252"/></marker>
+<marker id="mLoop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#5b8def"/></marker>
+</defs>
+<rect class="lane" x="14" y="16" width="180" height="884" rx="10"/>
+<rect class="lane" x="208" y="16" width="240" height="884" rx="10"/>
+<rect class="lane" x="462" y="16" width="440" height="884" rx="10"/>
+<text class="lt" x="26" y="46">模型 Model</text>
+<text class="lr" x="26" y="63">生成源码 · 提交 · 修复</text>
+<line class="div" x1="26" y1="74" x2="182" y2="74"/>
+<text class="lt" x="220" y="46">Host</text>
+<text class="lr" x="220" y="63">校验 · 记录版本 · 调度修复 · 更新卡片</text>
+<line class="div" x1="220" y1="74" x2="436" y2="74"/>
+<text class="lt" x="480" y="46">Web 隔离渲染</text>
+<text class="lr" x="480" y="63">沙箱运行 · 捕获错误 · 上报修复</text>
+<line class="div" x1="480" y1="74" x2="884" y2="74"/>
+
+<path class="ln" d="M182 147 H220" marker-end="url(#mN)"/>
+<path class="ln" d="M436 147 H480" marker-end="url(#mN)"/>
+<path class="ln" d="M682 182 V218" marker-end="url(#mN)"/>
+<path class="ln ok" d="M766 272 H786" marker-end="url(#mOk)"/>
+<path class="ln err" d="M682 326 V388" marker-end="url(#mErr)"/>
+<path class="ln err" d="M480 425 H436" marker-end="url(#mErr)"/>
+<path class="ln err" d="M220 425 H182" marker-end="url(#mErr)"/>
+<path class="ln err" d="M104 462 V567 H220" marker-end="url(#mErr)"/>
+<path class="ln loop" d="M436 567 H924 V147 H884" marker-end="url(#mLoop)"/>
+
+<rect class="node" x="26" y="112" width="156" height="70" rx="10"/>
+<text class="t" x="104" y="142">① 提交源码</text>
+<text class="s" x="104" y="162">生成图表源码并提交</text>
+
+<rect class="node" x="220" y="112" width="216" height="70" rx="10"/>
+<text class="t" x="328" y="142">② 校验并记录</text>
+<text class="s" x="328" y="162">静态校验 · 记录版本 v1</text>
+
+<rect class="node" x="480" y="112" width="404" height="70" rx="10"/>
+<text class="t" x="682" y="142">③ 隔离渲染</text>
+<text class="s" x="682" y="162">沙箱 iframe 加载并运行源码</text>
+
+<path class="node" d="M682 218 L766 272 L682 326 L598 272 Z"/>
+<text class="t" x="682" y="267">运行是否</text>
+<text class="t" x="682" y="285">报错？</text>
+
+<rect class="node ok" x="786" y="226" width="110" height="92" rx="10"/>
+<text class="t ok" x="841" y="256">✔ 成功</text>
+<text class="s" x="841" y="277">用户在卡片上操作</text>
+<text class="s" x="841" y="296">缩放/筛选/交互</text>
+
+<rect class="node err" x="480" y="388" width="404" height="74" rx="10"/>
+<text class="t err" x="682" y="419">④ 运行报错 → 发起修复请求</text>
+<text class="s" x="682" y="440">携带错误信息与卡片标识请求 Host</text>
+
+<rect class="node" x="220" y="388" width="216" height="74" rx="10"/>
+<text class="t" x="328" y="419">⑤ 取回当前源码</text>
+<text class="s" x="328" y="440">从日志读取 v1 源码与错误</text>
+
+<rect class="node" x="26" y="388" width="156" height="74" rx="10"/>
+<text class="t" x="104" y="419">⑥ 修复源码</text>
+<text class="s" x="104" y="440">按错误信息改写</text>
+
+<rect class="node" x="220" y="530" width="216" height="74" rx="10"/>
+<text class="t" x="328" y="561">⑦ 更新原卡片</text>
+<text class="s" x="328" y="582">写入新版本 v2 并保存日志</text>
+
+<text class="lb ok" x="776" y="262">成功</text>
+<text class="sec ok lba" x="786" y="212">成功分支</text>
+<text class="lb err lba" x="692" y="362">运行报错</text>
+<text class="sec lba" x="26" y="372">失败分支（运行报错）</text>
+<text class="mc" x="458" y="417">请求修复</text>
+<text class="mt lba" x="112" y="497">返回修复源码</text>
+<text class="lb loop" x="936" y="400" transform="rotate(-90 936 400)">⑧ 重新隔离渲染（回到 ③）</text>
+</svg>
+<div class="legend">
+<span><i></i>正常流程</span>
+<span><i class="ok"></i>成功分支</span>
+<span><i class="err"></i>失败分支 / 修复链路</span>
+<span><i class="loop"></i>修复回环（回到 ③ 重新渲染）</span>
+</div>
+</div></body></html>

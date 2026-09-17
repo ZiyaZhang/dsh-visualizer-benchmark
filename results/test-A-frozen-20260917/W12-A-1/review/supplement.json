@@ -1,0 +1,207 @@
+{
+  "scope": "Isolated unchanged source, explicit reviewer operations; not Host delivery.",
+  "states": [
+    {
+      "action": "initial",
+      "text": "7 天错误率\n单位：%　点击柱子选中某一天\n0\n1\n2\n3\n错误率 %\n0.4%\n0.5%\n0.3%\n2.8%\n0.6%\n0.5%\n0.4%\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n未选择日期\n分析所选日期\n选中某一天后，点击“分析所选日期”会把这天的日期与错误率发给我做进一步分析。",
+      "controls": [
+        {
+          "text": "分析所选日期",
+          "id": "analyze",
+          "disabled": true,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "resize",
+          "payload": {
+            "height": 426
+          }
+        }
+      ]
+    },
+    {
+      "action": ".barwrap:nth-child(4) .hit: 1",
+      "text": "7 天错误率\n单位：%　点击柱子选中某一天\n0\n1\n2\n3\n错误率 %\n0.4%\n0.5%\n0.3%\n2.8%\n0.6%\n0.5%\n0.4%\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n已选择：第 4 天 · 错误率 2.8%\n分析所选日期\n点击“分析所选日期”，我会收到：第 4 天，错误率 2.8%。",
+      "controls": [
+        {
+          "text": "分析所选日期",
+          "id": "analyze",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "resize",
+          "payload": {
+            "height": 426
+          }
+        }
+      ]
+    },
+    {
+      "action": "#analyze: 1",
+      "text": "7 天错误率\n单位：%　点击柱子选中某一天\n0\n1\n2\n3\n错误率 %\n0.4%\n0.5%\n0.3%\n2.8%\n0.6%\n0.5%\n0.4%\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n已选择：第 4 天 · 错误率 2.8%\n分析所选日期\n已发送：第 4 天，错误率 2.8%。",
+      "controls": [
+        {
+          "text": "分析所选日期",
+          "id": "analyze",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "resize",
+          "payload": {
+            "height": 426
+          }
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "send_prompt",
+          "payload": {
+            "text": "我选择的日期是第 4 天，错误率 2.8%。请分析这一天错误率明显偏高的原因，并给出排查建议。"
+          }
+        }
+      ]
+    },
+    {
+      "action": ".barwrap:nth-child(1) .hit: 1",
+      "text": "7 天错误率\n单位：%　点击柱子选中某一天\n0\n1\n2\n3\n错误率 %\n0.4%\n0.5%\n0.3%\n2.8%\n0.6%\n0.5%\n0.4%\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n已选择：第 1 天 · 错误率 0.4%\n分析所选日期\n点击“分析所选日期”，我会收到：第 1 天，错误率 0.4%。",
+      "controls": [
+        {
+          "text": "分析所选日期",
+          "id": "analyze",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "resize",
+          "payload": {
+            "height": 426
+          }
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "send_prompt",
+          "payload": {
+            "text": "我选择的日期是第 4 天，错误率 2.8%。请分析这一天错误率明显偏高的原因，并给出排查建议。"
+          }
+        }
+      ]
+    },
+    {
+      "action": "#analyze: 1",
+      "text": "7 天错误率\n单位：%　点击柱子选中某一天\n0\n1\n2\n3\n错误率 %\n0.4%\n0.5%\n0.3%\n2.8%\n0.6%\n0.5%\n0.4%\n第1天\n第2天\n第3天\n第4天\n第5天\n第6天\n第7天\n已选择：第 1 天 · 错误率 0.4%\n分析所选日期\n已发送：第 1 天，错误率 0.4%。",
+      "controls": [
+        {
+          "text": "分析所选日期",
+          "id": "analyze",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "resize",
+          "payload": {
+            "height": 426
+          }
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "send_prompt",
+          "payload": {
+            "text": "我选择的日期是第 4 天，错误率 2.8%。请分析这一天错误率明显偏高的原因，并给出排查建议。"
+          }
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "c133ad176ec3a7dfc84b949aa287ed35",
+          "type": "send_prompt",
+          "payload": {
+            "text": "我选择的日期是第 1 天，错误率 0.4%。请分析这一天错误率明显偏高的原因，并给出排查建议。"
+          }
+        }
+      ]
+    }
+  ]
+}

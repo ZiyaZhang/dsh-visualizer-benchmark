@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W07-D-1",
+  "roundId": "test-D-frozen-20260917",
+  "caseId": "W07",
+  "arm": "D",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "在回复里做个可以单步和重置的指数退避演示：最多请求4次，第1次失败后等待1秒，第2次失败后等待2秒，第3次成功就停止。让我看清每次结果、下一次等待和累计等待；这是示意，不实际发网络请求。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "指数退避单步演示（最多 4 次请求）",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/test-D-frozen-20260917/W07-D-1/widget-1.source.html",
+      "preview": "results/test-D-frozen-20260917/W07-D-1/widget-1.html",
+      "sha256": "0f000504e323ffae90e2fd81af2109b1bcc61e9088a547d42419969bc4a16bb0",
+      "bytes": 10948
+    }
+  ],
+  "final": "I'll load the visualization skill first, then build the demo.\n\n点「下一步」逐步推进：三次请求依次失败、失败、成功，两次等待完成后退避阶梯和累计等待同步更新；按「重置」回到起点重看一遍。注意等待时长本身是假设值，实际退避通常还会加入抖动（jitter）。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_wl9bMzX9TVACvadPKbGu9308",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_I9hGsroc8wsBRXL0PPD47197",
+        "argumentsSha256": "3f1f4d803164e45e579e5cad2805766b4bfc778423caa51cf7013bd060b4f58b",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_wLxc2CXRSGfjT13YTLVR2475",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_YQa8jcTNdRR7KG144l3b3053",
+        "argumentsSha256": "18699071be2381dda508b07ce4553ae474d4e28c2f5552b363525b953e85c754",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "51f57ae1bd77ae9f7d6b647b80b8f49d47fe8fc9d454a686de6cdb5a27d4c5ef"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "4a41d37cc6cd1952fd26a66c3a3eece68301aab644bdecb2f6971f841810dda0"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "faf226553dcecfa61023efff7421396a34f40e63089cbd5520aab64e9323c8a6"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "8c8defe2996efca9ebbffbfd8d227859b696b3f1682d207cad9a1afbc18d6b72"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8332,
+    "outputTokens": 10611,
+    "cacheReadTokens": 36224,
+    "cacheWriteTokens": 0,
+    "totalTokens": 55167
+  },
+  "elapsedSeconds": 41.672,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "c747f9036e91447aae7c9ccde76316634f9dbb0460d9f275184136ed580dd496",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "7869128592112eb755df5bb923e9ee6fd6ac49f6575b4ec3a6473f639e1bf487"
+}

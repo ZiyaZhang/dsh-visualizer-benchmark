@@ -1,0 +1,161 @@
+{
+  "scope": "Isolated unchanged source, explicit reviewer operations; not Host delivery.",
+  "states": [
+    {
+      "action": "initial",
+      "text": "REST vs GraphQL · 移动端接口取舍\n选一个团队现状，看推荐与理由\n3 人 / 单一 App\n5 人 / 开始有第二个客户端\n8 人 / 多端 + 前端饱和\n10 人+ / 字段级授权\nREST\n推荐\n\n资源导向 · 约定优先 · 基建几乎为零\n\n上手成本\n路径 + 动词即全部心智模型，新人当天能提交接口\n移动收益\nHTTP 缓存 / CDN / ETag 直接可用，省流量省电\n主要代价\n聚合靠 BFF 或多次往返；字段多了易接口膨胀\n运维面\n无网关、无 resolver，看日志就能定位问题\n演进\n/v1 /v2 并行，老客户端留在旧版本更省事\nGraphQL\n备选\n\n契约导向 · 单端点 · 需要持续投入\n\n上手成本\nschema / resolver / 前端 client 一套都要学，约 2 周起步\n移动收益\n一屏一次请求精准取数，慢网下明显少一次往返\n主要代价\nN+1、查询深度、响应体积必须主动设限\n运维面\n网关 + 逐字段鉴权 + 可观测，都是长期税\n演进\n单版本 + @deprecated，但客户端缓存更难做对\n适合 REST 的团队阶段\n适合 GraphQL 的团队阶段\n结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。",
+      "controls": [
+        {
+          "text": "3 人 / 单一 App",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "5 人 / 开始有第二个客户端",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "8 人 / 多端 + 前端饱和",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "10 人+ / 字段级授权",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "432bd5bbaf66e0ee02f5a96ceb3de092",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "432bd5bbaf66e0ee02f5a96ceb3de092",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "432bd5bbaf66e0ee02f5a96ceb3de092",
+          "type": "resize",
+          "payload": {
+            "height": 538
+          }
+        }
+      ]
+    },
+    {
+      "action": "#rgChips button:last-child: 1",
+      "text": "REST vs GraphQL · 移动端接口取舍\n选一个团队现状，看推荐与理由\n3 人 / 单一 App\n5 人 / 开始有第二个客户端\n8 人 / 多端 + 前端饱和\n10 人+ / 字段级授权\nREST\n备选\n\n资源导向 · 约定优先 · 基建几乎为零\n\n上手成本\n路径 + 动词即全部心智模型，新人当天能提交接口\n移动收益\nHTTP 缓存 / CDN / ETag 直接可用，省流量省电\n主要代价\n聚合靠 BFF 或多次往返；字段多了易接口膨胀\n运维面\n无网关、无 resolver，看日志就能定位问题\n演进\n/v1 /v2 并行，老客户端留在旧版本更省事\nGraphQL\n推荐\n\n契约导向 · 单端点 · 需要持续投入\n\n上手成本\nschema / resolver / 前端 client 一套都要学，约 2 周起步\n移动收益\n一屏一次请求精准取数，慢网下明显少一次往返\n主要代价\nN+1、查询深度、响应体积必须主动设限\n运维面\n网关 + 逐字段鉴权 + 可观测，都是长期税\n演进\n单版本 + @deprecated，但客户端缓存更难做对\n适合 REST 的团队阶段\n适合 GraphQL 的团队阶段\n结论：GraphQL 收益最大。逐字段鉴权与审计只有 schema 层能优雅表达，此时 REST 的版本矩阵更痛。",
+      "controls": [
+        {
+          "text": "3 人 / 单一 App",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "5 人 / 开始有第二个客户端",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "8 人 / 多端 + 前端饱和",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "10 人+ / 字段级授权",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "432bd5bbaf66e0ee02f5a96ceb3de092",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "432bd5bbaf66e0ee02f5a96ceb3de092",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "432bd5bbaf66e0ee02f5a96ceb3de092",
+          "type": "resize",
+          "payload": {
+            "height": 538
+          }
+        }
+      ]
+    },
+    {
+      "action": "#rgChips button:first-child: 1",
+      "text": "REST vs GraphQL · 移动端接口取舍\n选一个团队现状，看推荐与理由\n3 人 / 单一 App\n5 人 / 开始有第二个客户端\n8 人 / 多端 + 前端饱和\n10 人+ / 字段级授权\nREST\n推荐\n\n资源导向 · 约定优先 · 基建几乎为零\n\n上手成本\n路径 + 动词即全部心智模型，新人当天能提交接口\n移动收益\nHTTP 缓存 / CDN / ETag 直接可用，省流量省电\n主要代价\n聚合靠 BFF 或多次往返；字段多了易接口膨胀\n运维面\n无网关、无 resolver，看日志就能定位问题\n演进\n/v1 /v2 并行，老客户端留在旧版本更省事\nGraphQL\n备选\n\n契约导向 · 单端点 · 需要持续投入\n\n上手成本\nschema / resolver / 前端 client 一套都要学，约 2 周起步\n移动收益\n一屏一次请求精准取数，慢网下明显少一次往返\n主要代价\nN+1、查询深度、响应体积必须主动设限\n运维面\n网关 + 逐字段鉴权 + 可观测，都是长期税\n演进\n单版本 + @deprecated，但客户端缓存更难做对\n适合 REST 的团队阶段\n适合 GraphQL 的团队阶段\n结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。",
+      "controls": [
+        {
+          "text": "3 人 / 单一 App",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "5 人 / 开始有第二个客户端",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "8 人 / 多端 + 前端饱和",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "10 人+ / 字段级授权",
+          "id": "",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "432bd5bbaf66e0ee02f5a96ceb3de092",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "432bd5bbaf66e0ee02f5a96ceb3de092",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "432bd5bbaf66e0ee02f5a96ceb3de092",
+          "type": "resize",
+          "payload": {
+            "height": 538
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 2,
+  "id": "W06-D-2",
+  "roundId": "dev-D-receipt-20260917",
+  "caseId": "W06",
+  "arm": "D",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "在回复里做一个可交互地区销售对比：华东120万元、华南80万元、西部50万元。点击地区只做本地选中；另放一个“解释所选地区”按钮，点击后才向你追问，并把所选地区和数值带上。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "地区销售对比（可选中）",
+      "kind": "html",
+      "callSeq": 39,
+      "resultSeq": 40,
+      "replace": null,
+      "source": "results/dev-D-receipt-20260917/W06-D-2/widget-1.source.html",
+      "preview": "results/dev-D-receipt-20260917/W06-D-2/widget-1.html",
+      "sha256": "636d6526ec02432f6d956e8528fa7b9d05fd8b5aaf8fe469c8b06ef6ffe29a13",
+      "bytes": 5869
+    }
+  ],
+  "final": "上面是一个可交互的地区销售对比：点选地区行只做本地选中（条形高亮并显示占比），只有点击“解释所选地区”按钮时才会把你的选择和数值一起发给我追问。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_URYQ4xEVEhZNiF9wyjsc2031",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_PuY24zUGndUoLXQZwZwT9836",
+        "argumentsSha256": "3f1f4d803164e45e579e5cad2805766b4bfc778423caa51cf7013bd060b4f58b",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_HRSyIsBzjsCp3pq1mgQK7217",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 33,
+        "callId": "call_00_sF2yq8Sl2BkXLhDmnUqB9043",
+        "argumentsSha256": "65e09ad1c2476e68f2a0160c84516456f89b132ae1b0a61365a4c29e086a591a",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 39,
+        "callId": "call_00_WMaZJXoPk0DqLtyKGdcG5266",
+        "argumentsSha256": "87f91cbb5b422a1136b070172cf535d194bd0c9f34bd0c93834688b198ee0ee5",
+        "wrapped": false,
+        "resultSeq": 40,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "e145f67e1ea8017659e1d3fcd86670e8ab9da454fd71db22ad3170ba4c839d63"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "8fffd1ec42b138d5f01f911bfb4a14f535ca0f989115985923d88276ca820c01"
+      },
+      {
+        "path": "references/charts.md",
+        "callSeq": 33,
+        "resultSeq": 34,
+        "success": true,
+        "sha256": "0778ef689dea193a21f6f319a3d915e268d184bdd377128fa6a272a4ff8a1d80",
+        "resultSha256": "8d7825a1c62a8ae243da4e19be4fb1e483f962229f0dc22b444157093ffd9017"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "c9c29c8e6887381bcfad0d0cb2dcddb031a3f55abea0f93889b4424946a438bd"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "05b31e81a4e57d8c0810ae03b401ff6ade46406732cc495a735738a3ee9bf892"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8530,
+    "outputTokens": 2665,
+    "cacheReadTokens": 37376,
+    "cacheWriteTokens": 0,
+    "totalTokens": 48571
+  },
+  "elapsedSeconds": 13.851,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "e9ad006d5baca5dc74160eff2526f66dce06d0db13745a59cba4d6de6ac666c1",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "cafaf0888b510871f75a11d2a35ad3bdfce1382aef3870af5e524b0e08db5397"
+}

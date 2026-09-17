@@ -1,0 +1,320 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "W01-C-1",
+  "caseId": "W01",
+  "scenario": "binary",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-C-grounded-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:08:59.598Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "fail",
+      "reason": "Initial interval is not [0,7].",
+      "evidence": {
+        "states": [
+          "initial"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pending",
+      "reason": "Local actions have not run.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "2\ni=0\n5\ni=1\n8\ni=2\n12\ni=3\n16\ni=4\n23\ni=5\n38\ni=6\n56\ni=7\n第几轮\n—\nlow\n—\nmid\n—\nhigh\n—\n候选个数\n8\n准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。\n下一步\n重置\n每点一次「下一步」缩小一半范围\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 320,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "二分查找第0轮，low=0，mid=无，high=7"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "d553ee666a89be7691177b928b6487a4",
+          "payload": {},
+          "at": 77.40000009536743
+        },
+        {
+          "type": "rendered",
+          "channel": "d553ee666a89be7691177b928b6487a4",
+          "payload": {},
+          "at": 86.29999995231628
+        },
+        {
+          "type": "resize",
+          "channel": "d553ee666a89be7691177b928b6487a4",
+          "payload": {
+            "height": 320
+          },
+          "at": 86.90000009536743
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: 2 i=0 5 i=1 8 i=2 12 i=3 16 i=4 23 i=5 38 i=6 56 i=7 第几轮 — low — mid — high — 候选个数 8 准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。\n- button \"下一步\"\n- button \"重置\"\n- text: 每点一次「下一步」缩小一半范围"
+    },
+    {
+      "text": "2\ni=0\n5\ni=1\n8\ni=2\n12\ni=3\n16\ni=4\n23\ni=5\n38\ni=6\n56\ni=7\n第几轮\n—\nlow\n—\nmid\n—\nhigh\n—\n候选个数\n8\n准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。\n下一步\n重置\n每点一次「下一步」缩小一半范围\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 383,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "二分查找第0轮，low=0，mid=无，high=7"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "5c73e737ff8fe4f7fa3599076f4c743a",
+          "payload": {},
+          "at": 672.5
+        },
+        {
+          "type": "rendered",
+          "channel": "5c73e737ff8fe4f7fa3599076f4c743a",
+          "payload": {},
+          "at": 674.2999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "5c73e737ff8fe4f7fa3599076f4c743a",
+          "payload": {
+            "height": 383
+          },
+          "at": 674.2999999523163
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: 2 i=0 5 i=1 8 i=2 12 i=3 16 i=4 23 i=5 38 i=6 56 i=7 第几轮 — low — mid — high — 候选个数 8 准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。\n- button \"下一步\"\n- button \"重置\"\n- text: 每点一次「下一步」缩小一半范围"
+    },
+    {
+      "text": "2\ni=0\n5\ni=1\n8\ni=2\n12\ni=3\n16\ni=4\n23\ni=5\n38\ni=6\n56\ni=7\n第几轮\n—\nlow\n—\nmid\n—\nhigh\n—\n候选个数\n8\n准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。\n下一步\n重置\n每点一次「下一步」缩小一半范围\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 320,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "二分查找第0轮，low=0，mid=无，high=7"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "050695f3f9425e00e73a465d89e7e556",
+          "payload": {},
+          "at": 1233.4000000953674
+        },
+        {
+          "type": "rendered",
+          "channel": "050695f3f9425e00e73a465d89e7e556",
+          "payload": {},
+          "at": 1234.4000000953674
+        },
+        {
+          "type": "resize",
+          "channel": "050695f3f9425e00e73a465d89e7e556",
+          "payload": {
+            "height": 320
+          },
+          "at": 1234.4000000953674
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: 2 i=0 5 i=1 8 i=2 12 i=3 16 i=4 23 i=5 38 i=6 56 i=7 第几轮 — low — mid — high — 候选个数 8 准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。\n- button \"下一步\"\n- button \"重置\"\n- text: 每点一次「下一步」缩小一半范围"
+    },
+    {
+      "text": "2\ni=0\n5\ni=1\n8\ni=2\n12\ni=3\n16\ni=4\n23\ni=5\n38\ni=6\n56\ni=7\n第几轮\n—\nlow\n—\nmid\n—\nhigh\n—\n候选个数\n8\n准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。\n下一步\n重置\n每点一次「下一步」缩小一半范围\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 383,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "二分查找第0轮，low=0，mid=无，high=7"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0c71b98faeff67ea627533ba9d5066c0",
+          "payload": {},
+          "at": 1782.5
+        },
+        {
+          "type": "rendered",
+          "channel": "0c71b98faeff67ea627533ba9d5066c0",
+          "payload": {},
+          "at": 1783.5999999046326
+        },
+        {
+          "type": "resize",
+          "channel": "0c71b98faeff67ea627533ba9d5066c0",
+          "payload": {
+            "height": 383
+          },
+          "at": 1783.5999999046326
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: 2 i=0 5 i=1 8 i=2 12 i=3 16 i=4 23 i=5 38 i=6 56 i=7 第几轮 — low — mid — high — 候选个数 8 准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。\n- button \"下一步\"\n- button \"重置\"\n- text: 每点一次「下一步」缩小一半范围"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "d553ee666a89be7691177b928b6487a4",
+      "payload": {},
+      "at": 77.40000009536743
+    },
+    {
+      "type": "rendered",
+      "channel": "d553ee666a89be7691177b928b6487a4",
+      "payload": {},
+      "at": 86.29999995231628
+    },
+    {
+      "type": "resize",
+      "channel": "d553ee666a89be7691177b928b6487a4",
+      "payload": {
+        "height": 320
+      },
+      "at": 86.90000009536743
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "4587cf46dba60ce34385d52f65215124c1252524a5cf403c91dbafd5fd88c045",
+  "previewSha256": "a53b621be34df7823ec8cdcfdb43e5c515a2bf95163d4710ce79fe2832616e5c",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

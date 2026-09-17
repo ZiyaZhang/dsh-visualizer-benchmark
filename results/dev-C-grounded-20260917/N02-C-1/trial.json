@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "id": "N02-C-1",
+  "roundId": "dev-C-grounded-20260917",
+  "caseId": "N02",
+  "arm": "C",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "读取 sales.csv，只统计 status 为 paid 的订单。用一小段文字告诉我有效订单总额、金额最高的地区及金额，以及西部占总额的百分比（保留两位小数）。",
+  "expectedRoute": "text",
+  "widgets": [],
+  "final": "读取并筛选 `status=paid` 后（排除了 999 那笔 cancelled 订单）：\n\n**有效订单总额为 310**；金额最高的地区是**华东，150**；**西部占总额的 19.35%**（60 ÷ 310）。\n\n其中 paid 订单按地区汇总为：华东 150（120+30）、华南 100（80+20）、西部 60（50+10），三区合计 310；西部那笔 999 的 cancelled 订单未计入任何统计。",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "No inline widget attempt; verify the requested delivery form with check-dsh.py"
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case evaluates routing only"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 19,
+        "callId": "call_00_nQdECqKBF0DGiKIPxQvJ8725",
+        "argumentsSha256": "96503a9cf0bb32b6f73a36aa410a53e0a7d83373ec3905414613ddf6d8f4843c",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_ET_bedtQ3FEKNDnW61441hg9409",
+        "argumentsSha256": "188bf10553be47b21eab5dc93d88bee04c7df26a03b6f37a1107b8c46b9ce799",
+        "wrapped": false,
+        "resultSeq": 26,
+        "error": false
+      }
+    ],
+    "referencesRead": [],
+    "skillLoads": [],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "3217e867592010152551c512c40d46ab081f6596b98455f9aeecc5b8ced4a337"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 7375,
+    "outputTokens": 394,
+    "cacheReadTokens": 16128,
+    "cacheWriteTokens": 0,
+    "totalTokens": 23897
+  },
+  "elapsedSeconds": 5.016,
+  "sourceHead": "db0399958b07ce2a85088ddc8fcb3c5b49a2cb10",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "31efff1f2487fed48f919e61d1a09bf30d1ba9e327a679238dec17c5e5d9b49b",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "f3262f48bb93bec3c6756fd050dcc88638c3f8de67d17f91af5d389070c2cbea"
+}

@@ -1,0 +1,205 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><div class="sales-cmp">
+  <style>
+    .sales-cmp{max-width:560px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--dsw-alias-label-primary,#1f2329)}
+    .sales-cmp .card{background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.1));border-radius:12px;padding:14px 14px 10px}
+    .sales-cmp .card + .card{margin-top:10px}
+    .sales-cmp .head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:10px}
+    .sales-cmp h3{margin:0;font-size:14px;font-weight:600}
+    .sales-cmp .unit{font-size:12px;color:var(--dsw-alias-label-tertiary,#6b7280)}
+    .sales-cmp .rows{display:flex;flex-direction:column;gap:8px}
+    .sales-cmp .row{display:grid;grid-template-columns:1.1em 3.4em minmax(0,1fr) auto;align-items:center;gap:8px;width:100%;padding:6px 8px;border:1px solid transparent;border-radius:9px;background:transparent;color:inherit;font:inherit;font-size:13px;text-align:left;cursor:pointer}
+    .sales-cmp .row:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.05))}
+    .sales-cmp .row:focus-visible{outline:2px solid var(--dsw-alias-brand-primary,#2563eb);outline-offset:1px}
+    .sales-cmp .row[aria-pressed="true"]{background:var(--dsw-alias-interactive-bg-active,rgba(37,99,235,.1));border-color:var(--dsw-alias-brand-primary,#2563eb)}
+    .sales-cmp .dot{font-size:10px;line-height:1;color:var(--dsw-alias-brand-primary,#2563eb);visibility:hidden}
+    .sales-cmp .row[aria-pressed="true"] .dot{visibility:visible}
+    .sales-cmp .name{font-weight:500}
+    .sales-cmp .row[aria-pressed="true"] .name{font-weight:700}
+    .sales-cmp .track{display:block;min-width:0;height:10px;border-radius:999px;background:var(--dsw-alias-bg-layer-2,rgba(0,0,0,.06));overflow:hidden}
+    .sales-cmp .fill{display:block;height:100%;border-radius:999px;background:var(--dsw-alias-border-l2,rgba(0,0,0,.22));transition:background .15s ease}
+    .sales-cmp .row[aria-pressed="true"] .fill{background:var(--dsw-alias-brand-primary,#2563eb)}
+    .sales-cmp .val{font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--dsw-alias-label-secondary,#4b5563)}
+    .sales-cmp .row[aria-pressed="true"] .val{color:var(--dsw-alias-label-primary,#1f2329);font-weight:600}
+    .sales-cmp .tip{margin:8px 2px 2px;font-size:11.5px;line-height:1.5;color:var(--dsw-alias-label-tertiary,#6b7280)}
+    .sales-cmp .selhead{font-size:12px;color:var(--dsw-alias-label-tertiary,#6b7280);margin-bottom:4px}
+    .sales-cmp .selvalue{font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+    .sales-cmp .selsub{font-size:11.5px;color:var(--dsw-alias-label-tertiary,#6b7280);margin:2px 0 10px;min-height:1.5em}
+    .sales-cmp .explain{width:100%;padding:9px 12px;border-radius:9px;border:1px solid var(--dsw-alias-button-primary-fill,#2563eb);background:var(--dsw-alias-button-primary-fill,#2563eb);color:var(--dsw-alias-label-primary-inverted,#fff);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+    .sales-cmp .explain:disabled{border-color:var(--dsw-alias-border-l1,rgba(0,0,0,.12));background:var(--dsw-alias-bg-layer-2,rgba(0,0,0,.06));color:var(--dsw-alias-label-tertiary,#9ca3af);cursor:not-allowed}
+  </style>
+
+  <div class="card">
+    <div class="head">
+      <h3>地区销售额对比</h3>
+      <span class="unit">单位：万元</span>
+    </div>
+    <div class="rows" id="scRows" role="group" aria-label="地区销售额对比，选择一个地区"></div>
+    <p class="tip">点击地区只在本页选中，不会发起对话。</p>
+  </div>
+
+  <div class="card">
+    <div class="selhead">当前所选</div>
+    <div class="selvalue" id="scSelValue">未选择</div>
+    <div class="selsub" id="scSelSub">请先点击上方任一地区</div>
+    <button type="button" class="explain" id="scExplain" disabled>解释所选地区</button>
+  </div>
+
+  <script>
+    (function () {
+      var DATA = [
+        { id: 'east',  name: '华东', value: 120 },
+        { id: 'south', name: '华南', value: 80 },
+        { id: 'west',  name: '西部', value: 50 }
+      ];
+      var MAX = Math.max.apply(null, DATA.map(function (d) { return d.value; }));
+
+      var rows = document.getElementById('scRows');
+      var selValue = document.getElementById('scSelValue');
+      var selSub = document.getElementById('scSelSub');
+      var explainBtn = document.getElementById('scExplain');
+      var selected = null;
+      var buttons = {};
+
+      DATA.forEach(function (d) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'row';
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', d.name + ' ' + d.value + ' 万元');
+
+        var dot = document.createElement('span');
+        dot.className = 'dot';
+        dot.setAttribute('aria-hidden', 'true');
+        dot.textContent = '●';
+
+        var name = document.createElement('span');
+        name.className = 'name';
+        name.textContent = d.name;
+
+        var track = document.createElement('span');
+        track.className = 'track';
+        var fill = document.createElement('span');
+        fill.className = 'fill';
+        fill.style.width = (d.value / MAX * 100) + '%';
+        track.appendChild(fill);
+
+        var val = document.createElement('span');
+        val.className = 'val';
+        val.textContent = d.value + ' 万元';
+
+        btn.appendChild(dot);
+        btn.appendChild(name);
+        btn.appendChild(track);
+        btn.appendChild(val);
+        btn.addEventListener('click', function () { select(d); });
+        rows.appendChild(btn);
+        buttons[d.id] = btn;
+      });
+
+      function select(d) {
+        selected = d;
+        DATA.forEach(function (item) {
+          buttons[item.id].setAttribute('aria-pressed', item.id === d.id ? 'true' : 'false');
+        });
+        selValue.textContent = d.name + ' · ' + d.value + ' 万元';
+        selSub.textContent = '已在本页选中；点下方按钮才会向我追问。';
+        explainBtn.disabled = false;
+      }
+
+      explainBtn.addEventListener('click', function () {
+        if (!selected) { return; }
+        selSub.textContent = '已把选中地区与数值发给我，等待解释…';
+        explainBtn.disabled = true;
+        if (window.dshWidget && typeof window.dshWidget.sendPrompt === 'function') {
+          window.dshWidget.sendPrompt('请解释所选地区：' + selected.name + '，销售额 ' + selected.value + ' 万元。');
+        }
+      });
+    })();
+  </script>
+</div></body></html>

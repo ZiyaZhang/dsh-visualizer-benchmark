@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 2,
+  "id": "N04-D-2",
+  "roundId": "test-D-frozen-20260917",
+  "caseId": "N04",
+  "arm": "D",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "请在当前工作目录创建一份可保存的 sales.svg，内容是A=3、B=5的静态条形图，并给我文件路径，我要放到文档里。",
+  "expectedRoute": "file",
+  "widgets": [],
+  "final": "I'll create the SVG file directly — this is a persistent file deliverable, so it needs its own file workflow rather than a temporary inline widget.\n\n文件已创建并通过 XML 校验。\n\n**文件路径：**\n```\n[private path]/test-D-frozen-20260917/trials/N04-D-2/workspace/sales.svg\n```\n\n**内容说明：**\n- 静态 SVG 条形图，无脚本、无外部依赖，可直接嵌入文档或转成 PNG/PDF\n- 两个类别：**A = 3**（蓝色，柱高 100px）、**B = 5**（橙色，柱高 166.7px），高度严格按数值比例（1 单位 ≈ 33.3px）\n- 含标题 \"Sales\"、0–6 的 y 轴刻度与网格线、坐标轴、柱顶数值标签和 A/B 类别标签\n- 尺寸 400×300，`viewBox` 已设置，缩放不失真；文字使用 Helvetica/Arial 通用字体，跨平台可渲染\n\n需要的话我可以改成横向条形图、加上中文标签，或同时导出一份 PNG。",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "No inline widget attempt; verify the requested delivery form with check-dsh.py"
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case evaluates routing only"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "write",
+        "loggedName": "write",
+        "callSeq": 19,
+        "callId": "call_00_1OGIUmVHIAPuUl0F8ezv4003",
+        "argumentsSha256": "acdd437e8da66e9315af9d780ec55dc803208e2a21e645a2320394a10251f199",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 25,
+        "callId": "call_00_egitLFxQOJrdiKgfRrno4823",
+        "argumentsSha256": "c2f5a6dd2c1fbd17c5a2249a70ae6766e4d303b408b1ac035bad2ca9b7209c78",
+        "wrapped": false,
+        "resultSeq": 26,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 31,
+        "callId": "call_00_64SGs1eu7iVHVasHT63w3520",
+        "argumentsSha256": "4b145d0abc598895ac1743fec605495fa251d64fd8db2284d880470cc68cf777",
+        "wrapped": false,
+        "resultSeq": 32,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 37,
+        "callId": "call_00_ET_SLDoknzUby7VjYKRG2nG3988",
+        "argumentsSha256": "c06869ac2eaab40bee7aae5bf91444bc9e1f096dee9dc2a79db7ce6b91061519",
+        "wrapped": false,
+        "resultSeq": 38,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 43,
+        "callId": "call_00_axcjBsMBCLP53QIMMDVI3208",
+        "argumentsSha256": "c68936b118b0c5cd1c6c98ed2e7f25b8a03415f982fb9b26f2706c3f018f3eb7",
+        "wrapped": false,
+        "resultSeq": 44,
+        "error": false
+      }
+    ],
+    "referencesRead": [],
+    "skillLoads": [],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "a5e33e31788ef935e8340a7a9171f4036da024dcf3a72c04dc5ab5d99e0a9c12"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 7821,
+    "outputTokens": 2574,
+    "cacheReadTokens": 47872,
+    "cacheWriteTokens": 0,
+    "totalTokens": 58267
+  },
+  "elapsedSeconds": 14.654,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "54925484ca36dbbcb829a57547854719a071250b40d01cccbf9b929d9a61ab77",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [
+    {
+      "path": "sales.svg",
+      "beforeSha256": null,
+      "afterSha256": "89458d3b35a8839e8c44492c22719486c920884c9be1b584be6de7cd497cecc3"
+    }
+  ],
+  "artifactSetSha256": "13ca1d0e3c645ed7e3580b433665260bee67034553ea89592d1690503db69b5d"
+}

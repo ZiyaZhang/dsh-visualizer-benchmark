@@ -1,0 +1,72 @@
+<style>
+  .qs-wrap{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,#e3e5e8);border-radius:14px;padding:18px 18px 16px;max-width:420px;color:var(--dsw-alias-label-primary,#1a1a1a)}
+  .qs-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .qs-title{font-size:14px;font-weight:600}
+  .qs-range{font-size:12px;color:var(--dsw-alias-label-tertiary,#8a8f98);font-variant-numeric:tabular-nums}
+  .qs-row{display:flex;align-items:center;gap:12px}
+  .qs-btn{width:44px;height:44px;flex:0 0 auto;border-radius:10px;border:1px solid var(--dsw-alias-border-l2,#cfd3d8);background:var(--dsw-alias-bg-layer-2,#f5f6f7);color:var(--dsw-alias-label-primary,#1a1a1a);font-size:22px;font-weight:600;line-height:1;cursor:pointer;display:grid;place-items:center}
+  .qs-btn:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.06))}
+  .qs-btn:active:not(:disabled){background:var(--dsw-alias-interactive-bg-active,rgba(0,0,0,.1))}
+  .qs-btn:disabled{opacity:.4;cursor:not-allowed}
+  .qs-readout{flex:1 1 auto;min-width:0;text-align:center;font-size:34px;font-weight:650;font-variant-numeric:tabular-nums;line-height:1;color:var(--dsw-alias-brand-primary,#2f6feb)}
+  .qs-unit{font-size:13px;font-weight:500;color:var(--dsw-alias-label-secondary,#5b6069);margin-left:4px}
+  .qs-ticks{display:flex;gap:6px;margin-top:16px}
+  .qs-tick{flex:1 1 0;min-width:0;text-align:center;font-size:12px;font-variant-numeric:tabular-nums;padding:5px 0;border-radius:7px;border:1px solid var(--dsw-alias-border-l1,#e3e5e8);color:var(--dsw-alias-label-tertiary,#8a8f98);background:transparent;transition:background-color .15s ease,color .15s ease,border-color .15s ease}
+  .qs-tick.on{background:var(--dsw-alias-brand-primary,#2f6feb);border-color:var(--dsw-alias-brand-primary,#2f6feb);color:var(--dsw-alias-label-primary-inverted,#fff);font-weight:600}
+  .qs-hint{margin-top:12px;font-size:12px;color:var(--dsw-alias-label-secondary,#5b6069)}
+  .qs-hint[data-state="edge"]{color:var(--dsw-alias-state-error-primary,#c0392b)}
+  @media (prefers-reduced-motion:reduce){.qs-tick{transition:none}}
+</style>
+<div class="qs-wrap" role="group" aria-label="数量选择器，范围 0 到 5，当前值 2">
+  <div class="qs-head">
+    <div class="qs-title">数量</div>
+    <div class="qs-range">范围 0–5 · 步长 1</div>
+  </div>
+  <div class="qs-row">
+    <button class="qs-btn" id="qs-dec" type="button" aria-label="减少 1">−</button>
+    <div class="qs-readout" id="qs-value" aria-live="polite">2<span class="qs-unit">件</span></div>
+    <button class="qs-btn" id="qs-inc" type="button" aria-label="增加 1">+</button>
+  </div>
+  <div class="qs-ticks" id="qs-ticks" role="img" aria-label="刻度 0 到 5，当前高亮 2"></div>
+  <div class="qs-hint" id="qs-hint" data-state="ok" aria-live="polite"></div>
+</div>
+<script>
+(function(){
+  var MIN = 0, MAX = 5, INIT = 2;
+  var value = INIT;
+  var valueEl = document.getElementById('qs-value');
+  var unitEl = valueEl.querySelector('.qs-unit');
+  var dec = document.getElementById('qs-dec');
+  var inc = document.getElementById('qs-inc');
+  var hint = document.getElementById('qs-hint');
+  var ticksBox = document.getElementById('qs-ticks');
+  var ticks = [];
+  for (var i = MIN; i <= MAX; i++) {
+    var t = document.createElement('div');
+    t.className = 'qs-tick';
+    t.textContent = String(i);
+    ticksBox.appendChild(t);
+    ticks.push(t);
+  }
+  function render(){
+    valueEl.firstChild.nodeValue = String(value);
+    dec.disabled = (value <= MIN);
+    inc.disabled = (value >= MAX);
+    ticks.forEach(function(t, i){ t.classList.toggle('on', i === value - MIN); });
+    if (value >= MAX) {
+      hint.textContent = '已达上限，不能再增加';
+      hint.dataset.state = 'edge';
+    } else if (value <= MIN) {
+      hint.textContent = '已达下限，不能再减少';
+      hint.dataset.state = 'edge';
+    } else {
+      hint.textContent = '还可增加 ' + (MAX - value) + ' 次，减少 ' + (value - MIN) + ' 次';
+      hint.dataset.state = 'ok';
+    }
+    ticksBox.setAttribute('aria-label', '刻度 0 到 5，当前高亮 ' + value);
+  }
+  dec.addEventListener('click', function(){ if (value > MIN) { value--; render(); } });
+  inc.addEventListener('click', function(){ if (value < MAX) { value++; render(); } });
+  render();
+})();
+</script>

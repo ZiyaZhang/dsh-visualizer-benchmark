@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "E02-A-1",
+  "caseId": "E02",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 25,
+  "resultSeq": 26,
+  "casesPath": "results/test-A-frozen-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:16:37.562Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "not_applicable",
+      "reason": "No literal label oracle specified.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "REST vs GraphQL · 移动端接口取舍\n选一个团队现状，看推荐与理由\n3 人 / 单一 App\n5 人 / 开始有第二个客户端\n8 人 / 多端 + 前端饱和\n10 人+ / 字段级授权\nREST\n推荐\n\n资源导向 · 约定优先 · 基建几乎为零\n\n上手成本\n路径 + 动词即全部心智模型，新人当天能提交接口\n移动收益\nHTTP 缓存 / CDN / ETag 直接可用，省流量省电\n主要代价\n聚合靠 BFF 或多次往返；字段多了易接口膨胀\n运维面\n无网关、无 resolver，看日志就能定位问题\n演进\n/v1 /v2 并行，老客户端留在旧版本更省事\nGraphQL\n备选\n\n契约导向 · 单端点 · 需要持续投入\n\n上手成本\nschema / resolver / 前端 client 一套都要学，约 2 周起步\n移动收益\n一屏一次请求精准取数，慢网下明显少一次往返\n主要代价\nN+1、查询深度、响应体积必须主动设限\n运维面\n网关 + 逐字段鉴权 + 可观测，都是长期税\n演进\n单版本 + @deprecated，但客户端缓存更难做对\n适合 REST 的团队阶段\n适合 GraphQL 的团队阶段\n结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 538,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "02b0ea0abbe3014ac9e24c1d223f00bb",
+          "payload": {},
+          "at": 213.5
+        },
+        {
+          "type": "rendered",
+          "channel": "02b0ea0abbe3014ac9e24c1d223f00bb",
+          "payload": {},
+          "at": 213.90000009536743
+        },
+        {
+          "type": "resize",
+          "channel": "02b0ea0abbe3014ac9e24c1d223f00bb",
+          "payload": {
+            "height": 538
+          },
+          "at": 214
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: REST vs GraphQL · 移动端接口取舍 选一个团队现状，看推荐与理由\n- button \"3 人 / 单一 App\"\n- button \"5 人 / 开始有第二个客户端\"\n- button \"8 人 / 多端 + 前端饱和\"\n- button \"10 人+ / 字段级授权\"\n- heading \"REST 推荐\" [level=3]\n- paragraph: 资源导向 · 约定优先 · 基建几乎为零\n- list:\n  - listitem: 上手成本 路径 + 动词即全部心智模型，新人当天能提交接口\n  - listitem: 移动收益 HTTP 缓存 / CDN / ETag 直接可用，省流量省电\n  - listitem: 主要代价 聚合靠 BFF 或多次往返；字段多了易接口膨胀\n  - listitem: 运维面 无网关、无 resolver，看日志就能定位问题\n  - listitem: 演进 /v1 /v2 并行，老客户端留在旧版本更省事\n- heading \"GraphQL 备选\" [level=3]\n- paragraph: 契约导向 · 单端点 · 需要持续投入\n- list:\n  - listitem: 上手成本 schema / resolver / 前端 client 一套都要学，约 2 周起步\n  - listitem: 移动收益 一屏一次请求精准取数，慢网下明显少一次往返\n  - listitem: 主要代价 N+1、查询深度、响应体积必须主动设限\n  - listitem: 运维面 网关 + 逐字段鉴权 + 可观测，都是长期税\n  - listitem: 演进 单版本 + @deprecated，但客户端缓存更难做对\n- text: 适合 REST 的团队阶段 适合 GraphQL 的团队阶段 结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。"
+    },
+    {
+      "text": "REST vs GraphQL · 移动端接口取舍\n选一个团队现状，看推荐与理由\n3 人 / 单一 App\n5 人 / 开始有第二个客户端\n8 人 / 多端 + 前端饱和\n10 人+ / 字段级授权\nREST\n推荐\n\n资源导向 · 约定优先 · 基建几乎为零\n\n上手成本\n路径 + 动词即全部心智模型，新人当天能提交接口\n移动收益\nHTTP 缓存 / CDN / ETag 直接可用，省流量省电\n主要代价\n聚合靠 BFF 或多次往返；字段多了易接口膨胀\n运维面\n无网关、无 resolver，看日志就能定位问题\n演进\n/v1 /v2 并行，老客户端留在旧版本更省事\nGraphQL\n备选\n\n契约导向 · 单端点 · 需要持续投入\n\n上手成本\nschema / resolver / 前端 client 一套都要学，约 2 周起步\n移动收益\n一屏一次请求精准取数，慢网下明显少一次往返\n主要代价\nN+1、查询深度、响应体积必须主动设限\n运维面\n网关 + 逐字段鉴权 + 可观测，都是长期税\n演进\n单版本 + @deprecated，但客户端缓存更难做对\n适合 REST 的团队阶段\n适合 GraphQL 的团队阶段\n结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 1018,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "f30931996f70b3567d3d09340d1c6033",
+          "payload": {},
+          "at": 803.4000000953674
+        },
+        {
+          "type": "rendered",
+          "channel": "f30931996f70b3567d3d09340d1c6033",
+          "payload": {},
+          "at": 806
+        },
+        {
+          "type": "resize",
+          "channel": "f30931996f70b3567d3d09340d1c6033",
+          "payload": {
+            "height": 1018
+          },
+          "at": 806
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: REST vs GraphQL · 移动端接口取舍 选一个团队现状，看推荐与理由\n- button \"3 人 / 单一 App\"\n- button \"5 人 / 开始有第二个客户端\"\n- button \"8 人 / 多端 + 前端饱和\"\n- button \"10 人+ / 字段级授权\"\n- heading \"REST 推荐\" [level=3]\n- paragraph: 资源导向 · 约定优先 · 基建几乎为零\n- list:\n  - listitem: 上手成本 路径 + 动词即全部心智模型，新人当天能提交接口\n  - listitem: 移动收益 HTTP 缓存 / CDN / ETag 直接可用，省流量省电\n  - listitem: 主要代价 聚合靠 BFF 或多次往返；字段多了易接口膨胀\n  - listitem: 运维面 无网关、无 resolver，看日志就能定位问题\n  - listitem: 演进 /v1 /v2 并行，老客户端留在旧版本更省事\n- heading \"GraphQL 备选\" [level=3]\n- paragraph: 契约导向 · 单端点 · 需要持续投入\n- list:\n  - listitem: 上手成本 schema / resolver / 前端 client 一套都要学，约 2 周起步\n  - listitem: 移动收益 一屏一次请求精准取数，慢网下明显少一次往返\n  - listitem: 主要代价 N+1、查询深度、响应体积必须主动设限\n  - listitem: 运维面 网关 + 逐字段鉴权 + 可观测，都是长期税\n  - listitem: 演进 单版本 + @deprecated，但客户端缓存更难做对\n- text: 适合 REST 的团队阶段 适合 GraphQL 的团队阶段 结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。"
+    },
+    {
+      "text": "REST vs GraphQL · 移动端接口取舍\n选一个团队现状，看推荐与理由\n3 人 / 单一 App\n5 人 / 开始有第二个客户端\n8 人 / 多端 + 前端饱和\n10 人+ / 字段级授权\nREST\n推荐\n\n资源导向 · 约定优先 · 基建几乎为零\n\n上手成本\n路径 + 动词即全部心智模型，新人当天能提交接口\n移动收益\nHTTP 缓存 / CDN / ETag 直接可用，省流量省电\n主要代价\n聚合靠 BFF 或多次往返；字段多了易接口膨胀\n运维面\n无网关、无 resolver，看日志就能定位问题\n演进\n/v1 /v2 并行，老客户端留在旧版本更省事\nGraphQL\n备选\n\n契约导向 · 单端点 · 需要持续投入\n\n上手成本\nschema / resolver / 前端 client 一套都要学，约 2 周起步\n移动收益\n一屏一次请求精准取数，慢网下明显少一次往返\n主要代价\nN+1、查询深度、响应体积必须主动设限\n运维面\n网关 + 逐字段鉴权 + 可观测，都是长期税\n演进\n单版本 + @deprecated，但客户端缓存更难做对\n适合 REST 的团队阶段\n适合 GraphQL 的团队阶段\n结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 538,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "11b0a0c38133c32eb0d4b988e05721ff",
+          "payload": {},
+          "at": 1407.7999999523163
+        },
+        {
+          "type": "rendered",
+          "channel": "11b0a0c38133c32eb0d4b988e05721ff",
+          "payload": {},
+          "at": 1413.7999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "11b0a0c38133c32eb0d4b988e05721ff",
+          "payload": {
+            "height": 538
+          },
+          "at": 1413.7999999523163
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: REST vs GraphQL · 移动端接口取舍 选一个团队现状，看推荐与理由\n- button \"3 人 / 单一 App\"\n- button \"5 人 / 开始有第二个客户端\"\n- button \"8 人 / 多端 + 前端饱和\"\n- button \"10 人+ / 字段级授权\"\n- heading \"REST 推荐\" [level=3]\n- paragraph: 资源导向 · 约定优先 · 基建几乎为零\n- list:\n  - listitem: 上手成本 路径 + 动词即全部心智模型，新人当天能提交接口\n  - listitem: 移动收益 HTTP 缓存 / CDN / ETag 直接可用，省流量省电\n  - listitem: 主要代价 聚合靠 BFF 或多次往返；字段多了易接口膨胀\n  - listitem: 运维面 无网关、无 resolver，看日志就能定位问题\n  - listitem: 演进 /v1 /v2 并行，老客户端留在旧版本更省事\n- heading \"GraphQL 备选\" [level=3]\n- paragraph: 契约导向 · 单端点 · 需要持续投入\n- list:\n  - listitem: 上手成本 schema / resolver / 前端 client 一套都要学，约 2 周起步\n  - listitem: 移动收益 一屏一次请求精准取数，慢网下明显少一次往返\n  - listitem: 主要代价 N+1、查询深度、响应体积必须主动设限\n  - listitem: 运维面 网关 + 逐字段鉴权 + 可观测，都是长期税\n  - listitem: 演进 单版本 + @deprecated，但客户端缓存更难做对\n- text: 适合 REST 的团队阶段 适合 GraphQL 的团队阶段 结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。"
+    },
+    {
+      "text": "REST vs GraphQL · 移动端接口取舍\n选一个团队现状，看推荐与理由\n3 人 / 单一 App\n5 人 / 开始有第二个客户端\n8 人 / 多端 + 前端饱和\n10 人+ / 字段级授权\nREST\n推荐\n\n资源导向 · 约定优先 · 基建几乎为零\n\n上手成本\n路径 + 动词即全部心智模型，新人当天能提交接口\n移动收益\nHTTP 缓存 / CDN / ETag 直接可用，省流量省电\n主要代价\n聚合靠 BFF 或多次往返；字段多了易接口膨胀\n运维面\n无网关、无 resolver，看日志就能定位问题\n演进\n/v1 /v2 并行，老客户端留在旧版本更省事\nGraphQL\n备选\n\n契约导向 · 单端点 · 需要持续投入\n\n上手成本\nschema / resolver / 前端 client 一套都要学，约 2 周起步\n移动收益\n一屏一次请求精准取数，慢网下明显少一次往返\n主要代价\nN+1、查询深度、响应体积必须主动设限\n运维面\n网关 + 逐字段鉴权 + 可观测，都是长期税\n演进\n单版本 + @deprecated，但客户端缓存更难做对\n适合 REST 的团队阶段\n适合 GraphQL 的团队阶段\n结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 1018,
+      "visibleGraphics": 0,
+      "accessibleNames": [],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "af94c32b26f06a0a16c6dca4fa2cb254",
+          "payload": {},
+          "at": 1991.5
+        },
+        {
+          "type": "rendered",
+          "channel": "af94c32b26f06a0a16c6dca4fa2cb254",
+          "payload": {},
+          "at": 1997.7000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "af94c32b26f06a0a16c6dca4fa2cb254",
+          "payload": {
+            "height": 1018
+          },
+          "at": 1997.7000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: REST vs GraphQL · 移动端接口取舍 选一个团队现状，看推荐与理由\n- button \"3 人 / 单一 App\"\n- button \"5 人 / 开始有第二个客户端\"\n- button \"8 人 / 多端 + 前端饱和\"\n- button \"10 人+ / 字段级授权\"\n- heading \"REST 推荐\" [level=3]\n- paragraph: 资源导向 · 约定优先 · 基建几乎为零\n- list:\n  - listitem: 上手成本 路径 + 动词即全部心智模型，新人当天能提交接口\n  - listitem: 移动收益 HTTP 缓存 / CDN / ETag 直接可用，省流量省电\n  - listitem: 主要代价 聚合靠 BFF 或多次往返；字段多了易接口膨胀\n  - listitem: 运维面 无网关、无 resolver，看日志就能定位问题\n  - listitem: 演进 /v1 /v2 并行，老客户端留在旧版本更省事\n- heading \"GraphQL 备选\" [level=3]\n- paragraph: 契约导向 · 单端点 · 需要持续投入\n- list:\n  - listitem: 上手成本 schema / resolver / 前端 client 一套都要学，约 2 周起步\n  - listitem: 移动收益 一屏一次请求精准取数，慢网下明显少一次往返\n  - listitem: 主要代价 N+1、查询深度、响应体积必须主动设限\n  - listitem: 运维面 网关 + 逐字段鉴权 + 可观测，都是长期税\n  - listitem: 演进 单版本 + @deprecated，但客户端缓存更难做对\n- text: 适合 REST 的团队阶段 适合 GraphQL 的团队阶段 结论：先 REST。契约和版本用 OpenAPI + /v1 就够，别为尚不存在的客户端多样性预付网关成本。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "02b0ea0abbe3014ac9e24c1d223f00bb",
+      "payload": {},
+      "at": 213.5
+    },
+    {
+      "type": "rendered",
+      "channel": "02b0ea0abbe3014ac9e24c1d223f00bb",
+      "payload": {},
+      "at": 213.90000009536743
+    },
+    {
+      "type": "resize",
+      "channel": "02b0ea0abbe3014ac9e24c1d223f00bb",
+      "payload": {
+        "height": 538
+      },
+      "at": 214
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "89384f9ec130f63e141714ebda3235f23c73bb1d2c66ca96dfaff24cfb30c273",
+  "previewSha256": "8a8c1ec5bd8201ac9a0591b93536b91c2970d9b8159a6fc4550e533807926180",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

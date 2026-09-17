@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W10-A-2",
+  "roundId": "test-A-frozen-20260917",
+  "caseId": "W10",
+  "arm": "A",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "在回复中画一张静态流程图说明：模型提交源码，Host校验并记录，Web隔离渲染；成功后用户操作。若源码运行报错，Web请求修复，Host从日志取得当前源码并请求模型修复，再更新原卡片。图里标清三方职责和成功/失败分支。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "源码卡片：提交—校验—隔离渲染—出错修复 泳道流程",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/test-A-frozen-20260917/W10-A-2/widget-1.source.html",
+      "preview": "results/test-A-frozen-20260917/W10-A-2/widget-1.html",
+      "sha256": "8410610d9b97e050fa9bc18d544a359d952e1a23d821b834e57e63190b786274",
+      "bytes": 9909
+    }
+  ],
+  "final": "I'll load the visualization skill first, since this is a diagram request.\n\n上图用 **三条泳道 = 三方职责**，主线走成功、红线走失败，两条支路的分岔点标在「渲染通过？」这个判断上。\n\n**三方职责（按泳道）**\n- **模型**：只做源码生产 —— ① 提交源码；出错后 ⑥ 依据日志生成修复源码。\n- **Host**：唯一的可信中枢 —— ② 静态校验 + 版本落库 + 写运行日志；失败时 ⑤ 从日志取回当前源码并向模型发起修复；⑦ 把新版本写回原卡片。日志是回环里\"当前源码\"的唯一来源，这正是它不可省略的原因。\n- **Web**：只负责执行与反馈 —— ③ 在沙箱里隔离渲染；④ 运行报错时捕获错误并向上请求修复，不直接接触模型。\n\n**分支**\n- **成功**（绿）：渲染通过 → 用户在卡片上直接操作，流程结束。\n- **失败**（红框区）：源码运行报错 → Web 请求修复 → Host 取日志中的当前源码并请求模型 → 模型返回修复版本 → Host 更新**原卡片**（不是新建卡片）→ 沿青色虚线回到 ③ 重新隔离渲染，形成可重复的修复回环。\n\n关键设计点：Host 每次都用日志里的当前源码去请求修复，所以多轮修复始终作用在同一张卡片、同一份版本链上，不会丢失上下文。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_Wc6Mb3lmjBEgboPgQLdu7588",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_xNVjg1P0Aza9I16Xsd8H8534",
+        "argumentsSha256": "c1f14839e6acb69637ad7de05aba38232f21fe2aa6f53b8f55db9ebdd3ceb4e2",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_tfNo2umxLflz7IvuvEjI7052",
+        "argumentsSha256": "ac4ca12955dc6a9c398135a34c7e4f5b531d70439709e4fb42156d455d85c34f",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_JyltoFUqH3jJtBQIkfww3103",
+        "argumentsSha256": "16bde9683ab97d77b94e8911f0e5decc20123fcfb9a4070bce4b3b851ce92b9e",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/diagrams.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "26916fe9f5dbc4ae81203e343e310a30146003f315a8fb2affc5026bac33cceb",
+        "resultSha256": "a6ba31d6e895b56e83bcf06ed9c76b3da07a639ba47103e198b9ff31576fb241"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "0555429e65aa0103b3a545e7e79f1d62abca980275aaf2bc724a6c06f011cfb1"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "106432c9cb57ed140fbb608319db3c97dd7a618f1001ade7d1223eb470dbabcc"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "65398d21d79631c034e011431a8c755a3b96797413e0c3c8fc215d8f3a65aa21"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8351,
+    "outputTokens": 41049,
+    "cacheReadTokens": 66048,
+    "cacheWriteTokens": 0,
+    "totalTokens": 115448
+  },
+  "elapsedSeconds": 167.646,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "7e29d59d6df3766469adb05cb6ef0b17a4fb6c035988ae5738a0a0076c6f92e3",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "7a8abde7c6067b247b31124d1f0cad520372da1319a1e374d151d22a245dbe9e"
+}

@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W10-D-2",
+  "roundId": "test-D-frozen-20260917",
+  "caseId": "W10",
+  "arm": "D",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "在回复中画一张静态流程图说明：模型提交源码，Host校验并记录，Web隔离渲染；成功后用户操作。若源码运行报错，Web请求修复，Host从日志取得当前源码并请求模型修复，再更新原卡片。图里标清三方职责和成功/失败分支。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "模型 / Host / Web 源码提交与修复流程",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/test-D-frozen-20260917/W10-D-2/widget-1.source.html",
+      "preview": "results/test-D-frozen-20260917/W10-D-2/widget-1.html",
+      "sha256": "477912da1498bba35718fe887272c8dd111aa108ed1f8451b6e4795309345ca1",
+      "bytes": 7098
+    }
+  ],
+  "final": "上图按三条纵向泳道划分职责：**模型**负责提交与修复源码，**Host**负责校验记录、按卡片标识取日志源码、调度修复并更新原卡片，**Web**负责隔离渲染与错误上报。\n\n成功分支（绿色）直接进入用户在卡片上的操作；失败分支（红色）走 ④→⑦ 的修复链路，经蓝色虚线回环回到 ③ 重新渲染。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_jQWr0ZqesSKlRWReSg1S8752",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_WpZU7c9UXkjQMszBGr1J1037",
+        "argumentsSha256": "8b6a2772c5ef05aa7a67379490b98695928c001262df4b01bf3c0efb0e8a5ff4",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_MZib3lt9Ty1axP25WQtH2520",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_WDzZQsd7lIXgtb2dIi2J9682",
+        "argumentsSha256": "9db37d7852bdd04a90abd66fd3c826c14ac23c1f2034f7ac09ad5741da564cce",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/diagrams.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "26916fe9f5dbc4ae81203e343e310a30146003f315a8fb2affc5026bac33cceb",
+        "resultSha256": "1c7e5c1c400f6d08530aed03551abfc6535c111ebd02d3543d739ab5cc54394d"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "876f5b4f5773188cb813d4f8a9f8646e4b885911c45fad7143696b02834fec26"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "80e88450942cfe5688b69e6b69adbd182a3db1bbcdb17d6e8a3ef4dcd38f132a"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "176f711dc732334911d82c5b79b0019559f267f46757993d6771fec9a5d6834b"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 33103,
+    "outputTokens": 26896,
+    "cacheReadTokens": 27392,
+    "cacheWriteTokens": 0,
+    "totalTokens": 87391
+  },
+  "elapsedSeconds": 106.825,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "c8bf7f89a4fcc32c041b1b29b842e190dc697e0842530531a930076187219ae1",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "b82bfab1e8528c4fa78d7d66209facf02c637d54a5110e089894e727a2c31557"
+}

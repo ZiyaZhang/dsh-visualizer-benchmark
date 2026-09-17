@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "trialId": "N06-D-1",
+  "caseId": "N06",
+  "scope": "route evidence and narrow inline facts, not ordinary-task correctness",
+  "checkerSha256": "e41278c103bfd3be7bb41921b3ddeed3892a8d150b6930e8499dc86154f503fd",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "casesPath": "results/test-D-frozen-20260917/cases.json",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "Trial did not complete; do not score a setup/transport block as a product routing failure.",
+      "evidence": {
+        "trialStatus": "blocked"
+      }
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case does not require an inline widget.",
+      "evidence": {}
+    },
+    "content": {
+      "status": "not_applicable",
+      "reason": "Ordinary-task correctness is outside this route check; historical results remain unchanged.",
+      "evidence": {}
+    }
+  }
+}

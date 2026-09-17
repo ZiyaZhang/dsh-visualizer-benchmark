@@ -1,0 +1,209 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+  .qty-card{
+    --qty-accent: var(--dsw-alias-brand-primary, #3b82f6);
+    background: var(--dsw-alias-bg-layer-1, #fff);
+    border: 1px solid var(--dsw-alias-border-l1, #e5e7eb);
+    border-radius: 14px;
+    padding: 16px 18px 14px;
+    max-width: 340px;
+    font-family: inherit;
+    color: var(--dsw-alias-label-primary, #111827);
+  }
+  .qty-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px}
+  .qty-title{font-size:13px;font-weight:600;letter-spacing:.02em}
+  .qty-range{font-size:12px;color:var(--dsw-alias-label-tertiary,#6b7280);font-variant-numeric:tabular-nums}
+  .qty-row{display:flex;align-items:center;gap:12px;min-width:0}
+  .qty-btn{
+    flex:0 0 auto;width:44px;height:44px;border-radius:11px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;line-height:1;font-weight:500;
+    border:1px solid var(--dsw-alias-border-l2,#d1d5db);
+    background:var(--dsw-alias-bg-layer-2,#f9fafb);
+    color:var(--dsw-alias-label-primary,#111827);
+    cursor:pointer;user-select:none;
+    transition:background .12s ease, border-color .12s ease, transform .06s ease, opacity .12s ease;
+  }
+  .qty-btn:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.05))}
+  .qty-btn:active:not(:disabled){background:var(--dsw-alias-interactive-bg-active,rgba(0,0,0,.09));transform:translateY(1px)}
+  .qty-btn:disabled{
+    opacity:.38;cursor:not-allowed;
+    background:var(--dsw-alias-bg-layer-2,#f9fafb);
+    color:var(--dsw-alias-label-tertiary,#9ca3af);
+  }
+  .qty-value{
+    flex:1 1 auto;min-width:0;text-align:center;
+    font-size:34px;font-weight:600;line-height:1;
+    font-variant-numeric:tabular-nums;
+    padding:2px 0;
+    transition:color .15s ease;
+  }
+  .qty-value.is-min,.qty-value.is-max{color:var(--qty-accent)}
+  .qty-scale{display:flex;gap:6px;margin-top:14px}
+  .qty-cell{
+    flex:1 1 0;min-width:0;height:8px;border-radius:4px;
+    background:var(--dsw-alias-bg-layer-2,#eee);
+    border:1px solid var(--dsw-alias-border-l1,#e5e7eb);
+    transition:background .15s ease,border-color .15s ease;
+  }
+  .qty-cell.on{background:var(--qty-accent);border-color:var(--qty-accent)}
+  .qty-foot{
+    display:flex;justify-content:space-between;gap:8px;margin-top:8px;
+    font-size:11px;color:var(--dsw-alias-label-tertiary,#6b7280);
+    font-variant-numeric:tabular-nums;
+  }
+  .qty-hint{margin-top:10px;font-size:11.5px;color:var(--dsw-alias-label-secondary,#4b5563);min-height:15px}
+  @media (max-width:260px){ .qty-value{font-size:26px} .qty-btn{width:38px;height:38px} }
+</style>
+
+<div class="qty-card" id="qty-card" role="group" aria-labelledby="qty-title">
+  <div class="qty-head">
+    <span class="qty-title" id="qty-title">数量</span>
+    <span class="qty-range">可选 0 – 5</span>
+  </div>
+
+  <div class="qty-row">
+    <button class="qty-btn" id="qty-minus" type="button" aria-label="减少数量">−</button>
+    <output class="qty-value" id="qty-value" for="qty-minus qty-plus" aria-live="polite">2</output>
+    <button class="qty-btn" id="qty-plus" type="button" aria-label="增加数量">+</button>
+  </div>
+
+  <div class="qty-scale" id="qty-scale" aria-hidden="true">
+    <span class="qty-cell"></span><span class="qty-cell"></span><span class="qty-cell"></span>
+    <span class="qty-cell"></span><span class="qty-cell"></span><span class="qty-cell"></span>
+  </div>
+  <div class="qty-foot"><span>0</span><span>5</span></div>
+
+  <div class="qty-hint" id="qty-hint">&nbsp;</div>
+</div>
+
+<script>
+(function () {
+  const MIN = 0, MAX = 5;
+  let value = 2;
+
+  const card   = document.getElementById('qty-card');
+  const minus  = document.getElementById('qty-minus');
+  const plus   = document.getElementById('qty-plus');
+  const out    = document.getElementById('qty-value');
+  const cells  = Array.prototype.slice.call(document.querySelectorAll('#qty-scale .qty-cell'));
+  const hint   = document.getElementById('qty-hint');
+
+  function render() {
+    out.textContent = String(value);
+    out.classList.toggle('is-min', value === MIN);
+    out.classList.toggle('is-max', value === MAX);
+
+    minus.disabled = value <= MIN;
+    plus.disabled  = value >= MAX;
+
+    cells.forEach(function (c, i) { c.classList.toggle('on', i < value); });
+
+    if (value === MIN)      hint.textContent = '已到下限，减少按钮已禁用';
+    else if (value === MAX) hint.textContent = '已到上限，增加按钮已禁用';
+    else                    hint.textContent = '还可增加 ' + (MAX - value) + '，还可减少 ' + (value - MIN);
+  }
+
+  function step(delta) {
+    const next = Math.min(MAX, Math.max(MIN, value + delta));
+    if (next === value) return;
+    value = next;
+    render();
+  }
+
+  minus.addEventListener('click', function () { step(-1); });
+  plus.addEventListener('click', function () { step(1); });
+
+  card.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown')  { e.preventDefault(); step(-1); }
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp')   { e.preventDefault(); step(1); }
+  });
+
+  render();
+})();
+</script></body></html>

@@ -1,0 +1,516 @@
+{
+  "scope": "Isolated unchanged source, explicit reviewer operations; not Host delivery.",
+  "states": [
+    {
+      "action": "initial",
+      "text": "任务列表 · 筛选原型\n筛选\n状态\n进行中\n已完成\n负责人\n\n负责人不能为空，应用不可用\n\n取消\n应用\n当前筛选\n尚未应用筛选\n清除",
+      "controls": [
+        {
+          "text": "筛选",
+          "id": "fdTrigger",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "进行中",
+          "checked": true
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "已完成",
+          "checked": false
+        },
+        {
+          "text": null,
+          "id": "fdOwner",
+          "disabled": false,
+          "value": "",
+          "checked": false
+        },
+        {
+          "text": "取消",
+          "id": "fdCancel",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "应用",
+          "id": "fdApply",
+          "disabled": true,
+          "value": ""
+        },
+        {
+          "text": "清除",
+          "id": "fdClear",
+          "disabled": true,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "resize",
+          "payload": {
+            "height": 300
+          }
+        }
+      ]
+    },
+    {
+      "action": "#fdOwner: 李明",
+      "text": "任务列表 · 筛选原型\n筛选\n状态\n进行中\n已完成\n负责人\n\n条件已就绪，点击应用\n\n取消\n应用\n当前筛选\n尚未应用筛选\n清除",
+      "controls": [
+        {
+          "text": "筛选",
+          "id": "fdTrigger",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "进行中",
+          "checked": true
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "已完成",
+          "checked": false
+        },
+        {
+          "text": null,
+          "id": "fdOwner",
+          "disabled": false,
+          "value": "李明",
+          "checked": false
+        },
+        {
+          "text": "取消",
+          "id": "fdCancel",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "应用",
+          "id": "fdApply",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "清除",
+          "id": "fdClear",
+          "disabled": true,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "resize",
+          "payload": {
+            "height": 300
+          }
+        }
+      ]
+    },
+    {
+      "action": "input[value=\"已完成\"]: 1",
+      "text": "任务列表 · 筛选原型\n筛选\n状态\n进行中\n已完成\n负责人\n\n条件已就绪，点击应用\n\n取消\n应用\n当前筛选\n尚未应用筛选\n清除",
+      "controls": [
+        {
+          "text": "筛选",
+          "id": "fdTrigger",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "进行中",
+          "checked": false
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "已完成",
+          "checked": true
+        },
+        {
+          "text": null,
+          "id": "fdOwner",
+          "disabled": false,
+          "value": "李明",
+          "checked": false
+        },
+        {
+          "text": "取消",
+          "id": "fdCancel",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "应用",
+          "id": "fdApply",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "清除",
+          "id": "fdClear",
+          "disabled": true,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "resize",
+          "payload": {
+            "height": 300
+          }
+        }
+      ]
+    },
+    {
+      "action": "#fdApply: 1",
+      "text": "任务列表 · 筛选原型\n筛选\n当前筛选\n状态：已完成 · 负责人：李明\n清除",
+      "controls": [
+        {
+          "text": "筛选",
+          "id": "fdTrigger",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "进行中",
+          "checked": false
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "已完成",
+          "checked": true
+        },
+        {
+          "text": null,
+          "id": "fdOwner",
+          "disabled": false,
+          "value": "李明",
+          "checked": false
+        },
+        {
+          "text": "取消",
+          "id": "fdCancel",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "应用",
+          "id": "fdApply",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "清除",
+          "id": "fdClear",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "resize",
+          "payload": {
+            "height": 300
+          }
+        }
+      ]
+    },
+    {
+      "action": "#fdTrigger: 1",
+      "text": "任务列表 · 筛选原型\n筛选\n状态\n进行中\n已完成\n负责人\n\n条件已就绪，点击应用\n\n取消\n应用\n当前筛选\n状态：已完成 · 负责人：李明\n清除",
+      "controls": [
+        {
+          "text": "筛选",
+          "id": "fdTrigger",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "进行中",
+          "checked": false
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "已完成",
+          "checked": true
+        },
+        {
+          "text": null,
+          "id": "fdOwner",
+          "disabled": false,
+          "value": "李明",
+          "checked": false
+        },
+        {
+          "text": "取消",
+          "id": "fdCancel",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "应用",
+          "id": "fdApply",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "清除",
+          "id": "fdClear",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "resize",
+          "payload": {
+            "height": 300
+          }
+        }
+      ]
+    },
+    {
+      "action": "input[value=\"进行中\"]: 1",
+      "text": "任务列表 · 筛选原型\n筛选\n状态\n进行中\n已完成\n负责人\n\n条件已就绪，点击应用\n\n取消\n应用\n当前筛选\n状态：已完成 · 负责人：李明\n清除",
+      "controls": [
+        {
+          "text": "筛选",
+          "id": "fdTrigger",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "进行中",
+          "checked": true
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "已完成",
+          "checked": false
+        },
+        {
+          "text": null,
+          "id": "fdOwner",
+          "disabled": false,
+          "value": "李明",
+          "checked": false
+        },
+        {
+          "text": "取消",
+          "id": "fdCancel",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "应用",
+          "id": "fdApply",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "清除",
+          "id": "fdClear",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "resize",
+          "payload": {
+            "height": 300
+          }
+        }
+      ]
+    },
+    {
+      "action": "#fdApply: 1",
+      "text": "任务列表 · 筛选原型\n筛选\n当前筛选\n状态：进行中 · 负责人：李明\n清除",
+      "controls": [
+        {
+          "text": "筛选",
+          "id": "fdTrigger",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "进行中",
+          "checked": true
+        },
+        {
+          "text": null,
+          "id": "",
+          "disabled": false,
+          "value": "已完成",
+          "checked": false
+        },
+        {
+          "text": null,
+          "id": "fdOwner",
+          "disabled": false,
+          "value": "李明",
+          "checked": false
+        },
+        {
+          "text": "取消",
+          "id": "fdCancel",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "应用",
+          "id": "fdApply",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "清除",
+          "id": "fdClear",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "4a8ad2f30f6069646efc1042f55fe0ab",
+          "type": "resize",
+          "payload": {
+            "height": 300
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "W10-D-1",
+  "caseId": "W10",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/test-D-frozen-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:16:57.864Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [
+          "模型",
+          "Host",
+          "Web"
+        ],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "pass",
+      "reason": "All requested literal labels are present in visible text or accessible names.",
+      "evidence": {
+        "expectedText": [
+          "模型",
+          "Host",
+          "Web"
+        ],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "模型 · LLM\n产出 / 修复卡片源码\nHost · 后端服务\n校验 · 记录版本 · 调度修复\nWeb · 前端沙箱\n隔离渲染 · 上报运行错误\n① 提交源码\n模型产出卡片源码\n② 校验并记录\n校验通过 · 记录当前源码 v1\n③ 隔离渲染\n沙箱 iframe 内执行\n源码运行\n是否报错？\n⑤ 响应修复请求\n从日志取出当前源码 v1\n⑥ 生成修复版\n基于 v1 产出 v2\n⑦ 校验并记录 v2\n更新原卡片数据\n用户\n④ 用户操作卡片\n交互 · 复制 · 下载\n图例\n成功路径 ① → ④\n失败 → 修复 ⑤ → ⑦\n提交源码\n已记录 v1\n执行\n成功\n失败\n请求修复\n附 v1 请求修复\n返回修复版 v2\n原卡片重新渲染\n模型 · LLM 产出 / 修复卡片源码 Host · 后端服务 校验 · 记录版本 · 调度修复 Web · 前端沙箱 隔离渲染 · 上报运行错误 ① 提交源码 模型产出卡片源码 ② 校验并记录 校验通过 · 记录当前源码 v1 ③ 隔离渲染 沙箱 iframe 内执行 源码运行 是否报错？ ⑤ 响应修复请求 从日志取出当前源码 v1 ⑥ 生成修复版 基于 v1 产出 v2 ⑦ 校验并记录 v2 更新原卡片数据 用户 ④ 用户操作卡片 交互 · 复制 · 下载 图例 成功路径 ① → ④ 失败 → 修复 ⑤ → ⑦ 提交源码 已记录 v1 执行 成功 失败 请求修复 附 v1 请求修复 返回修复版 v2 原卡片重新渲染",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 552,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- img \"模型提交源码、Host 校验记录、Web 隔离渲染与运行报错修复流程图 三方泳道流程图：模型在模型泳道提交源码；Host 在 Host 泳道校验并记录当前源码版本 v1；Web 在沙箱中隔离渲染。Web 判断运行是否报错：成功则用户操作卡片；失败则 Web 请求修复，Host 从日志取出当前源码 v1 并请求模型生成修复版 v2，Host 校验记录并更新原卡片后重新渲染同一张卡片。\": 模型 · LLM 产出 / 修复卡片源码 Host · 后端服务 校验 · 记录版本 · 调度修复 Web · 前端沙箱 隔离渲染 · 上报运行错误 ① 提交源码 模型产出卡片源码 ② 校验并记录 校验通过 · 记录当前源码 v1 ③ 隔离渲染 沙箱 iframe 内执行 源码运行 是否报错？ ⑤ 响应修复请求 从日志取出当前源码 v1 ⑥ 生成修复版 基于 v1 产出 v2 ⑦ 校验并记录 v2 更新原卡片数据 用户 ④ 用户操作卡片 交互 · 复制 · 下载 图例 成功路径 ① → ④ 失败 → 修复 ⑤ → ⑦ 提交源码 已记录 v1 执行 成功 失败 请求修复 附 v1 请求修复 返回修复版 v2 原卡片重新渲染"
+    },
+    {
+      "text": "模型 · LLM\n产出 / 修复卡片源码\nHost · 后端服务\n校验 · 记录版本 · 调度修复\nWeb · 前端沙箱\n隔离渲染 · 上报运行错误\n① 提交源码\n模型产出卡片源码\n② 校验并记录\n校验通过 · 记录当前源码 v1\n③ 隔离渲染\n沙箱 iframe 内执行\n源码运行\n是否报错？\n⑤ 响应修复请求\n从日志取出当前源码 v1\n⑥ 生成修复版\n基于 v1 产出 v2\n⑦ 校验并记录 v2\n更新原卡片数据\n用户\n④ 用户操作卡片\n交互 · 复制 · 下载\n图例\n成功路径 ① → ④\n失败 → 修复 ⑤ → ⑦\n提交源码\n已记录 v1\n执行\n成功\n失败\n请求修复\n附 v1 请求修复\n返回修复版 v2\n原卡片重新渲染\n模型 · LLM 产出 / 修复卡片源码 Host · 后端服务 校验 · 记录版本 · 调度修复 Web · 前端沙箱 隔离渲染 · 上报运行错误 ① 提交源码 模型产出卡片源码 ② 校验并记录 校验通过 · 记录当前源码 v1 ③ 隔离渲染 沙箱 iframe 内执行 源码运行 是否报错？ ⑤ 响应修复请求 从日志取出当前源码 v1 ⑥ 生成修复版 基于 v1 产出 v2 ⑦ 校验并记录 v2 更新原卡片数据 用户 ④ 用户操作卡片 交互 · 复制 · 下载 图例 成功路径 ① → ④ 失败 → 修复 ⑤ → ⑦ 提交源码 已记录 v1 执行 成功 失败 请求修复 附 v1 请求修复 返回修复版 v2 原卡片重新渲染",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 270,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- img \"模型提交源码、Host 校验记录、Web 隔离渲染与运行报错修复流程图 三方泳道流程图：模型在模型泳道提交源码；Host 在 Host 泳道校验并记录当前源码版本 v1；Web 在沙箱中隔离渲染。Web 判断运行是否报错：成功则用户操作卡片；失败则 Web 请求修复，Host 从日志取出当前源码 v1 并请求模型生成修复版 v2，Host 校验记录并更新原卡片后重新渲染同一张卡片。\": 模型 · LLM 产出 / 修复卡片源码 Host · 后端服务 校验 · 记录版本 · 调度修复 Web · 前端沙箱 隔离渲染 · 上报运行错误 ① 提交源码 模型产出卡片源码 ② 校验并记录 校验通过 · 记录当前源码 v1 ③ 隔离渲染 沙箱 iframe 内执行 源码运行 是否报错？ ⑤ 响应修复请求 从日志取出当前源码 v1 ⑥ 生成修复版 基于 v1 产出 v2 ⑦ 校验并记录 v2 更新原卡片数据 用户 ④ 用户操作卡片 交互 · 复制 · 下载 图例 成功路径 ① → ④ 失败 → 修复 ⑤ → ⑦ 提交源码 已记录 v1 执行 成功 失败 请求修复 附 v1 请求修复 返回修复版 v2 原卡片重新渲染"
+    },
+    {
+      "text": "模型 · LLM\n产出 / 修复卡片源码\nHost · 后端服务\n校验 · 记录版本 · 调度修复\nWeb · 前端沙箱\n隔离渲染 · 上报运行错误\n① 提交源码\n模型产出卡片源码\n② 校验并记录\n校验通过 · 记录当前源码 v1\n③ 隔离渲染\n沙箱 iframe 内执行\n源码运行\n是否报错？\n⑤ 响应修复请求\n从日志取出当前源码 v1\n⑥ 生成修复版\n基于 v1 产出 v2\n⑦ 校验并记录 v2\n更新原卡片数据\n用户\n④ 用户操作卡片\n交互 · 复制 · 下载\n图例\n成功路径 ① → ④\n失败 → 修复 ⑤ → ⑦\n提交源码\n已记录 v1\n执行\n成功\n失败\n请求修复\n附 v1 请求修复\n返回修复版 v2\n原卡片重新渲染\n模型 · LLM 产出 / 修复卡片源码 Host · 后端服务 校验 · 记录版本 · 调度修复 Web · 前端沙箱 隔离渲染 · 上报运行错误 ① 提交源码 模型产出卡片源码 ② 校验并记录 校验通过 · 记录当前源码 v1 ③ 隔离渲染 沙箱 iframe 内执行 源码运行 是否报错？ ⑤ 响应修复请求 从日志取出当前源码 v1 ⑥ 生成修复版 基于 v1 产出 v2 ⑦ 校验并记录 v2 更新原卡片数据 用户 ④ 用户操作卡片 交互 · 复制 · 下载 图例 成功路径 ① → ④ 失败 → 修复 ⑤ → ⑦ 提交源码 已记录 v1 执行 成功 失败 请求修复 附 v1 请求修复 返回修复版 v2 原卡片重新渲染",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 552,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- img \"模型提交源码、Host 校验记录、Web 隔离渲染与运行报错修复流程图 三方泳道流程图：模型在模型泳道提交源码；Host 在 Host 泳道校验并记录当前源码版本 v1；Web 在沙箱中隔离渲染。Web 判断运行是否报错：成功则用户操作卡片；失败则 Web 请求修复，Host 从日志取出当前源码 v1 并请求模型生成修复版 v2，Host 校验记录并更新原卡片后重新渲染同一张卡片。\": 模型 · LLM 产出 / 修复卡片源码 Host · 后端服务 校验 · 记录版本 · 调度修复 Web · 前端沙箱 隔离渲染 · 上报运行错误 ① 提交源码 模型产出卡片源码 ② 校验并记录 校验通过 · 记录当前源码 v1 ③ 隔离渲染 沙箱 iframe 内执行 源码运行 是否报错？ ⑤ 响应修复请求 从日志取出当前源码 v1 ⑥ 生成修复版 基于 v1 产出 v2 ⑦ 校验并记录 v2 更新原卡片数据 用户 ④ 用户操作卡片 交互 · 复制 · 下载 图例 成功路径 ① → ④ 失败 → 修复 ⑤ → ⑦ 提交源码 已记录 v1 执行 成功 失败 请求修复 附 v1 请求修复 返回修复版 v2 原卡片重新渲染"
+    },
+    {
+      "text": "模型 · LLM\n产出 / 修复卡片源码\nHost · 后端服务\n校验 · 记录版本 · 调度修复\nWeb · 前端沙箱\n隔离渲染 · 上报运行错误\n① 提交源码\n模型产出卡片源码\n② 校验并记录\n校验通过 · 记录当前源码 v1\n③ 隔离渲染\n沙箱 iframe 内执行\n源码运行\n是否报错？\n⑤ 响应修复请求\n从日志取出当前源码 v1\n⑥ 生成修复版\n基于 v1 产出 v2\n⑦ 校验并记录 v2\n更新原卡片数据\n用户\n④ 用户操作卡片\n交互 · 复制 · 下载\n图例\n成功路径 ① → ④\n失败 → 修复 ⑤ → ⑦\n提交源码\n已记录 v1\n执行\n成功\n失败\n请求修复\n附 v1 请求修复\n返回修复版 v2\n原卡片重新渲染\n模型 · LLM 产出 / 修复卡片源码 Host · 后端服务 校验 · 记录版本 · 调度修复 Web · 前端沙箱 隔离渲染 · 上报运行错误 ① 提交源码 模型产出卡片源码 ② 校验并记录 校验通过 · 记录当前源码 v1 ③ 隔离渲染 沙箱 iframe 内执行 源码运行 是否报错？ ⑤ 响应修复请求 从日志取出当前源码 v1 ⑥ 生成修复版 基于 v1 产出 v2 ⑦ 校验并记录 v2 更新原卡片数据 用户 ④ 用户操作卡片 交互 · 复制 · 下载 图例 成功路径 ① → ④ 失败 → 修复 ⑤ → ⑦ 提交源码 已记录 v1 执行 成功 失败 请求修复 附 v1 请求修复 返回修复版 v2 原卡片重新渲染",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 270,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- img \"模型提交源码、Host 校验记录、Web 隔离渲染与运行报错修复流程图 三方泳道流程图：模型在模型泳道提交源码；Host 在 Host 泳道校验并记录当前源码版本 v1；Web 在沙箱中隔离渲染。Web 判断运行是否报错：成功则用户操作卡片；失败则 Web 请求修复，Host 从日志取出当前源码 v1 并请求模型生成修复版 v2，Host 校验记录并更新原卡片后重新渲染同一张卡片。\": 模型 · LLM 产出 / 修复卡片源码 Host · 后端服务 校验 · 记录版本 · 调度修复 Web · 前端沙箱 隔离渲染 · 上报运行错误 ① 提交源码 模型产出卡片源码 ② 校验并记录 校验通过 · 记录当前源码 v1 ③ 隔离渲染 沙箱 iframe 内执行 源码运行 是否报错？ ⑤ 响应修复请求 从日志取出当前源码 v1 ⑥ 生成修复版 基于 v1 产出 v2 ⑦ 校验并记录 v2 更新原卡片数据 用户 ④ 用户操作卡片 交互 · 复制 · 下载 图例 成功路径 ① → ④ 失败 → 修复 ⑤ → ⑦ 提交源码 已记录 v1 执行 成功 失败 请求修复 附 v1 请求修复 返回修复版 v2 原卡片重新渲染"
+    }
+  ],
+  "messages": [],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "26dc4a5b5878b4d0e826e10ebf3077d64be1ff17ac05e6ba034dd305acc06c30",
+  "previewSha256": "925ffc86ed2c12aa60859e7cb1dab226e55cebe1cb2d733332b332d5e2d86f12",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "svg",
+  "sandbox": "",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

@@ -1,0 +1,123 @@
+<div class="w06">
+  <style>
+    .w06{--w06-bar:#8fa3c8;--w06-bar-on:var(--dsw-alias-brand-primary,#3b6ef6);font:14px/1.5 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--dsw-alias-label-primary,#1c1f24);background:var(--dsw-alias-bg-layer-1,#f6f7f9);border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.08));border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:12px;max-width:560px}
+    .w06 *{box-sizing:border-box;min-width:0}
+    .w06-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+    .w06-title{font-weight:600;font-size:15px}
+    .w06-sub,.w06-total-unit{color:var(--dsw-alias-label-tertiary,#7a828e);font-size:12px}
+    .w06-total-num{font-size:20px;font-weight:650;font-variant-numeric:tabular-nums;margin-right:4px}
+    .w06-list{display:grid;gap:8px}
+    .w06-row{display:grid;grid-template-columns:3.5em 1fr auto;align-items:center;gap:10px;width:100%;padding:8px 10px;border:1px solid transparent;border-radius:9px;background:var(--dsw-alias-bg-layer-2,#fff);color:inherit;font:inherit;cursor:pointer;text-align:left}
+    .w06-row:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(0,0,0,.04))}
+    .w06-row:focus-visible{outline:2px solid var(--w06-bar-on);outline-offset:2px}
+    .w06-row[aria-pressed="true"]{border-color:var(--w06-bar-on);background:var(--dsw-alias-interactive-bg-active,rgba(59,110,246,.10))}
+    .w06-name{font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:4px}
+    .w06-check{display:none}
+    .w06-row[aria-pressed="true"] .w06-check{display:inline}
+    .w06-track{height:12px;border-radius:6px;background:var(--dsw-alias-bg-base,#eceef2);overflow:hidden}
+    .w06-fill{display:block;height:100%;border-radius:6px;background:var(--w06-bar);transition:background .15s ease}
+    .w06-row[aria-pressed="true"] .w06-fill{background:var(--w06-bar-on)}
+    .w06-val{font-variant-numeric:tabular-nums;font-weight:650;white-space:nowrap}
+    .w06-val small{font-weight:400;color:var(--dsw-alias-label-tertiary,#7a828e);margin-left:3px}
+    .w06-foot{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.08));padding-top:12px}
+    .w06-detail{font-size:12.5px;color:var(--dsw-alias-label-secondary,#5b636f);flex:1 1 12em}
+    .w06-detail b{color:var(--dsw-alias-label-primary,#1c1f24)}
+    .w06-explain{padding:8px 14px;border-radius:8px;border:1px solid transparent;background:var(--dsw-alias-button-primary-fill,#3b6ef6);color:var(--dsw-alias-label-primary-inverted,#fff);font:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
+    .w06-explain:disabled{background:var(--dsw-alias-bg-layer-2,#fff);color:var(--dsw-alias-label-tertiary,#9aa1ab);border-color:var(--dsw-alias-border-l1,rgba(0,0,0,.1));cursor:not-allowed}
+    .w06-status{font-size:12px;color:var(--dsw-alias-label-tertiary,#7a828e);min-height:1.2em}
+  </style>
+
+  <div class="w06-head">
+    <div>
+      <div class="w06-title">地区销售对比</div>
+      <div class="w06-sub">单位：万元 · 点击地区仅在本页选中</div>
+    </div>
+    <div><span class="w06-total-num">250</span><span class="w06-total-unit">万元 合计</span></div>
+  </div>
+
+  <div class="w06-list" role="group" aria-label="地区销售额对比，合计 250 万元">
+    <button type="button" class="w06-row" id="w06-btn-east" aria-pressed="false" aria-label="华东，120 万元，占 48%">
+      <span class="w06-name"><span class="w06-check" aria-hidden="true">✓</span>华东</span>
+      <span class="w06-track"><span class="w06-fill" style="width:100%"></span></span>
+      <span class="w06-val">120<small>万元</small></span>
+    </button>
+    <button type="button" class="w06-row" id="w06-btn-south" aria-pressed="false" aria-label="华南，80 万元，占 32%">
+      <span class="w06-name"><span class="w06-check" aria-hidden="true">✓</span>华南</span>
+      <span class="w06-track"><span class="w06-fill" style="width:66.7%"></span></span>
+      <span class="w06-val">80<small>万元</small></span>
+    </button>
+    <button type="button" class="w06-row" id="w06-btn-west" aria-pressed="false" aria-label="西部，50 万元，占 20%">
+      <span class="w06-name"><span class="w06-check" aria-hidden="true">✓</span>西部</span>
+      <span class="w06-track"><span class="w06-fill" style="width:41.7%"></span></span>
+      <span class="w06-val">50<small>万元</small></span>
+    </button>
+  </div>
+
+  <div class="w06-foot">
+    <div class="w06-detail" id="w06-detail">尚未选择地区</div>
+    <button type="button" class="w06-explain" id="w06-explain" disabled>解释所选地区</button>
+  </div>
+  <div class="w06-status" id="w06-status" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      var data = [
+        { id: 'east', name: '华东', value: 120 },
+        { id: 'south', name: '华南', value: 80 },
+        { id: 'west', name: '西部', value: 50 }
+      ];
+      var total = 250;
+      var selected = null;
+      var detail = document.getElementById('w06-detail');
+      var explain = document.getElementById('w06-explain');
+      var status = document.getElementById('w06-status');
+
+      function share(v) { return Math.round(v / total * 100); }
+
+      function render() {
+        for (var i = 0; i < data.length; i++) {
+          var d = data[i];
+          var btn = document.getElementById('w06-btn-' + d.id);
+          if (btn) btn.setAttribute('aria-pressed', selected === d.id ? 'true' : 'false');
+        }
+        var picked = null;
+        for (var j = 0; j < data.length; j++) if (data[j].id === selected) picked = data[j];
+        if (!picked) {
+          detail.textContent = '尚未选择地区';
+          explain.disabled = true;
+          return;
+        }
+        detail.innerHTML = '已选 <b>' + picked.name + ' · ' + picked.value + ' 万元</b> · 占三地区总额 ' + share(picked.value) + '%';
+        explain.disabled = false;
+      }
+
+      function pick(id) {
+        selected = id;
+        status.textContent = '已在本页选中，未发出追问';
+        render();
+      }
+
+      document.getElementById('w06-btn-east').addEventListener('click', function () { pick('east'); });
+      document.getElementById('w06-btn-south').addEventListener('click', function () { pick('south'); });
+      document.getElementById('w06-btn-west').addEventListener('click', function () { pick('west'); });
+
+      explain.addEventListener('click', function () {
+        if (explain.disabled) return;
+        var picked = null;
+        for (var i = 0; i < data.length; i++) if (data[i].id === selected) picked = data[i];
+        if (!picked) return;
+        var text = '请解释所选地区的销售表现：' + picked.name + ' ' + picked.value +
+          ' 万元（三地区对比：华东 120 万元、华南 80 万元、西部 50 万元，合计 250 万元；' +
+          picked.name + ' 占总额 ' + share(picked.value) + '%）。';
+        status.textContent = '已追问：' + picked.name + ' ' + picked.value + ' 万元';
+        if (window.dshWidget && typeof window.dshWidget.sendPrompt === 'function') {
+          window.dshWidget.sendPrompt(text);
+        } else {
+          status.textContent = '当前环境不支持自动追问，请直接发送：' + text;
+        }
+      });
+
+      render();
+    })();
+  </script>
+</div>

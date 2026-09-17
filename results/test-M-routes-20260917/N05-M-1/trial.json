@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 2,
+  "id": "N05-M-1",
+  "roundId": "test-M-routes-20260917",
+  "caseId": "N05",
+  "arm": "M",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "创建一份独立的 sales.html，展示华东120、华南80、西部50的销售额对比，给我文件入口，方便在右侧预览并保存下来。",
+  "expectedRoute": "file",
+  "widgets": [],
+  "final": "Workspace is empty, so I'll create a fully self-contained `sales.html` (no CDN/network needed) with an inline SVG bar chart.\n\n已创建完成 ✅\n\n**文件入口：** [`sales.html`]([private path]/test-M-routes-20260917/trials/N05-M-1/workspace/sales.html)\n\n- 相对路径：`sales.html`（位于当前工作区根目录）\n- 绝对路径：`[private path]/test-M-routes-20260917/trials/N05-M-1/workspace/sales.html`\n\n**内容说明**\n- 独立单文件，零外部依赖（无 CDN、无网络请求），离线双击即可打开\n- 纯内联 SVG 柱状图：华东 120、华南 80、西部 50（单位：万元），带 Y 轴刻度/网格线、悬停 tooltip\n- 下方 3 张统计卡片 + 页脚合计（250 万元，华东占比 48%）\n- 已通过校验：JS 语法正常、样式括号配对、数值 120/80/50 均已写入，文件大小 5.8 KB\n\n右侧预览面板直接打开该文件路径即可查看；需要「保存下来」时，下载/另存该 HTML 文件即可，它本身已是完整可用的成品页面。",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "No inline widget attempt; verify the requested delivery form with check-dsh.py"
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case evaluates routing only"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 18,
+        "callId": "call_00_Pyj02aHAZhd7qpuNWBEZ6647",
+        "argumentsSha256": "55d56f2508304b268f7172b84e09f396053cd2425bbcff8c2818f9b349424074",
+        "wrapped": false,
+        "resultSeq": 19,
+        "error": false
+      },
+      {
+        "name": "glob",
+        "loggedName": "glob",
+        "callSeq": 20,
+        "callId": "call_01_UxR7SeynZFOGv6NtV2YT7218",
+        "argumentsSha256": "69d6e1527e4619068bedea40dad927f661315486029121a8169bf7b88a79f822",
+        "wrapped": false,
+        "resultSeq": 21,
+        "error": false
+      },
+      {
+        "name": "write",
+        "loggedName": "write",
+        "callSeq": 26,
+        "callId": "call_00_oJfhQdySvRhTXKRegAnG5349",
+        "argumentsSha256": "faa808fba935ca0798c728d123a21286550e76d0c2a8a2b9b69dbf3e9e137fda",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 32,
+        "callId": "call_00_9OVFjkZQwuNAMlYZBm7c9156",
+        "argumentsSha256": "ba8e657b777b88a7dd8d17f313e31ef2d0d27992acfe0f82e026036fc2594639",
+        "wrapped": false,
+        "resultSeq": 33,
+        "error": false
+      }
+    ],
+    "referencesRead": [],
+    "skillLoads": [],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "1f6d46cb739f65aa220e2e5d540c4f1133c5bd3bc3956aee513a1977c69aa799"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 10,
+        "sha256": "86e10cc0c28dec776a21e0428ceb573f39a8cad6d0e683f4a8ab01bdb41618dd",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 6928,
+    "outputTokens": 3050,
+    "cacheReadTokens": 26752,
+    "cacheWriteTokens": 0,
+    "totalTokens": 36730
+  },
+  "elapsedSeconds": 12.999,
+  "sourceHead": "62b700bba7bb71e66d2d5a3b850ba8f4dd0fd6b4",
+  "rendererSha256": null,
+  "rejected": [],
+  "finalSha256": "5e8211a38a68f922672e4b744d0ee721090e974ea2f9ece93aa1dd4c1cb77dcd",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "fa26c056a8967efe8ef307333fe0842f98f6f034eebd0acd16905b8e2255e904",
+  "turnEnd": "completed",
+  "workspaceChanges": [
+    {
+      "path": "sales.html",
+      "beforeSha256": null,
+      "afterSha256": "124dd4268d6d9e2fb2868165be067547a0b9cacfbadefe57dc7beeef90bb0861"
+    }
+  ],
+  "artifactSetSha256": "0cfc50199d2731f5c9c5459c8c97e77403e9a5316e3d87e674fd6147ca359d85"
+}

@@ -1,0 +1,225 @@
+<div class="rg" id="rg">
+<style>
+.rg{--line:var(--dsw-alias-border-l1,#e4e7ec);--line2:var(--dsw-alias-border-l2,#cfd5dd);--bg2:var(--dsw-alias-bg-layer-2,#f5f6f8);--txt:var(--dsw-alias-label-primary,#1b1f24);--txt2:var(--dsw-alias-label-secondary,#5a6472);--txt3:var(--dsw-alias-label-tertiary,#8b95a4);--brand:var(--dsw-alias-brand-primary,#3b6ef6);color:var(--txt);font:14px/1.5 system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;display:flex;flex-direction:column;gap:.75rem}
+.rg *{box-sizing:border-box}
+.rg-head .rg-title{font-size:1.05rem;font-weight:650;letter-spacing:.01em}
+.rg-head .rg-sub{font-size:.8rem;color:var(--txt2);margin-top:.15rem}
+.rg-grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.panel{border:1px solid var(--line);border-radius:12px;padding:.7rem .8rem;background:var(--dsw-alias-bg-layer-1,transparent);min-width:0}
+.panel-h{font-size:.74rem;font-weight:650;color:var(--txt2);letter-spacing:.06em;margin-bottom:.5rem}
+.fact{padding:.38rem 0;border-top:1px dashed var(--line)}
+.fact:first-child{border-top:0;padding-top:0}
+.fact-label{font-size:.79rem;color:var(--txt2);margin-bottom:.3rem}
+.opts{display:flex;flex-wrap:wrap;gap:.35rem}
+.opt{display:inline-flex;align-items:center;gap:.35rem;padding:.24rem .55rem;border:1px solid var(--line);border-radius:999px;cursor:pointer;font-size:.79rem;line-height:1.3;background:var(--dsw-alias-bg-layer-1,transparent);min-width:0}
+.opt:hover{background:var(--dsw-alias-interactive-bg-hover,rgba(127,127,127,.1))}
+.opt input{appearance:none;-webkit-appearance:none;width:.8rem;height:.8rem;margin:0;flex:0 0 auto;border:1.5px solid var(--line2);border-radius:50%;position:relative;background:transparent}
+.opt input:checked{border-color:var(--brand)}
+.opt input:checked::after{content:"";position:absolute;inset:1.5px;border-radius:50%;background:var(--brand)}
+.opt:has(input:checked){border-color:var(--brand);font-weight:600;background:color-mix(in srgb,var(--brand) 10%,transparent)}
+.opt input:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.bars{display:flex;flex-direction:column;gap:.45rem}
+.bar-row{display:grid;grid-template-columns:4.4rem 1fr 2.5rem;align-items:center;gap:.5rem;font-size:.79rem}
+.bar-name{color:var(--txt2)}
+.bar{height:.6rem;border-radius:999px;background:var(--bg2);overflow:hidden}
+.fill{display:block;height:100%;border-radius:999px;transition:width .35s ease}
+.fill.rest{background:var(--dsw-alias-label-tertiary,#98a2b3)}
+.fill.gq{background:var(--brand)}
+.bar-val{text-align:right;font-variant-numeric:tabular-nums;color:var(--txt)}
+.bar-note{font-size:.72rem;color:var(--txt3);line-height:1.4}
+.verdict{border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem;margin-top:.7rem;background:var(--bg2)}
+.v-top{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+.v-title{font-weight:650;font-size:.95rem}
+.v-score{font-size:.73rem;color:var(--txt2);font-variant-numeric:tabular-nums;border:1px solid var(--line);border-radius:999px;padding:.05rem .45rem;white-space:nowrap}
+.v-desc{margin:.35rem 0 0;font-size:.81rem;color:var(--txt2)}
+.v-path{margin:.3rem 0 0;font-size:.8rem;color:var(--txt)}
+.signals{list-style:none;margin:.7rem 0 0;padding:0;display:flex;flex-direction:column;gap:.3rem}
+.signals li{display:flex;align-items:baseline;gap:.5rem;font-size:.77rem;border-top:1px dashed var(--line);padding-top:.3rem;flex-wrap:wrap}
+.signals li:first-child{border-top:0;padding-top:0}
+.sig-l{color:var(--txt3);flex:0 0 auto;min-width:5.2rem}
+.sig-t{color:var(--txt2);flex:1 1 auto;min-width:0}
+.chip{flex:0 0 auto;font-variant-numeric:tabular-nums;font-size:.71rem;border-radius:999px;padding:.05rem .4rem;border:1px solid var(--line);white-space:nowrap}
+.chip.g{color:var(--brand);border-color:color-mix(in srgb,var(--brand) 45%,transparent)}
+.chip.r{color:var(--txt2)}
+.chip.n{color:var(--txt3)}
+.costs .cost-grid{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.cost{border:1px solid var(--line);border-radius:10px;padding:.55rem .65rem;min-width:0}
+.cost.win{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 7%,transparent)}
+.cost-h{font-size:.81rem;font-weight:650;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.tag{font-size:.67rem;font-weight:600;color:var(--brand);border:1px solid color-mix(in srgb,var(--brand) 45%,transparent);border-radius:999px;padding:0 .35rem;display:none;white-space:nowrap}
+.cost.win .tag{display:inline}
+.cost ul{margin:.35rem 0 0;padding-left:1.05rem;font-size:.77rem;color:var(--txt2);display:flex;flex-direction:column;gap:.22rem}
+.rg-foot{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.rg-foot button{font:inherit;font-size:.79rem;padding:.35rem .7rem;border-radius:8px;border:1px solid var(--brand);background:var(--dsw-alias-button-primary-fill,var(--brand));color:var(--dsw-alias-label-primary-inverted,#fff);cursor:pointer}
+.rg-foot button:hover{opacity:.92}
+.foot-note{font-size:.72rem;color:var(--txt3);flex:1 1 15rem;min-width:0}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+
+<div class="rg-head">
+  <div class="rg-title">REST 还是 GraphQL：先看复杂度落在谁身上</div>
+  <div class="rg-sub">拨动你团队的真实条件，看天平往哪边倾</div>
+</div>
+
+<div class="rg-grid">
+  <section class="panel" aria-label="团队与产品情境">
+    <div class="panel-h">你的情境</div>
+    <div id="rgFacts"></div>
+  </section>
+
+  <section class="panel" aria-label="取舍结果">
+    <div class="panel-h">取舍天平</div>
+    <div class="bars" id="rgBars" role="img" aria-label="REST 与 GraphQL 的启发式契合度">
+      <div class="bar-row"><span class="bar-name">REST</span><div class="bar"><i class="fill rest" id="restBar"></i></div><span class="bar-val" id="restVal">–</span></div>
+      <div class="bar-row"><span class="bar-name">GraphQL</span><div class="bar"><i class="fill gq" id="gqBar"></i></div><span class="bar-val" id="gqVal">–</span></div>
+      <div class="bar-note">两条加起来是 100，表示“这份复杂度主要由谁承担”，不是打分排名。</div>
+    </div>
+    <div class="verdict" id="rgVerdict" aria-live="polite">
+      <div class="v-top"><span class="v-title" id="vTitle">–</span><span class="v-score" id="vScore">–</span></div>
+      <p class="v-desc" id="vDesc"></p>
+      <p class="v-path" id="vPath"></p>
+    </div>
+    <ul class="signals" id="rgSignals"></ul>
+  </section>
+</div>
+
+<section class="panel costs" aria-label="两种选择的代价">
+  <div class="panel-h">选了以后，账单长这样</div>
+  <div class="cost-grid">
+    <div class="cost" id="costRest">
+      <div class="cost-h">选 REST 你要付 <span class="tag" id="tagRest"></span></div>
+      <ul>
+        <li>一个屏幕要的数据可能拆成 2–4 次往返，客户端做拼装</li>
+        <li>字段演进靠版本号/兼容字段，文档容易和实现漂移</li>
+        <li>客户端一多，后端被迫长出“给 iOS 的字段”“给运营端的字段”</li>
+      </ul>
+    </div>
+    <div class="cost" id="costGq">
+      <div class="cost-h">选 GraphQL 你要付 <span class="tag" id="tagGq"></span></div>
+      <ul>
+        <li>schema 治理是长期工作：命名、废弃、向后兼容</li>
+        <li>N+1 要 DataLoader，还要加查询深度/复杂度限流</li>
+        <li>HTTP 缓存失效，得靠持久化查询 + 客户端规范化缓存</li>
+        <li>错误码、监控、字段级授权都要重建一套</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="rg-foot">
+  <button id="rgAsk" type="button">按这组参数给我一份落地清单</button>
+  <span class="foot-note">两端都不免费：REST 把复杂度推给客户端和后端分支，GraphQL 把复杂度收到服务端平台层。</span>
+</div>
+
+<script>
+(function(){
+  var FACTS=[
+    {key:'clients',label:'客户端数量与差异',def:'one',opts:[
+      {v:'one',t:'1 个自研 App',s:-2},
+      {v:'few',t:'2–3 个端（iOS/Android/Web）',s:1},
+      {v:'many',t:'多端 + 外部/合作方',s:3}]},
+    {key:'churn',label:'界面/需求迭代节奏',def:'mid',opts:[
+      {v:'slow',t:'季度级，改动少',s:-1},
+      {v:'mid',t:'每周都在改',s:1},
+      {v:'fast',t:'几乎每天，按屏改',s:2}]},
+    {key:'net',label:'移动端弱网与流量',def:'tight',opts:[
+      {v:'ok',t:'不是主要矛盾',s:0},
+      {v:'tight',t:'敏感，怕多轮往返',s:2}]},
+    {key:'cache',label:'HTTP/CDN 缓存依赖',def:'some',opts:[
+      {v:'strong',t:'强依赖 CDN/ETag',s:-2},
+      {v:'some',t:'一般',s:0},
+      {v:'weak',t:'基本是鉴权动态数据',s:1}]},
+    {key:'ops',label:'平台人力',def:'none',opts:[
+      {v:'none',t:'0 人，后端还要写业务',s:-3},
+      {v:'half',t:'能腾出半个人',s:0},
+      {v:'one',t:'有 1 人肯长期维护',s:2}]},
+    {key:'agg',label:'后端数据来源',def:'mono',opts:[
+      {v:'mono',t:'单服务/单库',s:-1},
+      {v:'multi',t:'3 个以上服务要聚合',s:2}]}
+  ];
+
+  var VERDICTS=[
+    {min:5,key:'gq',title:'GraphQL 更合适',desc:'客户端差异和迭代压力已经超过维护一张 schema 的代价，值得把它当平台来建。',path:'做法：网关 + 持久化查询白名单 + DataLoader，从最高频的聚合场景切入。'},
+    {min:2,key:'gq',title:'倾向 GraphQL，但要配治理',desc:'收益成立，前提是查询限流、缓存策略和 schema 治理有人长期负责。',path:'做法：先用一个 BFF 式网关验证，再逐步收编其它客户端的调用。'},
+    {min:-1,key:'mid',title:'REST + 薄 BFF 最划算',desc:'先用聚合端点把多轮请求压下去，等客户端真的分化了再上图也不迟。',path:'做法：按屏幕设计聚合端点，保留 HTTP 缓存、状态码和成熟监控。'},
+    {min:-99,key:'rest',title:'REST 优先，别急着加抽象',desc:'单端、变化可控时，GraphQL 带来的主要是只有你在维护的一层额外复杂度。',path:'做法：版本化 URL + 明确字段契约 + CDN/ETag，把缓存红利吃干净。'}
+  ];
+
+  var wrap=document.getElementById('rgFacts');
+  FACTS.forEach(function(f){
+    var box=document.createElement('div'); box.className='fact';
+    var lab=document.createElement('div'); lab.className='fact-label'; lab.textContent=f.label;
+    var row=document.createElement('div'); row.className='opts';
+    f.opts.forEach(function(o){
+      var l=document.createElement('label'); l.className='opt';
+      var i=document.createElement('input');
+      i.type='radio'; i.name='rg-'+f.key; i.value=o.v; i.checked=(o.v===f.def);
+      var s=document.createElement('span'); s.textContent=o.t;
+      l.appendChild(i); l.appendChild(s); row.appendChild(l);
+    });
+    box.appendChild(lab); box.appendChild(row); wrap.appendChild(box);
+  });
+
+  var restBar=document.getElementById('restBar'), gqBar=document.getElementById('gqBar');
+  var restVal=document.getElementById('restVal'), gqVal=document.getElementById('gqVal');
+  var bars=document.getElementById('rgBars'), signals=document.getElementById('rgSignals');
+  var vTitle=document.getElementById('vTitle'), vDesc=document.getElementById('vDesc'), vPath=document.getElementById('vPath'), vScore=document.getElementById('vScore');
+  var costRest=document.getElementById('costRest'), costGq=document.getElementById('costGq');
+  var tagRest=document.getElementById('tagRest'), tagGq=document.getElementById('tagGq');
+
+  function selected(){
+    var total=0, rows=[];
+    FACTS.forEach(function(f){
+      var inp=document.querySelector('input[name="rg-'+f.key+'"]:checked');
+      var val=inp?inp.value:f.def, hit=null;
+      f.opts.forEach(function(o){ if(o.v===val){ hit=o; } });
+      total+=hit.s;
+      rows.push({label:f.label,text:hit.t,s:hit.s});
+    });
+    return {total:total,rows:rows};
+  }
+
+  function render(){
+    var r=selected(), s=r.total;
+    var frac=Math.max(.05,Math.min(.95,.5+s/18));
+    var gq=Math.round(frac*100), rest=100-gq;
+    gqBar.style.width=gq+'%'; restBar.style.width=rest+'%';
+    gqVal.textContent=gq+' / 100'; restVal.textContent=rest+' / 100';
+    bars.setAttribute('aria-label','REST 契合度 '+rest+'，GraphQL 契合度 '+gq+'，净倾向 '+(s>=0?'+':'')+s);
+
+    var v=VERDICTS.filter(function(x){return s>=x.min;})[0];
+    vTitle.textContent=v.title; vDesc.textContent=v.desc; vPath.textContent=v.path;
+    vScore.textContent='净倾向 '+((s>=0?'+':'')+s)+'（正=GraphQL）';
+
+    signals.innerHTML='';
+    r.rows.forEach(function(x){
+      var li=document.createElement('li');
+      var a=document.createElement('span'); a.className='sig-l'; a.textContent=x.label;
+      var b=document.createElement('span'); b.className='sig-t'; b.textContent=x.text;
+      var c=document.createElement('span');
+      c.className='chip '+(x.s>0?'g':(x.s<0?'r':'n'));
+      c.textContent=x.s>0?('推向 GraphQL +'+x.s):(x.s<0?('推向 REST '+x.s):'中性');
+      li.appendChild(a); li.appendChild(b); li.appendChild(c); signals.appendChild(li);
+    });
+
+    if(v.key==='gq'){ costGq.className='cost win'; costRest.className='cost'; tagGq.textContent='你要付的账单'; }
+    else if(v.key==='rest'){ costRest.className='cost win'; costGq.className='cost'; tagRest.textContent='你要付的账单'; }
+    else { costRest.className='cost win'; costGq.className='cost win'; tagRest.textContent='两边都要付一点'; tagGq.textContent='两边都要付一点'; }
+  }
+
+  wrap.addEventListener('change', render);
+  render();
+
+  document.getElementById('rgAsk').addEventListener('click', function(){
+    if(!(window.dshWidget&&window.dshWidget.sendPrompt)) return;
+    var parts=FACTS.map(function(f){
+      var inp=document.querySelector('input[name="rg-'+f.key+'"]:checked');
+      var val=inp?inp.value:f.def, hit=null;
+      f.opts.forEach(function(o){ if(o.v===val){ hit=o; } });
+      return f.label+'：'+hit.t;
+    });
+    window.dshWidget.sendPrompt('我们是一个小团队，要给移动端提供数据接口。我的情境是——'+parts.join('；')+'。请按这组条件，给出一份 REST 或 GraphQL 的具体落地清单（接口分层、缓存策略、演进方式、需要几个人维护），并指出最容易被低估的那项成本。');
+  });
+})();
+</script>
+</div>

@@ -1,0 +1,139 @@
+<style>
+  .viz-wrap{font-family:inherit;color:var(--dsw-alias-label-primary,#111);background:var(--dsw-alias-bg-base,transparent);border:1px solid var(--dsw-alias-border-l1,rgba(0,0,0,.12));border-radius:12px;padding:14px 16px 12px;max-width:600px;box-sizing:border-box}
+  .viz-head{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;margin-bottom:4px}
+  .viz-title{font-size:14px;font-weight:600}
+  .viz-sub{font-size:12px;color:var(--dsw-alias-label-tertiary,#6b7280)}
+  #chart{display:block;width:100%;height:auto}
+  .barwrap{cursor:pointer;outline:none}
+  .barwrap .bar{fill:var(--dsw-alias-brand-primary,#2563eb);fill-opacity:.32;transition:fill-opacity .15s ease}
+  .barwrap:hover .bar{fill-opacity:.58}
+  .barwrap:focus-visible .bar{fill-opacity:.58}
+  .barwrap.sel .bar{fill-opacity:1}
+  .barwrap .sel-ring{fill:none;stroke:var(--dsw-alias-brand-primary,#2563eb);stroke-width:2;opacity:0;transition:opacity .15s ease}
+  .barwrap.sel .sel-ring{opacity:1}
+  .val{font-size:11px;font-variant-numeric:tabular-nums;fill:var(--dsw-alias-label-secondary,#4b5563)}
+  .val.sel{fill:var(--dsw-alias-brand-primary,#2563eb);font-weight:700}
+  .tick{font-size:11px;font-variant-numeric:tabular-nums;fill:var(--dsw-alias-label-tertiary,#6b7280)}
+  .grid{stroke:var(--dsw-alias-border-l1,rgba(0,0,0,.1));stroke-width:1}
+  .axis-title{font-size:11px;fill:var(--dsw-alias-label-tertiary,#6b7280)}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin-top:10px}
+  .readout{font-size:13px;min-width:0;flex:1 1 180px}
+  .readout b{font-variant-numeric:tabular-nums}
+  #analyze{background:var(--dsw-alias-button-primary-fill,#2563eb);color:var(--dsw-alias-label-primary-inverted,#fff);border:1px solid transparent;border-radius:8px;padding:7px 14px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+  #analyze:disabled{opacity:.45;cursor:not-allowed}
+  .hint{font-size:12px;color:var(--dsw-alias-label-tertiary,#6b7280);margin-top:8px}
+  @media (prefers-reduced-motion: reduce){.barwrap .bar,.barwrap .sel-ring{transition:none}}
+</style>
+<div class="viz-wrap">
+  <div class="viz-head">
+    <span class="viz-title">7 天错误率</span>
+    <span class="viz-sub">单位：%　点击柱子选中某一天</span>
+  </div>
+  <svg id="chart" viewBox="0 0 520 248" role="group" aria-label="7天错误率柱状图，可选择某一天"></svg>
+  <div class="row">
+    <div class="readout" id="readout" aria-live="polite">未选择日期</div>
+    <button id="analyze" type="button" disabled>分析所选日期</button>
+  </div>
+  <div class="hint" id="hint">选中某一天后，点击“分析所选日期”会把这天的日期与错误率发给我做进一步分析。</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script>
+(function(){
+  var data=[{day:1,rate:0.4},{day:2,rate:0.5},{day:3,rate:0.3},{day:4,rate:2.8},{day:5,rate:0.6},{day:6,rate:0.5},{day:7,rate:0.4}];
+  var readout=document.getElementById("readout");
+  var hint=document.getElementById("hint");
+  var btn=document.getElementById("analyze");
+  var selected=null;
+
+  var svg=d3.select("#chart");
+  var W=520,H=248,m={top:28,right:16,bottom:36,left:44};
+  var iw=W-m.left-m.right, ih=H-m.top-m.bottom;
+  var g=svg.append("g").attr("transform","translate("+m.left+","+m.top+")");
+  var x=d3.scaleBand().domain(data.map(function(d){return d.day;})).range([0,iw]).paddingInner(0.4).paddingOuter(0.25);
+  var y=d3.scaleLinear().domain([0,3]).range([ih,0]);
+  var ticks=[0,1,2,3];
+
+  var grid=g.append("g");
+  ticks.forEach(function(t){
+    grid.append("line").attr("class","grid").attr("x1",0).attr("x2",iw).attr("y1",y(t)).attr("y2",y(t));
+    grid.append("text").attr("class","tick").attr("x",-8).attr("y",y(t)).attr("dy","0.32em").attr("text-anchor","end").text(t);
+  });
+  grid.append("text").attr("class","axis-title").attr("x",-36).attr("y",-10).text("错误率 %");
+
+  var wraps=g.append("g").selectAll("g").data(data).join("g")
+    .attr("class","barwrap")
+    .attr("role","button")
+    .attr("tabindex",0)
+    .attr("aria-pressed","false")
+    .attr("aria-label",function(d){return "第"+d.day+"天，错误率 "+d.rate.toFixed(1)+"%";})
+    .attr("transform",function(d){return "translate("+x(d.day)+",0)";});
+
+  wraps.append("rect").attr("class","bar")
+    .attr("x",0).attr("y",function(d){return y(d.rate);})
+    .attr("width",x.bandwidth()).attr("height",function(d){return ih-y(d.rate);})
+    .attr("rx",4);
+
+  wraps.append("rect").attr("class","sel-ring")
+    .attr("x",-3).attr("y",function(d){return y(d.rate)-3;})
+    .attr("width",x.bandwidth()+6).attr("height",function(d){return ih-y(d.rate)+3;})
+    .attr("rx",6);
+
+  wraps.append("rect").attr("class","hit")
+    .attr("x",-6).attr("y",0).attr("width",x.bandwidth()+12).attr("height",ih)
+    .attr("fill","transparent");
+
+  var labels=wraps.append("text").attr("class","val")
+    .attr("x",x.bandwidth()/2).attr("y",function(d){return y(d.rate)-7;})
+    .attr("text-anchor","middle")
+    .text(function(d){return d.rate.toFixed(1)+"%";});
+
+  g.append("g").selectAll("text").data(data).join("text")
+    .attr("class","tick")
+    .attr("x",function(d){return x(d.day)+x.bandwidth()/2;})
+    .attr("y",ih+16)
+    .attr("text-anchor","middle")
+    .text(function(d){return "第"+d.day+"天";});
+
+  function find(day){for(var i=0;i<data.length;i++){if(data[i].day===day){return data[i];}}return null;}
+
+  function select(day){
+    selected=day;
+    wraps.classed("sel",function(d){return d.day===day;})
+         .attr("aria-pressed",function(d){return d.day===day?"true":"false";});
+    labels.classed("sel",function(d){return d.day===day;});
+    var d=find(day);
+    if(d){
+      readout.innerHTML="已选择：第 <b>"+d.day+"</b> 天 · 错误率 <b>"+d.rate.toFixed(1)+"%</b>";
+      hint.textContent="点击“分析所选日期”，我会收到：第 "+d.day+" 天，错误率 "+d.rate.toFixed(1)+"%。";
+    }else{
+      readout.textContent="未选择日期";
+      hint.textContent="选中某一天后，点击“分析所选日期”会把这天的日期与错误率发给我做进一步分析。";
+    }
+    btn.disabled = !d;
+  }
+
+  wraps.on("click",function(event,d){
+    select(selected===d.day?null:d.day);
+  });
+  wraps.on("keydown",function(event,d){
+    if(event.key==="Enter"||event.key===" "||event.key==="Spacebar"){
+      event.preventDefault();
+      select(selected===d.day?null:d.day);
+    }
+  });
+
+  btn.addEventListener("click",function(){
+    var d=find(selected);
+    if(!d){return;}
+    var msg="我选择的日期是第 "+d.day+" 天，错误率 "+d.rate.toFixed(1)+"%。请分析这一天错误率明显偏高的原因，并给出排查建议。";
+    if(window.dshWidget&&typeof window.dshWidget.sendPrompt==="function"){
+      window.dshWidget.sendPrompt(msg);
+      hint.textContent="已发送：第 "+d.day+" 天，错误率 "+d.rate.toFixed(1)+"%。";
+    }else{
+      hint.textContent="当前环境无法发送追问。";
+    }
+  });
+
+  select(null);
+})();
+</script>

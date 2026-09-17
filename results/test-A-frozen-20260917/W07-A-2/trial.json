@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W07-A-2",
+  "roundId": "test-A-frozen-20260917",
+  "caseId": "W07",
+  "arm": "A",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "在回复里做个可以单步和重置的指数退避演示：最多请求4次，第1次失败后等待1秒，第2次失败后等待2秒，第3次成功就停止。让我看清每次结果、下一次等待和累计等待；这是示意，不实际发网络请求。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "指数退避重试演示（单步 / 重置）",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/test-A-frozen-20260917/W07-A-2/widget-1.source.html",
+      "preview": "results/test-A-frozen-20260917/W07-A-2/widget-1.html",
+      "sha256": "53737afa72b4c9cd0c3232520450f8248924ce638ab4f85affdf97f48552c3d3",
+      "bytes": 12142
+    }
+  ],
+  "final": "上面是可交互的指数退避演示（纯示意，不发网络请求）：\n\n**怎么用**\n- **单步**：点一次「发起第 N 次请求」，就走完一次请求；失败后会自动播放该次的退避等待（真实 1 秒 / 2 秒，带倒计时），等待期间按钮显示「等待中…」。\n- **重置**：任何时候回到初始状态，四个请求位、时间轴、累计等待全部清零。\n\n**三个读数分别看**\n- **本次结果**：第 1、2 次为失败，第 3 次成功，并同步在对应请求卡片上标红/标蓝。\n- **下一次等待**：失败瞬间显示 1 秒 / 2 秒；等待进行中会附带剩余时间；成功后显示「不再重试」。\n- **累计等待**：下方的 0→3 秒时间轴实时增长，1 秒处有刻度线，直观看到第二次等待是第一道的两倍。\n\n第 4 次请求位始终标记为「备用 / 未使用」——因为第 3 次已经成功就停止，不会用到 4 次上限。若系统开启了「减少动态效果」，等待会直接结算而不播放倒计时。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_6ecjPrIHTDyM4HTH6gBf4005",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_TzM89hOaynk56BF7jkpL0467",
+        "argumentsSha256": "7088902a91f03cb1993ee2b302ad21bbed2907f9cc8b6017d346740aea4f10ae",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_VfsRxNvi4scswJh6H1qa0904",
+        "argumentsSha256": "ac4ca12955dc6a9c398135a34c7e4f5b531d70439709e4fb42156d455d85c34f",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_YwBUSFIrhU8KoMjptOzd0247",
+        "argumentsSha256": "dd513527b64a50f410d34bb2aa5b73a03700ee00a0644db9110b64a0adffea5c",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "391b59f213ae0c996f81f7efa788846e3a1b93251949966a5c9267490cc032cb"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "bde842fd23e66fb7012a9b981088411b8f8a6115bbe4e6ad146588a0ee0ac3c6"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "f33ae45d8052a582821396b645a5b08190f6f3c8d2b4f513449bb1367ebb4950"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "95df92e0fadbfd4a2e69a7d0e3a59490ac3d5536bb15f0fb21ae4e45d113e531"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8327,
+    "outputTokens": 15659,
+    "cacheReadTokens": 40832,
+    "cacheWriteTokens": 0,
+    "totalTokens": 64818
+  },
+  "elapsedSeconds": 61.851,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "7dd5ee0fd4c06ffd1f375b147ee33c080a78e8124bb88b75e71e8d14f2350059",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "ecda760701c7b9087e556f77b0c01cf8cf4ecdffd06462da247f9287c59a148f"
+}

@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W05-D-2",
+  "roundId": "dev-D-receipt-20260917",
+  "caseId": "W05",
+  "arm": "D",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "先在回复里让我试试一个数量选择器的手感：初始为2，每次增加或减少1，范围0到5，到达边界时禁用对应按钮。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "数量选择器（0–5）",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/dev-D-receipt-20260917/W05-D-2/widget-1.source.html",
+      "preview": "results/dev-D-receipt-20260917/W05-D-2/widget-1.html",
+      "sha256": "8e91d546f359f261bc747cd6816b8c4d27417658c088c9550955eeda6f264d90",
+      "bytes": 5113
+    }
+  ],
+  "final": "上面这个选择器可以直接点着试：初始为 2，每次 ±1，0–5 之间，到边界时对应按钮变灰不可点，下方色块同步显示当前档位。\n\n也支持键盘：聚焦后按方向键左右即可加减；如果想换成输入框、滚轮或滑块方式来对比手感，告诉我即可。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 18,
+        "callId": "call_00_Nu9tdP5BvlxbpvxBn8WL4160",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_Smt0e7UkrGTns36n9X4I1933",
+        "argumentsSha256": "3f1f4d803164e45e579e5cad2805766b4bfc778423caa51cf7013bd060b4f58b",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_7qBS8b4hqp0KINhvLmmd5517",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_cvjaEC7IYNXLvgIsdHOk8656",
+        "argumentsSha256": "474b631c69794f396e10954e6be3d5e3369220699518531b18ef0a870a2706ac",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/interaction.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "2c00d0c88eefeb86e8708664087cd40e9b0c22f603305af82be93deb6dd5a8b5",
+        "resultSha256": "2df7c360eb3914d490cbae596c7e828475e4e7085ecd0a2785e2f4d541e36597"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "f4c5b1c8ea3ee95a80d99fcf5af2389abc2603ac81407cbf45eb72f4101d0984"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 18,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "d74b76af8c6f5be9b0c347c67584f75988d8ab22c49fe15e0f20174a7f969e66"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "38d7ccd023e559354a09e32e785eceef903f510f89aafcb1892863a05d648d36"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8218,
+    "outputTokens": 2346,
+    "cacheReadTokens": 27776,
+    "cacheWriteTokens": 0,
+    "totalTokens": 38340
+  },
+  "elapsedSeconds": 11.781,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "09a1fdb8520f76aacf08fe2d725cefb00e0d6a3c4c57e6a4ec2829ddc4027135",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "173b834c9b182ef9b59d5ac9b77bf95eaf8c9db441dcd0b82a66745c05c27dda"
+}

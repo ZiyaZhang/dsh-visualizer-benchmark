@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 2,
+  "id": "N05-D-1",
+  "roundId": "test-D-frozen-20260917",
+  "caseId": "N05",
+  "arm": "D",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "创建一份独立的 sales.html，展示华东120、华南80、西部50的销售额对比，给我文件入口，方便在右侧预览并保存下来。",
+  "expectedRoute": "file",
+  "widgets": [],
+  "final": "已创建独立文件 `sales.html`（219 行，约 7.8 KB，纯静态、零依赖，双击即可打开）。\n\n**文件入口**\n- 路径：`[private path]/test-D-frozen-20260917/trials/N05-D-1/workspace/sales.html`\n- 相对入口：[sales.html](sales.html)　← 在右侧预览器中打开此文件即可实时查看\n\n**页面内容**\n- 三行横向条形图对比：华东 120、华南 80、西部 50（单位：万元）\n- 汇总卡片：总计 250 万元、区域数 3、最高区域 华东\n- 每行显示数值 + 占比（48.0% / 32.0% / 20.0%），底部有 0–120 刻度轴\n- 条形带入场动画，按最大值 120 归一化，比例直观\n\n**保存方式（两种）**\n1. 页面右下角「保存为图片」按钮：用内置 Canvas 现场绘制高清 PNG（含标题、数值、占比），直接下载 `销售额对比.png`，无需任何外部库。\n2. 直接用浏览器 `Cmd/Ctrl + S` 保存整个页面，或 `Cmd/Ctrl + P` 打印为 PDF。\n\n如需改成纵向柱状图、加同比数据或换配色，告诉我即可调整。",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "No inline widget attempt; verify the requested delivery form with check-dsh.py"
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case evaluates routing only"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 19,
+        "callId": "call_00_VrxEczYjAYLKP2qsWzfb9805",
+        "argumentsSha256": "0ad4a26770c38364e505516cf717419c94dd7c64fb7196cadb56578ee26522c0",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "write",
+        "loggedName": "write",
+        "callSeq": 25,
+        "callId": "call_00_KsUR8Rar5Jl8oeoPeUNy9236",
+        "argumentsSha256": "d62d5a0bf6017883291ec5d741af9f29cc9466d14f19c6da3d40a7371e1ae8fa",
+        "wrapped": false,
+        "resultSeq": 26,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 31,
+        "callId": "call_00_sO8tQN8sT7lhZyp9wTl69379",
+        "argumentsSha256": "96cf536bee03f4ac4c5f8b02a0f90ec54b2236d135f39f360dcf9b81eb9e66bb",
+        "wrapped": false,
+        "resultSeq": 32,
+        "error": false
+      }
+    ],
+    "referencesRead": [],
+    "skillLoads": [],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "76dd7914ca87b844c013eb7fb5974bb590269c8e08105392b444c6a2f56bd274"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 7433,
+    "outputTokens": 3603,
+    "cacheReadTokens": 30080,
+    "cacheWriteTokens": 0,
+    "totalTokens": 41116
+  },
+  "elapsedSeconds": 16.341,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "3ea818084e01d6cd067fe1be1dcc15839ea521ded94302d22a9e6bd7abff698b",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [
+    {
+      "path": "sales.html",
+      "beforeSha256": null,
+      "afterSha256": "e435f5f331e931e95c255de34fc6b969b0f2e5c60be3d259ccb4ee1b6bdb962a"
+    }
+  ],
+  "artifactSetSha256": "8afe3ddd6099cc5628f77c4bda28268ec7a2bf8a5104deba99441f4a82b42aaa"
+}

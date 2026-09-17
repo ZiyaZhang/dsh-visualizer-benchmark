@@ -1,0 +1,327 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "E02-D-2",
+  "caseId": "E02",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 53,
+  "resultSeq": 54,
+  "casesPath": "results/test-D-frozen-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:22:06.602Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "not_applicable",
+      "reason": "No literal label oracle specified.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "小团队移动端接口选型天平\n\n按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n\n客户端种类\n只有 1 个 App\n2–3 个端，形态相近\n4 个以上，还在增加\n页面数据形状的变化\n基本稳定，一季度动几次\n每季度都有几次改动\n几乎每周都在改\n一个屏幕的数据来源\n基本对应一个接口\n常要拼 2–4 个接口\n大量跨模块拼装，字段还要各自裁剪\nHTTP 缓存 / CDN / 网关复用\n很重要，靠它扛量\n有就行，不指望\n不太在意\n团队 GraphQL 经验\n没人写过\n有人写过，没形成基建\n熟练，愿意建网关与可观测\n接口形态\n以查询为主\n读写各半\n大量写、事务、文件上传\n混合，按路径分\nREST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\nREST 更合适\nGraphQL 更合适\n倾向度 +8 （−100 纯 REST … +100 纯 GraphQL）\n权重最大的两个因素\n+6\n一个屏幕的数据来源：常要拼 2–4 个接口\n+4\n客户端种类：2–3 个端，形态相近\n把你拉回 REST 的信号\n-4\nHTTP 缓存 / CDN / 网关复用：有就行，不指望\n按这套条件给具体方案\n重置\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 519,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "选型倾向：混合，倾向度 8，负一百为纯 REST，正一百为纯 GraphQL"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "0f18132c75afbd54781808a74c0a94b7",
+          "payload": {},
+          "at": 84.09999990463257
+        },
+        {
+          "type": "rendered",
+          "channel": "0f18132c75afbd54781808a74c0a94b7",
+          "payload": {},
+          "at": 91.69999980926514
+        },
+        {
+          "type": "resize",
+          "channel": "0f18132c75afbd54781808a74c0a94b7",
+          "payload": {
+            "height": 519
+          },
+          "at": 91.69999980926514
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"小团队移动端接口选型天平\" [level=3]\n- paragraph: 按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n- text: 客户端种类\n- combobox \"客户端种类\":\n  - option \"只有 1 个 App\"\n  - option \"2–3 个端，形态相近\" [selected]\n  - option \"4 个以上，还在增加\"\n- text: 页面数据形状的变化\n- combobox \"页面数据形状的变化\":\n  - option \"基本稳定，一季度动几次\"\n  - option \"每季度都有几次改动\" [selected]\n  - option \"几乎每周都在改\"\n- text: 一个屏幕的数据来源\n- combobox \"一个屏幕的数据来源\":\n  - option \"基本对应一个接口\"\n  - option \"常要拼 2–4 个接口\" [selected]\n  - option \"大量跨模块拼装，字段还要各自裁剪\"\n- text: HTTP 缓存 / CDN / 网关复用\n- combobox \"HTTP 缓存 / CDN / 网关复用\":\n  - option \"很重要，靠它扛量\"\n  - option \"有就行，不指望\" [selected]\n  - option \"不太在意\"\n- text: 团队 GraphQL 经验\n- combobox \"团队 GraphQL 经验\":\n  - option \"没人写过\"\n  - option \"有人写过，没形成基建\" [selected]\n  - option \"熟练，愿意建网关与可观测\"\n- text: 接口形态\n- combobox \"接口形态\":\n  - option \"以查询为主\"\n  - option \"读写各半\" [selected]\n  - option \"大量写、事务、文件上传\"\n- text: 混合，按路径分 REST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\n- img \"选型倾向：混合，倾向度 8，负一百为纯 REST，正一百为纯 GraphQL\"\n- text: REST 更合适 GraphQL 更合适 倾向度 +8 （−100 纯 REST … +100 纯 GraphQL）\n- heading \"权重最大的两个因素\" [level=4]\n- list:\n  - listitem: +6 一个屏幕的数据来源：常要拼 2–4 个接口\n  - listitem: +4 客户端种类：2–3 个端，形态相近\n- heading \"把你拉回 REST 的信号\" [level=4]\n- list:\n  - listitem: \"-4 HTTP 缓存 / CDN / 网关复用：有就行，不指望\"\n- button \"按这套条件给具体方案\"\n- button \"重置\""
+    },
+    {
+      "text": "小团队移动端接口选型天平\n\n按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n\n客户端种类\n只有 1 个 App\n2–3 个端，形态相近\n4 个以上，还在增加\n页面数据形状的变化\n基本稳定，一季度动几次\n每季度都有几次改动\n几乎每周都在改\n一个屏幕的数据来源\n基本对应一个接口\n常要拼 2–4 个接口\n大量跨模块拼装，字段还要各自裁剪\nHTTP 缓存 / CDN / 网关复用\n很重要，靠它扛量\n有就行，不指望\n不太在意\n团队 GraphQL 经验\n没人写过\n有人写过，没形成基建\n熟练，愿意建网关与可观测\n接口形态\n以查询为主\n读写各半\n大量写、事务、文件上传\n混合，按路径分\nREST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\nREST 更合适\nGraphQL 更合适\n倾向度 +8 （−100 纯 REST … +100 纯 GraphQL）\n权重最大的两个因素\n+6\n一个屏幕的数据来源：常要拼 2–4 个接口\n+4\n客户端种类：2–3 个端，形态相近\n把你拉回 REST 的信号\n-4\nHTTP 缓存 / CDN / 网关复用：有就行，不指望\n按这套条件给具体方案\n重置\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 922,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "选型倾向：混合，倾向度 8，负一百为纯 REST，正一百为纯 GraphQL"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "f7a82b65aa4bc143abbafbb03aa0bc62",
+          "payload": {},
+          "at": 676.5
+        },
+        {
+          "type": "rendered",
+          "channel": "f7a82b65aa4bc143abbafbb03aa0bc62",
+          "payload": {},
+          "at": 677.7999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "f7a82b65aa4bc143abbafbb03aa0bc62",
+          "payload": {
+            "height": 922
+          },
+          "at": 677.7999999523163
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- heading \"小团队移动端接口选型天平\" [level=3]\n- paragraph: 按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n- text: 客户端种类\n- combobox \"客户端种类\":\n  - option \"只有 1 个 App\"\n  - option \"2–3 个端，形态相近\" [selected]\n  - option \"4 个以上，还在增加\"\n- text: 页面数据形状的变化\n- combobox \"页面数据形状的变化\":\n  - option \"基本稳定，一季度动几次\"\n  - option \"每季度都有几次改动\" [selected]\n  - option \"几乎每周都在改\"\n- text: 一个屏幕的数据来源\n- combobox \"一个屏幕的数据来源\":\n  - option \"基本对应一个接口\"\n  - option \"常要拼 2–4 个接口\" [selected]\n  - option \"大量跨模块拼装，字段还要各自裁剪\"\n- text: HTTP 缓存 / CDN / 网关复用\n- combobox \"HTTP 缓存 / CDN / 网关复用\":\n  - option \"很重要，靠它扛量\"\n  - option \"有就行，不指望\" [selected]\n  - option \"不太在意\"\n- text: 团队 GraphQL 经验\n- combobox \"团队 GraphQL 经验\":\n  - option \"没人写过\"\n  - option \"有人写过，没形成基建\" [selected]\n  - option \"熟练，愿意建网关与可观测\"\n- text: 接口形态\n- combobox \"接口形态\":\n  - option \"以查询为主\"\n  - option \"读写各半\" [selected]\n  - option \"大量写、事务、文件上传\"\n- text: 混合，按路径分 REST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\n- img \"选型倾向：混合，倾向度 8，负一百为纯 REST，正一百为纯 GraphQL\"\n- text: REST 更合适 GraphQL 更合适 倾向度 +8 （−100 纯 REST … +100 纯 GraphQL）\n- heading \"权重最大的两个因素\" [level=4]\n- list:\n  - listitem: +6 一个屏幕的数据来源：常要拼 2–4 个接口\n  - listitem: +4 客户端种类：2–3 个端，形态相近\n- heading \"把你拉回 REST 的信号\" [level=4]\n- list:\n  - listitem: \"-4 HTTP 缓存 / CDN / 网关复用：有就行，不指望\"\n- button \"按这套条件给具体方案\"\n- button \"重置\""
+    },
+    {
+      "text": "小团队移动端接口选型天平\n\n按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n\n客户端种类\n只有 1 个 App\n2–3 个端，形态相近\n4 个以上，还在增加\n页面数据形状的变化\n基本稳定，一季度动几次\n每季度都有几次改动\n几乎每周都在改\n一个屏幕的数据来源\n基本对应一个接口\n常要拼 2–4 个接口\n大量跨模块拼装，字段还要各自裁剪\nHTTP 缓存 / CDN / 网关复用\n很重要，靠它扛量\n有就行，不指望\n不太在意\n团队 GraphQL 经验\n没人写过\n有人写过，没形成基建\n熟练，愿意建网关与可观测\n接口形态\n以查询为主\n读写各半\n大量写、事务、文件上传\n混合，按路径分\nREST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\nREST 更合适\nGraphQL 更合适\n倾向度 +8 （−100 纯 REST … +100 纯 GraphQL）\n权重最大的两个因素\n+6\n一个屏幕的数据来源：常要拼 2–4 个接口\n+4\n客户端种类：2–3 个端，形态相近\n把你拉回 REST 的信号\n-4\nHTTP 缓存 / CDN / 网关复用：有就行，不指望\n按这套条件给具体方案\n重置\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 519,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "选型倾向：混合，倾向度 8，负一百为纯 REST，正一百为纯 GraphQL"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "7006f06adf21d8c4cc73d48c39ac2722",
+          "payload": {},
+          "at": 1243.5999999046326
+        },
+        {
+          "type": "rendered",
+          "channel": "7006f06adf21d8c4cc73d48c39ac2722",
+          "payload": {},
+          "at": 1244.5
+        },
+        {
+          "type": "resize",
+          "channel": "7006f06adf21d8c4cc73d48c39ac2722",
+          "payload": {
+            "height": 519
+          },
+          "at": 1244.5
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- heading \"小团队移动端接口选型天平\" [level=3]\n- paragraph: 按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n- text: 客户端种类\n- combobox \"客户端种类\":\n  - option \"只有 1 个 App\"\n  - option \"2–3 个端，形态相近\" [selected]\n  - option \"4 个以上，还在增加\"\n- text: 页面数据形状的变化\n- combobox \"页面数据形状的变化\":\n  - option \"基本稳定，一季度动几次\"\n  - option \"每季度都有几次改动\" [selected]\n  - option \"几乎每周都在改\"\n- text: 一个屏幕的数据来源\n- combobox \"一个屏幕的数据来源\":\n  - option \"基本对应一个接口\"\n  - option \"常要拼 2–4 个接口\" [selected]\n  - option \"大量跨模块拼装，字段还要各自裁剪\"\n- text: HTTP 缓存 / CDN / 网关复用\n- combobox \"HTTP 缓存 / CDN / 网关复用\":\n  - option \"很重要，靠它扛量\"\n  - option \"有就行，不指望\" [selected]\n  - option \"不太在意\"\n- text: 团队 GraphQL 经验\n- combobox \"团队 GraphQL 经验\":\n  - option \"没人写过\"\n  - option \"有人写过，没形成基建\" [selected]\n  - option \"熟练，愿意建网关与可观测\"\n- text: 接口形态\n- combobox \"接口形态\":\n  - option \"以查询为主\"\n  - option \"读写各半\" [selected]\n  - option \"大量写、事务、文件上传\"\n- text: 混合，按路径分 REST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\n- img \"选型倾向：混合，倾向度 8，负一百为纯 REST，正一百为纯 GraphQL\"\n- text: REST 更合适 GraphQL 更合适 倾向度 +8 （−100 纯 REST … +100 纯 GraphQL）\n- heading \"权重最大的两个因素\" [level=4]\n- list:\n  - listitem: +6 一个屏幕的数据来源：常要拼 2–4 个接口\n  - listitem: +4 客户端种类：2–3 个端，形态相近\n- heading \"把你拉回 REST 的信号\" [level=4]\n- list:\n  - listitem: \"-4 HTTP 缓存 / CDN / 网关复用：有就行，不指望\"\n- button \"按这套条件给具体方案\"\n- button \"重置\""
+    },
+    {
+      "text": "小团队移动端接口选型天平\n\n按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n\n客户端种类\n只有 1 个 App\n2–3 个端，形态相近\n4 个以上，还在增加\n页面数据形状的变化\n基本稳定，一季度动几次\n每季度都有几次改动\n几乎每周都在改\n一个屏幕的数据来源\n基本对应一个接口\n常要拼 2–4 个接口\n大量跨模块拼装，字段还要各自裁剪\nHTTP 缓存 / CDN / 网关复用\n很重要，靠它扛量\n有就行，不指望\n不太在意\n团队 GraphQL 经验\n没人写过\n有人写过，没形成基建\n熟练，愿意建网关与可观测\n接口形态\n以查询为主\n读写各半\n大量写、事务、文件上传\n混合，按路径分\nREST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\nREST 更合适\nGraphQL 更合适\n倾向度 +8 （−100 纯 REST … +100 纯 GraphQL）\n权重最大的两个因素\n+6\n一个屏幕的数据来源：常要拼 2–4 个接口\n+4\n客户端种类：2–3 个端，形态相近\n把你拉回 REST 的信号\n-4\nHTTP 缓存 / CDN / 网关复用：有就行，不指望\n按这套条件给具体方案\n重置\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 922,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "选型倾向：混合，倾向度 8，负一百为纯 REST，正一百为纯 GraphQL"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "8dc6b7ea99f2789739c69d5102d16bf0",
+          "payload": {},
+          "at": 1801.8999998569489
+        },
+        {
+          "type": "rendered",
+          "channel": "8dc6b7ea99f2789739c69d5102d16bf0",
+          "payload": {},
+          "at": 1803
+        },
+        {
+          "type": "resize",
+          "channel": "8dc6b7ea99f2789739c69d5102d16bf0",
+          "payload": {
+            "height": 922
+          },
+          "at": 1803
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- heading \"小团队移动端接口选型天平\" [level=3]\n- paragraph: 按实际情况选，右边给出倾向与理由。倾向度只是把“成本放在哪”显式化，不是评分排名。\n- text: 客户端种类\n- combobox \"客户端种类\":\n  - option \"只有 1 个 App\"\n  - option \"2–3 个端，形态相近\" [selected]\n  - option \"4 个以上，还在增加\"\n- text: 页面数据形状的变化\n- combobox \"页面数据形状的变化\":\n  - option \"基本稳定，一季度动几次\"\n  - option \"每季度都有几次改动\" [selected]\n  - option \"几乎每周都在改\"\n- text: 一个屏幕的数据来源\n- combobox \"一个屏幕的数据来源\":\n  - option \"基本对应一个接口\"\n  - option \"常要拼 2–4 个接口\" [selected]\n  - option \"大量跨模块拼装，字段还要各自裁剪\"\n- text: HTTP 缓存 / CDN / 网关复用\n- combobox \"HTTP 缓存 / CDN / 网关复用\":\n  - option \"很重要，靠它扛量\"\n  - option \"有就行，不指望\" [selected]\n  - option \"不太在意\"\n- text: 团队 GraphQL 经验\n- combobox \"团队 GraphQL 经验\":\n  - option \"没人写过\"\n  - option \"有人写过，没形成基建\" [selected]\n  - option \"熟练，愿意建网关与可观测\"\n- text: 接口形态\n- combobox \"接口形态\":\n  - option \"以查询为主\"\n  - option \"读写各半\" [selected]\n  - option \"大量写、事务、文件上传\"\n- text: 混合，按路径分 REST 管资源与写，GraphQL 或 BFF 只覆盖字段裁剪频繁、聚合重的读场景；不要同时上两套全量基建。\n- img \"选型倾向：混合，倾向度 8，负一百为纯 REST，正一百为纯 GraphQL\"\n- text: REST 更合适 GraphQL 更合适 倾向度 +8 （−100 纯 REST … +100 纯 GraphQL）\n- heading \"权重最大的两个因素\" [level=4]\n- list:\n  - listitem: +6 一个屏幕的数据来源：常要拼 2–4 个接口\n  - listitem: +4 客户端种类：2–3 个端，形态相近\n- heading \"把你拉回 REST 的信号\" [level=4]\n- list:\n  - listitem: \"-4 HTTP 缓存 / CDN / 网关复用：有就行，不指望\"\n- button \"按这套条件给具体方案\"\n- button \"重置\""
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "0f18132c75afbd54781808a74c0a94b7",
+      "payload": {},
+      "at": 84.09999990463257
+    },
+    {
+      "type": "rendered",
+      "channel": "0f18132c75afbd54781808a74c0a94b7",
+      "payload": {},
+      "at": 91.69999980926514
+    },
+    {
+      "type": "resize",
+      "channel": "0f18132c75afbd54781808a74c0a94b7",
+      "payload": {
+        "height": 519
+      },
+      "at": 91.69999980926514
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "c82b69570c40d8e7e91ed0d9b996ea055ababd684191650daeb683b0133ed683",
+  "previewSha256": "253db2d1f5a3f3d7c63353c375dae3616281945a545ce6fd143ff9497e52c644",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

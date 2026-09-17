@@ -1,0 +1,143 @@
+{
+  "scope": "Isolated unchanged source, explicit reviewer operations; not Host delivery.",
+  "states": [
+    {
+      "action": "initial",
+      "text": "5 节点离散热传导示意\n左端固定 100 °C · 右端固定 0 °C · 中间 3 节点初始 0 °C\n100.0\n节点 0\n0.0\n节点 1\n0.0\n节点 2\n0.0\n节点 3\n0.0\n节点 4\n左端固定\n右端固定\n位置 i = 0 … 4（等间距，间距 Δx）\n节点 0\n100.0°\n固定边界\n节点 1\n0.0°\n计算节点\n节点 2\n0.0°\n计算节点\n节点 3\n0.0°\n计算节点\n节点 4\n0.0°\n固定边界\n单步\n连续\n重置\nt = 0 / 60\n点击任一中间节点可看它这一步的代入过程。当前 t = 0；所有内部节点同时用 t = 0 时刻的温度算出 t = 1 时刻的值（同步更新，不是原地顺序更新）。\n两端为固定边界：温度始终 100 °C 与 0 °C，不参与更新。\n示意说明：这是把杆离散成 5 个节点的显式差分示意，并非连续杆的真实解；区域只用节点温度代表，节点之间用颜色渐变填充仅为视觉连接。",
+      "controls": [
+        {
+          "text": "单步",
+          "id": "hdStep",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "连续",
+          "id": "hdPlay",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "hdReset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "b7e78a2a016beb0b6d7574ed3be74076",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "b7e78a2a016beb0b6d7574ed3be74076",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "b7e78a2a016beb0b6d7574ed3be74076",
+          "type": "resize",
+          "payload": {
+            "height": 558
+          }
+        }
+      ]
+    },
+    {
+      "action": "#hdStep: 2",
+      "text": "5 节点离散热传导示意\n左端固定 100 °C · 右端固定 0 °C · 中间 3 节点初始 0 °C\n100.0\n节点 0\n37.5\n节点 1\n6.3\n节点 2\n0.0\n节点 3\n0.0\n节点 4\n左端固定\n右端固定\n位置 i = 0 … 4（等间距，间距 Δx）\n节点 0\n100.0°\n固定边界\n节点 1\n37.5°\n计算节点\n节点 2\n6.3°\n计算节点\n节点 3\n0.0°\n计算节点\n节点 4\n0.0°\n固定边界\n单步\n连续\n重置\nt = 2 / 60\n点击任一中间节点可看它这一步的代入过程。当前 t = 2；所有内部节点同时用 t = 2 时刻的温度算出 t = 3 时刻的值（同步更新，不是原地顺序更新）。\n两端为固定边界：温度始终 100 °C 与 0 °C，不参与更新。\n示意说明：这是把杆离散成 5 个节点的显式差分示意，并非连续杆的真实解；区域只用节点温度代表，节点之间用颜色渐变填充仅为视觉连接。",
+      "controls": [
+        {
+          "text": "单步",
+          "id": "hdStep",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "连续",
+          "id": "hdPlay",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "hdReset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "b7e78a2a016beb0b6d7574ed3be74076",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "b7e78a2a016beb0b6d7574ed3be74076",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "b7e78a2a016beb0b6d7574ed3be74076",
+          "type": "resize",
+          "payload": {
+            "height": 558
+          }
+        }
+      ]
+    },
+    {
+      "action": "#hdReset: 1",
+      "text": "5 节点离散热传导示意\n左端固定 100 °C · 右端固定 0 °C · 中间 3 节点初始 0 °C\n100.0\n节点 0\n0.0\n节点 1\n0.0\n节点 2\n0.0\n节点 3\n0.0\n节点 4\n左端固定\n右端固定\n位置 i = 0 … 4（等间距，间距 Δx）\n节点 0\n100.0°\n固定边界\n节点 1\n0.0°\n计算节点\n节点 2\n0.0°\n计算节点\n节点 3\n0.0°\n计算节点\n节点 4\n0.0°\n固定边界\n单步\n连续\n重置\nt = 0 / 60\n点击任一中间节点可看它这一步的代入过程。当前 t = 0；所有内部节点同时用 t = 0 时刻的温度算出 t = 1 时刻的值（同步更新，不是原地顺序更新）。\n两端为固定边界：温度始终 100 °C 与 0 °C，不参与更新。\n示意说明：这是把杆离散成 5 个节点的显式差分示意，并非连续杆的真实解；区域只用节点温度代表，节点之间用颜色渐变填充仅为视觉连接。",
+      "controls": [
+        {
+          "text": "单步",
+          "id": "hdStep",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "连续",
+          "id": "hdPlay",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "hdReset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "b7e78a2a016beb0b6d7574ed3be74076",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "b7e78a2a016beb0b6d7574ed3be74076",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "b7e78a2a016beb0b6d7574ed3be74076",
+          "type": "resize",
+          "payload": {
+            "height": 558
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 2,
+  "id": "E01-D-2",
+  "roundId": "dev-D-receipt-20260917",
+  "caseId": "E01",
+  "arm": "D",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "帮我理解一下 TCP 三次握手，为什么要三次？",
+  "expectedRoute": "optional",
+  "widgets": [
+    {
+      "title": "TCP 三次握手：分步演示",
+      "kind": "html",
+      "callSeq": 31,
+      "resultSeq": 32,
+      "replace": null,
+      "source": "results/dev-D-receipt-20260917/E01-D-2/widget-1.source.html",
+      "preview": "results/dev-D-receipt-20260917/E01-D-2/widget-1.html",
+      "sha256": "a8ddefe9ff6b3334b59e130848aa17c351325fb7cfc0a06b26055afad34faf50",
+      "bytes": 14842
+    }
+  ],
+  "final": "核心一句话：三次的本质是**两个方向各自需要一次「被确认」**——客户端要确认服务端能收（第②帧的 ack=x+1），服务端要确认客户端能收（第③帧的 ack=y+1），外加双方各自声明初始序号（seq=x、seq=y），所以最少是 2+1=3 个报文，两次只能单向可信。\n\n真正的风险点在第③帧：如果只握两次，服务端在发出 SYN+ACK 后就自认建连，一旦那个 SYN 是网络里滞留很久的旧包，它会为一个你早已放弃的连接预留资源、甚至重复处理——第三次 ACK 就是让服务端确认「这次握手是你此刻真正想要的」。点开组件里的「⚠ 看看\"只握两次\"会怎样」可以对照这条失败路径。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_01b7dn84oQ2BGbqFlQSb8235",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "write",
+        "loggedName": "write",
+        "callSeq": 25,
+        "callId": "call_00_9F7mKYpRp3YpACFT1kBp0121",
+        "argumentsSha256": "9a63a2e3f87b11405f520f926399061341e41c999237bdc616b21aedd70bbdee",
+        "wrapped": false,
+        "resultSeq": 26,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 31,
+        "callId": "call_00_WV87HcOc7WyojJTN8fcn4727",
+        "argumentsSha256": "589a2be5ad4e785e81bd2a2ca42628417567e4c211a515fe8572aac982277f17",
+        "wrapped": false,
+        "resultSeq": 32,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 37,
+        "callId": "call_00_NgYn4LftrjLedfw8l0h79080",
+        "argumentsSha256": "239eeee8c830f719f730152174e0b7d7197544c9b5fdc3e71e552a127be542ea",
+        "wrapped": false,
+        "resultSeq": 38,
+        "error": false
+      }
+    ],
+    "referencesRead": [],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "5faca0814fc5c0e94c2853a3022aa2b5fa3819abc6c40ba85cf19068a908aa1a"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "775d4a8044490353598d1913c78e455cd4d317df65e366d1a0120d9c829bb2d4"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 7922,
+    "outputTokens": 6286,
+    "cacheReadTokens": 45440,
+    "cacheWriteTokens": 0,
+    "totalTokens": 59648
+  },
+  "elapsedSeconds": 28.043,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "46e7c950de39987910d695092ace425aeb8c3d4388431416cccc86f411cd8af8",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "6f5714cb33367e5c5dbe4c1bfb006a94800b16335d9742a3da389ab9aa5d8b2b"
+}

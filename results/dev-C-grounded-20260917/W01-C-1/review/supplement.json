@@ -1,0 +1,125 @@
+{
+  "scope": "Isolated unchanged source, explicit reviewer operations; not Host delivery.",
+  "states": [
+    {
+      "action": "initial",
+      "text": "2\ni=0\n5\ni=1\n8\ni=2\n12\ni=3\n16\ni=4\n23\ni=5\n38\ni=6\n56\ni=7\n第几轮\n—\nlow\n—\nmid\n—\nhigh\n—\n候选个数\n8\n准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。\n下一步\n重置\n每点一次「下一步」缩小一半范围",
+      "controls": [
+        {
+          "text": "下一步",
+          "id": "bsNext",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "bsReset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "f184699490202151280903322fa992d2",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f184699490202151280903322fa992d2",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f184699490202151280903322fa992d2",
+          "type": "resize",
+          "payload": {
+            "height": 320
+          }
+        }
+      ]
+    },
+    {
+      "action": "#bsNext: 2",
+      "text": "2\ni=0\n5\ni=1\n8\ni=2\n12\ni=3\n16\ni=4\n▲ low\n23\ni=5\n▼ mid\n38\ni=6\n56\ni=7\n▲ high\n第几轮\n2\nlow\n4 (16)\nmid\n5 (23)\nhigh\n7 (56)\n候选个数\n4\n第 2 轮：mid = ⌊(4+7)/2⌋ = 5，A[5] = 23 = 目标值 23，找到了！\n下一步\n重置\n已找到，点「重置」重新演示",
+      "controls": [
+        {
+          "text": "下一步",
+          "id": "bsNext",
+          "disabled": true,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "bsReset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "f184699490202151280903322fa992d2",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f184699490202151280903322fa992d2",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f184699490202151280903322fa992d2",
+          "type": "resize",
+          "payload": {
+            "height": 320
+          }
+        }
+      ]
+    },
+    {
+      "action": "#bsReset: 1",
+      "text": "2\ni=0\n5\ni=1\n8\ni=2\n12\ni=3\n16\ni=4\n23\ni=5\n38\ni=6\n56\ni=7\n第几轮\n—\nlow\n—\nmid\n—\nhigh\n—\n候选个数\n8\n准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。\n下一步\n重置\n每点一次「下一步」缩小一半范围",
+      "controls": [
+        {
+          "text": "下一步",
+          "id": "bsNext",
+          "disabled": false,
+          "value": ""
+        },
+        {
+          "text": "重置",
+          "id": "bsReset",
+          "disabled": false,
+          "value": ""
+        }
+      ],
+      "messages": [
+        {
+          "source": "dsh-widget",
+          "channel": "f184699490202151280903322fa992d2",
+          "type": "ready",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f184699490202151280903322fa992d2",
+          "type": "rendered",
+          "payload": {}
+        },
+        {
+          "source": "dsh-widget",
+          "channel": "f184699490202151280903322fa992d2",
+          "type": "resize",
+          "payload": {
+            "height": 320
+          }
+        }
+      ]
+    }
+  ]
+}

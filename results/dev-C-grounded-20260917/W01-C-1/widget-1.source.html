@@ -1,0 +1,171 @@
+<style>
+.bsearch{--cell:46px;--gap:8px;font-family:inherit;color:var(--dsw-alias-label-primary);display:flex;flex-direction:column;gap:12px;padding:4px 0}
+.bsearch .track{position:relative;overflow-x:auto;padding:0 2px}
+.bsearch .row{display:flex;gap:var(--gap);width:max-content}
+.bsearch .cell{width:var(--cell);flex:0 0 var(--cell);display:flex;flex-direction:column;align-items:center;gap:6px}
+.bsearch .box{width:100%;height:var(--cell);display:flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-2);font-size:17px;font-variant-numeric:tabular-nums;transition:background .18s,color .18s,opacity .18s,border-color .18s}
+.bsearch .idx{font-size:11px;color:var(--dsw-alias-label-tertiary);font-variant-numeric:tabular-nums}
+.bsearch .ptr{height:20px;font-size:11px;line-height:20px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--dsw-alias-label-secondary);opacity:0;transition:opacity .18s}
+.bsearch .ptr.on{opacity:1}
+.bsearch .ptr.lo{color:var(--dsw-alias-brand-primary)}
+.bsearch .ptr.hi{color:var(--dsw-alias-brand-primary)}
+.bsearch .ptr.mid{color:var(--dsw-alias-label-primary);font-weight:600}
+.bsearch .cell.range .box{border-color:var(--dsw-alias-brand-primary)}
+.bsearch .cell.dropped .box{opacity:.34}
+.bsearch .cell.dropped .box::after{content:"";position:absolute;height:1px;width:60%;background:var(--dsw-alias-state-error-primary)}
+.bsearch .cell.win .box{background:var(--dsw-alias-button-primary-fill);border-color:var(--dsw-alias-button-primary-fill);color:var(--dsw-alias-label-primary-inverted);font-weight:600}
+.bsearch .cell.midhint .box{background:var(--dsw-alias-interactive-bg-active)}
+.bsearch .ruler{position:relative;height:10px;width:max-content}
+.bsearch .rangebar{position:absolute;top:0;height:6px;border-radius:3px;background:var(--dsw-alias-brand-primary);opacity:.55}
+.bsearch .panel{background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.bsearch .stats{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px}
+.bsearch .stat{display:flex;align-items:baseline;gap:5px;min-width:0}
+.bsearch .stat .k{color:var(--dsw-alias-label-secondary)}
+.bsearch .stat .v{font-variant-numeric:tabular-nums;font-weight:600}
+.bsearch .msg{font-size:13px;line-height:1.55;color:var(--dsw-alias-label-primary)}
+.bsearch .msg.done{color:var(--dsw-alias-brand-primary);font-weight:600}
+.bsearch .note{font-size:12px;color:var(--dsw-alias-label-tertiary)}
+.bsearch .ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bsearch button{cursor:pointer;padding:6px 14px;border-radius:8px;font-size:13px}
+@media (max-width:420px){.bsearch{--cell:38px}.bsearch .box{font-size:15px}}
+</style>
+<div class="bsearch" id="bsRoot" aria-label="二分查找演示：有序数组 2、5、8、12、16、23、38、56，目标值 23">
+  <div class="track">
+    <div class="row" id="bsRow"></div>
+    <div class="ruler" id="bsRuler"><div class="rangebar" id="bsRange"></div></div>
+  </div>
+  <div class="panel">
+    <div class="stats">
+      <div class="stat"><span class="k">第几轮</span><span class="v" id="bsRound">—</span></div>
+      <div class="stat"><span class="k">low</span><span class="v" id="bsLow">—</span></div>
+      <div class="stat"><span class="k">mid</span><span class="v" id="bsMid">—</span></div>
+      <div class="stat"><span class="k">high</span><span class="v" id="bsHigh">—</span></div>
+      <div class="stat"><span class="k">候选个数</span><span class="v" id="bsSize">—</span></div>
+    </div>
+    <div class="msg" id="bsMsg">准备就绪：目标值是 23，初始搜索范围是整个数组。</div>
+    <div class="ctl">
+      <button type="button" id="bsNext">下一步</button>
+      <button type="button" id="bsReset">重置</button>
+      <span class="note" id="bsHint">每点一次「下一步」缩小一半范围</span>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var A=[2,5,8,12,16,23,38,56];
+  var TARGET=23;
+  var root=document.getElementById('bsRoot');
+  var row=document.getElementById('bsRow');
+  var ruler=document.getElementById('bsRuler');
+  var rangebar=document.getElementById('bsRange');
+  var nextBtn=document.getElementById('bsNext');
+  var resetBtn=document.getElementById('bsReset');
+  var els={round:document.getElementById('bsRound'),low:document.getElementById('bsLow'),mid:document.getElementById('bsMid'),
+           high:document.getElementById('bsHigh'),size:document.getElementById('bsSize'),msg:document.getElementById('bsMsg'),
+           hint:document.getElementById('bsHint')};
+  var cellRefs=[];
+  var GAP=8;
+
+  function build(){
+    row.innerHTML='';
+    cellRefs=[];
+    A.forEach(function(v,i){
+      var c=document.createElement('div');
+      c.className='cell';
+      var box=document.createElement('div'); box.className='box'; box.textContent=v;
+      var idx=document.createElement('div'); idx.className='idx'; idx.textContent='i='+i;
+      var pMid=document.createElement('div'); pMid.className='ptr mid';
+      var pLo=document.createElement('div'); pLo.className='ptr lo';
+      var pHi=document.createElement('div'); pHi.className='ptr hi';
+      c.appendChild(box); c.appendChild(idx); c.appendChild(pMid); c.appendChild(pLo); c.appendChild(pHi);
+      row.appendChild(c);
+      cellRefs.push({cell:c,mid:pMid,lo:pLo,hi:pHi});
+    });
+    var w=A.length*(46+GAP)-GAP, rulerW=row.getBoundingClientRect().width||w;
+    ruler.style.width=rulerW+'px';
+  }
+
+  function metrics(){
+    var first=cellRefs[0];
+    var cellW = first.cell.getBoundingClientRect().width || 46;
+    return cellW+GAP;
+  }
+
+  function initState(){ return {low:0, high:A.length-1, mid:null, dropped:{}, round:0, status:'ready'}; }
+
+  var state=initState();
+  var history=[state];
+
+  function render(){
+    var step=metrics();
+    A.forEach(function(v,i){
+      var r=cellRefs[i], inRange=(i>=state.low&&i<=state.high);
+      var cls='cell';
+      if(inRange) cls+=' range';
+      if(state.dropped[i]) cls+=' dropped';
+      if(state.status==='found'&&i===state.mid) cls+=' win';
+      else if(state.mid===i) cls+=' midhint';
+      r.cell.className=cls;
+      r.lo.className='ptr lo'+(state.status!=='ready'&&i===state.low?' on':'');
+      r.hi.className='ptr hi'+(state.status!=='ready'&&i===state.high?' on':'');
+      r.mid.className='ptr mid'+(state.mid===i?' on':'');
+      r.lo.textContent=(state.status!=='ready'&&i===state.low)?'▲ low':'';
+      r.hi.textContent=(state.status!=='ready'&&i===state.high)?'▲ high':'';
+      r.mid.textContent=(state.mid===i)?'▼ mid':'';
+    });
+    if(state.status==='ready'){ rangebar.style.left='0px'; rangebar.style.width=(A.length*step-GAP)+'px'; }
+    else { rangebar.style.left=(state.low*step)+'px'; rangebar.style.width=((state.high-state.low+1)*step-GAP)+'px'; }
+    els.round.textContent = state.status==='ready' ? '—' : String(state.round);
+    els.low.textContent = state.status==='ready' ? '—' : state.low+' ('+A[state.low]+')';
+    els.high.textContent = state.status==='ready' ? '—' : state.high+' ('+A[state.high]+')';
+    els.mid.textContent = state.mid===null ? '—' : state.mid+' ('+A[state.mid]+')';
+    els.size.textContent = state.status==='ready' ? String(A.length) : String(state.high-state.low+1);
+    root.setAttribute('aria-label','二分查找第'+ (state.status==='ready'?0:state.round) +'轮，low='+state.low+'，mid='+(state.mid===null?'无':state.mid)+'，high='+state.high);
+  }
+
+  function next(){
+    var s=history[history.length-1];
+    if(s.status==='found'||s.status==='done') return;
+    var low=s.low, high=s.high;
+    var mid=Math.floor((low+high)/2);
+    var ns;
+    if(A[mid]===TARGET){
+      ns={low:low,high:high,mid:mid,dropped:Object.assign({},s.dropped),round:s.round+1,status:'found',msg:'第 '+(s.round+1)+' 轮：mid = ⌊('+low+'+'+high+')/2⌋ = '+mid+'，A['+mid+'] = '+A[mid]+' = 目标值 23，找到了！'};
+      els.msg.className='msg done';
+    } else if(A[mid]<TARGET){
+      var d=Object.assign({},s.dropped);
+      for(var i=low;i<=mid;i++) d[i]=true;
+      ns={low:mid+1,high:high,mid:mid,dropped:d,round:s.round+1,status:'searching',
+          msg:'第 '+(s.round+1)+' 轮：mid = ⌊('+low+'+'+high+')/2⌋ = '+mid+'，A['+mid+'] = '+A[mid]+' < 23，目标在右半边 → 排除 '+low+'~'+mid+' 号位置，low = mid+1 = '+(mid+1)+'。'};
+      els.msg.className='msg';
+    } else {
+      var d2=Object.assign({},s.dropped);
+      for(var j=mid;j<=high;j++) d2[j]=true;
+      ns={low:low,high:mid-1,mid:mid,dropped:d2,round:s.round+1,status:'searching',
+          msg:'第 '+(s.round+1)+' 轮：mid = ⌊('+low+'+'+high+')/2⌋ = '+mid+'，A['+mid+'] = '+A[mid]+' > 23，目标在左半边 → 排除 '+mid+'~'+high+' 号位置，high = mid-1 = '+(mid-1)+'。'};
+      els.msg.className='msg';
+    }
+    history.push(ns);
+    state=ns;
+    els.msg.textContent=state.msg;
+    if(state.status==='found'){ nextBtn.disabled=true; els.hint.textContent='已找到，点「重置」重新演示'; }
+    render();
+  }
+
+  function reset(){
+    history=[initState()];
+    state=history[0];
+    els.msg.className='msg';
+    els.msg.textContent='准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。';
+    els.hint.textContent='每点一次「下一步」缩小一半范围';
+    nextBtn.disabled=false;
+    render();
+  }
+
+  nextBtn.addEventListener('click',next);
+  resetBtn.addEventListener('click',reset);
+  build();
+  reset();
+  window.addEventListener('resize',render);
+})();
+</script>

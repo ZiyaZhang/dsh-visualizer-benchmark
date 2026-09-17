@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "W03-D-1",
+  "caseId": "W03",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/dev-D-receipt-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:09:17.233Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [
+          "1月",
+          "2月",
+          "3月",
+          "4月",
+          "5月",
+          "120",
+          "-30",
+          "80"
+        ],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "pass",
+      "reason": "All requested literal labels are present in visible text or accessible names.",
+      "evidence": {
+        "expectedText": [
+          "1月",
+          "2月",
+          "3月",
+          "4月",
+          "5月",
+          "120",
+          "-30",
+          "80"
+        ],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "每月净新增用户（人）\n1–5 月 · 单位：人\n120\n80\n40\n0\n?\n缺失\n120\n80\n-30\n0\n净流失\n有数据 · 值为 0\n无数据 · 不等于 0\n1月\n2月\n3月\n4月\n5月\n正值 = 净新增\n负值 = 净流失\n0 = 有数据，值恰为零\n缺失 = 无数据，不等于 0\n每月净新增用户（人） 1–5 月 · 单位：人 120 80 40 0 ? 缺失 120 80 -30 0 净流失 有数据 · 值为 0 无数据 · 不等于 0 1月 2月 3月 4月 5月 正值 = 净新增 负值 = 净流失 0 = 有数据，值恰为零 缺失 = 无数据，不等于 0",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 434,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- img \"每月净新增用户对比图 1月120人，2月0人，3月数据缺失，4月-30人，5月80人。零值用基线上的空心圆表示，缺失数据用斜纹带加问号表示，负值用零线以下的红色柱表示。\": 每月净新增用户（人） 1–5 月 · 单位：人 120 80 40 0 ? 缺失 120 80 -30 0 净流失 有数据 · 值为 0 无数据 · 不等于 0 1月 2月 3月 4月 5月 正值 = 净新增 负值 = 净流失 0 = 有数据，值恰为零 缺失 = 无数据，不等于 0"
+    },
+    {
+      "text": "每月净新增用户（人）\n1–5 月 · 单位：人\n120\n80\n40\n0\n?\n缺失\n120\n80\n-30\n0\n净流失\n有数据 · 值为 0\n无数据 · 不等于 0\n1月\n2月\n3月\n4月\n5月\n正值 = 净新增\n负值 = 净流失\n0 = 有数据，值恰为零\n缺失 = 无数据，不等于 0\n每月净新增用户（人） 1–5 月 · 单位：人 120 80 40 0 ? 缺失 120 80 -30 0 净流失 有数据 · 值为 0 无数据 · 不等于 0 1月 2月 3月 4月 5月 正值 = 净新增 负值 = 净流失 0 = 有数据，值恰为零 缺失 = 无数据，不等于 0",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 212,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- img \"每月净新增用户对比图 1月120人，2月0人，3月数据缺失，4月-30人，5月80人。零值用基线上的空心圆表示，缺失数据用斜纹带加问号表示，负值用零线以下的红色柱表示。\": 每月净新增用户（人） 1–5 月 · 单位：人 120 80 40 0 ? 缺失 120 80 -30 0 净流失 有数据 · 值为 0 无数据 · 不等于 0 1月 2月 3月 4月 5月 正值 = 净新增 负值 = 净流失 0 = 有数据，值恰为零 缺失 = 无数据，不等于 0"
+    },
+    {
+      "text": "每月净新增用户（人）\n1–5 月 · 单位：人\n120\n80\n40\n0\n?\n缺失\n120\n80\n-30\n0\n净流失\n有数据 · 值为 0\n无数据 · 不等于 0\n1月\n2月\n3月\n4月\n5月\n正值 = 净新增\n负值 = 净流失\n0 = 有数据，值恰为零\n缺失 = 无数据，不等于 0\n每月净新增用户（人） 1–5 月 · 单位：人 120 80 40 0 ? 缺失 120 80 -30 0 净流失 有数据 · 值为 0 无数据 · 不等于 0 1月 2月 3月 4月 5月 正值 = 净新增 负值 = 净流失 0 = 有数据，值恰为零 缺失 = 无数据，不等于 0",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 434,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- img \"每月净新增用户对比图 1月120人，2月0人，3月数据缺失，4月-30人，5月80人。零值用基线上的空心圆表示，缺失数据用斜纹带加问号表示，负值用零线以下的红色柱表示。\": 每月净新增用户（人） 1–5 月 · 单位：人 120 80 40 0 ? 缺失 120 80 -30 0 净流失 有数据 · 值为 0 无数据 · 不等于 0 1月 2月 3月 4月 5月 正值 = 净新增 负值 = 净流失 0 = 有数据，值恰为零 缺失 = 无数据，不等于 0"
+    },
+    {
+      "text": "每月净新增用户（人）\n1–5 月 · 单位：人\n120\n80\n40\n0\n?\n缺失\n120\n80\n-30\n0\n净流失\n有数据 · 值为 0\n无数据 · 不等于 0\n1月\n2月\n3月\n4月\n5月\n正值 = 净新增\n负值 = 净流失\n0 = 有数据，值恰为零\n缺失 = 无数据，不等于 0\n每月净新增用户（人） 1–5 月 · 单位：人 120 80 40 0 ? 缺失 120 80 -30 0 净流失 有数据 · 值为 0 无数据 · 不等于 0 1月 2月 3月 4月 5月 正值 = 净新增 负值 = 净流失 0 = 有数据，值恰为零 缺失 = 无数据，不等于 0",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 212,
+      "visibleGraphics": 1,
+      "accessibleNames": [],
+      "messages": [],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- img \"每月净新增用户对比图 1月120人，2月0人，3月数据缺失，4月-30人，5月80人。零值用基线上的空心圆表示，缺失数据用斜纹带加问号表示，负值用零线以下的红色柱表示。\": 每月净新增用户（人） 1–5 月 · 单位：人 120 80 40 0 ? 缺失 120 80 -30 0 净流失 有数据 · 值为 0 无数据 · 不等于 0 1月 2月 3月 4月 5月 正值 = 净新增 负值 = 净流失 0 = 有数据，值恰为零 缺失 = 无数据，不等于 0"
+    }
+  ],
+  "messages": [],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "ec471a46621364465c1a3ca287148f145020000dce58c9824271a8845460fdea",
+  "previewSha256": "594c1795d796c45148268f575ff6dd3c8892778890b6ef8e5d6aec49587db9bd",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "svg",
+  "sandbox": "",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

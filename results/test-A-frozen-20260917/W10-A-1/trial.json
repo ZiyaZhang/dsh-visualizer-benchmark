@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W10-A-1",
+  "roundId": "test-A-frozen-20260917",
+  "caseId": "W10",
+  "arm": "A",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "在回复中画一张静态流程图说明：模型提交源码，Host校验并记录，Web隔离渲染；成功后用户操作。若源码运行报错，Web请求修复，Host从日志取得当前源码并请求模型修复，再更新原卡片。图里标清三方职责和成功/失败分支。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "模型 / Host / Web 源码卡片流程",
+      "kind": "html",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/test-A-frozen-20260917/W10-A-1/widget-1.source.html",
+      "preview": "results/test-A-frozen-20260917/W10-A-1/widget-1.html",
+      "sha256": "a99b5d2297f4975b5bb5e5d6719714635a72108d1f9425825d5d65ce02a030b4",
+      "bytes": 10302
+    }
+  ],
+  "final": "流程图已放在上方，用三条泳道区分职责：\n\n- **模型**：① 生成并提交源码；只在被请求时 ⑦ 返回修复后的新源码。\n- **Host**：② 校验（语法 / 安全限制）并记录版本，②a 通过后建卡；⑥ 从日志取得\"当前源码\"并请求模型修复；⑧ 更新原卡片（源码 + 版本号）。\n- **Web**：③ 在沙箱 iframe 中隔离渲染；④ 成功后交出卡片给用户操作（点击 / 输入）；⑤ 运行报错时采集日志并请求修复；⑨ 渲染修复后的原卡片。\n\n两条分支：\n\n- **成功分支（绿实线）**：校验通过 → 隔离渲染 → 用户操作。\n- **失败分支（红虚线）**：校验失败时 Host 直接驳回，模型修正后重新提交；运行报错时走修复回路 ⑤→⑥→⑦→⑧→⑨，再由右侧回环回到 ③ 重新隔离渲染，即\"更新原卡片而非新建卡片\"。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 19,
+        "callId": "call_00_w9ZtZiH07mBDMGnZd9Y23943",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_dZGIQpAW9r9pPZTtbBXR4198",
+        "argumentsSha256": "c1f14839e6acb69637ad7de05aba38232f21fe2aa6f53b8f55db9ebdd3ceb4e2",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_3WnZYKeX334dl0rLh4bP9714",
+        "argumentsSha256": "ac4ca12955dc6a9c398135a34c7e4f5b531d70439709e4fb42156d455d85c34f",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_kQEbCuQIqBPtQVACZ0Cp2448",
+        "argumentsSha256": "c90d5c2b89cea06caa7d9e62391706dc97ffbfd08f44bd0d0e3c39bd54e56304",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/diagrams.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "26916fe9f5dbc4ae81203e343e310a30146003f315a8fb2affc5026bac33cceb",
+        "resultSha256": "88495c8587f35df39a7d094bf8abd14c13f842212635cef6c8946603f133c0a0"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "98bb26344a54176fe02a580bca92da37dc63dfedbe71ef84aafa103430746cb6"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 19,
+        "resultSeq": 20,
+        "success": true,
+        "resultSha256": "2f414bf6e6930e595d64af066f191e7beb60781d2a70d7acf4c06e6187e80c0f"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "3b390dfcfe6bc4c28414b1f67aa4e00c1e38d59ae87d305737e40f510f607111"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8326,
+    "outputTokens": 20717,
+    "cacheReadTokens": 45824,
+    "cacheWriteTokens": 0,
+    "totalTokens": 74867
+  },
+  "elapsedSeconds": 86.125,
+  "sourceHead": "b56f63c297cf4925e62d239fa18a838d3aa0dc57",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "9fad99c076e2a9573dbefb9c7fb9841f84409d4f94f599b17a4e13b08b13350a",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "0d0c7228167d55afe518c20598eb2460dddb2a50fef90de62044ba21a187edd4"
+}

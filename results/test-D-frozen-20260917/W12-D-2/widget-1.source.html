@@ -1,0 +1,156 @@
+<style>
+  .w12 { font-family: inherit; color: var(--dsw-alias-label-primary); background: var(--dsw-alias-bg-layer-1); border: 1px solid var(--dsw-alias-border-l1); border-radius: 12px; padding: 14px 16px 12px; max-width: 640px; box-sizing: border-box; }
+  .w12 .ttl { margin: 0 0 2px; font-size: 14px; font-weight: 600; }
+  .w12 .hint { margin: 0 0 8px; font-size: 12px; color: var(--dsw-alias-label-secondary); }
+  .w12 .chart-wrap { overflow-x: auto; }
+  .w12 svg { display: block; width: 100%; min-width: 360px; height: auto; font-family: inherit; font-variant-numeric: tabular-nums; }
+  .w12 .bar { fill: var(--dsw-alias-brand-primary); opacity: .42; transition: opacity .15s ease; pointer-events: none; }
+  .w12 .day:hover .bar { opacity: .7; }
+  .w12 .day.selected .bar { opacity: 1; }
+  .w12 .hit { fill: transparent; cursor: pointer; outline: none; stroke: transparent; }
+  .w12 .day.selected .hit { stroke: var(--dsw-alias-brand-primary); stroke-width: 2; }
+  .w12 .hit:focus-visible { stroke: var(--dsw-alias-border-l2); stroke-width: 2; stroke-dasharray: 4 3; }
+  .w12 .val { font-size: 11px; fill: var(--dsw-alias-label-secondary); text-anchor: middle; pointer-events: none; }
+  .w12 .day.selected .val { fill: var(--dsw-alias-label-primary); font-weight: 600; }
+  .w12 .day-label { font-size: 11px; fill: var(--dsw-alias-label-tertiary); text-anchor: middle; pointer-events: none; }
+  .w12 .day.selected .day-label { fill: var(--dsw-alias-label-primary); font-weight: 600; }
+  .w12 .tick { font-size: 10px; fill: var(--dsw-alias-label-tertiary); text-anchor: end; }
+  .w12 .axis-ttl { font-size: 11px; fill: var(--dsw-alias-label-secondary); }
+  .w12 .grid { stroke: var(--dsw-alias-border-l1); stroke-width: 1; }
+  .w12 .base { stroke: var(--dsw-alias-border-l2); stroke-width: 1; }
+  .w12 .foot { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+  .w12 .status { font-size: 12.5px; color: var(--dsw-alias-label-secondary); min-height: 18px; }
+  .w12 .status.sel { color: var(--dsw-alias-label-primary); font-weight: 600; }
+  .w12 .go { margin-left: auto; border: none; border-radius: 8px; padding: 7px 14px; font-size: 13px; font-family: inherit; cursor: pointer; background: var(--dsw-alias-button-primary-fill); color: var(--dsw-alias-label-primary-inverted); }
+  .w12 .go:disabled { opacity: .45; cursor: not-allowed; }
+  .w12 .go:hover:not(:disabled) { filter: brightness(1.06); }
+</style>
+
+<div class="w12">
+  <h3 class="ttl">近 7 天错误率</h3>
+  <p class="hint">点击某天选中（单选）；再点“分析所选日期”向我追问。</p>
+
+  <div class="chart-wrap">
+    <svg viewBox="0 0 560 236" role="group" aria-label="近 7 天错误率柱状图，可选择某一天" aria-describedby="w12-sum">
+      <title>近 7 天错误率</title>
+      <desc id="w12-sum">第1天0.4%，第2天0.5%，第3天0.3%，第4天2.8%，第5天0.6%，第6天0.5%，第7天0.4%。</desc>
+
+      <text class="axis-ttl" x="44" y="13">错误率</text>
+      <line class="grid" x1="44" y1="20"  x2="544" y2="20"></line>
+      <line class="grid" x1="44" y1="80"  x2="544" y2="80"></line>
+      <line class="grid" x1="44" y1="140" x2="544" y2="140"></line>
+      <line class="base" x1="44" y1="200" x2="544" y2="200"></line>
+      <text class="tick" x="36" y="24">3%</text>
+      <text class="tick" x="36" y="84">2%</text>
+      <text class="tick" x="36" y="144">1%</text>
+      <text class="tick" x="36" y="204">0%</text>
+
+      <g class="day" id="day-1" data-day="1" data-rate="0.4">
+        <rect class="bar" x="62.71" y="176" width="34" height="24" rx="2"></rect>
+        <text class="val" x="79.71" y="170">0.4%</text>
+        <text class="day-label" x="79.71" y="219">第1天</text>
+        <rect class="hit" x="44" y="20" width="71.43" height="180" rx="6" tabindex="0" role="button" aria-pressed="false" aria-label="第1天，错误率0.4%"></rect>
+      </g>
+      <g class="day" id="day-2" data-day="2" data-rate="0.5">
+        <rect class="bar" x="134.14" y="170" width="34" height="30" rx="2"></rect>
+        <text class="val" x="151.14" y="164">0.5%</text>
+        <text class="day-label" x="151.14" y="219">第2天</text>
+        <rect class="hit" x="115.43" y="20" width="71.43" height="180" rx="6" tabindex="0" role="button" aria-pressed="false" aria-label="第2天，错误率0.5%"></rect>
+      </g>
+      <g class="day" id="day-3" data-day="3" data-rate="0.3">
+        <rect class="bar" x="205.57" y="182" width="34" height="18" rx="2"></rect>
+        <text class="val" x="222.57" y="176">0.3%</text>
+        <text class="day-label" x="222.57" y="219">第3天</text>
+        <rect class="hit" x="186.86" y="20" width="71.43" height="180" rx="6" tabindex="0" role="button" aria-pressed="false" aria-label="第3天，错误率0.3%"></rect>
+      </g>
+      <g class="day" id="day-4" data-day="4" data-rate="2.8">
+        <rect class="bar" x="277" y="32" width="34" height="168" rx="2"></rect>
+        <text class="val" x="294" y="26">2.8%</text>
+        <text class="day-label" x="294" y="219">第4天</text>
+        <rect class="hit" x="258.29" y="20" width="71.43" height="180" rx="6" tabindex="0" role="button" aria-pressed="false" aria-label="第4天，错误率2.8%"></rect>
+      </g>
+      <g class="day" id="day-5" data-day="5" data-rate="0.6">
+        <rect class="bar" x="348.43" y="164" width="34" height="36" rx="2"></rect>
+        <text class="val" x="365.43" y="158">0.6%</text>
+        <text class="day-label" x="365.43" y="219">第5天</text>
+        <rect class="hit" x="329.71" y="20" width="71.43" height="180" rx="6" tabindex="0" role="button" aria-pressed="false" aria-label="第5天，错误率0.6%"></rect>
+      </g>
+      <g class="day" id="day-6" data-day="6" data-rate="0.5">
+        <rect class="bar" x="419.86" y="170" width="34" height="30" rx="2"></rect>
+        <text class="val" x="436.86" y="164">0.5%</text>
+        <text class="day-label" x="436.86" y="219">第6天</text>
+        <rect class="hit" x="401.14" y="20" width="71.43" height="180" rx="6" tabindex="0" role="button" aria-pressed="false" aria-label="第6天，错误率0.5%"></rect>
+      </g>
+      <g class="day" id="day-7" data-day="7" data-rate="0.4">
+        <rect class="bar" x="491.29" y="176" width="34" height="24" rx="2"></rect>
+        <text class="val" x="508.29" y="170">0.4%</text>
+        <text class="day-label" x="508.29" y="219">第7天</text>
+        <rect class="hit" x="472.57" y="20" width="71.43" height="180" rx="6" tabindex="0" role="button" aria-pressed="false" aria-label="第7天，错误率0.4%"></rect>
+      </g>
+    </svg>
+  </div>
+
+  <div class="foot">
+    <span class="status" id="w12-status" aria-live="polite">未选择日期</span>
+    <button class="go" id="w12-go" type="button" disabled>分析所选日期</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var days = Array.prototype.slice.call(document.querySelectorAll('.w12 .day'));
+  var status = document.getElementById('w12-status');
+  var go = document.getElementById('w12-go');
+  var selected = null;
+
+  function dayEl(n) { return document.querySelector('.w12 .day[data-day="' + n + '"]'); }
+
+  function render() {
+    days.forEach(function (g) {
+      var on = g.dataset.day === selected;
+      g.classList.toggle('selected', on);
+      g.querySelector('.hit').setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    if (!selected) {
+      status.textContent = '未选择日期';
+      status.classList.remove('sel');
+      go.disabled = true;
+    } else {
+      status.textContent = '已选：第' + selected + '天 · 错误率 ' + dayEl(selected).dataset.rate + '%';
+      status.classList.add('sel');
+      go.disabled = false;
+    }
+  }
+
+  function select(day) {
+    selected = (selected === day) ? null : day; // 单选；再次点击同一天可取消
+    render();
+  }
+
+  days.forEach(function (g) {
+    var hit = g.querySelector('.hit');
+    hit.addEventListener('click', function () { select(g.dataset.day); });
+    hit.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault(); select(g.dataset.day); return;
+      }
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        var n = Number(g.dataset.day) + (e.key === 'ArrowRight' ? 1 : -1);
+        if (n >= 1 && n <= 7) dayEl(n).querySelector('.hit').focus();
+      }
+    });
+  });
+
+  go.addEventListener('click', function () {
+    if (!selected) return; // 只有点了按钮才追问
+    var rate = dayEl(selected).dataset.rate;
+    status.textContent = '已发送分析请求：第' + selected + '天 · 错误率 ' + rate + '%';
+    if (window.dshWidget && typeof window.dshWidget.sendPrompt === 'function') {
+      window.dshWidget.sendPrompt('请分析第' + selected + '天（错误率 ' + rate + '%）：可能的原因和排查方向是什么？');
+    }
+  });
+
+  render();
+})();
+</script>

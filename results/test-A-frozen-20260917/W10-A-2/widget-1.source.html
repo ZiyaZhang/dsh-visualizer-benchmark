@@ -1,0 +1,151 @@
+<div class="fc-wrap">
+<style>
+  .fc-wrap { container-type: inline-size; }
+  .fc { display:block; width:100%; height:auto;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+  .lane-body { fill: var(--dsw-alias-bg-layer-1, rgba(128,140,165,0.07));
+               stroke: var(--dsw-alias-border-l1, rgba(128,140,165,0.28)); stroke-width:1; }
+  .lane-div  { stroke: var(--dsw-alias-border-l1, rgba(128,140,165,0.3)); stroke-width:1; }
+  .box { fill: var(--dsw-alias-bg-layer-2, #ffffff);
+         stroke: var(--dsw-alias-border-l2, rgba(128,140,165,0.45)); stroke-width:1.2; }
+  .box-ok { fill: rgba(22,163,74,0.12); stroke:#16a34a; stroke-width:1.6; }
+  .diamond { fill: var(--dsw-alias-bg-layer-2, #ffffff);
+             stroke: var(--dsw-alias-border-l2, rgba(128,140,165,0.5)); stroke-width:1.2; }
+  .fail-band { fill: rgba(229,72,77,0.055); stroke: rgba(229,72,77,0.3);
+               stroke-width:1; stroke-dasharray:6 5; }
+  .t-cap { fill: var(--dsw-alias-label-primary, #1f2937); font-size:22px; font-weight:700; }
+  .t-legend { fill: var(--dsw-alias-label-tertiary, #7a8499); font-size:14px; }
+  .t-lane { fill: var(--dsw-alias-label-primary, #1f2937); font-size:18px; font-weight:700; }
+  .t-lane-sub { fill: var(--dsw-alias-label-secondary, #5b6577); font-size:13.5px; }
+  .t-title { fill: var(--dsw-alias-label-primary, #1f2937); font-size:16px; font-weight:600; }
+  .t-sub { fill: var(--dsw-alias-label-secondary, #5b6577); font-size:13.5px; }
+  .t-ok { fill:#16a34a; }
+  .t-err { fill:#e5484d; font-size:13px; font-weight:600; }
+  .t-band { fill:#e5484d; font-size:14px; font-weight:600; }
+  .t-edge { fill: var(--dsw-alias-label-secondary, #5b6577); font-size:13.5px; }
+  .line { fill:none; stroke: var(--dsw-alias-label-tertiary, #8b94a7); stroke-width:1.8;
+          stroke-linejoin:round; }
+  .line-ok { fill:none; stroke:#16a34a; stroke-width:2; stroke-linejoin:round; }
+  .line-err { fill:none; stroke:#e5484d; stroke-width:1.9; stroke-linejoin:round; }
+  .line-retry { fill:none; stroke:#0d9488; stroke-width:1.9; stroke-dasharray:7 5; stroke-linejoin:round; }
+  .chip { fill: var(--dsw-alias-bg-base, #ffffff); opacity:0.93; }
+</style>
+<svg class="fc" viewBox="0 0 984 830" role="img" aria-labelledby="fcT fcD">
+  <title id="fcT">模型提交源码、Host 校验记录、Web 隔离渲染的三方泳道流程图</title>
+  <desc id="fcD">三条泳道分别为模型、Host、Web。模型泳道：提交源码，失败回环中生成修复源码。Host 泳道：校验并记录版本与运行日志；失败回环中从日志取当前源码、请求模型修复、更新原卡片。Web 泳道：隔离渲染。成功分支为渲染通过后用户操作卡片。失败分支为源码运行报错，Web 捕获并请求修复，进入修复回环，修复完成后重新隔离渲染。</desc>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--dsw-alias-label-tertiary, #8b94a7)"/>
+    </marker>
+    <marker id="ahOk" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#16a34a"/>
+    </marker>
+    <marker id="ahErr" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#e5484d"/>
+    </marker>
+    <marker id="ahRetry" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#0d9488"/>
+    </marker>
+  </defs>
+
+  <!-- 标题与图例 -->
+  <text class="t-cap" x="24" y="26">源码卡片：提交 → 校验记录 → 隔离渲染 → 出错修复</text>
+  <rect x="26" y="42" width="10" height="10" rx="2" fill="rgba(22,163,74,0.18)" stroke="#16a34a"/>
+  <text class="t-legend" x="44" y="51">成功分支</text>
+  <rect x="118" y="42" width="10" height="10" rx="2" fill="rgba(229,72,77,0.16)" stroke="#e5484d"/>
+  <text class="t-legend" x="136" y="51">失败分支</text>
+  <line x1="208" y1="47" x2="232" y2="47" stroke="#0d9488" stroke-width="1.9" stroke-dasharray="7 5"/>
+  <text class="t-legend" x="240" y="51">重试回环</text>
+  <text class="t-legend" x="960" y="51" text-anchor="end">三方职责按泳道划分</text>
+
+  <!-- 泳道 -->
+  <rect class="lane-body" x="24"  y="64" width="250" height="734" rx="14"/>
+  <rect class="lane-body" x="314" y="64" width="280" height="734" rx="14"/>
+  <rect class="lane-body" x="634" y="64" width="310" height="734" rx="14"/>
+
+  <rect x="42"  y="78" width="4.5" height="16" rx="2.25" fill="#7c6cf5"/>
+  <rect x="332" y="78" width="4.5" height="16" rx="2.25" fill="#3b82f6"/>
+  <rect x="652" y="78" width="4.5" height="16" rx="2.25" fill="#0d9488"/>
+  <text class="t-lane" x="54"  y="90">模型 Model</text>
+  <text class="t-lane-sub" x="54"  y="108">生成 / 修复源码</text>
+  <text class="t-lane" x="344" y="90">Host</text>
+  <text class="t-lane-sub" x="344" y="108">校验 · 记录版本 · 取日志 · 调度</text>
+  <text class="t-lane" x="664" y="90">Web</text>
+  <text class="t-lane-sub" x="664" y="108">隔离渲染 · 捕获报错并上报</text>
+  <line class="lane-div" x1="38"  y1="116" x2="260"  y2="116"/>
+  <line class="lane-div" x1="328" y1="116" x2="580"  y2="116"/>
+  <line class="lane-div" x1="648" y1="116" x2="930"  y2="116"/>
+
+  <!-- 失败分支高亮区 -->
+  <rect class="fail-band" x="34" y="528" width="896" height="208" rx="16"/>
+  <text class="t-band" x="46" y="520">失败分支 · 运行报错触发修复回环</text>
+
+  <!-- 连接线（先画线，后画节点） -->
+  <path class="line" d="M254,166 H334" marker-end="url(#ah)"/>
+  <path class="line" d="M574,228 H654" marker-end="url(#ah)"/>
+  <path class="line" d="M789,260 V316" marker-end="url(#ah)"/>
+  <path class="line-ok" d="M789,388 V414" marker-end="url(#ahOk)"/>
+  <path class="line-err" d="M721,352 H690 V544" marker-end="url(#ahErr)"/>
+  <path class="line-err" d="M654,581 H574" marker-end="url(#ahErr)"/>
+  <path class="line-err" d="M334,581 H254" marker-end="url(#ahErr)"/>
+  <path class="line-err" d="M149,618 V687 H334" marker-end="url(#ahErr)"/>
+  <path class="line-retry" d="M454,724 V760 H934 V228 H924" marker-end="url(#ahRetry)"/>
+
+  <!-- 节点 -->
+  <rect class="box" x="44" y="134" width="210" height="66" rx="10"/>
+  <text class="t-title" x="149" y="161" text-anchor="middle">① 提交源码</text>
+  <text class="t-sub"   x="149" y="182" text-anchor="middle">生成卡片源码并提交</text>
+
+  <rect class="box" x="334" y="134" width="240" height="116" rx="10"/>
+  <text class="t-title" x="454" y="166" text-anchor="middle">② 校验并记录</text>
+  <text class="t-sub"   x="454" y="190" text-anchor="middle">静态校验源码</text>
+  <text class="t-sub"   x="454" y="210" text-anchor="middle">版本落库 + 运行日志</text>
+  <text class="t-sub"   x="454" y="230" text-anchor="middle">日志供后续取当前源码</text>
+
+  <rect class="box" x="654" y="196" width="270" height="64" rx="10"/>
+  <text class="t-title" x="789" y="222" text-anchor="middle">③ 隔离渲染</text>
+  <text class="t-sub"   x="789" y="243" text-anchor="middle">沙箱环境执行源码</text>
+
+  <path class="diamond" d="M789,316 L857,352 L789,388 L721,352 Z"/>
+  <text class="t-title" x="789" y="357" text-anchor="middle">渲染通过？</text>
+
+  <rect class="box-ok" x="704" y="414" width="170" height="72" rx="10"/>
+  <text class="t-title t-ok" x="789" y="444" text-anchor="middle">✓ 渲染成功</text>
+  <text class="t-sub"       x="789" y="467" text-anchor="middle">用户操作卡片</text>
+
+  <rect class="box" x="654" y="544" width="270" height="74" rx="10"/>
+  <text class="t-title" x="789" y="574" text-anchor="middle">④ 捕获运行错误</text>
+  <text class="t-sub"   x="789" y="597" text-anchor="middle">请求修复（附错误日志）</text>
+
+  <rect class="box" x="334" y="544" width="240" height="74" rx="10"/>
+  <text class="t-title" x="454" y="574" text-anchor="middle">⑤ 从日志取当前源码</text>
+  <text class="t-sub"   x="454" y="597" text-anchor="middle">读取最新版本源码</text>
+
+  <rect class="box" x="44" y="544" width="210" height="74" rx="10"/>
+  <text class="t-title" x="149" y="574" text-anchor="middle">⑥ 生成修复源码</text>
+  <text class="t-sub"   x="149" y="597" text-anchor="middle">依据错误日志修复</text>
+
+  <rect class="box" x="334" y="650" width="240" height="74" rx="10"/>
+  <text class="t-title" x="454" y="680" text-anchor="middle">⑦ 更新原卡片</text>
+  <text class="t-sub"   x="454" y="703" text-anchor="middle">写入新版本 · 刷新卡片</text>
+
+  <!-- 分支标注 -->
+  <text class="t-ok"  x="802" y="405">是</text>
+  <text class="t-err" x="716" y="346" text-anchor="end">否</text>
+  <text class="t-err" x="686" y="470" text-anchor="end">运行报错</text>
+
+  <!-- 边标签 -->
+  <rect class="chip" x="262" y="144" width="64" height="19" rx="4"/>
+  <text class="t-edge" x="294" y="158" text-anchor="middle">提交源码</text>
+  <rect class="chip" x="582" y="206" width="64" height="19" rx="4"/>
+  <text class="t-edge" x="614" y="220" text-anchor="middle">交付渲染</text>
+  <rect class="chip" x="582" y="559" width="64" height="19" rx="4"/>
+  <text class="t-edge" x="614" y="573" text-anchor="middle">请求修复</text>
+  <rect class="chip" x="248" y="559" width="92" height="19" rx="4"/>
+  <text class="t-edge" x="294" y="573" text-anchor="middle">请求模型修复</text>
+  <rect class="chip" x="195" y="663" width="92" height="19" rx="4"/>
+  <text class="t-edge" x="241" y="677" text-anchor="middle">返回修复源码</text>
+  <rect class="chip" x="641" y="736" width="106" height="19" rx="4"/>
+  <text class="t-edge" x="694" y="750" text-anchor="middle">修复后重新渲染</text>
+</svg>
+</div>

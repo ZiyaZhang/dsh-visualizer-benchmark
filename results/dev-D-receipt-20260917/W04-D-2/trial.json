@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "id": "W04-D-2",
+  "roundId": "dev-D-receipt-20260917",
+  "caseId": "W04",
+  "arm": "D",
+  "repeat": 2,
+  "status": "completed",
+  "prompt": "在回复里用一张静态横向条形图对比四个功能的使用次数：长文档的跨章节证据追溯120次、多轮对话中的上下文恢复80次、插件热更新后继续当前任务45次、直接生成一个简短答案300次。完整显示名称，手机上也要能读懂。",
+  "expectedRoute": "widget",
+  "widgets": [
+    {
+      "title": "四个功能的使用次数对比",
+      "kind": "svg",
+      "callSeq": 33,
+      "resultSeq": 34,
+      "replace": null,
+      "source": "results/dev-D-receipt-20260917/W04-D-2/widget-1.source.html",
+      "preview": "results/dev-D-receipt-20260917/W04-D-2/widget-1.html",
+      "sha256": "a91f1d86346d19dd2c24b7ffdc5d5e6e7cc9c0678cbeba7fb15bddaf4a373848",
+      "bytes": 3524
+    }
+  ],
+  "final": "I'll load the visualize skill first, since this is a chart request.\n\n上图按使用次数从少到多排列，条形从 0 起算，四类完整名称均在条上方完整显示、数值标在条尾，窄屏也不会截断。可以看到「直接生成一个简短答案」300 次约为其余三项之和（245 次）的 1.2 倍，而相对最重的三项能力合计仍略低于它。",
+  "checks": {
+    "route": {
+      "status": "pass",
+      "reason": "Accepted inline output uses an allowed form"
+    },
+    "acceptance": {
+      "status": "pending",
+      "reason": "Awaiting the deterministic checks and human review"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "skill",
+        "loggedName": "skill",
+        "callSeq": 18,
+        "callId": "call_00_ET_W3rKdBoJ7iXClfa1PY8H5936",
+        "argumentsSha256": "12d8280cc3451bc6e1ef6c845d167471f45f38dbb8f5b1e4406e300b91e19e7a",
+        "wrapped": false,
+        "resultSeq": 19,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 25,
+        "callId": "call_00_rKAOWQEBHc9xZqD75LFl4101",
+        "argumentsSha256": "65e09ad1c2476e68f2a0160c84516456f89b132ae1b0a61365a4c29e086a591a",
+        "wrapped": false,
+        "resultSeq": 27,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 26,
+        "callId": "call_01_KCROFN1ks2AKQapKIiqb3239",
+        "argumentsSha256": "1d3a16830886a28dcb3f20bd0466138124c8ae240d6bf4845deab2b5a3d5646e",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "show_widget",
+        "loggedName": "show_widget",
+        "callSeq": 33,
+        "callId": "call_00_ze5WPCUblZXDpuMZ5aNT9271",
+        "argumentsSha256": "0d1b54d5a57a5c89d0a009015034ad46e5f7b06d4bd3dac55dcfd153bb655d1e",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [
+      {
+        "path": "references/charts.md",
+        "callSeq": 25,
+        "resultSeq": 27,
+        "success": true,
+        "sha256": "0778ef689dea193a21f6f319a3d915e268d184bdd377128fa6a272a4ff8a1d80",
+        "resultSha256": "6088c3f6aa9e72ef34534c2eb4d3562a146a56633a7a512ae851314cc9aadac4"
+      },
+      {
+        "path": "references/style.md",
+        "callSeq": 26,
+        "resultSeq": 28,
+        "success": true,
+        "sha256": "058ec109f49ef7407a6e6bedf4930ccc390118e9004272b44bcb2fb7c45db5f6",
+        "resultSha256": "fb1f2bea3426c49dbf021629a5e53d6feaa61bd83c28bb22b789e6aaf16c1351"
+      }
+    ],
+    "skillLoads": [
+      {
+        "name": "visualize",
+        "callSeq": 18,
+        "resultSeq": 19,
+        "success": true,
+        "resultSha256": "0f2e31d8c8602697cf717a81d36c3ee45c862b9753d5c91775ed69e57298159f"
+      }
+    ],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "41a163e281e7b65c2161b4d64d4b093305a069ec23a923cb0b0fb78cd2d7493f"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 8118,
+    "outputTokens": 1662,
+    "cacheReadTokens": 26880,
+    "cacheWriteTokens": 0,
+    "totalTokens": 36660
+  },
+  "elapsedSeconds": 8.952,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "5cb7ee8d0488466889ae14f2d4b0faff46e8aba1180ca96b4cc40c7b3e013703",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "56bbe0d788b5014a07694e24ac1c7ca2a013ed2fa500edb52274eba2d9fdbb02"
+}

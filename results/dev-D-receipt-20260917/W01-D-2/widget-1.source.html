@@ -1,0 +1,189 @@
+<div class="bs-wrap">
+<style>
+  .bs-wrap{
+    --bs-brand: var(--dsw-alias-brand-primary, #3b6ef6);
+    --bs-ink: var(--dsw-alias-label-primary, #1b1f26);
+    --bs-ink2: var(--dsw-alias-label-secondary, #5b6472);
+    --bs-line: var(--dsw-alias-border-l1, #e2e5ea);
+    --bs-bg: var(--dsw-alias-bg-base, #fff);
+    --bs-bg2: var(--dsw-alias-bg-layer-2, #f6f7f9);
+    color: var(--bs-ink);
+    background: var(--bs-bg);
+    font: 14px/1.5 system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    border: 1px solid var(--bs-line);
+    border-radius: 14px;
+    padding: 14px 16px 12px;
+    max-width: 620px;
+  }
+  .bs-head{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+  .bs-title{font-weight:650;font-size:15px}
+  .bs-title b{color:var(--bs-brand);font-variant-numeric:tabular-nums}
+  .bs-round{font-size:12px;color:var(--bs-ink2);font-variant-numeric:tabular-nums}
+  .bs-array{display:flex;gap:6px;align-items:flex-start;overflow-x:auto;padding:2px 0 4px}
+  .bs-col{flex:1 1 0;min-width:36px;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .bs-tags{min-height:19px;display:flex;flex-wrap:wrap;gap:3px;justify-content:center}
+  .bs-tag{font-size:10px;line-height:15px;padding:0 5px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+  .bs-tag.low{background:rgba(59,110,246,.16);border-color:rgba(59,110,246,.5)}
+  .bs-tag.mid{background:var(--dsw-alias-button-primary-fill, #3b6ef6);color:var(--dsw-alias-label-primary-inverted,#fff)}
+  .bs-tag.high{background:rgba(217,119,6,.18);border-color:rgba(217,119,6,.5)}
+  .bs-cell{width:100%;height:44px;display:flex;align-items:center;justify-content:center;gap:2px;
+    border:1px solid var(--bs-line);border-radius:9px;background:var(--bs-bg2);
+    font-weight:650;font-size:15px;font-variant-numeric:tabular-nums;transition:background .18s,border-color .18s,opacity .18s}
+  .bs-cell.in-range{background:var(--dsw-alias-interactive-bg-hover, #eef2fb);border-color:rgba(59,110,246,.35)}
+  .bs-cell.excluded{background-image:repeating-linear-gradient(45deg,rgba(128,138,152,.22) 0 4px,transparent 4px 8px);
+    color:var(--dsw-alias-label-tertiary, #98a1ae);text-decoration:line-through;font-weight:500}
+  .bs-cell.is-mid{outline:2px solid var(--bs-brand);outline-offset:1px}
+  .bs-cell.found{background:rgba(31,157,85,.18);border-color:rgba(31,157,85,.65);text-decoration:none;color:var(--bs-ink);outline:none}
+  .bs-cell.found::after{content:"✓";font-size:12px;color:#1f9d55}
+  .bs-bar{width:100%;height:5px;border-radius:3px;background:transparent;transition:background .18s}
+  .bs-bar.hit{background:rgba(128,138,152,.5)}
+  .bs-idx{font-size:11px;color:var(--bs-ink2);font-variant-numeric:tabular-nums}
+  .bs-readout{margin-top:10px;padding:9px 11px;border-radius:10px;background:var(--bs-bg2);
+    border-left:3px solid var(--bs-brand);font-variant-numeric:tabular-nums}
+  .bs-main{font-size:13.5px}
+  .bs-sub{margin-top:3px;font-size:12px;color:var(--bs-ink2)}
+  .bs-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:9px;font-size:11.5px;color:var(--bs-ink2)}
+  .bs-legend span{display:inline-flex;align-items:center;gap:5px}
+  .bs-swatch{width:12px;height:12px;border-radius:4px;border:1px solid var(--bs-line);flex:0 0 auto}
+  .bs-swatch.hatch{background-image:repeating-linear-gradient(45deg,rgba(128,138,152,.6) 0 3px,transparent 3px 6px)}
+  .bs-swatch.mid{background:var(--bs-brand);border-color:transparent}
+  .bs-swatch.found{background:rgba(31,157,85,.5);border-color:rgba(31,157,85,.7)}
+  .bs-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:11px}
+  .bs-controls button{font:inherit;font-size:13px;padding:5px 14px;border-radius:9px;cursor:pointer}
+  .bs-hint{font-size:11.5px;color:var(--bs-ink2);margin-left:auto}
+</style>
+
+  <div class="bs-head">
+    <div class="bs-title">二分查找 · 目标 <b>23</b></div>
+    <div class="bs-round" id="bs-round">第 0 / 2 轮</div>
+  </div>
+
+  <div class="bs-array" id="bs-array" role="img" aria-label="有序数组 2,5,8,12,16,23,38,56，索引 0 到 7"></div>
+
+  <div class="bs-readout">
+    <div class="bs-main" id="bs-main" aria-live="polite">初始区间：low = 0，high = 7，尚未取 mid。</div>
+    <div class="bs-sub" id="bs-sub">8 个元素，最多需要 ⌈log₂8⌉ = 3 次比较。点击“下一步”开始第 1 轮。</div>
+  </div>
+
+  <div class="bs-legend">
+    <span><i class="bs-swatch" style="background:var(--dsw-alias-interactive-bg-hover,#eef2fb)"></i>当前搜索区间</span>
+    <span><i class="bs-swatch hatch"></i>已排除</span>
+    <span><i class="bs-swatch mid"></i>mid（本轮中间位置）</span>
+    <span><i class="bs-swatch found"></i>命中目标</span>
+  </div>
+
+  <div class="bs-controls">
+    <button type="button" id="bs-next">下一步</button>
+    <button type="button" id="bs-reset">重置</button>
+    <span class="bs-hint">mid = ⌊(low + high) / 2⌋</span>
+  </div>
+</div>
+<script>
+(function(){
+  var data = [2,5,8,12,16,23,38,56];
+  var target = 23;
+  var rounds = [];
+  (function(){
+    var lo = 0, hi = data.length - 1;
+    while (lo <= hi) {
+      var mid = Math.floor((lo + hi) / 2), v = data[mid];
+      if (v === target) { rounds.push({low:lo, high:hi, mid:mid, val:v, found:true, from:null, to:null, newLow:lo, newHigh:hi, excluded:null}); break; }
+      if (v < target) { rounds.push({low:lo, high:hi, mid:mid, val:v, found:false, from:lo, to:mid, newLow:mid+1, newHigh:hi, excluded:[lo,mid]}); lo = mid + 1; }
+      else { rounds.push({low:lo, high:hi, mid:mid, val:v, found:false, from:mid, to:hi, newLow:lo, newHigh:mid-1, excluded:[mid,hi]}); hi = mid - 1; }
+    }
+  })();
+
+  var step = 0;
+  var arrayEl = document.getElementById('bs-array');
+  var mainEl = document.getElementById('bs-main');
+  var subEl = document.getElementById('bs-sub');
+  var roundEl = document.getElementById('bs-round');
+  var nextBtn = document.getElementById('bs-next');
+  var resetBtn = document.getElementById('bs-reset');
+  var cells = [], tags = [], bars = [];
+
+  data.forEach(function(v, i){
+    var col = document.createElement('div'); col.className = 'bs-col';
+    var tag = document.createElement('div'); tag.className = 'bs-tags';
+    var cell = document.createElement('div'); cell.className = 'bs-cell'; cell.textContent = String(v);
+    var bar = document.createElement('div'); bar.className = 'bs-bar';
+    var idx = document.createElement('div'); idx.className = 'bs-idx'; idx.textContent = String(i);
+    col.appendChild(tag); col.appendChild(cell); col.appendChild(bar); col.appendChild(idx);
+    arrayEl.appendChild(col);
+    tags.push(tag); cells.push(cell); bars.push(bar);
+  });
+
+  function chip(text, kind){
+    var el = document.createElement('span');
+    el.className = 'bs-tag ' + kind;
+    el.textContent = text;
+    return el;
+  }
+
+  function render(){
+    var excluded = data.map(function(){ return false; });
+    for (var i = 0; i < step; i++){
+      var ex = rounds[i].excluded;
+      if (ex) for (var k = ex[0]; k <= ex[1]; k++) excluded[k] = true;
+    }
+    var last = step > 0 ? rounds[step - 1] : null;
+    var low = last ? last.low : 0;
+    var high = last ? last.high : data.length - 1;
+    var mid = last ? last.mid : -1;
+    var found = last ? last.found : false;
+    var excludedCount = excluded.filter(Boolean).length;
+
+    for (var j = 0; j < data.length; j++){
+      var c = cells[j];
+      c.className = 'bs-cell';
+      c.textContent = String(data[j]);
+      if (excluded[j]) c.classList.add('excluded');
+      else if (j >= low && j <= high) c.classList.add('in-range');
+      if (j === mid){
+        if (found) c.classList.add('found');
+        else c.classList.add('is-mid');
+      }
+      bars[j].className = 'bs-bar' + (excluded[j] ? ' hit' : '');
+      tags[j].innerHTML = '';
+      if (j === low) tags[j].appendChild(chip('low', 'low'));
+      if (j === mid) tags[j].appendChild(chip('mid', 'mid'));
+      if (j === high) tags[j].appendChild(chip('high', 'high'));
+    }
+
+    arrayEl.setAttribute('aria-label',
+      '有序数组 ' + data.join(',') + '。当前 low=' + low + '，high=' + high +
+      (mid >= 0 ? '，mid=' + mid + '（值 ' + data[mid] + '）' : '') +
+      '，已排除 ' + excludedCount + ' 个元素。');
+
+    if (step === 0){
+      mainEl.textContent = '初始区间：low = 0，high = 7，尚未取 mid。';
+      subEl.textContent = '8 个元素，最多需要 ⌈log₂8⌉ = 3 次比较。点击“下一步”开始第 1 轮。';
+    } else if (found){
+      mainEl.textContent = '第 ' + step + ' 轮：low = ' + low + '，high = ' + high + ' → mid = ⌊(' + low + '+' + high + ')/2⌋ = ' + mid +
+        '，a[' + mid + '] = ' + data[mid] + ' = 目标 23。命中！';
+      subEl.textContent = '共比较 ' + step + ' 轮就找到目标（8 个元素逐个查最坏要 8 次），已排除 ' + excludedCount + ' 个元素。';
+    } else {
+      var isLeft = data[mid] < target;
+      mainEl.textContent = '第 ' + step + ' 轮：low = ' + low + '，high = ' + high + ' → mid = ⌊(' + low + '+' + high + ')/2⌋ = ' + mid +
+        '，a[' + mid + '] = ' + data[mid] + '。' + data[mid] + (isLeft ? ' < ' : ' > ') + target +
+        '，目标在' + (isLeft ? '右' : '左') + '半区 → 排除下标 [' + last.from + '..' + last.to + ']。';
+      subEl.textContent = '新区间 low = ' + last.newLow + '，high = ' + last.newHigh +
+        '（还剩 ' + (last.newHigh - last.newLow + 1) + ' 个元素，已排除 ' + excludedCount + ' 个）。';
+    }
+
+    roundEl.textContent = '第 ' + step + ' / ' + rounds.length + ' 轮';
+    nextBtn.disabled = step >= rounds.length;
+    nextBtn.textContent = step >= rounds.length ? '已结束' : '下一步';
+    resetBtn.disabled = step === 0;
+  }
+
+  nextBtn.addEventListener('click', function(){
+    if (step < rounds.length){ step += 1; render(); }
+  });
+  resetBtn.addEventListener('click', function(){
+    step = 0; render();
+  });
+
+  render();
+})();
+</script>

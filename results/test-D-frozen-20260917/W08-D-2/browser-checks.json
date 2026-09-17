@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "W08-D-2",
+  "caseId": "W08",
+  "scenario": "cache",
+  "widgetIndex": 0,
+  "callSeq": 33,
+  "resultSeq": 34,
+  "casesPath": "results/test-D-frozen-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:19:56.215Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "pass",
+      "reason": "Document bootstrapped without a captured initial error and has visible content. This does not establish meaning, factual correctness, or functioning controls.",
+      "evidence": {
+        "state": "initial"
+      }
+    },
+    "interaction": {
+      "status": "pending",
+      "reason": "Cannot identify one numeric readout for (?<!未)命中(?:输入)?(?:数量|token数|token|Token数|Token)?|cache hits; found 0, 0.1.",
+      "evidence": {
+        "states": [
+          "initial",
+          "hit-0"
+        ]
+      }
+    },
+    "localMessages": {
+      "status": "pending",
+      "reason": "Local actions have not run.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Browser evidence is not a full content or factual grade.",
+      "evidence": {}
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "输入缓存成本示意\n总输入固定 1,000 token\n缓存命中率\n50%\n0%\n50%\n100%\n拖动调整命中率\n命中 500\n未命中 500\n命中输入\n未命中输入\ntoken 构成（合计 1,000）\n未命中成本\n命中成本\n斜纹 ＝ 相比全未命中省下的部分\n构成\ntoken 数\n示意成本\n命中输入\n500 token\n0.05 单位\n未命中输入\n500 token\n0.50 单位\n总输入 / 总成本\n1,000 token\n0.55 单位\n相比“全部未命中”的 1.00 单位，当前节省 0.45 单位（45%）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 472,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "快速选择命中率",
+        "缓存命中率（百分比）",
+        "输入构成：命中 500 token，未命中 500 token",
+        "示意成本 0.55 单位，相比全未命中节省 0.45 单位"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "5ec94188bcbdf82fe2b84f6ddebe6240",
+          "payload": {},
+          "at": 75.79999995231628
+        },
+        {
+          "type": "rendered",
+          "channel": "5ec94188bcbdf82fe2b84f6ddebe6240",
+          "payload": {},
+          "at": 97.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "5ec94188bcbdf82fe2b84f6ddebe6240",
+          "payload": {
+            "height": 472
+          },
+          "at": 97.10000014305115
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"输入缓存成本示意\" [level=3]\n- text: 总输入固定 1,000 token 缓存命中率 50%\n- group \"快速选择命中率\":\n  - button \"0%\"\n  - button \"50%\" [pressed]\n  - button \"100%\"\n- text: 拖动调整命中率\n- slider \"缓存命中率（百分比）\": \"50\"\n- img \"输入构成：命中 500 token，未命中 500 token\": 命中 500 未命中 500\n- text: 命中输入 未命中输入 token 构成（合计 1,000）\n- img \"示意成本 0.55 单位，相比全未命中节省 0.45 单位\"\n- text: 未命中成本 命中成本 斜纹 ＝ 相比全未命中省下的部分 构成 token 数 示意成本 命中输入 500 token 0.05 单位 未命中输入 500 token 0.50 单位 总输入 / 总成本 1,000 token 0.55 单位 相比“全部未命中”的 1.00 单位，当前节省 0.45 单位（45%）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。"
+    },
+    {
+      "text": "输入缓存成本示意\n总输入固定 1,000 token\n缓存命中率\n0%\n0%\n50%\n100%\n拖动调整命中率\n命中 0\n未命中 1,000\n命中输入\n未命中输入\ntoken 构成（合计 1,000）\n未命中成本\n命中成本\n斜纹 ＝ 相比全未命中省下的部分\n构成\ntoken 数\n示意成本\n命中输入\n0 token\n0.00 单位\n未命中输入\n1,000 token\n1.00 单位\n总输入 / 总成本\n1,000 token\n1.00 单位\n相比“全部未命中”的 1.00 单位，当前节省 0.00 单位（0%）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 472,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "快速选择命中率",
+        "缓存命中率（百分比）",
+        "输入构成：命中 0 token，未命中 1000 token",
+        "示意成本 1.00 单位，相比全未命中节省 0.00 单位"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "5ec94188bcbdf82fe2b84f6ddebe6240",
+          "payload": {},
+          "at": 75.79999995231628
+        },
+        {
+          "type": "rendered",
+          "channel": "5ec94188bcbdf82fe2b84f6ddebe6240",
+          "payload": {},
+          "at": 97.10000014305115
+        },
+        {
+          "type": "resize",
+          "channel": "5ec94188bcbdf82fe2b84f6ddebe6240",
+          "payload": {
+            "height": 472
+          },
+          "at": 97.10000014305115
+        }
+      ],
+      "name": "hit-0",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- heading \"输入缓存成本示意\" [level=3]\n- text: 总输入固定 1,000 token 缓存命中率 0%\n- group \"快速选择命中率\":\n  - button \"0%\" [pressed]\n  - button \"50%\"\n  - button \"100%\"\n- text: 拖动调整命中率\n- slider \"缓存命中率（百分比）\": \"0\"\n- img \"输入构成：命中 0 token，未命中 1000 token\": 命中 0 未命中 1,000\n- text: 命中输入 未命中输入 token 构成（合计 1,000）\n- img \"示意成本 1.00 单位，相比全未命中节省 0.00 单位\"\n- text: 未命中成本 命中成本 斜纹 ＝ 相比全未命中省下的部分 构成 token 数 示意成本 命中输入 0 token 0.00 单位 未命中输入 1,000 token 1.00 单位 总输入 / 总成本 1,000 token 1.00 单位 相比“全部未命中”的 1.00 单位，当前节省 0.00 单位（0%）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。"
+    },
+    {
+      "text": "输入缓存成本示意\n总输入固定 1,000 token\n缓存命中率\n50%\n0%\n50%\n100%\n拖动调整命中率\n命中 500\n未命中 500\n命中输入\n未命中输入\ntoken 构成（合计 1,000）\n未命中成本\n命中成本\n斜纹 ＝ 相比全未命中省下的部分\n构成\ntoken 数\n示意成本\n命中输入\n500 token\n0.05 单位\n未命中输入\n500 token\n0.50 单位\n总输入 / 总成本\n1,000 token\n0.55 单位\n相比“全部未命中”的 1.00 单位，当前节省 0.45 单位（45%）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 586,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "快速选择命中率",
+        "缓存命中率（百分比）",
+        "输入构成：命中 500 token，未命中 500 token",
+        "示意成本 0.55 单位，相比全未命中节省 0.45 单位"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "34dab45f84c89c92fd528893096e16cb",
+          "payload": {},
+          "at": 1215.6000001430511
+        },
+        {
+          "type": "rendered",
+          "channel": "34dab45f84c89c92fd528893096e16cb",
+          "payload": {},
+          "at": 1218.1000001430511
+        },
+        {
+          "type": "resize",
+          "channel": "34dab45f84c89c92fd528893096e16cb",
+          "payload": {
+            "height": 586
+          },
+          "at": 1218.1000001430511
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- heading \"输入缓存成本示意\" [level=3]\n- text: 总输入固定 1,000 token 缓存命中率 50%\n- group \"快速选择命中率\":\n  - button \"0%\"\n  - button \"50%\" [pressed]\n  - button \"100%\"\n- text: 拖动调整命中率\n- slider \"缓存命中率（百分比）\": \"50\"\n- img \"输入构成：命中 500 token，未命中 500 token\": 命中 500 未命中 500\n- text: 命中输入 未命中输入 token 构成（合计 1,000）\n- img \"示意成本 0.55 单位，相比全未命中节省 0.45 单位\"\n- text: 未命中成本 命中成本 斜纹 ＝ 相比全未命中省下的部分 构成 token 数 示意成本 命中输入 500 token 0.05 单位 未命中输入 500 token 0.50 单位 总输入 / 总成本 1,000 token 0.55 单位 相比“全部未命中”的 1.00 单位，当前节省 0.45 单位（45%）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。"
+    },
+    {
+      "text": "输入缓存成本示意\n总输入固定 1,000 token\n缓存命中率\n50%\n0%\n50%\n100%\n拖动调整命中率\n命中 500\n未命中 500\n命中输入\n未命中输入\ntoken 构成（合计 1,000）\n未命中成本\n命中成本\n斜纹 ＝ 相比全未命中省下的部分\n构成\ntoken 数\n示意成本\n命中输入\n500 token\n0.05 单位\n未命中输入\n500 token\n0.50 单位\n总输入 / 总成本\n1,000 token\n0.55 单位\n相比“全部未命中”的 1.00 单位，当前节省 0.45 单位（45%）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 472,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "快速选择命中率",
+        "缓存命中率（百分比）",
+        "输入构成：命中 500 token，未命中 500 token",
+        "示意成本 0.55 单位，相比全未命中节省 0.45 单位"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "ff11d56ae120c1f8495fbe2bca5cd23d",
+          "payload": {},
+          "at": 1785
+        },
+        {
+          "type": "rendered",
+          "channel": "ff11d56ae120c1f8495fbe2bca5cd23d",
+          "payload": {},
+          "at": 1789.7999999523163
+        },
+        {
+          "type": "resize",
+          "channel": "ff11d56ae120c1f8495fbe2bca5cd23d",
+          "payload": {
+            "height": 472
+          },
+          "at": 1789.7999999523163
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- heading \"输入缓存成本示意\" [level=3]\n- text: 总输入固定 1,000 token 缓存命中率 50%\n- group \"快速选择命中率\":\n  - button \"0%\"\n  - button \"50%\" [pressed]\n  - button \"100%\"\n- text: 拖动调整命中率\n- slider \"缓存命中率（百分比）\": \"50\"\n- img \"输入构成：命中 500 token，未命中 500 token\": 命中 500 未命中 500\n- text: 命中输入 未命中输入 token 构成（合计 1,000）\n- img \"示意成本 0.55 单位，相比全未命中节省 0.45 单位\"\n- text: 未命中成本 命中成本 斜纹 ＝ 相比全未命中省下的部分 构成 token 数 示意成本 命中输入 500 token 0.05 单位 未命中输入 500 token 0.50 单位 总输入 / 总成本 1,000 token 0.55 单位 相比“全部未命中”的 1.00 单位，当前节省 0.45 单位（45%）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。"
+    },
+    {
+      "text": "输入缓存成本示意\n总输入固定 1,000 token\n缓存命中率\n50%\n0%\n50%\n100%\n拖动调整命中率\n命中 500\n未命中 500\n命中输入\n未命中输入\ntoken 构成（合计 1,000）\n未命中成本\n命中成本\n斜纹 ＝ 相比全未命中省下的部分\n构成\ntoken 数\n示意成本\n命中输入\n500 token\n0.05 单位\n未命中输入\n500 token\n0.50 单位\n总输入 / 总成本\n1,000 token\n0.55 单位\n相比“全部未命中”的 1.00 单位，当前节省 0.45 单位（45%）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。\n",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 586,
+      "visibleGraphics": 0,
+      "accessibleNames": [
+        "快速选择命中率",
+        "缓存命中率（百分比）",
+        "输入构成：命中 500 token，未命中 500 token",
+        "示意成本 0.55 单位，相比全未命中节省 0.45 单位"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "680075c8317a5161c0b3ed65d6e59d59",
+          "payload": {},
+          "at": 2361.600000143051
+        },
+        {
+          "type": "rendered",
+          "channel": "680075c8317a5161c0b3ed65d6e59d59",
+          "payload": {},
+          "at": 2364.7000000476837
+        },
+        {
+          "type": "resize",
+          "channel": "680075c8317a5161c0b3ed65d6e59d59",
+          "payload": {
+            "height": 586
+          },
+          "at": 2364.7000000476837
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- heading \"输入缓存成本示意\" [level=3]\n- text: 总输入固定 1,000 token 缓存命中率 50%\n- group \"快速选择命中率\":\n  - button \"0%\"\n  - button \"50%\" [pressed]\n  - button \"100%\"\n- text: 拖动调整命中率\n- slider \"缓存命中率（百分比）\": \"50\"\n- img \"输入构成：命中 500 token，未命中 500 token\": 命中 500 未命中 500\n- text: 命中输入 未命中输入 token 构成（合计 1,000）\n- img \"示意成本 0.55 单位，相比全未命中节省 0.45 单位\"\n- text: 未命中成本 命中成本 斜纹 ＝ 相比全未命中省下的部分 构成 token 数 示意成本 命中输入 500 token 0.05 单位 未命中输入 500 token 0.50 单位 总输入 / 总成本 1,000 token 0.55 单位 相比“全部未命中”的 1.00 单位，当前节省 0.45 单位（45%）。口径：未命中 1 单位 / 1,000 token，命中 0.1 单位 / 1,000 token；仅为示意，不代表真实价格。"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "5ec94188bcbdf82fe2b84f6ddebe6240",
+      "payload": {},
+      "at": 75.79999995231628
+    },
+    {
+      "type": "rendered",
+      "channel": "5ec94188bcbdf82fe2b84f6ddebe6240",
+      "payload": {},
+      "at": 97.10000014305115
+    },
+    {
+      "type": "resize",
+      "channel": "5ec94188bcbdf82fe2b84f6ddebe6240",
+      "payload": {
+        "height": 472
+      },
+      "at": 97.10000014305115
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "cefb06ffb51007e7ab00e3417172ab9a541137019aecac193b0189d9caa932d6",
+  "previewSha256": "4e9f66b69b371118e05dbdbb3f2b837d5ae0d39fa868a09fe59f1baac79af970",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

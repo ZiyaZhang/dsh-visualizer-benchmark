@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 2,
+  "id": "N02-D-1",
+  "roundId": "dev-D-receipt-20260917",
+  "caseId": "N02",
+  "arm": "D",
+  "repeat": 1,
+  "status": "completed",
+  "prompt": "读取 sales.csv，只统计 status 为 paid 的订单。用一小段文字告诉我有效订单总额、金额最高的地区及金额，以及西部占总额的百分比（保留两位小数）。",
+  "expectedRoute": "text",
+  "widgets": [],
+  "final": "已读取 `sales.csv`，按 `status=paid` 过滤（西部那笔 999 的 cancelled 订单已排除）。\n\n有效订单共 6 笔，总额 **310**。金额最高的地区是**华东，150**（其次是华南 100、西部 60）。西部占有效总额 **19.35%**（60 / 310 = 19.3548%，四舍五入保留两位小数）。",
+  "checks": {
+    "route": {
+      "status": "pending",
+      "reason": "No inline widget attempt; verify the requested delivery form with check-dsh.py"
+    },
+    "acceptance": {
+      "status": "not_applicable",
+      "reason": "This case evaluates routing only"
+    }
+  },
+  "trace": {
+    "tools": [
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 19,
+        "callId": "call_00_qhRAI4OFx8I8vtIHWqI10646",
+        "argumentsSha256": "96503a9cf0bb32b6f73a36aa410a53e0a7d83373ec3905414613ddf6d8f4843c",
+        "wrapped": false,
+        "resultSeq": 20,
+        "error": false
+      },
+      {
+        "name": "glob",
+        "loggedName": "glob",
+        "callSeq": 21,
+        "callId": "call_01_FV3344TkaO33HaXeWfbk5425",
+        "argumentsSha256": "31ffe073194dad509d84b8ad73b5a7cb079f490674a31333d236af88c0701c1f",
+        "wrapped": false,
+        "resultSeq": 22,
+        "error": false
+      },
+      {
+        "name": "read",
+        "loggedName": "read",
+        "callSeq": 27,
+        "callId": "call_00_ET_MtsDzw4rGkhVVfSOoJMl2020",
+        "argumentsSha256": "b7cb08f498da94d0d34745baf325b8af9b1daf6a1c976deae558a763b11ebf50",
+        "wrapped": false,
+        "resultSeq": 28,
+        "error": false
+      },
+      {
+        "name": "bash",
+        "loggedName": "bash",
+        "callSeq": 33,
+        "callId": "call_00_q0C4aOCtV0k3SonrOGZM2873",
+        "argumentsSha256": "0fab8586c7c4b36b1e2af68ba33d356fda090e08372abb8df381faa2fe24c9d8",
+        "wrapped": false,
+        "resultSeq": 34,
+        "error": false
+      }
+    ],
+    "referencesRead": [],
+    "skillLoads": [],
+    "systemMessages": [
+      {
+        "seq": 7,
+        "sha256": "26e336c75ae794c266874f10561af6f9a010f7aeb8c569ca85ad10991f93a843"
+      }
+    ],
+    "requestHeaders": [
+      {
+        "seq": 11,
+        "sha256": "931ea2f0e929a7c166c57a5172042de5112f4cf16e9a183e8b756e26d7f087a9",
+        "model": "deepseek-flash",
+        "reasoningEffort": "high"
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 7541,
+    "outputTokens": 442,
+    "cacheReadTokens": 24192,
+    "cacheWriteTokens": 0,
+    "totalTokens": 32175
+  },
+  "elapsedSeconds": 5.926,
+  "sourceHead": "1342c1de1cfbe95bd3e73c708d2615cf5675803a",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rejected": [],
+  "finalSha256": "c920cc45bd22aea057cfbb7970d042da208e45c23c837af26770b0ca2c645872",
+  "requestModel": "deepseek-flash",
+  "reasoningEffort": "high",
+  "toolSchemasSha256": "78f2e84dd66f037c98ad32c4178894b49c4fceab155e7f40921c7ea7af2bb032",
+  "turnEnd": "completed",
+  "workspaceChanges": [],
+  "artifactSetSha256": "8558c494d8fd1c9e8f15dc1caebbd027f756c8da75e44f9d286a5e16a3a49bb2"
+}

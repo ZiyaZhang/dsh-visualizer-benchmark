@@ -1,5 +1,6 @@
 {
   "schemaVersion": 2,
+  "visualSettleMs": 500,
   "trialId": "W06-A-1",
   "caseId": "W06",
   "scenario": "sales",
@@ -8,7 +9,7 @@
   "resultSeq": 34,
   "casesPath": "results/dev-A-connected-20260917/cases.json",
   "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
-  "collectedAt": "2026-09-17T16:45:13.976Z",
+  "collectedAt": "2026-09-17T18:08:26.994Z",
   "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
   "checks": {
     "render": {
@@ -126,23 +127,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+          "channel": "8418a5742acb0f5526ec41172966d098",
           "payload": {},
-          "at": 98.79999995231628
+          "at": 92.40000009536743
         },
         {
           "type": "rendered",
-          "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+          "channel": "8418a5742acb0f5526ec41172966d098",
           "payload": {},
-          "at": 107.29999995231628
+          "at": 99.90000009536743
         },
         {
           "type": "resize",
-          "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+          "channel": "8418a5742acb0f5526ec41172966d098",
           "payload": {
             "height": 350
           },
-          "at": 107.29999995231628
+          "at": 99.90000009536743
         }
       ],
       "name": "initial",
@@ -166,23 +167,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+          "channel": "8418a5742acb0f5526ec41172966d098",
           "payload": {},
-          "at": 98.79999995231628
+          "at": 92.40000009536743
         },
         {
           "type": "rendered",
-          "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+          "channel": "8418a5742acb0f5526ec41172966d098",
           "payload": {},
-          "at": 107.29999995231628
+          "at": 99.90000009536743
         },
         {
           "type": "resize",
-          "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+          "channel": "8418a5742acb0f5526ec41172966d098",
           "payload": {
             "height": 350
           },
-          "at": 107.29999995231628
+          "at": 99.90000009536743
         }
       ],
       "name": "selected-west",
@@ -206,31 +207,31 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+          "channel": "8418a5742acb0f5526ec41172966d098",
           "payload": {},
-          "at": 98.79999995231628
+          "at": 92.40000009536743
         },
         {
           "type": "rendered",
-          "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+          "channel": "8418a5742acb0f5526ec41172966d098",
           "payload": {},
-          "at": 107.29999995231628
+          "at": 99.90000009536743
         },
         {
           "type": "resize",
-          "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+          "channel": "8418a5742acb0f5526ec41172966d098",
           "payload": {
             "height": 350
           },
-          "at": 107.29999995231628
+          "at": 99.90000009536743
         },
         {
           "type": "send_prompt",
-          "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+          "channel": "8418a5742acb0f5526ec41172966d098",
           "payload": {
             "text": "请解释所选地区的销售表现：西部，50 万元。结合这一数值说明该地区的销售地位、与其他地区的差距（华东 120 万元、华南 80 万元、西部 50 万元），并给出可能的原因与建议。"
           },
-          "at": 315.5
+          "at": 1273.5
         }
       ],
       "name": "explain-sent",
@@ -254,23 +255,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "c5fb9f6834dde6a22184889f0f732c5e",
+          "channel": "275c68fc71bd0a425a3857317af5eac5",
           "payload": {},
-          "at": 345.09999990463257
+          "at": 1809.9000000953674
         },
         {
           "type": "rendered",
-          "channel": "c5fb9f6834dde6a22184889f0f732c5e",
+          "channel": "275c68fc71bd0a425a3857317af5eac5",
           "payload": {},
-          "at": 350.09999990463257
+          "at": 1814.7999999523163
         },
         {
           "type": "resize",
-          "channel": "c5fb9f6834dde6a22184889f0f732c5e",
+          "channel": "275c68fc71bd0a425a3857317af5eac5",
           "payload": {
             "height": 304
           },
-          "at": 350.2000000476837
+          "at": 1814.7999999523163
         }
       ],
       "name": "initial",
@@ -294,23 +295,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "bd831c1e401da7cee025d9520fde4ea0",
+          "channel": "fe32764f588467d073cbb34e44a31808",
           "payload": {},
-          "at": 407.59999990463257
+          "at": 2389.2999999523163
         },
         {
           "type": "rendered",
-          "channel": "bd831c1e401da7cee025d9520fde4ea0",
+          "channel": "fe32764f588467d073cbb34e44a31808",
           "payload": {},
-          "at": 408.09999990463257
+          "at": 2390.100000143051
         },
         {
           "type": "resize",
-          "channel": "bd831c1e401da7cee025d9520fde4ea0",
+          "channel": "fe32764f588467d073cbb34e44a31808",
           "payload": {
             "height": 350
           },
-          "at": 408.09999990463257
+          "at": 2390.2000000476837
         }
       ],
       "name": "initial",
@@ -334,23 +335,23 @@
       "messages": [
         {
           "type": "ready",
-          "channel": "7673f9373e286fca369f11346336ddfd",
+          "channel": "9cbec5767bb1cae697bbceea1a2192fa",
           "payload": {},
-          "at": 471.2999999523163
+          "at": 2960.5
         },
         {
           "type": "rendered",
-          "channel": "7673f9373e286fca369f11346336ddfd",
+          "channel": "9cbec5767bb1cae697bbceea1a2192fa",
           "payload": {},
-          "at": 473.59999990463257
+          "at": 2964.2999999523163
         },
         {
           "type": "resize",
-          "channel": "7673f9373e286fca369f11346336ddfd",
+          "channel": "9cbec5767bb1cae697bbceea1a2192fa",
           "payload": {
             "height": 304
           },
-          "at": 473.59999990463257
+          "at": 2964.2999999523163
         }
       ],
       "name": "initial",
@@ -362,31 +363,31 @@
   "messages": [
     {
       "type": "ready",
-      "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+      "channel": "8418a5742acb0f5526ec41172966d098",
       "payload": {},
-      "at": 98.79999995231628
+      "at": 92.40000009536743
     },
     {
       "type": "rendered",
-      "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+      "channel": "8418a5742acb0f5526ec41172966d098",
       "payload": {},
-      "at": 107.29999995231628
+      "at": 99.90000009536743
     },
     {
       "type": "resize",
-      "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+      "channel": "8418a5742acb0f5526ec41172966d098",
       "payload": {
         "height": 350
       },
-      "at": 107.29999995231628
+      "at": 99.90000009536743
     },
     {
       "type": "send_prompt",
-      "channel": "7e04d926f2a4250edd1e6f6721e6e32f",
+      "channel": "8418a5742acb0f5526ec41172966d098",
       "payload": {
         "text": "请解释所选地区的销售表现：西部，50 万元。结合这一数值说明该地区的销售地位、与其他地区的差距（华东 120 万元、华南 80 万元、西部 50 万元），并给出可能的原因与建议。"
       },
-      "at": 315.5
+      "at": 1273.5
     }
   ],
   "console": [],
@@ -398,11 +399,48 @@
   "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
   "rendererHashKind": "recorded trial renderer source hash",
   "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
-  "themeMethod": "Original preview bytes; theme variables are updated through the shipped iframe message bridge.",
-  "checkerSha256": "0a80d43b670cf8a82de0f3b8bcaf78a5c46c5b9fcfe81ac82cb027077d0e3077",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
   "kind": "html",
   "sandbox": "allow-scripts",
   "playwrightVersion": "1.61.1",
   "networkRequests": [],
-  "browserVersion": "149.0.7827.55"
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
 }

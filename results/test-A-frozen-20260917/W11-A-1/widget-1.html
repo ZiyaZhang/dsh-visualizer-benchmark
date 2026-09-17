@@ -1,0 +1,186 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+  .fmp-wrap{font-family:inherit;color:var(--dsw-alias-label-primary);display:flex;flex-direction:column;gap:14px}
+  .fmp-panel{background:var(--dsw-alias-bg-base);border:1px solid var(--dsw-alias-border-l1);border-radius:14px;overflow:hidden}
+  .fmp-head{padding:14px 16px 12px;border-bottom:1px solid var(--dsw-alias-border-l1);display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .fmp-head h3{margin:0;font-size:15px;font-weight:600}
+  .fmp-tag{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--dsw-alias-label-tertiary);border:1px solid var(--dsw-alias-border-l1);border-radius:999px;padding:2px 8px;white-space:nowrap}
+  .fmp-body{padding:16px;display:flex;flex-direction:column;gap:16px}
+  .fmp-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+  .fmp-label{font-size:13px;font-weight:600}
+  .fmp-seg{display:flex;gap:8px;flex-wrap:wrap}
+  .fmp-seg button{flex:1 1 120px;min-width:0;padding:9px 14px;border-radius:10px;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);font:inherit;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
+  .fmp-seg button:hover{background:var(--dsw-alias-interactive-bg-hover)}
+  .fmp-seg button .dot{width:8px;height:8px;border-radius:50%;border:2px solid var(--dsw-alias-label-tertiary);flex:none}
+  .fmp-seg button[aria-pressed="true"]{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-interactive-bg-active);font-weight:600}
+  .fmp-seg button[aria-pressed="true"] .dot{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-brand-primary)}
+  .fmp-input{width:100%;box-sizing:border-box;padding:9px 12px;border-radius:10px;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);font:inherit;font-size:13px}
+  .fmp-input:focus{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:1px}
+  .fmp-hint{font-size:12px;color:var(--dsw-alias-label-secondary);min-height:16px}
+  .fmp-hint[data-tone="blocked"]{color:var(--dsw-alias-state-error-primary)}
+  .fmp-foot{padding:12px 16px;border-top:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-layer-1);display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+  .fmp-foot button{font:inherit;font-size:13px;padding:8px 16px;border-radius:10px;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-base);color:var(--dsw-alias-label-primary);cursor:pointer}
+  .fmp-foot button:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover)}
+  .fmp-foot button[data-primary]{background:var(--dsw-alias-button-primary-fill);color:var(--dsw-alias-label-primary-inverted);border-color:transparent;font-weight:600}
+  .fmp-foot button:disabled{opacity:.5;cursor:not-allowed}
+  .fmp-summary{border:1px solid var(--dsw-alias-border-l2);border-radius:14px;padding:14px 16px;background:var(--dsw-alias-bg-layer-2);display:none;gap:10px;flex-direction:column}
+  .fmp-summary[data-shown="1"]{display:flex}
+  .fmp-summary h4{margin:0;font-size:13px;font-weight:600}
+  .fmp-chips{display:flex;gap:8px;flex-wrap:wrap}
+  .fmp-chip{font-size:12.5px;padding:5px 11px;border-radius:999px;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-base)}
+  .fmp-chip b{font-variant-numeric:tabular-nums}
+  .fmp-empty{font-size:12.5px;color:var(--dsw-alias-label-tertiary)}
+  @media (max-width:420px){.fmp-seg button{flex-basis:100%}}
+</style>
+<div class="fmp-wrap">
+  <div class="fmp-panel" role="dialog" aria-label="筛选条件弹窗">
+    <div class="fmp-head">
+      <h3>筛选</h3><span class="fmp-tag">交互原型</span>
+    </div>
+    <div class="fmp-body">
+      <div class="fmp-field">
+        <span class="fmp-label" id="lbl-status">状态</span>
+        <div class="fmp-seg" role="group" aria-labelledby="lbl-status">
+          <button type="button" id="st-ongoing" aria-pressed="true"><span class="dot"></span>进行中</button>
+          <button type="button" id="st-done" aria-pressed="false"><span class="dot"></span>已完成</button>
+        </div>
+      </div>
+      <div class="fmp-field">
+        <label class="fmp-label" for="owner">负责人</label>
+        <input class="fmp-input" id="owner" type="text" placeholder="输入负责人姓名" autocomplete="off" aria-describedby="owner-hint">
+        <span class="fmp-hint" id="owner-hint" data-tone="blocked">负责人为空，“应用”暂不可用。</span>
+      </div>
+    </div>
+    <div class="fmp-foot">
+      <button type="button" id="reset">重置</button>
+      <button type="button" id="apply" data-primary disabled>应用</button>
+    </div>
+  </div>
+
+  <div class="fmp-summary" id="summary" data-shown="0" aria-live="polite">
+    <h4>已应用的筛选</h4>
+    <div class="fmp-chips" id="chips"></div>
+    <div class="fmp-empty" id="empty">尚未应用，填写负责人后点击“应用”。</div>
+  </div>
+</div>
+<script>
+(function(){
+  var state={status:"进行中",owner:""};
+  var applied=null;
+  var bOngoing=document.getElementById("st-ongoing"),bDone=document.getElementById("st-done");
+  var owner=document.getElementById("owner"),hint=document.getElementById("owner-hint");
+  var applyBtn=document.getElementById("apply"),resetBtn=document.getElementById("reset");
+  var summary=document.getElementById("summary"),chips=document.getElementById("chips"),empty=document.getElementById("empty");
+
+  function pickStatus(s){
+    state.status=s;
+    bOngoing.setAttribute("aria-pressed",String(s==="进行中"));
+    bDone.setAttribute("aria-pressed",String(s==="已完成"));
+  }
+  function sync(){
+    var ok=state.owner.trim().length>0;
+    applyBtn.disabled=!ok;
+    if(ok){hint.dataset.tone="ok";hint.textContent="将筛选：状态「"+state.status+"」· 负责人「"+state.owner.trim()+"」。";}
+    else{hint.dataset.tone="blocked";hint.textContent="负责人为空，“应用”暂不可用。";}
+  }
+  function render(){
+    if(!applied){summary.dataset.shown="0";return;}
+    summary.dataset.shown="1";
+    empty.style.display="none";
+    chips.innerHTML='<span class="fmp-chip">状态：<b></b></span><span class="fmp-chip">负责人：<b></b></span>';
+    var b=chips.querySelectorAll("b");
+    b[0].textContent=applied.status;b[1].textContent=applied.owner;
+  }
+  bOngoing.addEventListener("click",function(){pickStatus("进行中");sync();});
+  bDone.addEventListener("click",function(){pickStatus("已完成");sync();});
+  owner.addEventListener("input",function(){state.owner=owner.value;sync();});
+  applyBtn.addEventListener("click",function(){if(applyBtn.disabled)return;applied={status:state.status,owner:state.owner.trim()};render();});
+  resetBtn.addEventListener("click",function(){pickStatus("进行中");owner.value="";state.owner="";applied=null;render();sync();});
+  sync();render();
+})();
+</script></body></html>

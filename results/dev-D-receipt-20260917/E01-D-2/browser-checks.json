@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 2,
+  "visualSettleMs": 500,
+  "trialId": "E01-D-2",
+  "caseId": "E01",
+  "scenario": "static",
+  "widgetIndex": 0,
+  "callSeq": 31,
+  "resultSeq": 32,
+  "casesPath": "results/dev-D-receipt-20260917/cases.json",
+  "casesSha256": "8a0893d1f7eaaf499c8e1afe9e025a56ca001f4f591a5ef85a3583266b59b9b9",
+  "collectedAt": "2026-09-17T18:09:19.874Z",
+  "scope": "Isolated original srcdoc preview. No real WidgetCard, Host Remote, repair admission, or subsequent model response is exercised.",
+  "checks": {
+    "render": {
+      "status": "fail",
+      "reason": "Browser reported an initial runtime/resource error.",
+      "evidence": {
+        "errors": [
+          {
+            "type": "error",
+            "channel": "45e1d2382bbaefe4dc346c86522dbd92",
+            "payload": {
+              "message": "Uncaught TypeError: Cannot read properties of null (reading 'querySelectorAll')"
+            },
+            "at": 91.39999985694885
+          }
+        ]
+      }
+    },
+    "interaction": {
+      "status": "not_applicable",
+      "reason": "No automatic action sequence specified for this static inspection.",
+      "evidence": {}
+    },
+    "localMessages": {
+      "status": "not_applicable",
+      "reason": "No local action sequence was requested.",
+      "evidence": {}
+    },
+    "followupPayload": {
+      "status": "not_applicable",
+      "reason": "No explicit follow-up requested by this scenario.",
+      "evidence": {}
+    },
+    "hostFollowup": {
+      "status": "not_applicable",
+      "reason": "This preview never contacts the Host; validate real conversation delivery separately.",
+      "evidence": {}
+    },
+    "layout": {
+      "status": "pending",
+      "reason": "Four initial viewport/theme screenshots recorded; overflow is a review flag, not a standalone product verdict.",
+      "evidence": {
+        "screenshots": [
+          "initial-736-light.png",
+          "initial-360-light.png",
+          "initial-736-dark.png",
+          "initial-360-dark.png"
+        ],
+        "flags": []
+      }
+    },
+    "content": {
+      "status": "pending",
+      "reason": "Required labels were observed; values, proportions and meaning still need content review.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    },
+    "visibleLabels": {
+      "status": "not_applicable",
+      "reason": "No literal label oracle specified.",
+      "evidence": {
+        "expectedText": [],
+        "missing": []
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "path": "initial-736-light.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-360-light.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "light"
+    },
+    {
+      "path": "initial-736-dark.png",
+      "state": "initial",
+      "width": 736,
+      "appearance": "dark"
+    },
+    {
+      "path": "initial-360-dark.png",
+      "state": "initial",
+      "width": 360,
+      "appearance": "dark"
+    }
+  ],
+  "states": [
+    {
+      "text": "TCP 三次握手 · 分步演示\n① SYN\n② SYN + ACK\n③ ACK\n客户端\n服务端\nC\nsocket\nS\nlisten 80\nSYN · seq = x\n我想建连，请从 x 开始编号\n“我能发，你能收吗？”\nSYN + ACK · seq = y, ack = x + 1\n收到你的 x，我也从 y 开始\n“我能收，也能发；双向通道对上了”\nACK · ack = y + 1\n收到你的 y，服务端请进入建立态\n✔ 握手完成，双方 ESTABLISHED\n✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据\n状态：CLOSED → SYN_SENT → ESTABLISHED\nLISTEN → SYN_RCVD → ESTABLISHED\n点击上方 ①②③ 或“下一步”逐帧看：每帧都同时消耗掉一个“未确认”的疑问。\n① 客户端 → 服务端：SYN（seq = x）\n客户端\nCLOSED\n尚未建连\n服务端\nLISTEN\n等你开口\n这一帧解决了什么\n⚠ 看看“只握两次”会怎样\n← 上一步\n下一步 →\n▶ 自动播放\n客户端 服务端 C socket S listen 80 SYN · seq = x 我想建连，请从 x 开始编号 “我能发，你能收吗？” SYN + ACK · seq = y, ack = x + 1 收到你的 x，我也从 y 开始 “我能收，也能发；双向通道对上了” ACK · ack = y + 1 收到你的 y，服务端请进入建立态 ✔ 握手完成，双方 ESTABLISHED ✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据 状态：CLOSED → SYN_SENT → ESTABLISHED LISTEN → SYN_RCVD → ESTABLISHED",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 950,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "TCP 三次握手时序图"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "45e1d2382bbaefe4dc346c86522dbd92",
+          "payload": {},
+          "at": 68.09999990463257
+        },
+        {
+          "type": "error",
+          "channel": "45e1d2382bbaefe4dc346c86522dbd92",
+          "payload": {
+            "message": "Uncaught TypeError: Cannot read properties of null (reading 'querySelectorAll')"
+          },
+          "at": 91.39999985694885
+        },
+        {
+          "type": "resize",
+          "channel": "45e1d2382bbaefe4dc346c86522dbd92",
+          "payload": {
+            "height": 950
+          },
+          "at": 94.59999990463257
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "light",
+      "accessibility": "- text: TCP 三次握手 · 分步演示\n- button \"① SYN\"\n- button \"② SYN + ACK\"\n- button \"③ ACK\"\n- img \"TCP 三次握手时序图\": 客户端 服务端 C socket S listen 80 SYN · seq = x 我想建连，请从 x 开始编号 “我能发，你能收吗？” SYN + ACK · seq = y, ack = x + 1 收到你的 x，我也从 y 开始 “我能收，也能发；双向通道对上了” ACK · ack = y + 1 收到你的 y，服务端请进入建立态 ✔ 握手完成，双方 ESTABLISHED ✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据 状态：CLOSED → SYN_SENT → ESTABLISHED LISTEN → SYN_RCVD → ESTABLISHED\n- text: 点击上方 ①②③ 或“下一步”逐帧看：每帧都同时消耗掉一个“未确认”的疑问。 ① 客户端 → 服务端：SYN（seq = x） 客户端 CLOSED 尚未建连 服务端 LISTEN 等你开口\n- heading \"这一帧解决了什么\" [level=4]\n- list\n- button \"⚠ 看看“只握两次”会怎样\"\n- button \"← 上一步\"\n- button \"下一步 →\"\n- button \"▶ 自动播放\""
+    },
+    {
+      "text": "TCP 三次握手 · 分步演示\n① SYN\n② SYN + ACK\n③ ACK\n客户端\n服务端\nC\nsocket\nS\nlisten 80\nSYN · seq = x\n我想建连，请从 x 开始编号\n“我能发，你能收吗？”\nSYN + ACK · seq = y, ack = x + 1\n收到你的 x，我也从 y 开始\n“我能收，也能发；双向通道对上了”\nACK · ack = y + 1\n收到你的 y，服务端请进入建立态\n✔ 握手完成，双方 ESTABLISHED\n✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据\n状态：CLOSED → SYN_SENT → ESTABLISHED\nLISTEN → SYN_RCVD → ESTABLISHED\n点击上方 ①②③ 或“下一步”逐帧看：每帧都同时消耗掉一个“未确认”的疑问。\n① 客户端 → 服务端：SYN（seq = x）\n客户端\nCLOSED\n尚未建连\n服务端\nLISTEN\n等你开口\n这一帧解决了什么\n⚠ 看看“只握两次”会怎样\n← 上一步\n下一步 →\n▶ 自动播放\n客户端 服务端 C socket S listen 80 SYN · seq = x 我想建连，请从 x 开始编号 “我能发，你能收吗？” SYN + ACK · seq = y, ack = x + 1 收到你的 x，我也从 y 开始 “我能收，也能发；双向通道对上了” ACK · ack = y + 1 收到你的 y，服务端请进入建立态 ✔ 握手完成，双方 ESTABLISHED ✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据 状态：CLOSED → SYN_SENT → ESTABLISHED LISTEN → SYN_RCVD → ESTABLISHED",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 769,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "TCP 三次握手时序图"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "889665c29d6ef5a969fe3abe89ae24a2",
+          "payload": {},
+          "at": 689.6999998092651
+        },
+        {
+          "type": "error",
+          "channel": "889665c29d6ef5a969fe3abe89ae24a2",
+          "payload": {
+            "message": "Uncaught TypeError: Cannot read properties of null (reading 'querySelectorAll')"
+          },
+          "at": 691.5
+        },
+        {
+          "type": "resize",
+          "channel": "889665c29d6ef5a969fe3abe89ae24a2",
+          "payload": {
+            "height": 769
+          },
+          "at": 693
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "light",
+      "accessibility": "- text: TCP 三次握手 · 分步演示\n- button \"① SYN\"\n- button \"② SYN + ACK\"\n- button \"③ ACK\"\n- img \"TCP 三次握手时序图\": 客户端 服务端 C socket S listen 80 SYN · seq = x 我想建连，请从 x 开始编号 “我能发，你能收吗？” SYN + ACK · seq = y, ack = x + 1 收到你的 x，我也从 y 开始 “我能收，也能发；双向通道对上了” ACK · ack = y + 1 收到你的 y，服务端请进入建立态 ✔ 握手完成，双方 ESTABLISHED ✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据 状态：CLOSED → SYN_SENT → ESTABLISHED LISTEN → SYN_RCVD → ESTABLISHED\n- text: 点击上方 ①②③ 或“下一步”逐帧看：每帧都同时消耗掉一个“未确认”的疑问。 ① 客户端 → 服务端：SYN（seq = x） 客户端 CLOSED 尚未建连 服务端 LISTEN 等你开口\n- heading \"这一帧解决了什么\" [level=4]\n- list\n- button \"⚠ 看看“只握两次”会怎样\"\n- button \"← 上一步\"\n- button \"下一步 →\"\n- button \"▶ 自动播放\""
+    },
+    {
+      "text": "TCP 三次握手 · 分步演示\n① SYN\n② SYN + ACK\n③ ACK\n客户端\n服务端\nC\nsocket\nS\nlisten 80\nSYN · seq = x\n我想建连，请从 x 开始编号\n“我能发，你能收吗？”\nSYN + ACK · seq = y, ack = x + 1\n收到你的 x，我也从 y 开始\n“我能收，也能发；双向通道对上了”\nACK · ack = y + 1\n收到你的 y，服务端请进入建立态\n✔ 握手完成，双方 ESTABLISHED\n✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据\n状态：CLOSED → SYN_SENT → ESTABLISHED\nLISTEN → SYN_RCVD → ESTABLISHED\n点击上方 ①②③ 或“下一步”逐帧看：每帧都同时消耗掉一个“未确认”的疑问。\n① 客户端 → 服务端：SYN（seq = x）\n客户端\nCLOSED\n尚未建连\n服务端\nLISTEN\n等你开口\n这一帧解决了什么\n⚠ 看看“只握两次”会怎样\n← 上一步\n下一步 →\n▶ 自动播放\n客户端 服务端 C socket S listen 80 SYN · seq = x 我想建连，请从 x 开始编号 “我能发，你能收吗？” SYN + ACK · seq = y, ack = x + 1 收到你的 x，我也从 y 开始 “我能收，也能发；双向通道对上了” ACK · ack = y + 1 收到你的 y，服务端请进入建立态 ✔ 握手完成，双方 ESTABLISHED ✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据 状态：CLOSED → SYN_SENT → ESTABLISHED LISTEN → SYN_RCVD → ESTABLISHED",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 736,
+      "viewportWidth": 736,
+      "bodyHeight": 950,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "TCP 三次握手时序图"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "018cc9d35564051bb77b945d70b5e012",
+          "payload": {},
+          "at": 1270.2999999523163
+        },
+        {
+          "type": "error",
+          "channel": "018cc9d35564051bb77b945d70b5e012",
+          "payload": {
+            "message": "Uncaught TypeError: Cannot read properties of null (reading 'querySelectorAll')"
+          },
+          "at": 1271.6999998092651
+        },
+        {
+          "type": "resize",
+          "channel": "018cc9d35564051bb77b945d70b5e012",
+          "payload": {
+            "height": 950
+          },
+          "at": 1273.0999999046326
+        }
+      ],
+      "name": "initial",
+      "width": 736,
+      "appearance": "dark",
+      "accessibility": "- text: TCP 三次握手 · 分步演示\n- button \"① SYN\"\n- button \"② SYN + ACK\"\n- button \"③ ACK\"\n- img \"TCP 三次握手时序图\": 客户端 服务端 C socket S listen 80 SYN · seq = x 我想建连，请从 x 开始编号 “我能发，你能收吗？” SYN + ACK · seq = y, ack = x + 1 收到你的 x，我也从 y 开始 “我能收，也能发；双向通道对上了” ACK · ack = y + 1 收到你的 y，服务端请进入建立态 ✔ 握手完成，双方 ESTABLISHED ✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据 状态：CLOSED → SYN_SENT → ESTABLISHED LISTEN → SYN_RCVD → ESTABLISHED\n- text: 点击上方 ①②③ 或“下一步”逐帧看：每帧都同时消耗掉一个“未确认”的疑问。 ① 客户端 → 服务端：SYN（seq = x） 客户端 CLOSED 尚未建连 服务端 LISTEN 等你开口\n- heading \"这一帧解决了什么\" [level=4]\n- list\n- button \"⚠ 看看“只握两次”会怎样\"\n- button \"← 上一步\"\n- button \"下一步 →\"\n- button \"▶ 自动播放\""
+    },
+    {
+      "text": "TCP 三次握手 · 分步演示\n① SYN\n② SYN + ACK\n③ ACK\n客户端\n服务端\nC\nsocket\nS\nlisten 80\nSYN · seq = x\n我想建连，请从 x 开始编号\n“我能发，你能收吗？”\nSYN + ACK · seq = y, ack = x + 1\n收到你的 x，我也从 y 开始\n“我能收，也能发；双向通道对上了”\nACK · ack = y + 1\n收到你的 y，服务端请进入建立态\n✔ 握手完成，双方 ESTABLISHED\n✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据\n状态：CLOSED → SYN_SENT → ESTABLISHED\nLISTEN → SYN_RCVD → ESTABLISHED\n点击上方 ①②③ 或“下一步”逐帧看：每帧都同时消耗掉一个“未确认”的疑问。\n① 客户端 → 服务端：SYN（seq = x）\n客户端\nCLOSED\n尚未建连\n服务端\nLISTEN\n等你开口\n这一帧解决了什么\n⚠ 看看“只握两次”会怎样\n← 上一步\n下一步 →\n▶ 自动播放\n客户端 服务端 C socket S listen 80 SYN · seq = x 我想建连，请从 x 开始编号 “我能发，你能收吗？” SYN + ACK · seq = y, ack = x + 1 收到你的 x，我也从 y 开始 “我能收，也能发；双向通道对上了” ACK · ack = y + 1 收到你的 y，服务端请进入建立态 ✔ 握手完成，双方 ESTABLISHED ✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据 状态：CLOSED → SYN_SENT → ESTABLISHED LISTEN → SYN_RCVD → ESTABLISHED",
+      "temperature": [],
+      "numericReadouts": [],
+      "bodyWidth": 360,
+      "viewportWidth": 360,
+      "bodyHeight": 769,
+      "visibleGraphics": 1,
+      "accessibleNames": [
+        "TCP 三次握手时序图"
+      ],
+      "messages": [
+        {
+          "type": "ready",
+          "channel": "3cd7296672ab0de0f073ec13894f570d",
+          "payload": {},
+          "at": 1842.7999999523163
+        },
+        {
+          "type": "error",
+          "channel": "3cd7296672ab0de0f073ec13894f570d",
+          "payload": {
+            "message": "Uncaught TypeError: Cannot read properties of null (reading 'querySelectorAll')"
+          },
+          "at": 1844.1999998092651
+        },
+        {
+          "type": "resize",
+          "channel": "3cd7296672ab0de0f073ec13894f570d",
+          "payload": {
+            "height": 769
+          },
+          "at": 1847.6999998092651
+        }
+      ],
+      "name": "initial",
+      "width": 360,
+      "appearance": "dark",
+      "accessibility": "- text: TCP 三次握手 · 分步演示\n- button \"① SYN\"\n- button \"② SYN + ACK\"\n- button \"③ ACK\"\n- img \"TCP 三次握手时序图\": 客户端 服务端 C socket S listen 80 SYN · seq = x 我想建连，请从 x 开始编号 “我能发，你能收吗？” SYN + ACK · seq = y, ack = x + 1 收到你的 x，我也从 y 开始 “我能收，也能发；双向通道对上了” ACK · ack = y + 1 收到你的 y，服务端请进入建立态 ✔ 握手完成，双方 ESTABLISHED ✘ 这个 ACK 丢了：服务端不知道，你还在傻等数据 状态：CLOSED → SYN_SENT → ESTABLISHED LISTEN → SYN_RCVD → ESTABLISHED\n- text: 点击上方 ①②③ 或“下一步”逐帧看：每帧都同时消耗掉一个“未确认”的疑问。 ① 客户端 → 服务端：SYN（seq = x） 客户端 CLOSED 尚未建连 服务端 LISTEN 等你开口\n- heading \"这一帧解决了什么\" [level=4]\n- list\n- button \"⚠ 看看“只握两次”会怎样\"\n- button \"← 上一步\"\n- button \"下一步 →\"\n- button \"▶ 自动播放\""
+    }
+  ],
+  "messages": [
+    {
+      "type": "ready",
+      "channel": "45e1d2382bbaefe4dc346c86522dbd92",
+      "payload": {},
+      "at": 68.09999990463257
+    },
+    {
+      "type": "error",
+      "channel": "45e1d2382bbaefe4dc346c86522dbd92",
+      "payload": {
+        "message": "Uncaught TypeError: Cannot read properties of null (reading 'querySelectorAll')"
+      },
+      "at": 91.39999985694885
+    },
+    {
+      "type": "resize",
+      "channel": "45e1d2382bbaefe4dc346c86522dbd92",
+      "payload": {
+        "height": 950
+      },
+      "at": 94.59999990463257
+    }
+  ],
+  "console": [],
+  "pageErrors": [
+    "Cannot read properties of null (reading 'querySelectorAll')",
+    "Cannot read properties of null (reading 'querySelectorAll')",
+    "Cannot read properties of null (reading 'querySelectorAll')",
+    "Cannot read properties of null (reading 'querySelectorAll')"
+  ],
+  "failedRequests": [],
+  "flags": [],
+  "sourceSha256": "a8ddefe9ff6b3334b59e130848aa17c351325fb7cfc0a06b26055afad34faf50",
+  "previewSha256": "f1fdd7a6024ff82a30db977cfb2e8d342aa07f3dc7a715e893b4f0a26b9f55b2",
+  "rendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "rendererHashKind": "recorded trial renderer source hash",
+  "checkerRuntimeRendererSha256": "1f83909dcaafb54e46fa0ccd6c03d32c68ad809319f13a2eeb2033aab374aac2",
+  "themeMethod": "Theme tokens are computed from the product CSS and the Visualizer token list. SVG is rebuilt from unchanged source; HTML receives tokens through the shipped theme bridge.",
+  "checkerSha256": "3e81950402ce9591a5c3ac62c7a044bdbb69bdfc8cbbc4c236e45c7f22502c43",
+  "kind": "html",
+  "sandbox": "allow-scripts",
+  "playwrightVersion": "1.61.1",
+  "networkRequests": [],
+  "browserVersion": "149.0.7827.55",
+  "themeSourceSha256": "df484e2cf10d1d0d0787ec09bda78c2add7b8593f8dd0e77896ba21a91b613f4",
+  "themeTokens": {
+    "light": {
+      "--dsh-widget-color-scheme": "light",
+      "--dsw-alias-bg-base": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-1": "rgb(255, 255, 255)",
+      "--dsw-alias-bg-layer-2": "rgb(255, 255, 255)",
+      "--dsw-alias-border-l1": "rgba(0, 0, 0, 0.04)",
+      "--dsw-alias-border-l2": "rgba(0, 0, 0, 0.1)",
+      "--dsw-alias-brand-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-button-primary-fill": "rgb(15, 17, 21)",
+      "--dsw-alias-interactive-bg-active": "rgba(38, 49, 72, 0.1)",
+      "--dsw-alias-interactive-bg-hover": "rgba(38, 49, 72, 0.06)",
+      "--dsw-alias-label-primary": "rgb(15, 17, 21)",
+      "--dsw-alias-label-primary-inverted": "rgb(255, 255, 255)",
+      "--dsw-alias-label-secondary": "rgb(97, 102, 107)",
+      "--dsw-alias-label-tertiary": "rgb(129, 133, 140)",
+      "--dsw-alias-state-error-primary": "rgb(236, 19, 19)"
+    },
+    "dark": {
+      "--dsh-widget-color-scheme": "dark",
+      "--dsw-alias-bg-base": "rgb(21, 21, 23)",
+      "--dsw-alias-bg-layer-1": "rgb(35, 35, 36)",
+      "--dsw-alias-bg-layer-2": "rgb(44, 44, 46)",
+      "--dsw-alias-border-l1": "rgba(255, 255, 255, 0.06)",
+      "--dsw-alias-border-l2": "rgba(255, 255, 255, 0.12)",
+      "--dsw-alias-brand-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-button-primary-fill": "rgb(249, 250, 251)",
+      "--dsw-alias-interactive-bg-active": "rgba(255, 255, 255, 0.14)",
+      "--dsw-alias-interactive-bg-hover": "rgba(255, 255, 255, 0.08)",
+      "--dsw-alias-label-primary": "rgb(249, 250, 251)",
+      "--dsw-alias-label-primary-inverted": "rgb(53, 54, 56)",
+      "--dsw-alias-label-secondary": "rgb(207, 211, 214)",
+      "--dsw-alias-label-tertiary": "rgb(173, 178, 184)",
+      "--dsw-alias-state-error-primary": "rgb(242, 90, 90)"
+    }
+  }
+}

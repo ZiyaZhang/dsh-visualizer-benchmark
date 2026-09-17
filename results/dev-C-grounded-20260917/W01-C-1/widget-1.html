@@ -1,0 +1,257 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+.bsearch{--cell:46px;--gap:8px;font-family:inherit;color:var(--dsw-alias-label-primary);display:flex;flex-direction:column;gap:12px;padding:4px 0}
+.bsearch .track{position:relative;overflow-x:auto;padding:0 2px}
+.bsearch .row{display:flex;gap:var(--gap);width:max-content}
+.bsearch .cell{width:var(--cell);flex:0 0 var(--cell);display:flex;flex-direction:column;align-items:center;gap:6px}
+.bsearch .box{width:100%;height:var(--cell);display:flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-2);font-size:17px;font-variant-numeric:tabular-nums;transition:background .18s,color .18s,opacity .18s,border-color .18s}
+.bsearch .idx{font-size:11px;color:var(--dsw-alias-label-tertiary);font-variant-numeric:tabular-nums}
+.bsearch .ptr{height:20px;font-size:11px;line-height:20px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--dsw-alias-label-secondary);opacity:0;transition:opacity .18s}
+.bsearch .ptr.on{opacity:1}
+.bsearch .ptr.lo{color:var(--dsw-alias-brand-primary)}
+.bsearch .ptr.hi{color:var(--dsw-alias-brand-primary)}
+.bsearch .ptr.mid{color:var(--dsw-alias-label-primary);font-weight:600}
+.bsearch .cell.range .box{border-color:var(--dsw-alias-brand-primary)}
+.bsearch .cell.dropped .box{opacity:.34}
+.bsearch .cell.dropped .box::after{content:"";position:absolute;height:1px;width:60%;background:var(--dsw-alias-state-error-primary)}
+.bsearch .cell.win .box{background:var(--dsw-alias-button-primary-fill);border-color:var(--dsw-alias-button-primary-fill);color:var(--dsw-alias-label-primary-inverted);font-weight:600}
+.bsearch .cell.midhint .box{background:var(--dsw-alias-interactive-bg-active)}
+.bsearch .ruler{position:relative;height:10px;width:max-content}
+.bsearch .rangebar{position:absolute;top:0;height:6px;border-radius:3px;background:var(--dsw-alias-brand-primary);opacity:.55}
+.bsearch .panel{background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.bsearch .stats{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px}
+.bsearch .stat{display:flex;align-items:baseline;gap:5px;min-width:0}
+.bsearch .stat .k{color:var(--dsw-alias-label-secondary)}
+.bsearch .stat .v{font-variant-numeric:tabular-nums;font-weight:600}
+.bsearch .msg{font-size:13px;line-height:1.55;color:var(--dsw-alias-label-primary)}
+.bsearch .msg.done{color:var(--dsw-alias-brand-primary);font-weight:600}
+.bsearch .note{font-size:12px;color:var(--dsw-alias-label-tertiary)}
+.bsearch .ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bsearch button{cursor:pointer;padding:6px 14px;border-radius:8px;font-size:13px}
+@media (max-width:420px){.bsearch{--cell:38px}.bsearch .box{font-size:15px}}
+</style>
+<div class="bsearch" id="bsRoot" aria-label="二分查找演示：有序数组 2、5、8、12、16、23、38、56，目标值 23">
+  <div class="track">
+    <div class="row" id="bsRow"></div>
+    <div class="ruler" id="bsRuler"><div class="rangebar" id="bsRange"></div></div>
+  </div>
+  <div class="panel">
+    <div class="stats">
+      <div class="stat"><span class="k">第几轮</span><span class="v" id="bsRound">—</span></div>
+      <div class="stat"><span class="k">low</span><span class="v" id="bsLow">—</span></div>
+      <div class="stat"><span class="k">mid</span><span class="v" id="bsMid">—</span></div>
+      <div class="stat"><span class="k">high</span><span class="v" id="bsHigh">—</span></div>
+      <div class="stat"><span class="k">候选个数</span><span class="v" id="bsSize">—</span></div>
+    </div>
+    <div class="msg" id="bsMsg">准备就绪：目标值是 23，初始搜索范围是整个数组。</div>
+    <div class="ctl">
+      <button type="button" id="bsNext">下一步</button>
+      <button type="button" id="bsReset">重置</button>
+      <span class="note" id="bsHint">每点一次「下一步」缩小一半范围</span>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var A=[2,5,8,12,16,23,38,56];
+  var TARGET=23;
+  var root=document.getElementById('bsRoot');
+  var row=document.getElementById('bsRow');
+  var ruler=document.getElementById('bsRuler');
+  var rangebar=document.getElementById('bsRange');
+  var nextBtn=document.getElementById('bsNext');
+  var resetBtn=document.getElementById('bsReset');
+  var els={round:document.getElementById('bsRound'),low:document.getElementById('bsLow'),mid:document.getElementById('bsMid'),
+           high:document.getElementById('bsHigh'),size:document.getElementById('bsSize'),msg:document.getElementById('bsMsg'),
+           hint:document.getElementById('bsHint')};
+  var cellRefs=[];
+  var GAP=8;
+
+  function build(){
+    row.innerHTML='';
+    cellRefs=[];
+    A.forEach(function(v,i){
+      var c=document.createElement('div');
+      c.className='cell';
+      var box=document.createElement('div'); box.className='box'; box.textContent=v;
+      var idx=document.createElement('div'); idx.className='idx'; idx.textContent='i='+i;
+      var pMid=document.createElement('div'); pMid.className='ptr mid';
+      var pLo=document.createElement('div'); pLo.className='ptr lo';
+      var pHi=document.createElement('div'); pHi.className='ptr hi';
+      c.appendChild(box); c.appendChild(idx); c.appendChild(pMid); c.appendChild(pLo); c.appendChild(pHi);
+      row.appendChild(c);
+      cellRefs.push({cell:c,mid:pMid,lo:pLo,hi:pHi});
+    });
+    var w=A.length*(46+GAP)-GAP, rulerW=row.getBoundingClientRect().width||w;
+    ruler.style.width=rulerW+'px';
+  }
+
+  function metrics(){
+    var first=cellRefs[0];
+    var cellW = first.cell.getBoundingClientRect().width || 46;
+    return cellW+GAP;
+  }
+
+  function initState(){ return {low:0, high:A.length-1, mid:null, dropped:{}, round:0, status:'ready'}; }
+
+  var state=initState();
+  var history=[state];
+
+  function render(){
+    var step=metrics();
+    A.forEach(function(v,i){
+      var r=cellRefs[i], inRange=(i>=state.low&&i<=state.high);
+      var cls='cell';
+      if(inRange) cls+=' range';
+      if(state.dropped[i]) cls+=' dropped';
+      if(state.status==='found'&&i===state.mid) cls+=' win';
+      else if(state.mid===i) cls+=' midhint';
+      r.cell.className=cls;
+      r.lo.className='ptr lo'+(state.status!=='ready'&&i===state.low?' on':'');
+      r.hi.className='ptr hi'+(state.status!=='ready'&&i===state.high?' on':'');
+      r.mid.className='ptr mid'+(state.mid===i?' on':'');
+      r.lo.textContent=(state.status!=='ready'&&i===state.low)?'▲ low':'';
+      r.hi.textContent=(state.status!=='ready'&&i===state.high)?'▲ high':'';
+      r.mid.textContent=(state.mid===i)?'▼ mid':'';
+    });
+    if(state.status==='ready'){ rangebar.style.left='0px'; rangebar.style.width=(A.length*step-GAP)+'px'; }
+    else { rangebar.style.left=(state.low*step)+'px'; rangebar.style.width=((state.high-state.low+1)*step-GAP)+'px'; }
+    els.round.textContent = state.status==='ready' ? '—' : String(state.round);
+    els.low.textContent = state.status==='ready' ? '—' : state.low+' ('+A[state.low]+')';
+    els.high.textContent = state.status==='ready' ? '—' : state.high+' ('+A[state.high]+')';
+    els.mid.textContent = state.mid===null ? '—' : state.mid+' ('+A[state.mid]+')';
+    els.size.textContent = state.status==='ready' ? String(A.length) : String(state.high-state.low+1);
+    root.setAttribute('aria-label','二分查找第'+ (state.status==='ready'?0:state.round) +'轮，low='+state.low+'，mid='+(state.mid===null?'无':state.mid)+'，high='+state.high);
+  }
+
+  function next(){
+    var s=history[history.length-1];
+    if(s.status==='found'||s.status==='done') return;
+    var low=s.low, high=s.high;
+    var mid=Math.floor((low+high)/2);
+    var ns;
+    if(A[mid]===TARGET){
+      ns={low:low,high:high,mid:mid,dropped:Object.assign({},s.dropped),round:s.round+1,status:'found',msg:'第 '+(s.round+1)+' 轮：mid = ⌊('+low+'+'+high+')/2⌋ = '+mid+'，A['+mid+'] = '+A[mid]+' = 目标值 23，找到了！'};
+      els.msg.className='msg done';
+    } else if(A[mid]<TARGET){
+      var d=Object.assign({},s.dropped);
+      for(var i=low;i<=mid;i++) d[i]=true;
+      ns={low:mid+1,high:high,mid:mid,dropped:d,round:s.round+1,status:'searching',
+          msg:'第 '+(s.round+1)+' 轮：mid = ⌊('+low+'+'+high+')/2⌋ = '+mid+'，A['+mid+'] = '+A[mid]+' < 23，目标在右半边 → 排除 '+low+'~'+mid+' 号位置，low = mid+1 = '+(mid+1)+'。'};
+      els.msg.className='msg';
+    } else {
+      var d2=Object.assign({},s.dropped);
+      for(var j=mid;j<=high;j++) d2[j]=true;
+      ns={low:low,high:mid-1,mid:mid,dropped:d2,round:s.round+1,status:'searching',
+          msg:'第 '+(s.round+1)+' 轮：mid = ⌊('+low+'+'+high+')/2⌋ = '+mid+'，A['+mid+'] = '+A[mid]+' > 23，目标在左半边 → 排除 '+mid+'~'+high+' 号位置，high = mid-1 = '+(mid-1)+'。'};
+      els.msg.className='msg';
+    }
+    history.push(ns);
+    state=ns;
+    els.msg.textContent=state.msg;
+    if(state.status==='found'){ nextBtn.disabled=true; els.hint.textContent='已找到，点「重置」重新演示'; }
+    render();
+  }
+
+  function reset(){
+    history=[initState()];
+    state=history[0];
+    els.msg.className='msg';
+    els.msg.textContent='准备就绪：目标值是 23，初始搜索范围是整个数组（low=0，high=7）。';
+    els.hint.textContent='每点一次「下一步」缩小一半范围';
+    nextBtn.disabled=false;
+    render();
+  }
+
+  nextBtn.addEventListener('click',next);
+  resetBtn.addEventListener('click',reset);
+  build();
+  reset();
+  window.addEventListener('resize',render);
+})();
+</script></body></html>

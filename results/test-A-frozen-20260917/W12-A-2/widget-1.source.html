@@ -1,0 +1,147 @@
+<style>
+  .err7 { box-sizing: border-box; background: var(--dsw-alias-bg-layer-1, #ffffff); border: 1px solid var(--dsw-alias-border-l1, #e5e7eb); border-radius: 12px; padding: 14px 16px 16px; max-width: 560px; color: var(--dsw-alias-label-primary, #111827); font-family: inherit; }
+  .err7 * { box-sizing: border-box; }
+  .err7-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .err7-title { font-size: 14px; font-weight: 600; }
+  .err7-hint { font-size: 11px; color: var(--dsw-alias-label-tertiary, #9ca3af); }
+  .err7-chart { display: flex; gap: 8px; margin-top: 12px; }
+  .err7-ycol { position: relative; flex: 0 0 26px; width: 26px; height: 176px; }
+  .err7-ytick { position: absolute; right: 0; transform: translateY(50%); font-size: 10px; color: var(--dsw-alias-label-tertiary, #9ca3af); font-variant-numeric: tabular-nums; }
+  .err7-plotcol { flex: 1 1 auto; min-width: 0; }
+  .err7-plot { position: relative; height: 176px; }
+  .err7-grid { position: absolute; inset: 0; pointer-events: none; }
+  .err7-gl { position: absolute; left: 0; right: 0; border-top: 1px dashed var(--dsw-alias-border-l1, #e5e7eb); }
+  .err7-bars { position: absolute; inset: 0; display: flex; gap: 6px; }
+  .err7-day { flex: 1 1 0; min-width: 0; display: flex; align-items: flex-end; justify-content: center; padding: 0 3px; background: transparent; border: 0; border-radius: 8px; cursor: pointer; transition: background-color .12s ease; }
+  .err7-day:hover { background: var(--dsw-alias-interactive-bg-hover, rgba(127, 127, 127, .12)); }
+  .err7-day[aria-pressed="true"] { background: var(--dsw-alias-interactive-bg-active, rgba(79, 124, 255, .14)); }
+  .err7-day:focus-visible { outline: 2px solid var(--dsw-alias-brand-primary, #4f7cff); outline-offset: 1px; }
+  .err7-bar { position: relative; width: 100%; max-width: 34px; min-height: 3px; border-radius: 5px 5px 2px 2px; background: color-mix(in srgb, var(--dsw-alias-brand-primary, #4f7cff) 42%, var(--dsw-alias-bg-layer-1, #ffffff)); transition: background-color .12s ease; }
+  .err7-day[aria-pressed="true"] .err7-bar { background: var(--dsw-alias-brand-primary, #4f7cff); }
+  .err7-val { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 4px; padding: 0 2px; border-radius: 3px; font-size: 11px; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--dsw-alias-label-secondary, #6b7280); background: var(--dsw-alias-bg-layer-1, #ffffff); }
+  .err7-day[aria-pressed="true"] .err7-val { color: var(--dsw-alias-label-primary, #111827); font-weight: 600; }
+  .err7-xlabels { display: flex; gap: 6px; margin-top: 6px; }
+  .err7-xlabel { flex: 1 1 0; min-width: 0; text-align: center; white-space: nowrap; font-size: 10.5px; color: var(--dsw-alias-label-tertiary, #9ca3af); }
+  .err7-xlabel[data-selected="true"] { color: var(--dsw-alias-label-primary, #111827); font-weight: 600; }
+  .err7-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--dsw-alias-border-l1, #e5e7eb); }
+  .err7-readout { display: flex; gap: 18px; font-size: 12px; color: var(--dsw-alias-label-secondary, #6b7280); }
+  .err7-readout b { display: block; margin-top: 2px; font-size: 14px; font-weight: 600; color: var(--dsw-alias-label-primary, #111827); font-variant-numeric: tabular-nums; }
+  .err7-go { border: 0; border-radius: 8px; padding: 8px 14px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; background: var(--dsw-alias-button-primary-fill, #2f6bff); color: var(--dsw-alias-label-primary-inverted, #ffffff); }
+  .err7-go:disabled { opacity: .45; cursor: not-allowed; }
+  @media (max-width: 380px) { .err7-xlabel { font-size: 9.5px; letter-spacing: -.3px; } }
+  @media (prefers-reduced-motion: reduce) { .err7 * { transition: none !important; } }
+</style>
+<div class="err7">
+  <div class="err7-head">
+    <div class="err7-title">7天错误率</div>
+    <div class="err7-hint">纵轴单位：%；点柱子选择某一天</div>
+  </div>
+  <div class="err7-chart">
+    <div class="err7-ycol" id="err7-ycol" aria-hidden="true"></div>
+    <div class="err7-plotcol">
+      <div class="err7-plot">
+        <div class="err7-grid" id="err7-grid" aria-hidden="true"></div>
+        <div class="err7-bars" id="err7-bars" role="group" aria-label="7天错误率柱状图，可选择其中一天"></div>
+      </div>
+      <div class="err7-xlabels" id="err7-xlabels" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div class="err7-foot">
+    <div class="err7-readout" aria-live="polite">
+      <div>已选日期<b id="err7-selday">—</b></div>
+      <div>错误率<b id="err7-selrate">—</b></div>
+    </div>
+    <button class="err7-go" id="err7-go" type="button" disabled>分析所选日期</button>
+  </div>
+</div>
+<script>
+  (function () {
+    var DATA = [
+      { day: 1, rate: 0.4 }, { day: 2, rate: 0.5 }, { day: 3, rate: 0.3 }, { day: 4, rate: 2.8 },
+      { day: 5, rate: 0.6 }, { day: 6, rate: 0.5 }, { day: 7, rate: 0.4 }
+    ];
+    var Y_MAX = 3.2;
+    var TICKS = [0, 1, 2, 3];
+
+    var ycol = document.getElementById('err7-ycol');
+    var grid = document.getElementById('err7-grid');
+    var bars = document.getElementById('err7-bars');
+    var xlabels = document.getElementById('err7-xlabels');
+    var selDayEl = document.getElementById('err7-selday');
+    var selRateEl = document.getElementById('err7-selrate');
+    var goBtn = document.getElementById('err7-go');
+
+    function fmt(v) { return v.toFixed(1) + '%'; }
+    function pct(v) { return Math.max(0, Math.min(100, (v / Y_MAX) * 100)); }
+
+    TICKS.forEach(function (t) {
+      var y = pct(t);
+      var tick = document.createElement('span');
+      tick.className = 'err7-ytick';
+      tick.style.bottom = y + '%';
+      tick.textContent = String(t);
+      ycol.appendChild(tick);
+
+      var line = document.createElement('div');
+      line.className = 'err7-gl';
+      line.style.bottom = y + '%';
+      grid.appendChild(line);
+    });
+
+    var cells = DATA.map(function (d) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'err7-day';
+      btn.dataset.day = String(d.day);
+      btn.setAttribute('aria-pressed', 'false');
+      btn.setAttribute('aria-label', '第' + d.day + '天，错误率 ' + fmt(d.rate));
+
+      var bar = document.createElement('span');
+      bar.className = 'err7-bar';
+      bar.style.height = pct(d.rate) + '%';
+      var val = document.createElement('span');
+      val.className = 'err7-val';
+      val.textContent = fmt(d.rate);
+      bar.appendChild(val);
+      btn.appendChild(bar);
+      btn.addEventListener('click', function () { select(d.day); });
+      bars.appendChild(btn);
+
+      var label = document.createElement('span');
+      label.className = 'err7-xlabel';
+      label.textContent = '第' + d.day + '天';
+      xlabels.appendChild(label);
+
+      return { btn: btn, label: label };
+    });
+
+    var selected = null;
+
+    function select(day) {
+      selected = day;
+      DATA.forEach(function (d, i) {
+        var on = d.day === day;
+        cells[i].btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        cells[i].label.dataset.selected = on ? 'true' : 'false';
+      });
+      var cur = DATA.filter(function (d) { return d.day === day; })[0];
+      selDayEl.textContent = '第' + cur.day + '天';
+      selRateEl.textContent = fmt(cur.rate);
+      goBtn.disabled = false;
+    }
+
+    goBtn.addEventListener('click', function () {
+      if (selected === null) return;
+      var cur = DATA.filter(function (d) { return d.day === selected; })[0];
+      var rates = DATA.map(function (d) { return d.rate; });
+      var max = Math.max.apply(null, rates);
+      var min = Math.min.apply(null, rates);
+      var ctx = cur.rate === max ? '，为7天中最高' : (cur.rate === min ? '，为7天中最低' : '');
+      var text = '分析所选日期：第' + cur.day + '天，错误率 ' + fmt(cur.rate) + ctx +
+        '。请分析可能原因，并给出排查方向。';
+      if (window.dshWidget && typeof window.dshWidget.sendPrompt === 'function') {
+        window.dshWidget.sendPrompt(text);
+      }
+    });
+  })();
+</script>

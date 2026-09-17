@@ -1,0 +1,311 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+  .eb{--ok:#12a06a;--bad:var(--dsw-alias-state-error-primary,#d64545);display:grid;gap:12px;min-width:0;color:var(--dsw-alias-label-primary)}
+  .eb-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+  .eb-title{font-weight:600}
+  .eb-sub{font-size:12px;color:var(--dsw-alias-label-tertiary)}
+  .eb-status{margin:0;font-size:13px;line-height:1.5;padding:8px 10px;border-radius:10px;background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1)}
+  .eb-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px}
+  .eb-card{min-width:0;padding:8px 10px;border-radius:10px;background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1)}
+  .eb-k{font-size:11px;color:var(--dsw-alias-label-tertiary)}
+  .eb-v{margin-top:2px;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+  .eb-v.ok{color:var(--ok)}.eb-v.bad{color:var(--bad)}
+  .eb-timeline{overflow-x:auto;padding:2px 2px 6px}
+  .eb-track{display:flex;align-items:center;gap:4px;min-width:max-content}
+  .eb-node{flex:0 0 auto;min-width:78px;padding:6px 8px;border-radius:10px;text-align:center;background:var(--dsw-alias-bg-layer-1);border:1px solid var(--dsw-alias-border-l1)}
+  .eb-tag{display:block;font-size:11px;color:var(--dsw-alias-label-tertiary)}
+  .eb-res{display:block;margin-top:2px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+  .eb-node.bad{border-color:var(--bad)}.eb-node.bad .eb-res{color:var(--bad)}
+  .eb-node.ok{border-color:var(--ok)}.eb-node.ok .eb-res{color:var(--ok)}
+  .eb-node.next{border-color:var(--dsw-alias-brand-primary);border-width:2px;padding:5px 7px}
+  .eb-node.ghost{border-style:dashed;opacity:.6}
+  .eb-node.pending{opacity:.75}
+  .eb-wait{flex:0 0 calc(26px*var(--s) + 24px);min-width:44px;display:flex;flex-direction:column;gap:4px;justify-content:center}
+  .eb-wlabel{font-size:11px;text-align:center;white-space:nowrap;color:var(--dsw-alias-label-tertiary);font-variant-numeric:tabular-nums}
+  .eb-bar{height:6px;border-radius:3px;overflow:hidden;background:var(--dsw-alias-bg-layer-2);border:1px solid var(--dsw-alias-border-l1)}
+  .eb-bar i{display:block;height:100%;width:0;background:var(--dsw-alias-brand-primary,#4c7dff)}
+  .eb-wait.used .eb-wlabel,.eb-wait.waiting .eb-wlabel{color:var(--dsw-alias-label-secondary)}
+  .eb-wait.next .eb-wlabel{color:var(--dsw-alias-brand-primary);font-weight:600}
+  .eb-wait.skipped .eb-bar{border-style:dashed}
+  .eb-wait.skipped .eb-wlabel{font-style:italic}
+  table.eb-log{width:100%;border-collapse:collapse;font-size:12px}
+  .eb-log th{text-align:left;font-weight:500;padding:4px 6px;color:var(--dsw-alias-label-tertiary);border-bottom:1px solid var(--dsw-alias-border-l1);white-space:nowrap}
+  .eb-log td{padding:5px 6px;border-bottom:1px solid var(--dsw-alias-border-l1);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .eb-log tr[data-state="pending"] td{color:var(--dsw-alias-label-tertiary)}
+  .eb-log td.ok{color:var(--ok);font-weight:600}.eb-log td.bad{color:var(--bad);font-weight:600}
+  .eb-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  #ebStep{font-weight:600}
+  .eb-hint{font-size:12px;color:var(--dsw-alias-label-tertiary)}
+</style>
+<div class="eb" role="group" aria-labelledby="ebTitle">
+  <div class="eb-head">
+    <span class="eb-title" id="ebTitle">指数退避演示（最多请求 4 次）</span>
+    <span class="eb-sub">仅作示意，不发送真实网络请求 · 失败后等待 1s → 2s → 4s</span>
+  </div>
+
+  <p class="eb-status" id="ebStatus" aria-live="polite">就绪：点击「单步」发起第 1 次请求。</p>
+
+  <div class="eb-cards">
+    <div class="eb-card"><div class="eb-k">已请求次数</div><div class="eb-v"><span id="ebCount">0</span> / 4</div></div>
+    <div class="eb-card"><div class="eb-k">本次结果</div><div class="eb-v" id="ebLast">—</div></div>
+    <div class="eb-card"><div class="eb-k">下一次等待</div><div class="eb-v" id="ebNext">0 秒</div></div>
+    <div class="eb-card"><div class="eb-k">累计等待</div><div class="eb-v" id="ebCum">0 秒</div></div>
+  </div>
+
+  <div class="eb-timeline" tabindex="0" role="img" id="ebTimeline"
+       aria-label="时间线：第1次请求失败，等1秒；第2次失败，等2秒；第3次成功即停止。若第3次也失败则等4秒并做第4次，第4次后放弃。">
+    <div class="eb-track">
+      <div class="eb-node" id="ebA1"><span class="eb-tag">第 1 次</span><span class="eb-res">待请求</span></div>
+      <div class="eb-wait" id="ebW1" style="--s:1"><span class="eb-wlabel">等待 1s</span><span class="eb-bar"><i></i></span></div>
+      <div class="eb-node" id="ebA2"><span class="eb-tag">第 2 次</span><span class="eb-res">待请求</span></div>
+      <div class="eb-wait" id="ebW2" style="--s:2"><span class="eb-wlabel">等待 2s</span><span class="eb-bar"><i></i></span></div>
+      <div class="eb-node" id="ebA3"><span class="eb-tag">第 3 次</span><span class="eb-res">待请求</span></div>
+      <div class="eb-wait" id="ebW3" style="--s:4"><span class="eb-wlabel">等待 4s</span><span class="eb-bar"><i></i></span></div>
+      <div class="eb-node ghost" id="ebA4"><span class="eb-tag">第 4 次</span><span class="eb-res">上限</span></div>
+    </div>
+  </div>
+
+  <table class="eb-log">
+    <caption class="eb-hint" style="text-align:left;padding-bottom:4px">逐次明细（等待为示意，不消耗真实时间）</caption>
+    <thead><tr><th>尝试</th><th>结果</th><th>请求前等待</th><th>结果后等待</th><th>累计等待</th></tr></thead>
+    <tbody id="ebLogBody"></tbody>
+  </table>
+
+  <div class="eb-actions">
+    <button id="ebStep" type="button">单步</button>
+    <button id="ebReset" type="button">重置</button>
+    <span class="eb-hint" id="ebHint">点「单步」执行下一次请求。</span>
+  </div>
+</div>
+<script>
+(function(){
+  var attempts=[{ok:false},{ok:false},{ok:true},{ok:false}]; // 第3次成功，第4次为上限占位
+  var planWaits=[1,2,4];   // 第1/2/3次失败后的等待秒数
+  var MAX=4;
+  var done=0,cum=0,finished=false,timers=[],seq=0;
+  var $=function(id){return document.getElementById(id);};
+  var nodes=[null,$('ebA1'),$('ebA2'),$('ebA3'),$('ebA4')];
+  var resEls=[null].concat(Array.prototype.slice.call(document.querySelectorAll('.eb-node .eb-res')));
+  var waits=[null,$('ebW1'),$('ebW2'),$('ebW3')];
+  var waitLabels=[null,$('ebW1').querySelector('.eb-wlabel'),$('ebW2').querySelector('.eb-wlabel'),$('ebW3').querySelector('.eb-wlabel')];
+  var bars=[null,$('ebW1').querySelector('i'),$('ebW2').querySelector('i'),$('ebW3').querySelector('i')];
+  var stepBtn=$('ebStep'),resetBtn=$('ebReset');
+  var reduce=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  var rows=[];
+  (function buildLog(){
+    var tb=$('ebLogBody');
+    for(var i=1;i<=MAX;i++){
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td>第 '+i+' 次</td><td class="c-res">待请求</td><td class="c-pre">—</td><td class="c-after">—</td><td class="c-cum">—</td>';
+      tb.appendChild(tr);rows.push(tr);
+    }
+  })();
+
+  function cumAt(i){var s=0;for(var j=1;j<i;j++){s+=planWaits[j-1];}return s;}
+  function clearTimers(){for(var i=0;i<timers.length;i++){clearTimeout(timers[i]);}timers=[];seq++;}
+  function fmt(n){return n+' 秒';}
+
+  function statusText(){
+    if(done===0) return '就绪：点击「单步」发起第 1 次请求。';
+    var last=attempts[done-1];
+    if(last.ok) return '第 '+done+' 次请求成功，退避流程结束（第 4 次机会未使用）。';
+    if(done>=MAX) return '第 4 次请求仍失败，已达最多 4 次请求，放弃重试。';
+    return '第 '+done+' 次请求失败 → 等待 '+planWaits[done-1]+' 秒后发起第 '+(done+1)+' 次请求。';
+  }
+
+  function render(){
+    var last=done?attempts[done-1]:null;
+    $('ebCount').textContent=String(done);
+    var lastEl=$('ebLast');
+    lastEl.textContent=last?(last.ok?'成功 ✓':'失败 ✕'):'—';
+    lastEl.className='eb-v '+(last?(last.ok?'ok':'bad'):'');
+    var nextEl=$('ebNext');
+    if(done===0){nextEl.textContent='0 秒';}
+    else if(last.ok){nextEl.textContent='— 已停止';}
+    else if(done>=MAX){nextEl.textContent='— 已放弃';}
+    else {nextEl.textContent=fmt(planWaits[done-1]);}
+    nextEl.className='eb-v '+(last&&!last.ok&&done<MAX?'bad':'');
+    $('ebCum').textContent=fmt(cum);
+    $('ebStatus').textContent=statusText();
+
+    for(var i=1;i<=MAX;i++){
+      var node=nodes[i],res=resEls[i-1];
+      node.classList.remove('ok','bad','next','ghost','pending');
+      if(i<=done){
+        var a=attempts[i-1];
+        node.classList.add(a.ok?'ok':'bad');
+        res.textContent=a.ok?'成功 ✓':'失败 ✕';
+      }else if(i===MAX){
+        node.classList.add('ghost');
+        res.textContent=finished?'未使用（上限）':'上限';
+      }else{
+        if(i===done+1&&!finished) node.classList.add('next');
+        else node.classList.add('pending');
+        res.textContent='待请求';
+      }
+    }
+
+    for(var k=1;k<=3;k++){
+      var el=waits[k],plan=planWaits[k-1],a2=attempts[k-1];
+      el.classList.remove('used','skipped','next','pending');
+      if(done<k){el.classList.add('pending');waitLabels[k].textContent='等待 '+plan+'s';}
+      else if(a2.ok||k>=MAX){el.classList.add('skipped');waitLabels[k].textContent='未触发';}
+      else if(done>k){el.classList.add('used');waitLabels[k].textContent='已等待 '+plan+'s';}
+      else {el.classList.add('next');waitLabels[k].textContent='下一次等待 '+plan+'s';}
+    }
+
+    for(var r=1;r<=MAX;r++){
+      var tr=rows[r-1],c=tr.children;
+      if(r<=done){
+        var ar=attempts[r-1];
+        tr.dataset.state='done';
+        c[1].textContent=ar.ok?'成功 ✓':'失败 ✕';
+        c[1].className='c-res '+(ar.ok?'ok':'bad');
+        c[2].textContent=(r===1?0:planWaits[r-2])+' 秒';
+        if(ar.ok) c[3].textContent='—（停止）';
+        else if(r>=MAX) c[3].textContent='—（放弃）';
+        else c[3].textContent=planWaits[r-1]+' 秒';
+        c[4].textContent=fmt(cumAt(r));
+      }else{
+        tr.dataset.state='pending';
+        c[1].textContent=(r===MAX?'待请求（上限）':'待请求');
+        c[1].className='c-res';
+        c[2].textContent='—';c[3].textContent='—';c[4].textContent='—';
+      }
+    }
+
+    stepBtn.disabled=finished;
+    stepBtn.textContent=finished?'已完成':'单步';
+    $('ebHint').textContent=finished
+      ? '完成：共请求 '+done+' 次，累计等待 '+fmt(cum)+'。'
+      : '点「单步」执行下一次请求。';
+  }
+
+  function flashWait(k){
+    var el=waits[k],bar=bars[k],secs=planWaits[k-1];
+    var dur=reduce?0:Math.min(secs*400,1600);
+    var my=seq;
+    el.classList.add('waiting');
+    bar.style.transition='none';
+    bar.style.width='0%';
+    void bar.offsetWidth;
+    if(dur===0){bar.style.width='100%';return;}
+    bar.style.transition='width '+dur+'ms linear';
+    bar.style.width='100%';
+    timers.push(setTimeout(function(){if(my===seq)el.classList.remove('waiting');},dur));
+  }
+
+  function step(){
+    if(finished) return;
+    clearTimers();
+    var i=done;                 // 即将执行第 i+1 次（0 基）
+    bar_reset: {                // 清掉上一次未走完的进度
+      for(var b=1;b<=3;b++){bars[b].style.transition='none';}
+    }
+    if(i>0){cum+=planWaits[i-1];flashWait(i);}
+    done=i+1;
+    if(attempts[i].ok||done>=MAX) finished=true;
+    render();
+  }
+
+  function reset(){
+    clearTimers();
+    done=0;cum=0;finished=false;
+    for(var b=1;b<=3;b++){
+      bars[b].style.transition='none';bars[b].style.width='0%';
+      waits[b].classList.remove('waiting','used','skipped','next','pending');
+    }
+    render();
+  }
+
+  stepBtn.addEventListener('click',step);
+  resetBtn.addEventListener('click',reset);
+  render();
+})();
+</script></body></html>

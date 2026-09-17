@@ -1,0 +1,132 @@
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js; connect-src 'none'; worker-src 'none'; img-src data:; base-uri 'none'; form-action 'none';"><style>:root{--dsw-alias-bg-base:#ffffff;--dsw-alias-bg-layer-1:#ffffff;--dsw-alias-bg-layer-2:#f4f5f7;--dsw-alias-border-l1:#e5e7eb;--dsw-alias-border-l2:#d1d5db;--dsw-alias-label-primary:#1f2329;--dsw-alias-label-secondary:#606875;--dsw-alias-label-tertiary:#9299a3;--dsw-alias-label-primary-inverted:#ffffff;--dsw-alias-brand-primary:#4d6bfe;--dsw-alias-button-primary-fill:#4d6bfe;--dsw-alias-interactive-bg-hover:#eef1ff;--dsw-alias-interactive-bg-active:#e0e7ff;--dsw-alias-state-error-primary:#c43535}
+:where(*){box-sizing:border-box}
+:where(html){color-scheme:var(--dsh-widget-color-scheme,light)}
+:where(html,body){margin:0;min-height:0;background:transparent;color:var(--dsw-alias-label-primary,#1f2329);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:where(body){padding:16px}
+:where(svg){display:block;max-width:100%;height:auto}
+:where(button,input,select,textarea){font:inherit;color:inherit}
+:where(button){cursor:pointer;border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 10px;background:var(--dsw-alias-bg-layer-2,transparent)}
+:where(button:not(:disabled):hover){background:var(--dsw-alias-interactive-bg-hover,transparent)}
+:where(button:not(:disabled):active){background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover,transparent))}
+:where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea){border:0.5px solid var(--dsw-alias-border-l2);border-radius:6px;padding:5px 8px;background:var(--dsw-alias-bg-layer-1,transparent)}
+:where(button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}
+:where(button:disabled,input:disabled,select:disabled,textarea:disabled){cursor:not-allowed;opacity:.5}
+:where(input[type="range"]){accent-color:var(--dsw-alias-brand-primary);margin:0;max-width:100%}
+:where(table){width:100%;border-collapse:collapse}
+:where(thead>tr:last-child,tbody>tr:not(:last-child)){border-bottom:0.5px solid var(--dsw-alias-border-l1)}
+:where(th,td){padding:5px 8px;text-align:start}</style></head><body><script>(function() {
+  "use strict";
+  const C = {"source":"dsh-widget"};
+  const values = new Uint32Array(4);
+  crypto.getRandomValues(values);
+  const channel = Array.from(values, value => value.toString(16).padStart(8, "0")).join("");
+  const emit = parent.postMessage.bind(parent);
+  const post = (type, payload) => emit({ ...C, channel, type, payload }, "*");
+  let failed = null;
+  const reportError = (message, type = "error") => {
+    if (failed !== "resource_error") failed = type;
+    const text = String(message);
+    post(failed, { message: text.length > 1000 ? text.slice(0, 999) + "…" : text });
+  };
+  const api = Object.freeze({
+    sendPrompt(text) { post("send_prompt", { text }); }
+  });
+  Object.defineProperty(window, "dshWidget", { value: api, writable: false, configurable: false });
+  post("ready", {});
+  document.currentScript?.remove();
+
+  addEventListener("message", event => {
+    const message = event.data;
+    if (event.source !== parent || !message || message.source !== C.source) return;
+    if (message.type === "theme" && message.payload && message.payload.tokens) {
+      for (const [name, value] of Object.entries(message.payload.tokens)) {
+        if (typeof name === "string" && typeof value === "string") {
+          document.documentElement.style.setProperty(name, value);
+        }
+      }
+    }
+  });
+  addEventListener("error", event => {
+    const target = event.target;
+    if (target && target !== window && String(target.tagName).toUpperCase() === "SCRIPT") {
+      let source = typeof target.src === "string" ? target.src : "";
+      try {
+        const url = new URL(source);
+        source = url.origin + url.pathname;
+      } catch { /* An invalid script URL remains diagnostic text. */ }
+      reportError("Widget script load failed: " + (source || "unknown script"), "resource_error");
+      return;
+    }
+    reportError(event.message || "Widget script error");
+  }, true);
+  addEventListener("unhandledrejection", event => {
+    reportError(event.reason && event.reason.message || event.reason || "Unhandled widget rejection");
+  });
+  addEventListener("DOMContentLoaded", () => {
+    let lastHeight = 0;
+    let pendingSize = false;
+    let initialFrame = true;
+    const reportSize = () => {
+      if (pendingSize) return;
+      pendingSize = true;
+      requestAnimationFrame(() => {
+        pendingSize = false;
+        if (initialFrame) {
+          initialFrame = false;
+          if (!failed) post("rendered", {});
+        }
+        const height = Math.ceil(document.body.scrollHeight);
+        if (height === lastHeight) return;
+        lastHeight = height;
+        post("resize", { height });
+      });
+    };
+    new ResizeObserver(reportSize).observe(document.body);
+    reportSize();
+  });
+})();</script><style>
+  .vz-wrap{--bar:var(--dsw-alias-brand-primary,#3b6ef6);--track:var(--dsw-alias-bg-layer-2,#f0f1f4);
+    background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,#e5e6ea);
+    border-radius:12px;padding:14px 14px 10px;margin:0;color:var(--dsw-alias-label-primary,#1a1a1a);
+    font:400 13px/1.45 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:560px}
+  .vz-wrap figcaption{font-weight:600;font-size:14px;margin:0 0 2px}
+  .vz-wrap .unit{margin:0 0 12px;font-size:12px;color:var(--dsw-alias-label-tertiary,#6b6f76)}
+  .vz-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;margin-bottom:12px}
+  .vz-name{grid-column:1/-1;min-width:0;overflow-wrap:anywhere}
+  .vz-track{min-width:0;height:16px;background:var(--track);border-radius:8px;overflow:hidden}
+  .vz-fill{height:100%;background:var(--bar);border-radius:8px}
+  .vz-val{min-width:4ch;text-align:right;font-weight:600;font-variant-numeric:tabular-nums;color:var(--dsw-alias-label-primary,#1a1a1a)}
+  .vz-axis{display:grid;grid-template-columns:minmax(0,1fr) minmax(4ch,auto);gap:10px;border-top:1px solid var(--dsw-alias-border-l2,#d7d9de);padding-top:5px;font-size:11px;color:var(--dsw-alias-label-tertiary,#6b6f76)}
+  .vz-ticks{display:flex;justify-content:space-between}
+  .vz-axis .spacer{visibility:hidden}
+</style>
+<figure class="vz-wrap" role="img" aria-label="横向条形图：四个功能的使用次数。直接生成一个简短答案 300 次，长文档的跨章节证据追溯 120 次，多轮对话中的上下文恢复 80 次，插件热更新后继续当前任务 45 次。横轴 0 到 300 次，条形长度与次数成正比。">
+  <figcaption>四个功能的使用次数对比</figcaption>
+  <p class="unit">单位：次 · 横轴 0–300，条形长度与次数成正比</p>
+
+  <div class="vz-row">
+    <div class="vz-name">长文档的跨章节证据追溯</div>
+    <div class="vz-track"><div class="vz-fill" style="width:40%"></div></div>
+    <div class="vz-val">120</div>
+  </div>
+
+  <div class="vz-row">
+    <div class="vz-name">多轮对话中的上下文恢复</div>
+    <div class="vz-track"><div class="vz-fill" style="width:26.67%"></div></div>
+    <div class="vz-val">80</div>
+  </div>
+
+  <div class="vz-row">
+    <div class="vz-name">插件热更新后继续当前任务</div>
+    <div class="vz-track"><div class="vz-fill" style="width:15%"></div></div>
+    <div class="vz-val">45</div>
+  </div>
+
+  <div class="vz-row">
+    <div class="vz-name">直接生成一个简短答案</div>
+    <div class="vz-track"><div class="vz-fill" style="width:100%"></div></div>
+    <div class="vz-val">300</div>
+  </div>
+
+  <div class="vz-axis"><div class="vz-ticks"><span>0</span><span>150</span><span>300</span></div><span class="spacer">次</span></div>
+</figure></body></html>

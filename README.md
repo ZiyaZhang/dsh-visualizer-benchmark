@@ -4,48 +4,39 @@
 
 这套评测用于迭代 `show_widget` 的工具指导和 Visualize Skill。**只评价内联组件的质量；文件、项目修改、Cordis 扩展等任务只检查是否走了正确流程。** 固定 DeepSeek-V41-Flash（`deepseek-flash`）/ High。
 
-## 先看效果，再给评分
+## 先看效果与选择
 
 启动 `python3 serve.py --port 3092` 后打开：
 
-- [结果入口](http://127.0.0.1:3092/)
-- [本轮 A/B：28 份内联成品](http://127.0.0.1:3092/label.html?stage=compare-visualizer-dev-connected-20260917)：7 题 × 2 次 × A/B，同题混排。
-- [6 份历史校准样本](http://127.0.0.1:3092/label.html?stage=calibration)：二分查找、热传导、地区追问，每题两次；已保存的评分继续保留。
-- [Codex / Cowork 参照](http://127.0.0.1:3092/reference.html)：仅供产品效果参考，不加入 DSH 指标，不要求你打分。
+- [84 份模型视觉评审](http://127.0.0.1:3092/model-review.html)：题目、完整回复、可交互原始组件、四维分数、内容/完成判断与截图证据。
+- [结果与最终选择](results/visual-review.md)：开发集四版、冻结后的保留集 A/D，采用理由与失败分别说明。
+- [独立人工页](http://127.0.0.1:3092/label.html?stage=compare-visualizer-heldout-20260917)：需要抽查或纠正时使用，已有人工标注原样保留。
+- [Codex / Cowork 参照](http://127.0.0.1:3092/reference.html)：仅供产品效果参考，不加入 DSH 指标。
 
-校准样本是历史版本的真实首次输出，**不是新旧提示词对照**。历史的 73 次运行、原始源码、失败与截图均保留。已知二分查找正文有最坏比较次数错误，部分终态说明也未同步；不能因按钮可点而说整体质量通过。
+**本轮完成 126 次真实 DSH 生成：84 份内联成品已评，42 次其它任务只检查路由；另有 4 次 Cordis 计划运行因缺少真实预设记 blocked。** 全部使用 V41 Flash / High。没有要求你再逐份打完。
 
-## 当前实测状态（2026-09-17）
+## 这轮改了什么
 
-**公司接口已恢复，46 次真实 DSH 生成已全部完成，实际配置均为 V41 Flash / High。** A 为当前两个 PR 加 master，B 只增加 Skill 主文的一段核对要求，M 为同一 master、不含两个 PR。
+选择 **D：修改 `show_widget` 接收源码后的回执**，准确说明“Host 接受源码，Client 负责渲染”，让组件后的文字只补关键结论或限制。B/C 的 Skill 增补未稳定改善总体结果，未进入产品。
 
-| 组别 | 已完成 / 计划 | 内联成品供人工评价 | 其它任务路由 |
-| --- | ---: | ---: | ---: |
-| A 当前指导 | 20 / 20 | 14 份 | 6 / 6 通过 |
-| B 候选指导 | 20 / 20 | 14 份 | 6 / 6 通过 |
-| M 纯 master | 6 / 6 | 不评价 | 6 / 6 通过 |
+| 对照 | A 完整回复字符数中位数 | D 完整回复字符数中位数 | 首次渲染 A / D |
+| --- | ---: | ---: | --- |
+| 开发集，各14份 | 367.5 | 151 | 14/14 · 13/14 |
+| 保留集，各14份 | 392 | 162.5 | 14/14 · 13/14 |
 
-- 28 份内联输出的首次渲染：A 14 份通过；B 13 份通过、1 份失败。B 的失败样本自行猜测更新标识，被 Host 拒绝后又提交一张新卡；首次失败、拒绝、后续卡片全部保留。
-- 二分题的“8 个元素最多比较 3 次”错误在 A 两次出现；B 一次避开精确错误断言，一次明确给出正确的最坏 4 次。此单项不能代表全文正确或整体质量胜出。
-- 三道开发路由题在 M/A/B 各重复两次，共 18 次正确交付且未调用 `show_widget`。这只覆盖代码回复、文字汇总和项目修改，不代表尚未运行的文件/Cordis 题已通过。
-- [结果与选择记录](results/visualizer-dev-connected-20260917.md)逐项说明结果、检查器校准及限制；[候选原文与动机](candidates/B-state-consistency.md)保留确切改动。**暂不采用 B，继续保留 A 产品基线**，等待人工四维判断后决定下一轮改法；保留测试集仍未运行。
+正文中位数在两组均缩短约59%，但仍有内容、脚本与窄屏失败，**不能宣布整体视觉质量胜出**。回执发生在首次源码生成之后，A/D 初始组件差异不能直接归因于这条回执。四维逐项分布、内容待核和每次失败见[报告](results/visual-review.md)。
 
-最新 master `62b700bba7` 与 Host `a754eacf66` / Web `5aefdb9332` 在独立 checkout 整合为实验提交 `b56f63c297`；B 为 `9ca98673c5`。两份产品 PR 未修改、未合并。本地构建/检查不代表完整远端 CI。
+这些分数由 Codex 按用户明确授权做视觉与交互评审，**非盲、未经人工校准**；不是人工评分或独立发布门槛。没有覆盖原人工标注。所有首次输出与失败保留，分数不相加成总分，渲染成功不能抵销事实错误。
 
-连接恢复前的 [A pilot](results/dev-current-20260917/manifest.json) 和 [M pilot](results/dev-master-20260917/manifest.json) 各有一次连接错误，另有 9 / 2 次未开始；当时 TCP 成功而 TLS 握手超时。旧轮冻结记录保留，不把旧环境失败算作本轮模型错误。新三组共用 `visualizer-dev-connected-20260917`，没有覆盖失败重试。
+实验使用 master `62b700bba7`，A `b56f63c297`，B `9ca98673c5`，C `db0399958b`，D `1342c1de1c`。开发集86次完成后[冻结候选](results/selection-before-heldout.json)，再运行保留集。最终产品仅保留回执、必要验证与 README 链接，两个 PR 已推送、未合并；远端 CI 以 PR 页面为准。
 
-采集复核发现旧脚本将非显示日志块混入回复，已从原始 Session 重新导出严格 `type: text` 正文；46 份均有修正元数据，原导出私有备份，模型输出与组件源码不变。没有重新请求模型，没有改写冻结 manifest。新评分使用校正后的可见完整回复。
+[最初 A/B 记录](results/visualizer-dev-connected-20260917.md)属于较早阶段；当时未评和未采用的结论不覆盖本报告。连接恢复前的 A/M pilot 及历史73次结果也保留，不把环境错误算作本轮模型失败。修正主题采集与可见正文导出的过程见报告，没有修改生成的源码或重新请求模型挑最好结果。
 
-## 你需要做什么
+## 你还需要做什么
 
-1. 打开本轮 A/B 页，逐份看 28 份完整回答。页面包含题目、预期结果、全部组件、正文和已有证据；可分批完成。
-2. 实际操作控件，查看窄屏/深色，分别给理解价值、信息与布局、操作可理解性、简洁与聚焦打 **0 / 1 / 2**。
-3. 无法观察的维度选 N/A 并说明原因；尚不能判断的整份结果保存“待核”，不要用 0 代替未评。
-4. 保存。标注在本机私有目录，可继续修改或导出；旧版成对偏好仍保留，不转换成新评分。
+本次授权的打标已完成。你可以打开评审页抽查几份，验收我给出的分数、失败说明和这次小改动；不同意的判断可以留在原人工页，不会覆盖模型分。
 
-你不需要运行模型、整理截图、检查 Git 提交或填写 Codex/Cowork 分数。先完成这轮四维与内容判断；维护者再结合失败决定保留当前版或提出下一候选，选定后运行未用于调优的保留集。规则或题目若改动，另起轮次，不追改本轮判据。
-
-详见 [rubric.md](rubric.md)。人工分与路由、事实、功能门槛分开，不相加成总分，不相互抵销。
+发布前还欠真实 Cordis 预设路由验证；本轮 headless 没有这个环境，不能声称它无回退。如果要让质量分成为发布门槛，还需要独立人工逐维校准。你不需要运行模型、整理截图或评价 Codex/Cowork。
 
 ## 题集
 
@@ -143,6 +134,7 @@ python3 summarize.py --stage dev-A-v2 --output results/dev-A-v2
 | `check-dsh.py` / `render-check.mjs` | 路由/有限事实检查；浏览器操作与截图 |
 | `serve.py` / `label.html` / `dsh-view.html` | 标注保存、逐份评价、独立操作 |
 | `summarize.py` / `index.html` | 按证据汇总；当前结果入口 |
+| `model-review.html` / `model-review.json` | 经用户授权的模型视觉评审，四维、说明与证据哈希；独立于人工标注 |
 | `results/<round>/` | 冻结manifest、题目快照、逐trial结果与检查 |
 | `history/cases-v1.json` / `dsh-results.json` | 历史题目和73次原始记录，不覆盖 |
 | `dsh/` / `screenshots/` | 历史源码、原始预览、截图与文字观察 |
@@ -152,7 +144,7 @@ python3 summarize.py --stage dev-A-v2 --output results/dev-A-v2
 
 ## 设计来源与产品边界
 
-基于用户提供的评测方案落实，直接复用已有 DSH 采集/预览能力，并参考 [file-references benchmark](https://github.com/Dudu-0223/dsh-benchmarks/tree/main/file-references) 的输入冻结、产物哈希和选择记录。人工维度依据本机 Codex Visualize Skill 1.0.32 的实际规则细化；Claude skill-creator 的 grader/analyzer 用于检查证据与分析失败，首版不引入未经校准的模型裁判。
+基于用户提供的评测方案落实，直接复用已有 DSH 采集/预览能力，并参考 [file-references benchmark](https://github.com/Dudu-0223/dsh-benchmarks/tree/main/file-references) 的输入冻结、产物哈希和选择记录。人工维度依据本机 Codex Visualize Skill 1.0.32 的实际规则细化；Claude skill-creator 的 grader/analyzer 用于检查证据与分析失败，原方案不引入未经校准的模型裁判；本轮按用户后续明确授权添加模型视觉评审，单独记录，不当作独立发布门槛。
 
 [Anthropic agent evals](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)、[Claude plugin evals](https://code.claude.com/docs/en/plugin-evals)、[OpenAI eval best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices)、[ArtifactsBench](https://arxiv.org/abs/2507.04952) 提供方法参考，不能代替本套检查器与人工标注的校准。
 

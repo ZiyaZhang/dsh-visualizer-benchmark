@@ -1,0 +1,46 @@
+<style>
+  .vz-wrap{--bar:var(--dsw-alias-brand-primary,#3b6ef6);--track:var(--dsw-alias-bg-layer-2,#f0f1f4);
+    background:var(--dsw-alias-bg-layer-1,#fff);border:1px solid var(--dsw-alias-border-l1,#e5e6ea);
+    border-radius:12px;padding:14px 14px 10px;margin:0;color:var(--dsw-alias-label-primary,#1a1a1a);
+    font:400 13px/1.45 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:560px}
+  .vz-wrap figcaption{font-weight:600;font-size:14px;margin:0 0 2px}
+  .vz-wrap .unit{margin:0 0 12px;font-size:12px;color:var(--dsw-alias-label-tertiary,#6b6f76)}
+  .vz-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;margin-bottom:12px}
+  .vz-name{grid-column:1/-1;min-width:0;overflow-wrap:anywhere}
+  .vz-track{min-width:0;height:16px;background:var(--track);border-radius:8px;overflow:hidden}
+  .vz-fill{height:100%;background:var(--bar);border-radius:8px}
+  .vz-val{min-width:4ch;text-align:right;font-weight:600;font-variant-numeric:tabular-nums;color:var(--dsw-alias-label-primary,#1a1a1a)}
+  .vz-axis{display:grid;grid-template-columns:minmax(0,1fr) minmax(4ch,auto);gap:10px;border-top:1px solid var(--dsw-alias-border-l2,#d7d9de);padding-top:5px;font-size:11px;color:var(--dsw-alias-label-tertiary,#6b6f76)}
+  .vz-ticks{display:flex;justify-content:space-between}
+  .vz-axis .spacer{visibility:hidden}
+</style>
+<figure class="vz-wrap" role="img" aria-label="横向条形图：四个功能的使用次数。直接生成一个简短答案 300 次，长文档的跨章节证据追溯 120 次，多轮对话中的上下文恢复 80 次，插件热更新后继续当前任务 45 次。横轴 0 到 300 次，条形长度与次数成正比。">
+  <figcaption>四个功能的使用次数对比</figcaption>
+  <p class="unit">单位：次 · 横轴 0–300，条形长度与次数成正比</p>
+
+  <div class="vz-row">
+    <div class="vz-name">长文档的跨章节证据追溯</div>
+    <div class="vz-track"><div class="vz-fill" style="width:40%"></div></div>
+    <div class="vz-val">120</div>
+  </div>
+
+  <div class="vz-row">
+    <div class="vz-name">多轮对话中的上下文恢复</div>
+    <div class="vz-track"><div class="vz-fill" style="width:26.67%"></div></div>
+    <div class="vz-val">80</div>
+  </div>
+
+  <div class="vz-row">
+    <div class="vz-name">插件热更新后继续当前任务</div>
+    <div class="vz-track"><div class="vz-fill" style="width:15%"></div></div>
+    <div class="vz-val">45</div>
+  </div>
+
+  <div class="vz-row">
+    <div class="vz-name">直接生成一个简短答案</div>
+    <div class="vz-track"><div class="vz-fill" style="width:100%"></div></div>
+    <div class="vz-val">300</div>
+  </div>
+
+  <div class="vz-axis"><div class="vz-ticks"><span>0</span><span>150</span><span>300</span></div><span class="spacer">次</span></div>
+</figure>
