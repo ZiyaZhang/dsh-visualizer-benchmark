@@ -6,3 +6,13 @@ credentials.env
 annotations*.json
 node_modules/
 .DS_Store
+
+# Generated runs stay local until human audit and deliberate publication.
+/results/*
+!/results/reviewed-example/
+!/results/visual-review.md
+/artifacts/
+/.artifacts/
+/model-review.*
+/screenshots/
+/candidates/

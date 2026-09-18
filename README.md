@@ -1,151 +1,101 @@
-# DSH 可交互内联可视化 benchmark
+---
+description: "DSH 内联可视化的固定题集、运行器、检查器与人工 rubric。"
+kind: "package-reference"
+---
 
-独立仓库：[ZiyaZhang/dsh-visualizer-benchmark](https://github.com/ZiyaZhang/dsh-visualizer-benchmark)。产品 PR 只需在 README 链接此评测，不包含评测代码、题集或实验产物。
+# DSH 内联可视化评测
 
-这套评测用于迭代 `show_widget` 的工具指导和 Visualize Skill。**只评价内联组件的质量；文件、项目修改、Cordis 扩展等任务只检查是否走了正确流程。** 固定 DeepSeek-V41-Flash（`deepseek-flash`）/ High。
+这套 benchmark 用于回答两个问题：**内联组件是否完成任务、是否更好理解和使用；新增能力是否把其它任务误导到内联组件。** 固定 DeepSeek-V41-Flash（`deepseek-flash`）/ High。其它任务只评路由，不评代码、文件或 Cordis 扩展的产物质量。
 
-## 先看效果与选择
+## 当前可以得出什么
 
-启动 `python3 serve.py --port 3092` 后打开：
+当前提交提供可复跑的方法和题集，**不发布尚未经人工审核的 A/B 结果、视觉分数或候选胜出结论**。此前的生成产物、模型评分、截图、候选与报告已从当前文件树移除，完整实验保留在仓库外的本地归档；没有抹掉原始失败。Git 历史仍保留旧提交。
 
-- [84 份模型视觉评审](http://127.0.0.1:3092/model-review.html)：题目、完整回复、可交互原始组件、四维分数、内容/完成判断与截图证据。
-- [结果与最终选择](results/visual-review.md)：开发集四版、冻结后的保留集 A/D，采用理由与失败分别说明。
-- [独立人工页](http://127.0.0.1:3092/label.html?stage=compare-visualizer-heldout-20260917)：需要抽查或纠正时使用，已有人工标注原样保留。
-- [Codex / Cowork 参照](http://127.0.0.1:3092/reference.html)：仅供产品效果参考，不加入 DSH 指标。
+[保留的人工记录](results/reviewed-example/observation.json)只有一份历史校准样本，题面、源码、正文与人工标注的绑定哈希保持一致。原标注的 `correctness=pass` 与正文“8 个元素最多比较 3 次”存在冲突：标准二分查找最坏需要 4 次。保留原标注，不代替用户改分；这份样本不是通过验收或 A/B 有效的证明。
 
-**本轮完成 126 次真实 DSH 生成：84 份内联成品已评，42 次其它任务只检查路由；另有 4 次 Cordis 计划运行因缺少真实预设记 blocked。** 全部使用 V41 Flash / High。没有要求你再逐份打完。
+## 评测如何帮助改产品
 
-## 这轮改了什么
-
-选择 **D：修改 `show_widget` 接收源码后的回执**，准确说明“Host 接受源码，Client 负责渲染”，让组件后的文字只补关键结论或限制。B/C 的 Skill 增补未稳定改善总体结果，未进入产品。
-
-| 对照 | A 完整回复字符数中位数 | D 完整回复字符数中位数 | 首次渲染 A / D |
-| --- | ---: | ---: | --- |
-| 开发集，各14份 | 367.5 | 151 | 14/14 · 13/14 |
-| 保留集，各14份 | 392 | 162.5 | 14/14 · 13/14 |
-
-正文中位数在两组均缩短约59%，但仍有内容、脚本与窄屏失败，**不能宣布整体视觉质量胜出**。回执发生在首次源码生成之后，A/D 初始组件差异不能直接归因于这条回执。四维逐项分布、内容待核和每次失败见[报告](results/visual-review.md)。
-
-这些分数由 Codex 按用户明确授权做视觉与交互评审，**非盲、未经人工校准**；不是人工评分或独立发布门槛。没有覆盖原人工标注。所有首次输出与失败保留，分数不相加成总分，渲染成功不能抵销事实错误。
-
-实验使用 master `62b700bba7`，A `b56f63c297`，B `9ca98673c5`，C `db0399958b`，D `1342c1de1c`。开发集86次完成后[冻结候选](results/selection-before-heldout.json)，再运行保留集。最终产品仅保留回执、必要验证与 README 链接，两个 PR 已推送、未合并；远端 CI 以 PR 页面为准。
-
-[最初 A/B 记录](results/visualizer-dev-connected-20260917.md)属于较早阶段；当时未评和未采用的结论不覆盖本报告。连接恢复前的 A/M pilot 及历史73次结果也保留，不把环境错误算作本轮模型失败。修正主题采集与可见正文导出的过程见报告，没有修改生成的源码或重新请求模型挑最好结果。
-
-## 你还需要做什么
-
-本次授权的打标已完成。你可以打开评审页抽查几份，验收我给出的分数、失败说明和这次小改动；不同意的判断可以留在原人工页，不会覆盖模型分。
-
-发布前还欠真实 Cordis 预设路由验证；本轮 headless 没有这个环境，不能声称它无回退。如果要让质量分成为发布门槛，还需要独立人工逐维校准。你不需要运行模型、整理截图或评价 Codex/Cowork。
-
-## 题集
-
-[cases.json](cases.json) 有 20 题：开发集 10、保留测试集 10。每题保存自然语言请求、固定数据/文件、允许路由、预期结果和浏览器检查场景。
-
-| 类别 | 开发集 | 保留测试集 |
+| 发现 | 应采取的动作 | 证据要求 |
 | --- | --- | --- |
-| 算法与数值交互 | W01 二分查找；W02 热传导 | W07 指数退避；W08 缓存成本 |
-| 静态图 | W03 缺失/零/负数；W04 长中文标签 | W09 读取CSV画趋势；W10 职责与修复分支 |
-| 控件与追问 | W05 数量选择器；W06 地区追问 | W11 筛选原型；W12 异常日期追问 |
-| 允许主动可视化 | E01 TCP三次握手 | E02 REST/GraphQL取舍 |
-| 其它任务的路由 | N01 代码；N02 文字汇总；N03 项目修改 | N04 SVG文件；N05 HTML文件；N06 Cordis扩展 |
+| 文件或项目任务调用了 `show_widget` | 收紧工具描述或 Skill 路由条件 | 任务要求、实际工具调用、真实交付与 master 对照 |
+| 首次无法渲染、控件计算或追问值错误 | 区分生成源码错误、指导缺口与运行时问题，再做小改动 | 原始源码、错误与实际交互状态；不能只看截图 |
+| 图难理解、布局拥挤、正文重复 | 针对失败调整对应 Skill/reference 或工具回执 | 同题多次对照，经人工核对改善与新增退步 |
 
-主动可视化题允许文字与内联两种形式；出图率只描述行为，不奖励多画。静态图允许 SVG 或 HTML；需要脚本交互时应使用 HTML，其中可以包含 SVG。
+脚本提供可复核的检查与问题定位，人工决定内容是否正确、任务是否完成及四维质量。没有这些人工证据，就不把“能渲染”当作“效果好”，也不发布总体赢家。产品单测和浏览器回放另行验证运行时，不替代生成评测。
 
-N06 必须在真实 Cordis 预设下运行。headless 不加载该预设，运行器会记 `blocked`，不会用缺少工具的环境给模型判失败。文件存在或没有 `show_widget` 也不能单独证明正确路由，应结合任务要求与实际工具/交付记录。
+## 题集与规则
 
-原位修复、一次自动预算、准确版本、日志恢复继续由 Host/Web 功能验证单列。独立预览抓到消息不代表原对话已收到；普通用户修改图的产品语义也不预设成新的强制更新契约。
+[cases.json](cases.json) 保存 20 道题的原始 query、固定 fixture、允许路由、真值与检查场景；[rubric.md](rubric.md) 定义判断方法。
 
-## 一次实验如何运行
+| 题类 | 题目 |
+| --- | --- |
+| 12 道必须内联 | 二分查找、热传导、缺失/零/负数、长中文标签、数量选择器、地区追问、指数退避、缓存成本、CSV 趋势、职责与修复分支、筛选原型、异常日期追问 |
+| 2 道允许主动可视化 | TCP 三次握手、REST/GraphQL 取舍；不奖励多出图 |
+| 6 道路由保护 | 代码回答、文字汇总、项目修改、SVG 文件、HTML 文件、Cordis 扩展 |
 
-`Task` 是题目；`Trial` 是某题在某版本的一次尝试。运行器准备隔离环境、启动真实 DSH，采集器读取完整 Session 日志，检查器核对产物与交互，人工页面评价呈现质量，汇总器检查记录后给出逐项结果。
+静态图允许 SVG 或 HTML；脚本交互使用 HTML，其中可以包含 SVG。普通控件操作留在组件内，显式分析请求才发送追问。
 
-比较分两种：
+保留原 dev/test 各 10 题的分组用于复跑；**这些题都已在此前开发中运行并被查看，不能再次宣称是新的未见测试集。** 新一轮若需要独立测试，应补充新题并在候选冻结后首次运行。
 
-- **路由保护**：相同 master，不含两个 PR 的 M 与包含两个 PR 的 A 比较其它任务的路由。
-- **提示词效果**：相同产品、模型、加载方式和题目，当前 A 与只改变已声明工具指导/Skill 的 B 比较内联效果。
+人工先判断内容正确性与完成情况，再分别评理解价值、信息与布局、操作可理解性、简洁与聚焦（0/1/2，必要时 N/A）。不合成总分，不用美观抵销错误。`pending`、环境错误和未评均不算通过。
 
-每个 round 固定一个 arm，多 round 用同一个 `comparisonId` 关联。正式候选每题至少重复两次，保留所有首次尝试。先用开发集校准；候选与规则冻结后才运行保留集。看过测试结果再针对它改指导，应作为下一轮开发，不继续声称该题是未见测试。
+N06 需要真实 Cordis 预设。普通 headless 没有该环境时记 `blocked`，不冒充通过。独立 iframe 捕获消息不能证明真实原对话收到追问；原位修复、版本核验与自动修复预算仍由产品功能验证覆盖。
 
-### 看什么指标，怎样据此迭代
+## 运行一组评测
 
-| 问题 | 报告方式 | 如何使用 |
-| --- | --- | --- |
-| 是否走错流程 | 非内联题逐题列 master / PR 路由结论、`show_widget` 调用和真实交付证据 | 新增误触发要定位到工具描述或 Skill 触发条件；不能以零组件调用代替正确交付 |
-| 首次能否完成 | 各检查的 pass / fail / pending / error / N/A 计数，同时显示计划数和实际尝试数 | 首次拒绝、渲染失败和后续修复分开；环境错误不能从分母中消失 |
-| 图是否更好用 | 四维分布及同题逐次结果，附具体问题；事实/完成判断独立展示 | 不合成总分；关注改善是否在重复尝试中出现，是否伴随别的退步 |
-| 修改是否有额外成本 | 实际工具调用、加载过的 references、usage、耗时 | 只在配置与加载方式一致时比较；缓存、环境重试等限制写清楚 |
-
-先根据开发集错误选择一个最小修改：路由问题改工具描述或 Skill 描述，重复的布局问题改对应 reference，状态与正文矛盾则补充交付前核对要求。每个候选记录具体改动和预期解决的失败，不同时换模型、产品与题目来宣布提示词有效。
-
-选择记录应逐项回答：改善了什么，哪些地方持平或退步，是否出现新的误路由，哪些问题尚未验证。优先排除新增硬性失败；质量各维有取舍时保留取舍，由人工决定，不用一个总分掩盖。若样本不足或结果不稳定，结论就是“证据不足”。候选选定后才运行未用于调优的保留集。
-
-### 准备
-
-需要 Python 3.9+、符合产品要求的 Node（22.19+ 或 24+）、已构建且 Git 干净的 DSH checkout。浏览器检查使用 checkout 已安装的 Playwright 及浏览器。不同版本应各用独立 checkout；不要修改只读镜像。
-
-凭据由 `DEEPSEEK_API_KEY` / `DEEPSEEK_BASE_URL` 环境变量，或显式的 `--env-file` 提供。运行器不读取 shell 配置，不打印密钥。私有 env 文件不放在此目录，不提交。
+需要 Python 3.9+、符合产品要求的 Node（22.19+ 或 24+）、干净且已构建的 DSH checkout，以及 Web checkout 已安装的 Playwright 和浏览器。从本目录运行；若作为其它仓库的 `visualizer/` 子目录，先 `cd visualizer`。
 
 ```sh
 export DSH_EVAL_REPO=/absolute/path/to/built-dsh-checkout
 export DSH_EVAL_NODE=/absolute/path/to/supported/node
 
-# 只冻结输入并检查构建，不请求模型
-python3 run-dsh.py --plan --round dev-A-v2 --comparison-id dev-v2 \
-  --repo "$DSH_EVAL_REPO" --arm A --split dev --repeats 1
+# 冻结产品、工具/Skill、题集与 rubric；不调用模型
+python3 run.py --plan --round dev-A-01 --comparison-id dev-01 \
+  --repo "$DSH_EVAL_REPO" --arm A --split dev --repeats 2
 
-# 同一组计划执行尚未开始的尝试
-python3 run-dsh.py --resume --round dev-A-v2 --comparison-id dev-v2 \
-  --repo "$DSH_EVAL_REPO" --arm A --split dev --repeats 1 \
+# 运行同一组计划；凭据文件须在仓库外
+python3 run.py --resume --round dev-A-01 --comparison-id dev-01 \
+  --repo "$DSH_EVAL_REPO" --arm A --split dev --repeats 2 \
   --env-file /absolute/private/path/credentials.env
 ```
 
-一次试跑用于验证工具链，不等于正式 A/B。`--case W01 W02` 可缩小范围。执行前冻结题集、rubric、源码与实际构建文件/Skill 哈希；运行中若产品文件变化会停止，避免一轮混入两版。旧轮的 runner、collector 或冻结规则不匹配时拒绝重新采集/续跑，须保留旧轮并新建实验。每次尝试独立 home、agents 和工作区，模型输入只提供任务与所需 fixture，评分真值和其它尝试不作为输入。这是运行目录隔离，不是额外的操作系统沙箱；判分前仍应核查完整 trace 是否有越界读取。
+`Task` 是题目；`Trial` 是题目 × 版本 × 重复序号。M 是相同 master 上不含 Visualizer 的路由对照；A 是加入两个 PR 的版本；候选只改变预先声明的工具指导或 Skill。每版使用独立 checkout，相同模型、配置和题目。`--case W01 W02` 可缩小范围。
 
-失败、超时、缺日志与未开始各自保留。`--resume` 不覆盖已完成或失败的尝试；重试须新 round，并解释原因。原始事件与完整 Session 私有保存，公开结果仅提取必要工具记录、源码、正文和统计。
+运行器冻结实际源码与构建文件哈希，每次尝试建立独立 home、agents 和工作区，仅把题目和 fixture 给模型，不提供真值或评分规则。这不是操作系统级沙箱，应检查 trace 中的越界读取。首次输出、拒绝、超时和环境错误都保留；`--resume` 不替换已结束的尝试，重试另开 round 并说明原因。
 
-### 检查与汇总
+提取后的生成文件写入被 Git 忽略的 `results/<round>/`。原始 Session、日志、凭据及标注不作为共享结果提交；运行器默认将私有数据存到本目录之外的 `../.artifacts/visualizer/runs/`，可用 `--private-root` 指定其它目录。旧实验如需读取，应在原归档中使用当时冻结的脚本，不用新版改写。
+
+## 检查、人工评审与汇总
 
 ```sh
-python3 check-dsh.py --trial results/dev-A-v2/W01-A-1/trial.json \
-  --output results/dev-A-v2/W01-A-1/checks.json
-
+python3 check-dsh.py --trial results/dev-A-01/W01-A-1/trial.json \
+  --output results/dev-A-01/W01-A-1/checks.json
 "$DSH_EVAL_NODE" render-check.mjs \
-  --trial results/dev-A-v2/W01-A-1/trial.json \
-  --output results/dev-A-v2/W01-A-1 --repo "$DSH_EVAL_REPO"
+  --trial results/dev-A-01/W01-A-1/trial.json \
+  --output results/dev-A-01/W01-A-1 --repo "$DSH_EVAL_REPO"
 
 python3 serve.py --port 3092
-python3 summarize.py --stage dev-A-v2 --output results/dev-A-v2
+# 打开 http://127.0.0.1:3092/label.html，查看完整正文并实际操作后保存
+python3 summarize.py --stage dev-A-01 --output results/dev-A-01
+python3 -m unittest discover -s . -p 'test_*.py' -v
 ```
 
-采集器在 runner 每次结束后执行；手动重收集使用 `node collect-dsh.mjs --round ROUND_ID`，自定义私有目录时追加 `--private-root DIR`。它读取完整 Session，而非可能截断长字符串的 CLI 输出。正文按顺序合并本次运行全部 assistant message 的可见 text 块，包含组件前后的可见说明。首次源码保持原样，所有接受与拒绝的调用保留，不静默选最好的一张图。若需修正本轮旧版正文导出，可显式加 `--correct-final-exports`：须整轮结束、原摘要和 Session 身份匹配，并在私有目录备份；只更正导出，不改生成输入或 frozen collector 哈希。
+运行器调用 `collect-dsh.mjs` 读取完整 Session，只导出可见正文及必要工具记录。浏览器检查复用真实 Web `srcdoc`，采集 736px/360px、浅/深主题及关键状态；定位不确定时保留待核。环境问题不归责给模型。
 
-浏览器检查打开真实 Web `srcdoc` 生成的预览，用隔离 iframe 操作。初始渲染、状态转换、消息与布局提醒分别记录；定位失败会保留待核或检查器错误。截图覆盖宽/窄和浅/深，关键动作后另保留状态证据。若某个场景尚无可用自动断言，它显示待人工核对，不能自动通过。
+人工标注默认保存在网页目录外的 `../.artifacts/visualizer/annotations-v2.json`，可用 `serve.py --state /private/path/annotations.json` 改位置；汇总器须传对应的 `--annotations`。标签绑定完整成品、正文、题面和评分页面/规则哈希，变化后需重新审核。汇总器验证数据，不替代人工判断，也不自动选赢家。
 
-四维标注绑定题面、全部组件、完整正文、渲染产物和评分页/规则版本。正文使用本地 Marked 16.4.2 展示 Markdown，保留原文可查；原始 HTML 转义、外部图片不加载。汇总是生成时的快照，实时进度以打标页为准。汇总会拒绝无效评分，标出内容变化后的旧评分；未评、错误和不适用不算通过。结果按题和检查项报告计数，不用小样本制造统计显著性，也不自动选赢家。
+共享结果应另作审核：保留完整计划数、缺失项、失败和审核状态，再提交经过人工核对的观察台账、指标与选择理由。未审核的数据继续留在本地。不能挑一份好样例代表整轮成功。
 
-## 文件与证据
+## 文件与来源
 
 | 文件 | 职责 |
 | --- | --- |
-| `cases.json` / `rubric.md` | 题集、允许路由、预期结果；人工锚点 |
-| `run-dsh.py` | 冻结输入、构建检查、隔离运行、首次尝试保护 |
-| `collect-dsh.mjs` | 完整日志采集、全部组件与正文、真实预览 |
-| `check-dsh.py` / `render-check.mjs` | 路由/有限事实检查；浏览器操作与截图 |
-| `serve.py` / `label.html` / `dsh-view.html` | 标注保存、逐份评价、独立操作 |
-| `summarize.py` / `index.html` | 按证据汇总；当前结果入口 |
-| `model-review.html` / `model-review.json` | 经用户授权的模型视觉评审，四维、说明与证据哈希；独立于人工标注 |
-| `results/<round>/` | 冻结manifest、题目快照、逐trial结果与检查 |
-| `history/cases-v1.json` / `dsh-results.json` | 历史题目和73次原始记录，不覆盖 |
-| `dsh/` / `screenshots/` | 历史源码、原始预览、截图与文字观察 |
-| `results.json` / `reference.html` | 历史Codex/Cowork参照，含当时的限制 |
+| `cases.json` / `rubric.md` | 固定题集、fixture、真值、路由边界与人工锚点 |
+| `run.py` / `collect-dsh.mjs` | 冻结输入、运行 DSH、采集轨迹与原始输出 |
+| `check-dsh.py` / `render-check.mjs` | 路由、有限事实与浏览器交互检查 |
+| `serve.py` / `label.html` / `vendor/` | 本地人工评审与绑定标签 |
+| `summarize.py` / `test_eval.py` | 分项汇总与检查器校准 |
 
-原始 Session、凭据、私有标注和备份在目录外。历史目录里的独立源码与完整回复是有意保留的评测产物，不能与完整私有 Session 混为一谈。默认标注位置用于当前本机，也可用 `serve.py --state /private/path/annotations-v2.json` 更改；汇总时传同一个 `--annotations`。不要把私有运行目录整体复制进 benchmark。
+目录与实验记录方式参考 [file-references benchmark](https://github.com/Dudu-0223/dsh-benchmarks/tree/main/file-references)。`cases.json` 将题目和真值集中存放，避免为每道题增加多份小文件；模型只收到其中的 prompt 与 fixture。四维是本 benchmark 的规则，不是 Codex 官方评分表。
 
-## 设计来源与产品边界
-
-基于用户提供的评测方案落实，直接复用已有 DSH 采集/预览能力，并参考 [file-references benchmark](https://github.com/Dudu-0223/dsh-benchmarks/tree/main/file-references) 的输入冻结、产物哈希和选择记录。人工维度依据本机 Codex Visualize Skill 1.0.32 的实际规则细化；Claude skill-creator 的 grader/analyzer 用于检查证据与分析失败，原方案不引入未经校准的模型裁判；本轮按用户后续明确授权添加模型视觉评审，单独记录，不当作独立发布门槛。
-
-[Anthropic agent evals](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)、[Claude plugin evals](https://code.claude.com/docs/en/plugin-evals)、[OpenAI eval best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices)、[ArtifactsBench](https://arxiv.org/abs/2507.04952) 提供方法参考，不能代替本套检查器与人工标注的校准。
-
-产品实现仍在 [Host #3820](https://github.com/deepseek-harness/deepseek-harness/pull/3820) 与 [Web #3340](https://github.com/deepseek-harness/deepseek-harness/pull/3340)。实验不向生产包增加测试接口；最终产品 README 只需说明行为并链接独立评测，候选、失败和选择过程留在这里。
+产品实现位于 [Host #3820](https://github.com/deepseek-harness/deepseek-harness/pull/3820) 与 [Web #3340](https://github.com/deepseek-harness/deepseek-harness/pull/3340)。评测单独维护，产品 README 只链接。

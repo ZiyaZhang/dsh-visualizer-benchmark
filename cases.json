@@ -6,8 +6,7 @@
   "modelLabel": "DeepSeek-V41-Flash",
   "effort": "high",
   "scope": "Only inline artifact quality; other workflows are routing guards. Optional visuals are permitted and output rate is descriptive, not a quality metric.",
-  "splitPolicy": "Development cases may guide iteration. Freeze test inputs before a candidate run; do not optimize prompts against revealed test results. Existing historical trials are development/calibration evidence, not held-out tests.",
-  "legacyCases": "history/cases-v1.json",
+  "splitPolicy": "All existing dev/test cases have already been run and inspected during prior development. Preserve the partition for reproducible regression; do not claim the test split is a fresh unseen holdout. Add and freeze new tasks before making a new holdout claim.",
   "viewports": [
     736,
     360

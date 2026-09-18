@@ -1,4 +1,4 @@
-"""Local, evidence-preserving review of historical and manifest-backed DSH trials."""
+"""Local review of fresh trials and explicitly retained human-reviewed examples."""
 import argparse
 import hashlib
 import json
@@ -10,15 +10,26 @@ from threading import Lock
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent
-DEFAULT_STATE = Path.home() / 'harness/.dsh-runs/visualizer-eval-20260917/annotations-v2.json'
+DEFAULT_STATE = ROOT.parent / '.artifacts/visualizer/annotations-v2.json'
 LEGACY_STATE = DEFAULT_STATE.with_name('annotations.json')
 LOCK = Lock()
 DIMENSIONS = ('understanding', 'layout', 'operability', 'focus')
-CALIBRATION = [f'{case}-integrated-{repeat}' for case in ('I01', 'I02', 'F01') for repeat in (1, 2)]
 
 
 def read_json(path, fallback):
     return json.loads(path.read_text()) if path.exists() else fallback
+
+
+def read_reviews(path):
+    data = read_json(path, {'schemaVersion': 2, 'reviews': {}, 'revisions': []})
+    if data.get('schemaVersion') != 2:
+        raise ValueError('四维标注文件版本不兼容；旧 annotations.json 保持不变')
+    # Preserve a published label verbatim; newer local edits take precedence.
+    example = read_json(ROOT / 'results/reviewed-example/observation.json', {})
+    if example:
+        review = example['review']
+        data['reviews'].setdefault(review['trialId'], review)
+    return data
 
 
 def public_file(relative):
@@ -134,15 +145,14 @@ def normalize_trial(raw, case, round_id='history', historical=False):
 
 def catalog():
     current_cases = read_json(ROOT / 'cases.json', {'cases': []})
-    historical_cases = read_json(ROOT / 'history/cases-v1.json', current_cases)
-    old_cases = {case['id']: case for case in historical_cases.get('cases', [])}
-    historical = read_json(ROOT / 'dsh-results.json', {'runs': []})
-    trials = [normalize_trial(run, old_cases.get(run.get('case'), {}), historical=True) for run in historical.get('runs', [])]
-    stages = [
-        {'id': 'calibration', 'title': '校准：6 份 DSH 成品', 'trialIds': [t['id'] for key in CALIBRATION for t in trials if t['localTrialId'] == key], 'description': '同一已提交版本、3 道题各生成两次，逐份评分；这不是版本 A/B 对照。'},
-        {'id': 'history', 'title': '历史：全部尝试与路由', 'trialIds': [t['id'] for t in trials], 'description': '保留全部历史首次输出、失败与普通任务；历史人工偏好不会迁成新的四维评分。'}
-    ]
-    errors = []
+    trials, stages, errors = [], [], []
+    reviewed = read_json(ROOT / 'results/reviewed-example/observation.json', {})
+    if reviewed:
+        trial = normalize_trial(reviewed['trial'], reviewed['case'], reviewed['trial']['roundId'])
+        trials.append(trial)
+        stages.append({'id': 'reviewed-example', 'title': '保留的人工标注样本',
+                       'trialIds': [trial['id']],
+                       'description': '仅一份历史人工记录，不是 A/B 结论。原正确性标注与正文最坏次数存在冲突，需人工复核。'})
     for manifest_path in sorted((ROOT / 'results').glob('*/manifest.json')):
         try:
             manifest = read_json(manifest_path, {})
@@ -164,18 +174,11 @@ def catalog():
                     supplement = read_json(candidate.parent / filename, {})
                     raw['checks'] = merge_checks(raw.get('checks', {}), supplement.get('checks', {}))
                 trial = normalize_trial(raw, cases.get(case_id, {}), round_id)
-                duplicate = next((index for index, existing in enumerate(trials) if existing['localTrialId'] == trial['localTrialId'] and existing['historical']), None) if manifest.get('origin') == 'historical-calibration' else None
-                if duplicate is not None:
-                    original_id = trials[duplicate]['id']
-                    trials[duplicate] = trial
-                    stages[1]['trialIds'] = [trial['id'] if old == original_id else old for old in stages[1]['trialIds']]
-                else:
-                    trials.append(trial)
+                trials.append(trial)
                 ids.append(trial['id'])
-            if manifest.get('origin') == 'historical-calibration':
-                stages[0]['trialIds'] = [round_id + '/' + key for key in CALIBRATION if round_id + '/' + key in ids]
-            else:
-                stages.append({'id': round_id, 'title': '实验：' + round_id, 'trialIds': ids, 'description': '来自冻结 manifest；尚未产出的计划项仍然显示。', 'comparisonId': manifest.get('comparisonId'), 'arm': manifest.get('arm')})
+            stages.append({'id': round_id, 'title': '实验：' + round_id, 'trialIds': ids,
+                           'description': '来自冻结 manifest；未评结果仅供本地审核，不作为已验证结论。',
+                           'comparisonId': manifest.get('comparisonId'), 'arm': manifest.get('arm')})
         except (ValueError, KeyError, TypeError, OSError) as error:
             errors.append(f'{manifest_path.parent.name}: {error}')
     # A shared review queue hides candidate labels in the ordinary scoring flow.
@@ -191,10 +194,11 @@ def catalog():
         stages.insert(1, {'id': 'compare-' + comparison, 'title': '同题混排：' + comparison,
                           'trialIds': [t['id'] for t in members],
                           'description': '同题同次序号的两个候选按固定顺序混排，逐份评价；版本信息在评分后查看。路由对照另列，未生成项仍保留。'})
+    if not stages:
+        stages.append({'id': 'empty', 'title': '尚无本地运行', 'trialIds': [], 'description': '按 README 运行题集后再人工评审。'})
     return {
-        'schemaVersion': 2, 'trials': trials, 'stages': stages, 'defaultStage': 'calibration', 'catalogErrors': errors,
+        'schemaVersion': 2, 'trials': trials, 'stages': stages, 'defaultStage': stages[0]['id'], 'catalogErrors': errors,
         'dimensions': list(DIMENSIONS), 'evidence': '已有检查来自脚本或代理核查，不是人工评分；未评不计为 0。',
-        'historicalSummary': historical.get('latestMasterComparison', {}), 'productValidation': historical.get('productValidation', {}),
         'taskCount': len(current_cases.get('cases', []))
     }
 
@@ -257,10 +261,7 @@ class Handler(SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def read_reviews(self):
-        data = read_json(self.server.state_path, {'schemaVersion': 2, 'reviews': {}, 'revisions': []})
-        if data.get('schemaVersion') != 2:
-            raise ValueError('四维标注文件版本不兼容；旧 annotations.json 保持不变')
-        return data
+        return read_reviews(self.server.state_path)
 
     def do_GET(self):
         path = urlsplit(self.path).path
@@ -326,5 +327,5 @@ if __name__ == '__main__':
     parser.add_argument('--state', type=Path, default=DEFAULT_STATE)
     args = parser.parse_args()
     server = make_server(args.port, args.state)
-    print(f'Local review: http://127.0.0.1:{server.server_port}/label.html?stage=calibration', flush=True)
+    print(f'Local review: http://127.0.0.1:{server.server_port}/label.html', flush=True)
     server.serve_forever()

@@ -17,7 +17,7 @@ def summarize(stage, annotation_path):
         raise ValueError('Unknown stage: ' + stage)
     ids = set(selected['trialIds'])
     trials = [t for t in data['trials'] if t['id'] in ids]
-    annotations = serve.read_json(annotation_path, {'schemaVersion': 2, 'reviews': {}})
+    annotations = serve.read_reviews(annotation_path)
     if annotations.get('schemaVersion') != 2:
         raise ValueError('Expected v2 annotations; historical preference is not dimensional scoring')
     reviews = annotations.get('reviews', {})
@@ -84,7 +84,7 @@ def markdown(report):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--stage', default='calibration')
+    parser.add_argument('--stage', required=True)
     parser.add_argument('--annotations', type=Path, default=serve.DEFAULT_STATE)
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()

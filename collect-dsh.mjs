@@ -1,4 +1,4 @@
-/** Collect v2 trials from durable Sessions; never rewrite the historical dsh-results.json.
+/** Collect frozen trials from durable Sessions; preserve each first attempt.
  * Hash-bound evidence and separate missing/failed denominators follow the MIT-licensed
  * Dudu-0223/dsh-benchmarks/file-references evaluator (25f7ec5c).
  */
@@ -8,7 +8,7 @@ import crypto from 'node:crypto';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 
 const ROOT=path.dirname(fileURLToPath(import.meta.url));
-const DEFAULT_PRIVATE=path.resolve(ROOT,'../.dsh-runs/visualizer-eval-20260917/v2');
+const DEFAULT_PRIVATE=path.resolve(ROOT,'../.artifacts/visualizer/runs');
 const tokens={'--dsw-alias-bg-base':'#ffffff','--dsw-alias-bg-layer-1':'#ffffff','--dsw-alias-bg-layer-2':'#f4f5f7','--dsw-alias-border-l1':'#e5e7eb','--dsw-alias-border-l2':'#d1d5db','--dsw-alias-label-primary':'#1f2329','--dsw-alias-label-secondary':'#606875','--dsw-alias-label-tertiary':'#9299a3','--dsw-alias-label-primary-inverted':'#ffffff','--dsw-alias-brand-primary':'#4d6bfe','--dsw-alias-button-primary-fill':'#4d6bfe','--dsw-alias-interactive-bg-hover':'#eef1ff','--dsw-alias-interactive-bg-active':'#e0e7ff','--dsw-alias-state-error-primary':'#c43535'};
 const sha=value=>crypto.createHash('sha256').update(value).digest('hex');
 const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
